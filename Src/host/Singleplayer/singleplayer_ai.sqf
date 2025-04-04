@@ -10,6 +10,7 @@
 #include "..\thread.hpp"
 #include "..\..\client\WidgetSystem\widgets.hpp"
 #include "..\NOEngine\NOEngine.hpp"
+#include "..\GameObjects\GameConstants.hpp"
 
 /*
 TODO head control:
@@ -259,6 +260,10 @@ sp_ai_playCapture = {
 
 sp_ai_internal_processPlayingStates = {
     (_this select 0) params ["_t","_obj","_cdata","_basePos","_ctx"];
+    
+    if isNullReference(_obj) exitWith {
+        stopThisUpdate();
+    }; //already destroyed
     _capmove = _ctx get "capturePos";
     
     if (count _cdata == 0) exitWith {
@@ -449,6 +454,59 @@ sp_ai_createPerson = {
     _m
 };
 
+sp_ai_createPersonEx = {
+    params ["_pos","_tname",["_params",[]],["_mobHandler",{}],["_bodyhandler",{}]];
+    
+    if (_tname in sp_ai_mobs) then {
+        [_tname] call sp_ai_deletePerson;
+    };
+
+    private _body = [_pos,null,_tname] call sp_ai_createPerson;
+    if equalTypes(_pos,"") then {
+        _body setDir (callFunc(_pos call sp_getObject,getDir));
+    };
+    _mob = _body getvariable "link";
+    if equalTypes(_params,[]) then {
+        _params = createHashMapFromArray _params;
+    };
+    setVar(_mob,age,_params getOrDefault vec2("age",randInt(20,40)));
+
+    if ("uniform" in _params) then {
+        [_params getOrDefault ["uniform","Cloth"],_mob,INV_CLOTH] call createItemInInventory;
+    };
+    
+    private _pnm = _params getOrDefault vec2("name",["Мужик" arg "Неизвестный"]);
+    callFuncParams(_mob,generateNaming,_pnm select 0 arg _pnm select 1);
+    [_body] call anim_syncAnim;
+    
+    _body setAnimSpeedCoef 1;
+
+    _body call _bodyhandler;
+    _mob call _mobHandler;
+    _mob
+};
+
+sp_ai_deletePerson = {
+    params ["_m"];
+    if equalTypes(_m,"") then {
+        _m = sp_ai_mobs getOrDefault [_m,objNull];
+    };
+    if isNullReference(_m) exitWith {};
+    if equalTypes(_m,objNull) then {
+        _m = _m getvariable "link";
+    };
+    if isNullVar(_m) exitWith {};
+    _body = getVar(_m,owner);
+    {
+        if equals(_y,_body) then {
+            sp_ai_mobs deleteAt _x;
+        };
+    } foreach sp_ai_mobs;
+    array_remove(smd_allInGameMobs,_body);
+    delete(_m);
+    deleteVehicle _body;
+};
+
 sp_ai_getMobObject = {
     private _body = sp_ai_mobs getOrDefault [_this,objNull];
     if isNullReference(_body) exitWith {nullPtr};
@@ -470,8 +528,10 @@ sp_ai_moveItemToWorld = {
     
     if (canSuspend) exitWith {
         private _p = _this;
-        private _r = null;
+        private _r = "nonevalue";
         {_r = _p call sp_ai_moveItemToWorld} call sp_threadCriticalSection;
+        if isNullVar(_r) exitWith {};
+        if equals(_r,"nonevalue") exitWith {};
         _r
     };
 
@@ -498,8 +558,10 @@ sp_ai_moveItemToMob = {
     params ["_m","_item","_slot"];
     if (canSuspend) exitWith {
         private _p = _this;
-        private _r = null;
+        private _r = "nonevalue";
         {_r = _p call sp_ai_moveItemToMob} call sp_threadCriticalSection;
+        if isNullVar(_r) exitWith {};
+        if equals(_r,"nonevalue") exitWith {};
         _r
     };
     

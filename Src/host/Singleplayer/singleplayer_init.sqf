@@ -185,6 +185,12 @@ sp_threadStart = {
 	_handl
 };
 
+sp_threadStop = {
+	params ["_thd"];
+	threadStop(_thd);
+	sp_internal_threads = sp_internal_threads - [_thd];
+};
+
 sp_threadCriticalSection = {
 	params ["_code"];
 	isnil _code;

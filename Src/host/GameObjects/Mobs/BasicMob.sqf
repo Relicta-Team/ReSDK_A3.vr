@@ -1624,7 +1624,9 @@ region(Animator)
 	func(setAnimSpeedCoef)
 	{
 		objParams_1(_val);
-
+		#ifdef EDITOR_OR_SP_MODE
+		if !callSelf(isPlayer) exitWith {};
+		#endif
 		callSelfParams(syncSmdVar,"animSpeed" arg _val);
 	};
 
