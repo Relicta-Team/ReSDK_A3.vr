@@ -197,6 +197,8 @@
       - default # дефолт после трансфера чтобы вес правильно расчитался
 
 - <<: *interacting
+  options:
+    craft_duration: from_skill(4,1)
   required:
     components:
       hand_item:
