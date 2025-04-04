@@ -237,7 +237,7 @@
     modifiers:
       - name: transfer_reagents
         get_from: 
-          milkContainer: 1
+          milkContainer: 30
       - name: replace_reagent
         from: Milk
         to: Nutriment
