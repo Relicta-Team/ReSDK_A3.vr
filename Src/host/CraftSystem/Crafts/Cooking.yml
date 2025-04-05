@@ -200,6 +200,9 @@
   options:
     craft_duration: from_skill(4,1)
   required:
+    skills:
+      cooking: 3
+      knife: 3
     components:
       hand_item:
         class: Knife
