@@ -255,27 +255,6 @@
     class: Lockpick
     count: {min: 1, max: 2}
 
-
-- name: Иголка с ниткой
-  type: default
-  category: Other
-  options:
-    craft_duration: from_skill(12,6)
-  required: 
-    skills:
-      engineering: 3
-      theft: 4
-    components:
-      - class: MetalDebris(1-2)
-        count: 1
-        check_type_of: false
-      - class: SyntDebris1
-        count: 1
-        check_type_of: false
-  result:
-    class: NeedleWithThreads
-    count: {min: 2, max: 3}
-
 - name: Металлическое ведро
   type: default
   category: Other
