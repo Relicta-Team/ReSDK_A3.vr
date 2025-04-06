@@ -689,20 +689,13 @@ cpt4_pos_bar_aloguys - 3 sits
 	}] call sp_ai_createPersonEx;
 
 	//looped state of ohrwalk
-	["cpt4_ohrwalk_state",1] call sp_storageSet;
-	["cpt4_ohrwalk1","cpt4_pos_ohrwalk1","cpt4_bar_ohrwalk1",{
-		params ["_mob"];
-		["cpt4_ohrwalk_state",{_this+1},1] call sp_storageUpdate;
-
-		_After = cpt4_loophandler_ohrwalk;
-		invokeAfterDelay(_After,2);
-	}] call sp_ai_playAnim;
-
+	["cpt4_ohrwalk1",
+		[
+			["cpt4_pos_ohrwalk1","cpt4_bar_ohrwalk1",{rand(3,5)}],
+			["cpt4_pos_ohrwalk2","cpt4_bar_ohrwalk2",{rand(3,5)}]
+		]
+	] call sp_ai_playAnimsLooped;
 
 	[false,1.5] call setBlackScreenGUI;
 }] call sp_addScene;
 
-cpt4_loophandler_ohrwalk = {
-	_nval = str((["cpt4_ohrwalk_state",1] call sp_storageGet)%2  + 1);
-	["cpt4_ohrwalk1","cpt4_pos_ohrwalk" + _nval,"cpt4_bar_ohrwalk" + _nval,cpt4_loophandler_ohrwalk] call sp_ai_playAnim;
-};

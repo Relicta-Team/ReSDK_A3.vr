@@ -198,7 +198,7 @@ sp_ai_debug_suspendCapture = {
 
 
 sp_ai_playCapture = {
-    params ["_target","_cdata","_basePos",["_postCode",{}],"_mapStates"];
+    params ["_target","_cdata","_basePos",["_postCode",{}],"_mapStates","_internalContext"];
     private _cpydta = array_copy(_cdata);
 
     private _moveproc = true;
@@ -229,7 +229,9 @@ sp_ai_playCapture = {
 
         ["postAnimCode",_postCode],
 
-        ["mapStates",_mapStates]
+        ["mapStates",_mapStates],
+
+        ["internalContext",_internalContext]
     ];
     
     _target setanimspeedcoef 1;
@@ -279,7 +281,7 @@ sp_ai_internal_processPlayingStates = {
         };
         
         [_obj,getposatl _obj,false] call sp_ai_commitMobPos;
-        [_obj] call (_ctx get "postAnimCode");
+        [_obj,_ctx get "internalContext"] call (_ctx get "postAnimCode");
     };
     _curDelta = tickTime - _t;
     _firstFrame = _cdata select 0;
@@ -389,7 +391,7 @@ sp_ai_debug_createTestPerson = {
 };
 
 sp_ai_playAnim = {
-    params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates"];
+    params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates","_internalContext"];
 
     if isNullVar(_mapStates) then {
         _mapStates = createHashMap;
@@ -431,7 +433,7 @@ sp_ai_playAnim = {
 
     private _buff = call compile LOADFILE _animName;
 
-    [_target,_buff,_basePos,_postCode,_mapStates] call sp_ai_playCapture;
+    [_target,_buff,_basePos,_postCode,_mapStates,_internalContext] call sp_ai_playCapture;
 };
 
 sp_ai_createPerson = {
@@ -679,4 +681,78 @@ sp_ai_internal_onUpdate = {
             };
         };
     } foreach sp_ai_mobs;
+};
+
+/*
+    Play looped animlist
+    ["target",[
+        ["pos1","anim1","_pauseCodeOrFloat","_additionalPostcode"]
+    ]] call sp_ai_playAnimsLooped
+*/
+sp_ai_playAnimsLooped = {
+    params ["_target","_anims",["_commonState",{}]];
+    
+    if (count _anims == 0) exitWith {};
+
+    //_anims -> params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates"];
+    private _anmStateContext = createHashMapFromArray [
+        ["target",_target], //cur target
+        ["curAnim",0], //cur anim
+        ["animList",_anims], //animlist
+        ["commonState",_commonState],
+
+        ["_tref",objNull]
+    ];
+    
+    [_target,_anims select 0,_anmStateContext] call sp_ai_internal_playAnimStateLoop;
+};
+
+sp_ai_internal_playAnimStateLoop = {
+    params ["_t","_anm","_ctxInt"];
+    _anm params ["_p","_anmName","_pauseAft","_callPostCode"];
+    
+    _ctxInt set ["pause",_pauseAft];
+    _ctxInt set ["callPostAnim",_callPostCode];
+
+    [_t,_p,_anmName,{
+        params ["_obj","_ctxInt"];
+        
+        //save object reference (for hotreload checks)
+        if !isNullReference(_obj) then {
+            _ctxInt set ["_tref",_obj];
+        };
+
+        if not_equals(_obj,_ctxInt get "_tref") exitWith {}; //exit on obsolete object
+
+        //calculate awaiter
+        _pause = _ctxInt getOrDefault ["pause",0];
+        if equalTypes(_pause,{}) then {
+            _pause = call _pause;
+        };
+
+        //get next anim
+        _curAnimId = _ctxInt get "curAnim";
+        _anmList = _ctxInt get "animList";
+        _maxAnimId = count _anmList - 1;
+        _nextId = _curAnimId + 1;
+        if (_nextId > _maxAnimId) then {_nextId = 0};
+
+        //write new id
+        _ctxInt set ["curAnim",_nextId];
+
+        //play commonstate
+        _commonState = _ctxInt get "commonState";
+        [_obj,_ctxInt] call _commonState;
+
+        //play additional code (e.g. set anim, or play sound)
+        [_obj,_ctxInt] call (_ctxInt getOrDefault ["callPostAnim",{}]);
+
+        //play anim
+        _paramList = [_ctxInt get "target",_anmList select _nextId,_ctxInt];
+        if (_pause > 0) then {
+            invokeAfterDelayParams(sp_ai_internal_playAnimStateLoop)
+        } else {
+            _paramList call sp_ai_internal_playAnimStateLoop;
+        };
+    },_states,_ctxInt] call sp_ai_playAnim;
 };
