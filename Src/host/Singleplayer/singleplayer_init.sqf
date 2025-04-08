@@ -65,6 +65,7 @@ sp_internal_reloadScenario = {
 
 	//reset triggers
 	sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+	sp_gc_internal_listTriggersZones = ["Struct_SPZoneTrigger",false] call getAllObjectsInWorldTypeOf;
 
 	private _oldscn = sp_loadedScenarios;
 	
@@ -96,6 +97,8 @@ if (!isNull(sp_gc_handleUpdateTriggers)) then {
 
 sp_gc_handleUpdateTriggers = -1;
 sp_gc_internal_listTriggers = [];
+sp_gc_internal_listTriggersZones = [];
+sp_gc_internal_activeTriggers = createhashMap; //key name, value gameobject
 
 sp_initMainModule = {
 	call sp_initGUI;
@@ -118,6 +121,29 @@ sp_initMainModule = {
 		if (_del) then {
 			sp_gc_internal_listTriggers = sp_gc_internal_listTriggers - [nullPtr];
 		};
+
+		//handle triggers
+		_usrPos = player modelToWorld (player selectionPosition "head");
+		_inZone = false;
+		_trgname = null;
+		_mapcollide = sp_gc_internal_activeTriggers;
+		{
+			if isNullReference(_x) then {continue};
+			_inZone = callFuncParams(_x,isInsideTrigger,_usrPos);
+			_trgname = getVar(_x,triggerName);
+			if (_inZone) then {
+				if !(_trgname in _mapcollide) then {
+					_mapcollide set [_trgname,_x];
+					[_trgname,true] call sp_callTriggerEvent;
+				};
+			} else {
+				if (_trgname in _mapcollide) then {
+					_mapcollide deleteAt _trgname;
+					[_trgname,false] call sp_callTriggerEvent;
+				};
+			};
+
+		} foreach sp_gc_internal_listTriggersZones;
 	};
 	sp_gc_handleUpdateTriggers = startUpdate(_triggerHandle,0.05);
 };

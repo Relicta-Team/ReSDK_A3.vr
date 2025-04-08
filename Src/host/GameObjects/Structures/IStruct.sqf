@@ -465,11 +465,10 @@ class(Struct_SPZoneTrigger) extends(Struct_SPTrigger)
 
 	func(isInsideTrigger)
 	{
-		objParams_1(_usr);
-		private _p = callFunc(_usr,getPos);
+		objParams_1(_usrPos);
 		private _myLoc = getSelf(loc);
-		_p inArea [
-			getposatl _myLoc,getSelf(sizeX),getSelf(sizeY),getdir _myLoc,true,getSelf(sizeZ)
+		_usrPos inArea [
+			getposatl _myLoc,getSelf(sizeX)/2,getSelf(sizeY)/2,getdir _myLoc,true,getSelf(sizeZ)/2
 		]
 	};
 endclass

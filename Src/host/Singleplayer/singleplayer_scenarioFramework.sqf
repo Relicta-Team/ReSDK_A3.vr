@@ -45,6 +45,25 @@ sp_addScene = {
 	sp_internal_map_scenes set [_name,_code];
 };
 
+//triggerzone works
+sp_addTriggerEnter = {
+	params ["_name","_code"];
+	sp_internal_map_scenes set [_name + "__onEnter",_code];
+};
+
+sp_addTriggerExit = {
+	params ["_name","_code"];
+	sp_internal_map_scenes set [_name + "__onExit",_code];
+};
+
+sp_callTriggerEvent = {
+	params ["_name",["_isEnter",true]];
+	private _postfix = ifcheck(_isEnter,"__onEnter","__onExit");
+	call (sp_internal_map_scenes getOrDefault [_name + _postfix, {}])
+};
+
+
+
 sp_preloadScenarioEnvironment = {
 	
 	private _persetupCode = {

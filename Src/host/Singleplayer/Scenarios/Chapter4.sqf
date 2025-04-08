@@ -765,11 +765,86 @@ cpt4_pos_bar_aloguys - 3 sits
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt4_bar_musicProc = false;
+cpt4_bar_musicUpdateReq = false;
+if !isNull(cpt4_bar_musicHandle) then {
+	stopUpdate(cpt4_bar_musicHandle);
+};
+cpt4_bar_musicHandle = -1;
+if !isNull(cpt4_bar_curMusicPlayed) then {
+	stopSound (cpt4_bar_curMusicPlayed);
+};
+cpt4_bar_curMusicPlayed = -1;
+cpt4_bar_curMusicStartTime = 0;
+cpt4_bar_curMusicDist = 10;
+cpt4_bar_curMusicName = "";
+
+["cpt4_trg_barhallway",{
+	cpt4_bar_curMusicDist = 12;
+	cpt4_bar_musicUpdateReq = true;
+}] call sp_addTriggerEnter;
+
+["cpt4_trg_bazone",{
+	cpt4_bar_curMusicDist = 18;
+	cpt4_bar_musicUpdateReq = true;
+}] call sp_addTriggerEnter;
+
+["cpt4_trg_bazone",{
+	cpt4_bar_curMusicDist = 12;
+	cpt4_bar_musicUpdateReq = true;
+}] call sp_addTriggerExit;
+
+["cpt4_trg_bardoor",{
+	//start bar handle
+	//!unknown undefined behaviour (fuck bis)
+	if (!cpt4_bar_musicProc && false) then {
+		cpt4_bar_musicProc = true;
+		_mlist = [
+			"chap4\radios\bar_radio1",
+			"chap4\radios\bar_radio2",
+			"chap4\radios\bar_radio3"
+		];
+		private _fnc = {
+			(_this select 0) params ["_mlist"];
+
+			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) exitWith {
+				cpt4_bar_musicUpdateReq = false;
+				//_startTime = (soundParams cpt4_bar_curMusicPlayed) select 3;
+				_startTime = tickTime - cpt4_bar_curMusicStartTime; //new offset
+				stopSound cpt4_bar_curMusicPlayed;
+				cpt4_bar_curMusicPlayed = [
+					"cpt4_obj_barradio",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime-diag_deltaTime
+				] call sp_audio_sayAtTarget;
+
+				[format["update mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
+			};
+
+			if equals(soundParams cpt4_bar_curMusicPlayed,[]) then {
+				_m = _mlist deleteAt 0;
+				_mlist pushBack _m;
+				cpt4_bar_curMusicName = _m;
+				
+				cpt4_bar_curMusicPlayed = ["cpt4_obj_barradio",_m,cpt4_bar_curMusicDist,
+					//!errors... ifcheck(cpt4_bar_curMusicPlayed==-1,30,0) //first time offset
+					0 
+				] call sp_audio_sayAtTarget;
+				cpt4_bar_curMusicStartTime = tickTime;
+
+				[format["start mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
+			};
+		};
+		cpt4_bar_musicHandle = startUpdateParams(_fnc,0,[_mlist]);
+	};
+
+	cpt4_bar_curMusicDist = 0.5;
+	cpt4_bar_musicUpdateReq = true;
+}] call sp_addTriggerEnter;
+
 ["cpt4_trg_barenter",{
 	
 	//radlist: chap4\radios\bar_radio3.ogg
 	private _distance = 10;
-	["cpt4_obj_barradio","chap4\radios\bar_radio1",_distance] call sp_audio_sayAtTarget;
+	//["cpt4_obj_barradio","chap4\radios\bar_radio1",_distance] call sp_audio_sayAtTarget;
 }] call sp_addScene;
 
 ["cpt4_trg_barmainroom",{

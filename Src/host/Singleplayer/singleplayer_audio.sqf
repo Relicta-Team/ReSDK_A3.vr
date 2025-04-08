@@ -44,7 +44,7 @@ sp_audio_sayPlayerList = {
 };
 
 sp_audio_sayAtTarget = {
-	params ["_target","_pathPost",["_dist",20]];
+	params ["_target","_pathPost",["_dist",20],["_startOffset",0]];
 	if (sp_debug_skipAudio) exitWith {-1};
 	_target = [_target] call sp_audio_internal_resolveTarget;
 	if isNullReference(_target) exitWith {-1};
@@ -56,7 +56,7 @@ sp_audio_sayAtTarget = {
 	private _mpath = "singleplayer\sp_guide\" + _pathPost;
 	//params ["_source","_class","_dist",["_pitch",1],["_offset",0]];
 	private _vol = 1;
-	[_mpath,_target,_vol,null,_dist] call soundGlobal_play;
+	[_mpath,_target,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
 };
 
 sp_audio_internal_resolveTarget = {
