@@ -61,8 +61,11 @@
 		[false] call sp_setNotificationVisible;
 		refset(_ct,true);
 
+		2 call sp_threadPause;
+		callFuncParams(call sp_getActor,playSound, "emotes\sigh_male" arg getRandomPitchInRange(0.85,1.2));
 		1 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
+
 		["resist",{false}] call sp_addPlayerHandler;
 		[
 			"Чтобы встать с кровати нажмите $input_act_resist."
@@ -85,7 +88,7 @@
 		5 call sp_threadPause;
 
 		[
-			"Для активации свободного осмотра удерживайте @lookAround,"
+			"Для свободного осмотра (вращения головой) удерживайте @lookAround,"
 			+ sbr + "для переключения режима нажмите @lookAroundToggle"
 		] call sp_setNotification;
 
@@ -118,7 +121,8 @@
 		[false] call sp_setNotificationVisible;
 
 		2 call sp_threadPause;
-		["chap1\gg2"] call sp_audio_sayPlayer;
+		_h = ["chap1\gg2"] call sp_audio_sayPlayer;
+		_h call sp_audio_waitForEndSound;
 
 		["Для основного действия с объектами в мире нажмите $input_act_mainAction. "+
 		"Например: дверь - открыть, кнопка - нажать, кровать - лечь."+
@@ -138,7 +142,7 @@
 }] call sp_addScene;
 
 ["cpt1_basemoving", {
-	["Снова в путь","Отправляйтесь через пещеры и найдите новое пристанище"] call sp_setTaskMessageEff;
+	["Снова в путь","Отправляйтесь в пещеры и найдите новое пристанище"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
 ["cpt1_trg_Xbutton",{
@@ -162,23 +166,34 @@
 	} call sp_threadStart;
 }] call sp_addScene;
 
+["cpt1_trg_ZbuttonUp",{
+	{
+		_h = ["Чтобы встать нажмите ещё раз @MoveDown, либо @MoveUp"] call sp_setNotification;
+		{
+			callFunc(call sp_getActor,getStance) != STANCE_DOWN
+		} call sp_threadWait;
+		[false,_h] call sp_setNotificationVisible;
+	} call sp_threadStart;
+}] call sp_addScene;
+
 ["cpt1_trg_walkbutton",{
 	{
-		["Чтобы переключиться на медленный шаг нажмите @WalkRunToggle"] call sp_setNotification;
+		_h = ["Чтобы переключиться на медленный шаг нажмите @WalkRunToggle"] call sp_setNotification;
 		private _tReset = tickTime + 5;
 		{
 			callFunc(call sp_getActor,isWalking)
 			|| (tickTime >= _tReset)
 		} call sp_threadWait;
-		[false] call sp_setNotificationVisible;
+		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt1_trg_campfiresee",{
 	{
 		_h = ["chap1\gg3"] call sp_audio_sayPlayer;
-		{count soundParams _h == 0} call sp_threadWait;
+		_h call sp_audio_waitForEndSound;
 		["chap1\gg4"] call sp_audio_sayPlayer;
+		2 call sp_threadPause;
 		["cpt1_looting"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -484,6 +499,7 @@
 
 		[""] call sp_view_setPlayerHudVisible;
 		[true,2.5] call setBlackScreenGUI;
+		2.5 call sp_threadPause;
 
 		["cpt2_begin"] call sp_startScene;
 	} call sp_threadStart;

@@ -233,6 +233,10 @@ sp_ai_playCapture = {
 
         ["internalContext",_internalContext]
     ];
+
+    if equals(_internalContext,"__not_provided__") then {
+       _ctx set ["internalContext",null];
+    };
     
     _target setanimspeedcoef 1;
 
@@ -391,7 +395,7 @@ sp_ai_debug_createTestPerson = {
 };
 
 sp_ai_playAnim = {
-    params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates","_internalContext"];
+    params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates",["_internalContext","__not_provided__"]];
 
     if isNullVar(_mapStates) then {
         _mapStates = createHashMap;
@@ -709,7 +713,7 @@ sp_ai_playAnimsLooped = {
 
 sp_ai_internal_playAnimStateLoop = {
     params ["_t","_anm","_ctxInt"];
-    _anm params ["_p","_anmName","_pauseAft","_callPostCode"];
+    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}]];
     
     _ctxInt set ["pause",_pauseAft];
     _ctxInt set ["callPostAnim",_callPostCode];
@@ -750,9 +754,21 @@ sp_ai_internal_playAnimStateLoop = {
         //play anim
         _paramList = [_ctxInt get "target",_anmList select _nextId,_ctxInt];
         if (_pause > 0) then {
-            invokeAfterDelayParams(sp_ai_internal_playAnimStateLoop)
+            invokeAfterDelayParams(sp_ai_internal_playAnimStateLoop,_pause,_paramList)
         } else {
             _paramList call sp_ai_internal_playAnimStateLoop;
         };
     },_states,_ctxInt] call sp_ai_playAnim;
+};
+
+sp_ai_setLookAtControl = {
+    params ["_mob","_target"];
+    if (isNullReference(_mob)) exitWith {};
+    if isNullReference(_target) then {
+        _mob lookat objnull;
+        _mob disableAI "ANIM";
+    } else {
+        _mob enableAI "ANIM";
+        _mob lookat _target;
+    };
 };

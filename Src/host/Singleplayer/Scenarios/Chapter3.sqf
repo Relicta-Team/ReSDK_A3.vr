@@ -67,6 +67,8 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_trg_founddeadbody",{
 	{
+		["chap3\gg1"] call sp_audio_sayPlayer;
+
 		["Вы можете обыскивать тела людей не проявляющих активности. Например: мертвых, связанных или спящих." + 
 		sbr + sbr +
 		"Для этого подойдите к телу, нажмите ПКМ и выберите пункт ""Раздеть"". В открывшемся меню инвентаря чужого персонажа нажмите по слоту с предметом. Выбранный предмет будет взят в активную руку."+
@@ -119,10 +121,14 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			private _m = pick["Так не закрыто же!","Не заперто.","Зачем взламывать открытое?!?!"];
 			callFuncParams(_usr,localSay,_m arg "error");
 		};
+		if not_equals("cpt3_obj_lockeddoor" call sp_getObject,this) exitWith {
+			callFuncParams(_usr,mindSay,"Слишком сложный замок...");
+		};
 		if getSelf(isOpen) exitWith {};
 
-		callFuncParams(_usr,mindSay,"Мне удалось взломать замок!");
+		callFuncParams(_usr,mindSay,"Мне удалось взломать замок... но отмычка не пережила это.");
 		callSelfParams(setDoorLock,false arg false);
+		nextFrame({delete(_this)},_lockpick);
 	};
 
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
@@ -240,6 +246,10 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_foundmonster",{
 	{
+		{
+			[0,1.5,0.01,0.5] call cam_addCamShake;
+		} call sp_threadCriticalSection;
+
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
 		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
@@ -270,6 +280,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			params ["_targ"];
 			_trch = callFunc(call sp_getActor,getItemInActiveHandRedirect);
 			if (isNullReference(_trch)) exitWith {true};
+			if !isTypeOf(_trch,Torch) exitWith {true};
 			
 			if (callFuncParams(call sp_getActor,getDirFrom,(sp_ai_debug_testmobs get "cpt3_eater") getvariable "link") == DIR_FRONT) exitWith {
 				["cpt3_obj_torchonthrow",_trch] call sp_storageSet;
@@ -310,6 +321,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 			_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
 		}] call sp_ai_playAnim;
+
+		0.5 call sp_threadPause;
+		["chap3\gg2"] call sp_audio_sayPlayer;
 
 		["Прятки со смертью","Проберитесь через пропускную зону к городу"] call sp_setTaskMessageEff;
 
@@ -457,7 +471,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 }] call sp_addScene;
 
 ["cpt3_trg_attackeater",{
-	[cpt3_hudvis_eatercombat] call sp_setHudVisibility;
+	[cpt3_hudvis_eatercombat] call sp_view_setPlayerHudVisible;
 	["click_target",{
 		params ["_t"];
 		_ret = true;
@@ -493,7 +507,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			_d getvariable ["combatMenuCtg",widgetNull]
 		},0.02] call sp_createWidgetHighlight;
 
-		_h = ["В верхнем меню вы можете настроить способы атаки и защиты, а справа настраивается зона атаки - место куда вы будете бить противника."+
+		_h = ["Нажмите $input_act_inventory. В верхнем меню вы можете настроить способы атаки и защиты, а справа настраивается зона атаки - место куда вы будете бить противника."+
 		sbr+"Как будете готовы атаковать - нажмите ЛКМ для атаки"] call sp_setNotification;
 
 		{
@@ -506,9 +520,23 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		["cpt3_lightswitch",false] call sp_storageSet;
 		[true] call sp_setHideTaskMessageCtg;
 
-		// {
-		// 	callFuncParams(call sp_getActor,canSeeObject,"cpt3_obj_doordestr" call sp_getObject)
-		// } call sp_threadWait;
+		1.2 call sp_threadPause;
+
+		_sound = ["chap3\gg3"] call sp_audio_sayPlayer;
+		_sound call sp_audio_waitForEndSound;
+
+		_threadlook = {
+			{
+				callFuncParams(call sp_getActor,canSeeObject,"cpt3_obj_doordestr" call sp_getObject)
+			} call sp_threadWait;
+			[
+				"chap3\gg4",
+				"chap3\gg5"
+			] call sp_audio_sayPlayerList;
+		} call sp_threadStart;
+		
+		_threadlook = call sp_threadWaitForEnd;
+		
 		_h1 = ["main_action",{
 			params ["_t"];
 			if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
@@ -544,13 +572,17 @@ cpt3_func_damageEvent = {
 
     _snd = false;
     for "_i" from 1 to randInt(2,4) do {
-        private _wpos = _worldPos vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),rand(-0.1,0.1)];
+        private _wpos = _worldPos vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),rand(-0.2,0.3)];
         callFuncParams(_trg,sendDamageVisualOnPos,_wpos arg _eff arg _snd arg _isblock);
     };
 };
 
 ["cpt3_dodestroydoor",{
 	{
+		["chap3\gg6"] call sp_audio_sayPlayer;
+		
+		1 call sp_threadPause;
+
 		["Вы можете разрушать объекты с помощью вашего оружия. Для этого нажмите ЛКМ в боевом режиме по двери"] call sp_setNotification;
 		_obj = "cpt3_obj_doordestr" call sp_getObject;
 		//callFuncParams(_obj,setHPCurrentPrecentage,10);
@@ -562,7 +594,14 @@ cpt3_func_damageEvent = {
 			if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
 				_t call cpt3_func_damageEvent;
 				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
+					[false] call sp_setNotificationVisible;
 					nextFrameParams(deleteGameObject,[_t]);
+
+					_worldPos = callFunc(_t,getPos) vectorAdd [0,0,0.5];
+					for "_i" from 1 to 4 do {
+						private _wpos = _worldPos vectoradd [rand(-0.8,0.8),rand(-0.8,0.8),0.5];
+						_w = ["WoodenDebris" + (str randInt(3,4)),_wpos,null,true] call createItemInWorld;
+					};
 				};
 				_hret = false;
 			};
@@ -572,10 +611,37 @@ cpt3_func_damageEvent = {
 }] call sp_addScene;
 
 ["t3_trg_foundgate",{
-
+	["chap3\gg7"] call sp_audio_sayPlayer;
 }] call sp_addScene;
 
 ["cpt3_trg_ongate",{
 	//cpt3_obj_radio - speaker
 	//cpt3_obj_bigspeaker - big speaker
+	{
+		[
+			[player,"chap3\gg8"],
+			["cpt3_obj_radio","chap3\radio1",["endoffset",2]],
+
+			[player,"chap3\gg9",["endoffset",3.1]], 
+			["cpt3_obj_radio","chap3\radio2",["endoffset",-2]],
+
+			[player,"chap3\gg10",["endoffset",2]], 
+			["cpt3_obj_radio","chap3\radio3",["endoffset",2]],
+
+			[player,"chap3\gg11",["endoffset",3.1]], 
+			["cpt3_obj_radio","chap3\radio4",["onend",{
+				["cpt3_onend"] call sp_startScene;
+			}]]
+		] call sp_audio_startDialog;
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt3_onend",{
+	[""] call sp_view_setPlayerHudVisible;
+    [true] call sp_setHideTaskMessageCtg;
+	[true,2] call setBlackScreenGUI;
+	{
+        3 call sp_threadPause;
+        ["cpt4_begin"] call sp_startScene;
+    } call sp_threadStart;
 }] call sp_addScene;

@@ -560,7 +560,12 @@ cpt2_restoreTrapMethods = {
 
 ["cpt2_trg_end",{
     [""] call sp_view_setPlayerHudVisible;
+    [true] call sp_setHideTaskMessageCtg;
 	[true,1.1] call setBlackScreenGUI;
+    {
+        3 call sp_threadPause;
+        ["cpt3_begin"] call sp_startScene;
+    } call sp_threadStart;
 }] call sp_addScene;
 
 //cpt2_obj_medcab - medical cab

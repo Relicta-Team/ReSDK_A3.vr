@@ -3,6 +3,15 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\engine.hpp"
+#include "..\oop.hpp"
+#include "..\struct.hpp"
+#include "..\text.hpp"
+#include "..\thread.hpp"
+#include "..\..\client\WidgetSystem\widgets.hpp"
+#include "..\NOEngine\NOEngine.hpp"
+#include "..\GameObjects\GameConstants.hpp"
+
 sp_audio_sayPlayer = {
 	params ["_pathPost"];
 	if (sp_debug_skipAudio) exitWith {-1};
@@ -11,6 +20,13 @@ sp_audio_sayPlayer = {
 		null,null,
 		true //redirect to effect audio channel
 	] call soundUI_play;
+};
+
+sp_audio_waitForEndSound = {
+	params ["_handle"];
+	if (sp_debug_skipAudio) exitWith {};
+	
+	{count soundParams _handle == 0} call sp_threadWait;
 };
 
 sp_audio_sayPlayerList = {
@@ -31,9 +47,7 @@ sp_audio_sayAtTarget = {
 	params ["_target","_pathPost",["_dist",20]];
 	if (sp_debug_skipAudio) exitWith {-1};
 	_target = [_target] call sp_audio_internal_resolveTarget;
-	if isNullReference(_target) exitWith {};
-
-	refset(_refOutTgt,_target);
+	if isNullReference(_target) exitWith {-1};
 
 	if equals(_target,player) exitWith {
 		[_pathPost] call sp_audio_sayPlayer;
@@ -80,6 +94,10 @@ sp_audio_startDialog = {
 	{
 		if (count _x > 2) then {
 			private _params = _x select 2;
+			if (count _params == 2 
+				&& {equalTypes(_params select 0,"")}) then {
+					_params = [_params];
+				};
 			_x set [2,createHashMapFromArray _params];
 		} else {
 			_x set [2,createHashMap];
@@ -95,28 +113,30 @@ sp_audio_startDialog = {
 };
 
 sp_audio_internal_procDialog = {
-	params ["_stateSeq"];
+	params ["_stateSeq",["_canCheckStartCond",true]];
 	_stateSeq params ["_dlg","_cur"];
 	private _curSeq = _dlg select _cur;
 	_curSeq params ["_tgt","_pathPost","_ctxParams"];
 	private _tgtReal = [_tgt] call sp_audio_internal_resolveTarget;
-
+	
 	private _canStartCode = _ctxParams getOrDefault ["canstart",{true}];
 
-	if (!([_tgtReal] call (_canStartCode))) exitWith {
-		//TODO implement start condition
-		// startAsyncInvoke
-		// 	{
-
-		// 	},
-		// 	{
-				
-		// 	}
-		// endAsyncInvoke
+	if (!([_tgtReal] call _canStartCode) && _canCheckStartCond) exitWith {
+		startAsyncInvoke
+			{
+				params ["_tgtReal","_canStartCode","_startSeq"];
+				[_tgtReal] call _canStartCode;
+			},
+			{
+				params ["_tgtReal","_canStartCode","_startSeq"];
+				[_startSeq,false] call sp_audio_internal_procDialog;
+			},
+			[_tgtReal,_canStartCode,_startSeq]
+		endAsyncInvoke
 	};
 
 	private _handle = [_tgt,_pathPost,_ctxParams get "volume"] call sp_audio_sayAtTarget;
-	
+	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg soundParams _handle);
 	if equals(soundParams _handle,[])exitWith{};
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
@@ -127,6 +147,7 @@ sp_audio_internal_procDialog = {
 			if equals(_spar,[]) exitWith {true};
 			_spar params ["","","_len","_time"];
 			_endoffset = _ctxParams getOrDefault ["endoffset",0];
+			//traceformat("TIMECHECK FOR %1"+endl + "		%2 %3 (-%4) => %5",_spar select 0 arg _time arg _len arg _endoffset arg _time >= (_len - _endoffset));
 			_time>=(_len - _endoffset)
 		},
 		{
@@ -140,7 +161,7 @@ sp_audio_internal_procDialog = {
 			};
 
 			[] call (
-				(_stateSeq select 0 select _origCurId)
+				(_stateSeq select 0 select _origCurId select 2)
 					getOrDefault ["onend",{}]
 			);
 

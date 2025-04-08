@@ -417,6 +417,7 @@ class(Struct_SPISpecialObject) extends(IStruct)
 	{
 		objParams();
 		if callSelf(disableVisual) then {
+			if (sp_debug_doNotHideDebugObjects) exitwith {};
 			setSelf(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
 		};
 	};

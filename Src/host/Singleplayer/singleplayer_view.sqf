@@ -146,14 +146,14 @@ sp_setNotification = {
 		private _vname = [_text,"\$\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
 		private _inpName = [_keyName] call input_getKeyNameByInputName;
-		_text = [_text,"\$"+_keyName,_inpName] call regex_replace;
+		_text = [_text,"\$"+_keyName,format["<t size='1.3' color='#3bad18'>%1</t>",_inpName]] call regex_replace;
 	};
 
 	while {[_text,"\@\w+"] call regex_isMatch} do {
 		private _vname = [_text,"\@\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
 		private _inpName = actionKeysNames _keyName;
-		_text = [_text,"\@"+_keyName,_inpName] call regex_replace;
+		_text = [_text,"\@"+_keyName,format["<t size='1.3' color='#e20048'>%1</t>",_inpName]] call regex_replace;
 	};
 
 	[_tWid,format["%2<t align='center' size='1.2'>%1</t>%2 ",_text,sbr]] call widgetSetText;
