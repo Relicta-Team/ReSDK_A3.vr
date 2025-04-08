@@ -424,6 +424,7 @@ class(Struct_SPISpecialObject) extends(IStruct)
 endclass
 
 class(Struct_SPTrigger) extends(Struct_SPISpecialObject)
+
 	var(model,"a3\structures_f_orange\vr\helpers\sign_sphere100cm_geometry_f.p3d");
 
 	editor_attribute("EditorVisible" arg "type:string")
@@ -435,6 +436,41 @@ class(Struct_SPTrigger) extends(Struct_SPISpecialObject)
 	func(constructor)
 	{
 		objParams();
+	};
+endclass
+
+class(Struct_SPZoneTrigger) extends(Struct_SPTrigger)
+
+	func(__editor_renderbbx)
+	{
+		params ["_convfunc"];
+		private _xv = ("sizeX" call _convfunc)/2;
+		private _yv = ("sizeY" call _convfunc)/2;
+		private _zv = ("sizeZ" call _convfunc)/2;
+		[
+			[-_xv,-_yv,-_zv],[_xv,_yv,_zv]
+		]
+	};
+
+	editor_attribute("EditorVisible" arg "type:float")
+	var(sizeX,1);
+
+	editor_attribute("EditorVisible" arg "type:float")
+	var(sizeY,1);
+
+	editor_attribute("EditorVisible" arg "type:float")
+	var(sizeZ,1);
+
+	editor_attribute("InternalImpl") var(triggerDistance,0);
+
+	func(isInsideTrigger)
+	{
+		objParams_1(_usr);
+		private _p = callFunc(_usr,getPos);
+		private _myLoc = getSelf(loc);
+		_p inArea [
+			getposatl _myLoc,getSelf(sizeX),getSelf(sizeY),getdir _myLoc,true,getSelf(sizeZ)
+		]
 	};
 endclass
 

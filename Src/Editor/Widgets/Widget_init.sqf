@@ -122,6 +122,7 @@ menu_structureLayout = [
 			"text:Переключить отображение классов;act:(!drawNames_enabled) call drawNames_setEnable",//short:512 + 0x16
 			"text:Переключить отображение курсора геометрии;act:call geoCursor_toggle",
 			"text:Переключить отображение сетки чанков;act: call pertest_chunkViewToggle;",
+			"text:Переключить отображение зон;act: call zoneVis_switchMode",
 			"text:Переключить время суток;act:(!call rendering_isNightEnabled) call rendering_setNight"
 		]
 	],
