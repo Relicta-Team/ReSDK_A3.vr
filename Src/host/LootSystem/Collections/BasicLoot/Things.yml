@@ -41,6 +41,8 @@ Things_tier2:
       prob: 3%
     CandleDisabled:
       prob: 3%
+    MetalDebris1:
+      prob: 3%
 
 
 #Tier3

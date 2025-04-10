@@ -1,3 +1,33 @@
+- name: Грибная самокрутка
+  type: interact
+  category: Other
+  options:
+    craft_duration: (rta * 2) + irnd(4,7)
+  required:
+    components:
+      hand_item:
+        class: GribChopped
+      target:
+        class: Paper
+        check_type_of: false
+  result:
+    class: SamokrutkaDisabled 
+
+- name: Грибная самокрутка
+  type: interact
+  category: Other
+  options:
+    craft_duration: (rta * 2) + irnd(4,7)
+  required:
+    components:
+      hand_item:
+        class: Paper
+      target:
+        class: GribChopped
+        check_type_of: false
+  result:
+    class: SamokrutkaDisabled
+
 - name: Кухонный нож
   type: default
   category: Other
