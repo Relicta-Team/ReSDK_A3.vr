@@ -68,8 +68,6 @@
     handler_type: default
     class: MetalDebris1
     count: 1
-    class: SyntDebris1
-    count: 1
   result: 
     class: PistolOneShoot
 
