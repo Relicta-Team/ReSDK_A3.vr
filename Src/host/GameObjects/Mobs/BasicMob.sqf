@@ -1531,6 +1531,12 @@ region(Messaging and chat managers)
 		callSelfParams(localSay,_mes arg "mind");
 	};
 
+	func(addCamShake)
+	{
+		objParams_4(_pwrPos,_pwrDir,_freq,_dur);
+		callSelfParams(sendInfo,"camshake" arg [_pwrPos arg _pwrDir arg _freq arg _dur]);
+	};
+
 region(Animator)
 
 	_anim = {
