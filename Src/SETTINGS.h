@@ -43,6 +43,11 @@
 	#undef SP_DEBUG
 #endif
 
+//rbuilder force disable spmode and editor
+#ifdef RBUILDER
+	#undef SP_MODE_OR_EDITOR
+	#undef EDITOR_OR_SP_MODE
+#endif
 
 //============================================================================
 //			REGION: COMMON SETTINGS
