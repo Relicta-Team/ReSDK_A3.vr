@@ -1026,7 +1026,7 @@ endregion
 	" node_met
 	func(playSound)
 	{
-		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos",["_hasRTProcess",true]];
+		params ['this',"_path",["_pitch",1],["_maxDist",50],["_vol",1],"_atPos",["_hasRTProcess",true],["_offset",0]];
 		FHEADER;
 		private _source = if !isNullVar(_atPos) then {
 			_atPos
@@ -1043,6 +1043,9 @@ endregion
 		};
 
 		private _data = [_path arg _source arg _vol arg _pitch arg _maxDist];
+		if (_offset > 0) then {
+			_data append [null,_offset]; //null is file extension
+		};
 
 		private _srcObj = callSelf(getBasicLoc);
 		
