@@ -301,6 +301,10 @@ if (isMultiplayer) then {
 	#endif
 };
 
+#ifdef SP_MODE
+	loadFile("src\host\Singleplayer\singleplayer_init.sqf");
+#endif
+
 server_maxclients = 70; //максимальное количество подключаемых клиентов
 
 server_isHandleEndSession = false;

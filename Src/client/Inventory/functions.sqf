@@ -131,7 +131,7 @@ inventory_setGlobalVisible = {
 		_x set [1,(_x select 1)+_valmod];
 	} foreach inventory_slotpos_map;
 	
-	call inventory_resetPositionHandWidgets;
+	call inventory_resetPositionHandWidgetsForced;
 };
 
 decl(void())
@@ -248,6 +248,10 @@ openInventory = {
 
 	#ifdef DEBUG
 	private _invTimeCreate = tickTime;
+	#endif
+
+	#ifdef SP_MODE
+		sp_checkInput("open_inventory",[]);
 	#endif
 
 	if (isDisplayOpen) exitWith {};
@@ -501,6 +505,17 @@ inventory_resetPositionHandWidgets = {
 	};
 	[INV_HAND_L call inventoryGetWidgetById,[50 - _offsetW - _biasW,100 - SIZE_INVSLOT],TIME_PREPARE_SLOTS] call widgetSetPositionOnly;
 	[INV_HAND_R call inventoryGetWidgetById,[50 + _biasW,100 - SIZE_INVSLOT],TIME_PREPARE_SLOTS] call widgetSetPositionOnly;
+};
+
+decl(void())
+inventory_resetPositionHandWidgetsForced = {
+	private _offsetW = transformSizeByAR(SIZE_INVSLOT);
+	private _biasW = transformSizeByAR(SLOT_BIASH);
+	if (!inventory_isGlobalVisible) then {
+		_biasW = 100; _offsetW = 100;
+	};
+	[INV_HAND_L call inventoryGetWidgetById,[50 - _offsetW - _biasW,100 - SIZE_INVSLOT],0] call widgetSetPositionOnly;
+	[INV_HAND_R call inventoryGetWidgetById,[50 + _biasW,100 - SIZE_INVSLOT],0] call widgetSetPositionOnly;
 };
 
 decl(void())
@@ -1403,6 +1418,9 @@ inventory_onExamine = {
 //Смена активной руки
 decl(void())
 inventory_changeActiveHand = {
+	#ifdef SP_MODE
+		sp_checkInput("change_active_hand",[]);
+	#endif
 
 	if (verb_isMenuLoaded) then {
 		call verb_unloadMenu;
@@ -1417,6 +1435,10 @@ inventory_changeActiveHand = {
 
 decl(void())
 inventory_changeTwoHandsMode = {
+	#ifdef SP_MODE
+		sp_checkInput("change_two_hands",[]);
+	#endif
+
 	if (["switch2hands",0.7] call input_spamProtect) exitWith {};
 	rpcSendToServer("switchTwoHands",[player]);
 };

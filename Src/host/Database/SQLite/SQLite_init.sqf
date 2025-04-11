@@ -17,6 +17,9 @@ db_canUseQueryLogToStdout = false;
 
 //Основная функция инициализации базы данных
 db_init = {
+	#ifdef SP_MODE
+	if(true) exitWith {[0,"OK_BUT_SP_MODE"]};
+	#endif
 	["Start initialize database"] call logInfo;
 	["Database path: %1",DB_PATH] call logInfo;
 

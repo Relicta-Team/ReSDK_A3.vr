@@ -29,7 +29,11 @@ os_light_setEnable = {
 	params ["_mode"];
 	if (_mode) then {
 		os_light_lastTimeSendInfo = 0;
-		os_light_handle_onupdate = startUpdate(os_light_onUpdate,OS_LIGHT_UPDATE_DELAY);
+		private _ltUpd = OS_LIGHT_UPDATE_DELAY;
+		#ifdef SP_MODE
+		_ltUpd = 0.05;
+		#endif
+		os_light_handle_onupdate = startUpdate(os_light_onUpdate,_ltUpd);
 	} else {
 		stopUpdate(os_light_handle_onupdate);
 		os_light_handle_onupdate = -1;

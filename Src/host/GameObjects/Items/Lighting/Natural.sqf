@@ -165,6 +165,10 @@ class(Torch) extends(ILightible)
 	func(onUpdate)
 	{
 		updateParams();
+		#ifdef SP_MODE
+			sp_checkWSim("light");
+		#endif
+
 		modSelf(fuelLeft,-1);
 		callSelf(handleIgniteArea);
 		if (getSelf(fuelLeft) == 0) then {
@@ -368,6 +372,15 @@ class(Candle) extends(Sigarette)
 	var(light,"SLIGHT_LEGACY_CANDLE" call lightSys_getConfigIdByName);
 	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
 	var(fuelLeft,60 * 30);
+
+	func(onUpdate)
+	{
+		objParams();
+		#ifdef SP_MODE
+			sp_checkWSim("light");
+		#endif
+		super();
+	};
 
 	func(onFuelEmpty)
 	{

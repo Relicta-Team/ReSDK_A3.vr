@@ -17,6 +17,9 @@
 #ifdef EDITOR
 	#define EDITOR_OR_RBUILDER
 	#define RBUILDER_OR_EDITOR
+
+	#define SP_MODE_OR_EDITOR
+	#define EDITOR_OR_SP_MODE
 #endif
 
 #ifdef RBUILDER
@@ -25,6 +28,26 @@
 	#define RBUILDER_OR_EDITOR
 #endif
 
+//uncomment for enable singleplayer
+//#define SP_MODE
+#define SP_DEBUG
+
+#ifdef SP_MODE
+	#define SP_MODE_OR_EDITOR
+	#define EDITOR_OR_SP_MODE
+	#undef EDITOR
+#endif
+
+//disable spdebug on disabled spmode
+#ifndef SP_MODE
+	#undef SP_DEBUG
+#endif
+
+//rbuilder force disable spmode and editor
+#ifdef RBUILDER
+	#undef SP_MODE_OR_EDITOR
+	#undef EDITOR_OR_SP_MODE
+#endif
 
 //============================================================================
 //			REGION: COMMON SETTINGS
@@ -72,8 +95,16 @@
 #define SERVER_PASSWORD server_password
 
 #ifndef EDITOR
+	#ifndef SP_MODE
+		#define __FORCE_DISABLE_LOCAL_PATHES__
+	#endif
+#endif
+
+#ifdef __FORCE_DISABLE_LOCAL_PATHES__
+	#undef __FORCE_DISABLE_LOCAL_PATHES__
 	#undef USE_LOCAL_PATHES
 #endif
+
 
 //Пути до разных сегментов
 #ifdef USE_LOCAL_PATHES
@@ -217,4 +248,11 @@
 #else
 	#define USEEVERYDAYRUN_doValidation() 
 	#define USEEVERYDAYRUN_THREAD_UPDATE() 
+#endif
+
+
+#ifdef SP_MODE
+	#undef EDITOR
+	#define DEBUG
+	#undef RELEASE
 #endif

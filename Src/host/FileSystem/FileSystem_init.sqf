@@ -13,6 +13,10 @@ fso_map_tree = createhashMap; //flat object
 
 //initialize filesystem
 fso_init = {
+	#ifdef SP_MODE
+	if(true)exitWith{};
+	#endif
+
 	private _nativeCollection = addonFiles ["src\"];
 
 	private _useNativeCollector = count _nativeCollection > 0;
@@ -91,6 +95,10 @@ fso_buildTree = {
 fso_getFiles = {
 	params ["_pathDir",["_extension",""],["_recursive",false],["_internalFlag",true]];
 	
+	#ifdef SP_MODE
+	if(true)exitWith{};
+	#endif
+
 	//build fso tree
 	if (_internalFlag && {count fso_map_tree == 0}) then {
 		call fso_init;

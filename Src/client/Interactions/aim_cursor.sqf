@@ -10,6 +10,9 @@ namespace(InteractAim,interaction_aim_)
 macro_const(interaction_aim_widgetSize)
 #define AIM_SIZE 3
 
+decl(bool)
+interact_aim_disableGlobal = false;
+
 decl(int)
 interaction_aim_handle = -1;
 decl(int)
@@ -55,7 +58,7 @@ interaction_aim_alphaUpdate = {
 	(interaction_aim_widgets select 0) ctrlSetTextColor [0,1,0,_nv];
 	*/
 	_col = (interaction_aim_widgets select 0) getVariable ["rgb_col",[0,1,0,1]];
-	if (call cd_isEyesClosed) exitWith {
+	if (call cd_isEyesClosed || interact_aim_disableGlobal) exitWith {
 		_col set [3,0];
 		(interaction_aim_widgets select 0) ctrlSetTextColor _col;
 	};

@@ -458,7 +458,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define tickTime diag_tickTime
 #define deltaTime diag_deltaTime
 
-#ifdef EDITOR
+#ifdef EDITOR_OR_SP_MODE
 	#define __alloc_thread_loc__ (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] call stringReplace,__LINE__]]; \
 		(cba_common_perFrameHandlerArray select -1) set [7,diag_stacktrace]
 	#define startUpdate(func,delay) call{private _h = [func,delay] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
@@ -667,12 +667,25 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define setLastError(data__)
 #endif
 
+#ifdef SP_MODE
+	#define setLastError(data__) error(data__)
+#endif
+
 
 #define exitScope(cond) if (true) exitWith {cond};
 //TODO: опционально возвращаем только первые несколько функций стека вызова
 #define getCallStack() diag_stacktrace
 //#define CALLSTACK_NAMED(function, functionName) {private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
 //#define DUMPSTACK ([__FILE__, __LINE__] call acre_main_fnc_dumpCallStack
+
+//special spmode macros
+#ifdef SP_MODE
+	#define sp_checkInput(varname,params) if ([varname,params] call sp_gc_handlePlayerInput) exitWith {};
+	#define sp_checkWSim(varname) if (!(varname call sp_wsimIsActive)) exitWith {};
+#else
+	#define sp_checkInput(varname,params)
+	#define sp_checkWSim(varname)
+#endif
 
 
 //common macro

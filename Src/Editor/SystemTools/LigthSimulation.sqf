@@ -284,8 +284,10 @@ function(lsim_internal_loadLight)
 
 	//enable sim if need
 	if !(simulationEnabled _obj) then {
-		_obj enableSimulation true;
-		_obj switchLight "off";
+		if (getmass _obj == 0) then {
+			_obj enableSimulation true;
+			_obj switchLight "off";
+		};
 	};
 
 	lsim_objMap set [hashValue _obj,_obj];
