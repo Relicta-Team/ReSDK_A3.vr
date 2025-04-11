@@ -4587,7 +4587,7 @@ Replaced value:
 ```sqf
 if (_coefWt <= _val) exitWith {r};
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 562](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L562)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 564](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L564)
 ## thadd()
 
 Type: constant
@@ -4599,7 +4599,7 @@ Replaced value:
 ```sqf
 modvar(_val)+_mod;
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 563](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L563)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 565](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L565)
 ## thchange(mod)
 
 Type: constant
@@ -4611,7 +4611,7 @@ Replaced value:
 ```sqf
 _mod = mod;
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 564](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L564)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 566](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L566)
 ## mlp(v)
 
 Type: constant
@@ -4623,7 +4623,7 @@ Replaced value:
 ```sqf
 'v'
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1428](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1428)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1430](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1430)
 # Mob_Inventory.sqf
 
 ## __switchVars(prevname,nextname)
