@@ -241,7 +241,7 @@ Replaced value:
 ```sqf
 [obj,[_xp + ((_wp + _biasW) * xpos),_yp + ((_hp + SLOT_BIASH) * ypos)] , TIME_PREPARE_SLOTS] call widgetSetPositionOnly
 ```
-File: [client\Inventory\functions.sqf at line 420](../../../Src/client/Inventory/functions.sqf#L420)
+File: [client\Inventory\functions.sqf at line 424](../../../Src/client/Inventory/functions.sqf#L424)
 ## DEMAP(index,side)
 
 Type: constant
@@ -254,7 +254,7 @@ Replaced value:
 ```sqf
 (inventory_slotpos_map select index select side)
 ```
-File: [client\Inventory\functions.sqf at line 449](../../../Src/client/Inventory/functions.sqf#L449)
+File: [client\Inventory\functions.sqf at line 453](../../../Src/client/Inventory/functions.sqf#L453)
 ## POS_LEFTUP
 
 Type: constant
@@ -266,7 +266,7 @@ Replaced value:
 ```sqf
 _xp + ((_wp + _biasW) * DEMAP(INV_BACKPACK,0)),_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_BACKPACK,1))
 ```
-File: [client\Inventory\functions.sqf at line 450](../../../Src/client/Inventory/functions.sqf#L450)
+File: [client\Inventory\functions.sqf at line 454](../../../Src/client/Inventory/functions.sqf#L454)
 ## POS_RIGHTDOWN
 
 Type: constant
@@ -278,7 +278,7 @@ Replaced value:
 ```sqf
 _xp + ((_wp + _biasW) * DEMAP(INV_HAND_R,0)) + _wp,_yp + ((_hp + SLOT_BIASH) * DEMAP(INV_HAND_R,1)) + _hp
 ```
-File: [client\Inventory\functions.sqf at line 451](../../../Src/client/Inventory/functions.sqf#L451)
+File: [client\Inventory\functions.sqf at line 455](../../../Src/client/Inventory/functions.sqf#L455)
 ## inventory_isGlobalVisible
 
 Type: Variable
@@ -370,7 +370,7 @@ Description:
 - Param: _wp
 - Param: _hp
 
-File: [client\Inventory\functions.sqf at line 406](../../../Src/client/Inventory/functions.sqf#L406)
+File: [client\Inventory\functions.sqf at line 410](../../../Src/client/Inventory/functions.sqf#L410)
 ## inventory_resetPositionHandWidgets
 
 Type: function
@@ -378,7 +378,15 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 496](../../../Src/client/Inventory/functions.sqf#L496)
+File: [client\Inventory\functions.sqf at line 500](../../../Src/client/Inventory/functions.sqf#L500)
+## inventory_resetPositionHandWidgetsForced
+
+Type: function
+
+Description: 
+
+
+File: [client\Inventory\functions.sqf at line 511](../../../Src/client/Inventory/functions.sqf#L511)
 ## closeInventory
 
 Type: function
@@ -386,7 +394,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 507](../../../Src/client/Inventory/functions.sqf#L507)
+File: [client\Inventory\functions.sqf at line 522](../../../Src/client/Inventory/functions.sqf#L522)
 ## closeInventory_handle
 
 Type: function
@@ -394,7 +402,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 540](../../../Src/client/Inventory/functions.sqf#L540)
+File: [client\Inventory\functions.sqf at line 555](../../../Src/client/Inventory/functions.sqf#L555)
 ## inventoryGetPictureById
 
 Type: function
@@ -402,7 +410,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 550](../../../Src/client/Inventory/functions.sqf#L550)
+File: [client\Inventory\functions.sqf at line 565](../../../Src/client/Inventory/functions.sqf#L565)
 ## inventoryGetSlotNameById
 
 Type: function
@@ -410,7 +418,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 555](../../../Src/client/Inventory/functions.sqf#L555)
+File: [client\Inventory\functions.sqf at line 570](../../../Src/client/Inventory/functions.sqf#L570)
 ## inventoryGetWidgetById
 
 Type: function
@@ -418,7 +426,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 560](../../../Src/client/Inventory/functions.sqf#L560)
+File: [client\Inventory\functions.sqf at line 575](../../../Src/client/Inventory/functions.sqf#L575)
 ## inventoryGetWidgetOnMouse
 
 Type: function
@@ -426,7 +434,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 565](../../../Src/client/Inventory/functions.sqf#L565)
+File: [client\Inventory\functions.sqf at line 580](../../../Src/client/Inventory/functions.sqf#L580)
 ## inventoryGetContainerWidgetOnMouse
 
 Type: function
@@ -434,7 +442,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 577](../../../Src/client/Inventory/functions.sqf#L577)
+File: [client\Inventory\functions.sqf at line 592](../../../Src/client/Inventory/functions.sqf#L592)
 ## inventoryIsInContainerWidgetsZone
 
 Type: function
@@ -442,7 +450,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 589](../../../Src/client/Inventory/functions.sqf#L589)
+File: [client\Inventory\functions.sqf at line 604](../../../Src/client/Inventory/functions.sqf#L604)
 ## inventoryIsInWidgetsZone
 
 Type: function
@@ -450,7 +458,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 594](../../../Src/client/Inventory/functions.sqf#L594)
+File: [client\Inventory\functions.sqf at line 609](../../../Src/client/Inventory/functions.sqf#L609)
 ## inventoryIsInsideSelfWidget
 
 Type: function
@@ -458,7 +466,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 599](../../../Src/client/Inventory/functions.sqf#L599)
+File: [client\Inventory\functions.sqf at line 614](../../../Src/client/Inventory/functions.sqf#L614)
 ## inventory_onUpdate
 
 Type: function
@@ -466,7 +474,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 608](../../../Src/client/Inventory/functions.sqf#L608)
+File: [client\Inventory\functions.sqf at line 623](../../../Src/client/Inventory/functions.sqf#L623)
 ## inventory_onMousePress
 
 Type: function
@@ -475,7 +483,7 @@ Description:
 - Param: _obj
 - Param: _key
 
-File: [client\Inventory\functions.sqf at line 751](../../../Src/client/Inventory/functions.sqf#L751)
+File: [client\Inventory\functions.sqf at line 766](../../../Src/client/Inventory/functions.sqf#L766)
 ## inventory_onMouseRelease
 
 Type: function
@@ -484,7 +492,7 @@ Description:
 - Param: _obj
 - Param: _key
 
-File: [client\Inventory\functions.sqf at line 801](../../../Src/client/Inventory/functions.sqf#L801)
+File: [client\Inventory\functions.sqf at line 816](../../../Src/client/Inventory/functions.sqf#L816)
 ## inventory_onMouseScroll
 
 Type: function
@@ -493,7 +501,7 @@ Description:
 - Param: _disp
 - Param: _scroll
 
-File: [client\Inventory\functions.sqf at line 844](../../../Src/client/Inventory/functions.sqf#L844)
+File: [client\Inventory\functions.sqf at line 859](../../../Src/client/Inventory/functions.sqf#L859)
 ## inventory_onSlotUpdate
 
 Type: function
@@ -503,7 +511,7 @@ Description:
 - Param: _data
 - Param: _supressRestoreHide (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 873](../../../Src/client/Inventory/functions.sqf#L873)
+File: [client\Inventory\functions.sqf at line 888](../../../Src/client/Inventory/functions.sqf#L888)
 ## inventory_syncGerms
 
 Type: function
@@ -511,7 +519,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\Inventory\functions.sqf at line 921](../../../Src/client/Inventory/functions.sqf#L921)
+File: [client\Inventory\functions.sqf at line 936](../../../Src/client/Inventory/functions.sqf#L936)
 ## inventory_internal_syncGermsBodyPartKey
 
 Type: function
@@ -520,7 +528,7 @@ Description:
 - Param: _partKey
 - Param: _opacity
 
-File: [client\Inventory\functions.sqf at line 940](../../../Src/client/Inventory/functions.sqf#L940)
+File: [client\Inventory\functions.sqf at line 955](../../../Src/client/Inventory/functions.sqf#L955)
 ## inventory_syncModelPos
 
 Type: function
@@ -530,7 +538,7 @@ Type: function
 Description: 
 - Param: _wid
 
-File: [client\Inventory\functions.sqf at line 960](../../../Src/client/Inventory/functions.sqf#L960)
+File: [client\Inventory\functions.sqf at line 975](../../../Src/client/Inventory/functions.sqf#L975)
 ## inventory_onSlotListUpdate
 
 Type: function
@@ -538,7 +546,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\Inventory\functions.sqf at line 990](../../../Src/client/Inventory/functions.sqf#L990)
+File: [client\Inventory\functions.sqf at line 1005](../../../Src/client/Inventory/functions.sqf#L1005)
 ## inventory_onReleaseSlot
 
 Type: function
@@ -546,7 +554,7 @@ Type: function
 Description: 
 - Param: _slotTo
 
-File: [client\Inventory\functions.sqf at line 999](../../../Src/client/Inventory/functions.sqf#L999)
+File: [client\Inventory\functions.sqf at line 1014](../../../Src/client/Inventory/functions.sqf#L1014)
 ## inventory_onPressSlot
 
 Type: function
@@ -554,7 +562,7 @@ Type: function
 Description: 
 - Param: _slotFrom
 
-File: [client\Inventory\functions.sqf at line 1068](../../../Src/client/Inventory/functions.sqf#L1068)
+File: [client\Inventory\functions.sqf at line 1083](../../../Src/client/Inventory/functions.sqf#L1083)
 ## inventory_onPutDownItem
 
 Type: function
@@ -563,7 +571,7 @@ Description:
 - Param: _id (optional, default cd_activeHand)
 - Param: _isFastPutdown (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 1095](../../../Src/client/Inventory/functions.sqf#L1095)
+File: [client\Inventory\functions.sqf at line 1110](../../../Src/client/Inventory/functions.sqf#L1110)
 ## inventory_onDropItem
 
 Type: function
@@ -571,7 +579,7 @@ Type: function
 Description: 
 - Param: _id (optional, default cd_activeHand)
 
-File: [client\Inventory\functions.sqf at line 1136](../../../Src/client/Inventory/functions.sqf#L1136)
+File: [client\Inventory\functions.sqf at line 1151](../../../Src/client/Inventory/functions.sqf#L1151)
 ## inventory_onTransferSlot
 
 Type: function
@@ -580,7 +588,7 @@ Description:
 - Param: _slotFrom
 - Param: _slotTo
 
-File: [client\Inventory\functions.sqf at line 1151](../../../Src/client/Inventory/functions.sqf#L1151)
+File: [client\Inventory\functions.sqf at line 1166](../../../Src/client/Inventory/functions.sqf#L1166)
 ## inventory_onInteractTargetWith
 
 Type: function
@@ -589,7 +597,7 @@ Description:
 - Param: _obj
 - Param: _slotData
 
-File: [client\Inventory\functions.sqf at line 1188](../../../Src/client/Inventory/functions.sqf#L1188)
+File: [client\Inventory\functions.sqf at line 1203](../../../Src/client/Inventory/functions.sqf#L1203)
 ## inventory_onMainAction
 
 Type: function
@@ -597,7 +605,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1206](../../../Src/client/Inventory/functions.sqf#L1206)
+File: [client\Inventory\functions.sqf at line 1221](../../../Src/client/Inventory/functions.sqf#L1221)
 ## inventory_onExtraAction
 
 Type: function
@@ -605,7 +613,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1243](../../../Src/client/Inventory/functions.sqf#L1243)
+File: [client\Inventory\functions.sqf at line 1258](../../../Src/client/Inventory/functions.sqf#L1258)
 ## inventory_onClick
 
 Type: function
@@ -613,7 +621,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1302](../../../Src/client/Inventory/functions.sqf#L1302)
+File: [client\Inventory\functions.sqf at line 1317](../../../Src/client/Inventory/functions.sqf#L1317)
 ## inventory_onExamine
 
 Type: function
@@ -621,7 +629,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1344](../../../Src/client/Inventory/functions.sqf#L1344)
+File: [client\Inventory\functions.sqf at line 1359](../../../Src/client/Inventory/functions.sqf#L1359)
 ## inventory_changeActiveHand
 
 Type: function
@@ -629,7 +637,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1405](../../../Src/client/Inventory/functions.sqf#L1405)
+File: [client\Inventory\functions.sqf at line 1420](../../../Src/client/Inventory/functions.sqf#L1420)
 ## inventory_changeTwoHandsMode
 
 Type: function
@@ -637,7 +645,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1419](../../../Src/client/Inventory/functions.sqf#L1419)
+File: [client\Inventory\functions.sqf at line 1437](../../../Src/client/Inventory/functions.sqf#L1437)
 ## inventory_onChangeActiveHand
 
 Type: function
@@ -647,7 +655,7 @@ Description:
 - Param: _act
 - Param: _setToNew (optional, default false)
 
-File: [client\Inventory\functions.sqf at line 1425](../../../Src/client/Inventory/functions.sqf#L1425)
+File: [client\Inventory\functions.sqf at line 1447](../../../Src/client/Inventory/functions.sqf#L1447)
 ## inventory_isEmptyHands
 
 Type: function
@@ -655,7 +663,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1451](../../../Src/client/Inventory/functions.sqf#L1451)
+File: [client\Inventory\functions.sqf at line 1473](../../../Src/client/Inventory/functions.sqf#L1473)
 ## inventory_isEmptyActiveHand
 
 Type: function
@@ -663,7 +671,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1456](../../../Src/client/Inventory/functions.sqf#L1456)
+File: [client\Inventory\functions.sqf at line 1478](../../../Src/client/Inventory/functions.sqf#L1478)
 ## inventory_getModelById
 
 Type: function
@@ -671,7 +679,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1459](../../../Src/client/Inventory/functions.sqf#L1459)
+File: [client\Inventory\functions.sqf at line 1481](../../../Src/client/Inventory/functions.sqf#L1481)
 ## inventory_getSlotDataById
 
 Type: function
@@ -679,7 +687,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1464](../../../Src/client/Inventory/functions.sqf#L1464)
+File: [client\Inventory\functions.sqf at line 1486](../../../Src/client/Inventory/functions.sqf#L1486)
 ## inventory_getContainerSlotDataById
 
 Type: function
@@ -687,7 +695,7 @@ Type: function
 Description: 
 
 
-File: [client\Inventory\functions.sqf at line 1469](../../../Src/client/Inventory/functions.sqf#L1469)
+File: [client\Inventory\functions.sqf at line 1491](../../../Src/client/Inventory/functions.sqf#L1491)
 # helpers.hpp
 
 ## INVENTORY_LOG

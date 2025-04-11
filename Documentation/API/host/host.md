@@ -2650,7 +2650,7 @@ File: [host\engine.hpp at line 459](../../../Src/host/engine.hpp#L459)
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> Exists if **EDITOR_OR_SP_MODE** defined
 
 Description: 
 
@@ -2665,7 +2665,7 @@ File: [host\engine.hpp at line 462](../../../Src/host/engine.hpp#L462)
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> Exists if **EDITOR_OR_SP_MODE** defined
 
 Description: 
 - Param: func
@@ -2680,7 +2680,7 @@ File: [host\engine.hpp at line 465](../../../Src/host/engine.hpp#L465)
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> Exists if **EDITOR_OR_SP_MODE** defined
 
 Description: 
 - Param: func
@@ -2696,7 +2696,7 @@ File: [host\engine.hpp at line 465](../../../Src/host/engine.hpp#L465)
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> Exists if **EDITOR_OR_SP_MODE** not defined
 
 Description: 
 - Param: func
@@ -3673,6 +3673,20 @@ Replaced value:
 
 ```
 File: [host\engine.hpp at line 667](../../../Src/host/engine.hpp#L667)
+## setLastError(data__)
+
+Type: constant
+
+> Exists if **SP_MODE** defined
+
+Description: 
+- Param: data__
+
+Replaced value:
+```sqf
+error(data__)
+```
+File: [host\engine.hpp at line 671](../../../Src/host/engine.hpp#L671)
 ## exitScope(cond)
 
 Type: constant
@@ -3684,7 +3698,7 @@ Replaced value:
 ```sqf
 if (true) exitWith {cond};
 ```
-File: [host\engine.hpp at line 671](../../../Src/host/engine.hpp#L671)
+File: [host\engine.hpp at line 675](../../../Src/host/engine.hpp#L675)
 ## getCallStack()
 
 Type: constant
@@ -3696,7 +3710,65 @@ Replaced value:
 ```sqf
 diag_stacktrace
 ```
-File: [host\engine.hpp at line 673](../../../Src/host/engine.hpp#L673)
+File: [host\engine.hpp at line 677](../../../Src/host/engine.hpp#L677)
+## sp_checkInput(varname,params)
+
+Type: constant
+
+> Exists if **SP_MODE** defined
+
+Description: 
+- Param: varname
+- Param: params
+
+Replaced value:
+```sqf
+if ([varname,params] call sp_gc_handlePlayerInput) exitWith {};
+```
+File: [host\engine.hpp at line 683](../../../Src/host/engine.hpp#L683)
+## sp_checkWSim(varname)
+
+Type: constant
+
+> Exists if **SP_MODE** defined
+
+Description: 
+- Param: varname
+
+Replaced value:
+```sqf
+if (!(varname call sp_wsimIsActive)) exitWith {};
+```
+File: [host\engine.hpp at line 684](../../../Src/host/engine.hpp#L684)
+## sp_checkInput(varname,params)
+
+Type: constant
+
+> Exists if **SP_MODE** not defined
+
+Description: 
+- Param: varname
+- Param: params
+
+Replaced value:
+```sqf
+
+```
+File: [host\engine.hpp at line 686](../../../Src/host/engine.hpp#L686)
+## sp_checkWSim(varname)
+
+Type: constant
+
+> Exists if **SP_MODE** not defined
+
+Description: 
+- Param: varname
+
+Replaced value:
+```sqf
+
+```
+File: [host\engine.hpp at line 687](../../../Src/host/engine.hpp#L687)
 ## BASIC_MOB_TYPE
 
 Type: constant
@@ -3708,7 +3780,7 @@ Replaced value:
 ```sqf
 "B_Survivor_F"
 ```
-File: [host\engine.hpp at line 679](../../../Src/host/engine.hpp#L679)
+File: [host\engine.hpp at line 692](../../../Src/host/engine.hpp#L692)
 ## editor_only(any)
 
 Type: constant
@@ -3722,7 +3794,7 @@ Replaced value:
 ```sqf
 any
 ```
-File: [host\engine.hpp at line 683](../../../Src/host/engine.hpp#L683)
+File: [host\engine.hpp at line 696](../../../Src/host/engine.hpp#L696)
 ## editor_conditional(ed__,noted__)
 
 Type: constant
@@ -3737,7 +3809,7 @@ Replaced value:
 ```sqf
 ed__
 ```
-File: [host\engine.hpp at line 684](../../../Src/host/engine.hpp#L684)
+File: [host\engine.hpp at line 697](../../../Src/host/engine.hpp#L697)
 ## editor_only(any)
 
 Type: constant
@@ -3751,7 +3823,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\engine.hpp at line 686](../../../Src/host/engine.hpp#L686)
+File: [host\engine.hpp at line 699](../../../Src/host/engine.hpp#L699)
 ## editor_conditional(ed__,noted__)
 
 Type: constant
@@ -3766,7 +3838,7 @@ Replaced value:
 ```sqf
 noted__
 ```
-File: [host\engine.hpp at line 687](../../../Src/host/engine.hpp#L687)
+File: [host\engine.hpp at line 700](../../../Src/host/engine.hpp#L700)
 ## IS_INIT_MODULE
 
 Type: constant
@@ -3778,7 +3850,7 @@ Replaced value:
 ```sqf
 isNullVar(__FUNCITONS_LOAD_ONLY__)
 ```
-File: [host\engine.hpp at line 694](../../../Src/host/engine.hpp#L694)
+File: [host\engine.hpp at line 707](../../../Src/host/engine.hpp#L707)
 ## node_var
 
 Type: constant
@@ -3790,7 +3862,7 @@ Replaced value:
 ```sqf
 call nodegen_addClassField;
 ```
-File: [host\engine.hpp at line 706](../../../Src/host/engine.hpp#L706)
+File: [host\engine.hpp at line 719](../../../Src/host/engine.hpp#L719)
 ## node_met
 
 Type: constant
@@ -3802,7 +3874,7 @@ Replaced value:
 ```sqf
 call nodegen_addClassMethod;
 ```
-File: [host\engine.hpp at line 752](../../../Src/host/engine.hpp#L752)
+File: [host\engine.hpp at line 765](../../../Src/host/engine.hpp#L765)
 ## node_class
 
 Type: constant
@@ -3814,7 +3886,7 @@ Replaced value:
 ```sqf
 call nodegen_addClass;
 ```
-File: [host\engine.hpp at line 759](../../../Src/host/engine.hpp#L759)
+File: [host\engine.hpp at line 772](../../../Src/host/engine.hpp#L772)
 ## node_func(name)
 
 Type: constant
@@ -3826,7 +3898,7 @@ Replaced value:
 ```sqf
 + endl+ 'node:name' call nodegen_addFunction; name
 ```
-File: [host\engine.hpp at line 770](../../../Src/host/engine.hpp#L770)
+File: [host\engine.hpp at line 783](../../../Src/host/engine.hpp#L783)
 ## node_system
 
 Type: constant
@@ -3838,7 +3910,7 @@ Replaced value:
 ```sqf
 call nodegen_addSystemNode;
 ```
-File: [host\engine.hpp at line 773](../../../Src/host/engine.hpp#L773)
+File: [host\engine.hpp at line 786](../../../Src/host/engine.hpp#L786)
 ## node_enum
 
 Type: constant
@@ -3850,7 +3922,7 @@ Replaced value:
 ```sqf
 call nodegen_addEnumerator;
 ```
-File: [host\engine.hpp at line 796](../../../Src/host/engine.hpp#L796)
+File: [host\engine.hpp at line 809](../../../Src/host/engine.hpp#L809)
 ## node_struct
 
 Type: constant
@@ -3862,7 +3934,7 @@ Replaced value:
 ```sqf
 call nodegen_addStruct;
 ```
-File: [host\engine.hpp at line 810](../../../Src/host/engine.hpp#L810)
+File: [host\engine.hpp at line 823](../../../Src/host/engine.hpp#L823)
 ## node_system_group(gname)
 
 Type: constant
@@ -3874,7 +3946,7 @@ Replaced value:
 ```sqf
 __nsys_grp = gname;
 ```
-File: [host\engine.hpp at line 826](../../../Src/host/engine.hpp#L826)
+File: [host\engine.hpp at line 839](../../../Src/host/engine.hpp#L839)
 # init.sqf
 
 ## server_loadingState
@@ -6062,7 +6134,7 @@ File: [host\oop.hpp at line 16](../../../Src/host/oop.hpp#L16)
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> Exists if **EDITOR_OR_SP_MODE** defined
 
 Description: 
 
@@ -6076,7 +6148,7 @@ File: [host\oop.hpp at line 19](../../../Src/host/oop.hpp#L19)
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> Exists if **EDITOR_OR_SP_MODE** not defined
 
 Description: 
 
@@ -6223,7 +6295,7 @@ File: [host\oop.hpp at line 59](../../../Src/host/oop.hpp#L59)
 
 Type: constant
 
-> Exists if **EDITOR** defined
+> Exists if **EDITOR_OR_SP_MODE** defined
 
 Description: editor_attribute("atrname")
 - Param: key_s
@@ -6237,7 +6309,7 @@ File: [host\oop.hpp at line 65](../../../Src/host/oop.hpp#L65)
 
 Type: constant
 
-> Exists if **EDITOR** not defined
+> Exists if **EDITOR_OR_SP_MODE** not defined
 
 Description: editor_attribute("atrname")
 - Param: key_s

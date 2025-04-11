@@ -138,7 +138,7 @@ Description:
 - Param: _usr
 - Param: _client
 
-File: [host\VerbSystem\verbs.sqf at line 74](../../../Src/host/VerbSystem/verbs.sqf#L74)
+File: [host\VerbSystem\verbs.sqf at line 82](../../../Src/host/VerbSystem/verbs.sqf#L82)
 ## verb_tryCollectVerbs
 
 Type: function
@@ -147,7 +147,15 @@ Description: условия на добавления вербов и отпра
 - Param: _mob
 - Param: _targ
 
-File: [host\VerbSystem\verbs.sqf at line 128](../../../Src/host/VerbSystem/verbs.sqf#L128)
+File: [host\VerbSystem\verbs.sqf at line 145](../../../Src/host/VerbSystem/verbs.sqf#L145)
+## verb_getTypeById
+
+Type: function
+
+Description: 
+- Param: _id
+
+File: [host\VerbSystem\verbs.sqf at line 202](../../../Src/host/VerbSystem/verbs.sqf#L202)
 # verbsCondAndAct.h
 
 ## usr
