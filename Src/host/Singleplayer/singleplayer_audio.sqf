@@ -43,6 +43,15 @@ sp_audio_sayPlayerList = {
 	
 };
 
+sp_audio_isSoundHandleDone = {
+	params ["_handle"];
+	private _spr = soundParams _handle;
+	if (count soundParams _handle == 0) exitWith {true};
+	if ((_spr select 1) >= 1) exitWith {true};
+	if ((_spr select 2) == (_spr select 3)) exitWith {true};
+	false
+};
+
 sp_audio_sayAtTarget = {
 	params ["_target","_pathPost",["_dist",20],["_startOffset",0]];
 	if (sp_debug_skipAudio) exitWith {-1};
