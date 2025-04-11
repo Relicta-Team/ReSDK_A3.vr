@@ -90,12 +90,16 @@
 #define SERVER_PASSWORD server_password
 
 #ifndef EDITOR
+	#ifndef SP_MODE
+		#define __FORCE_DISABLE_LOCAL_PATHES__
+	#endif
+#endif
+
+#ifdef __FORCE_DISABLE_LOCAL_PATHES__
+	#undef __FORCE_DISABLE_LOCAL_PATHES__
 	#undef USE_LOCAL_PATHES
 #endif
-#define USE_LOCAL_PATHES
-#ifndef SP_MODE
-	#undef USE_LOCAL_PATHES
-#endif
+
 
 //Пути до разных сегментов
 #ifdef USE_LOCAL_PATHES
