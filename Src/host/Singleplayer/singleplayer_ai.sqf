@@ -514,9 +514,13 @@ sp_ai_deletePerson = {
 };
 
 sp_ai_getMobObject = {
-    private _body = sp_ai_mobs getOrDefault [_this,objNull];
+    private _body = _this call sp_ai_getMobBody;
     if isNullReference(_body) exitWith {nullPtr};
     _body getvariable ["link",nullPtr]
+};
+
+sp_ai_getMobBody = {
+    sp_ai_mobs getOrDefault [_this,objNull];
 };
 
 sp_ai_commitMobPos = {

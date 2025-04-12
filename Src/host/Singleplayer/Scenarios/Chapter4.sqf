@@ -673,7 +673,7 @@ cpt4_pos_bar_aloguys - 3 sits
 		["name",["Бомжара","Тянульщик"]]
 	],{
 		
-	},{ _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"; [_this, player] call sp_ai_setLookAtControl; }] call sp_ai_createPersonEx;
+	},{ _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"; }] call sp_ai_createPersonEx;
 
 	["cpt4_pos_bomzowner","cpt4_bomzowner",[
 		["uniform","WhitePlaidCoat"],
@@ -794,32 +794,68 @@ cpt4_bar_curMusicName = "";
 	cpt4_bar_musicUpdateReq = true;
 }] call sp_addTriggerExit;
 
+["cpt4_trg_bumbar",{
+	["cpt4_poorman" call sp_ai_getMobBody, player] call sp_ai_setLookAtControl;
+}] call sp_addTriggerEnter;
+["cpt4_trg_bumbar",{
+	["cpt4_poorman" call sp_ai_getMobBody, objNull] call sp_ai_setLookAtControl;
+}] call sp_addTriggerExit;
+
 ["cpt4_trg_bardoor",{
 	//start bar handle
-	//!unknown undefined behaviour (fuck bis)
-	if (!cpt4_bar_musicProc && false) then {
+	
+	if (!cpt4_bar_musicProc) then {
 		cpt4_bar_musicProc = true;
 		_mlist = [
 			"chap4\radios\bar_radio1",
 			"chap4\radios\bar_radio2",
-			"chap4\radios\bar_radio3"
+			"chap4\radios\bar_radio3",
+			"chap4\radios\bar_radio4",
+			"chap4\radios\bar_radio5",
+			"chap4\radios\bar_radio6",
+			"chap4\radios\bar_radio7"
 		];
 		private _fnc = {
 			(_this select 0) params ["_mlist"];
-
-			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) exitWith {
-				cpt4_bar_musicUpdateReq = false;
-				//_startTime = (soundParams cpt4_bar_curMusicPlayed) select 3;
-				_startTime = tickTime - cpt4_bar_curMusicStartTime; //new offset
-				stopSound cpt4_bar_curMusicPlayed;
-				cpt4_bar_curMusicPlayed = [
-					"cpt4_obj_barradio",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime-diag_deltaTime
-				] call sp_audio_sayAtTarget;
-
-				[format["update mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
+			if(isgamepaused) exitWith {};
+			if (!cpt4_bar_musicProc) exitWith {
+				stopUpdate();
 			};
 
-			if equals(soundParams cpt4_bar_curMusicPlayed,[]) then {
+			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) then {
+				cpt4_bar_musicUpdateReq = false;
+				//_startTime = (soundParams cpt4_bar_curMusicPlayed) select 3;
+				
+				_prevhandler = cpt4_bar_curMusicPlayed;
+				stopSound _prevhandler;
+				if (!(_prevhandler call sp_audio_isSoundHandleDone)) then {
+					warningformat("Sound not stopped at task: %1",_prevhandler);
+					startAsyncInvoke
+						{
+							params ["_v","_t"];
+							warningformat("Attempt to stop: %1",_v);
+							stopSound _v;
+							_v call sp_audio_isSoundHandleDone
+						},
+						{
+							warningformat("Sound stopped: %1 time %2",_this select 0 arg tickTime - (_this select 1));
+						},
+						[_prevhandler,tickTime]
+					endAsyncInvoke
+					// [_prevhandler]SPAWN {uisleep 0.01;stopSound (_this select 0)};
+				};
+				
+				_startTime = tickTime - cpt4_bar_curMusicStartTime; //new offset
+				cpt4_bar_curMusicPlayed = [
+					"cpt4_obj_barradio",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime
+				] call sp_audio_sayAtTarget;
+
+				//[format["update mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
+
+				assert_str(_prevhandler call sp_audio_isSoundHandleDone,"music handle not null: " + (str cpt4_bar_curMusicPlayed) + "; " + (str soundParams cpt4_bar_curMusicPlayed) );
+			};
+
+			if (cpt4_bar_curMusicPlayed call sp_audio_isSoundHandleDone) then {
 				_m = _mlist deleteAt 0;
 				_mlist pushBack _m;
 				cpt4_bar_curMusicName = _m;
@@ -830,7 +866,7 @@ cpt4_bar_curMusicName = "";
 				] call sp_audio_sayAtTarget;
 				cpt4_bar_curMusicStartTime = tickTime;
 
-				[format["start mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
+				//[format["start mus: %1 (%2m)",cpt4_bar_curMusicName,cpt4_bar_curMusicDist]] call chatPrint;
 			};
 		};
 		cpt4_bar_musicHandle = startUpdateParams(_fnc,0,[_mlist]);
