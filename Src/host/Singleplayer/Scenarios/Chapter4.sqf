@@ -170,9 +170,15 @@ cpt4_addProcessorMainAct = {
 	}] call sp_addPlayerHandler;
 
 	{
-		[cpt4_questName_kochevs,"В город постоянно приходят новые люди. Опрашивайте, досматривайте и запускайте их внутрь."] call sp_setTaskMessageEff;
-		callFuncParams("cpt4_obj_doorbegin" call sp_getObject,setDoorLock,false arg false);
 		callFuncParams("cpt4_obj_radio1" call sp_getObject,playSound,"electronics\siren" arg 1.25 arg 20 arg 1.2 arg null arg false);
+		
+		1 call sp_threadPause;
+		(["chap4\gg\vaht1_gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		0.5 call sp_threadPause;
+		
+		[cpt4_questName_kochevs,"В город постоянно приходят новые люди. Опрашивайте, досматривайте и запускайте их внутрь."] call sp_setTaskMessageEff;
+
+		callFuncParams("cpt4_obj_doorbegin" call sp_getObject,setDoorLock,false arg false);
 
 		cpt4_canOpenWindow = true;
 		{getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)} call sp_threadWait;
@@ -183,7 +189,6 @@ cpt4_addProcessorMainAct = {
 			params ["_mob"];
 			[_mob,getposatl _mob,null] call sp_ai_setMobPos;
 			_mob switchmove "acts_commenting_on_fight_loop";
-			["cpt4_act_koch1_enter"] call sp_startScene;
 		},[
 			["state_1",{
 				params ["_obj"];
@@ -192,6 +197,10 @@ cpt4_addProcessorMainAct = {
 				["cpt4_obj_bag1koch",_bag] call sp_storageSet;
 			}]
 		]] call sp_ai_playAnim;
+
+		//for realistic dialog
+		{("cpt4_karim" call sp_ai_getmobbody distance2d player <= 2.6)} call sp_threadWait;
+		["cpt4_act_koch1_enter"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -207,10 +216,23 @@ cpt4_addProcessorMainAct = {
 
 ["cpt4_act_koch1_enter",{
 	{
+		([
+			[player,"chap4\gg\vaht1_gg2",["endoffset",1]]   
+			,["cpt4_karim","chap4\npc_vaht\koch1_1",["endoffset",0.5]] 
+			,[player,"chap4\gg\vaht1_gg3"] 
+			,["cpt4_karim","chap4\npc_vaht\koch1_2"] 
+			,[player,"chap4\gg\vaht1_gg4"] 
+			,["cpt4_karim","chap4\npc_vaht\koch1_3",["endoffset",0.5]] 
+			,[player,"chap4\gg\vaht1_gg5"]
+		] call sp_audio_startDialog)
+			call sp_audio_waitForEndDialog;
 		1 call sp_threadPause;
 		[cpt4_questName_kochevs,"Оформите пропуск на имя ""Карим Сухач"". "
 		+ "Для этого возьмите бланк пропуска из стопки бумаги слева от окна на полке и впишите в него имя."
 		] call sp_setTaskMessageEff;
+
+		2 call sp_threadPause;
+		(["chap4\gg\vaht1_gg6"] call sp_audio_sayPlayer);
 
 		_karim = "cpt4_karim" call sp_ai_getMobObject;
 		private _tpaper = nullPtr;
@@ -324,26 +346,47 @@ cpt4_addProcessorMainAct = {
 			[_body] call anim_syncAnim;
 		} call sp_threadCriticalSection;
 
+		[true] call sp_setHideTaskMessageCtg;
+
 		cpt4_canOpenWindow = true;
 		{
 			getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)
 		} call sp_threadWait;
 		cpt4_canOpenWindow = false;
 
+		["cpt4_store_ibam_actions",0] call sp_storageSet;
+
 		["cpt4_ibam" call sp_ai_getMobObject,"cpt4_pos_enterkochevs","cpt4_koch2_enter",{
 			params ["_mob"];
 			[_mob,getposatl _mob,null] call sp_ai_setMobPos;
 			_mob switchmove "acts_jetscrewaidf_idle2";
-			["cpt4_act_koch2_enter"] call sp_startScene;
+			["cpt4_store_ibam_actions",{_this + 1}] call sp_storageUpdate;	
 		}] call sp_ai_playAnim;
+
+		//before because dynamic dialog
+		{("cpt4_ibam" call sp_ai_getmobbody distance2d player <= 2.6)} call sp_threadWait;
+		([
+			[player,"chap4\gg\vaht2_gg1"]   
+			,["cpt4_ibam","chap4\npc_vaht\koch2_1",["endoffset",0.5]] 
+			,[player,"chap4\gg\vaht2_gg2"]
+			,["cpt4_ibam","chap4\npc_vaht\koch2_2",["endoffset",0.5]]
+			,[player,"chap4\gg\vaht2_gg3"]
+			,["cpt4_ibam","chap4\npc_vaht\koch2_3",["endoffset",0.2]]
+			,[player,"chap4\gg\vaht2_gg4",["onstart",{
+				[cpt4_questName_kochevs,"Решите стоит ли пропускать его в город"] call sp_setTaskMessageEff;
+			}]]
+		] call sp_audio_startDialog)
+			call sp_audio_waitForEndDialog;
+		
+		{(["cpt4_store_ibam_actions",0] call sp_storageGet) >= 1} call sp_threadWait;
+
+		["cpt4_act_koch2_enter"] call sp_startScene;
+
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt4_act_koch2_enter",{
-	{
-		[true] call sp_setHideTaskMessageCtg;
-		1 call sp_threadPause;
-		[cpt4_questName_kochevs,"Решите стоит ли пропускать его в город"] call sp_setTaskMessageEff;
+	{		
 		1 call sp_threadPause;
 		_hreg = ["Люди, использующие странные слова в речи могут быть опасны. Решите - пропустить кочевника или закрыть окно."
 		+ sbr + "Если решите пропустить его - оформите пропуск на его имя - ""Ибам Шнурок"". В ином случае просто нажмите кнопку, чтобы отказать в регистрации."] call sp_setNotification;
@@ -355,8 +398,10 @@ cpt4_addProcessorMainAct = {
 			_ibam = "cpt4_ibam" call sp_ai_getMobObject;
 			{!getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)} call sp_threadWait;
 			//speak ibam
-
-			4 call sp_threadPause;
+			([
+				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",20]]
+			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+			//4 call sp_threadPause;
 			{["cpt4_ibam"] call sp_ai_deletePerson} call sp_threadCriticalSection;
 			["cpt4_act_ibam_result",-1] call sp_storageSet;
 		} call sp_threadStart;
@@ -390,6 +435,10 @@ cpt4_addProcessorMainAct = {
 				getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
 			} call sp_threadWait;
 			cpt4_canOpenEnter = false;
+
+			[
+				["cpt4_ibam","chap4\npc_vaht\koch2_good",["distance",20]]
+			] call sp_audio_startDialog;
 
 			[_ibam,_ibamPos,"cpt4_koch2_exit",{
 				params ["_mob"];
@@ -483,8 +532,27 @@ cpt4_addProcessorMainAct = {
 			params ["_mob"];
 			[_mob,getposatl _mob,null] call sp_ai_setMobPos;
 			_mob switchmove "amovpknlmstpsnonwnondnon";
-			["cpt4_act_koch3_enter"] call sp_startScene;
 		}] call sp_ai_playAnim;
+
+		//dynamic audio
+		{("cpt4_tombomz" call sp_ai_getmobbody distance2d player <= 2.8)} call sp_threadWait;
+
+		([
+			["cpt4_tombomz","chap4\npc_vaht\koch3_1",["endoffset",0.2]] 
+			,[player,"chap4\gg\vaht3_gg1",["endoffset",1.3]]
+			,["cpt4_tombomz","chap4\npc_vaht\koch3_2",["endoffset",0.5]]  
+			,[player,"chap4\gg\vaht3_gg2",["endoffset",1.3]]   
+			,["cpt4_tombomz","chap4\npc_vaht\koch3_3",["endoffset",1]] 
+			,[player,"chap4\gg\vaht3_gg3",["endoffset",1.7]]
+			,["cpt4_tombomz","chap4\npc_vaht\koch3_4",["endoffset",1.5]]
+			,[player,"chap4\gg\vaht3_gg4",["endoffset",1.3]]
+			,["cpt4_tombomz","chap4\npc_vaht\koch3_5",["endoffset",2.6]]
+			,[player,"chap4\gg\vaht3_gg5",["endoffset",0.2]]		
+		] call sp_audio_startDialog)
+			call sp_audio_waitForEndDialog;
+		
+		["cpt4_act_koch3_enter"] call sp_startScene;
+
 		//for test
 		//["cpt4_act_koch3_enter"] call sp_startScene;
 	} call sp_threadStart;
@@ -492,12 +560,13 @@ cpt4_addProcessorMainAct = {
 
 ["cpt4_act_koch3_enter",{
 	{
-		3 call sp_threadPause;
+		
+
 		["Люди, которые ведут себя странно, говорят непонятные слова больны болезнью Тоннельного Образа Мышления (ТОМность)."
 		+sbr + "Избегайте любых контактов с ними, так как ТОМность заразна. Если у вас есть силы и возможность - облегчите муки болезненного и убейте его."
 		] call sp_setNotification;
 
-		1 call sp_threadPause;
+		["cpt4_obj_radio2","chap4\speaker\speak1",50] call sp_audio_sayAtTarget;
 
 		["cpt4_tombomz_armyguy" call sp_ai_getMobObject,"cpt4_pos_armyattacktom","cpt4_armygettom",{
 			params ["_mob"];
@@ -505,6 +574,9 @@ cpt4_addProcessorMainAct = {
 		},[
 			["state_1",{
 				params ["_obj"];
+				
+				[true]	call sp_setHideTaskMessageCtg;
+
 				callFuncParams(_obj getvariable "link",setCombatMode,true);
 
 				["cpt4_tombomz",callFunc("cpt4_tombomz" call sp_ai_getMobObject,getPos),"cpt4_koch3_gettom",{
@@ -525,16 +597,21 @@ cpt4_addProcessorMainAct = {
 		} call sp_threadCriticalSection;
 		
 		2 call sp_threadPause;
-		[false]	call sp_setHideTaskMessageCtg;
+		
+		[false] call sp_setNotificationVisible;
 		{
 			["cpt4_tombomz"] call sp_ai_deletePerson;
 			["cpt4_tombomz_armyguy"] call sp_ai_deletePerson;
 		} call sp_threadCriticalSection;
 
-		1 call sp_threadPause;
+		3 call sp_threadPause;
 		//speaker activate GODO med
+		(["cpt4_obj_radio2","chap4\speaker\speak2",50] call sp_audio_sayAtTarget) call sp_audio_waitForEndSound;
+		2 call sp_threadPause;
 
-		["cpt4_act_gotomed_begin"] call sp_startScene;
+		{
+			["cpt4_act_gotomed_begin"] call sp_startScene;
+		} call sp_threadCriticalSection;
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -819,7 +896,7 @@ cpt4_bar_curMusicName = "";
 			(_this select 0) params ["_mlist"];
 			if(isgamepaused) exitWith {};
 			if (!cpt4_bar_musicProc) exitWith {
-				stopUpdate();
+				stopThisUpdate();
 			};
 
 			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) then {

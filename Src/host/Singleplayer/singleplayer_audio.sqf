@@ -73,7 +73,7 @@ sp_audio_internal_resolveTarget = {
 	if equalTypes(_target,"") then {
 		//check mob
 		private _ptarg = sp_ai_mobs getOrDefault [_target,objNull];
-		if !isNullReference(_ptarg) exitWith {_target = getVar(_ptarg,owner)};
+		if !isNullReference(_ptarg) exitWith {_target = _ptarg};
 
 		//check gref
 		private _ptarg = _target call sp_getObject;
@@ -93,7 +93,7 @@ sp_audio_internal_resolveTarget = {
 	canstart - условие возможности старта диалога
 	onstart - код вызываемый при старте диалога
 	onend - код вызываемый при окончании диалога
-	volume - громкость звука
+	distance - дистанция звука
 */
 sp_audio_startDialog = {
 	private _dlg = _this;
@@ -119,6 +119,21 @@ sp_audio_startDialog = {
 	];
 
 	[_stateSeq] call sp_audio_internal_procDialog;
+
+	_stateSeq
+};
+
+sp_audio_isDoneDialog = {
+	params ["_dlglst","_idx"];
+	_idx >= count _dlglst	
+};
+
+sp_audio_waitForEndDialog = {
+	private _dlgData = _this;
+	if (sp_debug_skipAudio) exitWith {};
+	{
+		_dlgData call sp_audio_isDoneDialog
+	} call sp_threadWait;
 };
 
 sp_audio_internal_procDialog = {
@@ -144,11 +159,12 @@ sp_audio_internal_procDialog = {
 		endAsyncInvoke
 	};
 
-	private _handle = [_tgt,_pathPost,_ctxParams get "volume"] call sp_audio_sayAtTarget;
+	private _handle = [_tgt,_pathPost,_ctxParams get "distance"] call sp_audio_sayAtTarget;
 	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg soundParams _handle);
 	if equals(soundParams _handle,[])exitWith{};
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
+	_tgtReal setRandomlip true;
 	startAsyncInvoke
 		{
 			params ["_stateSeq","_handle","_ctxParams"];
@@ -160,13 +176,16 @@ sp_audio_internal_procDialog = {
 			_time>=(_len - _endoffset)
 		},
 		{
-			params ["_stateSeq","_handle","_ctxParams"];
+			params ["_stateSeq","_handle","_ctxParams","_tgtReal"];
+			_tgtReal setRandomlip false;
+
 			//increment stateseq
 			_curId = _stateSeq select 1;
 			_origCurId = _curId;
 			INC(_curId);
 			if (_curId >= (count (_stateSeq select 0))) exitWith {
 				//end of dialog
+				_stateSeq set [1,_curId];
 			};
 
 			[] call (
@@ -177,6 +196,6 @@ sp_audio_internal_procDialog = {
 			_stateSeq set [1,_curId];
 			[_stateSeq] call sp_audio_internal_procDialog;
 		},
-		[_stateSeq,_handle,_ctxParams]
+		[_stateSeq,_handle,_ctxParams,_tgtReal]
 	endAsyncInvoke
 };
