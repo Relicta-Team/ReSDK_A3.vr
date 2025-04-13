@@ -8,18 +8,18 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=3704;
+		nextID=3706;
 	};
 	class LayerIndexProvider
 	{
-		nextID=231;
+		nextID=238;
 	};
 	class Camera
 	{
-		pos[]={3994.103,21.313505,3889.509};
-		dir[]={0.74044687,-0.65385902,0.15615514};
-		up[]={0.63990426,0.75650609,0.13495056};
-		aside[]={0.20636687,1.6939593e-06,-0.97856069};
+		pos[]={4085.5686,97.087234,3877.738};
+		dir[]={-0.30182102,0.89742076,-0.32215825};
+		up[]={0.61343461,0.4415611,0.65476888};
+		aside[]={-0.7298491,1.7788261e-06,0.68377787};
 	};
 };
 binarizationWanted=0;
@@ -111,8 +111,8 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Structures_F_Enoch_Civilian_Houses",
 	"BSG_EFT",
-	"A3_Structures_F_Civ_Lamps",
 	"A3_Structures_F_Walls",
+	"A3_Structures_F_Civ_Lamps",
 	"AtmObjects"
 };
 class AddonsMetaData
@@ -577,7 +577,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=80;
+		items=11;
 		class Item0
 		{
 			dataType="Group";
@@ -724,7 +724,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14.021998,5.039012,8100.0068};
+				position[]={14.029322,5.0390115,8100.0093};
 			};
 			side="Empty";
 			flags=4;
@@ -734,7 +734,7 @@ class Mission
 			};
 			id=2205;
 			type="Land_Orange_01_F";
-			atlOffset=-0.0021867752;
+			atlOffset=-0.002187252;
 		};
 		class Item3
 		{
@@ -2161,7 +2161,7 @@ class Mission
 			state=1;
 			class Entities
 			{
-				items=154;
+				items=157;
 				class Item0
 				{
 					dataType="Object";
@@ -3837,16 +3837,17 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3974.2412,10.411322,3889.2383};
+						position[]={3974.2412,10.126797,3889.2383};
 					};
 					side="Empty";
+					flags=4;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BlockStone""]]}";
 					};
 					id=3452;
 					type="block_strongstone";
-					atlOffset=10.856579;
+					atlOffset=0.023621559;
 				};
 				class Item105
 				{
@@ -4649,9 +4650,58 @@ class Mission
 					type="table_nastil_1";
 					atlOffset=3.0262337;
 				};
+				class Item154
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4092.0979,21.20059,3941.9768};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Kastrula""]]}";
+					};
+					id=3691;
+					type="kastryla";
+					atlOffset=0.7625618;
+				};
+				class Item155
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4091.7212,21.270599,3941.7603};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Teapot""]]}";
+					};
+					id=3693;
+					type="chaynik";
+					atlOffset=0.7615757;
+				};
+				class Item156
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4091.9287,21.468496,3942.8674};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FryingPan""]]}";
+					};
+					id=3690;
+					type="land_skovoroda";
+					atlOffset=1.0645695;
+				};
 			};
 			id=3094;
-			atlOffset=3.028635;
+			atlOffset=0.81767273;
 		};
 		class Item6
 		{
@@ -11912,7 +11962,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3993.7502,42.494411,3887.3018};
+						position[]={3993.7502,40.384094,3887.3018};
 						angles[]={6.1801424,3.3779762,5.0508733};
 					};
 					side="Empty";
@@ -11922,7 +11972,7 @@ class Mission
 					};
 					id=3427;
 					type="Land_W_sharpRock_monolith";
-					atlOffset=1.3451347;
+					atlOffset=17.769754;
 				};
 				class Item40
 				{
@@ -11994,7 +12044,7 @@ class Mission
 				};
 			};
 			id=3490;
-			atlOffset=4.5473824;
+			atlOffset=4.4814358;
 		};
 		class Item8
 		{
@@ -12003,7 +12053,7 @@ class Mission
 			state=1;
 			class Entities
 			{
-				items=152;
+				items=170;
 				class Item0
 				{
 					dataType="Object";
@@ -14649,40 +14699,334 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3977.6245,17.193134,3892.7231};
+						position[]={3977.6245,16.440075,3892.7231};
 						angles[]={6.1016254,4.9741926,0.00081270491};
 					};
 					side="Empty";
+					flags=4;
 					class Attributes
 					{
 						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumClayHouse""]]}";
 					};
 					id=3516;
 					type="CUP_A2_house_l_9_ep1";
-					atlOffset=0.50638008;
+					atlOffset=0.037846565;
+				};
+				class Item152
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4080.5127,16.09621,3890.3337};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BarrelCampfireBig""]]}";
+					};
+					id=3558;
+					type="Land_GarbageBarrel_02_buried_F";
+					atlOffset=10.712474;
+				};
+				class Item153
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4088.084,22.764957,3893.1084};
+						angles[]={0,0.43633226,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\mil\cargo\cargo_tower_v2_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
+					};
+					id=3608;
+					type="Land_Cargo_Tower_V2_ruins_F";
+					atlOffset=0.17802238;
+				};
+				class Item154
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4088.4155,16.924065,3893.5786};
+						angles[]={0.040696424,3.8390419,6.2540565};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\civilian\houses\house_1w07_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
+					};
+					id=3610;
+					type="Land_House_1W07_ruins_F";
+					atlOffset=0.5514164;
+				};
+				class Item155
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4080.3115,17.326521,3887.197};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3611;
+					type="Land_WoodenBox_02_F";
+					atlOffset=1.0585041;
+				};
+				class Item156
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4081.1824,17.326521,3886.3232};
+						angles[]={0,0.69813162,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3612;
+					type="Land_WoodenBox_02_F";
+					atlOffset=1.0695038;
+				};
+				class Item157
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4052.5398,18.871933,3877.355};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3618;
+					type="Land_WoodenBox_02_F";
+					atlOffset=2.6608362;
+				};
+				class Item158
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4057.9912,21.771933,3876.8118};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3619;
+					type="Land_WoodenBox_02_F";
+					atlOffset=2.787508;
+				};
+				class Item159
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4037.9614,19.74649,3868.4185};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3623;
+					type="Land_WoodenBox_02_F";
+					atlOffset=3.3754807;
+				};
+				class Item160
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4038.1716,19.744307,3869.5059};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3624;
+					type="Land_WoodenBox_02_F";
+					atlOffset=3.373229;
+				};
+				class Item161
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4037.9954,20.720827,3868.8608};
+						angles[]={1.7136335e-07,0,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3625;
+					type="Land_WoodenBox_02_F";
+					atlOffset=0.00099372864;
+				};
+				class Item162
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4032.981,19.890644,3878.7598};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
+					};
+					id=3627;
+					type="Land_WoodenBox_02_F";
+					atlOffset=3.3995571;
+				};
+				class Item163
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4051.8196,18.796442,3874.5303};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""BoardWoodenBox""]]}";
+					};
+					id=3617;
+					type="box_wood_close";
+					atlOffset=2.6659861;
+				};
+				class Item164
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4081.1812,16.684532,3874.7554};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumFireGarbagePile""]]}";
+					};
+					id=3495;
+					type="pozharishe";
+					atlOffset=10.616428;
+				};
+				class Item165
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4074.272,16.839872,3880.6797};
+						angles[]={0,3.8397293,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
+					};
+					id=3614;
+					type="land_tarkov_wood";
+					atlOffset=1.1604605;
+				};
+				class Item166
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4041.0696,19.399559,3868.8687};
+						angles[]={0,3.0543268,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
+					};
+					id=3622;
+					type="land_tarkov_wood";
+					atlOffset=3.514204;
+				};
+				class Item167
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4033.2444,19.402798,3876.0635};
+						angles[]={0,4.7123909,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
+					};
+					id=3626;
+					type="land_tarkov_wood";
+					atlOffset=3.3956013;
+				};
+				class Item168
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3990.0493,16.484356,3890.1042};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampKeroseneHolderCharged""]]}";
+					};
+					id=3635;
+					type="Land_Net_Fence_pole_F";
+					atlOffset=0.12378883;
+				};
+				class Item169
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3988.0325,16.452606,3886.6357};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampKeroseneHolderCharged""]]}";
+					};
+					id=3636;
+					type="Land_Net_Fence_pole_F";
+					atlOffset=1.1795435;
 				};
 			};
 			id=3491;
-			atlOffset=0.084837914;
+			atlOffset=0.26596451;
 		};
 		class Item9
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4081.1812,16.684532,3874.7554};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumFireGarbagePile""]]}";
-			};
-			id=3495;
-			type="pozharishe";
-			atlOffset=10.616428;
-		};
-		class Item10
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14698,1204 +15042,875 @@ class Mission
 			id=3529;
 			type="controlpanel";
 		};
-		class Item11
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4080.5127,16.09621,3890.3337};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BarrelCampfireBig""]]}";
-			};
-			id=3558;
-			type="Land_GarbageBarrel_02_buried_F";
-			atlOffset=10.712474;
-		};
-		class Item12
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4115.6113,5.6240578,3924.6509};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ChairCasual""]]}";
-			};
-			id=3559;
-			type="land_stulcasual";
-			atlOffset=-9.5367432e-07;
-		};
-		class Item13
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4088.084,22.764957,3893.1084};
-				angles[]={0,0.43633226,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\mil\cargo\cargo_tower_v2_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
-			};
-			id=3608;
-			type="Land_Cargo_Tower_V2_ruins_F";
-			atlOffset=0.17802238;
-		};
-		class Item14
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4088.4155,16.924065,3893.5786};
-				angles[]={0.040696424,3.8390419,6.2540565};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_enoch\civilian\houses\house_1w07_ruins_f.p3d""]]],[""class"",""IStruct""]]}";
-			};
-			id=3610;
-			type="Land_House_1W07_ruins_F";
-			atlOffset=0.5514164;
-		};
-		class Item15
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4080.3115,17.326521,3887.197};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3611;
-			type="Land_WoodenBox_02_F";
-			atlOffset=1.0585041;
-		};
-		class Item16
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4081.1824,17.326521,3886.3232};
-				angles[]={0,0.69813162,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3612;
-			type="Land_WoodenBox_02_F";
-			atlOffset=1.0695038;
-		};
-		class Item17
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4074.272,16.839872,3880.6797};
-				angles[]={0,3.8397293,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
-			};
-			id=3614;
-			type="land_tarkov_wood";
-			atlOffset=1.1604605;
-		};
-		class Item18
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4051.8196,18.796442,3874.5303};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""BoardWoodenBox""]]}";
-			};
-			id=3617;
-			type="box_wood_close";
-			atlOffset=2.6659861;
-		};
-		class Item19
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4052.5398,18.871933,3877.355};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3618;
-			type="Land_WoodenBox_02_F";
-			atlOffset=2.6608362;
-		};
-		class Item20
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4057.9912,21.771933,3876.8118};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3619;
-			type="Land_WoodenBox_02_F";
-			atlOffset=2.787508;
-		};
-		class Item21
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4041.0696,19.399559,3868.8687};
-				angles[]={0,3.0543268,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
-			};
-			id=3622;
-			type="land_tarkov_wood";
-			atlOffset=3.514204;
-		};
-		class Item22
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4037.9614,19.74649,3868.4185};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3623;
-			type="Land_WoodenBox_02_F";
-			atlOffset=3.3754807;
-		};
-		class Item23
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4038.1716,19.744307,3869.5059};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3624;
-			type="Land_WoodenBox_02_F";
-			atlOffset=3.373229;
-		};
-		class Item24
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4037.9954,20.720827,3868.8608};
-				angles[]={1.7136335e-07,0,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3625;
-			type="Land_WoodenBox_02_F";
-			atlOffset=0.00099372864;
-		};
-		class Item25
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4033.2444,19.402798,3876.0635};
-				angles[]={0,4.7123909,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""OldWoodenBox""]]}";
-			};
-			id=3626;
-			type="land_tarkov_wood";
-			atlOffset=3.3956013;
-		};
-		class Item26
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4032.981,19.890644,3878.7598};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Things_tier1_2_3""]]],[""class"",""SquareWoodenBox""]]}";
-			};
-			id=3627;
-			type="Land_WoodenBox_02_F";
-			atlOffset=3.3995571;
-		};
-		class Item27
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4004.1487,19.509453,3890.7498};
-				angles[]={0,2.70526,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:pFNljnZhUsA""]]}";
-			};
-			id=3633;
-			type="Land_LampShabby_off_F";
-			atlOffset=3.3272915;
-		};
-		class Item28
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3987.2896,16.484356,3891.0007};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampKeroseneHolderCharged""]]}";
-			};
-			id=3635;
-			type="Land_Net_Fence_pole_F";
-			atlOffset=10.734107;
-		};
-		class Item29
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3986.436,16.452606,3886.3584};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampKeroseneHolderCharged""]]}";
-			};
-			id=3636;
-			type="Land_Net_Fence_pole_F";
-			atlOffset=2.1817551;
-		};
-		class Item30
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4021.2893,19.504059,3880.4783};
-				angles[]={0,6.0213861,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:O9zkTFGSzR4""]]}";
-			};
-			id=3637;
-			type="Land_LampShabby_off_F";
-			atlOffset=10.732029;
-		};
-		class Item31
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4034.459,19.654503,3888.5869};
-				angles[]={0,2.70526,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:tQwSolZVZlo""]]}";
-			};
-			id=3638;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.035663605;
-		};
-		class Item32
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4050.822,19.508078,3879.3621};
-				angles[]={0,5.5850539,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:cfiFLDnMpKA""]]}";
-			};
-			id=3639;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.0072546005;
-		};
-		class Item33
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4059.8347,19.569107,3893.9854};
-				angles[]={0,2.4434607,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:GaGTUa+uMBk""]]}";
-			};
-			id=3640;
-			type="Land_LampShabby_off_F";
-			atlOffset=10.797077;
-		};
-		class Item34
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4069.865,19.703953,3883.929};
-				angles[]={0,6.1086526,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:EbPFsGSLUgk""]]}";
-			};
-			id=3641;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.16369438;
-		};
-		class Item35
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4078.6731,19.590036,3894.6077};
-				angles[]={0,5.4105234,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:TNEeI0J4E0E""]]}";
-			};
-			id=3643;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.012057304;
-		};
-		class Item36
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4081.7581,19.522503,3904.7559};
-				angles[]={0,4.1887932,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:advQHTT0u1k""]]}";
-			};
-			id=3645;
-			type="Land_LampShabby_off_F";
-			atlOffset=10.750473;
-		};
-		class Item37
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4082.5452,19.561071,3912.731};
-				angles[]={0,4.7123909,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:tgc5JBNCVTk""]]}";
-			};
-			id=3646;
-			type="Land_LampShabby_off_F";
-			atlOffset=10.789042;
-		};
-		class Item38
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4083.3762,19.551498,3919.4075};
-				angles[]={0,4.537858,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:/Nb2mysuKGg""]]}";
-			};
-			id=3647;
-			type="Land_LampShabby_off_F";
-			atlOffset=10.779469;
-		};
-		class Item39
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4076.4954,19.560953,3912.5623};
-				angles[]={0,1.5707963,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk""]]}";
-			};
-			id=3648;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.20558929;
-		};
-		class Item40
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4077.5361,19.818855,3904.5981};
-				angles[]={0,2.0943949,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:3PS+ZB8O9JI""]]}";
-			};
-			id=3649;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.1942482;
-		};
-		class Item41
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4066.085,19.776951,3924.998};
-				angles[]={0,3.752459,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:/jVjRwYjrsI""]]}";
-			};
-			id=3650;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.12664604;
-		};
-		class Item42
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4093.0464,19.661537,3925.0027};
-				angles[]={0,2.7925265,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14""]]}";
-			};
-			id=3651;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.030258179;
-		};
-		class Item43
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4063.8354,19.782265,3949.656};
-				angles[]={0,0.95993131,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:UzU1nOur5uc""]]}";
-			};
-			id=3652;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.15505505;
-		};
-		class Item44
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4097.6108,19.702715,3948.7053};
-				angles[]={0,2.7052603,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:JR3QZPf6hug""]]}";
-			};
-			id=3653;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.036015511;
-		};
-		class Item45
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4093.4155,19.708551,3935.2734};
-				angles[]={0,1.5707963,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:MSq5L/vjZbY""]]}";
-			};
-			id=3654;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.074695587;
-		};
-		class Item46
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4065.5376,19.745619,3935.1653};
-				angles[]={0,4.8869262,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:xuARD7iq1RA""]]}";
-			};
-			id=3655;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.099275589;
-		};
-		class Item47
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4075.9988,19.676554,3919.4363};
-				angles[]={0,1.5707963,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk (1)""]]}";
-			};
-			id=3656;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.019683838;
-		};
-		class Item48
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4082.1272,19.571451,3952.2847};
-				angles[]={0,1.5707963,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk (2)""]]}";
-			};
-			id=3657;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.13157272;
-		};
-		class Item49
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4079.4451,21.237345,3925.634};
-				angles[]={0.78539813,0,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""LampCeiling G:cW+redBe24w""]]}";
-			};
-			id=3658;
-			type="Lamp_tarelka";
-			atlOffset=5.2232037;
-		};
-		class Item50
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4074.593,27.535763,3936.9832};
-				angles[]={0,1.6580627,0};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:LGwvHHFqoYs""]]}";
-			};
-			id=3659;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.34216881;
-		};
-		class Item51
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4083.3359,20.131031,3935.5623};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:zP+CAE8nuxA""]]}";
-			};
-			id=3661;
-			type="Lamp_tarelka";
-			atlOffset=2.6408348;
-		};
-		class Item52
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4076.2747,20.13796,3934.657};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:65w6J4YUL0o""]]}";
-			};
-			id=3663;
-			type="Lamp_tarelka";
-			atlOffset=2.6477642;
-		};
-		class Item53
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4076.21,20.122255,3940.6687};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:5VbWMkZ+ZD4""]]}";
-			};
-			id=3664;
-			type="Lamp_tarelka";
-			atlOffset=2.6320591;
-		};
-		class Item54
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4083.5623,20.138687,3940.458};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:BQ23FkqMp64""]]}";
-			};
-			id=3665;
-			type="Lamp_tarelka";
-			atlOffset=2.6484909;
-		};
-		class Item55
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4077.6921,23.219398,3933.9553};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:Zl1qtIozuC4""]]}";
-			};
-			id=3666;
-			type="Lamp_tarelka";
-			atlOffset=2.6995735;
-		};
-		class Item56
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4084.7534,23.212469,3934.8606};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:7ppSOuz79YU""]]}";
-			};
-			id=3667;
-			type="Lamp_tarelka";
-			atlOffset=2.6897182;
-		};
-		class Item57
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4084.9797,23.220125,3939.7563};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:q4Ql12HL7zo""]]}";
-			};
-			id=3668;
-			type="Lamp_tarelka";
-			atlOffset=2.6986942;
-		};
-		class Item58
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4075.2292,23.203693,3939.5972};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:KMfaSZIe2eQ""]]}";
-			};
-			id=3669;
-			type="Lamp_tarelka";
-			atlOffset=2.6861019;
-		};
-		class Item59
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4068.9539,23.201033,3940.6362};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:KEPLIBkLy7w""]]}";
-			};
-			id=3674;
-			type="Lamp_tarelka";
-			atlOffset=2.6796017;
-		};
-		class Item60
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4068.9592,23.199898,3935.6548};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:WneZ/bB/rrc""]]}";
-			};
-			id=3675;
-			type="Lamp_tarelka";
-			atlOffset=2.6771469;
-		};
-		class Item61
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4069.0217,20.130888,3940.9724};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:uWolcQogtBo""]]}";
-			};
-			id=3676;
-			type="Lamp_tarelka";
-			atlOffset=2.6406918;
-		};
-		class Item62
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4069.0391,20.137358,3934.3943};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:CSv6oNyaj/c""]]}";
-			};
-			id=3677;
-			type="Lamp_tarelka";
-			atlOffset=2.6471615;
-		};
-		class Item63
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4069.0063,20.157244,3928.7195};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:r6QPVIPIsNA""]]}";
-			};
-			id=3678;
-			type="Lamp_tarelka";
-			atlOffset=2.6670475;
-		};
-		class Item64
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4075.3816,20.114763,3928.7751};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:NFkvuprqjFY""]]}";
-			};
-			id=3679;
-			type="Lamp_tarelka";
-			atlOffset=2.624567;
-		};
-		class Item65
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4083.4814,20.121359,3928.9216};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:GKLEQENHB9o""]]}";
-			};
-			id=3680;
-			type="Lamp_tarelka";
-			atlOffset=2.6311626;
-		};
-		class Item66
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4089.7837,20.152275,3928.8391};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:mo2MH5jnsAc""]]}";
-			};
-			id=3681;
-			type="Lamp_tarelka";
-			atlOffset=2.6620789;
-		};
-		class Item67
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4090.1062,20.17988,3936.019};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:q2n1KEPPaJA""]]}";
-			};
-			id=3682;
-			type="Lamp_tarelka";
-			atlOffset=2.6896839;
-		};
-		class Item68
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4089.6609,20.177277,3941.9749};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:WBY5JUV8B3E""]]}";
-			};
-			id=3683;
-			type="Lamp_tarelka";
-			atlOffset=2.6870804;
-		};
-		class Item69
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4089.9866,23.194662,3935.8447};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:zTFmvokdRKQ""]]}";
-			};
-			id=3684;
-			type="Lamp_tarelka";
-			atlOffset=2.6719112;
-		};
-		class Item70
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4090.1804,23.186842,3941.2534};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:D7vBoXH0Wp8""]]}";
-			};
-			id=3685;
-			type="Lamp_tarelka";
-			atlOffset=2.665411;
-		};
-		class Item71
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4069.0759,23.213287,3928.8992};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:W7ZvRWFBFr4""]]}";
-			};
-			id=3686;
-			type="Lamp_tarelka";
-			atlOffset=1.7318554;
-		};
-		class Item72
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4074.8472,23.18564,3928.9822};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:GZFf7wp0H64""]]}";
-			};
-			id=3687;
-			type="Lamp_tarelka";
-			atlOffset=2.6632099;
-		};
-		class Item73
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4083.3052,23.197151,3928.865};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:ZD18a42addg""]]}";
-			};
-			id=3688;
-			type="Lamp_tarelka";
-			atlOffset=2.6757202;
-		};
-		class Item74
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4090.0823,23.218134,3928.9468};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:YJsojt9qr8Q""]]}";
-			};
-			id=3689;
-			type="Lamp_tarelka";
-			atlOffset=2.6987228;
-		};
-		class Item75
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4091.9287,21.468496,3942.8674};
-			};
-			side="Empty";
-			flags=1;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FryingPan""]]}";
-			};
-			id=3690;
-			type="land_skovoroda";
-			atlOffset=1.0645695;
-		};
-		class Item76
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4092.0979,21.20059,3941.9768};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Kastrula""]]}";
-			};
-			id=3691;
-			type="kastryla";
-			atlOffset=0.7625618;
-		};
-		class Item77
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4091.7212,21.270599,3941.7603};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Teapot""]]}";
-			};
-			id=3693;
-			type="chaynik";
-			atlOffset=0.7615757;
-		};
-		class Item78
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4097.1563,19.746399,3914.5837};
-				angles[]={0,2.7925265,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14 (1)""]]}";
-			};
-			id=3702;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.086974144;
-		};
-		class Item79
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={4066.4167,19.820759,3912.4304};
-				angles[]={0,2.7925265,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14 (2)""]]}";
-			};
-			id=3703;
-			type="Land_LampShabby_off_F";
-			atlOffset=0.18357754;
+		class Item10
+		{
+			dataType="Layer";
+			name="Слой 238";
+			state=1;
+			class Entities
+			{
+				items=49;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4081.7581,19.522503,3904.7559};
+						angles[]={0,4.1887932,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:advQHTT0u1k""]]}";
+					};
+					id=3645;
+					type="Land_LampShabby_off_F";
+					atlOffset=10.750473;
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4083.3762,19.551498,3919.4075};
+						angles[]={0,4.537858,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:/Nb2mysuKGg""]]}";
+					};
+					id=3647;
+					type="Land_LampShabby_off_F";
+					atlOffset=10.779469;
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4076.4954,19.560953,3912.5623};
+						angles[]={0,1.5707963,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk""]]}";
+					};
+					id=3648;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.20558929;
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4077.5361,19.818855,3904.5981};
+						angles[]={0,2.0943949,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:3PS+ZB8O9JI""]]}";
+					};
+					id=3649;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.1942482;
+				};
+				class Item4
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4066.085,19.776951,3924.998};
+						angles[]={0,3.752459,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:/jVjRwYjrsI""]]}";
+					};
+					id=3650;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.12664604;
+				};
+				class Item5
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4093.0464,19.661537,3925.0027};
+						angles[]={0,2.7925265,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14""]]}";
+					};
+					id=3651;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.030258179;
+				};
+				class Item6
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4063.8354,19.782265,3949.656};
+						angles[]={0,0.95993131,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:UzU1nOur5uc""]]}";
+					};
+					id=3652;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.15505505;
+				};
+				class Item7
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4097.6108,19.702715,3948.7053};
+						angles[]={0,2.7052603,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:JR3QZPf6hug""]]}";
+					};
+					id=3653;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.036015511;
+				};
+				class Item8
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4093.4155,19.708551,3935.2734};
+						angles[]={0,1.5707963,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:MSq5L/vjZbY""]]}";
+					};
+					id=3654;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.074695587;
+				};
+				class Item9
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4065.5376,19.745619,3935.1653};
+						angles[]={0,4.8869262,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:xuARD7iq1RA""]]}";
+					};
+					id=3655;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.099275589;
+				};
+				class Item10
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4075.9988,19.676554,3919.4363};
+						angles[]={0,1.5707963,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk (1)""]]}";
+					};
+					id=3656;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.019683838;
+				};
+				class Item11
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4082.1272,19.571451,3952.2847};
+						angles[]={0,1.5707963,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:q75jxPPfekk (2)""]]}";
+					};
+					id=3657;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.13157272;
+				};
+				class Item12
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4097.1563,19.746399,3914.5837};
+						angles[]={0,2.7925265,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14 (1)""]]}";
+					};
+					id=3702;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.086974144;
+				};
+				class Item13
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4066.4167,19.820759,3912.4304};
+						angles[]={0,2.7925265,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLampEnabled""],[""mark"",""StreetLampEnabled G:1mNwro6Oh14 (2)""]]}";
+					};
+					id=3703;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.18357754;
+				};
+				class Item14
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4078.6731,19.590036,3894.6077};
+						angles[]={0,5.4105234,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:TNEeI0J4E0E""]]}";
+					};
+					id=3643;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.012057304;
+				};
+				class Item15
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4004.1487,19.509453,3890.7498};
+						angles[]={0,2.70526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:pFNljnZhUsA""]]}";
+					};
+					id=3633;
+					type="Land_LampShabby_off_F";
+					atlOffset=3.3272915;
+				};
+				class Item16
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4020.6184,19.504059,3881.3528};
+						angles[]={0,6.0213861,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:O9zkTFGSzR4""]]}";
+					};
+					id=3637;
+					type="Land_LampShabby_off_F";
+					atlOffset=10.732029;
+				};
+				class Item17
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4034.459,19.654503,3888.5869};
+						angles[]={0,2.70526,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:tQwSolZVZlo""]]}";
+					};
+					id=3638;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.035663605;
+				};
+				class Item18
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4050.822,19.508078,3879.3621};
+						angles[]={0,5.5850539,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:cfiFLDnMpKA""]]}";
+					};
+					id=3639;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.0072546005;
+				};
+				class Item19
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4059.8347,19.569107,3893.9854};
+						angles[]={0,2.4434607,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:GaGTUa+uMBk""]]}";
+					};
+					id=3640;
+					type="Land_LampShabby_off_F";
+					atlOffset=10.797077;
+				};
+				class Item20
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4069.865,19.703953,3883.929};
+						angles[]={0,6.1086526,0};
+					};
+					side="Empty";
+					flags=5;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:EbPFsGSLUgk""]]}";
+					};
+					id=3641;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.16369438;
+				};
+				class Item21
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4082.5452,19.561071,3912.731};
+						angles[]={0,4.7123909,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:tgc5JBNCVTk""]]}";
+					};
+					id=3646;
+					type="Land_LampShabby_off_F";
+					atlOffset=10.789042;
+				};
+				class Item22
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4074.593,27.535763,3936.9832};
+						angles[]={0,1.6580627,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:LGwvHHFqoYs""]]}";
+					};
+					id=3659;
+					type="Land_LampShabby_off_F";
+					atlOffset=0.34216881;
+				};
+				class Item23
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4076.2747,20.13796,3934.657};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:65w6J4YUL0o""]]}";
+					};
+					id=3663;
+					type="Lamp_tarelka";
+					atlOffset=2.6477642;
+				};
+				class Item24
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4076.21,20.122255,3940.6687};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:5VbWMkZ+ZD4""]]}";
+					};
+					id=3664;
+					type="Lamp_tarelka";
+					atlOffset=2.6320591;
+				};
+				class Item25
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4083.5623,20.138687,3940.458};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:BQ23FkqMp64""]]}";
+					};
+					id=3665;
+					type="Lamp_tarelka";
+					atlOffset=2.6484909;
+				};
+				class Item26
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4077.6921,23.169399,3933.9553};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:Zl1qtIozuC4""]]}";
+					};
+					id=3666;
+					type="Lamp_tarelka";
+					atlOffset=2.6495743;
+				};
+				class Item27
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4084.7534,23.189812,3934.8606};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:7ppSOuz79YU""]]}";
+					};
+					id=3667;
+					type="Lamp_tarelka";
+					atlOffset=2.6670609;
+				};
+				class Item28
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4084.9797,23.220125,3939.7563};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:q4Ql12HL7zo""]]}";
+					};
+					id=3668;
+					type="Lamp_tarelka";
+					atlOffset=2.6986942;
+				};
+				class Item29
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4075.2292,23.203693,3939.5972};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:KMfaSZIe2eQ""]]}";
+					};
+					id=3669;
+					type="Lamp_tarelka";
+					atlOffset=2.6861019;
+				};
+				class Item30
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4068.9539,23.201033,3940.6362};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:KEPLIBkLy7w""]]}";
+					};
+					id=3674;
+					type="Lamp_tarelka";
+					atlOffset=2.6796017;
+				};
+				class Item31
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4068.9592,23.199898,3935.6548};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:WneZ/bB/rrc""]]}";
+					};
+					id=3675;
+					type="Lamp_tarelka";
+					atlOffset=2.6771469;
+				};
+				class Item32
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4069.0217,20.130888,3940.9724};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:uWolcQogtBo""]]}";
+					};
+					id=3676;
+					type="Lamp_tarelka";
+					atlOffset=2.6406918;
+				};
+				class Item33
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4069.0391,20.137358,3934.3943};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:CSv6oNyaj/c""]]}";
+					};
+					id=3677;
+					type="Lamp_tarelka";
+					atlOffset=2.6471615;
+				};
+				class Item34
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4069.0063,20.157244,3928.7195};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:r6QPVIPIsNA""]]}";
+					};
+					id=3678;
+					type="Lamp_tarelka";
+					atlOffset=2.6670475;
+				};
+				class Item35
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4075.3816,20.114763,3928.7751};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:NFkvuprqjFY""]]}";
+					};
+					id=3679;
+					type="Lamp_tarelka";
+					atlOffset=2.624567;
+				};
+				class Item36
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4083.4814,20.121359,3928.9216};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:GKLEQENHB9o""]]}";
+					};
+					id=3680;
+					type="Lamp_tarelka";
+					atlOffset=2.6311626;
+				};
+				class Item37
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4089.7837,20.152275,3928.8391};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:mo2MH5jnsAc""]]}";
+					};
+					id=3681;
+					type="Lamp_tarelka";
+					atlOffset=2.6620789;
+				};
+				class Item38
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4090.1062,20.17988,3936.019};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:q2n1KEPPaJA""]]}";
+					};
+					id=3682;
+					type="Lamp_tarelka";
+					atlOffset=2.6896839;
+				};
+				class Item39
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4089.6609,20.177277,3941.9749};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:WBY5JUV8B3E""]]}";
+					};
+					id=3683;
+					type="Lamp_tarelka";
+					atlOffset=2.6870804;
+				};
+				class Item40
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4089.9866,23.194662,3935.8447};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:zTFmvokdRKQ""]]}";
+					};
+					id=3684;
+					type="Lamp_tarelka";
+					atlOffset=2.6719112;
+				};
+				class Item41
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4090.1804,23.186842,3941.2534};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:D7vBoXH0Wp8""]]}";
+					};
+					id=3685;
+					type="Lamp_tarelka";
+					atlOffset=2.665411;
+				};
+				class Item42
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4069.0759,23.213287,3928.8992};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:W7ZvRWFBFr4""]]}";
+					};
+					id=3686;
+					type="Lamp_tarelka";
+					atlOffset=1.7318554;
+				};
+				class Item43
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4074.8472,23.18564,3928.9822};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:GZFf7wp0H64""]]}";
+					};
+					id=3687;
+					type="Lamp_tarelka";
+					atlOffset=2.6632099;
+				};
+				class Item44
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4083.3052,23.197151,3928.865};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:ZD18a42addg""]]}";
+					};
+					id=3688;
+					type="Lamp_tarelka";
+					atlOffset=2.6757202;
+				};
+				class Item45
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4090.0823,23.218134,3928.9468};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:YJsojt9qr8Q""]]}";
+					};
+					id=3689;
+					type="Lamp_tarelka";
+					atlOffset=2.6987228;
+				};
+				class Item46
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4083.3359,20.131031,3935.5623};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""light"",""SLIGHT_ITAL_LAMP_MEDIUM""]]],[""class"",""LampCeiling_Red""],[""mark"",""LampCeiling_Red G:zP+CAE8nuxA""]]}";
+					};
+					id=3661;
+					type="Lamp_tarelka";
+					atlOffset=2.6408348;
+				};
+				class Item47
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4079.4451,21.237345,3925.634};
+						angles[]={0.78539813,0,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""LampCeiling""],[""mark"",""LampCeiling G:cW+redBe24w""]]}";
+					};
+					id=3658;
+					type="Lamp_tarelka";
+					atlOffset=5.2232037;
+				};
+				class Item48
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3978.6594,16.282955,3889.7646};
+						angles[]={0,2.70526,0};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""StreetLamp""],[""mark"",""StreetLamp G:pFNljnZhUsA (1)""]]}";
+					};
+					id=3705;
+					type="Land_LampShabby_off_F";
+					atlOffset=7.5109253;
+				};
+			};
+			id=3704;
+			atlOffset=11.89533;
 		};
 	};
 };
