@@ -65,8 +65,8 @@ func(setDoorOpen)
 	private _oldState = getSelf(isOpen);
 	if getSelf(isLocked) exitWith {
 		if (!_oldState) then {
-			_snd = "doors\locked" + str pick [1 arg 2];
-			_rpith = getRandomPitchInRange(0.6,1.3);
+			private _snd = "doors\locked" + str pick [1 arg 2];
+			private _rpith = getRandomPitchInRange(0.6,1.3);
 			callSelfParams(playSound,_snd arg _rpith);
 		};
 	};
@@ -81,8 +81,12 @@ func(setDoorOpen)
 	} else {
 		callSelf(getCloseSoundParams);
 	};
-
-	_snd params ["_sound","_pitch","_dist","_vol"];
+	#ifdef SP_MODE
+	private _pitch = null;
+	private _dist = null;
+	private _vol = null;
+	#endif
+	_snd params ["_sound",["_pitch",null],["_dist",null],["_vol",null]];
 
 	callSelfParams(playSound, _sound arg _pitch arg _dist arg _vol);
 };

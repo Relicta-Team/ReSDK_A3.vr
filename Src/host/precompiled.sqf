@@ -129,7 +129,7 @@ pc_oop_postInitClass = {
 			__sc = toString _code;
 
 			//в редакторе для видимости методов при помощи отладчика добавляем информацию о методах в тело функций
-			#ifdef EDITOR
+			#ifdef EDITOR_OR_SP_MODE
 				__sc = (format["private ___fn___ = ""%1::%2"";private ___fd___ = ""%3"";",_class,_name,_classmet_declinfo get _name]) + __sc;
 			#endif
 
@@ -146,7 +146,7 @@ pc_oop_postInitClass = {
 				];
 			} else {
 				//просто компилируем код со встроенной информации о члене (где нет ключевого слова super)
-				#ifdef EDITOR
+				#ifdef EDITOR_OR_SP_MODE
 					_methods set [_forEachIndex,[_name,compile __sc]]
 				#endif 
 			};

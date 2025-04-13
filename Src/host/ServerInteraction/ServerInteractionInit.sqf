@@ -101,7 +101,7 @@ si_rayCast = {
 	#endif
 
 	//post ngo redirect
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	//double check
 		if (_obj call noe_client_isNGO) then {
 			_obj = _obj call noe_client_getNGOSource;
@@ -118,7 +118,7 @@ si_rayCast = {
 	#endif
 
 	//Логика редактора
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 		if (count allVariables _obj == 0) exitWith {_defaultReturn};
 		if (typeof _obj == BASIC_MOB_TYPE) then {
 			ifcheck(_retVirtual,_obj getVariable "link",_obj);
@@ -141,7 +141,7 @@ si_handleObjectReturnCheckVirtual = {
 	private _defaultReturn = nullPtr;
 
 	//post ngo redirect
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	//double check
 		if (_obj call noe_client_isNGO) then {
 			_obj = _obj call noe_client_getNGOSource;
@@ -153,7 +153,7 @@ si_handleObjectReturnCheckVirtual = {
 	#endif
 
 	//Логика редактора
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 		if (count allVariables _obj == 0) exitWith {_defaultReturn};
 		if (typeof _obj == BASIC_MOB_TYPE) then {
 			_obj getVariable "link";
@@ -210,7 +210,7 @@ si_getIntersectDataV2 = {
 		100,
 		INTERACT_LODS_CHECK_STANDART
  	];
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	_ins = _ins select {isNull((_x select 2)getvariable "link")};
 	#endif
 	if (count _ins == 0) exitWith {[objnull,[0,0,0],[0,0,0]]};
@@ -301,7 +301,7 @@ si_addThrowTask = {
 	};
 
 	private _tempObj = createSimpleObject[_model,[50,50,50],true];
-	#ifndef EDITOR
+	#ifndef EDITOR_OR_SP_MODE
 	_tempObj hideObject true;
 	#endif
 
@@ -468,7 +468,7 @@ si_onBulletAct = {
 
 	private _targ = _barrierObj getVariable "link";
 
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	if isNullVar(_targ) then {
 		{
 			_targ = _obj getVariable _x;

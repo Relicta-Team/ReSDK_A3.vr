@@ -74,7 +74,7 @@ Replaced value:
 ```sqf
 if (_code == code) exitWith {[text] call (getDisplay getVariable ["printError",{}])}
 ```
-File: [client\ClientData\ClientData.sqf at line 525](../../../Src/client/ClientData/ClientData.sqf#L525)
+File: [client\ClientData\ClientData.sqf at line 533](../../../Src/client/ClientData/ClientData.sqf#L533)
 ## cd_clientName
 
 Type: Variable
@@ -254,7 +254,7 @@ Initial value:
 ```sqf
 vec3(0,0,0)
 ```
-File: [client\ClientData\ClientData.sqf at line 238](../../../Src/client/ClientData/ClientData.sqf#L238)
+File: [client\ClientData\ClientData.sqf at line 246](../../../Src/client/ClientData/ClientData.sqf#L246)
 ## cd_internal_lastTPDir
 
 Type: Variable
@@ -266,7 +266,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\ClientData\ClientData.sqf at line 240](../../../Src/client/ClientData/ClientData.sqf#L240)
+File: [client\ClientData\ClientData.sqf at line 248](../../../Src/client/ClientData/ClientData.sqf#L248)
 ## cd_internal_tpHandle
 
 Type: Variable
@@ -278,7 +278,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\ClientData\ClientData.sqf at line 242](../../../Src/client/ClientData/ClientData.sqf#L242)
+File: [client\ClientData\ClientData.sqf at line 250](../../../Src/client/ClientData/ClientData.sqf#L250)
 ## cd_internal_hasTPError
 
 Type: Variable
@@ -290,7 +290,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\ClientData\ClientData.sqf at line 244](../../../Src/client/ClientData/ClientData.sqf#L244)
+File: [client\ClientData\ClientData.sqf at line 252](../../../Src/client/ClientData/ClientData.sqf#L252)
 ## cd_internal_lastTPObj
 
 Type: Variable
@@ -302,7 +302,7 @@ Initial value:
 ```sqf
 objnull
 ```
-File: [client\ClientData\ClientData.sqf at line 246](../../../Src/client/ClientData/ClientData.sqf#L246)
+File: [client\ClientData\ClientData.sqf at line 254](../../../Src/client/ClientData/ClientData.sqf#L254)
 ## cd_internal_startLoadTime
 
 Type: Variable
@@ -314,7 +314,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\ClientData\ClientData.sqf at line 248](../../../Src/client/ClientData/ClientData.sqf#L248)
+File: [client\ClientData\ClientData.sqf at line 256](../../../Src/client/ClientData/ClientData.sqf#L256)
 ## cd_OnSkillsUpdate
 
 Type: function
@@ -349,7 +349,7 @@ Description:
 - Param: _pos
 - Param: _dir
 
-File: [client\ClientData\ClientData.sqf at line 251](../../../Src/client/ClientData/ClientData.sqf#L251)
+File: [client\ClientData\ClientData.sqf at line 259](../../../Src/client/ClientData/ClientData.sqf#L259)
 ## cd_syncObjTransform
 
 Type: function
@@ -359,7 +359,7 @@ Description:
 - Param: _pos
 - Param: _dir
 
-File: [client\ClientData\ClientData.sqf at line 366](../../../Src/client/ClientData/ClientData.sqf#L366)
+File: [client\ClientData\ClientData.sqf at line 374](../../../Src/client/ClientData/ClientData.sqf#L374)
 ## cd_clientDisconnect
 
 Type: function
@@ -367,7 +367,7 @@ Type: function
 Description: 
 - Param: _args
 
-File: [client\ClientData\ClientData.sqf at line 377](../../../Src/client/ClientData/ClientData.sqf#L377)
+File: [client\ClientData\ClientData.sqf at line 385](../../../Src/client/ClientData/ClientData.sqf#L385)
 ## cd_authproc
 
 Type: function
@@ -375,7 +375,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 405](../../../Src/client/ClientData/ClientData.sqf#L405)
+File: [client\ClientData\ClientData.sqf at line 413](../../../Src/client/ClientData/ClientData.sqf#L413)
 ## cd_openAuth
 
 Type: function
@@ -383,7 +383,7 @@ Type: function
 Description: 
 - Param: _mes
 
-File: [client\ClientData\ClientData.sqf at line 412](../../../Src/client/ClientData/ClientData.sqf#L412)
+File: [client\ClientData\ClientData.sqf at line 420](../../../Src/client/ClientData/ClientData.sqf#L420)
 ## cd_authResult
 
 Type: function
@@ -392,7 +392,7 @@ Description:
 - Param: _code
 - Param: _nick
 
-File: [client\ClientData\ClientData.sqf at line 518](../../../Src/client/ClientData/ClientData.sqf#L518)
+File: [client\ClientData\ClientData.sqf at line 526](../../../Src/client/ClientData/ClientData.sqf#L526)
 ## cd_switchMove_anim
 
 Type: function
@@ -400,7 +400,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 549](../../../Src/client/ClientData/ClientData.sqf#L549)
+File: [client\ClientData\ClientData.sqf at line 557](../../../Src/client/ClientData/ClientData.sqf#L557)
 ## cd_switchMove_force_anim
 
 Type: function
@@ -408,7 +408,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 554](../../../Src/client/ClientData/ClientData.sqf#L554)
+File: [client\ClientData\ClientData.sqf at line 562](../../../Src/client/ClientData/ClientData.sqf#L562)
 ## cd_playMove_anim
 
 Type: function
@@ -416,7 +416,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 561](../../../Src/client/ClientData/ClientData.sqf#L561)
+File: [client\ClientData\ClientData.sqf at line 569](../../../Src/client/ClientData/ClientData.sqf#L569)
 ## cd_setMimic_anim
 
 Type: function
@@ -424,7 +424,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 567](../../../Src/client/ClientData/ClientData.sqf#L567)
+File: [client\ClientData\ClientData.sqf at line 575](../../../Src/client/ClientData/ClientData.sqf#L575)
 ## cd_switchAction_anim
 
 Type: function
@@ -432,7 +432,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 572](../../../Src/client/ClientData/ClientData.sqf#L572)
+File: [client\ClientData\ClientData.sqf at line 580](../../../Src/client/ClientData/ClientData.sqf#L580)
 ## cd_syncongrabrot_setvdirup
 
 Type: function
@@ -440,7 +440,7 @@ Type: function
 Description: 
 - Param: _m
 
-File: [client\ClientData\ClientData.sqf at line 577](../../../Src/client/ClientData/ClientData.sqf#L577)
+File: [client\ClientData\ClientData.sqf at line 585](../../../Src/client/ClientData/ClientData.sqf#L585)
 ## cd_camshake_proc
 
 Type: function
@@ -448,7 +448,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientData\ClientData.sqf at line 586](../../../Src/client/ClientData/ClientData.sqf#L586)
+File: [client\ClientData\ClientData.sqf at line 594](../../../Src/client/ClientData/ClientData.sqf#L594)
 ## cd_replicate_replloc
 
 Type: function
@@ -457,7 +457,7 @@ Description:
 - Param: _method
 - Param: _ctx
 
-File: [client\ClientData\ClientData.sqf at line 591](../../../Src/client/ClientData/ClientData.sqf#L591)
+File: [client\ClientData\ClientData.sqf at line 599](../../../Src/client/ClientData/ClientData.sqf#L599)
 ## repl_doLocal
 
 Type: function
@@ -466,7 +466,7 @@ Description:
 - Param: _method
 - Param: _ctx
 
-File: [client\ClientData\ClientData.sqf at line 600](../../../Src/client/ClientData/ClientData.sqf#L600)
+File: [client\ClientData\ClientData.sqf at line 608](../../../Src/client/ClientData/ClientData.sqf#L608)
 # ClientDataGamemode.sqf
 
 ## cd_onChangeGameState
@@ -1795,7 +1795,7 @@ Replaced value:
 ```sqf
 _cd_map_dataCode = []; cd_commands_localCommandsList set [name,_cd_map_dataCode]; _cd_map_dataCode pushBack
 ```
-File: [client\ClientData\SendCommand.sqf at line 311](../../../Src/client/ClientData/SendCommand.sqf#L311)
+File: [client\ClientData\SendCommand.sqf at line 315](../../../Src/client/ClientData/SendCommand.sqf#L315)
 ## arguments
 
 Type: constant
@@ -1807,7 +1807,7 @@ Replaced value:
 ```sqf
 cd_internal_cmd_thisArguments
 ```
-File: [client\ClientData\SendCommand.sqf at line 314](../../../Src/client/ClientData/SendCommand.sqf#L314)
+File: [client\ClientData\SendCommand.sqf at line 318](../../../Src/client/ClientData/SendCommand.sqf#L318)
 ## cd_commandHistoryBuffer
 
 Type: Variable
@@ -1845,7 +1845,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\ClientData\SendCommand.sqf at line 308](../../../Src/client/ClientData/SendCommand.sqf#L308)
+File: [client\ClientData\SendCommand.sqf at line 312](../../../Src/client/ClientData/SendCommand.sqf#L312)
 ## cd_openSendCommandWindow
 
 Type: function
@@ -1878,7 +1878,7 @@ Description:
 - Param: _cmd
 - Param: _args (optional, default 0)
 
-File: [client\ClientData\SendCommand.sqf at line 295](../../../Src/client/ClientData/SendCommand.sqf#L295)
+File: [client\ClientData\SendCommand.sqf at line 299](../../../Src/client/ClientData/SendCommand.sqf#L299)
 # VersionViewer.sqf
 
 ## versionviewer_timeout_init_clientname

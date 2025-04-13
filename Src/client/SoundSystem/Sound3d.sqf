@@ -165,7 +165,7 @@ sound3d_stopLocalLopped = {
 };
 
 //hotreload cleanup sounds
-#ifdef EDITOR
+#ifdef EDITOR_OR_SP_MODE
 if !isNullVar(sound3d_internal_list_soundBuff) then {
 	{
 		stopSound(_x select 1);

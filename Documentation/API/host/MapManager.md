@@ -628,6 +628,40 @@ Description:
 - Param: _o
 
 File: [host\MapManager\Maps\SaloonV2.sqf at line 22](../../../Src/host/MapManager/Maps/SaloonV2.sqf#L22)
+# sp_guide.sqf
+
+## reditor_binding_fc
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\sp_guide.sqf at line 3](../../../Src/host/MapManager/Maps/sp_guide.sqf#L3)
+## reditor_binding_gv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\sp_guide.sqf at line 12](../../../Src/host/MapManager/Maps/sp_guide.sqf#L12)
+## reditor_binding_sv
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\sp_guide.sqf at line 17](../../../Src/host/MapManager/Maps/sp_guide.sqf#L17)
+## reditor_binding_gref
+
+Type: function
+
+Description: 
+- Param: _o
+
+File: [host\MapManager\Maps\sp_guide.sqf at line 22](../../../Src/host/MapManager/Maps/sp_guide.sqf#L22)
 # Template.sqf
 
 ## reditor_binding_fc

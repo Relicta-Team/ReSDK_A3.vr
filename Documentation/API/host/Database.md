@@ -91,7 +91,7 @@ Replaced value:
 ```sqf
 (if (val < 10) then {"0" + str val} else {str val})
 ```
-File: [host\Database\SQLite\SQLite_functions.sqf at line 173](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L173)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 176](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L176)
 ## db_open
 
 Type: function
@@ -174,7 +174,7 @@ Type: function
 Description: versioning
 
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 139](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L139)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 142](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L142)
 ## db_getCommonVal
 
 Type: function
@@ -183,7 +183,7 @@ Description:
 - Param: _varName
 - Param: _returnType (optional, default "string")
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 146](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L146)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 149](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L149)
 ## db_setCommonVal
 
 Type: function
@@ -193,7 +193,7 @@ Description:
 - Param: _value
 - Param: _inString (optional, default true)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 154](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L154)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 157](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L157)
 ## db_dateTimeFormatForComparsion
 
 Type: function
@@ -207,7 +207,7 @@ Description: Форматирует массив даты-времени в ст
 - Param: _s (optional, default 0)
 - Param: _ms (optional, default 0)
 
-File: [host\Database\SQLite\SQLite_functions.sqf at line 170](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L170)
+File: [host\Database\SQLite\SQLite_functions.sqf at line 173](../../../Src/host/Database/SQLite/SQLite_functions.sqf#L173)
 # SQLite_init.sqf
 
 ## db_version
@@ -258,7 +258,7 @@ Replaced value:
 ```sqf
 [(format[txtval arg fmt]) call {if not_equalTypes(_this,"") then {str _this} else {str parseText _this}},"log"] call chatPrint;
 ```
-File: [host\Database\SQLite\SQLite_manager.sqf at line 771](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L771)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 775](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L775)
 ## __logrepsync(txtval,fmt)
 
 Type: constant
@@ -273,7 +273,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Database\SQLite\SQLite_manager.sqf at line 773](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L773)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 777](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L777)
 ## db_closeConnection
 
 Type: function
@@ -537,7 +537,7 @@ Type: function
 Description: вызывается когда сессия началась
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 686](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L686)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 690](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L690)
 ## db_onGamemodeSessionEnd
 
 Type: function
@@ -545,7 +545,7 @@ Type: function
 Description: вызывается когда сессия закончилась
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 696](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L696)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 700](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L700)
 ## db_registerNewVote
 
 Type: function
@@ -555,7 +555,7 @@ Description:
 - Param: _charTStruct
 - Param: _clientList
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 714](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L714)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 718](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L718)
 ## db_registerVoteClient
 
 Type: function
@@ -564,7 +564,7 @@ Description:
 - Param: _id
 - Param: _name
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 724](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L724)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 728](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L728)
 ## db_processVoteClient
 
 Type: function
@@ -574,7 +574,7 @@ Description:
 - Param: _vote
 - Param: _autoSync (optional, default true)
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 732](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L732)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 736](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L736)
 ## db_onSyncReputations
 
 Type: function
@@ -582,7 +582,7 @@ Type: function
 Description: 
 
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 765](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L765)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 769](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L769)
 ## db_hasNeedClientVote
 
 Type: function
@@ -592,7 +592,7 @@ Description:
 - Param: _reputation (optional, default "")
 - Param: _refInfo
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 978](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L978)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 982](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L982)
 ## db_da_isSynced
 
 Type: function
@@ -602,7 +602,7 @@ Description: ! not used
 - Param: _refId
 - Param: _loadArrived (optional, default false)
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1050](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1050)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1054](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1054)
 ## db_da_isSyncedAsDiscordId
 
 Type: function
@@ -610,7 +610,7 @@ Type: function
 Description: ! not used
 - Param: _id
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1070](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1070)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1074](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1074)
 ## db_da_updateArrivedInCity
 
 Type: function
@@ -618,7 +618,7 @@ Type: function
 Description: ! not used
 - Param: _nick
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1078](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1078)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1082](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1082)
 ## db_da_register
 
 Type: function
@@ -627,7 +627,7 @@ Description: ! not used
 - Param: _nick
 - Param: _discordid
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1093](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1093)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1097](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1097)
 ## db_da_updateStatArrivedInCity
 
 Type: function
@@ -635,7 +635,7 @@ Type: function
 Description: обновляем статистику посещения города
 - Param: _client
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1102](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1102)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1106](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1106)
 ## db_port_oldAccountRegistered
 
 Type: function
@@ -643,4 +643,4 @@ Type: function
 Description: port handler, if true - successed port from old account
 - Param: _did
 
-File: [host\Database\SQLite\SQLite_manager.sqf at line 1117](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1117)
+File: [host\Database\SQLite\SQLite_manager.sqf at line 1121](../../../Src/host/Database/SQLite/SQLite_manager.sqf#L1121)

@@ -268,6 +268,10 @@ atmos_cv_tupd = ["onTemperatureUpdate"];
 #endif
 
 atmos_internal_onUpdate = {
+	#ifdef SP_MODE
+		sp_checkWSim("atmos");
+	#endif
+	
 	_chunkList = null;
 	_atmosDat = null;
 	_chObj = null;

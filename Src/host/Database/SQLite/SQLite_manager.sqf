@@ -666,6 +666,10 @@ db_saveReputation = {
 //создаем сессию и возвращаем её айди
 db_createGamemodeSession = {
 	params ["_gmName"];
+	
+	#ifdef SP_MODE
+	if(true) exitWith {floor random 999999};
+	#endif
 
 	#ifdef DEBUG
 	if (isMultiplayer) exitwith {-1};

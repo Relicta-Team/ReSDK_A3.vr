@@ -98,7 +98,12 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		private _snd = callSelfReflect("get"+_category+"sound");
 		//Для мультипараметров
 		if equalTypes(_snd,[]) then {
-			_snd params ["_s","_p","_md","_vl"];
+			#ifdef SP_MODE
+			private _md = null;
+			private _lv = null;
+			private _p = null;
+			#endif
+			_snd params ["_s",["_p",null],["_md",null],["_vl",null]];
 			callSelfParams(playSound, _s arg _p arg _md arg _vl); //parametrize called
 		} else {
 			callSelfParams(playSound, _snd arg _pitch arg _maxDist arg _vol);

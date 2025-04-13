@@ -207,7 +207,7 @@ Type: function
 Description: 
 
 
-File: [client\OneSync\OneSync_light.sqf at line 40](../../../Src/client/OneSync/OneSync_light.sqf#L40)
+File: [client\OneSync\OneSync_light.sqf at line 44](../../../Src/client/OneSync/OneSync_light.sqf#L44)
 ## os_light_onUpdate
 
 Type: function
@@ -215,7 +215,7 @@ Type: function
 Description: 
 
 
-File: [client\OneSync\OneSync_light.sqf at line 55](../../../Src/client/OneSync/OneSync_light.sqf#L55)
+File: [client\OneSync\OneSync_light.sqf at line 59](../../../Src/client/OneSync/OneSync_light.sqf#L59)
 ## os_light_registerAsNoProcessedLight
 
 Type: function
@@ -224,7 +224,7 @@ Description:
 - Param: _lt
 - Param: _intensity
 
-File: [client\OneSync\OneSync_light.sqf at line 70](../../../Src/client/OneSync/OneSync_light.sqf#L70)
+File: [client\OneSync\OneSync_light.sqf at line 74](../../../Src/client/OneSync/OneSync_light.sqf#L74)
 # OneSync_mobcollision.sqf
 
 ## OS_MOBCOLLISION_DISTANCE_CHECK

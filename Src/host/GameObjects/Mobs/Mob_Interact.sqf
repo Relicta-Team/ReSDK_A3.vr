@@ -107,6 +107,8 @@ func(clickTarget)
 
 
 		} else {
+			//далеко для интеракции
+			if (callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE)exitWith {};
 			if (getSelf(lastActionTime) > tickTime) exitWith {};
 			setSelf(lastActionTime,tickTime + 0.3);
 
@@ -1457,9 +1459,9 @@ region(viewing object)
 				};
 				true
 			} count _selectionsNames;
-			_viewmode = linearConversion[0,count _selectionsNames,_countView,VISIBILITY_MODE_NONE,VISIBILITY_MODE_FULL];
+			_visMode = linearConversion[0,count _selectionsNames,_countView,VISIBILITY_MODE_NONE,VISIBILITY_MODE_FULL];
 			#ifdef _mob_internal__log_canseeobject__
-			traceformat("COUNT %1 from %2; viewmode: %3",_countView arg count _selectionsNames arg vec4("NO","LOW","MED","FULL") select _viewmode);
+			traceformat("COUNT %1 from %2; viewmode: %3",_countView arg count _selectionsNames arg vec4("NO","LOW","MED","FULL") select _visMode);
 			#endif
 
 		} else {
@@ -1497,13 +1499,13 @@ region(viewing object)
 				true
 			} count _bY;
 
-			_viewmode = linearConversion[0,7,_countView,VISIBILITY_MODE_NONE,VISIBILITY_MODE_FULL];
+			_visMode = linearConversion[0,7,_countView,VISIBILITY_MODE_NONE,VISIBILITY_MODE_FULL];
 			#ifdef _mob_internal__log_canseeobject__
-			traceformat("COUNT %1 from %2; viewmode: %3",_countView arg 8 arg vec4("NO","LOW","MED","FULL") select _viewmode);
+			traceformat("COUNT %1 from %2; viewmode: %3",_countView arg 8 arg vec4("NO","LOW","MED","FULL") select _visMode);
 			#endif
 		};
 		if _needFullSearch then {
-			refset(_ref_viewmode,_viewmode);
+			refset(_ref_viewmode,_visMode);
 		};
 		_retval
 	};

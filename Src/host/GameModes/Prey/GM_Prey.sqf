@@ -154,6 +154,7 @@ class(GMPreyMobEater) extends(Mob)
 	var(voiceType,"eater");
 	getter_func(isFailCombat,false);
 	
+	["eater","roar","onEaterRoar"] call ie_actions_regNew;
 	["eater","sniff","onEaterSniff"] call ie_actions_regNew;
 	["eater","regen","onEaterRegen"] call ie_actions_regNew;
 	["eater","legkie","onEaterStamina"] call ie_actions_regNew;
@@ -164,6 +165,7 @@ class(GMPreyMobEater) extends(Mob)
 			setVar(callFuncParams(this,getPart,_x),slotedWeap,weaponModule(Claws));
 		} foreach [BP_INDEX_ARM_R,BP_INDEX_ARM_L];
 
+		callSelfParams(addAction,"Жрун" arg "Рычать" arg "eater_roar");
 		callSelfParams(addAction,"Жрун" arg "Принюхаться" arg "eater_sniff");
 		//callSelfParams(addAction,"Жрун" arg "Восстановление" arg "eater_regen");
 		callSelfParams(addAction,"Жрун" arg "Сгинуть" arg "eater_regen");
@@ -195,6 +197,60 @@ class(GMPreyMobEater) extends(Mob)
 	{
 		objParams();
 		callSelfParams(addStaminaRegen,50);
+	};
+
+	var(_eater_lastscream,0);
+	func(onEaterRoar)
+	{
+		objParams();
+		if (tickTime < getSelf(_eater_lastscream)) exitWith {};
+		setSelf(_eater_lastscream,tickTime + randInt(10,20));
+
+		callSelfParams(playSound,"monster\eater\scream" + (str randInt(1,5)) arg getRandomPitchInRange(0.8,1.3) arg 30 arg 2.2 arg null arg false);
+		private _rmes = pick [
+			"рычит",
+			"скалится",
+			"кричит",
+			"вопит",
+			"орёт",
+			"визжит"
+		];
+		callSelfParams(meSay,_rmes);
+		
+		{
+			callFuncParams(_x,addCamShake,0.01 arg 2.5 arg 0.02 arg 1.4);
+		} foreach callSelfParams(getNearMobs,15 arg false);
+	};
+
+	var(_eater_nextAttackSound,0);
+	func(syncAttackDelayProcess)
+	{
+		objParams_4(_type,_attWeapon,_attItem,_overrideRTA);
+		super();
+		if equals(_type,"melee") then {
+			if (tickTime >= getSelf(_eater_nextAttackSound)) then {
+				setSelf(_eater_nextAttackSound,tickTime + rand(0.5,4));
+				callSelfParams(playSound,"monster\eater\attack" + (str randInt(1,5)) arg getRandomPitchInRange(0.8,1.3) arg 6 arg 2.2 arg null arg false arg 1);
+			};
+		};
+	};
+
+	func(onUpdate)
+	{
+		updateParams();
+		super();
+		callSelf(handle_eaterlife);
+	};
+
+	var(_eater_nextRoar,0);
+	func(handle_eaterlife)
+	{
+		objParams();
+		if (!callSelf(isActive)) exitWith {};
+		if (tickTime >= getSelf(_eater_nextRoar)) then {
+			setSelf(_eater_nextRoar,tickTime + randInt(20,60 + 30));
+			callSelfParams(playSound,"monster\eater\idle" + (str randInt(1,6)) arg getRandomPitchInRange(0.8,1.3) arg 10 arg 2.2 arg null arg !false);
+		};
 	};
 
 	var(sniffDistance,80);

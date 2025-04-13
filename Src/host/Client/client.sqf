@@ -95,7 +95,9 @@ class(ServerClient) /*extends(NetObject)*/
 		setSelf(discordId,_disId);
 		setSelf(id,_id);
 
+		#ifndef SP_MODE
 		[this] call db_loadClient;
+		#endif
 
 		callSelf(onConnected);
 		

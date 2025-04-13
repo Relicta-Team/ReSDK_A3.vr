@@ -581,7 +581,7 @@ Type: function
 Description: 
 
 
-File: [host\OOP_engine\oop_preinit.sqf at line 108](../../../Src/host/OOP_engine/oop_preinit.sqf#L108)
+File: [host\OOP_engine\oop_preinit.sqf at line 111](../../../Src/host/OOP_engine/oop_preinit.sqf#L111)
 ## oop_checkTypeSafe
 
 Type: function
@@ -590,7 +590,7 @@ Description: проверка типа
 - Param: _typename
 - Param: _defaultRet (optional, default "object")
 
-File: [host\OOP_engine\oop_preinit.sqf at line 123](../../../Src/host/OOP_engine/oop_preinit.sqf#L123)
+File: [host\OOP_engine\oop_preinit.sqf at line 126](../../../Src/host/OOP_engine/oop_preinit.sqf#L126)
 ## oop_getinhlist
 
 Type: function
@@ -600,7 +600,7 @@ Description:
 - Param: _recurs
 - Param: _refarr
 
-File: [host\OOP_engine\oop_preinit.sqf at line 134](../../../Src/host/OOP_engine/oop_preinit.sqf#L134)
+File: [host\OOP_engine\oop_preinit.sqf at line 137](../../../Src/host/OOP_engine/oop_preinit.sqf#L137)
 ## oop_getinhlist_Node
 
 Type: function
@@ -609,7 +609,7 @@ Description:
 - Param: _typename
 - Param: _global (optional, default false)
 
-File: [host\OOP_engine\oop_preinit.sqf at line 162](../../../Src/host/OOP_engine/oop_preinit.sqf#L162)
+File: [host\OOP_engine\oop_preinit.sqf at line 165](../../../Src/host/OOP_engine/oop_preinit.sqf#L165)
 ## oop_getFieldBaseValue
 
 Type: function
@@ -620,7 +620,7 @@ Description: _altMethodNameIfNil - возвращает альтернативн
 - Param: _doCompile (optional, default false)
 - Param: _altMethodNameIfNil (optional, default "")
 
-File: [host\OOP_engine\oop_preinit.sqf at line 169](../../../Src/host/OOP_engine/oop_preinit.sqf#L169)
+File: [host\OOP_engine\oop_preinit.sqf at line 172](../../../Src/host/OOP_engine/oop_preinit.sqf#L172)
 ## oop_getData
 
 Type: function
@@ -628,7 +628,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\OOP_engine\oop_preinit.sqf at line 191](../../../Src/host/OOP_engine/oop_preinit.sqf#L191)
+File: [host\OOP_engine\oop_preinit.sqf at line 194](../../../Src/host/OOP_engine/oop_preinit.sqf#L194)
 ## oop_injectToMethod
 
 Type: function
@@ -640,7 +640,7 @@ Description:
 - Param: _sect (optional, default "end")
 - Param: _overrideChild (optional, default false)
 
-File: [host\OOP_engine\oop_preinit.sqf at line 245](../../../Src/host/OOP_engine/oop_preinit.sqf#L245)
+File: [host\OOP_engine\oop_preinit.sqf at line 248](../../../Src/host/OOP_engine/oop_preinit.sqf#L248)
 ## oop_getTypeValue
 
 Type: function
@@ -649,4 +649,4 @@ Description: получить значение системного поля т�
 - Param: _typeName
 - Param: _value
 
-File: [host\OOP_engine\oop_preinit.sqf at line 280](../../../Src/host/OOP_engine/oop_preinit.sqf#L280)
+File: [host\OOP_engine\oop_preinit.sqf at line 283](../../../Src/host/OOP_engine/oop_preinit.sqf#L283)
