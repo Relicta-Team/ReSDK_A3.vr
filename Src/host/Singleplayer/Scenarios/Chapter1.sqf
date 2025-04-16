@@ -402,6 +402,12 @@
 
 }] call sp_addScene;
 
+["cpt1_act_mapview",{
+	{
+		
+	} call sp_threadStart;
+}] call sp_addScene;
+
 ["cpt1_foundmap",{
 	{
 		_h = [
