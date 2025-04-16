@@ -107,8 +107,6 @@ func(clickTarget)
 
 
 		} else {
-			//далеко для интеракции
-			if (callSelf(getLastInteractDistance)>INTERACT_ITEM_DISTANCE)exitWith {};
 			if (getSelf(lastActionTime) > tickTime) exitWith {};
 			setSelf(lastActionTime,tickTime + 0.3);
 
