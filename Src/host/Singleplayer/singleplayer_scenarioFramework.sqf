@@ -24,6 +24,10 @@ sp_loadScenario = {
 
 sp_startScene = {
 	params ["_name",["_doTeleport",false]];
+	if (canSuspend) exitWith {
+		ISNIL {_this call sp_startScene}	
+	};
+
 	call (sp_internal_map_scenes getOrDefault [_name,{
 		errorformat("Scene not found - %1",_name);
 	}]);

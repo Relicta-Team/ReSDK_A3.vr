@@ -73,6 +73,7 @@ cpt4_addProcessorMainAct = {
 	_cloth = ["NomadCloth3",_mob,INV_CLOTH] call createItemInInventory;
 	["ShuttleBag",_mob,INV_HAND_L] call createItemInInventory;
 	["Torch",_mob,INV_HAND_R] call createItemInInventory;
+	["CustomKnife",_mob,INV_BELT] call createItemInInventory;
 	
 	//sync speed
 	[_body] call anim_syncAnim;
@@ -103,6 +104,7 @@ cpt4_addProcessorMainAct = {
 		} call sp_threadWait;
 
 		["Возьмите ручку со стола нажав ЛКМ. Чтобы достать один листок из стопки бумаги нажмите $input_act_mainAction"] call sp_setNotification;
+		//TODO getLastTouched for pen and papers
 		{
 			callFuncParams(call sp_getActor,hasItem,"Paper")
 			&& callFuncParams(call sp_getActor,hasItem,"ItemWritter" arg true)
@@ -114,9 +116,10 @@ cpt4_addProcessorMainAct = {
 
 		{
 			_papers = callFuncParams(call sp_getActor,getNearObjects,"Paper" arg 3 arg false arg true);
+			_papers append ([call sp_getActor,"Paper",false] call getAllItemsInInventory);
 			private _found = false;
 			{
-				_found = [getVar(_x,content),"5"] call regex_isMatch;
+				_found = [getVar(_x,content),"(5|пять|пятер|пято|пятю)"] call regex_isMatch;
 				if (_found)exitWith{};
 			} foreach _papers;
 			_found
@@ -222,11 +225,37 @@ cpt4_addProcessorMainAct = {
 			,[player,"chap4\gg\vaht1_gg3"] 
 			,["cpt4_karim","chap4\npc_vaht\koch1_2"] 
 			,[player,"chap4\gg\vaht1_gg4"] 
-			,["cpt4_karim","chap4\npc_vaht\koch1_3",["endoffset",0.5]] 
+			,["cpt4_karim","chap4\npc_vaht\koch1_3",[
+				["endoffset",0.5],
+				["onstart",{
+					_knifePos = callFunc("cpt4_pos_knifekarimpos" call sp_getObject,getPos);
+					_karim = "cpt4_karim" call sp_ai_getMobObject;
+					_par1 = [_karim,INV_BELT,INV_HAND_L];
+					invokeAfterDelayParams({_this call sp_ai_moveItemToMob},0.2,_par1);
+					_par2 = [_karim,INV_HAND_L,_knifePos];
+					_cde = {
+						_dta = _this call sp_ai_moveItemToWorld;
+						if !isNullVar(_dta) then {
+							["cpt4_obj_knifetostore",_dta] call sp_storageSet;
+						};
+					}; invokeAfterDelayParams(_cde,1.8,_par2);
+				}]
+			]] 
 			,[player,"chap4\gg\vaht1_gg5"]
 		] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
 		1 call sp_threadPause;
+
+		[cpt4_questName_kochevs,"Заберите нож на хранение, убрав его на один из красных стеллажей"] call sp_setTaskMessageEff;
+
+		{
+			_knife = ["cpt4_obj_knifetostore",nullPtr] call sp_storageGet;
+			_plc = callFunc(_knife,getObjectPlace);
+			!isNullReference(_plc) && {
+				isTypeOf(_plc,BigRedEdgesRack)
+			}
+		} call sp_threadWait;
+
 		[cpt4_questName_kochevs,"Оформите пропуск на имя ""Карим Сухач"". "
 		+ "Для этого возьмите бланк пропуска из стопки бумаги слева от окна на полке и впишите в него имя."
 		] call sp_setTaskMessageEff;
@@ -299,6 +328,10 @@ cpt4_addProcessorMainAct = {
 			["cpt4_act_koch1_done",false] call sp_storageGet
 		} call sp_threadWait;
 
+		{
+			["cpt4_karim"] call sp_ai_deletePerson;
+		} call sp_threadCriticalSection;
+
 		[cpt4_questName_kochevs,"Возвращайтесь в свой кабинет"] call sp_setTaskMessageEff;
 
 		{
@@ -329,7 +362,7 @@ cpt4_addProcessorMainAct = {
 		callFuncParams("cpt4_obj_radio1" call sp_getObject,playSound,"electronics\siren" arg 1.25 arg 20 arg 1.2 arg null arg false);
 		1.5 call sp_threadPause;
 
-		[cpt4_questName_kochevs,"Встречайте следующего посетителя"] call sp_setTaskMessageEff;
+		[cpt4_questName_kochevs,"Встречайте очередного посетителя"] call sp_setTaskMessageEff;
 
 		{
 			_body = ["cpt4_pos_enterkochevs",null,"cpt4_ibam"] call sp_ai_createPerson;
@@ -383,6 +416,79 @@ cpt4_addProcessorMainAct = {
 		["cpt4_act_koch2_enter"] call sp_startScene;
 
 	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_act_screamerTOM",{
+	_d = getGUI;
+	_txtlist = [];
+	_provideText = {
+		params ["_sizeX","_sizeY","_count","_sizeMod"];
+		for "_i" from 1 to _count do {
+			_w = [_d,TEXT,[rand(0,100-_sizeX),rand(0,100-_sizeY),_sizeX,_sizeX]] call createWidget;
+			widgetFadeNow(_w,1);
+			[_w,format["<t align='center' size='%1' font='Ringbear' color='#d11534'>ТОМНЫЙ</t>",_sizeMod]] call widgetSetText;
+			_txtlist pushBack _w;
+		};
+	};
+
+	[8,5,100,1] call _provideText;
+	[15,8,50,2] call _provideText;
+	[30,20,10,4] call _provideText;
+	
+	_mainback = [_d,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
+	_mainback setBackgroundColor [0,0,0,1];
+	widgetFadeNow(_mainback,1);
+
+	_cdesnd = { ["chap4\scream",0.7] call sp_audio_sayPlayer; };
+	invokeAfterDelay(_cdesnd,0.1);
+
+	{
+		_x setFade 0;
+		_cde = { 
+			_this commit rand(0.1,0.5);
+			[0,1.5,0.001,0.2] call cam_addCamShake;
+			startAsyncInvoke
+			{
+				if !isNullReference(_this) then {
+					(_this call widgetGetPosition) params ["_curX","_curY"];
+					[_this,[_curX + rand(-0.1,0.1),_curY + rand(-0.1,0.1)],0] call widgetSetPositionOnly
+				};
+				isNullReference(_this)
+			},
+			{},
+			_this
+			endAsyncInvoke
+		};
+		invokeAfterDelayParams(_cde,rand(0.2,1),_x);
+	} foreach _txtlist;
+	[0.04,0.1,0.08,8] call cam_addCamShake;
+
+	_cend = { 
+		[{
+			params ["_txtlist","_mainback"];
+
+			for "_i" from 1 to 3 do {
+				_tent = rand(0.05,0.2);
+				_text = rand(0.05,0.2);
+				
+				widgetSetFade(_mainback,0,_tent);
+				_tent call sp_threadPause;
+				
+				widgetSetFade(_mainback,1,_text);
+				_text call sp_threadPause;
+			};
+			
+			widgetSetFade(_mainback,0,0.2);
+			0.3 call sp_threadPause;
+			{{[_x] call deleteWidget} foreach _txtlist;} call sp_threadCriticalSection;
+			
+			widgetSetFade(_mainback,1,0.2);
+			1 call sp_threadPause;
+			[_mainback,true] call deleteWidget; 
+		},_this] call sp_threadStart;
+	};
+	invokeAfterDelayParams(_cend,4,[_txtlist arg _mainback]);
+	
 }] call sp_addScene;
 
 ["cpt4_act_koch2_enter",{
@@ -480,6 +586,8 @@ cpt4_addProcessorMainAct = {
 }] call sp_addScene;
 
 ["cpt4_act_koch3_prepare",{
+	callFuncParams("cpt4_obj_doorbegin" call sp_getObject,setDoorLock,false arg false);
+
 	{
 		[cpt4_questName_kochevs,"Возвращайтесь к заполнению отчёта"] call sp_setTaskMessageEff;
 		
@@ -516,6 +624,7 @@ cpt4_addProcessorMainAct = {
 			callFuncParams(_mob,generateNaming,"Выха" arg "Штрих");
 
 			_cloth = ["StreakCloth",_mob,INV_CLOTH] call createItemInInventory;
+			["Gasmask",_mob,INV_FACE] call createItemInInventory;
 			["ShortSword",_mob,INV_HAND_R] call createItemInInventory;
 			callFunc(_mob,switchTwoHands);
 			[_body] call anim_syncAnim;
@@ -547,7 +656,15 @@ cpt4_addProcessorMainAct = {
 			,["cpt4_tombomz","chap4\npc_vaht\koch3_4",["endoffset",1.5]]
 			,[player,"chap4\gg\vaht3_gg4",["endoffset",1.3]]
 			,["cpt4_tombomz","chap4\npc_vaht\koch3_5",["endoffset",2.6]]
-			,[player,"chap4\gg\vaht3_gg5",["endoffset",0.2]]		
+			,[player,"chap4\gg\vaht3_gg5",[
+				["endoffset",0.2],
+				["onstart",{
+					_post = {
+						["cpt4_act_screamerTOM"] call sp_startScene;
+					};
+					invokeAfterDelay(_post,4.4);
+				}]
+			]]		
 		] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
 		
@@ -652,11 +769,20 @@ cpt4_addProcessorMainAct = {
 			[_mob,getposatl _mob,null] call sp_ai_setMobPos;
 		}] call sp_ai_playAnim;
 	};
-	invokeAfterDelay(_after,3);
+	invokeAfterDelay(_after,2);
 	
 	{
 		{["cpt4_act_gotomed_dialog_start",false] call sp_storageGet} call sp_threadWait;
-		3 call sp_threadPause;
+		
+		([
+			["cpt4_armyguy1","chap4\npc_vaht\armytomed_1",["endoffset",0.2]],
+			[player,"chap4\gg\armytomed_gg1",["endoffset",0.7]],
+			["cpt4_armyguy1","chap4\npc_vaht\armytomed_2",["endoffset",0.2]]
+		] call sp_audio_startDialog)
+			call sp_audio_waitForEndDialog;
+		
+		2 call sp_threadPause;
+
 		[true] call sp_setHideTaskMessageCtg;
 		[true,1.5] call setBlackScreenGUI;
 
@@ -814,6 +940,13 @@ cpt4_pos_bar_aloguys - 3 sits
 		
 	}] call sp_ai_createPersonEx;
 
+	["cpt4_pos_barkarim","cpt4_karim",[
+		["uniform","NomadCloth3"],
+		["name",["Карим","Сухач"]]
+	],{
+		setVar(_this,age,34);
+		callFuncParams("cpt4_obj_bar_karimsit" call sp_getObject,seatConnect,_this);
+	}] call sp_ai_createPersonEx;
 
 
 	//looped state of ohrwalk
@@ -827,7 +960,8 @@ cpt4_pos_bar_aloguys - 3 sits
 
 		["cpt4_citywalker1","cpt4_pos_citywalker1","cpt4_bar_citywalker1"] call sp_ai_playAnim;
 		["cpt4_citywalker2","cpt4_pos_citywalker2","cpt4_bar_citywalker2",{
-			callFuncParams("cpt4_citywalker2" call sp_ai_getMobObject,seatConnect,"cpt4_obj_barnearmed_bench" call sp_getObject);
+			_mob = "cpt4_citywalker2" call sp_ai_getMobObject;
+			callFuncParams("cpt4_obj_barnearmed_bench" call sp_getObject,seatConnect,_mob);
 		}] call sp_ai_playAnim;
 	};
 	invokeAfterDelay(_anims,2);
@@ -837,6 +971,13 @@ cpt4_pos_bar_aloguys - 3 sits
 		1 call sp_threadPause;
 		[false,1.5] call setBlackScreenGUI;
 		3 call sp_threadPause;
+
+		([
+			[player,"chap4\gg\prebar_gg1"],
+			[player,"chap4\gg\prebar_gg2"],
+			[player,"chap4\gg\prebar_gg3"]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
 		[cpt4_questName_tobar,"Идите в бар"] call sp_setTaskMessageEff;
 
 	} call sp_threadStart;
@@ -857,18 +998,25 @@ cpt4_bar_curMusicDist = 10;
 cpt4_bar_curMusicName = "";
 
 ["cpt4_trg_barhallway",{
-	cpt4_bar_curMusicDist = 12;
+	cpt4_bar_curMusicDist = 8;
 	cpt4_bar_musicUpdateReq = true;
 }] call sp_addTriggerEnter;
 
 ["cpt4_trg_bazone",{
-	cpt4_bar_curMusicDist = 18;
+	cpt4_bar_curMusicDist = 14;
 	cpt4_bar_musicUpdateReq = true;
 }] call sp_addTriggerEnter;
 
 ["cpt4_trg_bazone",{
-	cpt4_bar_curMusicDist = 12;
+	cpt4_bar_curMusicDist = 8;
 	cpt4_bar_musicUpdateReq = true;
+
+	if (["cpt4_data_drinksuccess",false] call sp_storageGet) then {
+		([
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_9",["distance",15]]
+		] call sp_audio_startDialog)
+	};
+
 }] call sp_addTriggerExit;
 
 ["cpt4_trg_bumbar",{
@@ -960,17 +1108,200 @@ cpt4_bar_curMusicName = "";
 	//["cpt4_obj_barradio","chap4\radios\bar_radio1",_distance] call sp_audio_sayAtTarget;
 }] call sp_addScene;
 
+["cpt4_trg_alcoguys_talk",{
+	{
+		([
+			["cpt4_bar_alсoguys3","chap4\npc_bar\alcoguy_1",["endoffset",1.5]],
+			["cpt4_bar_alсoguys2","chap4\npc_bar\alcoguy_2"]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		_thds = [];
+		for "_i" from 1 to 3 do {
+			_thds pushBack ([{
+				params ["_i"];
+				_cupObj = ("cpt4_obj_barcup" + (str _i)) call sp_getObject;
+			
+				_cupDefPos = callFunc(_cupObj,getPos);
+
+				_alcoName = "cpt4_bar_alсoguys" + (str _i);
+				_alcoObj = _alcoName call sp_ai_getMobObject;
+
+				rand(0.8,1.4) call sp_threadPause;
+
+				//взять кружку
+				[_alcoObj,_cupObj,INV_HAND_R] call sp_ai_moveItemToMob;
+
+				//выждать время
+				rand(0.6,1.4) call sp_threadPause;
+
+				//глотаем глотки
+				for "_i" from 1 to randInt(2,4) do {
+					_mes = pick[
+						"алкашится из кружки",
+						"квасит брагу",
+						"упивается",
+						"упивается брагой",
+						"пьёт из кружки",
+						"бухает брагу"
+					];
+					{
+						callFuncParams(_alcoObj,meSay,_mes arg "act");
+						callFuncParams(_alcoObj,playSound,"mob\drink" arg getRandomPitch);
+					} call sp_threadCriticalSection;
+					rand(0.8,1.6) call sp_threadPause;
+				};
+
+				if (_alcoName == "cpt4_bar_alсoguys1") then {
+					_awaiter = [];
+					{
+						_awaiter = [["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_3"]] call sp_audio_startDialog;
+					} call sp_threadCriticalSection;
+					_awaiter call sp_audio_waitForEndDialog;
+				};
+
+				//ставим кружку
+				[_alcoObj,_cupObj,_cupDefPos vectorAdd vec3(rand(-0.05,0.05),rand(-0.05,0.05),0)] call sp_ai_moveItemToWorld;
+
+			},[_i]] call sp_threadStart);
+		};
+
+		{
+			all_of(_thds apply {_x call sp_threadWaitForEnd})
+		} call sp_threadWait;
+
+		
+
+		{
+			callFuncParams("cpt4_bar_alсoguys1" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true)
+			<= 1.4
+		} call sp_threadWait;
+
+		["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_4"] call sp_audio_sayAtTarget;
+
+		//looped state
+		for "_i" from 1 to 3 do {
+			[{
+				params ["_i"];
+				randInt(5,20) call sp_threadPause; //first time delay
+
+				_alcoName = "cpt4_bar_alсoguys" + (str _i);
+				_alcoObj = _alcoName call sp_ai_getMobObject;
+
+				_cupObj = ("cpt4_obj_barcup" + (str _i)) call sp_getObject;
+				_cupDefPos = callFunc(_cupObj,getPos);
+				while {true} do {					
+					
+					//взять кружку
+					[_alcoObj,_cupObj,INV_HAND_R] call sp_ai_moveItemToMob;
+
+					//выждать время
+					rand(1.2,1.8) call sp_threadPause;
+
+					//глотаем глотки
+					for "_i" from 1 to randInt(1,3) do {
+						_mes = pick[
+							"алкашится из кружки",
+							"квасит брагу",
+							"упивается",
+							"упивается брагой",
+							"пьёт из кружки",
+							"бухает брагу"
+						];
+						{
+							callFuncParams(_alcoObj,meSay,_mes arg "act");
+							callFuncParams(_alcoObj,playSound,"mob\drink" arg getRandomPitch);
+						} call sp_threadCriticalSection;
+						rand(0.8,1.6) call sp_threadPause;
+					};
+
+					rand(1,3) call sp_threadPause;
+
+					//ставим кружку
+					[_alcoObj,_cupObj,_cupDefPos vectorAdd vec3(rand(-0.05,0.05),rand(-0.05,0.05),0)] call sp_ai_moveItemToWorld;
+
+					//отдых
+					randInt(20,60) call sp_threadPause;
+				}
+
+			},[_i]] call sp_threadStart;
+		};
+
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_trg_barkarim_talk",{
+	{
+		([
+			["cpt4_karim","chap4\npc_bar\karim_1",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		{
+			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
+		} call sp_threadWait;
+
+		1.2 call sp_threadPause;
+
+		([
+			["cpt4_karim","chap4\npc_bar\karim_2",["endoffset",0.1]],
+			[player,"chap4\gg\karmitalk_gg1",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_3",["endoffset",0.1]],
+			[player,"chap4\gg\karmitalk_gg2",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_4",["endoffset",0.1]],
+			[player,"chap4\gg\karmitalk_gg3",["endoffset",1.1]],
+			["cpt4_karim","chap4\npc_bar\karim_5",["endoffset",0.1]],
+			[player,"chap4\gg\karmitalk_gg4",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_6",["endoffset",0.1]],
+			[player,"chap4\gg\karmitalk_gg5",["endoffset",0.7]],
+			["cpt4_karim","chap4\npc_bar\karim_7",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		{
+			not_equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
+		} call sp_threadWait;
+
+		([
+			["cpt4_karim","chap4\npc_bar\karim_8"]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+	} call sp_threadStart;
+}] call sp_addScene;
+
 ["cpt4_trg_barmainroom",{
 	{
+		([
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",20]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
 		[cpt4_questName_tobar,"Сядьте за барную стойку и закажите выпивку"] call sp_setTaskMessageEff;
 		
 		{
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barchair_forplayer" call sp_getObject);
 		} call sp_threadWait;
 
-		//todo close and lock door
+
+		//! BAR ENTER EVENT
+		{
+			callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorOpen,false arg true);
+			callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorLock,true arg false);
+		} call sp_threadCriticalSection;
+
+		//delete objects
+		{
+			["cpt4_obj_bomzcar" call sp_getObject] call deleteGameObject;
+			["cpt4_bomzcar"] call sp_ai_deletePerson;
+			["cpt4_bomzowner"] call sp_ai_deletePerson;
+
+			["cpt4_barsmoker1"] call sp_ai_deletePerson;
+			["cpt4_barsmoker2"] call sp_ai_deletePerson;
+		} call sp_threadCriticalSection;
 
 		//dialog 
+		["cpt4_bar_barnik" call sp_ai_getMobBody,player] call sp_ai_setLookAtControl;
+		([
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_2",["endoffset",0.1]],
+			[player,"chap4\gg\barmentalk_gg1",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		["Достаньте из кармана свои деньги - звяки, взяв их в руки"] call sp_setNotification;
 
@@ -1001,11 +1332,16 @@ cpt4_bar_curMusicName = "";
 			1.2 call sp_threadPause;
 			
 			[_barnik,_money,INV_HAND_R] call sp_ai_moveItemToMob;
+			["cpt4_bar_barnik" call sp_ai_getMobBody,objNull] call sp_ai_setLookAtControl;
 			
 			//talk
 			1 call sp_threadPause;
 			{
 				[_money] call deleteGameObject;
+				
+				[
+					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",["endoffset",0.1]]
+				] call sp_audio_startDialog;
 
 				["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik1",{
 					params ["_obj"];
@@ -1054,6 +1390,31 @@ cpt4_bar_curMusicName = "";
 	}] call sp_addPlayerHandler;
 	{
 		//dialog
+		([
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_5",["endoffset",0.1]],
+			[player,"chap4\gg\barmentalk_gg2",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_6",["endoffset",0.1]],
+			[player,"chap4\gg\barmentalk_gg3",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_7",["endoffset",1.2]],
+			[player,"chap4\gg\barmentalk_gg4",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik2",{
+			//onend
+			params ["_body"];
+			_body switchmove "inbasemoves_table1";
+		},[
+			["state_1",{
+				[{(["cpt4_data_drinkcount",0] call sp_storageGet) >= 10}] call sp_ai_animWait;
+			}],
+			["state_2",{
+				[{(["cpt4_data_drinkcount",0] call sp_storageGet) >= 15}] call sp_ai_animWait;
+
+			}]
+		]
+		] call sp_ai_playAnim;
+		
 
 		_h = ["Питьё жидкостей работает по аналогии с поеданием. Выберите справа зону ""рот"" и нажмите ЛКМ с кружкой или бутылкой в руке по кнопке ""моя персона"". "
 		+"Для регулирования размера глотков нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
@@ -1062,6 +1423,72 @@ cpt4_bar_curMusicName = "";
 		} call sp_threadWait;
 		[false,_h] call sp_setNotificationVisible;
 
+		["cpt4_act_gotohome"] call sp_startScene;
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_act_gotohome",{
+	{
+		callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorLock,false arg false);
+
+		callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatDisconnect,0);
+		["cpt4_brodyaga_bar","cpt4_pos_brodyaga_bar","cpt4_bar_brodyaga_away",{
+			params ["_body"];
+			{
+				
+
+				for "_ind" from 1 to 6 do {
+					rand(5,20) call sp_threadPause;
+					{
+						private this = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
+						private _vomitDuration = rand(2,5);
+						private _vparams = [getSelf(owner),"SLIGHT_MOB_VOMIT" call lightSys_getConfigIdByName,
+							["bubbleseffect","Memory"] //"head"
+							,_vomitDuration];
+						{
+							callFuncParams(_x,sendInfo,"do_fe_mob" arg _vparams);
+						} foreach callSelfParams(getNearMobs,20 arg false);
+						_m = pick [
+							"блююёт",
+							"рыгается",
+							"рвётся",
+							"трясётся и блюется",
+							"выблёвывает выпитое"
+						];
+						callSelfParams(meSay,_m);
+						callSelfParams(playEmoteSound,"vomit");
+
+						callSelfParams(setMobFaceAnim,'dead');
+						callSelfAfter(syncMobFaceAnim,_vomitDuration);
+						
+					} call sp_threadCriticalSection;
+				};
+
+				callFuncParams("cpt4_brodyaga_bar" call sp_ai_getMobObject,setUnconscious,10000000);
+				//hardcoded pos
+				["cpt4_brodyaga_bar",[4128.49,3853.23,16.0964],257.924] call sp_ai_setMobPos;
+				("cpt4_brodyaga_bar" call sp_ai_getMobBody) switchmove "Acts_StaticDeath_12";
+				
+			} call sp_threadStart;
+		},[
+			["state_1",{
+				if !getVar("cpt4_obj_doorbarmain" call sp_getObject,isOpen) then {
+					callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorOpen,true arg true);
+				};
+			}]
+		]] call sp_ai_playAnim;
+
+
 		[cpt4_questName_tobar,"Идите домой"] call sp_setTaskMessageEff;
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_trg_onendchapter",{
+	{
+		[""] call sp_view_setPlayerHudVisible;
+		[true,1.5] call setBlackScreenGUI;
+		3 call sp_threadPause;
+
+		["cpt5_begin"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;

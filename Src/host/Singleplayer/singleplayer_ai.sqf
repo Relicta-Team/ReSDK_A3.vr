@@ -231,6 +231,8 @@ sp_ai_playCapture = {
 
         ["mapStates",_mapStates],
 
+        ["__anmoffset_delta",0],
+
         ["internalContext",_internalContext]
     ];
 
@@ -287,6 +289,13 @@ sp_ai_internal_processPlayingStates = {
         [_obj,getposatl _obj,false] call sp_ai_commitMobPos;
         [_obj,_ctx get "internalContext"] call (_ctx get "postAnimCode");
     };
+
+    if ("__anmawaiter" in _ctx) exitWith {
+        [_ctx] call sp_ai_playAnimAwaiter;
+    };
+
+    _t = _t + (_ctx get "__anmoffset_delta");
+
     _curDelta = tickTime - _t;
     _firstFrame = _cdata select 0;
     _firstFrame params ["_dt","_opType","_frameData"];
@@ -363,6 +372,29 @@ sp_ai_internal_processPlayingStates = {
             }]);
         };
 
+    };
+};
+
+/*
+    ["state_1",{
+        {
+        
+        }
+    }]
+*/
+sp_ai_animWait = {
+    params ["_codecondition",["_params",[]]];
+    _ctx set ["__anmawaiter",[_codecondition,_params]];
+    _ctx set ["__anmoffset_start",tickTime];
+};
+
+sp_ai_playAnimAwaiter = {
+    params ["_ctx"];
+    (_ctx get "__anmawaiter") params ["_cd__","_pr__"];
+    if (_pr__ call _cd__) then {
+        _offset = tickTime - (_ctx get "__anmoffset_start");
+        _ctx deleteAt "__anmawaiter";
+        _ctx set ["__anmoffset_delta",_offset + (_ctx get "__anmoffset_delta")];
     };
 };
 
@@ -564,6 +596,7 @@ sp_ai_moveItemToWorld = {
     _it
 };
 
+//перемещение предмета из мира или между слотами
 sp_ai_moveItemToMob = {
     params ["_m","_item","_slot"];
     if (canSuspend) exitWith {
@@ -579,8 +612,31 @@ sp_ai_moveItemToMob = {
         _m = _m getvariable "link";
     };
     if isNullVar(_m) exitWith {};
+    if equalTypes(_item,0) then {
+        _item = callFuncParams(_m,getItemInSlotRedirect,_item);
+    };
     if isNullReference(_item) exitWith {};
     private this = _m;
+
+    if equals(getVar(_item,loc),_m) exitWith {
+        private _slotFrom = getVar(_item,slot);
+        private _slotTo = _slot;
+
+        //standart checker
+		if !callSelfParams(hasSlot,_slotFrom) exitWith {};
+		if !callSelfParams(hasSlot,_slotTo) exitWith {};
+		private _itemFrom = callSelfParams(getItemInSlotRedirect,_slotFrom);
+		if isNullReference(_itemFrom) exitWith {};
+		
+		if !callSelfParams(canSetItemOnSlot,args2(_itemFrom,_slotTo)) exitWith {};
+		
+		if callSelfParams(isHoldedTwoHands,_itemFrom) then {
+			callSelfParams(onTwoHand,_itemFrom);
+		};
+		callSelfParams(interpolate,"trans" arg _itemFrom arg _slotTo);
+		callSelfParams(setItemOnSlot,_itemFrom arg _slotTo);
+    };
+
     //check if in world (server protect)
     if !callFunc(_item,isInWorld) exitWith {};
 
@@ -609,7 +665,8 @@ sp_ai_setMobPos = {
 	if equalTypes(_reforpos,"") then {
 		private _obj = _reforpos call sp_getObject;
 		_pos = callFunc(_obj,getPos);
-		if !isNullVar(_dir) then {
+		//это не баг. в режиме строчной позиции любое число даст автоустановку направления
+        if !isNullVar(_dir) then {
 			_dir = callFunc(_obj,getDir);
 		};	
 	} else {

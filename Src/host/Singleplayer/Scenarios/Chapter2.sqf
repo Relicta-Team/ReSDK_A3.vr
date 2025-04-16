@@ -335,7 +335,9 @@ cpt2_json_allowedRecipes = '
             (callFunc(call sp_getActor,getPos) select 2) <= _bZFall
         } call sp_threadWait;
 
-        ["cpt2_trg_onfall"] call sp_startScene;
+        {
+            ["cpt2_trg_onfall"] call sp_startScene;
+        } call sp_threadCriticalSection;
     } call sp_threadStart;
 }] call sp_addScene;
 

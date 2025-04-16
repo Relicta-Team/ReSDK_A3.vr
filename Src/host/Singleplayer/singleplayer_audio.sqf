@@ -13,11 +13,11 @@
 #include "..\GameObjects\GameConstants.hpp"
 
 sp_audio_sayPlayer = {
-	params ["_pathPost"];
+	params ["_pathPost",["_vol",1]];
 	if (sp_debug_skipAudio) exitWith {-1};
 
 	["singleplayer\sp_guide\" + _pathPost,
-		null,null,
+		_vol,null,
 		true //redirect to effect audio channel
 	] call soundUI_play;
 };
@@ -65,6 +65,9 @@ sp_audio_sayAtTarget = {
 	private _mpath = "singleplayer\sp_guide\" + _pathPost;
 	//params ["_source","_class","_dist",["_pitch",1],["_offset",0]];
 	private _vol = 1;
+	if (typeof _target == BASIC_MOB_TYPE) then {
+		_target = _target modelToWorldVisual (_target selectionPosition "head");
+	};
 	[_mpath,_target,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
 };
 
@@ -124,7 +127,7 @@ sp_audio_startDialog = {
 };
 
 sp_audio_isDoneDialog = {
-	params ["_dlglst","_idx"];
+	params [["_dlglst",[]],["_idx",0]];
 	_idx >= count _dlglst	
 };
 
@@ -182,16 +185,17 @@ sp_audio_internal_procDialog = {
 			//increment stateseq
 			_curId = _stateSeq select 1;
 			_origCurId = _curId;
+			
+			[] call (
+				(_stateSeq select 0 select _origCurId select 2)
+					getOrDefault ["onend",{}]
+			);
+			
 			INC(_curId);
 			if (_curId >= (count (_stateSeq select 0))) exitWith {
 				//end of dialog
 				_stateSeq set [1,_curId];
 			};
-
-			[] call (
-				(_stateSeq select 0 select _origCurId select 2)
-					getOrDefault ["onend",{}]
-			);
 
 			_stateSeq set [1,_curId];
 			[_stateSeq] call sp_audio_internal_procDialog;

@@ -404,18 +404,35 @@
 
 ["cpt1_act_mapview",{
 	{
+		0.5 call sp_threadPause;
+		_d = getGUI;
+		_sizeX = 40;
+		_sizeY = 85; 
+		_w = [_d,PICTURE,[50-(_sizeX/2),50-(_sizeY/2),_sizeX,_sizeY]] call createWidget;
+		widgetSetFade(_w,1,0);
+		[_w,PATH_PICTURE("mapsp_scaled.paa")] call widgetSetPicture;
+		widgetSetFade(_w,0,0.7);
 		
+		{["cpt1_data_dialogmessageDone",false] call sp_storageGet} call sp_threadWait;
+		//5 call sp_threadPause;
+
+		widgetSetFade(_w,1,0.3);
+		1 call sp_threadPause;
+		[_w,true] call deleteWidget;
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt1_foundmap",{
+	["cpt1_act_mapview"] call sp_startScene;
 	{
 		_h = [
-			"chap1\gg5",
-			"chap1\gg6",
-			"chap1\gg7",
-			"chap1\gg8"
-		] call sp_audio_sayPlayerList;
+			[player,"chap1\gg5"],
+			[player,"chap1\gg6"],
+			[player,"chap1\gg7"],
+			[player,"chap1\gg8",["onstart",{
+				["cpt1_data_dialogmessageDone",true] call sp_storageSet;
+			}]]
+		] call sp_audio_startDialog;
 		_h call sp_threadWaitForEnd;
 		_wall = "cpt1_loot_wall_topart2" call sp_getObject;
 		if !isNullReference(_wall) then {

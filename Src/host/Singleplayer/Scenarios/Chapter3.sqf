@@ -59,7 +59,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_trg_foundmushrooms",{
 	{
-		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти ралзичные грибы, в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
+		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти различные грибы, в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
@@ -318,6 +318,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		callFuncParams(_eaterSrc,playSound,"monster\eater\scream2" arg getRandomPitchInRange(0.8,1.3) arg 30 arg 2.2 arg null arg false);
 		[_eaterSrc,null,"cpt3_eater_runaway",{
 			params ["_mob"];
+			_mob setvelocity [0,0,0]; //fix fast moving bug
 			[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 			_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
 		}] call sp_ai_playAnim;
@@ -402,10 +403,11 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 				if (refget(_refm) >= VISIBILITY_MODE_LOW) then {
 					{
 						
-						[_eater,null,"cpt3_eater_attack",{
+						[_eater,"cpt3_pos_eaterstealth","cpt3_eater_attack",{
 							params ["_mob"];
-							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 							_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
+							_mob setvelocity [0,0,0]; //fix fast moving bug
+							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 						}] call sp_ai_playAnim;
 
 						callFuncParams(_eater,playSound,"monster\eater\scream5" arg getRandomPitchInRange(0.9,1.1) arg 50 arg 2.2 arg null arg false);
@@ -417,6 +419,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 						
 					} call sp_threadCriticalSection;
 					_post = {
+						
+						["cpt3_eater","cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+
 						["cpt3_flag_caneatercheck",true] call sp_storageSet;
 						["cpt3_pos_onfailstealth",0] call sp_setPlayerPos;
 						[false,1.1] call setBlackScreenGUI;
@@ -535,7 +540,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			] call sp_audio_sayPlayerList;
 		} call sp_threadStart;
 		
-		_threadlook = call sp_threadWaitForEnd;
+		_threadlook call sp_threadWaitForEnd;
 		
 		_h1 = ["main_action",{
 			params ["_t"];
