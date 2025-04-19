@@ -193,6 +193,8 @@ sp_createTrigger = {
 	_ctok
 };
 
+sp_threadNull = threadNull;
+
 if !isNull(sp_internal_threads) then {
 	{
 		if not_equals(_x,threadNull) then {

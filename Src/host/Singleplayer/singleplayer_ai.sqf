@@ -112,6 +112,7 @@ sp_ai_debug_internal_handleUpdate = {
     ];
 
     _targ setposatl (_basePos vectorAdd [0,0,0]);
+    _targ setvelocity [0,0,0];
     
     _animState = animationState _targ;
     _deltaTime = tickTime - sp_ai_debug_startTime;

@@ -840,6 +840,65 @@ cpt4_pos_bar_aloguys - 3 sits
 	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 
 	//prep mobs
+	["cpt4_pos_barlekar","cpt4_barlekar",[
+		["uniform","DoctorCloth"],
+		["name",["Лекарь"]]
+	],{},{
+		_this switchMove "Acts_Accessing_Computer_Loop";
+	}] call sp_ai_createPersonEx;
+
+	// ========== лекари ========
+	["cpt4_pos_barlekar2","cpt4_barlekar2",[
+		["uniform","DoctorCloth"],
+		["name",["Лекарь"]]
+	],{
+		private _item = callFuncParams(_this,getPart,BP_INDEX_ARM_R);		
+		callFuncParams(_item,unlink,null arg true);
+	},{
+		_this switchMove "Acts_GetAttention_Loop";
+	}] call sp_ai_createPersonEx;
+
+	// ========== ходуны на заднем фоне ==========
+	for "_i" from 1 to 3 do {
+		_pos = "cpt4_pos_farwalker" + (str _i);
+		_anm = "cpt4_farwalk" + (str _i);
+		[_pos,_pos + "_mobref",[
+			["uniform","CitizenCloth6"],
+			["name",["Мужик"]]
+		],{},{}] call sp_ai_createPersonEx;
+
+		_uniformChanger = {
+			params ["_mob"];
+			_formClass = pick["CitizenCloth" + (str randInt(1,22)),(pick["Green","Yellow","BlackPlaid","BluePlaid","WhitePlaid"])+"Coat"
+			//,"AbbatCloth" - script error
+			];
+
+			_mob forceAddUniform getFieldBaseValue(_formClass,"armaClass");
+		};
+
+		[_pos + "_mobref",
+			[
+				[_pos,_anm + "_start",{rand(5,10)},_uniformChanger],
+				[_pos + "_end",_anm + "_end",{rand(5,10)},_uniformChanger]
+			]
+		] call sp_ai_playAnimsLooped;
+
+		//inverted mobs
+		[_pos + "_end",_pos + "_mobref_invert",[
+			["uniform","CitizenCloth6"],
+			["name",["Мужик"]]
+		],{},{}] call sp_ai_createPersonEx;
+
+		[_pos + "_mobref_invert",
+			[
+				[_pos + "_end",_anm + "_end",{rand(5,10)},_uniformChanger],
+				[_pos,_anm + "_start",{rand(5,10)},_uniformChanger]
+			]
+		] call sp_ai_playAnimsLooped;
+
+	};
+
+
 	["cpt4_pos_citywalker1","cpt4_citywalker1",[
 		["uniform","CitizenCloth6"]
 	],{
@@ -924,6 +983,7 @@ cpt4_pos_bar_aloguys - 3 sits
 		["name",["Иванур","Володин"]]
 	],{
 		callFuncParams("cpt4_obj_barsit_party3" call sp_getObject,seatConnect,_this);
+		("cpt4_bar_alсoguys3" call sp_ai_getMobBody) switchMove "HubSittingAtTableU_idle3";
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_brodyaga_bar","cpt4_brodyaga_bar",[
@@ -948,7 +1008,24 @@ cpt4_pos_bar_aloguys - 3 sits
 		callFuncParams("cpt4_obj_bar_karimsit" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 
+	//main handle
+	{
+		1 call sp_threadPause;
+		[false,1.5] call setBlackScreenGUI;
+		3 call sp_threadPause;
 
+		([
+			[player,"chap4\gg\prebar_gg1"],
+			[player,"chap4\gg\prebar_gg2"],
+			[player,"chap4\gg\prebar_gg3"]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		[cpt4_questName_tobar,"Идите в бар"] call sp_setTaskMessageEff;
+
+	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_trg_barstartanims",{
 	//looped state of ohrwalk
 	_anims = {
 		["cpt4_ohrwalk1",
@@ -965,22 +1042,6 @@ cpt4_pos_bar_aloguys - 3 sits
 		}] call sp_ai_playAnim;
 	};
 	invokeAfterDelay(_anims,2);
-
-	//main handle
-	{
-		1 call sp_threadPause;
-		[false,1.5] call setBlackScreenGUI;
-		3 call sp_threadPause;
-
-		([
-			[player,"chap4\gg\prebar_gg1"],
-			[player,"chap4\gg\prebar_gg2"],
-			[player,"chap4\gg\prebar_gg3"]
-		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
-
-		[cpt4_questName_tobar,"Идите в бар"] call sp_setTaskMessageEff;
-
-	} call sp_threadStart;
 }] call sp_addScene;
 
 cpt4_bar_musicProc = false;
@@ -1107,6 +1168,61 @@ cpt4_bar_curMusicName = "";
 	private _distance = 10;
 	//["cpt4_obj_barradio","chap4\radios\bar_radio1",_distance] call sp_audio_sayAtTarget;
 }] call sp_addScene;
+
+cpt4_func_alcoDrinkProcess_forthread = {
+	params ["_cupName","_alcoName",["_prepause",[10,30]],["_codecondition",{true}],["_drinkCount",1]];
+	randInt(_prepause select 0,_prepause select 1) call sp_threadPause; //first time delay
+
+	_alcoObj = _alcoName call sp_ai_getMobObject;
+
+	_cupObj = (_cupName) call sp_getObject;
+	_cupDefPos = callFunc(_cupObj,getPos);
+	if equals(_codecondition,"once") then {
+		_codecondition = { __called == 0 };
+	};
+	__called = 0;
+	while _codecondition do {					
+		
+		//взять кружку
+		[_alcoObj,_cupObj,INV_HAND_R] call sp_ai_moveItemToMob;
+
+		//выждать время
+		rand(1.2,1.8) call sp_threadPause;
+
+		//глотаем глотки
+		for "_i" from 1 to randInt(1,_drinkCount) do {
+			_mes = pick[
+				"алкашится",
+				"алкашится из кружки",
+				"квасит",
+				"квасит из кружки",
+				"упивается",
+				"упивается брагой",
+				"пьёт",
+				"пьёт из кружки",
+				"бухает",
+				"бухает из кружки",
+				"делает глоток",
+				"подбухивает",
+				"выпивает"
+			];
+			{
+				callFuncParams(_alcoObj,meSay,_mes arg "act");
+				callFuncParams(_alcoObj,playSound,"mob\drink" arg getRandomPitch);
+			} call sp_threadCriticalSection;
+			rand(0.8,1.6) call sp_threadPause;
+		};
+
+		rand(1,3) call sp_threadPause;
+
+		//ставим кружку
+		[_alcoObj,_cupObj,_cupDefPos vectorAdd vec3(rand(-0.05,0.05),rand(-0.05,0.05),0)] call sp_ai_moveItemToWorld;
+
+		//отдых
+		randInt(30,80) call sp_threadPause;
+		INC(__called);
+	}
+};
 
 ["cpt4_trg_alcoguys_talk",{
 	{
@@ -1239,6 +1355,8 @@ cpt4_bar_curMusicName = "";
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
 
+		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0,0],"once"]] call sp_threadStart;
+
 		1.2 call sp_threadPause;
 
 		([
@@ -1247,7 +1365,10 @@ cpt4_bar_curMusicName = "";
 			["cpt4_karim","chap4\npc_bar\karim_3",["endoffset",0.1]],
 			[player,"chap4\gg\karmitalk_gg2",["endoffset",0.1]],
 			["cpt4_karim","chap4\npc_bar\karim_4",["endoffset",0.1]],
-			[player,"chap4\gg\karmitalk_gg3",["endoffset",1.1]],
+			[player,"chap4\gg\karmitalk_gg3",[["endoffset",1.1],["onstart",{
+				[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0.5,1],"once"]] call sp_threadStart;
+			}]
+			]],
 			["cpt4_karim","chap4\npc_bar\karim_5",["endoffset",0.1]],
 			[player,"chap4\gg\karmitalk_gg4",["endoffset",0.1]],
 			["cpt4_karim","chap4\npc_bar\karim_6",["endoffset",0.1]],
@@ -1263,11 +1384,20 @@ cpt4_bar_curMusicName = "";
 			["cpt4_karim","chap4\npc_bar\karim_8"]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
+		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[2,5],null,3]] call sp_threadStart;
+
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
+
 ["cpt4_trg_barmainroom",{
 	{
+		if not_equals(cpt4_internal_brodyagaDrink_threadHandle,sp_threadNull) then {
+			[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;	
+		};
+		cpt4_internal_brodyagaDrink_threadHandle = [cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforbrodyaga","cpt4_brodyaga_bar"]] call sp_threadStart;
+
 		([
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",20]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
@@ -1287,6 +1417,7 @@ cpt4_bar_curMusicName = "";
 
 		//delete objects
 		{
+			["cpt4_obj_wallpostbar" call sp_getObject] call deleteGameObject;
 			["cpt4_obj_bomzcar" call sp_getObject] call deleteGameObject;
 			["cpt4_bomzcar"] call sp_ai_deletePerson;
 			["cpt4_bomzowner"] call sp_ai_deletePerson;
@@ -1432,6 +1563,7 @@ cpt4_bar_curMusicName = "";
 		callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorLock,false arg false);
 
 		callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatDisconnect,0);
+		[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
 		["cpt4_brodyaga_bar","cpt4_pos_brodyaga_bar","cpt4_bar_brodyaga_away",{
 			params ["_body"];
 			{
