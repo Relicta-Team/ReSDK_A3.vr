@@ -22,7 +22,7 @@ sp_storage = createHashMap;
 sp_debug = true;
 sp_debug_viewOnReload = true;
 sp_debug_skipAudio = false;
-sp_debug_doNotHideDebugObjects = false;//показ спавнпоинтов
+sp_debug_doNotHideDebugObjects = !false;//показ спавнпоинтов
 
 sp_ai_debug_testmobs = createHashMap;
 sp_ai_mobs = createHashMap;
@@ -102,8 +102,17 @@ sp_gc_internal_activeTriggers = createhashMap; //key name, value gameobject
 
 sp_initMainModule = {
 	call sp_initGUI;
-	if (isNull(gm_currentMode) || isNullReference(gm_currentMode)) then {
+	
+	private _modeLoaded = !isNull(gm_currentMode);
+	if (!_modeLoaded || isNullReference(gm_currentMode)) then {
 		call sp_preloadScenarioEnvironment;
+	};
+
+
+	//reset triggers
+	if (_modeLoaded) then {
+		sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+		sp_gc_internal_listTriggersZones = ["Struct_SPZoneTrigger",false] call getAllObjectsInWorldTypeOf;
 	};
 
 	private _triggerHandle = {

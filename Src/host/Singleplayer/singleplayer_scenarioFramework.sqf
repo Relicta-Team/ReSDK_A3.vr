@@ -99,7 +99,12 @@ sp_preloadScenarioEnvironment = {
 	invokeAfterDelay({ ["onClientPrepareToPlay" arg [true arg 0]] call client_sendToServer},0.3);
 	
 	//auto start game
-	invokeAfterDelay({["processClientCommand" arg vec2("startgame",player)] call client_sendToServer},0.4);
+	_starting = {
+		sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+		sp_gc_internal_listTriggersZones = ["Struct_SPZoneTrigger",false] call getAllObjectsInWorldTypeOf;
+		["processClientCommand" arg vec2("startgame",player)] call client_sendToServer;
+	};
+	invokeAfterDelay(_starting,0.4);
 	invokeAfterDelay({["Загрузка..."] call chat_clearBuffer;},0.41);
 	
 };

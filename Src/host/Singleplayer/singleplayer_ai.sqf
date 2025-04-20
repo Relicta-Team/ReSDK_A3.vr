@@ -291,6 +291,11 @@ sp_ai_internal_processPlayingStates = {
         [_obj,_ctx get "internalContext"] call (_ctx get "postAnimCode");
     };
 
+    _ctxInt = _ctx get "internalContext";
+    if (!isNullVar(_ctxInt) && {refget(_ctxInt get "cancelToken")}) exitWith {
+        stopThisUpdate();
+    };
+
     if ("__anmawaiter" in _ctx) exitWith {
         [_ctx] call sp_ai_playAnimAwaiter;
     };
@@ -522,6 +527,10 @@ sp_ai_createPersonEx = {
 
     _body call _bodyhandler;
     _mob call _mobHandler;
+    
+    //post sync anim
+    [_body] call anim_syncAnim;
+
     _mob
 };
 
@@ -758,27 +767,33 @@ sp_ai_internal_onUpdate = {
 sp_ai_playAnimsLooped = {
     params ["_target","_anims",["_commonState",{}]];
     
-    if (count _anims == 0) exitWith {};
+    if (count _anims == 0) exitWith {refcreate(true)};
 
     //_anims -> params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates"];
+    private _cancelToken = refcreate(false);
     private _anmStateContext = createHashMapFromArray [
         ["target",_target], //cur target
         ["curAnim",0], //cur anim
         ["animList",_anims], //animlist
         ["commonState",_commonState],
+        ["cancelToken",_cancelToken],
 
-        ["_tref",objNull]
+        ["_tref",objNull] //назначив _target этой переменной - всё сломается. надо разбираться в причинах
     ];
     
     [_target,_anims select 0,_anmStateContext] call sp_ai_internal_playAnimStateLoop;
+
+    _cancelToken
 };
 
 sp_ai_internal_playAnimStateLoop = {
     params ["_t","_anm","_ctxInt"];
-    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}]];
+    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}],"_states"];
     
     _ctxInt set ["pause",_pauseAft];
     _ctxInt set ["callPostAnim",_callPostCode];
+
+    if (refget(_ctxInt get "cancelToken")) exitWith {};
 
     [_t,_p,_anmName,{
         params ["_obj","_ctxInt"];
@@ -789,6 +804,8 @@ sp_ai_internal_playAnimStateLoop = {
         };
 
         if not_equals(_obj,_ctxInt get "_tref") exitWith {}; //exit on obsolete object
+
+        if (refget(_ctxInt get "cancelToken")) exitWith {};
 
         //calculate awaiter
         _pause = _ctxInt getOrDefault ["pause",0];
