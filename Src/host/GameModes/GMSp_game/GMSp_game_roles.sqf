@@ -67,7 +67,7 @@ class(GMSp_game_BasicRole) extends(BasicRole) // BasicRole - базовая ро
 
 	// Массив базовых атрибутов:
 	// Сила (ST), Интеллект (IQ), Ловкость (DX), Здоровье (HT)
-	getter_func(getSkills,"st: 10; dx: 10; iq: 10; ht: 10");
+	getter_func(getSkills,"st: 13; dx: 11; iq: 9; ht: 9");
 
 	//Список дополнительных навыков
 	func(getOtherSkills) {

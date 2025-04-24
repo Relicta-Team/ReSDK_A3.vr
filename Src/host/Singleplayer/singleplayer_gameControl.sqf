@@ -98,14 +98,15 @@ sp_clearPlayerHandlers = {
 sp_gc_onPlayerAssigned = {
 	params ["_mob"];
 
+	["begin"] call sp_loadScenario;
 	["Chapter1"] call sp_loadScenario;
 	["Chapter2"] call sp_loadScenario;
 	["Chapter3"] call sp_loadScenario;
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
-	//["cpt1_begin"] call sp_startScene;
-	["cpt4_begin",true] call sp_startScene;
+	["begin_start"] call sp_startScene;
+	//["cpt4_begin",true] call sp_startScene;
 };
 
 //устанавливает позицию игрока
@@ -165,6 +166,7 @@ sp_getPoint = {
 };
 
 sp_internal_map_wsim = createHashMap;
+sp_internal_map_wsimHandlers = createHashMap;
 _wsim = [
 	"atmos" //atmos sim
 	,"light" //lightsim (fireplace,torchs)
@@ -176,11 +178,35 @@ _wsim = [
 
 {
 	sp_internal_map_wsim set [_x,false];
+	sp_internal_map_wsimHandlers set [_x,[]];
 } foreach _wsim;
+
+sp_wsim_invokeNextAction = false;
 
 //use wsim sp_checkWSim for disable world simulation
 sp_wsimIsActive = {
+	if (sp_wsim_invokeNextAction) exitWith {
+		sp_wsim_invokeNextAction = false;
+		true
+	};
 	sp_internal_map_wsim getOrDefault [_this,true]
+};
+
+sp_addWsimHandler = {
+	params ["_wsimMode","_func"];
+	(sp_internal_map_wsimHandlers get _wsimMode)pushBack _func;
+};
+sp_removeWsimHandler = {
+	params ["_wsimMode","_handle"];
+	private _data = sp_internal_map_wsimHandlers getOrDefault [_wsimMode,[]];
+	!isNull(_data deleteat _handle)
+};
+sp_internal_wsimHandleAction = {
+	params ["_wsim","_params"];
+	private _data = sp_internal_map_wsimHandlers getOrDefault [_wsim,[]];
+	{
+		_params call _x;
+	} foreach _data;
 };
 
 sp_wsimSetActive = {
