@@ -126,7 +126,8 @@ class(RifleSVT) extends(IRangedWeapon)
 	var(size,ITEM_SIZE_LARGE);
 	var(basicDistance,900);
 	var(halfDistance,400);
-	var(shootSpeed,735);
+	//var(shootSpeed,735);
+	var(shootSpeed,367);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_RIFLE);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_RIFLE);
 	getter_func(getAttackVisualData,"BFX_BULLET_SHOTRIFLE");
