@@ -111,7 +111,18 @@ sp_ai_debug_internal_handleUpdate = {
         "_gProg","_gTime","_gDur","_gBlndFact"
     ];
 
-    _targ setposatl (_basePos vectorAdd [0,0,0]);
+    _rpos = (_basePos vectorAdd [0,0,0]);
+    
+    //more optimized capturing but creates new dummy mob
+    // if isNull(_targ getvariable "sp_aidebug_att_camcapt") then {
+    //     _val = _rpos call gm_createMob;
+    //     _val setposatl _rpos;
+    //     _mptr = struct_newp(AutoModelPtr,_val);
+    //     _targ setvariable ["sp_aidebug_att_camcapt",_mptr];
+    // };
+    //_rpos = getposatl(_targ getvariable "sp_aidebug_att_camcapt" callv(get));
+
+    _targ setposatl (_rpos);
     _targ setvelocity [0,0,0];
     
     _animState = animationState _targ;
@@ -191,9 +202,13 @@ sp_ai_debug_suspendCapture = {
     [false] call sp_cam_setCinematicCam;
 
     stopUpdate(sp_ai_debug_curCaptureHandle);
+    
+    sp_ai_debug_curCaptureTarget setvariable ["sp_aidebug_att_camcapt",null];
+
     sp_ai_debug_curCaptureHandle = -1;
     sp_ai_debug_headMovingEnable = false;
     sp_ai_debug_curCaptureTarget = objNull;
+
     //sp_ai_debug_curCaptureBasePos = vec3(0,0,0);
 };
 
@@ -476,6 +491,11 @@ sp_ai_playAnim = {
     private _buff = call compile LOADFILE _animName;
 
     [_target,_buff,_basePos,_postCode,_mapStates,_internalContext] call sp_ai_playCapture;
+};
+
+sp_ai_stopAnim = {
+    params ["_animHandle"];
+    stopUpdate(_animHandle);
 };
 
 sp_ai_createPerson = {

@@ -76,22 +76,6 @@
 		} call sp_threadWait;
 		[false] call sp_setNotificationVisible;
 
-		1 call sp_threadPause;
-
-		[
-			"Передвижение вперёд @MoveForward,"
-			+ sbr + "передвижение назад @MoveBack,"
-			+ sbr + "влево @TurnLeft,"
-			+ sbr + "вправо @TurnRight,"
-		] call sp_setNotification;
-
-		5 call sp_threadPause;
-
-		[
-			"Для свободного осмотра (вращения головой) удерживайте @lookAround,"
-			+ sbr + "для переключения режима нажмите @lookAroundToggle"
-		] call sp_setNotification;
-
 		5 call sp_threadPause;
 
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;

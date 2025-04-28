@@ -15,8 +15,28 @@ sp_gui_taskMessageWidth = 25;
 
 sp_internal_lastNotification = "";
 
+if !isNull(sp_gui_pphndl_chromabb) then {
+	ppEffectDestroy sp_gui_pphndl_chromabb;
+};
+sp_gui_pphndl_chromabb = ppEffectCreate ["ChromAberration", 10000];
+if !isNull(sp_gui_pphndl_clrinvers) then {
+	ppEffectDestroy sp_gui_pphndl_clrinvers;
+};
+sp_gui_pphndl_clrinvers = ppEffectCreate ["ColorInversion", 10001];
+
+sp_gui_pphndl_chromabb ppEffectEnable true;
+sp_gui_pphndl_clrinvers ppEffectEnable true;
+
+sp_gui_internal_handlePPUpdate = -1;
+
 sp_isGUIInit = false;
 sp_initGUI = {
+	if not_equals(sp_gui_internal_handlePPUpdate,-1) then {
+		stopUpdate(sp_gui_internal_handlePPUpdate);
+	};
+
+	sp_gui_internal_handlePPUpdate = startUpdate(sp_gui_internal_onUpdatePPGUI,0.1);
+
 	if (count sp_gui_taskWidgets > 0) exitWith {};
 	private _d = getGUI;
 	private _ctg = [_d,WIDGETGROUP,[100-sp_gui_taskMessageWidth,2,sp_gui_taskMessageWidth,15]] call createWidget;
@@ -301,4 +321,35 @@ sp_view_setPlayerHeadVisible = {
 	} else {
 		[player,"onChangeFace",true] call smd_syncVar;
 	};
+};
+
+sp_gui_setPlayerColorInversion = {
+	params ["_r","_g","_b"];
+	private _handle = sp_gui_pphndl_clrinvers;
+	_handle ppEffectAdjust [_r,_g,_b];
+	_handle ppEffectCommit 0.01;	
+};
+
+sp_gui_setPlayerAbberation = {
+	params ["_abberval"];
+	private _handle = sp_gui_pphndl_chromabb;
+	_handle ppEffectAdjust [_abberval,_abberval,true];
+	_handle ppEffectCommit 0.01;
+};
+
+sp_gui_internal_onUpdatePPGUI = {
+	
+	_hp = sp_playerHp;
+
+	if (_hp < 100) then {
+		if (tickTime >= (sp_playerLastDamagedTime + 5)) then {
+			_hp = _hp + 3;
+			sp_playerHp = _hp;
+		};
+	};
+
+	_abber = linearConversion [100,0,_hp,0,0.5,true];
+	[_abber] call sp_gui_setPlayerAbberation;
+	_redclr = linearConversion [100,0,_hp,0,0.6,true];
+	[_redclr,0,0] call sp_gui_setPlayerColorInversion;
 };

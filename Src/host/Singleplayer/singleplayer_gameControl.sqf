@@ -215,3 +215,13 @@ sp_wsimSetActive = {
 	sp_internal_map_wsim set [_handler,_mode];
 	true
 };
+
+sp_playerHp = 100;
+sp_playerLastDamagedTime = 0;
+sp_internal_handleTargetThrowingContact = {
+	params ["_bulletMesh","_targ"];
+	if equals(_targ,player) exitWith {
+		sp_playerHp = (sp_playerHp - randInt(5,15)) max 0;
+		sp_playerLastDamagedTime = tickTime;
+	};
+};

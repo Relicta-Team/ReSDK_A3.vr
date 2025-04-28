@@ -54,6 +54,11 @@ interact_th_getRelRadiusPos = {
 interact_th_onThrowingEnd = {
 	params ["_obj","_targ"];
 	if isNullReference(_obj) exitWith {false};
+
+	#ifdef SP_MODE
+	[_obj,_targ] call sp_internal_handleTargetThrowingContact;
+	#endif
+
 	/*_pos = if (typeof _barrierObj == BASIC_MOB_TYPE) then {
 		[getPosATL _barrierObj] call interact_th_getRelRadiusPos
 	} else {

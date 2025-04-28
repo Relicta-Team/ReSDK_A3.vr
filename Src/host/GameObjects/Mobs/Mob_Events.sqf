@@ -457,7 +457,7 @@ _onRemoveItemFromContainer = {
 	
 	callFuncParams(_cont,removeItem,_item arg this arg _slot);
 
-}; rpcAdd("onRemoveItemFromContainer",_onRemoveItemFromContainer); dbg = _onRemoveItemFromContainer;
+}; rpcAdd("onRemoveItemFromContainer",_onRemoveItemFromContainer); //dbg = _onRemoveItemFromContainer;
 
 _onContainerClose = {
 	params ["_mobObj","_contRef"];
