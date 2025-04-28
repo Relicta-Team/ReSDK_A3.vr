@@ -532,7 +532,10 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 		_threadlook = {
 			{
-				callFuncParams(call sp_getActor,canSeeObject,"cpt3_obj_doordestr" call sp_getObject)
+				_obj = "cpt3_obj_doordestr" call sp_getObject;
+				callFuncParams(call sp_getActor,canSeeObject,_obj)
+				|| callFuncParams(call sp_getActor,getDistanceTo,_obj arg true) <= 1.2
+				|| equals(pointerList get ((call interact_cursorobject)getVariable "ref"),_obj)
 			} call sp_threadWait;
 			[
 				"chap3\gg4",

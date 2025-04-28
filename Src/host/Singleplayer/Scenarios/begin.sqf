@@ -5,7 +5,9 @@
 
 #include "Scenario.h"
 
+begin_handleKeyDown = -1;
 ["begin_start",{
+	sp_playerCanMove = false;
 	[""] call sp_view_setPlayerHudVisible;
 	{
 		setVar(call sp_getActor,stamina,1000);
@@ -13,8 +15,6 @@
 
 	[true,0] call setBlackScreenGUI;
 	["begin_pos_player",0] call sp_setPlayerPos;
-
-	[false,3] call setBlackScreenGUI;
 	
 	["begin_pos_watcher1","begin_watcher1",[
 		["uniform","StreakCloth"],
@@ -39,7 +39,9 @@
 				["uniform","StreakCloth"],
 				["name",["Житель"]]
 			],{
-
+				if (_i == 2) then {
+					["ShortSword",_this,INV_HAND_L] call createItemInInventory;
+				};
 			},
 			{
 				if (_i==2) then {
@@ -109,23 +111,40 @@
 
 
 	//["begin_naattacked"] call sp_startScene;
-	invokeAfterDelay({["being_toattack"] call sp_startScene},2);
-
-}] call sp_addScene;
-
-["begin_naattacked",{
-
-	for "_i" from 1 to 3 do {
-		_strI = str _i;
-		["begin_mainattacker"+_strI,"begin_pos_mainattacker"+_strI,"begin_mainattacker"+_strI,{
-
-		}] call sp_ai_playAnim;
+	if (begin_handleKeyDown != -1) then {
+		(findDisplay 46) displayRemoveEventHandler ["KeyDown",begin_handleKeyDown];
+		begin_handleKeyDown = -1;
 	};
+	begin_handleKeyDown = (findDisplay 46) displayAddEventHandler ["keyDown",{
+		params ["_d","_key"];
+		_sprintAndWalk = (ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(GetOver) + ACT(TactToggle) + ACT(WalkRunToggle));
+		_locked = CHANGE_STANCE_BUTTONS + FAST_DROP_BUTTONS + _sprintAndWalk;
+		if (_key in _locked) then {true} else {false};
+	}];
+	
+	{
+		2 call sp_threadPause;
+		[false,3] call setBlackScreenGUI;
+		5 call sp_threadPause;
+		_h = ["Чтобы осмотреться <t size='1.3' color='#e20048'>вращайте мышкой</t>"] call sp_setNotification;
+
+		{
+			callFuncParams("begin_keeper1" call sp_ai_getMobObject,getDirTo,call sp_getActor) == DIR_FRONT
+		} call sp_threadWait;
+
+		{
+			["being_toattack"] call sp_startScene
+		} call sp_threadCriticalSection;
+
+		2 call sp_threadPause;
+		[_h,false] call sp_setNotificationVisible;
+
+	} call sp_threadStart;
 
 }] call sp_addScene;
 
 begin_attackStarted = false;
-
+begin_canStartAttack = false;
 ["being_toattack",{
 	/*
 	state1 - inanim
@@ -146,6 +165,9 @@ begin_attackStarted = false;
 		}],
 		["state_2",{
 			{
+				sp_playerCanMove = true;
+				player forcewalk true;
+
 				1 call sp_threadPause;
 
 				[
@@ -171,7 +193,7 @@ begin_attackStarted = false;
 			params ["_obj"];
 			_anim = "hubbriefing_ext_contact";
 			_obj switchMove _anim;
-			
+			begin_canStartAttack=true;
 			[{begin_attackStarted}] call sp_ai_animWait;
 		}],
 		["state_4",{}],
@@ -269,8 +291,8 @@ begin_startattack_activated = false;
 	("begin_watcher2" call sp_ai_getMobBody) setvariable ["anim_handle",_anm];
 
 	{
-		10 call sp_threadPause;
-
+		{begin_canStartAttack} call sp_threadWait;
+		5 call sp_threadPause;
 		_wbody = ("begin_watcher1" call sp_ai_getMobBody);
 		[
 			"begin_mainattacker1" call sp_ai_getMobObject,
@@ -282,14 +304,14 @@ begin_startattack_activated = false;
 
 		0.15 call sp_threadPause;
 
+		player forcewalk false;
+
 		//bum grenade
 		_trg = "begin_posdata_grenade" call sp_getObject;
 		_pos = callFunc(_trg,getPos);
 		{
 			[_pos] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
-
-		begin_attackStarted = true;
 
 		//dooropen
 		{
@@ -306,13 +328,15 @@ begin_startattack_activated = false;
 				callFuncParams("begin_watcher2" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD);
 			} call sp_threadCriticalSection;
 		} call sp_threadStart;
+		
+		begin_attackStarted = true;
 
 		//loop attack targets
 		for "_i" from 1 to 2 do {
 			[{
 				params ["_i"];
 				_strI = str _i;
-				1.5 call sp_threadPause;
+				2.1 call sp_threadPause;
 				while {true} do {
 					
 					_target = player;
@@ -340,7 +364,7 @@ begin_startattack_activated = false;
 			},_i] call sp_threadStart;
 		};
 
-		1.3 call sp_threadPause;
+		1.8 call sp_threadPause;
 
 		_refv = ("begin_startdead4" call sp_ai_getMobBody) getvariable "anim_handle";
 		[_refv] call sp_ai_stopAnim;
@@ -410,7 +434,14 @@ begin_enterrun2_act = false;
 	_hndl = ["begin_startdead6","begin_pos_startdead6","begin\startdead6",{
 
 	},[
+		["state_1",{
+			params ["_obj"];
+			_objT = "begin_obj_startdead6weap" call sp_getObject;
+			[_obj,_objT,INV_HAND_L] call sp_ai_moveItemToMob;
+		}],
+		["state_2",{
 
+		}]
 	]] call sp_ai_playAnim;
 	("begin_startdead6" call sp_ai_getMobBody) setvariable ["anim_handle",_hndl];
 
@@ -420,7 +451,7 @@ begin_enterrun2_act = false;
 			{
 				_body = "begin_startdead6" call sp_ai_getMobBody;
 				_ps = _body modelToWorld ((_body selectionPosition "spine3") vectoradd [rand(-.01,.01),rand(-.01,.01),rand(-.01,.01)]);
-				_ps = _ps vectoradd [rand(-0.5,0.5),0,rand(0,0.8)];
+				_ps = _ps vectoradd [rand(-1.5,1.5),0,rand(0,0.8)];
 				for "_iP" from 1 to randInt(3,6) do {
 					[("begin_mainattacker5") call sp_ai_getMobObject,_ps] call cpt5_act_doShot;
 					rand(0.3,0.4) call sp_threadPause;
@@ -431,24 +462,28 @@ begin_enterrun2_act = false;
 			//kill
 			{
 				_body = "begin_startdead6" call sp_ai_getMobBody;
-				_target = "begin_startdead6" call sp_ai_getMobBody;
+				_target = "begin_startdead6" call sp_ai_getMobObject;
 				_ps = _body modelToWorld ((_body selectionPosition "spine3") vectoradd [rand(-.01,.01),rand(-.01,.01),rand(-.01,.01)]);
-				_ps = _ps vectoradd [rand(-0.5,0.5),0,rand(0,0.8)];
+				
+				{
+					[_body getvariable "anim_handle"] call sp_ai_stopAnim;
+					_body switchmove "";
+				} call sp_threadCriticalSection;
+
 				for "_iP" from 1 to randInt(3,6) do {
 					[("begin_mainattacker5") call sp_ai_getMobObject,_ps] call cpt5_act_doShot;
 					rand(0.3,0.4) call sp_threadPause;
 				};
+
 				_prts = [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R];
-				{
-					[_body getvariable "anim_handle"] call sp_ai_stopAnim;
-				} call sp_threadCriticalSection;
-				
 				for "_i" from 1 to randInt(1,3) do {
 					{
 						callFuncParams(_target,lossLimb,pick _prts);
 					} call sp_threadCriticalSection;
-					callFuncParams(_target,lossLimb,BP_INDEX_HEAD);
 				};
+				{
+					callFuncParams(_target,lossLimb,BP_INDEX_HEAD);
+				} call sp_threadCriticalSection;
 
 			} call sp_threadStart;
 		}],
@@ -540,8 +575,23 @@ begin_act_readyToDown = false;
 		}],
 		["state_3",{
 			//sounds sword
+			_obj = "begin_keeper2" call sp_ai_getMobObject;
+			callFunc(_obj,switchTwoHands);
+			callFuncParams(_obj,setCombatMode,true);
+			{
+				_obj = "begin_keeper2" call sp_ai_getMobObject;
+				0.5 call sp_threadPause;
+				for "_i" from 1 to 6 do {
+					private _snd = "attacks\blade_parry" + (str randInt(1,3));
+					private _rpith = getRandomPitchInRange(0.6,1.3);
+					callFuncParams(_obj,playSound,_snd arg _rpith arg 20 arg null arg null arg false);
+					rand(0.6,0.8) call sp_threadPause;
+				};
+				
+			} call sp_threadStart;
 		}],
 		["state_4",{
+			callFuncParams("begin_keeper2" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD);
 			//death
 		}]
 	]] call sp_ai_playAnim;
@@ -550,11 +600,11 @@ begin_act_readyToDown = false;
 
 begin_internal_collisionObjects = [];
 begin_internal_setNearCollisionMode = {
-	params ["_mode"];
+	params ["_mode",["_dist",10]];
 	private _isEnabled = count begin_internal_collisionObjects > 0;
 	if (_mode == _isEnabled) exitWith {};
 	if (_mode) then {
-		begin_internal_collisionObjects = player nearObjects 10;
+		begin_internal_collisionObjects = player nearObjects _dist;
 		{
 			player disableCollisionWith _x;
 		} foreach begin_internal_collisionObjects;
@@ -573,9 +623,12 @@ begin_run5_act = false;
 
 	//player animation
 	//begin_pos_playerautoanim1
+	player forcewalk true;
 	[true] call begin_internal_setNearCollisionMode;
+	[true] call sp_gui_setCinematicMode;
 	[player,"begin_pos_playerautoanim1","begin\playerautoanim1",{
 		[false] call begin_internal_setNearCollisionMode;
+		[false] call sp_gui_setCinematicMode;
 	}] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
 
@@ -604,8 +657,10 @@ begin_run6_act = false;
 	begin_run6_act = true;
 	//begin_pos_playerautoanim2
 	[true] call begin_internal_setNearCollisionMode;
+	[true] call sp_gui_setCinematicMode;
 	[player,"begin_pos_playerautoanim2","begin\playerautoanim2",{
 		[false] call begin_internal_setNearCollisionMode;
+		[false] call sp_gui_setCinematicMode;
 	}] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
 
@@ -617,6 +672,7 @@ begin_tokeeper3_act = false;
 	["begin_keeper3","begin_pos_keeper3","begin\keeper3",{},[
 		["state_1",{}],//hello
 		["state_2",{
+			player forcewalk false;
 			callFuncParams("begin_doortoexit" call sp_getObject,setDoorOpen,true);
 		}],//open
 		["state_3",{}],//pre close
@@ -697,9 +753,11 @@ begin_prechase_act = false;
 	if (begin_prechase_act) exitWith {};
 	begin_prechase_act = true;
 
-	[true] call begin_internal_setNearCollisionMode;
+	[true,30] call begin_internal_setNearCollisionMode;
+	[true] call sp_gui_setCinematicMode;
 	[player,"begin_pos_playerautoanim3","begin\playerautoanim3",{
 		[false] call begin_internal_setNearCollisionMode;
+		[false] call sp_gui_setCinematicMode;
 	}] call sp_ai_playAnim;
 
 }] call sp_addTriggerEnter;
@@ -773,6 +831,9 @@ begin_finalizer_act = false;
 ["begin_finalizer",{
 	if (begin_finalizer_act) exitWith {};
 	begin_finalizer_act = true;
+
+	(findDisplay 46) displayRemoveEventHandler ["KeyDown",begin_handleKeyDown];
+	begin_handleKeyDown = -1;
 
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0.1] call setBlackScreenGUI;

@@ -353,3 +353,19 @@ sp_gui_internal_onUpdatePPGUI = {
 	_redclr = linearConversion [100,0,_hp,0,0.6,true];
 	[_redclr,0,0] call sp_gui_setPlayerColorInversion;
 };
+
+sp_gui_internal_cinematicMode = false;
+sp_gui_setCinematicMode = {
+	params ["_mode"];
+	if equals(_mode,sp_gui_internal_cinematicMode) exitWith {};
+	sp_gui_internal_cinematicMode = _mode;
+	if (_mode) then {
+		_d = call displayOpen;
+		setMousePosition [100,100];
+		_d displayAddEventHandler ["MouseMoving",{
+			setMousePosition [100,100];
+		}];
+	} else {
+		call displayClose;
+	};
+};

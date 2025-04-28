@@ -417,7 +417,7 @@
 				["cpt1_data_dialogmessageDone",true] call sp_storageSet;
 			}]]
 		] call sp_audio_startDialog;
-		_h call sp_threadWaitForEnd;
+		_h call sp_audio_waitForEndDialog;
 		_wall = "cpt1_loot_wall_topart2" call sp_getObject;
 		if !isNullReference(_wall) then {
 			[_wall] call deleteStructure;

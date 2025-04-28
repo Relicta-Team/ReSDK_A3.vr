@@ -10,3 +10,4 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 #include "..\..\..\client\WidgetSystem\widgets.hpp"
+#include "..\..\..\client\WidgetSystem\blockedButtons.hpp"
