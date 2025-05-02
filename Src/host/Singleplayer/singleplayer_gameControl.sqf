@@ -97,6 +97,8 @@ sp_clearPlayerHandlers = {
 //used for on assigned handler
 sp_gc_onPlayerAssigned = {
 	params ["_mob"];
+	
+	[] call sp_audio_stopMusic;
 
 	["begin"] call sp_loadScenario;
 	["Chapter1"] call sp_loadScenario;

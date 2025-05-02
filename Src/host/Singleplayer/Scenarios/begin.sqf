@@ -5,6 +5,213 @@
 
 #include "Scenario.h"
 
+begin_logoshown = false;
+["begin_prestart",{
+	call sp_cam_createCinematicCam;
+	[true] call sp_cam_setCinematicCam;
+
+	[""] call sp_view_setPlayerHudVisible;
+	[true,0] call setBlackScreenGUI;
+
+	["begin_pos_camcutsceneintro",0] call sp_setPlayerPos;
+
+	//=======================================making mob================================
+
+	//bum in house
+	["begin_pos_intromob1","begin_intromob1",[
+		["uniform","Castoffs1"]
+	],{},{
+		_this switchMove "passenger_flatground_2_Idle_Unarmed";
+	}] call sp_ai_createPersonEx;
+
+	//2 nomads
+	["begin_pos_intromob2","begin_intromob2",[
+		["uniform","NomadCloth9"]
+	],{},{
+		_this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_5_loop";
+	}] call sp_ai_createPersonEx;
+	["begin_pos_intromob3","begin_intromob3",[
+		["uniform","NomadCloth21"]
+	],{
+		["Torch",_this,INV_HAND_L] call createItemInInventory;
+	},{
+		
+	}] call sp_ai_createPersonEx;
+
+	//walker nomad
+	["begin_pos_intromob4","begin_intromob4",[
+		["uniform","NomadCloth14"]
+	],{
+		["Torch",_this,INV_HAND_R] call createItemInInventory;
+	},{
+		
+	}] call sp_ai_createPersonEx;
+
+	//caveguy
+	["begin_pos_intromob5","begin_intromob5",[
+		["uniform","NomadCloth2"]
+	],{
+		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
+	},{
+		
+	}] call sp_ai_createPersonEx;
+
+	//merchant location
+	["begin_pos_intromob6","begin_intromob6",[
+		["uniform","NomadCloth2"]
+	],{
+		
+	},{
+		_this switchmove "inbasemoves_table1";
+	}] call sp_ai_createPersonEx;
+	["begin_pos_intromob7","begin_intromob7",[
+		["uniform","NomadCloth2"]
+	],{
+		
+	},{
+		
+	}] call sp_ai_createPersonEx;
+
+	for "_i" from 1 to 3 do {
+		_strI = str _i;
+
+		
+		["begin_pos_introna"+_strI,"begin_introna"+_strI,[
+			["uniform","NewArmyStdCloth"]
+		],{
+			
+		},{
+			["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
+			callFunc(_this,switchTwoHands);
+		}] call sp_ai_createPersonEx;
+	};
+
+	//starting thread
+	{
+		["intro"] call sp_audio_playMusic;
+
+		["vr",[3943.11,3906.06,16.1934],55.28,0.7,[12.3216,6.01474],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
+		[false,1] call setBlackScreenGUI;
+
+		10 call sp_threadPause;
+		(["begin\precutscene\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		1 call sp_threadPause;
+
+		["vr",[4000.79,3933.75,15.5935],306.964,0.340001,[18.8002,-1.43735],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
+		(["begin\precutscene\gg2"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		3 call sp_threadPause;
+
+		["vr",[4036.36,3935.1,19.1935],263.098,0.54,[25.7139,-1.43735],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
+		(["begin\precutscene\gg3"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		2 call sp_threadPause;
+
+		["vr",[3934.05,3981.78,9.79338],296.457,0.46,[6.10687,7.22812],0,0,4.00993,0,1,1,0,1] call sp_cam_prepCamera;
+
+		["fov",0.46,0.42,9] call sp_cam_interpCam;
+
+		(["begin\precutscene\gg4"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		2 call sp_threadPause;
+		(["begin\precutscene\gg5"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+
+		_d = getGUI;
+		_mainBack = widgetNull;
+		_ctg = widgetNull;
+		_b = widgetNull;
+		_logo = widgetNull;
+
+		{
+			_mainBack = [_d,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
+			_mainBack setBackgroundColor [0,0,0,1];
+			_ctg = [_d,WIDGETGROUP,WIDGET_FULLSIZE] call createWidget;
+			_b = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctg] call createWidget;
+			_b setBackgroundColor [0,0,0,1];
+			_sx = 40;
+			_sy = 40;
+			_logo = [_d,PICTURE,[50-_sx/2,50-_sy/2,_sx,_sy],_ctg] call createWidget;
+			[_logo,"rel_ui\Assets\log.paa"] call widgetSetPicture;
+			{widgetSetFade(_x,1,0)} foreach [_logo,_b,_mainBack];
+		} call sp_threadCriticalSection;
+		
+		
+
+		widgetSetFade(_b,0,0.3);
+		0.3 call sp_threadPause;
+		widgetSetFade(_logo,0,0.1);
+
+		//fog effect
+		{
+			_localFogs = [];
+			for "_i" from 1 to 100 do {
+				
+				_h = 70;
+				_args = [_d,PICTURE,[-100,-100,rand(40,70),rand(40,70)],_ctg];
+				
+				_fog = _args call createWidget;
+				_fog ctrlEnable false;
+				_fog ctrlSetTextColor [1,1,1,0.4];
+				
+				_localFogs pushback _fog;
+				
+				[_fog,PATH_PICTURE("lobby\fog.paa")] call widgetSetPicture;
+				_fog setVariable ['lastupdate',tickTime + rand(0.1,1)];
+				
+			};
+			
+			private _onFrameCodeFog = {
+				
+				_lifetime = 12;
+				
+				{
+					if isNullReference(_x) exitWith {
+						stopThisUpdate();
+					};
+
+					_sprStartPos = [50 + rand(-0,50),100 - rand(-5,0)];
+					_sprEndPos = [50 + rand(-50,50),30];
+
+					_lastUpd = _x getVariable 'lastupdate';
+					if (tickTime >= _lastUpd) then {
+						if (begin_logoshown) exitWith {
+							_x setVariable ['lastupdate',tickTime + 1000];
+							_x setFade 1;
+							[_x,[rand(0,50),-50],rand(2.8,3)] call widgetSetPositionOnly
+						};
+						_x setFade 0;
+						_sp = _sprStartPos;
+						[_x,_sp] call widgetSetPositionOnly;
+						_randBias = rand(1,8);
+						_x setFade 0;
+						_x ctrlSetAngle [random 360, 0.5, 0.5,false];
+						[_x,_sprEndPos,_lifetime - _randBias] call widgetSetPositionOnly;
+						_x setVariable ['lastupdate',tickTime + _lifetime-_randBias];
+					};
+				} foreach (_this select 0);
+			};
+			
+			startUpdateParams(_onFrameCodeFog,0,_localFogs);
+		} call sp_threadCriticalSection;	
+
+
+		5 call sp_threadPause;
+		//enable native background
+		widgetSetFade(_mainBack,0,0);
+
+		//hide logo
+		widgetSetFade(_logo,1,1);
+		1 call sp_threadPause;
+		begin_logoshown = true;
+		//hide ctg (smoke effect)
+		//widgetSetFade(_ctg,1,3);
+
+		7 call sp_threadPause;
+		[_ctg] call deleteWidget;
+		[_mainback] call deleteWidget;
+		
+	} call sp_threadStart;
+}] call sp_addScene;
+
+
 begin_handleKeyDown = -1;
 ["begin_start",{
 	sp_playerCanMove = false;
@@ -570,10 +777,16 @@ begin_act_readyToDown = false;
 	*/
 	["begin_keeper2","begin_pos_keeper2","begin\keeper2",{},[
 		["state_1",{
-			[{begin_run5_act}] call sp_ai_animWait;
+			[{begin_playerInVent}] call sp_ai_animWait;
 		}],
 		["state_2",{
 			//todo close crate and sounds
+			_obj = "begin_obj_crate" call sp_getObject;
+			_pos = callFunc("begin_pos_cratenewpos" call sp_getObject,getPos) vectoradd [0,0,0.7];
+
+			//callFuncParams(call sp_getActor,interpolate,"trans" arg _obj)
+			callFuncParams(_obj,changePosition,_pos);
+			callFuncParams(_obj,playSound,"pull\wood2" arg 1 arg 10 arg 1 arg null arg false);
 		}],
 		["state_3",{
 			//sounds sword
@@ -619,6 +832,7 @@ begin_internal_setNearCollisionMode = {
 };
 
 begin_run5_act = false;
+begin_playerInVent = false;
 ["begin_run5",{
 	if (begin_run5_act) exitWith {};
 	begin_run5_act = true;
@@ -633,6 +847,7 @@ begin_run5_act = false;
 		[false] call sp_gui_setCinematicMode;
 
 		["beginchase2",true] call sp_audio_playMusic;
+		begin_playerInVent = true;
 	}] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
 
@@ -756,6 +971,8 @@ begin_prechase_act = false;
 ["begin_prechase",{
 	if (begin_prechase_act) exitWith {};
 	begin_prechase_act = true;
+	
+	[true,true] call sp_audio_setMusicPause;
 
 	[true,30] call begin_internal_setNearCollisionMode;
 	[true] call sp_gui_setCinematicMode;
@@ -777,6 +994,7 @@ begin_chase_act = false;
 	},[
 		["state_1",{
 			callFuncParams("begin_doorexit" call sp_getObject,setDoorOpen,true);
+			["beginchase"] call sp_audio_playMusic;
 		}]
 	]] call sp_ai_playAnim;
 
@@ -841,6 +1059,7 @@ begin_finalizer_act = false;
 
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0.1] call setBlackScreenGUI;
+	[true,true] call sp_audio_setMusicPause;
 	{
 		5 call sp_threadPause;
 		["cpt1_begin"] call sp_startScene;
