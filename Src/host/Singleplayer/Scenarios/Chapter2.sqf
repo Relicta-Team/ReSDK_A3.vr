@@ -104,6 +104,9 @@ cpt2_json_allowedRecipes = '
         {
             getVar("cpt2_obj_gate" call sp_getObject,isOpen)
         } call sp_threadWait;
+
+        ["kollectors",true] call sp_audio_playMusic;
+
         [false] call sp_setNotificationVisible;
         ["Все хвосты ведут домой","Идите через коллекторы"] call sp_setTaskMessageEff;
         0.7 call sp_threadPause;

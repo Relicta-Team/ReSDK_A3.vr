@@ -97,6 +97,8 @@ cpt4_addProcessorMainAct = {
 			[false,_h] call sp_setNotificationVisible;
 		};
 
+		["vahta",true] call sp_audio_playMusic;
+
 		[cpt4_questName_begin,"Возвращайтесь к своим рабочим обязанностям"] call sp_setTaskMessageEff;
 		["Сядьте на стул, нажав $input_act_mainAction"] call sp_setNotification;
 		{
@@ -791,6 +793,8 @@ cpt4_addProcessorMainAct = {
 		["cpt4_armyguy1"] call sp_ai_deletePerson;
 		["cpt4_armyguy2"] call sp_ai_deletePerson;
 
+		[] call sp_audio_stopMusic;
+
 		{
 			["cpt4_bar_begin"] call sp_startScene;
 		} call sp_threadCriticalSection;
@@ -1025,7 +1029,14 @@ cpt4_pos_bar_aloguys - 3 sits
 	} call sp_threadStart;
 }] call sp_addScene;
 
-["cpt4_trg_barstartanims",{
+cpt4_trg_barstartmusic_act = false;
+["cpt4_trg_barstartmusic",{
+	if (cpt4_trg_barstartmusic) exitWith {};
+	cpt4_trg_barstartmusic = true;
+	["city",true] call sp_audio_playMusic;
+}] call sp_addTriggerEnter;
+
+["cpt4_trg_barstartanims",{	
 	//looped state of ohrwalk
 	_anims = {
 		["cpt4_ohrwalk1",
@@ -1066,6 +1077,8 @@ cpt4_bar_curMusicName = "";
 ["cpt4_trg_bazone",{
 	cpt4_bar_curMusicDist = 14;
 	cpt4_bar_musicUpdateReq = true;
+
+	[true,true] call sp_audio_setMusicPause;
 }] call sp_addTriggerEnter;
 
 ["cpt4_trg_bazone",{
@@ -1157,6 +1170,8 @@ cpt4_bar_curMusicName = "";
 		};
 		cpt4_bar_musicHandle = startUpdateParams(_fnc,0,[_mlist]);
 	};
+
+	[false,true] call sp_audio_setMusicPause;
 
 	cpt4_bar_curMusicDist = 0.5;
 	cpt4_bar_musicUpdateReq = true;

@@ -313,6 +313,8 @@ begin_startattack_activated = false;
 			[_pos] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
 
+		["beginchase",true] call sp_audio_playMusic;
+
 		//dooropen
 		{
 			callFuncParams("begin_doorenter" call sp_getObject,setDoorOpen,true);
@@ -629,6 +631,8 @@ begin_run5_act = false;
 	[player,"begin_pos_playerautoanim1","begin\playerautoanim1",{
 		[false] call begin_internal_setNearCollisionMode;
 		[false] call sp_gui_setCinematicMode;
+
+		["beginchase2",true] call sp_audio_playMusic;
 	}] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
 

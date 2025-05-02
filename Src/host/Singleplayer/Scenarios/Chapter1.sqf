@@ -126,6 +126,7 @@
 }] call sp_addScene;
 
 ["cpt1_basemoving", {
+	["tomb"] call sp_audio_playMusic;
 	["Снова в путь","Отправляйтесь в пещеры и найдите новое пристанище"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
@@ -188,6 +189,11 @@
 	["Остатки цивилизации","Осмотрите ящики на наличие ценных предметов"] call sp_setTaskMessageEff;
 
 	{
+		1 call sp_threadPause;
+		["hellocave"] call sp_audio_playMusic;
+	} call sp_threadStart;
+
+	{
 		_bpref = "cpt1_looting_bottle";
 		_barr = [];
 		for "_i" from 1 to 2 do {
@@ -198,7 +204,7 @@
 		};
 
 		{
-			any_of(_barr apply {callFuncParams(_x,getDistanceTo,call sp_getActor arg true) <= 2})
+			any_of(_barr apply {callFuncParams(_x,getDistanceTo,call sp_getActor arg true) <= 3})
 		} call sp_threadWait;
 
 		["У вас есть 2 свободных руки, в которые можно взять любые предметы."+
@@ -478,6 +484,8 @@
 			equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
 		["Новый дом","Откройте дверь"] call sp_setTaskMessageEff;
+
+		["yell"] call sp_audio_playMusic;
 
 		{
 			callFuncParams("cpt1_obj_doortopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 3

@@ -54,6 +54,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 }] call sp_addScene;
 
 ["cpt3_trg_katafound",{
+	["katacombs"] call sp_audio_playMusic;
 	["На подступе","Идите через катакомбы"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
@@ -155,6 +156,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	setVar("cpt3_obj_lockeddoor" call sp_getObject,isLocked,true);
 
 	[cpt3_hudvis_eaterzone] call sp_view_setPlayerHudVisible;
+
+	[] call sp_audio_stopMusic;
+
 	{
 		_lampSrc = "LampCeiling G:Kym4iXFMOZ0 (3)" call sp_getObject;
 		
@@ -246,10 +250,12 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_foundmonster",{
 	{
+		["eaterstealth"] call sp_audio_playMusic;
+
 		{
 			[0,1.5,0.01,0.5] call cam_addCamShake;
 		} call sp_threadCriticalSection;
-
+		
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
 		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
@@ -525,6 +531,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		["cpt3_lightswitch",false] call sp_storageSet;
 		[true] call sp_setHideTaskMessageCtg;
 
+		[] call sp_audio_stopMusic;
 		1.2 call sp_threadPause;
 
 		_sound = ["chap3\gg3"] call sp_audio_sayPlayer;
@@ -533,9 +540,10 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		_threadlook = {
 			{
 				_obj = "cpt3_obj_doordestr" call sp_getObject;
+				_refobj = (call interact_cursorobject)getVariable ["ref","nullref"];
 				callFuncParams(call sp_getActor,canSeeObject,_obj)
 				|| callFuncParams(call sp_getActor,getDistanceTo,_obj arg true) <= 1.2
-				|| equals(pointerList get ((call interact_cursorobject)getVariable "ref"),_obj)
+				|| equals(pointerList getOrDefault vec2(_refobj,nullPtr),_obj)
 			} call sp_threadWait;
 			[
 				"chap3\gg4",
@@ -618,7 +626,9 @@ cpt3_func_damageEvent = {
 	} call sp_threadStart;
 }] call sp_addScene;
 
-["t3_trg_foundgate",{
+["cpt3_trg_foundgate",{
+	["gate"] call sp_audio_playMusic;
+
 	["chap3\gg7"] call sp_audio_sayPlayer;
 }] call sp_addScene;
 

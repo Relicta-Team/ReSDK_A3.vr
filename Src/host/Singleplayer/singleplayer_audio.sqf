@@ -12,6 +12,25 @@
 #include "..\NOEngine\NOEngine.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 
+sp_audio_playMusic = {
+	params ["_name",["_looped",false]];
+	private _params = [];
+	if (_looped) then {
+		_params pushBack ["repeat",true];
+	};
+
+	["sp\" + _name,30,_params] call music_play;
+};
+sp_audio_stopMusic = {
+	params ["_temp"];
+	[30] call music_stop;
+};
+
+sp_audio_setMusicPause = {
+	params ["_mode",["_smooth",true]];
+	[30,_mode,_smooth] call music_setPause;
+};
+
 sp_audio_sayPlayer = {
 	params ["_pathPost",["_vol",1]];
 	if (sp_debug_skipAudio) exitWith {-1};
@@ -69,6 +88,14 @@ sp_audio_sayAtTarget = {
 		_target = _target modelToWorldVisual (_target selectionPosition "head");
 	};
 	[_mpath,_target,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
+};
+
+sp_audio_playSound = {
+	params ["_pos","_pathPost",["_dist",20]];
+	private _vol = 1;
+	private _startOffset = 0;
+	private _mpath = "singleplayer\sp_guide\" + _pathPost;
+	[_mpath,_pos,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
 };
 
 sp_audio_internal_resolveTarget = {

@@ -109,8 +109,16 @@ cpt5_questName_preend = "Последний рывок";
 	]] call sp_ai_createPersonEx;
 		["cpt5_weaponloader",
 			[
-				["cpt5_pos_weaponloader1","cpt5_weaponloader1",{rand(10,15)},{ params ["_obj"]; _obj switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_5_loop"}],
-				["cpt5_pos_weaponloader2","cpt5_weaponloader2",{rand(10,15)},{ params ["_obj"]; _obj switchMove "Acts_JetsCrewaidFCrouch_loop_m"}]
+				["cpt5_pos_weaponloader1","cpt5_weaponloader1",{rand(10,15)},{ 
+					params ["_obj"]; 
+					_obj switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_5_loop";
+					[getposatl _obj,"chap5\sfx\ammo" + (str randInt(1,2))] call sp_audio_playSound;
+				}],
+				["cpt5_pos_weaponloader2","cpt5_weaponloader2",{rand(10,15)},{ 
+					params ["_obj"]; 
+					_obj switchMove "Acts_JetsCrewaidFCrouch_loop_m";
+					[getposatl _obj,"chap5\sfx\ammo" + (str randInt(1,2))] call sp_audio_playSound;	
+				}]
 			]
 		] call sp_ai_playAnimsLooped;
 
@@ -122,7 +130,7 @@ cpt5_questName_preend = "Последний рывок";
 		callFunc(_this,switchTwoHands);
 	}] call sp_ai_createPersonEx;
 
-	["cpt5_pos_armytalker1","cpt5_armytalker",[
+	["cpt5_pos_armytalker1","cpt5_armytalker1",[
 		["uniform","StreakCloth"],
 		["name",["Боец"]]
 	],{},{
@@ -313,6 +321,23 @@ cpt5_questName_preend = "Последний рывок";
 
 		[cpt5_questName_startCombat,"Отправляйтесь в бой"] call sp_setTaskMessageEff;
 
+		{
+			while {true} do {
+				_p = pick [[-5,0,2],[5,0,2],[0,-5,2],[0,5,2]];
+				[(getposatl player) vectoradd _p,"chap5\sfx\bum" + (str randInt(1,5)),30] call sp_audio_playSound;	
+				rand(0.2,5) call sp_threadPause;
+			};
+		} call sp_threadStart;
+
+		{
+			{
+				callFuncParams("cpt5_weaponloader" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true) <= 3;
+			} call sp_threadWait;
+			([
+				["cpt5_weaponloader","chap5\underground\guy3"]
+			] call sp_audio_startDialog);
+		} call sp_threadStart;
+
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -321,9 +346,28 @@ cpt5_act_lekartalks = false;
 ["cpt5_trg_lekarstalks",{
 	if (!cpt5_act_lekartalks) then {
 		cpt5_act_lekartalks = true;
+		
+		{
+
+			([
+				["cpt5_bedwall_1","chap5\underground\guy2"]
+			] call sp_audio_startDialog);
+			rand(2,4) call sp_threadPause;
+
+			([
+				["cpt5_bedwall_2","chap5\underground\guy4"]
+			] call sp_audio_startDialog);
+		} call sp_threadStart;
 
 		{
-			2 call sp_threadPause;
+			([
+				["cpt5_lekarstand","chap5\underground\lek1_1",["endoffset",0.1]],
+				["cpt5_lekarmove","chap5\underground\lek2_1",["endoffset",0.3]],
+				["cpt5_lekarstand","chap5\underground\lek1_2",["endoffset",0.2]],
+				["cpt5_lekarmove","chap5\underground\lek2_2",["endoffset",0.1]],
+				["cpt5_lekarstand","chap5\underground\lek1_3",["endoffset",0.2]]
+			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+			//2 call sp_threadPause;
 			["cpt5_lekarmove","cpt5_pos_lekarmove","cpt5_lekarmove_towounded",{
 				params ["_mob"];
 				_mob switchmove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop";
@@ -337,6 +381,10 @@ cpt5_act_undergroundmover = false;
 ["cpt5_trg_undergroundmover",{
 	if (!cpt5_act_undergroundmover) then {
 		cpt5_act_undergroundmover = true;
+
+		([
+			["cpt5_underground_mover","chap5\underground\guy1",["endoffset",0.1]]
+		] call sp_audio_startDialog);
 
 		["cpt5_underground_mover",[
 			["cpt5_pos_underground_mover","cpt5_undergroundmover",rand(2,5),{
@@ -370,6 +418,11 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 				params ["_mob"];
 				_mob switchmove "acts_aidlpercmstpslowwpstdnon_warmup_1_loop";
 			}] call sp_ai_playAnim;
+			
+			_obj = "cpt5_obj_invvaltoup" call sp_getObject;
+			if !isNullReference(_obj) then {
+				[_obj] call deleteGameObject;
+			};
 
 		};
 
@@ -393,7 +446,12 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 		} call sp_threadWait;
 
 		//dialog kapitan
-		2 call sp_threadPause;
+		([
+			["cpt5_kapitan","chap5\underground\under_kap1",["endoffset",0.1]],
+			[player,"chap5\underground\under_gg1",["endoffset",0.1]],
+			["cpt5_kapitan","chap5\underground\under_kap2",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+		//2 call sp_threadPause;
 
 		[cpt5_questName_startCombat,"Возьмите со склада вооружение и подготовьтесь к бою."] call sp_setTaskMessageEff;
 		cpt5_data_kapitan_startQuest_loadweapon = true;
@@ -529,11 +587,18 @@ if !isNull(cpt5_internal_handleUpdateFire) then {
 cpt5_internal_handleUpdateFire = startUpdate(interact_th__clith,0); //start fire update
 
 cpt5_internal_warzoneGrenades = true;
+cpt5_trg_combat_stage1_act = false;
 //приказ подавления
 ["cpt5_trg_combat_stage1",{
+	if (cpt5_trg_combat_stage1_act) exitWith {};
+	cpt5_trg_combat_stage1_act = true;
 
 	{
 		//dialog
+		([
+			["cpt5_kapitan","chap5\underground\kap_podavl",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
 
 		[cpt5_questName_rangedCombat,"Подавите позиции врага"] call sp_setTaskMessageEff;
 		
@@ -614,6 +679,15 @@ cpt5_internal_warzoneGrenades = true;
 
 }] call sp_addTriggerEnter;
 
+["cpt5_trg_warzonetalkers",{
+	{
+		([
+			["cpt5_armytalker2","chap5\underground\campfirer1",["endoffset",1.2]],
+			["cpt5_armytalker1","chap5\underground\campfirer2",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+	} call sp_threadStart;
+}] call sp_addScene;
+
 cpt5_trg_enterwarzone_entered = false;
 ["cpt5_trg_enterwarzone",{
 	if (cpt5_trg_enterwarzone_entered) exitWith {};
@@ -624,6 +698,7 @@ cpt5_trg_enterwarzone_entered = false;
 		{
 			[callFunc("cpt5_trgobj_event_grenade1" call sp_getObject,getPos)] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
+		["war",true] call sp_audio_playMusic;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
@@ -653,16 +728,58 @@ cpt5_warzone_danger = true;
 
 //подавили врагов. двигаем вперёд
 ["cpt5_attack_afterstage1",{
+
+	_obj = "cpt5_obj_invvaltowoundedman" call sp_getObject;
+	if !isNullReference(_obj) then {
+		[_obj] call deleteGameObject;
+	};
+
 	{
 		["cpt5_kapitan","cpt5_pos_capitan4",0] call sp_ai_setMobPos;
 		//dialog
-		[cpt5_questName_rangedCombat,"Спасите раненого бойца на поле боя"] call sp_setTaskMessageEff;
+		([
+			["cpt5_kapitan","chap5\warzone\kap1",[["endoffset",0.8],["distance",40]]],
+			[player,"chap5\warzone\strelok2",["endoffset",0.4]],
+			[player,"chap5\warzone\gg1",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+		
 	} call sp_threadStart;
 }] call sp_addScene;
+
+cpt5_trg_savewoundedstart_act = false;
+["cpt5_trg_savewoundedstart",{
+	if (cpt5_trg_savewoundedstart) exitWith {};
+	cpt5_trg_savewoundedstart = true;
+
+	{
+		([
+			["cpt5_kapitan","chap5\warzone\kap2",["endoffset",0.4]],
+			[player,"chap5\warzone\gg2",["endoffset",0.1]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		[cpt5_questName_rangedCombat,"Спасите раненого бойца на поле боя"] call sp_setTaskMessageEff;
+	} call sp_threadStart;
+}] call sp_addTriggerEnter;
 
 ["cpt5_trg_woundedmanfound",{
 	{
 		//dialog
+		([
+			["cpt5_woundedman","chap5\warzone\wounded1",["endoffset",1.4]],
+			[player,"chap5\warzone\gg_towounded",["endoffset",1.2]],
+			["cpt5_woundedman","chap5\warzone\wounded2",["endoffset",0.8]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		{
+				//callFuncParams("cpt5_woundedman" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true) <= 5
+			while {!cpt5_trg_woundedmansave_act} do {
+				[
+					["cpt5_woundedman","chap5\sfx\moan" + (str randInt(1,3))]
+				] call sp_audio_startDialog;
+				rand(5,10) call sp_threadPause;
+			};
+		} call sp_threadStart;
+
 		_h = ["Чтобы тащить человека выберите режим ""Схватить"" в правом меню и нажмите $input_act_extraAction по раненому человеку."] call sp_setNotification;
 		
 		_mob = "cpt5_woundedman" call sp_ai_getMobObject;
@@ -670,7 +787,6 @@ cpt5_warzone_danger = true;
 		[false,_h] call sp_setNotificationVisible;
 
 		[cpt5_questName_rangedCombat,"Дотащите раненого до ваших позиций"] call sp_setTaskMessageEff;
-
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -686,8 +802,18 @@ cpt5_trg_woundedmansave_act = false;
 		[true] call sp_setHideTaskMessageCtg;
 
 		//dialog
+		{
+			([
+				["cpt5_kapitan","chap5\warzone\kap3",["endoffset",0.1]],
+				["cpt5_kapitan","chap5\warzone\kap4",["endoffset",0.1]],
+				[player,"chap5\warzone\gg3",["endoffset",0.7]],
+				["cpt5_kapitan","chap5\warzone\kap5",["endoffset",1]],
+				[player,"chap5\warzone\gg4",["endoffset",1.1]],
+				["cpt5_kapitan","chap5\warzone\kap6",["endoffset",0.1]]
+			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
-		[cpt5_questName_rangedCombat,"Отправляйтесь к позиции на возвышености"] call sp_setTaskMessageEff;
+			[cpt5_questName_rangedCombat,"Отправляйтесь к позиции на возвышености"] call sp_setTaskMessageEff;
+		} call sp_threadStart;
 	};
 }] call sp_addTriggerEnter;
 
@@ -715,6 +841,9 @@ cpt5_act_shotingStarted = false;
 						["cpt5_data_deadizt",{_this + 1},0] call sp_storageUpdate;
 						refset(_body getvariable "anim_handler",true);
 						_body switchMove (pick ["Acts_StaticDeath_04","Acts_StaticDeath_05","Acts_StaticDeath_06","Acts_StaticDeath_10","Acts_StaticDeath_13"]);
+
+						[getposatl _body,"chap5\sfx\scream" + (str randInt(1,3)),30] call sp_audio_playSound;
+
 					};
 				}; invokeAfterDelayParams(_nfHndl,0.1,[this]);
 			};
@@ -743,8 +872,14 @@ cpt5_trg_dialog_onseegate = false;
 	if (cpt5_trg_dialog_onseegate) exitWith {};
 	cpt5_trg_dialog_onseegate = true;
 
-	[cpt5_questName_preend,"Откройте автоматическую решётку"] call sp_setTaskMessageEff;
-	//dialog can see gate
+	{
+		//dialog can see gate
+		([
+			[player,"chap5\warzone\gg_seedoor",["endoffset",0.7]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		[cpt5_questName_preend,"Откройте автоматическую решётку"] call sp_setTaskMessageEff;
+	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
 ["cpt5_trg_closecombat_pre",{
@@ -770,6 +905,7 @@ cpt5_act_closecombat_started = false;
 	if (cpt5_act_closecombat_started) exitWith {};
 	cpt5_act_closecombat_started = true;
 	
+	["closecombat",true] call sp_audio_playMusic;
 	sp_playerCanMove = false;
 
 	["cpt5_izcombat","cpt5_pos_izcombat_spawn","cpt5_izt_ccmb_prepare",{
@@ -781,6 +917,10 @@ cpt5_act_closecombat_started = false;
 			callFunc(_izt,switchTwoHands);
 			[_body] call anim_syncAnim;
 			callFuncParams(_izt,setCombatMode,true);
+
+			([
+				["cpt5_izcombat","chap5\warzone\dikoubivat",["endoffset",0.7]]
+			] call sp_audio_startDialog);
 		}]
 	]] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
@@ -831,6 +971,8 @@ cpt5_act_closecombat_started = false;
 		
 		_thdcombat call sp_threadStop;
 
+		[] call sp_audio_stopMusic;
+
 		_refizt = ("cpt5_izcombat" call sp_ai_getMobBody)getvariable "anim_handler";
 		refset(_refizt,true);
 
@@ -878,12 +1020,24 @@ cpt5_act_closecombat_started = false;
 	{
 		{
 			callFuncParams("cpt5_kapitan" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true)
-			<= 2.5
+			<= 4
 		} call sp_threadWait;
 		[true] call sp_setHideTaskMessageCtg;
 
 		//dialog
-		1 call sp_threadPause;
+		([
+			["cpt5_kapitan","chap5\final\kap1",[["endoffset",0.7],["distance",40]]],
+
+			["cpt5_attacker2","chap5\final\guy1",["endoffset",1.4]],
+			["cpt5_attacker4","chap5\final\guy3",["endoffset",1.5]],
+			["cpt5_attacker5","chap5\final\guy4",["endoffset",1.5]],
+			[player,"chap5\final\gg1",["endoffset",0.1]],
+			["cpt5_attacker3","chap5\final\guy2",["endoffset",2.1]],
+
+
+			["cpt5_kapitan","chap5\final\kap2",[["endoffset",0],["distance",40]]]
+		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+		//1 call sp_threadPause;
 
 		["cpt5_kapitan","cpt5_pos_capitan5","cpt5_capitan_attack",{
 			params ["_mob"];
@@ -912,7 +1066,7 @@ cpt5_act_closecombat_started = false;
 				["state_2",{
 					[{cpt5_data_lastbattle}] call sp_ai_animWait;
 				}]
-			]];;
+			]];
 			invokeAfterDelayParams(sp_ai_playAnim,0.2 + (_i/2),_pars);
 		};
 		
@@ -937,6 +1091,12 @@ cpt5_data_lastbattle = false;
 			
 		]] call sp_ai_playAnim;
 	};
+
+	([
+		["cpt5_defender1","chap5\final\izt1",[["endoffset",1.5],["distance",50]]],
+		["cpt5_defender2","chap5\final\izt2",[["endoffset",1.5],["distance",50]]],
+		["cpt5_defender3","chap5\final\izt3",[["endoffset",1.2],["distance",50]]]
+	] call sp_audio_startDialog);
 
 	{
 		_izt = [];
