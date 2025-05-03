@@ -108,3 +108,14 @@ sp_preloadScenarioEnvironment = {
 	invokeAfterDelay({["Загрузка..."] call chat_clearBuffer;},0.41);
 	
 };
+
+//cleanup all scene data
+sp_cleanupSceneData = {
+	//first - stop all threads
+	call sp_threadStopAll;
+	
+	//now delete all mobs
+	{
+		[_x] call sp_ai_deletePerson;
+	} foreach sp_ai_mobs;
+};

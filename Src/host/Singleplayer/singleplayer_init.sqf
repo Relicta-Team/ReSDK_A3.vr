@@ -229,6 +229,15 @@ sp_threadStop = {
 	sp_internal_threads = sp_internal_threads - [_thd];
 };
 
+sp_threadStopAll = {
+	{
+		if not_equals(_x,threadNull) then {
+			threadStop(_x);
+		}
+	} foreach sp_internal_threads;
+	sp_internal_threads = [];
+};
+
 sp_threadCriticalSection = {
 	params ["_code"];
 	isnil _code;
