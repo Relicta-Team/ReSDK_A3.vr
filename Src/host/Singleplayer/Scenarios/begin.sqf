@@ -5,6 +5,8 @@
 
 #include "Scenario.h"
 
+begin_debug_showLogo = true;
+
 begin_logoshown = false;
 ["begin_prestart",{
 	call sp_cam_createCinematicCam;
@@ -70,7 +72,7 @@ begin_logoshown = false;
 	],{
 		
 	},{
-		
+		_this switchmove "Acts_B_M01_briefing";
 	}] call sp_ai_createPersonEx;
 
 	for "_i" from 1 to 3 do {
@@ -80,39 +82,107 @@ begin_logoshown = false;
 		["begin_pos_introna"+_strI,"begin_introna"+_strI,[
 			["uniform","NewArmyStdCloth"]
 		],{
-			
-		},{
-			["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
+			[ifcheck(_i==3,"BattleAxe","RifleSVT"),_this,INV_HAND_R] call createItemInInventory;
 			callFunc(_this,switchTwoHands);
+
+			["CombatHat",_this,INV_HEAD] call createItemInInventory;
 		}] call sp_ai_createPersonEx;
 	};
 
 	//starting thread
 	{
-		["intro"] call sp_audio_playMusic;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
 
-		["vr",[3943.11,3906.06,16.1934],55.28,0.7,[12.3216,6.01474],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
+		{
+			3 call sp_threadPause;
+			["intro"] call sp_audio_playMusic;
+			6 call sp_threadPause;
+			(["begin\precutscene\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			5 call sp_threadPause;
+			(["begin\precutscene\gg2"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			1 call sp_threadPause;
+			(["begin\precutscene\gg3"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			2.8 call sp_threadPause;
+			(["begin\precutscene\gg4"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			3 call sp_threadPause;
+			(["begin\precutscene\gg5"] call sp_audio_sayPlayer);
+		} call sp_threadStart;
+
+		//1 call sp_threadPause;
+		begin_debug_timingIntro = tickTime;
+
+		//walker in tunnel
+		["vr",[3943.62,3999.43,87.8217],305.033,0.51,[7.31202,2.04198],0,0,720,0.028667,0,1,0,1] call sp_cam_prepCamera;
+		["all",["vr",[3942.64,4000.11,87.8217],304.549,0.41,[8.59264,2.04198],0,0,720,0.028667,0,1,0,1],20] call sp_cam_interpTo;
+		"begin_intromob4" call sp_ai_waitForMobLoaded;
+		{["begin_intromob4","begin_pos_intromob4","begin\introtunnel.anm"] call sp_ai_playAnim} call sp_threadCriticalSection;
+		[false,2] call sp_gui_setBlackScreenGUI; //потому что это первая сцена
+		8 call sp_threadPause;
+		[true,1] call sp_gui_setBlackScreenGUI;
+		call sp_cam_stopAllInterp;
+
+		//nomads looting
+		["vr",[3920.89,3990.54,90.0218],192.304,0.35,[3.56222,2.04198],0,0,720,0.028667,0,1,0,1] call sp_cam_prepCamera;
+		["all",["vr",[3920.56,3988.97,90.6218],191.199,0.35,[-5.81236,2.04198],0,0,720,0.028667,0,1,0,1],25] call sp_cam_interpTo;
+		"begin_intromob2" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
 		[false,1] call setBlackScreenGUI;
+		8 call sp_threadPause;
+		[true,1] call sp_gui_setBlackScreenGUI;
+		call sp_cam_stopAllInterp;
 
-		10 call sp_threadPause;
-		(["begin\precutscene\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		1 call sp_threadPause;
+		//bum inside house
+		// ["vr",[3917.29,3976.71,122.421],41.1298,0.58,[-4.15509,0],0,0,720,0.028667,0,1,0,1] call sp_cam_prepCamera;
+		// ["all",["vr",[3918.33,3977.92,122.421],40.7631,0.58,[1.67053,4.10418],0,0,720,0.028667,0,1,0,1],25] call sp_cam_interpTo;
+		// "begin_intromob1" call sp_ai_waitForMobLoaded;
+		// {call sp_isPlayerPosPrepared} call sp_threadWait;
+		// [false,1] call setBlackScreenGUI;
+		// 5 call sp_threadPause;
+		// [true,1] call sp_gui_setBlackScreenGUI;
+		// call sp_cam_stopAllInterp;
 
-		["vr",[4000.79,3933.75,15.5935],306.964,0.340001,[18.8002,-1.43735],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
-		(["begin\precutscene\gg2"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		3 call sp_threadPause;
+		//cave guard
+		["vr",[3968.64,3990.48,91.8219],257.031,0.36,[16.4857,2.04198],0,0,720,0.028667,0,1,0,1] call sp_cam_prepCamera;
+		["all",["vr",[3968.09,3989.14,91.8219],267.178,0.55,[12.5978,-8.55648],0,0,720,0.028667,0,1,0,1],25] call sp_cam_interpTo;
+		"begin_intromob5" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		[false,1] call setBlackScreenGUI;
+		8 call sp_threadPause;
+		[true,1] call sp_gui_setBlackScreenGUI;
+		call sp_cam_stopAllInterp;
 
-		["vr",[4036.36,3935.1,19.1935],263.098,0.54,[25.7139,-1.43735],10,0,0.947056,0,1,1,0,1] call sp_cam_prepCamera;
-		(["begin\precutscene\gg3"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		2 call sp_threadPause;
 
+		//merchanters
+		// ["vr",[3929.36,4006.03,149.022],300.822,0.47,[-33.279,-14.5418],0,0,720,0.028667,0,1,0,1] call sp_cam_prepCamera;
+		// "begin_intromob7" call sp_ai_waitForMobLoaded;
+		// _bdy = ("begin_intromob7" call sp_ai_getMobBody);
+		// _bdy switchmove "Acts_B_M01_briefing"; _bdy setAnimSpeedCoef 0.8;
+		// ["all",["vr",[3928.92,4005.79,148.822],315.817,0.47,[-32.0988,-14.5418],0,0,720,0.028667,0,1,0,1],15] call sp_cam_interpTo;
+		// 0.1 call sp_threadPause;
+		// [false,0.2] call sp_gui_setBlackScreenGUI;
+		// 4 call sp_threadPause;
+		// [true,0.2] call sp_gui_setBlackScreenGUI;
+		// call sp_cam_stopAllInterp;
+
+		
+
+		//napos
 		["vr",[3934.05,3981.78,9.79338],296.457,0.46,[6.10687,7.22812],0,0,4.00993,0,1,1,0,1] call sp_cam_prepCamera;
-
+		"begin_introna1" call sp_ai_waitForMobLoaded;
+		{
+			for "_i" from 1 to 3 do {
+				_strI = str _i;
+				["begin_introna"+_strI,"begin_pos_introna"+_strI,"begin\introna"+_strI] call sp_ai_playAnim;
+			};
+		} call sp_threadCriticalSection;
+		1 call sp_threadPause;
 		["fov",0.46,0.42,9] call sp_cam_interpCam;
+		[false,4] call sp_gui_setBlackScreenGUI;
 
-		(["begin\precutscene\gg4"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		2 call sp_threadPause;
-		(["begin\precutscene\gg5"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		4.3 call sp_threadPause;
+		
+
+		begin_debug_timingIntro = tickTime - begin_debug_timingIntro;
 
 		_d = getGUI;
 		_mainBack = widgetNull;
@@ -135,9 +205,9 @@ begin_logoshown = false;
 		
 		
 
-		widgetSetFade(_b,0,0.3);
-		0.3 call sp_threadPause;
-		widgetSetFade(_logo,0,0.1);
+		widgetSetFade(_b,0,0.05);
+		0.1 call sp_threadPause;
+		widgetSetFade(_logo,0,0.15);
 
 		//fog effect
 		{
@@ -192,22 +262,24 @@ begin_logoshown = false;
 			startUpdateParams(_onFrameCodeFog,0,_localFogs);
 		} call sp_threadCriticalSection;	
 
-
-		5 call sp_threadPause;
-		//enable native background
-		widgetSetFade(_mainBack,0,0);
-
-		//hide logo
-		widgetSetFade(_logo,1,1);
-		1 call sp_threadPause;
-		begin_logoshown = true;
-		//hide ctg (smoke effect)
-		//widgetSetFade(_ctg,1,3);
-
-		7 call sp_threadPause;
+		if (begin_debug_showLogo) then {
+			5 call sp_threadPause;
+			//enable native background
+			widgetSetFade(_mainBack,0,0);
+		
+			//hide logo
+			widgetSetFade(_logo,1,1);
+			1 call sp_threadPause;
+			begin_logoshown = true;
+			//hide ctg (smoke effect)
+			//widgetSetFade(_ctg,1,3);
+			
+			7 call sp_threadPause;
+		};
 		[_ctg] call deleteWidget;
 		[_mainback] call deleteWidget;
 		
+		[false] call sp_cam_setCinematicCam;
 	} call sp_threadStart;
 }] call sp_addScene;
 

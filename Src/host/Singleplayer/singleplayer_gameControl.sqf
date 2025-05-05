@@ -155,6 +155,10 @@ sp_setPlayerPos = {
 	
 };
 
+sp_isPlayerPosPrepared = {
+	call noe_client_isPlayerPositionChunksLoaded;
+};
+
 //получает объект по глобальной ссылке
 sp_getObject = {
 	params ["_gref"];

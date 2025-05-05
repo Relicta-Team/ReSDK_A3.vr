@@ -369,3 +369,11 @@ sp_gui_setCinematicMode = {
 		call displayClose;
 	};
 };
+
+sp_gui_setBlackScreenGUI = {
+	params ["_mode",["_time",1],["_threadWait",true]];
+	[_mode,_time] call setBlackScreenGUI;
+	if (canSuspend && _threadWait) then {
+		_time call sp_threadPause;
+	};
+};

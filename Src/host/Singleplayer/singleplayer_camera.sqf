@@ -5,6 +5,7 @@
 
 // camera control
 sp_cam_cinematicCam = objNull;
+sp_cam_internal_bufferCamData = [];
 
 sp_cam_createCinematicCam = {
 	private _cam = "camera" createVehicleLocal [0,0,0];//camcreate [0,0,0];
@@ -55,8 +56,13 @@ sp_cam_setFov = {
 };
 
 sp_cam_prepCamera = {
-	_cpar = _this;
-
+	private _cpar = _this;
+	if (canSuspend) exitWith {
+		{
+			_cpar call sp_cam_prepCamera;
+		} call sp_threadCriticalSection;
+	};
+	_cpar = array_copy(_cpar);
 	private _cam = sp_cam_cinematicCam;
 	//["vr",[3932.76,3981.64,10.3934],309.069,0.75,[-12.2237,0],0,0,3.71942,0,0,1,0,1]
 	_cpar deleteAt 0;
@@ -78,28 +84,126 @@ sp_cam_prepCamera = {
 		_pitch,
 		_bank
 	] call bis_fnc_setpitchbank;
+
+	sp_cam_internal_bufferCamData = ["vr",_pos,_dir,_fov,_pitchbank];
+};
+
+sp_cam_interp_internal_mapCamData = createHashMapFromArray [
+	["pos",1],
+	["dir",2],
+	["fov",3],
+	["pitchbank",4]
+];
+sp_cam_interp_internal_orderCommands = [
+	"fov","pos","dir","pitchbank"
+];
+
+sp_cam_interpTo = {
+	params ["_mode","_to",["_time",1]];
+
+	private _from = sp_cam_internal_bufferCamData;
+	[_mode,_from,_to,_time] call sp_cam_interpCam;
 };
 
 sp_cam_interpCam = {
 	params ["_mode","_from","_to",["_time",1]];
-	_interpData = {
-		(_this select 0) params ["_ctx","_pars"];
-		_ctx params ["_start","_end"];
-		_pars params ["_mode","_from","_to"];
-		if (_mode == "pos") exitwith {
-			_val = vectorLinearConversion [_start,_end,tickTime,_from,_to,true];
-			[_val] call sp_cam_setCamPos;
-			if equals(_val,_to) then {stopThisUpdate()};
+
+	if (_mode != "all") then {
+		if (equalTypes(_from,[]) && {equals(_from select 0,"vr")}) then {
+			_from = _from select (sp_cam_interp_internal_mapCamData get _mode);
 		};
-		if (_mode == "fov") exitwith {
-			_val = linearConversion [_start,_end,tickTime,_from,_to,true];
-			[_val] call sp_cam_setFov;
-			if equals(_val,_to) then {stopThisUpdate()};
+		if (equalTypes(_to,[]) && {equals(_to select 0,"vr")}) then {
+			_to = _to select (sp_cam_interp_internal_mapCamData get _mode);
 		};
 	};
+
+	_interpData = {
+		(_this select 0) params ["_ctx","_pars","_cancelToken"];
+		_ctx params ["_start","_end"];
+		
+		//external terminate
+		if (refget(_cancelToken)) exitWith {
+			stopThisUpdate();
+		};
+
+		//normal terminate
+		if (tickTime >= _end) exitWith {
+			stopThisUpdate();
+			refset(_cancelToken,true);
+			sp_cam_internal_map_allUpdatesCancelToken deleteAt thisUpdate;
+		};
+
+		_pars params ["_mode","_from","_to"];
+
+		_modeHandler = {
+			if (_mode == "pos") exitwith {
+				_val = vectorLinearConversion [_start,_end,tickTime,_from,_to,true];
+				[_val] call sp_cam_setCamPos;
+				//if equals(_val,_to) then {stopThisUpdate()};
+			};
+			if (_mode == "fov") exitwith {
+				_val = linearConversion [_start,_end,tickTime,_from,_to,true];
+				[_val] call sp_cam_setFov;
+				//if equals(_val,_to) then {stopThisUpdate()};
+			};
+			if (_mode == "dir") exitwith {
+				_dir = linearConversion [_start,_end,tickTime,_from,_to,true];
+				sp_cam_cinematicCam setdir _dir;
+			};
+			if (_mode == "pitchbank") exitwith {
+				
+				_from params ["_pf","_bf"];
+				_to params ["_pt","_bt"];
+
+				_pitch = linearConversion [_start,_end,tickTime,_pf,_pt,true];
+				_bank = linearConversion [_start,_end,tickTime,_bf,_bt,true];
+				[
+					sp_cam_cinematicCam,
+					_pitch,
+					_bank
+				] call bis_fnc_setpitchbank;
+			};
+		};
+
+		if (_mode == "all") exitWith {
+			_fromOrig = _from;
+			_toOrig = _to;
+			_mapIndex = sp_cam_interp_internal_mapCamData;
+			{
+				private _mode = _x;
+				private _curIndex = _mapIndex get _mode;
+				private _from = _fromOrig select _curIndex;
+				private _to = _toOrig select _curIndex;
+				call _modeHandler;
+			} foreach sp_cam_interp_internal_orderCommands;
+		};
+
+		call _modeHandler;
+
+		
+	};
+
+	private _cancelToken = refcreate(false);
 	private _args = [
 		[tickTime,tickTime+_time],
-		[_mode,_from,_to]
+		[_mode,_from,_to],
+		_cancelToken
 	];
-	startUpdateParams(_interpData,0,_args);
+	private _updHandle = startUpdateParams(_interpData,0,_args);
+	
+	sp_cam_internal_map_allUpdatesCancelToken set [_updHandle,_cancelToken];
+
+	_updHandle
 };
+
+sp_cam_stopAllInterp = {
+	{
+		{
+			refset(_y,true);
+			sp_cam_internal_map_allUpdatesCancelToken deleteat _x;
+		} foreach sp_cam_internal_map_allUpdatesCancelToken;
+		
+	} call sp_threadCriticalSection;
+};
+
+sp_cam_internal_map_allUpdatesCancelToken = createHashMap;

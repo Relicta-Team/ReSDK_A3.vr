@@ -45,10 +45,15 @@ sp_ai_debug_startCapture = {
 
     sp_ai_debug_stateCount = 1;
 
+    //cap v2 use animspeed
+    private _animSpeed = getAnimSpeedCoef _target;
+    sp_ai_debug_previewPerson setAnimSpeedCoef _animSpeed;
+
     sp_ai_debug_captureData = [
-        "cap_v1",
+        "cap_v2",
         [
-            ["usepos",_movecapt]
+            ["usepos",_movecapt],
+            ["animspeed",_animSpeed]
         ]
     ]; //[[frame1, data1], [frame2, data2]]...
     sp_ai_debug_lastAnim = "";
@@ -218,6 +223,7 @@ sp_ai_playCapture = {
     private _cpydta = array_copy(_cdata);
 
     private _moveproc = true;
+    private _animspeed = 1;
     if equalTypes(_cpydta select 0,"") then {
         _cpydta deleteAt 0;
         private _pars = _cpydta deleteAt 0;
@@ -225,6 +231,10 @@ sp_ai_playCapture = {
             _x params ["_name","_val"];
             if (_name == "usepos") then {
                 _moveproc = _val;
+                continue;
+            };
+            if (_name == "animspeed") then {
+                _animspeed = _val;
                 continue;
             };
         } foreach _pars;
@@ -256,7 +266,7 @@ sp_ai_playCapture = {
        _ctx set ["internalContext",null];
     };
     
-    _target setanimspeedcoef 1;
+    _target setAnimSpeedCoef _animspeed;
 
     traceformat("CAPINFO: %1 [%2]",_ctx get "capturePos" arg _moveproc)
     if (_ctx get "capturePos") then {
@@ -720,6 +730,22 @@ sp_ai_setMobPos = {
 	};
 };
 
+sp_ai_isLoadedPos = {
+    params ["_mob"];
+    private _body = _mob call sp_ai_getMobBody;
+    if isNullReference(_body) exitWith {true}; //no body - no loaded
+    private _mptr = _body getvariable "__sp_ai_internal_nftime";
+    if isNullVar(_mptr) exitWith {false};
+    isobjecthidden (_mptr callv(get))
+};
+
+sp_ai_waitForMobLoaded = {
+    params ["_mob"];
+    {
+        [_mob] call sp_ai_isLoadedPos
+    } call sp_threadWait;
+};
+
 sp_ai_internal_onUpdate = {
     _chunkLoaded = {
         params ["_ps"];
@@ -732,9 +758,9 @@ sp_ai_internal_onUpdate = {
         _vpos = _y getvariable "__sp_ai_internal_commitPos";
         _loaded = [_vpos] call _chunkLoaded;
         if (!_loaded) then {
+            _y setvariable [_specvar,null];
             _y setposatl _vpos;
             _y setVelocity [0,0,0];
-            _y setvariable [_specvar,null];
         } else {
             if isNull(_y getvariable _specvar) then {
                 _val = createSimpleObject ["rel_vox\obj\block_dirt.p3d",[0,0,0],true];
@@ -767,8 +793,9 @@ sp_ai_internal_onUpdate = {
                         if (!isNull(_m getvariable _specvar)) then {
                             _mptr = _m getvariable _specvar;
                             _mptr callv(get) setposatl (_vpos vectordiff [0,0,0.1]);
-                            _m setPosAtl (_vpos vectoradd [0,0,0.3]);
+                            _m setPosAtl (_vpos vectoradd [0,0,0.1]);
                             _mptr callv(get) hideObject true;
+                            _m setvelocity [0,0,0];
                         };
                     },
                     [_y,_vpos,_specvar,tickTime + 2]
