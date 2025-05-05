@@ -278,8 +278,10 @@ begin_logoshown = false;
 		};
 		[_ctg] call deleteWidget;
 		[_mainback] call deleteWidget;
-		
+		[true,0] call setBlackScreenGUI;
 		[false] call sp_cam_setCinematicCam;
+
+		//["begin_start"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
 
