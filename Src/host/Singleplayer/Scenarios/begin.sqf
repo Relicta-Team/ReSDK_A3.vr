@@ -179,7 +179,7 @@ begin_logoshown = false;
 		["fov",0.46,0.42,9] call sp_cam_interpCam;
 		[false,4] call sp_gui_setBlackScreenGUI;
 
-		4.3 call sp_threadPause;
+		4.5 call sp_threadPause;
 		
 
 		begin_debug_timingIntro = tickTime - begin_debug_timingIntro;
