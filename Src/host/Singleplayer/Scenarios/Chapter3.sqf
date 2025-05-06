@@ -18,35 +18,41 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	};
 
 	//create deadbody
-	_posDeadbody = callFunc("cpt3_pos_deadbody_looting" call sp_getObject,getPos);
-	_body = [_posDeadbody,null,"cpt3_deadbody"] call sp_ai_createPerson;
-	_mob = _body getvariable "link";
-
-	callFuncParams(_mob,generateNaming,"Уба" arg "Бахот");
-	setVar(_mob,age,27);
-
-	_cloth = ["NomadCloth10",_mob,INV_CLOTH] call createItemInInventory;
-	["Lockpick",_cloth] call createItemInContainer;
+	_body = objNull;
+	_mob = nullPtr;
+	["cpt3_pos_deadbody_looting","cpt3_deadbody",[
+		["uniform","NomadCloth10"],
+		["name",["Мертвец"]],
+		["age",27]
+	],{
+		_cloth = callFuncParams(_this,getItemInSlot,INV_CLOTH);
+		["Lockpick",_cloth] call createItemInContainer;
+		_mob = _this;
+	},{
+		_body = _this;
+	}] call sp_ai_createPersonEx;
 	
 	callFuncParams(_mob,destroyLimb,BP_INDEX_HEAD);
 	callFuncParams(_mob,destroyLimb,BP_INDEX_LEG_L);
-	//callFuncParams(_mob,destroyLimb,BP_INDEX_ARM_L);
 	callFuncParams(_mob,destroyLimb,BP_INDEX_ARM_R);
 
 	_body switchMove "acts_staticdeath_10";
 	_body enablemimics false;
 
 	//make eater
-	_eaterBdy = ["cpt3_pos_eaterbase","GMPreyMobEater","cpt3_eater"] call sp_ai_createPerson;
+	_eaterBdy = objNull;
+	["cpt3_pos_eaterbase","cpt3_eater",[
+		["class","GMPreyMobEater"],
+		["name",["Сонный","Жрун"]]
+	],{
+		["Castoffs1",_this,INV_CLOTH] call createItemInInventory;
+	},{
+		_eaterBdy = _this;
+	}] call sp_ai_createPersonEx;
 	_eaterBdy setDir (callFunc("cpt3_pos_eaterbase" call sp_getObject,getDir));
 	if (!sp_debug) then {
 		_eaterBdy hideObject true;
 	};
-	_eater = _eaterBdy getvariable "link";
-
-	callFuncParams(_eater,generateNaming,"Сонный" arg "Жрун");
-	["Castoffs1",_eater,INV_CLOTH] call createItemInInventory;
-
 	_eaterBdy switchmove "ApanPercMstpSnonWnonDnon_G01";
 	_eaterBdy setface "persianhead_a3_01_player";//disable eater head
 
@@ -660,6 +666,49 @@ cpt3_func_damageEvent = {
 	[true,2] call setBlackScreenGUI;
 	{
         3 call sp_threadPause;
-        ["cpt4_begin"] call sp_startScene;
+		["cpt3_topart4"] call sp_startScene;
     } call sp_threadStart;
+}] call sp_addScene;
+
+
+["cpt3_topart4",{
+	{
+		//cam shown
+		[true] call sp_cam_setCinematicCam;
+		{
+			["cpt3_pos_cutscenetocpt4","player_cutscene",[
+				["uniform",cpt1_playerUniform]
+			],{
+				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			}] call sp_ai_createPersonEx;
+
+		} call sp_threadCriticalSection;
+
+		["vr",[4417.22,3859.65,12.6363],71.0314,0.33,[5.52114,0],0,0,760.728,0,0,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		["player_cutscene","cpt3_pos_cutscenetocpt4","cutscenes\cpt3_cutscenetocpt4",{},[
+			["state_1",{
+				callFuncParams("GateCity G:6C2bvKArl3c" call sp_getObject,setDoorOpen,true);
+			}]
+		]] call sp_ai_playAnim;
+		[false,4] call setBlackScreenGUI;
+		11 call sp_threadPause;
+
+		
+		_pos2 = ["vr",[4423,3861.58,13.9363],71.6569,0.72,[-8.56582,0],0,0,760.728,0,0,1,0,1];
+		["all",_pos2,16.3 + 8] call sp_cam_interpTo;
+		(10) call sp_threadPause;
+		[true,4] call sp_gui_setBlackScreenGUI;
+
+		5 call sp_threadPause;
+
+		[false] call sp_cam_setCinematicCam;
+		call sp_cam_stopAllInterp;
+		_post = {
+			call sp_cleanupSceneData;
+        	["cpt4_begin"] call sp_startScene;
+		}; 
+		invokeAfterDelay(_post,2);
+	} call sp_threadStart;
 }] call sp_addScene;

@@ -3,6 +3,12 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\engine.hpp"
+#include "..\oop.hpp"
+#include "..\struct.hpp"
+#include "..\text.hpp"
+#include "..\thread.hpp"
+
 // camera control
 sp_cam_cinematicCam = objNull;
 sp_cam_internal_bufferCamData = [];
@@ -30,8 +36,14 @@ sp_cam_setCamPos = {
 };
 
 sp_cam_setCinematicCam = {
-	params ["_mode"];
+	params ["_mode",["_recreate",true]];
 	if (_mode) then {
+		if (call sp_cam_isCreated && _recreate) then {
+			deletevehicle sp_cam_cinematicCam;
+		};
+		if (_recreate) then {
+			call sp_cam_createCinematicCam;
+		};
 		sp_cam_cinematicCam switchCamera "Internal";
 	} else {
 		cam_currentCamera cameraEffect ["terminate","back"];
@@ -72,7 +84,6 @@ sp_cam_prepCamera = {
 	private _pitchbank =	_cpar select 3;
 	private _focus =	_cpar select 4;
 
-	[_fov] call sp_cam_setFov;
 
 	_pitchbank params ["_pitch","_bank"];
 
@@ -84,6 +95,8 @@ sp_cam_prepCamera = {
 		_pitch,
 		_bank
 	] call bis_fnc_setpitchbank;
+	
+	[_fov] call sp_cam_setFov;
 
 	sp_cam_internal_bufferCamData = ["vr",_pos,_dir,_fov,_pitchbank];
 };
@@ -95,7 +108,7 @@ sp_cam_interp_internal_mapCamData = createHashMapFromArray [
 	["pitchbank",4]
 ];
 sp_cam_interp_internal_orderCommands = [
-	"fov","pos","dir","pitchbank"
+	"pos","dir","pitchbank","fov"
 ];
 
 sp_cam_interpTo = {
@@ -142,11 +155,18 @@ sp_cam_interpCam = {
 				//if equals(_val,_to) then {stopThisUpdate()};
 			};
 			if (_mode == "fov") exitwith {
+				// if (_to < _from) then {
+				// 	swap_lvars(_to,_from);
+				// };
 				_val = linearConversion [_start,_end,tickTime,_from,_to,true];
+				//if (_from == _to) then {_val = _from};
 				[_val] call sp_cam_setFov;
 				//if equals(_val,_to) then {stopThisUpdate()};
 			};
 			if (_mode == "dir") exitwith {
+				if (_to < _from) then {
+					swap_lvars(_to,_from);
+				};
 				_dir = linearConversion [_start,_end,tickTime,_from,_to,true];
 				sp_cam_cinematicCam setdir _dir;
 			};

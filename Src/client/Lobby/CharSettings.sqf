@@ -615,7 +615,12 @@ lobby_setFace = {
 			_text commit 0.1;
 		};
 		if (_optionName == "select") exitwith {
-			lobby_glob_dummy_man setFace _config;			
+			lobby_glob_dummy_man setFace _config;
+
+			#ifdef SP_MODE
+			[format["facecopy: %1",_config]] call chatPrint;
+			copyToClipboard _config;
+			#endif		
 			
 			_text setFade 1;
 			_text commit 0.2;

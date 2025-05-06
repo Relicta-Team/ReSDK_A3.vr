@@ -9,7 +9,6 @@ begin_debug_showLogo = true;
 
 begin_logoshown = false;
 ["begin_prestart",{
-	call sp_cam_createCinematicCam;
 	[true] call sp_cam_setCinematicCam;
 
 	[""] call sp_view_setPlayerHudVisible;
@@ -297,6 +296,33 @@ begin_handleKeyDown = -1;
 	[true,0] call setBlackScreenGUI;
 	["begin_pos_player",0] call sp_setPlayerPos;
 	
+	["begin_pos_hwcut1","begin_hwcut1",[
+		["uniform","StreakCloth"]
+	],{},{
+		_this switchmove "Acts_Accessing_Computer_Loop";
+	}] call sp_ai_createPersonEx;
+
+	["begin_pos_hwcut2man","begin_hwcut2man",[
+		["uniform","StreakCloth"]
+	],{},{
+		_this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_3_loop";
+	}] call sp_ai_createPersonEx;
+	["begin_pos_hwcut2woman","begin_hwcut2woman",[
+		["uniform","StreakCloth"],
+		["class","MobWoman"],
+		["face","FaceW10"]
+	],{},{
+		_this switchMove "Acts_CivilIdle_1";
+	}] call sp_ai_createPersonEx;
+
+	["begin_pos_hwcut3","begin_hwcut3",[
+		["uniform","StreakCloth"]
+	],{},{
+
+	}] call sp_ai_createPersonEx;
+
+
+
 	["begin_pos_watcher1","begin_watcher1",[
 		["uniform","StreakCloth"],
 		["name",["Смотрящий"]]
@@ -326,7 +352,8 @@ begin_handleKeyDown = -1;
 			},
 			{
 				if (_i==2) then {
-					_this switchMove "Acts_JetsMarshallingLeft_loop";
+					//_this switchMove "Acts_JetsMarshallingLeft_loop";
+					_this switchmove "Acts_ShowingTheRightWay_loop";
 				}
 			}
 		] call sp_ai_createPersonEx;
@@ -435,20 +462,35 @@ begin_canStartAttack = false;
 	5-door1open
 	6-door2open
 	*/
-	["begin_keeper1","begin_pos_keeper1","begin\keeper1",{},[
+	["begin_keeper1","begin_pos_keeper1","begin\keeper1",{
+		//on end
+		params ["_mob"];
+		_anim = "hubbriefing_ext_contact";
+		_mob switchMove _anim;
+
+		[_mob,"begin_pos_keeper1_gate",0] call sp_ai_setMobPos;
+		begin_canStartAttack=true;
+	},[
 		["state_1",{
+			params ["_obj"];
+			callFuncParams("begin_obj_hwdoor" call sp_getObject,setDoorOpen,true);
+		}],
+		["state_2",{
 			params ["_obj"];
 			_anim = "acts_explaining_ew_idle03";
 			_obj switchMove _anim;
-			
-
-			[{tickTime > _this},tickTime + rand(2,5)] call sp_ai_animWait;
-		}],
-		["state_2",{
-			{
+			_thd = {
+				//dialog
+				3 call sp_threadPause;
 				sp_playerCanMove = true;
-				player forcewalk true;
-
+	 			player forcewalk true;
+				player setAnimSpeedCoef 0.78;
+				
+			} call sp_threadStart;
+			
+			//nocheck thread
+			[{
+				_this call sp_threadWaitForEnd;
 				1 call sp_threadPause;
 
 				[
@@ -468,25 +510,63 @@ begin_canStartAttack = false;
 				10 call sp_threadPause;
 
 				[false,_h] call sp_setNotificationVisible;
-			} call sp_threadStart;
-		}],
-		["state_3",{
-			params ["_obj"];
-			_anim = "hubbriefing_ext_contact";
-			_obj switchMove _anim;
-			begin_canStartAttack=true;
-			[{begin_attackStarted}] call sp_ai_animWait;
-		}],
-		["state_4",{}],
-		["state_5",{
-			//open door1
-			callFuncParams("begin_rundoor1" call sp_getObject,setDoorOpen,true);
-		}],
-		["state_6",{
-			//open door2
-			callFuncParams("begin_rundoor2" call sp_getObject,setDoorOpen,true);
+			},_thd] call sp_threadStart;
+
+			[{equals(_this,sp_threadNull)},_thd] call sp_ai_animWait;
 		}]
 	]] call sp_ai_playAnim;
+	// ["begin_keeper1","begin_pos_keeper1","begin\keeper1",{},[
+	// 	["state_1",{
+	// 		params ["_obj"];
+	// 		_anim = "acts_explaining_ew_idle03";
+	// 		_obj switchMove _anim;
+			
+
+	// 		[{tickTime > _this},tickTime + rand(2,5)] call sp_ai_animWait;
+	// 	}],
+	// 	["state_2",{
+	// 		{
+	// 			sp_playerCanMove = true;
+	// 			player forcewalk true;
+
+	// 			1 call sp_threadPause;
+
+	// 			[
+	// 				"Передвижение вперёд @MoveForward,"
+	// 				+ sbr + "передвижение назад @MoveBack,"
+	// 				+ sbr + "влево @TurnLeft,"
+	// 				+ sbr + "вправо @TurnRight,"
+	// 			] call sp_setNotification;
+
+	// 			10 call sp_threadPause;
+
+	// 			_h = [
+	// 				"Для свободного осмотра (вращения головой) удерживайте @lookAround,"
+	// 				+ sbr + "для переключения режима нажмите @lookAroundToggle"
+	// 			] call sp_setNotification;
+				
+	// 			10 call sp_threadPause;
+
+	// 			[false,_h] call sp_setNotificationVisible;
+	// 		} call sp_threadStart;
+	// 	}],
+	// 	["state_3",{
+	// 		params ["_obj"];
+	// 		_anim = "hubbriefing_ext_contact";
+	// 		_obj switchMove _anim;
+	// 		begin_canStartAttack=true;
+	// 		[{begin_attackStarted}] call sp_ai_animWait;
+	// 	}],
+	// 	["state_4",{}],
+	// 	["state_5",{
+	// 		//open door1
+	// 		callFuncParams("begin_rundoor1" call sp_getObject,setDoorOpen,true);
+	// 	}],
+	// 	["state_6",{
+	// 		//open door2
+	// 		callFuncParams("begin_rundoor2" call sp_getObject,setDoorOpen,true);
+	// 	}]
+	// ]] call sp_ai_playAnim;
 }] call sp_addScene;
 
 begin_startattack_activated = false;
@@ -494,6 +574,10 @@ begin_startattack_activated = false;
 	
 	if (begin_startattack_activated) exitWith {};
 	begin_startattack_activated = true;
+
+	private _ivl = "begin_obj_invvalpreattack" call sp_getObject;
+	private _oldpos = callFunc(_ivl,getPos);
+	callFuncParams(_ivl,changePosition,_oldpos vectoradd vec3(0,0,-4));
 
 	//for reload mode close doors
 	callFuncParams("begin_doorenter" call sp_getObject,setDoorOpen,false);
@@ -613,6 +697,36 @@ begin_startattack_activated = false;
 		} call sp_threadStart;
 		
 		begin_attackStarted = true;
+
+		4 call sp_threadPause;
+
+		{ [[3755.28,3927.41,7.12903]] call cpt5_explosionGrenade; } call sp_threadCriticalSection;
+		for "_i" from 1 to 2 do {
+			_strI = str _i;
+			private _objname = "begin_obj_destr" + _strI;
+			private _obj = _objname call sp_getObject;
+			private _pos = callFunc(_obj,getPos);
+			callFuncParams(_obj,changePosition,_pos vectoradd vec3(0,0,5));
+		};
+
+		//keeper anim
+		["begin_keeper1","begin_pos_keeper1_gate","begin\keeper1_run",{
+			//on end
+			params ["_mob"];
+			_anim = "hubbriefing_ext_contact";
+			_mob switchMove _anim;
+
+				begin_canStartAttack=true;
+			},[
+				["state_1",{
+					params ["_obj"];
+					callFuncParams("begin_rundoor1" call sp_getObject,setDoorOpen,true);
+				}],
+				["state_2",{
+					callFuncParams("begin_rundoor2" call sp_getObject,setDoorOpen,true);
+				}]
+			]
+		] call sp_ai_playAnim;
 
 		//loop attack targets
 		for "_i" from 1 to 2 do {
@@ -1131,9 +1245,12 @@ begin_finalizer_act = false;
 	(findDisplay 46) displayRemoveEventHandler ["KeyDown",begin_handleKeyDown];
 	begin_handleKeyDown = -1;
 
+	player setAnimSpeedCoef 1;
+
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0.1] call setBlackScreenGUI;
 	[true,true] call sp_audio_setMusicPause;
+	call sp_cleanupSceneData;
 	{
 		5 call sp_threadPause;
 		["cpt1_begin"] call sp_startScene;

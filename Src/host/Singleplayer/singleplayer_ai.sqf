@@ -33,7 +33,7 @@ sp_ai_debug_startCapture = {
         call sp_cam_createCinematicCam;
     };
     
-    [true] call sp_cam_setCinematicCam;
+    [true,false] call sp_cam_setCinematicCam;
 
 
     sp_ai_debug_previewPerson = call sp_ai_debug_getPreviewPerson;
@@ -535,18 +535,39 @@ sp_ai_createPersonEx = {
         [_tname] call sp_ai_deletePerson;
     };
 
-    private _body = [_pos,null,_tname] call sp_ai_createPerson;
-    if equalTypes(_pos,"") then {
-        _body setDir (callFunc(_pos call sp_getObject,getDir));
-    };
-    _mob = _body getvariable "link";
     if equalTypes(_params,[]) then {
         _params = createHashMapFromArray _params;
     };
-    setVar(_mob,age,_params getOrDefault vec2("age",randInt(20,40)));
+    private _cls = _params get "class";
+    private _body = [_pos,_cls,_tname] call sp_ai_createPerson;
+    if equalTypes(_pos,"") then {
+        _body setDir (callFunc(_pos call sp_getObject,getDir));
+    };
+    _mob = _body getvariable "link";    
 
     if ("uniform" in _params) then {
         [_params getOrDefault ["uniform","Cloth"],_mob,INV_CLOTH] call createItemInInventory;
+    };
+    if ("face" in _params) then {
+        private _face = _params get "face";
+        if (_face in faces_map_man) then {
+            callFuncParams(_mob,setMobFace,pick(faces_map_man get _face))
+        } else {
+            callFuncParams(_mob,setMobFace,_face);
+        };
+    } else {
+        callFuncParams(_mob,setMobFace,pick(faces_map_man get "white"));
+    };
+
+    if ("age" in _params) then {
+        private _age = _params get "age";
+        if equalTypes(_age,[]) then {
+            setVar(_mob,age,randInt(_age select 0,_age select 1));
+        } else {
+            setVar(_mob,age,_age);
+        };
+    } else {
+        setVar(_mob,age,randInt(20,40));
     };
     
     private _pnm = _params getOrDefault vec2("name",["Мужик" arg "Неизвестный"]);

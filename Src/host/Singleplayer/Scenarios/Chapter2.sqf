@@ -569,8 +569,51 @@ cpt2_restoreTrapMethods = {
 	[true,1.1] call setBlackScreenGUI;
     {
         3 call sp_threadPause;
-        ["cpt3_begin"] call sp_startScene;
+
+        ["cpt2_topart3"] call sp_startScene;
+       
     } call sp_threadStart;
+}] call sp_addScene;
+
+["cpt2_topart3",{
+	{
+		//cam shown
+		[true] call sp_cam_setCinematicCam;
+		{
+			["cpt2_pos_cutscenetocpt3","player_cutscene",[
+				["uniform",cpt1_playerUniform]
+			],{
+				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			}] call sp_ai_createPersonEx;
+
+		} call sp_threadCriticalSection;
+
+		["vr",[4263.95,3958.19,8.57178],169.17,0.45,[6.2883,0],0,0,760.139,0,0,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		["player_cutscene","cpt2_pos_cutscenetocpt3","cutscenes\cpt2_cutscenetocpt3",{},[
+            ["state_1",{
+                callFuncParams("cpt2_obj_doortocpt3" call sp_getObject,setDoorOpen,true);
+            }]
+        ]] call sp_ai_playAnim;
+		1 call sp_threadPause;
+		_del = 14.3;
+		_pos2 = ["vr",[4264.5,3955.25,8.57178],169.17,0.32,[6.2883,0],0,0,760.139,0,0,1,0,1];
+		["all",_pos2,_del + 8] call sp_cam_interpTo;
+		[false,1] call setBlackScreenGUI;
+		(_del) call sp_threadPause;
+		[true,4] call sp_gui_setBlackScreenGUI;
+
+		5 call sp_threadPause;
+
+		[false] call sp_cam_setCinematicCam;
+		call sp_cam_stopAllInterp;
+		_post = {
+            call sp_cleanupSceneData;
+            ["cpt3_begin"] call sp_startScene;
+        };
+        invokeAfterDelay(_post,3);
+	} call sp_threadStart;
 }] call sp_addScene;
 
 //cpt2_obj_medcab - medical cab

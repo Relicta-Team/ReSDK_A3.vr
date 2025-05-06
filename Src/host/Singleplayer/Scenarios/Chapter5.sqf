@@ -124,7 +124,9 @@ cpt5_questName_preend = "Последний рывок";
 
 	["cpt5_pos_capitan1","cpt5_kapitan",[
 		["uniform","StreakCloth"],
-		["name",["Капитан"]]
+		["name",["Капитан"]],
+		["face","facepoet"],
+		["age",29]
 	],{
 		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
 		callFunc(_this,switchTwoHands);
@@ -185,7 +187,8 @@ cpt5_questName_preend = "Последний рывок";
 	//-------------------------- spawn emeny -----------------------------
 	["cpt5_pos_izt1","cpt5_izt1",[
 		["uniform","StreakCloth"],
-		["name",["Истязатель"]]
+		["name",["Истязатель"]],
+		["face","asian"]
 	],{
 		["RifleAuto",_this,INV_HAND_R] call createItemInInventory;
 		callFuncParams(_this,setCombatMode,true);
@@ -233,7 +236,8 @@ cpt5_questName_preend = "Последний рывок";
 
 	["cpt5_pos_izt2","cpt5_izt2",[
 		["uniform","StreakCloth"],
-		["name",["Истязатель"]]
+		["name",["Истязатель"]],
+		["face","asian"]
 	],{
 		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
 		callFuncParams(_this,setCombatMode,true);
@@ -241,7 +245,8 @@ cpt5_questName_preend = "Последний рывок";
 	}] call sp_ai_createPersonEx;
 	["cpt5_pos_izt3","cpt5_izt3",[
 		["uniform","StreakCloth"],
-		["name",["Истязатель"]]
+		["name",["Истязатель"]],
+		["face","asian"]
 	],{
 		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
 		callFuncParams(_this,setCombatMode,true);
@@ -299,7 +304,8 @@ cpt5_questName_preend = "Последний рывок";
 	//moving pos (left->right) cpt5_pos_izcombat1 cpt5_pos_izcombat2
 	["cpt5_pos_izcombat_spawn","cpt5_izcombat",[
 		["uniform","StreakCloth"],
-		["name",["Дико","Убивать"]]
+		["name",["Дико","Убивать"]],
+		["face","face60"]
 	],{
 		["ShortSword",_this,INV_HAND_R] call createItemInInventory;
 	}] call sp_ai_createPersonEx;
@@ -1009,7 +1015,8 @@ cpt5_act_closecombat_started = false;
 		_strI = str _i;
 		["cpt5_pos_defender" + _strI,"cpt5_defender" + _strI,[
 			["uniform","StreakCloth"],
-			["name",["Истязатель"]]
+			["name",["Истязатель"]],
+			["face","asian"]
 		],{
 			[pick["RifleFinisher","RifleAuto","PistolHandmade"],_this,INV_HAND_R] call createItemInInventory;
 			callFuncParams(_this,setCombatMode,true);
@@ -1135,6 +1142,9 @@ cpt5_data_lastbattle = false;
 		5 call sp_threadPause;
 		[true,0.2] call setBlackScreenGUI;
 		
-
+		_ender = {
+			call sp_cleanupSceneData;
+		};
+		invokeAfterDelay(_ender,2);
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;

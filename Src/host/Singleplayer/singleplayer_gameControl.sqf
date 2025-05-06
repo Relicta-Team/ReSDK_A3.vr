@@ -98,6 +98,7 @@ sp_clearPlayerHandlers = {
 sp_gc_onPlayerAssigned = {
 	params ["_mob"];
 	
+	[-1] call music_stop;
 	[] call sp_audio_stopMusic;
 
 	["begin"] call sp_loadScenario;
@@ -107,7 +108,8 @@ sp_gc_onPlayerAssigned = {
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
-	["begin_start"] call sp_startScene;
+	["begin_prestart"] call sp_startScene;
+	//["cpt3_begin"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
 };
 

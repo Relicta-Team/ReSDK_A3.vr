@@ -7,6 +7,8 @@
 
 #include "..\..\..\client\Inventory\inventory.hpp"
 
+cpt1_playerUniform = "NomadCloth9";
+
 ["cpt1_begin",{
 
 	//enable input
@@ -507,15 +509,61 @@
 }] call sp_addScene;
 
 ["cpt1_walk_final",{
+
+	
+
 	{
 		{
 			getVar("cpt1_obj_finaldoor" call sp_getObject,isOpen)
 		} call sp_threadWait;
 
 		[""] call sp_view_setPlayerHudVisible;
-		[true,2.5] call setBlackScreenGUI;
-		2.5 call sp_threadPause;
+		[true,2.5] call sp_gui_setBlackScreenGUI;
+		
+		["cpt1_topart2"] call sp_startScene;
+	} call sp_threadStart;
+}] call sp_addScene;
 
-		["cpt2_begin"] call sp_startScene;
+
+["cpt1_topart2",{
+	{
+		//cam shown
+		[true] call sp_cam_setCinematicCam;
+		{
+			["cpt1_pos_cutscenetocpt2","player_cutscene",[
+				["uniform",cpt1_playerUniform]
+			],{
+				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			}] call sp_ai_createPersonEx;
+
+		} call sp_threadCriticalSection;
+
+		["vr",[4072.4,3995.58,12.3159],105.566,0.32,[-24.4379,3.96708],0,0,748.007,0,1,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		["player_cutscene","cpt1_pos_cutscenetocpt2","cutscenes\cpt1_cutscenetocpt2"] call sp_ai_playAnim;
+		2 call sp_threadPause;
+		_del = 8.3;
+		_pos2 = ["vr",[4070.55,3986.09,12.3159],96.3651,0.32,[-23.785,3.96708],0,0,748.007,0,1,1,0,1];
+		["all",_pos2,_del] call sp_cam_interpTo;
+		[false,1] call setBlackScreenGUI;
+		(_del) call sp_threadPause;
+		call sp_cam_stopAllInterp;
+		_pos2 call sp_cam_prepCamera;
+		
+		2.4 call sp_threadPause;
+
+		["all",["vr",[4070.22,3978.11,12.3159],77.8022,0.32,[-25.3084,3.96708],0,0,748.007,0,1,1,0,1],8] call sp_cam_interpTo;
+		[true,4] call sp_gui_setBlackScreenGUI;
+
+		6 call sp_threadPause;
+
+		[false] call sp_cam_setCinematicCam;
+		call sp_cam_stopAllInterp;
+		_post = {
+			call sp_cleanupSceneData;
+			["cpt2_begin"] call sp_startScene;
+		};
+		invokeAfterDelay(_post,3);
 	} call sp_threadStart;
 }] call sp_addScene;

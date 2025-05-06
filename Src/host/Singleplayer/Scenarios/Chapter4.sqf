@@ -31,6 +31,10 @@ cpt4_canOpenWindow = false;
 cpt4_gref_doorwindow = "GateCity G:8fd0oIb9ArY (2)";
 cpt4_gref_doorenter = "GateCity G:8fd0oIb9ArY (1)";
 
+cpt4_data_karimFace = "face05_baf";
+
+cpt4_playerUniform = "WatchmanCloth";
+
 cpt4_addProcessorMainAct = {
 	params ["_tobjName","_code"];
 	["main_action",compile format['
@@ -64,19 +68,16 @@ cpt4_addProcessorMainAct = {
 	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 	[false,1.5] call setBlackScreenGUI;
 
-	_body = ["cpt4_pos_enterkochevs",null,"cpt4_karim"] call sp_ai_createPerson;
-	_body setDir (callFunc("cpt4_pos_enterkochevs" call sp_getObject,getDir));
-	_mob = _body getvariable "link";
-	setVar(_mob,age,34);
-	callFuncParams(_mob,generateNaming,"Карим" arg "Сухач");
-
-	_cloth = ["NomadCloth3",_mob,INV_CLOTH] call createItemInInventory;
-	["ShuttleBag",_mob,INV_HAND_L] call createItemInInventory;
-	["Torch",_mob,INV_HAND_R] call createItemInInventory;
-	["CustomKnife",_mob,INV_BELT] call createItemInInventory;
-	
-	//sync speed
-	[_body] call anim_syncAnim;
+	["cpt4_pos_enterkochevs","cpt4_karim",[
+		["uniform","NomadCloth3"],
+		["name",["Карим","Сухач"]],
+		["age",34],
+		["face",cpt4_data_karimFace]
+	],{
+		["ShuttleBag",_this,INV_HAND_L] call createItemInInventory;
+		["Torch",_this,INV_HAND_R] call createItemInInventory;
+		["CustomKnife",_this,INV_BELT] call createItemInInventory;
+	}] call sp_ai_createPersonEx;	
 
 	callFuncParams("RedButton G:NJnbP0kznrs" call sp_getObject,setEnable,false);
 	
@@ -367,18 +368,15 @@ cpt4_addProcessorMainAct = {
 		[cpt4_questName_kochevs,"Встречайте очередного посетителя"] call sp_setTaskMessageEff;
 
 		{
-			_body = ["cpt4_pos_enterkochevs",null,"cpt4_ibam"] call sp_ai_createPerson;
-			_body setDir (callFunc("cpt4_pos_enterkochevs" call sp_getObject,getDir));
-			_mob = _body getvariable "link";
-			setVar(_mob,age,26);
-			callFuncParams(_mob,generateNaming,"Ибам" arg "Шнурок");
-
-			_cloth = ["NomadCloth8",_mob,INV_CLOTH] call createItemInInventory;
-			["WoolCoat",_mob,INV_BACK] call createItemInInventory;
-			["Candle",_mob,INV_HAND_L] call createItemInInventory;
-			
-			//sync speed
-			[_body] call anim_syncAnim;
+			["cpt4_pos_enterkochevs","cpt4_ibam",[
+				["name",["Ибам","Шнурок"]],
+				["uniform","NomadCloth8"],
+				["age",26],
+				["face","face09_baf"]
+			],{
+				["WoolCoat",_this,INV_BACK] call createItemInInventory;
+				["Candle",_this,INV_HAND_L] call createItemInInventory;
+			}] call sp_ai_createPersonEx;
 		} call sp_threadCriticalSection;
 
 		[true] call sp_setHideTaskMessageCtg;
@@ -608,28 +606,27 @@ cpt4_addProcessorMainAct = {
 
 		//========== tombomz
 		{
-			_body = ["cpt4_pos_enterkochevs",null,"cpt4_tombomz"] call sp_ai_createPerson;
-			_body setDir (callFunc("cpt4_pos_enterkochevs" call sp_getObject,getDir));
-			_mob = _body getvariable "link";
-			setVar(_mob,age,44);
-			callFuncParams(_mob,generateNaming,"Бомж" arg "Нормальнышек");
-			_cloth = ["Castoffs2",_mob,INV_CLOTH] call createItemInInventory;
-			[_body] call anim_syncAnim;
+			["cpt4_pos_enterkochevs","cpt4_tombomz",[
+				["age",44],
+				["name",["Бомж","Нормальнышек"]],
+				["uniform","Castoffs2"],
+				["face","face12_ep1"]
+			]] call sp_ai_createPersonEx;
 		} call sp_threadCriticalSection;
 
 		//========== armyguy
 		{
-			_body = ["cpt4_pos_armyattacktom",null,"cpt4_tombomz_armyguy"] call sp_ai_createPerson;
-			_body setDir (callFunc("cpt4_pos_armyattacktom" call sp_getObject,getDir));
-			_mob = _body getvariable "link";
-			setVar(_mob,age,24);
-			callFuncParams(_mob,generateNaming,"Выха" arg "Штрих");
-
-			_cloth = ["StreakCloth",_mob,INV_CLOTH] call createItemInInventory;
-			["Gasmask",_mob,INV_FACE] call createItemInInventory;
-			["ShortSword",_mob,INV_HAND_R] call createItemInInventory;
-			callFunc(_mob,switchTwoHands);
-			[_body] call anim_syncAnim;
+			["cpt4_pos_armyattacktom","cpt4_tombomz_armyguy",[
+				["uniform","StreakCloth"],
+				["age",24],
+				["name",["Выха","Штрих"]],
+				["face","asianhead_a3_05"]
+			],{
+				["Gasmask",_this,INV_FACE] call createItemInInventory;
+				["ShortSword",_this,INV_HAND_R] call createItemInInventory;
+				callFunc(_this,switchTwoHands);
+			}] call sp_ai_createPersonEx;
+			
 		} call sp_threadCriticalSection;
 
 		cpt4_canOpenWindow = true;
@@ -742,11 +739,13 @@ cpt4_addProcessorMainAct = {
 
 	["cpt4_pos_armyfrommeds","cpt4_armyguy1",[
 		["name",["Охр","Исимбар"]],
-		["uniform","CaretakerCloth"]
+		["uniform","CaretakerCloth"],
+		["face","face58"]
 	]] call sp_ai_createPersonEx;
 	["cpt4_pos_armyfrommeds","cpt4_armyguy2",[
 		["name",["Младший Охр","Акептис"]],
-		["uniform","StreakCloth"]
+		["uniform","StreakCloth"],
+		["face","face07"]
 	],{
 		["Baton",_this,INV_HAND_R] call createItemInInventory;
 	}] call sp_ai_createPersonEx;
@@ -796,9 +795,67 @@ cpt4_addProcessorMainAct = {
 		[] call sp_audio_stopMusic;
 
 		{
-			["cpt4_bar_begin"] call sp_startScene;
+			["cpt4_tobar"] call sp_startScene;
 		} call sp_threadCriticalSection;
 	} call sp_threadStart;
+}] call sp_addScene;
+
+["cpt4_tobar",{
+	{
+		{
+			["cpt4_pos_cutscenetobar","player_cutscene",[
+				["uniform",cpt4_playerUniform]
+			],{
+				callFuncParams("cpt4_obj_medtobarchair" call sp_getObject,seatConnect,_this);
+			},{
+				invokeAfterDelay({("player_cutscene" call sp_ai_getMobBody) switchmove "re_HubSittingChairC_idle1"},0.1);
+			}] call sp_ai_createPersonEx;
+
+			["cpt4_pos_cutscenelekar","cpt4barlek",[
+				["uniform","DoctorCloth"]
+			],{},{
+				_this switchmove "Acts_Briefing_Intro3_Major_1";
+				[_this,player] call sp_ai_setLookAtControl;
+				{
+					_body = "cpt4barlek" call sp_ai_getMobBody;
+					while {!isNullReference(_body)} do {
+						_body setRandomlip true;
+						rand(0.2,0.4) call sp_threadPause;
+						_body setRandomlip false;
+						rand(0.4,0.8) call sp_threadPause;
+					};
+				} call sp_threadStart;
+			}] call sp_ai_createPersonEx;
+
+			["cpt4_pos_cutsceneohr","cpt4barohr",[
+				["name",["Охр","Исимбар"]],
+				["uniform","CaretakerCloth"],
+				["face","face58"]
+			],{
+				["RifleFinisher",_this] call createItemInInventory;
+				callFunc(_this,switchTwoHands);
+			},{
+				_this switchmove "Acts_A_M01_briefing";
+				[_this,player] call sp_ai_setLookAtControl;
+			}] call sp_ai_createPersonEx;
+
+
+		} call sp_threadCriticalSection;
+
+		[true] call sp_cam_setCinematicCam;
+		["vr",[4152.96,3809.78,17.8719],270.399,0.59,[-26.5285,0],0,0,720,0.0524573,0,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		["all",["vr",[4152.96,3809.78,16.7719],269.477,0.8,[-8.80887,0],0,0,720,0.0524573,0,1,0,1],35] call sp_cam_interpTo;
+		[false,5] call sp_gui_setBlackScreenGUI;
+		15 call sp_threadPause;
+		[true,5] call sp_gui_setBlackScreenGUI;
+		[false] call sp_cam_setCinematicCam;
+		call sp_cam_stopAllInterp;
+
+		["cpt4_bar_begin"] call sp_startScene;
+	} call sp_threadStart;
+	
 }] call sp_addScene;
 
 /*
@@ -915,7 +972,8 @@ cpt4_pos_bar_aloguys - 3 sits
 
 	["cpt4_pos_poorman","cpt4_poorman",[
 		["uniform","Castoffs3"],
-		["name",["Раган","Бедолагин"]]
+		["name",["Доходяга"]],
+		["face","playerhead_white1"]
 	],{
 		private _item = callFuncParams(_this,getPart,BP_INDEX_ARM_L);		
 		callFuncParams(_item,unlink,null arg true);
@@ -936,28 +994,32 @@ cpt4_pos_bar_aloguys - 3 sits
 
 	["cpt4_pos_bomzcar","cpt4_bomzcar",[
 		["uniform","Castoffs1"],
-		["name",["Бомжара","Тянульщик"]]
+		["name",["Бомжара","Тянульщик"]],
+		["face","face29"]
 	],{
 		
 	},{ _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"; }] call sp_ai_createPersonEx;
 
 	["cpt4_pos_bomzowner","cpt4_bomzowner",[
 		["uniform","WhitePlaidCoat"],
-		["name",["Архатил","Вялов"]]
+		["name",["Архатил","Вялов"]],
+		["face","face73"]
 	],{
 		
 	}, { _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_8_loop" }] call sp_ai_createPersonEx;
 
 	["cpt4_pos_ohrwalk1","cpt4_ohrwalk1",[
 		["uniform","StreakCloth"],
-		["name",["Охр","Варош"]]
+		["name",["Охр","Варош"]],
+		["face","greekhead_a3_12"]
 	],{
 		["ShortSword",_this,INV_BELT] call createItemInInventory;
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_ohrstand","cpt4_ohrstand1",[
 		["uniform","StreakCloth"],
-		["name",["Охр","Измур"]]
+		["name",["Охр","Измур"]],
+		["face","face17_ep1"]
 	],{
 		["Baton",_this,INV_BELT] call createItemInInventory;
 	},{
@@ -966,25 +1028,32 @@ cpt4_pos_bar_aloguys - 3 sits
 
 	["cpt4_pos_barstrangeman","cpt4_barstrangeman",[
 		["uniform","HeadCloth"],
-		["name",["Дий","Черный"]]
+		["name",["Дий","Черный"]],
+		["face","face16_ep1"]
 	],{},{[_this, player] call sp_ai_setLookAtControl; _this enableMimics false}] call sp_ai_createPersonEx;
 
 	//-------------------------- bar spawn -------------------
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys1",[
 		["uniform","WhitePlaidCoat"],
-		["name",["Выха","Забойщик"]]
+		["name",["Выха","Забойщик"]],
+		["face","face123_pmc"],
+		["age",36]
 	],{
 		callFuncParams("cpt4_obj_barsit_party1" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys2",[
 		["uniform","WhitePlaidCoat"],
-		["name",["Губан","Мощин"]]
+		["name",["Губан","Мощин"]],
+		["face","face109_pmc"],
+		["age",23]
 	],{
 		callFuncParams("cpt4_obj_barsit_party2" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys3",[
 		["uniform","WhitePlaidCoat"],
-		["name",["Иванур","Володин"]]
+		["name",["Иванур","Володин"]],
+		["face","livonianhead_1"],
+		["age",32]
 	],{
 		callFuncParams("cpt4_obj_barsit_party3" call sp_getObject,seatConnect,_this);
 		("cpt4_bar_alсoguys3" call sp_ai_getMobBody) switchMove "HubSittingAtTableU_idle3";
@@ -992,23 +1061,27 @@ cpt4_pos_bar_aloguys - 3 sits
 
 	["cpt4_pos_brodyaga_bar","cpt4_brodyaga_bar",[
 		["uniform","WhitePlaidCoat"],
-		["name",["Алкашня",""]]
+		["name",["Алкашня",""]],
+		["face","face08"]
 	],{
 		callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_barnik","cpt4_bar_barnik",[
 		["uniform","CookerCloth"],
-		["name",["Барник","Малим"]]
+		["name",["Барник","Малим"]],
+		["face","nc_head2"],
+		["age",38]
 	],{
 		
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_barkarim","cpt4_karim",[
 		["uniform","NomadCloth3"],
-		["name",["Карим","Сухач"]]
+		["name",["Карим","Сухач"]],
+		["age",34],
+		["face",cpt4_data_karimFace]
 	],{
-		setVar(_this,age,34);
 		callFuncParams("cpt4_obj_bar_karimsit" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 
@@ -1635,7 +1708,85 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		[""] call sp_view_setPlayerHudVisible;
 		[true,1.5] call setBlackScreenGUI;
 		3 call sp_threadPause;
+		
+		["cpt4_topart5"] call sp_startScene;
+		
+	} call sp_threadStart;
+}] call sp_addScene;
 
-		["cpt5_begin"] call sp_startScene;
+["cpt4_topart5",{
+	{
+		{
+			["cpt4_pos_cutscenetocpt5","player_cutscene",[
+				["uniform",cpt4_playerUniform]
+			],{
+				
+			},{
+				_this switchmove "Acts_Accessing_Computer_Loop";
+			}] call sp_ai_createPersonEx;
+
+			for "_i" from 1 to 2 do {
+				_strI = str _i;
+				_pos = "cpt4_pos_cutscenetocpt5_iz" + _strI;
+				[_pos,"cpt4_iztpre" + _strI,[
+					["uniform","StreakCloth"]
+				],{
+					["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
+					callFunc(_this,switchTwoHands);
+				}] call sp_ai_createPersonEx;
+			};
+
+		} call sp_threadCriticalSection;
+		[true] call sp_cam_setCinematicCam;
+
+		["vr",[4200.24,3846.01,10.3988],146.569,0.53,[-26.2951,-4.11871],0,0,2.26073,0,0,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+
+		(["chap4\monolog\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		
+		[false,3] call sp_gui_setBlackScreenGUI;
+		
+		["player_cutscene","cpt4_pos_cutscenetocpt5","cutscenes\cpt4_cutscenetocpt5"] call sp_ai_playAnim;
+		1 call sp_threadPause;
+
+		["vr",[4203.27,3841.75,8.69881],354.543,0.53,[3.87096,-0.301369],0,0,2.26073,0,0,1,0,1] call sp_cam_prepCamera;
+		2 call sp_threadPause;
+		(["chap4\monolog\gg2"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		1 call sp_threadPause;
+		(["chap4\monolog\gg3"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		
+		2 call sp_threadPause;
+
+		
+		[true,3] call sp_gui_setBlackScreenGUI;
+		["vr",[4230.88,3700.47,8.00983],147.826,0.71,[8.00672,0],0,0,3.27006,0,1,1,0,1] call sp_cam_prepCamera;
+		["all",["vr",[4232.79,3697.42,8.00983],147.826,0.71,[8.00672,0],0,0,3.27006,0,1,1,0,1],20] call sp_cam_interpTo;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		[false,3] call setBlackScreenGUI;
+		(["chap4\monolog\gg4"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound; //city walls
+		1 call sp_threadPause;
+		[true,3] call sp_gui_setBlackScreenGUI;
+
+		call sp_cam_stopAllInterp;
+		["vr",[4143.06,3714.21,11.7165],87.1522,0.36,[1.21158,0],0,0,2.05077,0,0,1,0,1] call sp_cam_prepCamera;
+		"cpt4_iztpre1" call sp_ai_waitForMobLoaded;
+		
+		["all",["vr",[4144.86,3714.28,11.7165],87.607,0.36,[0.458279,0],0,0,2.05077,0,0,1,0,1],20] call sp_cam_interpTo;
+		2 call sp_threadPause;
+		[false,2] call setBlackScreenGUI;
+		["cpt4_iztpre1","cpt4_pos_cutscenetocpt5_iz1","cutscenes\cpt4_cutscenetocpt5_iz1"] call sp_ai_playAnim;
+		["cpt4_iztpre2","cpt4_pos_cutscenetocpt5_iz2","cutscenes\cpt4_cutscenetocpt5_iz2"] call sp_ai_playAnim;
+		(["chap4\monolog\gg5"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		1 call sp_threadPause;
+		(["chap4\monolog\gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		[true,0.5] call sp_gui_setBlackScreenGUI;
+
+		[false] call sp_cam_setCinematicCam;
+		_post = {
+			call sp_cleanupSceneData;
+			["cpt5_begin"] call sp_startScene;
+		};
+		invokeAfterDelay(_post,3);
 	} call sp_threadStart;
 }] call sp_addScene;
