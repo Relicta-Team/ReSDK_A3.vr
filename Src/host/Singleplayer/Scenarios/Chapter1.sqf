@@ -11,6 +11,8 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_begin",{
 
+	[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+
 	//enable input
 
 	private _usr = call sp_getActor;
@@ -38,15 +40,22 @@ cpt1_playerUniform = "NomadCloth9";
 	
 	{
 		[
-			"Добро пожаловать в Relicta. Любой раунд начинается с того, что вы просыпаетесь в кровати."
+			"Добро пожаловать в Relicta. Любая смена в Сети начинается с пробуждения в кровати."
 		] call sp_setNotification;
 
 		5 call sp_threadPause;
 
 		["open_inventory",{false}] call sp_addPlayerHandler;
 		[
-			"Для начала нужно проснуться. Для этого нажмите $input_act_inventory, переместите мышь вправо и выберите кнопку ""Сон""."
+			"Для начала попробуйте проснуться. Для этого нажмите $input_act_inventory, переместите мышь вправо и нажмите кнопку ""Сон"" и ваш персонаж пробудится."
 		] call sp_setNotification;
+		_zoneH = [{
+			private _d = getDisplay;
+			if isNullReference(_d) exitWith {widgetNull};
+
+			_d getvariable ["interactMenuCtg",widgetNull];
+		},0.02] call sp_createWidgetHighlight;
+
 		_ct = [{
 			_wid = widgetNull;
 			{
@@ -61,6 +70,7 @@ cpt1_playerUniform = "NomadCloth9";
 			!callFunc(call sp_getActor,isSleep)
 		} call sp_threadWait;
 		[false] call sp_setNotificationVisible;
+		refset(_zoneH,true);
 		refset(_ct,true);
 
 		2 call sp_threadPause;
@@ -81,7 +91,7 @@ cpt1_playerUniform = "NomadCloth9";
 		5 call sp_threadPause;
 
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
-		["Курсор в центре отображает то, на что вы смотрите. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
+		["Курсор в центре обозначает вашу цель - то, на что вы смотрите. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [
 			interaction_aim_widgets select 0
 		] call sp_createWidgetHighlight;
@@ -97,7 +107,7 @@ cpt1_playerUniform = "NomadCloth9";
 			false
 		}] call sp_addPlayerHandler;
 		
-		["Для осмотра окружающих вас объектов наведите на них курсор и нажмите $input_act_examine. Попробуйте осмотреть окружение..."] call sp_setNotification;
+		["Для осмотра любых окружающих вас объектов наведитесь на них курсором и нажмите $input_act_examine. Попробуйте осмотреть окружение..."] call sp_setNotification;
 		{
 			(["examine_count",0] call sp_storageGet) >= 2
 			&& {(["examine_has_update",false] call sp_storageGet)}
@@ -120,6 +130,21 @@ cpt1_playerUniform = "NomadCloth9";
 		//wait for door open
 		{ getVar(["cpt1_bed_door"] call sp_getObject,isOpen)} call sp_threadWait;
 		[false] call sp_setNotificationVisible;
+
+		//lamp disabling handler
+		{
+			rand(2,4) call sp_threadPause;
+			{
+				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа начинает угасать" arg "act");
+			} call sp_threadCriticalSection;
+			
+			rand(4,5) call sp_threadPause;
+			{
+				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,lightSetMode,false);
+				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа затухает" arg "act");
+			} call sp_threadCriticalSection;
+
+		} call sp_threadStart;
 
 		["cpt1_basemoving"] call sp_startScene;
 
@@ -165,6 +190,12 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_trg_walkbutton",{
 	{
+		{
+			callFunc(call sp_getActor,getStance) != STANCE_DOWN
+		} call sp_threadWait;
+		
+		1 call sp_threadPause;
+
 		_h = ["Чтобы переключиться на медленный шаг нажмите @WalkRunToggle"] call sp_setNotification;
 		private _tReset = tickTime + 5;
 		{
@@ -331,7 +362,7 @@ cpt1_playerUniform = "NomadCloth9";
 						if isNullReference(_obj) exitWith {};
 
 						{
-							callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp) <= 1
+							callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.3
 						} call sp_threadWait;
 
 						["Для того, чтобы зажечь факел нажмите ЛКМ с факелом в активной руке по костру"] call sp_setNotification;
@@ -527,6 +558,8 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_topart2",{
 	{
+		["chap1end"] call sp_audio_playMusic;
+
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
@@ -538,13 +571,13 @@ cpt1_playerUniform = "NomadCloth9";
 
 		} call sp_threadCriticalSection;
 
-		["vr",[4072.4,3995.58,12.3159],105.566,0.32,[-24.4379,3.96708],0,0,748.007,0,1,1,0,1] call sp_cam_prepCamera;
+		["vr",[4042.43,4139.39,12.0123],99.5766,0.39,[-18.5022,7.18263],0,0,720,0.412544,0,1,0,1] call sp_cam_prepCamera;
 		"player_cutscene" call sp_ai_waitForMobLoaded;
 		{call sp_isPlayerPosPrepared} call sp_threadWait;
 		["player_cutscene","cpt1_pos_cutscenetocpt2","cutscenes\cpt1_cutscenetocpt2"] call sp_ai_playAnim;
 		2 call sp_threadPause;
 		_del = 8.3;
-		_pos2 = ["vr",[4070.55,3986.09,12.3159],96.3651,0.32,[-23.785,3.96708],0,0,748.007,0,1,1,0,1];
+		_pos2 = ["vr",[4040.72,4129.23,12.0123],99.5766,0.39,[-18.5022,7.18263],0,0,720,0.412544,0,1,0,1];
 		["all",_pos2,_del] call sp_cam_interpTo;
 		[false,1] call setBlackScreenGUI;
 		(_del) call sp_threadPause;
@@ -553,7 +586,7 @@ cpt1_playerUniform = "NomadCloth9";
 		
 		2.4 call sp_threadPause;
 
-		["all",["vr",[4070.22,3978.11,12.3159],77.8022,0.32,[-25.3084,3.96708],0,0,748.007,0,1,1,0,1],8] call sp_cam_interpTo;
+		["all",["vr",[4039.76,4123.51,12.0123],99.5766,0.39,[-18.5022,7.18263],0,0,720,0.412544,0,1,0,1],8] call sp_cam_interpTo;
 		[true,4] call sp_gui_setBlackScreenGUI;
 
 		6 call sp_threadPause;
@@ -564,6 +597,6 @@ cpt1_playerUniform = "NomadCloth9";
 			call sp_cleanupSceneData;
 			["cpt2_begin"] call sp_startScene;
 		};
-		invokeAfterDelay(_post,3);
+		//invokeAfterDelay(_post,3);
 	} call sp_threadStart;
 }] call sp_addScene;

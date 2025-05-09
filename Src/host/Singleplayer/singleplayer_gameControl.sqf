@@ -233,3 +233,18 @@ sp_internal_handleTargetThrowingContact = {
 		sp_playerLastDamagedTime = tickTime;
 	};
 };
+
+sp_clearPlayerInventory = {
+	if (canSuspend) exitWith {
+		{
+			call sp_clearPlayerInventory;
+		} call sp_threadCriticalSection;
+	};
+
+	{
+		private _item = callFuncParams(call sp_getActor,getItemInSlotRedirect,_x);
+		if !isNullReference(_item) then {
+			delete(_item);
+		};
+	} foreach INV_LIST_ALL;
+};
