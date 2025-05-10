@@ -434,7 +434,7 @@ cpt2_json_allowedRecipes = '
 
 ["cpt2_trg_torchnotif",{
     _items = [call sp_getActor,"Torch",true] call getAllItemsInInventory;
-    if (count _item == 0) then {
+    if (count _items == 0) then {
         {
             _h = ["Не забудьте взять свой факел."] call sp_setNotification;
             5 call sp_threadPause;
@@ -577,6 +577,8 @@ cpt2_restoreTrapMethods = {
 
 ["cpt2_topart3",{
 	{
+        ["transition3"] call sp_audio_playMusic;
+        
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
