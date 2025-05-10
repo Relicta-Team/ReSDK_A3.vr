@@ -74,7 +74,7 @@ cpt1_playerUniform = "NomadCloth9";
 		refset(_ct,true);
 
 		2 call sp_threadPause;
-		callFuncParams(call sp_getActor,playSound, "emotes\sigh_male" arg getRandomPitchInRange(0.85,1.2));
+		callFuncParams(call sp_getActor,playSound, "emotes\sigh_male" arg 0.92);
 		1 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
 
@@ -88,7 +88,7 @@ cpt1_playerUniform = "NomadCloth9";
 		} call sp_threadWait;
 		[false] call sp_setNotificationVisible;
 
-		5 call sp_threadPause;
+		2 call sp_threadPause;
 
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
 		["Курсор в центре обозначает вашу цель - то, на что вы смотрите. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
@@ -96,7 +96,7 @@ cpt1_playerUniform = "NomadCloth9";
 			interaction_aim_widgets select 0
 		] call sp_createWidgetHighlight;
 		
-		5 call sp_threadPause;
+		7 call sp_threadPause;
 		refset(_ct,true);
 		
 		["examine",{false}] call sp_addPlayerHandler;
@@ -222,7 +222,7 @@ cpt1_playerUniform = "NomadCloth9";
 	["Остатки цивилизации","Осмотрите ящики на наличие ценных предметов"] call sp_setTaskMessageEff;
 
 	{
-		1 call sp_threadPause;
+		4 call sp_threadPause;
 		["hellocave"] call sp_audio_playMusic;
 	} call sp_threadStart;
 
@@ -425,6 +425,56 @@ cpt1_playerUniform = "NomadCloth9";
 
 }] call sp_addScene;
 
+cpt1_act_openMap = {
+	["updown\paper_up"+str randInt(1,3),player modelToWorldVisual (player selectionPosition "head"),1,null,5,null,0] call soundGlobal_play;
+	_d = call dynamicDisplayOpen;
+	_sizeX = 40;
+	_sizeY = 85; 
+	_w = [_d,PICTURE,[50-(_sizeX/2),50-(_sizeY/2),_sizeX,_sizeY]] call createWidget;
+	widgetSetFade(_w,1,0);
+	[_w,PATH_PICTURE("mapsp_scaled.paa")] call widgetSetPicture;
+	_butposY = (50-(_sizeY/2)) + _sizeY - 2;
+	_butsizeY = 100 - _butposY;
+	_w2 = [_d,BUTTON,[50-(_sizeX/2/2),_butposY,_sizeX/2,_butsizeY]] call createWidget;
+	_w2 ctrlsettext "Закрыть";
+	widgetSetFade(_w2,1,0);
+
+	widgetSetFade(_w,0,0.7);
+	widgetSetFade(_w2,0,0.5);
+
+	_w2 ctrlAddEventHandler ["MouseButtonUp",{
+		_nf = {
+			call displayClose;
+			["updown\paper_up"+str randInt(1,3),player modelToWorldVisual (player selectionPosition "head"),1,null,5,null,0] call soundGlobal_play;
+		};
+		nextFrame(_nf);
+	}];
+};
+
+cpt1_act_addMapViewHandler = {
+	["main_action",{
+		params ["_t"];
+		private _ret = false;
+		if (equals(getVar(_t,name),"Карта")) then {
+			call cpt1_act_openMap;
+			_ret = true;
+		};
+		_ret
+	}] call sp_addPlayerHandler;
+
+	["activate_verb",{
+		params ["_t","_name"];
+		private _ret = false;
+		if (_name == "mainact") then {
+			if (equals(getVar(_t,name),"Карта")) then {
+				call cpt1_act_openMap;
+				_ret = true;
+			};
+		};
+		_ret
+	}] call sp_addPlayerHandler;
+};
+
 ["cpt1_act_mapview",{
 	{
 		0.5 call sp_threadPause;
@@ -445,6 +495,38 @@ cpt1_playerUniform = "NomadCloth9";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+["cpt1_trg_checknextpath",{
+	_wall = "cpt1_loot_wall_topart2" call sp_getObject;
+	if !isNullReference(_wall) then {
+		//tp
+		{
+			[true,1] call sp_gui_setBlackScreenGUI;
+			_d = getGUI;
+			_t = widgetNull;
+			{
+				_sizeX = 100;
+				_sizeY = 60;
+				_t = [_d,TEXT,[0,50-(_sizeY/2) + 20,_sizeX,_sizeY]] call createWidget;
+				[_t,format["<t align='center' valign='middle' color='#781f4d' size='1.7' font='Ringbear'>%1</t>",pick[
+					"Не стоит ходить в неизвестные места",
+					"Я не знаю что там, лучше вернусь обратно...",
+					"Там может быть опасно. Поищу в другом месте.",
+					"Я не собираюсь идти туда..."
+				]]] call widgetSetText;
+				widgetSetFade(_t,1,0);
+				widgetSetFade(_t,0,1);
+			} call sp_threadCriticalSection;
+			
+			["cpt1_pos_looting",0] call sp_setPlayerPos;
+			4 call sp_threadPause;
+			widgetSetFade(_t,1,1);
+			[false,1] call sp_gui_setBlackScreenGUI;
+
+			[_t] call deleteWidget;
+		} call sp_threadStart;
+	};
+}] call sp_addTriggerEnter;
+
 ["cpt1_foundmap",{
 	["cpt1_act_mapview"] call sp_startScene;
 	{
@@ -461,13 +543,21 @@ cpt1_playerUniform = "NomadCloth9";
 		if !isNullReference(_wall) then {
 			[_wall] call deleteStructure;
 		};
+		
+		call cpt1_act_addMapViewHandler;
+
+		_h = ["Чтобы ещё раз посмотреть карту нажмите $input_act_mainAction по ней"] call sp_setNotification;
+		5 call sp_threadPause;
+		[false,_h] call sp_setNotificationVisible;
+
 		["cpt1_walk_topart2"] call sp_startScene;
 
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt1_walk_topart2",{
-	["Новый дом","Отправляйтесь к ближайшему городу через коллекторы"] call sp_setTaskMessageEff;
+	["transition4"] call sp_audio_playMusic;
+	["Новый дом","Отправляйтесь к ближайшему городу"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
 ["cpt1_trg_founddoor",{
@@ -541,15 +631,14 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_walk_final",{
 
-	
-
 	{
 		{
 			getVar("cpt1_obj_finaldoor" call sp_getObject,isOpen)
 		} call sp_threadWait;
-
 		[""] call sp_view_setPlayerHudVisible;
 		[true,2.5] call sp_gui_setBlackScreenGUI;
+		["chap1end"] call sp_audio_playMusic;
+		3 call sp_threadPause;
 		
 		["cpt1_topart2"] call sp_startScene;
 	} call sp_threadStart;
@@ -558,8 +647,6 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_topart2",{
 	{
-		["chap1end"] call sp_audio_playMusic;
-
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
