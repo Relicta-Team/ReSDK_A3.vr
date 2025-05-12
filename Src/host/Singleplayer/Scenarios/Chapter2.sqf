@@ -105,8 +105,6 @@ cpt2_json_allowedRecipes = '
             getVar("cpt2_obj_gate" call sp_getObject,isOpen)
         } call sp_threadWait;
 
-        ["kollectors",true] call sp_audio_playMusic;
-
         [false] call sp_setNotificationVisible;
         ["Все хвосты ведут домой","Идите через коллекторы"] call sp_setTaskMessageEff;
         0.7 call sp_threadPause;
@@ -114,6 +112,10 @@ cpt2_json_allowedRecipes = '
         ["chap2\gg4"] call sp_audio_sayPlayer;
     } call sp_threadStart;
     
+}] call sp_addScene;
+
+["cpt2_trg_enterkollectors",{
+    ["kollectors",true] call sp_audio_playMusic;
 }] call sp_addScene;
 
 ["cpt2_trg_hungerevent",{
@@ -376,6 +378,8 @@ cpt2_json_allowedRecipes = '
 
 ["cpt2_trg_onfall",{
     
+    [] call sp_audio_stopMusic;
+
     callFuncParams(call sp_getActor,playSound, "agony\falling_down_scream2" arg getRandomPitchInRange(0.85,1.2));
 
     callFuncParams(call sp_getActor,setUnconscious,5);
@@ -445,6 +449,10 @@ cpt2_json_allowedRecipes = '
 
 ["cpt2_trg_kol_insidehole",{
     //temorary for tests
+}] call sp_addScene;
+
+["cpt2_trg_kol_underenter",{
+    ["eff1"] call sp_audio_playMusic;
 }] call sp_addScene;
 
 ["cpt2_trg_tragdamage",{
@@ -579,6 +587,8 @@ cpt2_restoreTrapMethods = {
 	{
         ["transition3"] call sp_audio_playMusic;
         
+        1.5 call sp_threadPause;
+
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
