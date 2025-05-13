@@ -540,7 +540,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
         } call sp_threadCriticalSection;
 
         {
-            while {hud_pain > 0} do {
+            while {hud_bleeding > 0} do {
                 if (callFuncParams("cpt2_pos_revertbandagelocation" call sp_getObject,getDistanceTo,call sp_getActor arg true) >= 10) then {
                     sp_playerCanMove = false;
                     [true,0.8] call sp_gui_setBlackScreenGUI;
@@ -551,7 +551,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
                         _sizeY = 60;
                         _t = [_d,TEXT,[0,50-(_sizeY/2) + 20,_sizeX,_sizeY]] call createWidget;
                         [_t,format["<t align='center' valign='middle' color='#781f4d' size='1.7' font='Ringbear'>%1</t>",pick[
-                            "Я не могу идти дальше...",
+                            "Я не могу идти дальше в таком состоянии...",
                             "Я истеку кровью...",
                             "Кровотечение само не остановится..."
                         ]]] call widgetSetText;

@@ -135,7 +135,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 		callFuncParams(_usr,mindSay,"Мне удалось взломать замок... но отмычка не пережила это.");
 		callSelfParams(setDoorLock,false arg false);
-		nextFrame({delete(_this)},_lockpick);
+		nextFrameParams({delete(_this)},_lockpick);
 	};
 
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
@@ -255,6 +255,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 }] call sp_addScene;
 
 ["cpt3_foundmonster",{
+	["cpt3_eater","cpt3_pos_eaterbase",0] call sp_ai_setMobPos;
 	{
 		["eaterstealth"] call sp_audio_playMusic;
 
@@ -487,6 +488,8 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt3_data_doorSeeDialogPerformed = false;
+
 ["cpt3_trg_attackeater",{
 	[cpt3_hudvis_eatercombat] call sp_view_setPlayerHudVisible;
 	["click_target",{
@@ -555,6 +558,8 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 				"chap3\gg4",
 				"chap3\gg5"
 			] call sp_audio_sayPlayerList;
+
+			cpt3_data_doorSeeDialogPerformed = true;
 		} call sp_threadStart;
 		
 		_threadlook call sp_threadWaitForEnd;
@@ -601,6 +606,8 @@ cpt3_func_damageEvent = {
 
 ["cpt3_dodestroydoor",{
 	{
+		{cpt3_data_doorSeeDialogPerformed} call sp_threadWait;
+
 		["chap3\gg6"] call sp_audio_sayPlayer;
 		
 		1 call sp_threadPause;
@@ -672,7 +679,14 @@ cpt3_func_damageEvent = {
 
 
 ["cpt3_topart4",{
+	if (sp_debug) then {
+		callFuncParams("GateCity G:6C2bvKArl3c" call sp_getObject,setDoorOpen,false);
+	};
+
 	{
+		
+		["transition1"] call sp_audio_playMusic;
+
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
@@ -682,9 +696,26 @@ cpt3_func_damageEvent = {
 				["Torch",_this,INV_HAND_R] call createItemInInventory;
 			}] call sp_ai_createPersonEx;
 
+			["cpt3_pos_cutscenearmygate","cpt3_armygate",[
+				["uniform","StreakCloth"]
+			],{
+				["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
+				callFunc(_this,switchTwoHands);
+			}] call sp_ai_createPersonEx;
+
 		} call sp_threadCriticalSection;
 
-		["vr",[4417.22,3859.65,12.6363],71.0314,0.33,[5.52114,0],0,0,760.728,0,0,1,0,1] call sp_cam_prepCamera;
+		_animStartAG = {
+			["cpt3_armygate","cpt3_pos_cutscenearmygate","cutscenes\cpt3_cutscenearmyongate",{}] call sp_ai_playAnim;
+		}; invokeAfterDelay(_animStartAG,4);
+		_eaterScream = {
+			_pos = [4426.8,3777.53,8.74983];
+			_obj = "player_cutscene" call sp_ai_getMobObject;
+			callFuncParams(_obj,playSound,"monster\eater\idle3" arg 0.82 arg 30 arg 1.3 arg _pos arg false);
+			
+		}; invokeAfterDelay(_eaterScream,5.5);
+
+		["vr",[4434.06,3779.81,9.47894],71.3239,0.28,[-0.95584,0],0,0,720,0.198145,0,1,0,1] call sp_cam_prepCamera;
 		"player_cutscene" call sp_ai_waitForMobLoaded;
 		{call sp_isPlayerPosPrepared} call sp_threadWait;
 		["player_cutscene","cpt3_pos_cutscenetocpt4","cutscenes\cpt3_cutscenetocpt4",{},[
@@ -696,7 +727,7 @@ cpt3_func_damageEvent = {
 		11 call sp_threadPause;
 
 		
-		_pos2 = ["vr",[4423,3861.58,13.9363],71.6569,0.72,[-8.56582,0],0,0,760.728,0,0,1,0,1];
+		_pos2 = ["vr",[4438.88,3781.21,11.979],70.2198,0.91,[-23.9821,0],0,0,720,0.198145,0,1,0,1];
 		["all",_pos2,16.3 + 8] call sp_cam_interpTo;
 		(10) call sp_threadPause;
 		[true,4] call sp_gui_setBlackScreenGUI;
