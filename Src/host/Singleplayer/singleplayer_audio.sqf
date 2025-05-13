@@ -13,10 +13,13 @@
 #include "..\GameObjects\GameConstants.hpp"
 
 sp_audio_playMusic = {
-	params ["_name",["_looped",false]];
+	params ["_name",["_looped",false],["_toqueue",false]];
 	private _params = [];
 	if (_looped) then {
 		_params pushBack ["repeat",true];
+	};
+	if (_toqueue) then {
+		_params pushback ["wait",true];
 	};
 
 	["sp\" + _name,30,_params] call music_play;

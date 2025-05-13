@@ -74,9 +74,15 @@ cpt2_json_allowedRecipes = '
 ]
 ';
 
+cpt2_data_healingSkill = 5;
+
 //wait for gate open
 ["cpt2_begin",{
     ["cpt2_pos_start",0] call sp_setPlayerPos;
+
+    //save and increase healing
+    cpt2_data_healingSkill = getVar(call sp_getActor,healing);
+    setVar(call sp_getActor,healing,17);
 
     //todo give inventory
 
@@ -99,7 +105,7 @@ cpt2_json_allowedRecipes = '
         1 call sp_threadPause;
 
         ["Для открытие автоматических дверей и ворот используются рычаги, кнопки и щитки. Перед вами один из таких примеров - старые ворота." +
-        " Рядом с ними находится переключатель. Попробуйте активировать его, нажав ПКМ и выбрав пункт ""Открыть"", либо нажмите $input_act_mainAction нацелившись на него."] call sp_setNotification;
+        " Рядом с ними находится переключатель. Попробуйте активировать его, нажав ПКМ и выбрав пункт ""Нажать"", либо нажмите $input_act_mainAction нацелившись на него."] call sp_setNotification;
 
         {
             getVar("cpt2_obj_gate" call sp_getObject,isOpen)
@@ -124,7 +130,7 @@ cpt2_json_allowedRecipes = '
     callFuncParams(call sp_getActor,localSay,_mes arg "mind");
     callFuncParams(call sp_getActor,playSound,"mob\hungry" + str randInt(1,4) arg getRandomPitch);
     {
-        0.5 call sp_threadPause;
+        2 call sp_threadPause;
         ["chap2\gg5"] call sp_audio_sayPlayer;
         
         ["Все хвосты ведут домой","Утолите свой голод"] call sp_setTaskMessageEff;
@@ -376,9 +382,22 @@ cpt2_json_allowedRecipes = '
     
 }] call sp_addScene;
 
+cpt2_data_pillMessage = "Достаньте упаковку обезболивающего из вашего инвентаря.";
 ["cpt2_trg_onfall",{
     
     [] call sp_audio_stopMusic;
+
+    {
+        if (
+            (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
+            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),8,true] call getAllItemsOnPosition) == 0)
+        ) then {
+            _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
+            _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
+            setVar(_pbox,pillCount,2);
+            cpt2_data_pillMessage = "Подберите упаковку обезболивающего на земле.";
+        };
+    } call sp_threadCriticalSection;
 
     callFuncParams(call sp_getActor,playSound, "agony\falling_down_scream2" arg getRandomPitchInRange(0.85,1.2));
 
@@ -389,6 +408,37 @@ cpt2_json_allowedRecipes = '
     //best anim
     player switchMove "acts_staticdeath_10";
 
+    //thread teleport
+    {
+        while {hud_pain > 0} do {
+            if (callFuncParams("cpt2_pos_falling" call sp_getObject,getDistanceTo,call sp_getActor arg true) >= 5) then {
+                sp_playerCanMove = false;
+                [true,0.8] call sp_gui_setBlackScreenGUI;
+                _d = getGUI;
+                _t = widgetNull;
+                {
+                    _sizeX = 100;
+                    _sizeY = 60;
+                    _t = [_d,TEXT,[0,50-(_sizeY/2) + 20,_sizeX,_sizeY]] call createWidget;
+                    [_t,format["<t align='center' valign='middle' color='#781f4d' size='1.7' font='Ringbear'>%1</t>",pick[
+                        "С такой болью я далеко не уйду...",
+                        "Мне слишком больно..."
+                    ]]] call widgetSetText;
+                    widgetSetFade(_t,1,0);
+                    widgetSetFade(_t,0,1);
+                } call sp_threadCriticalSection;
+                
+                ["cpt2_pos_falling",0] call sp_setPlayerPos;
+                4 call sp_threadPause;
+                widgetSetFade(_t,1,1);
+                [false,1] call sp_gui_setBlackScreenGUI;
+                [_t] call deleteWidget;
+                sp_playerCanMove = true;
+            };
+            0.1 call sp_threadPause;
+        };
+    } call sp_threadStart;
+
     hud_pain = 3;
     {
         {
@@ -398,8 +448,8 @@ cpt2_json_allowedRecipes = '
         1.5 call sp_threadPause;
 
         ["chap2\gg6"] call sp_audio_sayPlayer;
-
-        ["Вы получили урон от падения и испытываете умеренную боль. Достаньте упаковку обезболивающего из вашего инвентаря. "+
+        private _mes = cpt2_data_pillMessage;
+        ["Вы получили урон от падения и испытываете умеренную боль. "+_mes+" "+
         sbr+sbr+"Чтобы достать таблетку из коробки нажмите по ней пустой рукой $input_act_mainAction, либо через ПКМ-меню"] call sp_setNotification;
 
         _hpain = [{
@@ -449,6 +499,9 @@ cpt2_json_allowedRecipes = '
 
 ["cpt2_trg_kol_insidehole",{
     //temorary for tests
+    _trap = "cpt2_obj_trap1" call sp_getObject;
+    _pos = callFunc(_trap,getPos);
+    callFuncParams(_trap,changePosition,_pos vectoradd vec3(0,0,-10));
 }] call sp_addScene;
 
 ["cpt2_trg_kol_underenter",{
@@ -457,7 +510,12 @@ cpt2_json_allowedRecipes = '
 
 ["cpt2_trg_tragdamage",{
     {
-        _trap = "cpt2_obj_trap1" call sp_getObject;
+        {
+            _trap = "cpt2_obj_trap1" call sp_getObject;
+            _pos = callFunc(_trap,getPos);
+            callFuncParams(_trap,changePosition,_pos vectoradd vec3(0,0,10));
+        } call sp_threadCriticalSection;
+
         [0.5,3.5,.05,0.5] call cam_addCamShake;
         ["chap2\gg7"] call sp_audio_sayPlayer;
         
@@ -470,8 +528,50 @@ cpt2_json_allowedRecipes = '
             _w
         }] call sp_createWidgetHighlight;
         
+        private _mes = "Достаньте бинт из инвентаря и наложите его на правую ногу.";
+        {
+            if (count ([call sp_getActor,"Bandage"] call getAllItemsInInventory) == 0
+                && (count (["Bandage",callFunc(call sp_getActor,getPos),20,true] call getAllItemsOnPosition) == 0)
+            ) then {
+                _mes = "Подберите бинт с земли и наложите его на правую ногу.";
+                _pos = callFunc("cpt2_pos_bandageobj" call sp_getObject,getPos);
+                ["Bandage",_pos] call createItemInWorld;
+            };
+        } call sp_threadCriticalSection;
 
-        ["Вы попали в капкан и получили кровоточащую рану. Достаньте бинт и наложите его на правую ногу. Выберите правую ногу в области взаимодействия и нажмите с бинтом в руке по ""Моей персоне""."] call sp_setNotification;
+        {
+            while {hud_pain > 0} do {
+                if (callFuncParams("cpt2_pos_revertbandagelocation" call sp_getObject,getDistanceTo,call sp_getActor arg true) >= 10) then {
+                    sp_playerCanMove = false;
+                    [true,0.8] call sp_gui_setBlackScreenGUI;
+                    _d = getGUI;
+                    _t = widgetNull;
+                    {
+                        _sizeX = 100;
+                        _sizeY = 60;
+                        _t = [_d,TEXT,[0,50-(_sizeY/2) + 20,_sizeX,_sizeY]] call createWidget;
+                        [_t,format["<t align='center' valign='middle' color='#781f4d' size='1.7' font='Ringbear'>%1</t>",pick[
+                            "Я не могу идти дальше...",
+                            "Я истеку кровью...",
+                            "Кровотечение само не остановится..."
+                        ]]] call widgetSetText;
+                        widgetSetFade(_t,1,0);
+                        widgetSetFade(_t,0,1);
+                    } call sp_threadCriticalSection;
+                    
+                    ["cpt2_pos_revertbandagelocation",0] call sp_setPlayerPos;
+                    4 call sp_threadPause;
+                    widgetSetFade(_t,1,1);
+                    [false,1] call sp_gui_setBlackScreenGUI;
+                    sp_playerCanMove = true;
+
+                    [_t] call deleteWidget;
+                };
+                0.1 call sp_threadPause;
+            };
+        } call sp_threadStart;
+
+        ["Вы попали в капкан и получили кровоточащую рану. "+_mes+" Затем снимите свою одежду, перетащив её в слот свободной руки. Выберите правую ногу в области взаимодействия и нажмите с бинтом в руке по ""Моей персоне""."] call sp_setNotification;
 
         _hlegWid = [{
             _wid = widgetNull;
@@ -504,6 +604,10 @@ cpt2_json_allowedRecipes = '
         [false] call sp_setNotificationVisible;
     } call sp_threadStart;
 
+}] call sp_addScene;
+
+["cpt2_trg_nextmusicunderground",{
+    ["eff2",false,true] call sp_audio_playMusic;
 }] call sp_addScene;
 
 //restore methods
@@ -572,6 +676,9 @@ cpt2_restoreTrapMethods = {
 }] call sp_addScene;
 
 ["cpt2_trg_end",{
+    //restore healing skill
+    setVar(call sp_getActor,healing,cpt2_data_healingSkill);
+
     [""] call sp_view_setPlayerHudVisible;
     [true] call sp_setHideTaskMessageCtg;
 	[true,1.1] call setBlackScreenGUI;
