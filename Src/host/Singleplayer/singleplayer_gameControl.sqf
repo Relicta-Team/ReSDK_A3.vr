@@ -232,7 +232,7 @@ sp_internal_handleTargetThrowingContact = {
 		sp_playerHp = (sp_playerHp - randInt(10,25)) max 0;
 		sp_playerLastDamagedTime = tickTime;
 		if (sp_playerHp <= 0) then {
-			nextFrame(sp_delegateDiePlayer);
+			call sp_callEventDiePlayer;
 		};
 	};
 };
