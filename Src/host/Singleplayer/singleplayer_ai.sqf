@@ -618,7 +618,14 @@ sp_ai_getMobBody = {
 
 sp_ai_commitMobPos = {
     params ["_m","_p",["_doApply",true]];
+    if equalTypes(_m,"") then {
+        _m = _m call sp_ai_getMobBody;
+    };
     
+    if isNullVar(_p) then {
+        _p = getposatl _m;
+    };
+
     _m setvariable ["__sp_ai_internal_commitPos",_p];
     if (_doApply) then {
         _m setposatl _p;
