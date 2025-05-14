@@ -1485,12 +1485,15 @@ class(IDestructible) extends(GameObject)
 	//set new position with interpolation
 	func(changePosition)
 	{
-		objParams_1(_pos);
+		objParams_2(_pos,_interp);
 		if !callSelf(isInWorld) exitWith {};
-		
-		{
-			callFuncParams(_x,interpolate,"auto_trans_fall" arg this arg getSelf(pointer));
-		} foreach callSelfParams(getNearMobs,20);
+		if isNullVar(_interp) then {_interp = true};
+
+		if (_interp) then {
+			{
+				callFuncParams(_x,interpolate,"auto_trans_fall" arg this arg getSelf(pointer));
+			} foreach callSelfParams(getNearMobs,20);
+		};
 
 		callSelfParams(setPos__,_pos);
 	};
