@@ -400,10 +400,12 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt4_data_eaterHandleLife = threadNull;
+
 ["cpt3_trg_stealthguide",{
 
 	//eater stealth handler
-	{
+	cpt4_data_eaterHandleLife = {
 		_eater = "cpt3_eater" call sp_ai_getMobObject;
 		while {!getVar(_eater,isDead)} do {
 			_refm = refcreate(0);
@@ -507,6 +509,7 @@ cpt3_data_doorSeeDialogPerformed = false;
 				};
 				
 				setVar(_eater,isDead,true);
+				[cpt4_data_eaterHandleLife] call sp_threadStop;
 				getVar(_eater,owner) switchMove "Acts_StaticDeath_05";
 				call sp_removeCurrentPlayerHandler;
 			};

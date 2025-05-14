@@ -455,7 +455,7 @@ cpt1_act_addMapViewHandler = {
 	["main_action",{
 		params ["_t"];
 		private _ret = false;
-		if (equals(getVar(_t,name),"Карта")) then {
+		if (getVar(_t,name) == "Карта") then {
 			call cpt1_act_openMap;
 			_ret = true;
 		};
@@ -466,7 +466,7 @@ cpt1_act_addMapViewHandler = {
 		params ["_t","_name"];
 		private _ret = false;
 		if (_name == "mainact") then {
-			if (equals(getVar(_t,name),"Карта")) then {
+			if (getVar(_t,name)=="Карта") then {
 				call cpt1_act_openMap;
 				_ret = true;
 			};
@@ -615,7 +615,7 @@ cpt1_act_addMapViewHandler = {
 			&& equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
 
-		["Чтобы открыть дверь с помощью ключа - возьмите его в руку и нажмите ЛКМ, нацелившись на дверь"] call sp_setNotification;
+		["Чтобы отпереть дверь с помощью ключа - возьмите его в руку и нажмите ЛКМ, нацелившись на дверь."] call sp_setNotification;
 		{
 			!getVar("cpt1_obj_doortopart2" call sp_getObject,isLocked)
 		} call sp_threadWait;
@@ -684,6 +684,6 @@ cpt1_act_addMapViewHandler = {
 			call sp_cleanupSceneData;
 			["cpt2_begin"] call sp_startScene;
 		};
-		//invokeAfterDelay(_post,3);
+		invokeAfterDelay(_post,3);
 	} call sp_threadStart;
 }] call sp_addScene;

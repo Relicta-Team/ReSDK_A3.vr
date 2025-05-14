@@ -108,7 +108,7 @@ sp_gc_onPlayerAssigned = {
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
-	["begin_prestart"] call sp_startScene;
+	["begin_start"] call sp_startScene;
 	//["cpt3_begin"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
 };
@@ -229,9 +229,17 @@ sp_playerLastDamagedTime = 0;
 sp_internal_handleTargetThrowingContact = {
 	params ["_bulletMesh","_targ"];
 	if equals(_targ,player) exitWith {
-		sp_playerHp = (sp_playerHp - randInt(5,15)) max 0;
+		sp_playerHp = (sp_playerHp - randInt(10,25)) max 0;
 		sp_playerLastDamagedTime = tickTime;
+		if (sp_playerHp <= 0) then {
+			nextFrame(sp_delegateDiePlayer);
+		};
 	};
+};
+sp_delegateDiePlayer = {};
+sp_setEventDiePlayer = {
+	params ["_code"];
+	sp_delegateDiePlayer = _code;
 };
 
 sp_clearPlayerInventory = {

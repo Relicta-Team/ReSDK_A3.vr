@@ -289,6 +289,13 @@ begin_debug_fastTests = sp_debug;
 begin_handleKeyDown = -1;
 ["begin_start",{
 	
+	{
+		[] call sp_audio_stopMusic;
+		player forcewalk false;
+
+		["begin_finalizer"] call sp_callTriggerEvent;
+	} call sp_setEventDiePlayer;
+
 	sp_playerCanMove = false;
 	
 	[""] call sp_view_setPlayerHudVisible;
@@ -303,28 +310,6 @@ begin_handleKeyDown = -1;
 		["uniform","StreakCloth"]
 	],{},{
 		_this switchmove "Acts_Accessing_Computer_Loop";
-
-		["begin_hwcut1",
-			[
-				["begin_pos_hwcut1","begin\village_kuhar",
-				{rand(8,17)},
-				{ 
-					params ["_obj"];
-					_obj switchmove "Acts_Accessing_Computer_Loop";
-				},
-				[
-					["state_1",{
-						params ["_obj"]; _obj switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop";
-						[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
-					}],
-					["state_2",{
-						params ["_obj"]; _obj switchMove "hubbriefing_ext_contact";
-						[{tickTime > _this},tickTime + rand(10,15)] call sp_ai_animWait;
-					}]
-				]
-				]
-			]
-		] call sp_ai_playAnimsLooped;
 	}] call sp_ai_createPersonEx;
 
 	["begin_pos_hwcut2man","begin_hwcut2man",[
@@ -345,34 +330,7 @@ begin_handleKeyDown = -1;
 	],{
 		["Shovel",_this,INV_BACK] call createItemInInventory;
 	},{
-		["begin_hwcut3",
-			[
-				["begin_pos_hwcut3","begin\village_lopat",
-				{rand(10,15)},
-				{ 
-					params ["_obj"];
-					_obj switchmove "hubstandinguc_idle1";
-				},
-				[
-					["state_1",{
-						params ["_obj"]; 
-						_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
-						[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
-					}],
-					["state_2",{
-						params ["_obj"]; 
-						_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
-						[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
-					}],
-					["state_3",{
-						params ["_obj"]; 
-						_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
-						[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
-					}]
-				]
-				]
-			]
-		] call sp_ai_playAnimsLooped;
+		
 	}] call sp_ai_createPersonEx;
 
 	["begin_pos_hwcut4man1","begin_hwcut4man1",[
@@ -551,6 +509,61 @@ begin_handleKeyDown = -1;
 
 }] call sp_addScene;
 
+begin_func_startTalkerAnimations = {
+	["begin_hwcut1",
+		[
+			["begin_pos_hwcut1","begin\village_kuhar",
+			{rand(8,17)},
+			{ 
+				params ["_obj"];
+				//pos begin_pos_hwcut1
+				_obj switchmove "Acts_Accessing_Computer_Loop";
+				[_obj,"begin_pos_hwcut1",0] call sp_ai_setMobPos;
+			},
+			[
+				["state_1",{
+					params ["_obj"]; _obj switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop";
+					[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
+				}],
+				["state_2",{
+					params ["_obj"]; _obj switchMove "hubbriefing_ext_contact";
+					[{tickTime > _this},tickTime + rand(10,15)] call sp_ai_animWait;
+				}]
+			]
+			]
+		]
+	] call sp_ai_playAnimsLooped;
+
+	["begin_hwcut3",
+		[
+			["begin_pos_hwcut3","begin\village_lopat",
+			{rand(10,15)},
+			{ 
+				params ["_obj"];
+				_obj switchmove "hubstandinguc_idle1";
+			},
+			[
+				["state_1",{
+					params ["_obj"]; 
+					_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
+					[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
+				}],
+				["state_2",{
+					params ["_obj"]; 
+					_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
+					[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
+				}],
+				["state_3",{
+					params ["_obj"]; 
+					_obj switchMove "acts_aidlpercmstpsnonwnondnon_warmup_4_loop";
+					[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
+				}]
+			]
+			]
+		]
+	] call sp_ai_playAnimsLooped;
+};
+
 //kuhar
 ["beging_trg_talker1",{
 	{
@@ -578,7 +591,7 @@ begin_handleKeyDown = -1;
 			["begin_hwcut2man","begin\village\muzh2",["endoffset",0.4]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 		
-		["begin_hwcut2man",player] call sp_ai_setLookAtControl;
+		//["begin_hwcut2man",player] call sp_ai_setLookAtControl;
 		["begin_hwcut2woman",player] call sp_ai_setLookAtControl;
 
 		{
@@ -707,6 +720,8 @@ begin_canStartAttack = false;
 				sp_playerCanMove = true;
 	 			player forcewalk true;
 				player setAnimSpeedCoef 0.78;
+
+				call begin_func_startTalkerAnimations;
 				
 			} call sp_threadStart;
 			
@@ -743,10 +758,17 @@ begin_canStartAttack = false;
 begin_startattack_activated = false;
 ["begin_startattack",{
 	
-	[] call sp_audio_stopMusic;
+	
 
 	if (begin_startattack_activated) exitWith {};
 	begin_startattack_activated = true;
+	
+	[true,true] call sp_audio_setMusicPause;
+	_post = {
+		[] call sp_audio_stopMusic;
+		[!true,true] call sp_audio_setMusicPause;
+	};
+	invokeAfterDelay(_post,4);
 
 	private _ivl = "begin_obj_invvalpreattack" call sp_getObject;
 	private _oldpos = callFunc(_ivl,getPos);
@@ -1351,35 +1373,61 @@ begin_run6_act = false;
 }] call sp_addTriggerEnter;
 
 begin_tokeeper3_act = false;
-["begin_tokeeper3",{
+begin_internal_data_keeper3readytoNextDialog = false;
+["begin_trg_tokeeper3",{
 	if (begin_tokeeper3_act) exitWith {};
 	begin_tokeeper3_act = true;
+	
+	["begin_keeper3",player] call sp_ai_setLookAtControl;
 
+	private _post = {
+		{
+			_hndl = ([
+				["begin_keeper3","begin\end\bro1",[["endoffset",0.3],["distance",25]]],
+				[player,"begin\end\gg1",["endoffset",0.1]],
+				["begin_keeper3","begin\end\bro2",["endoffset",0.1]],
+				[player,"begin\end\gg2",["endoffset",0.7]],
+				["begin_keeper3","begin\end\bro3",["endoffset",0.1]]
+			] call sp_audio_startDialog);
+			
+			_hndl call sp_audio_waitForEndDialog;
+			1.2 call sp_threadPause;
+
+			([
+				[player,"begin\end\gg3",[["endoffset",0.2],["onstart",{
+					begin_internal_data_keeper3readytoNextDialog = true;
+				}]]],
+				["begin_keeper3","begin\end\bro4",["endoffset",0.3]],
+				[player,"begin\end\gg4",["endoffset",0.1]],
+				["begin_keeper3","begin\end\bro5",["endoffset",0.2]],
+				[player,"begin\end\gg5",["endoffset",0.1]]
+			] call sp_audio_startDialog);
+		} call sp_threadStart;
+		
+	}; invokeAfterDelay(_post,0.6);
 	["begin_keeper3","begin_pos_keeper3","begin\keeper3",{},[
 		["state_1",{
-			_thd = {
-				([
-					["begin_keeper3","begin\end\bro1",["endoffset",0.3]],
-					[player,"begin\end\gg1",["endoffset",0.1]],
-					["begin_keeper3","begin\end\bro2",["endoffset",0.1]],
-					[player,"begin\end\gg2",["endoffset",0.4]],
-					["begin_keeper3","begin\end\bro3",["endoffset",0.1]],
-					[player,"begin\end\gg3",["endoffset",0.2]],
-					["begin_keeper3","begin\end\bro4",["endoffset",0.3]],
-					[player,"begin\end\gg4",["endoffset",0.1]],
-					["begin_keeper3","begin\end\bro5",["endoffset",0.2]],
-					[player,"begin\end\gg5",["endoffset",0.1]]
-				] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
-			} call sp_threadStart;
-			//["begin_data_talkthreadbro",_thd] call sp_storageSet;
-		}],//hello
+			params ["_obj"];
+			
+			_obj switchmove "acts_explaining_ew_idle01";
+
+			[{begin_internal_data_keeper3readytoNextDialog}] call sp_ai_animWait;
+		}],
 		["state_2",{
-			//[{equals(_this,threadNull)},["begin_data_talkthreadbro",threadNull] call sp_storageGet] call sp_ai_animWait;
+			
+			//[{tickTime > _this},tickTime + rand(5,10)] call sp_ai_animWait;
+		}],
+		//3 open, 4 goto, 5 close
+		["state_3",{
 			player forcewalk false;
 			callFuncParams("begin_doortoexit" call sp_getObject,setDoorOpen,true);
-		}],//open
-		["state_3",{}],//pre close
+		}],
 		["state_4",{
+			params ["_obj"];
+			_obj switchmove "acts_taking_cover_from_jets_in_loop";
+			[{begin_data_behinddoorEnd}] call sp_ai_animWait;
+		}],
+		["state_5",{
 			{
 				{
 					callFuncParams("begin_doortoexit" call sp_getObject,setDoorOpen,false);
@@ -1389,8 +1437,7 @@ begin_tokeeper3_act = false;
 					callFuncParams("begin_doortoexit" call sp_getObject,setDoorLock,true);
 				} call sp_threadCriticalSection;
 			} call sp_threadStart;
-		}],//close
-		["state_5",{}]//die
+		}]
 	]] call sp_ai_playAnim;
 
 	["begin_cutscene2dead2","begin_pos_cutscene2dead2","begin\cutscene2dead2",{},[
@@ -1425,6 +1472,17 @@ begin_tokeeper3_act = false;
 					"begin_cutscene2dead2",
 					"begin_keeper3"
 				];
+
+				2.3 call sp_threadPause;
+				
+				[getposatl("begin_cutscene2attack1" call sp_ai_getMobBody),"begin\radio5",35] call sp_audio_playSound;
+				1.8 call sp_threadPause;
+				[
+					["begin_cutscene2attack1","begin\end\na1",["endoffset",0.1]],
+					["begin_cutscene2attack1","begin\radio8",["endoffset",3]],
+					["begin_cutscene2attack1","begin\end\na2",["endoffset",0.1]]
+				] call sp_audio_startDialog;
+			
 			} call sp_threadStart;
 		}],
 		["state_3",{
@@ -1435,20 +1493,22 @@ begin_tokeeper3_act = false;
 			private _rpith = getRandomPitchInRange(0.6,1.3);
 			callFuncParams(_door,playSound,_snd arg _rpith arg 50 arg null arg null arg false);
 
-			{
-				[getposatl("begin_cutscene2attack1" call sp_ai_getMobBody),"begin\radio5",35] call sp_audio_playSound;
-				3 call sp_threadPause;
-				[
-					["begin_cutscene2attack1","begin\end\na1",["endoffset",0.1]],
-					["begin_cutscene2attack1","begin\radio8",["endoffset",3]],
-					["begin_cutscene2attack1","begin\end\na2",["endoffset",0.1]]
-				] call sp_audio_startDialog;
-			} call sp_threadStart;
+			[{tickTime > _this},tickTime + 2.4] call sp_ai_animWait;
+			_postOff = {
+				callFuncParams("begin_cutscene2attack1" call sp_ai_getMobObject,setCombatMode,false);
+			}; invokeAfterDelay(_postOff,5.5);
 		}]
 	]] call sp_ai_playAnim;
 
 	//exitdoor - begin_doortoexit
 	//cutscene door - begin_doorexit_cutscene2
+
+}] call sp_addTriggerEnter;
+
+begin_data_behinddoorEnd = false;
+["begin_trg_behinddoorend",{
+	if (begin_data_behinddoorEnd) exitWith {};
+	begin_data_behinddoorEnd = true;
 
 }] call sp_addTriggerEnter;
 
@@ -1487,8 +1547,8 @@ begin_prechase_act = false;
 begin_chase_act = false;
 ["begin_chase",{
 	if (begin_chase_act) exitWith {};
-	begin_chase = true;
-
+	begin_chase_act = true;
+	[!true,true] call sp_audio_setMusicPause;
 	//begin_pos_chase_attacker1/2
 	["begin_chase_attacker1","begin_pos_chase_attacker1","begin\chase_attacker1",{
 
@@ -1535,7 +1595,7 @@ begin_chaseend_act = false;
 	]] call sp_ai_playAnim;
 
 	{
-		
+		2 call sp_threadPause;
 		_body = player;
 		while {true} do {
 			setVar(("begin_chase_attacker2") call sp_ai_getMobObject,stamina,100);
