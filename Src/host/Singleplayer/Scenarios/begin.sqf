@@ -348,7 +348,7 @@ begin_handleKeyDown = -1;
 		["begin_pos_arounder1","begin_arounder1",[
 			["uniform","StreakCloth"]
 		],{},{
-
+			_this switchmove "Acts_JetsCrewaidF_idle2";
 		}] call sp_ai_createPersonEx;
 		//lookat cages
 		["begin_pos_arounder2","begin_arounder2",[
@@ -803,6 +803,8 @@ begin_startattack_activated = false;
 				
 			}],
 			["state_2",{
+				params ["_mob"];
+
 				[{
 					_mbs = [];
 					for "_i" from 1 to 5 do {
@@ -811,15 +813,20 @@ begin_startattack_activated = false;
 					({callFunc(_x,isActive)} count _mbs) == 0
 				}] call sp_ai_animWait;
 
-				[
-					["begin_mainattacker1","begin\gate\na1_2",["distance",20]],
-					["begin_mainattacker2","begin\gate\na2_2",["distance",20]]
-				] call sp_audio_startDialog;
+				if equals(_mob,"begin_mainattacker1" call sp_ai_getMobBody) then {
+					[
+						["begin_mainattacker1","begin\gate\na1_2",["distance",20]],
+						["begin_mainattacker2","begin\gate\na2_2",["distance",20]]
+					] call sp_audio_startDialog;
 
-				{
-					3 call sp_threadPause;
-					[getposatl("begin_mainattacker1" call sp_ai_getMobBody),"begin\radio5",35] call sp_audio_playSound;
-				} call sp_threadStart;
+					{
+						3 call sp_threadPause;
+						[getposatl("begin_mainattacker1" call sp_ai_getMobBody),"begin\radio5",35] call sp_audio_playSound;
+						2 call sp_threadPause;
+						[getposatl("begin_mainattacker1" call sp_ai_getMobBody),"begin\radio7",35] call sp_audio_playSound;
+					} call sp_threadStart;
+				};
+				
 			}]
 		]] call sp_ai_playAnim;
 	};
@@ -947,7 +954,7 @@ begin_startattack_activated = false;
 			private _objname = "begin_obj_destr" + _strI;
 			private _obj = _objname call sp_getObject;
 			private _pos = callFunc(_obj,getPos);
-			callFuncParams(_obj,changePosition,_pos vectoradd vec3(0,0,5));
+			callFuncParams(_obj,changePosition,_pos vectoradd vec3(0,0,5) arg false);
 		};
 
 		//keeper anim
@@ -1510,6 +1517,11 @@ begin_data_behinddoorEnd = false;
 	if (begin_data_behinddoorEnd) exitWith {};
 	begin_data_behinddoorEnd = true;
 
+	//backwall for fix softlock
+	private _obj = "begin_obj_invwaldoorend" call sp_getObject;
+	private _pos = callFunc(_obj,getPos) vectorAdd [0,0,10];
+	callFuncParams(_obj,changePosition,_pos arg false);
+
 }] call sp_addTriggerEnter;
 
 begin_cutscene2_act = false;
@@ -1520,6 +1532,11 @@ begin_cutscene2_act = false;
 	callFuncParams("begin_doorexit_cutscene2" call sp_getObject,setDoorOpen,true);
 	_snd = "doors\kick_break" + str randInt(1,3);
 	callFuncParams("begin_doorexit_cutscene2" call sp_getObject,playSound,_snd arg getRandomPitchInRange(0.6,1.3));
+
+	{
+		2.7 call sp_threadPause;
+		[getposatl("begin_cutscene2attack1" call sp_ai_getMobBody),"begin\radio4",35] call sp_audio_playSound;
+	} call sp_threadStart;
 
 	[
 		["begin_cutscene2dead2","begin\end\dead1",["endoffset",0.1]],
@@ -1562,15 +1579,28 @@ begin_chase_act = false;
 	{
 		1.3 call sp_threadPause;
 		
-		[getposatl("begin_chase_attacker1" call sp_ai_getMobBody),"begin\radio2",35] call sp_audio_playSound;
+		[getposatl("begin_chase_attacker1" call sp_ai_getMobBody),"begin\radio2",55] call sp_audio_playSound;
+
+		2.4 call sp_threadPause;
 
 		_body = player;
 		while {true} do {
+			["begin_chase_attacker1",null,false] call sp_ai_commitMobPos;
+
 			setVar(("begin_chase_attacker1") call sp_ai_getMobObject,stamina,100);
 			_ps = _body modelToWorld ((_body selectionPosition "spine3") vectoradd [rand(-.01,.01),rand(-.01,.01),rand(-.01,.01)]);
 
 			for "_iP" from 1 to randInt(1,5) do {
 				[("begin_chase_attacker1") call sp_ai_getMobObject,_ps] call cpt5_act_doShot;
+
+				//check player cheating with ai
+				if (
+					callFuncParams(call sp_getActor,getDirTo,"begin_chase_attacker1" call sp_ai_getMobObject) == DIR_BACK
+					&& callFuncParams(call sp_getActor,getDistanceTo,"begin_chase_attacker1" call sp_ai_getMobObject arg true) > 15
+				) then {
+					call sp_callEventDiePlayer;
+				};
+
 				rand(0.5,0.7) call sp_threadPause;
 			};
 
@@ -1598,6 +1628,9 @@ begin_chaseend_act = false;
 		2 call sp_threadPause;
 		_body = player;
 		while {true} do {
+			
+			["begin_chase_attacker1",null,false] call sp_ai_commitMobPos;
+
 			setVar(("begin_chase_attacker2") call sp_ai_getMobObject,stamina,100);
 			_ps = _body modelToWorld ((_body selectionPosition "spine3") vectoradd [rand(-.01,.01),rand(-.01,.01),rand(-.01,.01)]);
 
