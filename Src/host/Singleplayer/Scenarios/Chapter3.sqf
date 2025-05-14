@@ -554,10 +554,10 @@ cpt3_data_doorSeeDialogPerformed = false;
 				|| callFuncParams(call sp_getActor,getDistanceTo,_obj arg true) <= 1.2
 				|| equals(pointerList getOrDefault vec2(_refobj,nullPtr),_obj)
 			} call sp_threadWait;
-			[
+			([
 				"chap3\gg4",
 				"chap3\gg5"
-			] call sp_audio_sayPlayerList;
+			] call sp_audio_sayPlayerList) call sp_threadWaitForEnd;
 
 			cpt3_data_doorSeeDialogPerformed = true;
 		} call sp_threadStart;

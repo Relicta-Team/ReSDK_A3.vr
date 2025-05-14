@@ -910,6 +910,9 @@ sp_ai_internal_playAnimStateLoop = {
 
 sp_ai_setLookAtControl = {
     params ["_mob","_target"];
+    if equalTypes(_mob,"") then {
+        _mob = _mob call sp_ai_getMobBody;
+    };
     if (isNullReference(_mob)) exitWith {};
     if isNullReference(_target) then {
         _mob lookat objnull;
