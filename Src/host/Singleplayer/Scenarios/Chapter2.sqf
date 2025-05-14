@@ -183,7 +183,9 @@ cpt2_data_healingSkill = 5;
             if (
                 isTypeOf(_t,Debris)
                 || equals(_t,"cpt2_obj_frypan" call sp_getObject)
-            ) exitWith {true};
+            ) exitWith {
+                false
+            };
             false
         }] call sp_addPlayerHandler;
 

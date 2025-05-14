@@ -704,7 +704,7 @@ cpt5_trg_enterwarzone_entered = false;
 		{
 			[callFunc("cpt5_trgobj_event_grenade1" call sp_getObject,getPos)] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
-		["war",true] call sp_audio_playMusic;
+		["war_v2",true] call sp_audio_playMusic;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 

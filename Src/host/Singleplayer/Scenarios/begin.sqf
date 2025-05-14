@@ -289,6 +289,8 @@ begin_debug_fastTests = sp_debug;
 begin_handleKeyDown = -1;
 ["begin_start",{
 	
+	[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+
 	{
 		[] call sp_audio_stopMusic;
 		player forcewalk false;
@@ -893,16 +895,18 @@ begin_startattack_activated = false;
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		{begin_canStartAttack} call sp_threadWait;
-		5 call sp_threadPause;
+		2.2 call sp_threadPause;
 
 		([["begin_watcher1","begin\gate\watcher",["distance",35]]] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
-
-		_wbody = ("begin_watcher1" call sp_ai_getMobBody);
-		[
-			"begin_mainattacker1" call sp_ai_getMobObject,
-			_wbody modelToWorld (_wbody selectionPosition "head")
-		] call cpt5_act_doShot;
+		{
+			_wbody = ("begin_watcher1" call sp_ai_getMobBody);
+			[
+				"begin_mainattacker1" call sp_ai_getMobObject,
+				_wbody modelToWorld (_wbody selectionPosition "head")
+			] call cpt5_act_doShot;
+		} call sp_threadCriticalSection;
+		
 		0.1 call sp_threadPause;
 
 		{callFuncParams("begin_watcher1" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD)} call sp_threadCriticalSection;
@@ -1658,10 +1662,12 @@ begin_finalizer_act = false;
 
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0.1] call setBlackScreenGUI;
-	[true,true] call sp_audio_setMusicPause;
 	call sp_cleanupSceneData;
+	
+	["intro2"] call sp_audio_playMusic;
+
 	{
-		5 call sp_threadPause;
+		10 call sp_threadPause;  //because intro2
 		["cpt1_begin"] call sp_startScene;
 	} call sp_threadStart;
 

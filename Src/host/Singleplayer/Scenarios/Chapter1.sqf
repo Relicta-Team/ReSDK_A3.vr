@@ -11,7 +11,9 @@ cpt1_playerUniform = "NomadCloth9";
 
 ["cpt1_begin",{
 
-	[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
+		[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+	};
 
 	//enable input
 
@@ -567,6 +569,12 @@ cpt1_act_addMapViewHandler = {
 	["load_verbs",{
 		params ["_targ","_verbs"];
 		if equals(_targ,"cpt1_obj_doortopart2" call sp_getObject) then {
+			[_verbs,{
+				params ["_name","_id"];
+				_name in ["description","mainact"]
+			}] call sp_filterVerbsOnHandle;
+		} else {
+			//для всех остальных тоже подключаем фильтрацию
 			[_verbs,{
 				params ["_name","_id"];
 				_name in ["description","mainact"]

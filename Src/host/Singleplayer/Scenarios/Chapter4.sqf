@@ -785,6 +785,7 @@ cpt4_addProcessorMainAct = {
 		2 call sp_threadPause;
 
 		[true] call sp_setHideTaskMessageCtg;
+		[""] call sp_view_setPlayerHudVisible;
 		[true,1.5] call setBlackScreenGUI;
 
 		2 call sp_threadPause;
@@ -841,6 +842,7 @@ cpt4_addProcessorMainAct = {
 
 
 		} call sp_threadCriticalSection;
+		["transition2"] call sp_audio_playMusic;
 
 		[true] call sp_cam_setCinematicCam;
 		["vr",[4152.96,3809.78,17.8719],270.399,0.59,[-26.5285,0],0,0,720,0.0524573,0,1,0,1] call sp_cam_prepCamera;
@@ -1737,6 +1739,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			};
 
 		} call sp_threadCriticalSection;
+		
 		[true] call sp_cam_setCinematicCam;
 
 		["vr",[4200.24,3846.01,10.3988],146.569,0.53,[-26.2951,-4.11871],0,0,2.26073,0,0,1,0,1] call sp_cam_prepCamera;
@@ -1744,7 +1747,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		{call sp_isPlayerPosPrepared} call sp_threadWait;
 
 		(["chap4\monolog\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		
+
 		[false,3] call sp_gui_setBlackScreenGUI;
 		
 		["player_cutscene","cpt4_pos_cutscenetocpt5","cutscenes\cpt4_cutscenetocpt5"] call sp_ai_playAnim;
@@ -1758,8 +1761,10 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		
 		2 call sp_threadPause;
 
-		
 		[true,3] call sp_gui_setBlackScreenGUI;
+		
+		["chap3end"] call sp_audio_playMusic;
+
 		["vr",[4230.88,3700.47,8.00983],147.826,0.71,[8.00672,0],0,0,3.27006,0,1,1,0,1] call sp_cam_prepCamera;
 		["all",["vr",[4232.79,3697.42,8.00983],147.826,0.71,[8.00672,0],0,0,3.27006,0,1,1,0,1],20] call sp_cam_interpTo;
 		{call sp_isPlayerPosPrepared} call sp_threadWait;
@@ -1778,7 +1783,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		["cpt4_iztpre1","cpt4_pos_cutscenetocpt5_iz1","cutscenes\cpt4_cutscenetocpt5_iz1"] call sp_ai_playAnim;
 		["cpt4_iztpre2","cpt4_pos_cutscenetocpt5_iz2","cutscenes\cpt4_cutscenetocpt5_iz2"] call sp_ai_playAnim;
 		(["chap4\monolog\gg5"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		1 call sp_threadPause;
+		2 call sp_threadPause;
 		(["chap4\monolog\gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		[true,0.5] call sp_gui_setBlackScreenGUI;
 

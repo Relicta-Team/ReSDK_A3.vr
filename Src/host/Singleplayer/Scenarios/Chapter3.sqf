@@ -141,9 +141,14 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
 
 	{
+		1 call sp_threadPause;
+		["Для взлома двери с помощью отмычки нажмите ЛКМ по двери. Если у вас есть навыки взлома - вы с лёгкостью откроете дверь."] call sp_setNotification;
+
 		{
 			!getVar("cpt3_obj_lockeddoor" call sp_getObject,isLocked)
 		} call sp_threadWait;
+		
+		[false] call sp_setNotificationVisible;
 
 		[
 			callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),
@@ -256,6 +261,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_foundmonster",{
 	["cpt3_eater","cpt3_pos_eaterbase",0] call sp_ai_setMobPos;
+	("cpt3_eater" call sp_ai_getMobBody) hideObject false;
 	{
 		["eaterstealth"] call sp_audio_playMusic;
 
@@ -356,7 +362,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			[_wall] call deleteGameObject;
 		};
 
-		_h = ["Вы можете драться при помощи любых предметов, взятых в руки. Однако помните, что в бою холодное оружие значительно эффективнее чем подручные предметы"] call sp_setNotification;
+		_h = ["Вы можете драться при помощи любых предметов, взятых в руки. Однако помните, что в бою холодное оружие значительно эффективнее чем подручные предметы."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 		
@@ -627,6 +633,9 @@ cpt3_func_damageEvent = {
 				_t call cpt3_func_damageEvent;
 				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
 					[false] call sp_setNotificationVisible;
+					
+					call sp_removeCurrentPlayerHandler;
+
 					nextFrameParams(deleteGameObject,[_t]);
 
 					_worldPos = callFunc(_t,getPos) vectorAdd [0,0,0.5];
