@@ -241,6 +241,9 @@ sp_setEventDiePlayer = {
 	params ["_code"];
 	sp_delegateDiePlayer = _code;
 };
+sp_callEventDiePlayer = {
+	nextFrame(sp_delegateDiePlayer);
+};
 
 sp_clearPlayerInventory = {
 	if (canSuspend) exitWith {
