@@ -40,3 +40,6 @@ RBuilder/VM/profile/**
 RBuilder/VM/cmp.exe
 RBuilder/platform_path.cache
 RBuilder/bin/**
+
+Third-party/SPBuilder/__pycache__/**
+Third-party/SPBuilder/build/**
