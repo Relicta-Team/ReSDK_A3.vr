@@ -448,6 +448,7 @@ begin_handleKeyDown = -1;
 	["begin_pos_cutscene1dead","begin_cutscene1dead",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
 	["begin_pos_cutscene1attack","begin_cutscene1attack",_NAInvData,{
 		["BattleAxe",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
 	}] call sp_ai_createPersonEx;
 
 
