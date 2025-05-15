@@ -692,6 +692,22 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
 cpt2_data_bandageRefList = [];
 
 ["cpt2_trg_tragdamage",{
+
+    // защита от активации первого капкана
+    ["main_action",{
+        params ["_t"];
+        if equals(_t,"cpt2_obj_trap1" call sp_getObject) exitWith {true};
+        false
+    }] call sp_addPlayerHandler;
+
+    ["activate_verb",{
+        params ["_t","_name"];
+        if (_name == "mainact") then {
+            if equals(_t,"cpt2_obj_trap1" call sp_getObject) exitWith {true};
+        };
+        false
+    }] call sp_addPlayerHandler;
+
     {
         {
             _trap = "cpt2_obj_trap1" call sp_getObject;
