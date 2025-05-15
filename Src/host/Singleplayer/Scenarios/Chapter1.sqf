@@ -35,12 +35,33 @@ cpt1_playerUniform = "NomadCloth9";
 
 	{
 		[
-			"Добро пожаловать в Relicta. Любая смена в Сети начинается с пробуждения в кровати."
+			"Добро пожаловать в Relicta. По мере прохождения обучения вам будет постепенно открываться всё больше возможностей. "
+			+"Вас погрузят в основные токности управления в игре - не спешите и действуйте инструкциям, появляющимся в этом окне. "
+			+"Однако не думайте, что вас будут всё время вести за руку. В некоторых случаях потребуется проявить смекалку."
 		] call sp_setNotification;
 
-		5 call sp_threadPause;
+		15 call sp_threadPause;
 
+		["Для начала нажмите $input_act_mainAction"] call sp_setNotification;
 		["open_inventory",false] call sp_setLockPlayerHandler;
+		{
+			isInventoryOpen
+		} call sp_threadWait;
+
+		[
+			"Только что вы перешли в режим взаимодействия и инвентаря. В этом режиме вы будете взаимодействовать с предметами и вашим инвентарём. Переместив мышь вправо вы увидите панель взаимодействия. "
+			+" На ней в верхней части отображаются навыки вашего персонажа, по центру - зоны взаимодействия к живым сущностям а внизу - кнопки особых действий."
+		] call sp_setNotification;
+
+		_zoneH = [{
+			private _d = getDisplay;
+			if isNullReference(_d) exitWith {widgetNull};
+
+			_d getvariable ["interactMenuCtg",widgetNull];
+		},0.02] call sp_createWidgetHighlight;
+
+		15 call sp_threadPause;
+
 		["press_specact",false] call sp_setLockPlayerHandler;
 		_unsleepHandle = ["press_specact",{
 			params ["_id"];
@@ -48,14 +69,9 @@ cpt1_playerUniform = "NomadCloth9";
 		}] call sp_addPlayerHandler;
 
 		[
-			"Для начала попробуйте проснуться. Для этого нажмите $input_act_inventory, переместите мышь вправо и нажмите кнопку ""Сон"" и ваш персонаж пробудится."
+			"Любая смена в Сети начинается с пробуждения в кровати. Попробуем разбудить вашего персонажа. Для этого переместите мышь вправо и нажмите кнопку ""Сон"" в нижней части панели взаимодействия и ваш персонаж начнёт просыпаться."
 		] call sp_setNotification;
-		_zoneH = [{
-			private _d = getDisplay;
-			if isNullReference(_d) exitWith {widgetNull};
-
-			_d getvariable ["interactMenuCtg",widgetNull];
-		},0.02] call sp_createWidgetHighlight;
+		
 
 		_ct = [{
 			_wid = widgetNull;
@@ -96,7 +112,7 @@ cpt1_playerUniform = "NomadCloth9";
 		2 call sp_threadPause;
 
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
-		["Курсор в центре обозначает вашу цель - то, на что вы смотрите. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
+		["Курсор в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [
 			interaction_aim_widgets select 0
 		] call sp_createWidgetHighlight;
@@ -112,7 +128,7 @@ cpt1_playerUniform = "NomadCloth9";
 			false
 		}] call sp_addPlayerHandler;
 		
-		["Для осмотра любых окружающих вас объектов наведитесь на них курсором и нажмите $input_act_examine. Попробуйте осмотреть окружение..."] call sp_setNotification;
+		["Для осмотра любых окружающих вас объектов наведитесь на них курсором и нажмите $input_act_examine. В вашем временном пристанище много интересного. Попробуйте осмотреть окружение..."] call sp_setNotification;
 		{
 			(["examine_count",0] call sp_storageGet) >= 2
 			&& {(["examine_has_update",false] call sp_storageGet)}

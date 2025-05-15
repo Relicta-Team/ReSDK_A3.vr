@@ -74,6 +74,8 @@ cpt2_json_allowedRecipes = '
 ]
 ';
 
+cpt2_craftDuration = 60; //TODO inject to json string
+
 cpt2_data_healingSkill = 5;
 
 cpt2_defaultHud = "right+stats+cursor+inv";
@@ -81,9 +83,103 @@ cpt2_defaultHudWithStamina = cpt2_defaultHud + "+stam";
 
 cpt2_canClickByFood = false;
 
-cpt2_fnc_clickItemsDelegate = {
-    if (isTypeOf(_this,IFoodItem)) exitWith {!cpt2_canClickByFood};
+//хандлер поедания
+cpt2_fnc_clickself_ItemCheck = {
+    if isTypeOf(_this,Pill) exitWith {true};
+
+    if (isTypeOf(_this,IFoodItem)) exitWith {
+        if (isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) exitWith {
+            true
+        };
+
+        [
+            pick["Это не готово","Лучше сначала приготовить","Это надо готовить.","Не стоит есть сырым"]
+            ,"mind"
+        ] call chatPrint;
+        false;
+    };
     true
+};
+
+cpt2_fnc_canPickupItem = {
+    //check intermediate food
+    if ("блюдо" in (tolower getVar(_this,name)) || isTypeOf(_this,OrganicDebris1)) exitWith {
+        ["Надо подождать пока приготовится...","mind"] call chatPrint;
+        false
+    };
+    true
+};
+
+cpt2_data_listTorches = [];
+
+cpt2_act_internal_printMessageOnTorch = {
+    params [["_isDisAct",true]];
+    private _list = if(_isDisAct) then {
+        [
+            "Глупо тушить свой факел сейчас...",
+            "Без света я здесь долго не протяну.",
+            "Я не буду тушить факел - это глупо.",
+            "Нет необходимости тушить факел..."
+        ]
+    } else {
+        [
+            "Я не стану этого делать.",
+            "Это может быть опасно.",
+            "Так и до пожара довести получится.",
+            "С этим лучше не играться."
+        ]
+    };
+
+    [
+        pick _list,"mind"
+    ] call chatPrint;
+};
+
+cpt2_act_enableTorchHadnler = {
+    cpt2_data_listTorches = [call sp_getActor,"Torch",true] call getAllItemsInInventory;
+    //add torch handler
+    ["main_action",{
+        params ["_t"];
+        if (array_exists(cpt2_data_listTorches,_t)) exitWith {
+            [true] call cpt2_act_internal_printMessageOnTorch;
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
+    ["activate_verb",{
+		params ["_t","_name"];
+		private _ret = false;
+		if (_name == "mainact") then {
+			if (array_exists(cpt2_data_listTorches,_t)) then {
+				[true] call cpt2_act_internal_printMessageOnTorch;
+				_ret = true;
+			};
+		};
+		_ret
+	}] call sp_addPlayerHandler;
+
+    ["interact_with",{
+        params ["_item","_with"];
+        if (array_exists(cpt2_data_listTorches,_with)) exitWith {
+            [false] call cpt2_act_internal_printMessageOnTorch;
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
+
+    ["click_target",{
+        params ["_t"];
+        if (
+            callFunc(_t,isContainer)
+            && {
+                array_exists(cpt2_data_listTorches,callFunc(call sp_getActor,getItemInActiveHandRedirect))
+            }
+        ) exitWith {
+            [false] call cpt2_act_internal_printMessageOnTorch;
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
 };
 
 //wait for gate open
@@ -101,11 +197,22 @@ cpt2_fnc_clickItemsDelegate = {
 		["Torch",call sp_getActor] call createItemInInventory;
 	};
 
-    sp_delegateCanClickItem = cpt2_fnc_clickItemsDelegate;
+    //enable torch handler
+    call cpt2_act_enableTorchHadnler;
 
     [sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
-    sp_allowebVerbs append ["craft","craft_here"];
+    
     call cpt1_act_addMapViewHandler;
+
+    //add feed locking handler
+    ["click_self",{
+        params ["_t"];
+        _canuse = _t call cpt2_fnc_clickself_ItemCheck;
+        !_canuse
+    }] call sp_addPlayerHandler;
+
+    //add non-ready dish pickup handler
+    sp_delegateCanClickItem = cpt2_fnc_canPickupItem;
 
     //save and increase healing
     cpt2_data_healingSkill = getVar(call sp_getActor,healing);
@@ -175,6 +282,8 @@ cpt2_fnc_clickItemsDelegate = {
 
 ["cpt2_trg_foundkitchen",{
     {
+        sp_allowebVerbs append ["craft","craft_here"];
+
         ["Вы нашли кухню. Здесь вы можете приготовить немного еды. Для начала подожгите огонь печи, нажав ЛКМ по ней с факелом в руке"] call sp_setNotification;
         {
             getVar("cpt2_obj_stove" call sp_getObject,lightIsEnabled)
@@ -214,12 +323,36 @@ cpt2_fnc_clickItemsDelegate = {
             false
         }] call sp_addPlayerHandler;
 
+
         {
             _nitms = callFuncParams("cpt2_obj_stove" call sp_getObject,getNearObjects,"Debris" arg 3 arg true arg true);
             any_of(_nitms apply {"блюдо" in (tolower getVar(_x,name)) || isTypeOf(_x,OrganicDebris1)})
         } call sp_threadWait;
 
         ["Теперь подождите некоторое время пока блюдо будет готово"] call sp_setNotification;
+
+        //хандлеры защиты поднятия сковороды во время готовки
+        _hlockfpan_list = [
+            ["click_target",{
+                params ["_t"];
+                if isTypeOf(_t,FryingPan) exitWith {
+                    ["Надо доготовить.","error"] call chatPrint;
+                    true
+                };
+                false
+            }] call sp_addPlayerHandler,
+            ["activate_verb",{
+                params ["_t","_name"];
+                private _ret = false;
+                if (_name == "pickup") then {
+                    if (isTypeOf(_t,FryingPan)) then {
+                        ["Надо доготовить.","error"] call chatPrint;
+                        _ret = true;
+                    };
+                };
+                _ret
+            }] call sp_addPlayerHandler
+        ];
 
         {
             _nitms = callFuncParams("cpt2_obj_stove" call sp_getObject,getNearObjects,"IFoodItem" arg 3 arg true arg true);
@@ -230,9 +363,16 @@ cpt2_fnc_clickItemsDelegate = {
         ["Заберите приготовленное со сковороды. "+
         "Чтобы съесть какую-либо еду откройте инвентарь, выберите область взаимодействия ""Рот"" и затем нажмите по зоне ""Моя персона"" над слотами инвентаря. "+
         "Еда при этом должна находиться в активной руке."] call sp_setNotification;
+
+        {
+            {
+                _x call sp_removePlayerHandler;
+            } foreach _hlockfpan_list;
+        } call sp_threadCriticalSection;
+
         _hClick = ["click_self",{
             params ["_item"];
-            if (callFunc(_item,isFood)) then {
+            if (isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_hunger = 100;

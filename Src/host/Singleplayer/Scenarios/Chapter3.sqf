@@ -11,9 +11,14 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	call sp_initializeDefaultPlayerHandlers;
     [true,0] call setBlackScreenGUI;
 
+	call cpt2_act_enableTorchHadnler;
+	cpt2_data_listTorches pushback ("cpt3_obj_torchoneater" call sp_getObject);
+	
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
 	[true] call sp_setPlayerSprintAllowed;
     call cpt1_act_addMapViewHandler;
+
+	sp_allowebVerbs append ["undress"];
 
 	["cpt3_pos_start",0] call sp_setPlayerPos;
 	[cpt3_hudvis_default] call sp_view_setPlayerHudVisible;
@@ -77,6 +82,19 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
 }] call sp_addScene;
+
+cpt3_trg_enterdarkzone_act = false;
+["cpt3_trg_enterdarkzone",{
+	if (cpt3_trg_enterdarkzone_act) exitWith {};
+	cpt3_trg_enterdarkzone_act = true;
+
+	{
+		_h = ["В Сети бывают действительно темные места. Учитесь ориентироваться на местности в условиях плохой освещённости. Находясь в пещерах ищите и создавайте ориентиры, чтобы не заблудиться."] call sp_setNotification;
+		10 call sp_threadPause;
+		[false,_h] call sp_setNotificationVisible;
+	} call sp_threadStart;
+
+}] call sp_addTriggerEnter;
 
 ["cpt3_trg_founddeadbody",{
 	{
@@ -274,7 +292,10 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		{
 			[0,1.5,0.01,0.5] call cam_addCamShake;
 		} call sp_threadCriticalSection;
-		
+
+		["press_specact",false] call sp_setLockPlayerHandler;
+		["extra_action",false] call sp_setLockPlayerHandler;
+
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
 		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
@@ -530,6 +551,8 @@ cpt3_data_doorSeeDialogPerformed = false;
 	}] call sp_addPlayerHandler;
 
 	{
+		["combat",false] call sp_setLockPlayerHandler;
+
 		_h = ["Чтобы атаковать противника перейдите в боевой режим, нажав $input_act_combatMode"] call sp_setNotification;
 		{
 			getVar(call sp_getActor,isCombatModeEnable)
