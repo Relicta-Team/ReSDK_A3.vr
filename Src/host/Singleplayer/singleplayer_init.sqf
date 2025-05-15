@@ -9,6 +9,7 @@
 #include "..\text.hpp"
 #include "..\thread.hpp"
 #include "..\..\client\WidgetSystem\widgets.hpp"
+#include "..\GameObjects\GameConstants.hpp"
 
 #include "singleplayer_camera.sqf"
 #include "singleplayer_view.sqf"
@@ -19,10 +20,12 @@
 
 sp_storage = createHashMap;
 
-sp_debug = true;
+sp_debug = false;
 sp_debug_viewOnReload = true;
-sp_debug_skipAudio = false;
-sp_debug_doNotHideDebugObjects = !false;//показ спавнпоинтов
+sp_debug_skipAudio = true;
+sp_debug_doNotHideDebugObjects = false;//показ спавнпоинтов
+
+sp_debug_fastThreadSleep = true;
 
 sp_ai_debug_testmobs = createHashMap;
 sp_ai_mobs = createHashMap;
@@ -245,6 +248,7 @@ sp_threadCriticalSection = {
 
 sp_threadPause = {
 	params ["_time"];
+	if (sp_debug_fastThreadSleep) then {_time = 0.001};
 	threadSleep(_time);
 };
 

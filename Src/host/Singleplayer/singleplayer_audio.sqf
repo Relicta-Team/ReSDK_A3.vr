@@ -14,6 +14,7 @@
 
 sp_audio_playMusic = {
 	params ["_name",["_looped",false],["_toqueue",false]];
+	if (sp_debug_skipAudio) exitWith {};
 	private _params = [];
 	if (_looped) then {
 		_params pushBack ["repeat",true];
@@ -31,6 +32,7 @@ sp_audio_stopMusic = {
 
 sp_audio_setMusicPause = {
 	params ["_mode",["_smooth",true]];
+	if (sp_debug_skipAudio) exitWith {};
 	[30,_mode,_smooth] call music_setPause;
 };
 
@@ -194,7 +196,7 @@ sp_audio_internal_procDialog = {
 
 	private _handle = [_tgt,_pathPost,_ctxParams get "distance"] call sp_audio_sayAtTarget;
 	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg soundParams _handle);
-	if equals(soundParams _handle,[])exitWith{};
+	if (equals(soundParams _handle,[]) && !sp_debug_skipAudio) exitWith{};
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
 	_tgtReal setRandomlip true;

@@ -1719,10 +1719,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 ["cpt4_topart5",{
 	{
 		{
-			["cpt4_pos_cutscenetocpt5","player_cutscene",[
-				["uniform",cpt4_playerUniform]
-			],{
-				
+			["cpt4_pos_cutscenetocpt5","player_cutscene",[],{
+				[_this] call sp_copyPlayerInventoryTo;
 			},{
 				_this switchmove "Acts_Accessing_Computer_Loop";
 			}] call sp_ai_createPersonEx;

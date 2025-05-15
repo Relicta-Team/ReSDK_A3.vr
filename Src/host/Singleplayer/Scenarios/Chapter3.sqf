@@ -4,13 +4,19 @@
 // ======================================================
 
 #include "Scenario.h"
-cpt3_hudvis_default = "right+stats+cursor+inv";
+cpt3_hudvis_default = "stam+right+stats+cursor+inv";
 cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 ["cpt3_begin",{
-	
+	call sp_initializeDefaultPlayerHandlers;
+    [true,0] call setBlackScreenGUI;
+
+	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
+	[true] call sp_setPlayerSprintAllowed;
+    call cpt1_act_addMapViewHandler;
+
 	["cpt3_pos_start",0] call sp_setPlayerPos;
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	[cpt3_hudvis_default] call sp_view_setPlayerHudVisible;
 	[false,1.5] call setBlackScreenGUI;
 
 	if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
@@ -702,10 +708,8 @@ cpt3_func_damageEvent = {
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
-			["cpt3_pos_cutscenetocpt4","player_cutscene",[
-				["uniform",cpt1_playerUniform]
-			],{
-				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			["cpt3_pos_cutscenetocpt4","player_cutscene",[],{
+				[_this] call sp_copyPlayerInventoryTo;
 			}] call sp_ai_createPersonEx;
 
 			["cpt3_pos_cutscenearmygate","cpt3_armygate",[

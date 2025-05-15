@@ -203,11 +203,22 @@ sp_isVisibleNotification = {
 	(getFade (call sp_int_getNotificationWidgetCtg)) == 0;	
 };
 
+sp_allInitializedWidgetHighlightTokens = [];
+
+sp_cleanupWidgetHighlightTokens = {
+	sp_allInitializedWidgetHighlightTokens apply {
+		refset(_x,true);
+	};
+	sp_allInitializedWidgetHighlightTokens resize 0;
+};
 
 sp_createWidgetHighlight = {
 	params ["_w",["_sizePx",0.01]];
 	if equalTypes(_w,{}) exitWith {
 		private _cancelToken = refcreate(false);
+		
+		sp_allInitializedWidgetHighlightTokens pushBack _cancelToken;
+
 		startAsyncInvoke
 		{
 			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
@@ -242,6 +253,9 @@ sp_createWidgetHighlight = {
 			_wlist pushBack ([_dpar,BACKGROUND,[0,0,0,0]] call createWidget);
 		};
 		private _cancelToken = refcreate(false);
+
+		sp_allInitializedWidgetHighlightTokens pushBack _cancelToken;
+
 		startAsyncInvoke
 		{
 			_this params ["_w","_wlist","_sizePx","_cancelToken","_laststart"];
@@ -300,7 +314,7 @@ sp_createWidgetHighlight = {
 
 //включение или отключение отображения худа. для черного экрана используем setBlackScreenGUI
 sp_view_setPlayerHudVisible = {
-	params [["_mode","inv+right+up+left+stats+cursor"]];
+	params [["_mode","inv+right+up+left+stats+cursor+stam"]];
 	private _modesList = _mode splitString " +";
 	["inv" in _modesList] call inventory_setGlobalVisible; //enable inventory slots
 	interactMenu_disableGlobal = !("right" in _modesList); //right menu
@@ -308,6 +322,8 @@ sp_view_setPlayerHudVisible = {
 	interactEmote_disableGlobal = !("left" in _modesList); //left/emote menu
 
 	interact_aim_disableGlobal = !("cursor" in _modesList);
+
+	[("stam" in _modesList)] call stamina_setVisible;
 	
 	{_x ctrlShow ("stats" in _modesList)} foreach hud_widgets; //statuses
 };

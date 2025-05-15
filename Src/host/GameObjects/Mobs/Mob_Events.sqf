@@ -401,7 +401,7 @@ _onMainAction = {
 	if callFunc(_item,isScriptedObject) exitWith {callFuncParams(getVar(_item,__script),onMainAction,this)};
 	
 	#ifdef SP_MODE
-		sp_checkInput("interact_with",[_item]);
+		sp_checkInput("main_action",[_item]);
 	#endif
 
 	callFuncParams(_item,onMainAction,this);
@@ -566,6 +566,10 @@ _onUpdateSpecAct = {
 	params ["_mobObj","_act",["_isPlayed",false],["_lightLevel",0]];
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
 	
+	#ifdef SP_MODE
+		sp_checkInput("press_specact",[_act]);
+	#endif
+
 	if isTypeOf(this,MobGhost) exitWith {};
 	//todo more logic and boolean condition
 
@@ -639,6 +643,10 @@ _onStrafeCatch = {
 	params ["_mobObj"];
 	
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+
+	#ifdef SP_MODE
+		sp_checkInput("strafe",[]);
+	#endif
 
 	if (callSelf(isActive)) then {
 		if (callSelf(getStance) > STANCE_DOWN) then {

@@ -76,20 +76,45 @@ cpt2_json_allowedRecipes = '
 
 cpt2_data_healingSkill = 5;
 
+cpt2_defaultHud = "right+stats+cursor+inv";
+cpt2_defaultHudWithStamina = cpt2_defaultHud + "+stam";
+
+cpt2_canClickByFood = false;
+
+cpt2_fnc_clickItemsDelegate = {
+    if (isTypeOf(_this,IFoodItem)) exitWith {!cpt2_canClickByFood};
+    true
+};
+
 //wait for gate open
 ["cpt2_begin",{
+    call sp_initializeDefaultPlayerHandlers;
+    [true,0] call setBlackScreenGUI;
+
     ["cpt2_pos_start",0] call sp_setPlayerPos;
+
+    if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
+		[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+	};
+
+    if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
+		["Torch",call sp_getActor] call createItemInInventory;
+	};
+
+    sp_delegateCanClickItem = cpt2_fnc_clickItemsDelegate;
+
+    [sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
+    sp_allowebVerbs append ["craft","craft_here"];
+    call cpt1_act_addMapViewHandler;
 
     //save and increase healing
     cpt2_data_healingSkill = getVar(call sp_getActor,healing);
     setVar(call sp_getActor,healing,17);
 
-    //todo give inventory
-
     //load recipes
     [FromJSON cpt2_json_allowedRecipes] call csys_loadConfig;
 
-    ["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+    [cpt2_defaultHud] call sp_view_setPlayerHudVisible;
 	[false,3] call setBlackScreenGUI;
     {
         2.5 call sp_threadPause;
@@ -295,6 +320,7 @@ cpt2_data_healingSkill = 5;
     setVar(_o,desc,"Похоже на обезболивающее...");
 
     _o = ["Bandage",_obj] call createItemInContainer;
+    cpt2_data_bandageRefList pushBack _o;
     _st pushBack _o;
     setVar(_o,name,"Старый бинт");
     setVar(_o,desc,"Для остановки слабых ран сойдёт.");
@@ -308,11 +334,13 @@ cpt2_data_healingSkill = 5;
             call sp_setNotification;
 
         _tobjnext = "cpt2_trg_shifting" call sp_getTriggerByName;
-        {
-            _meds = (["medicine_for_guide",[]] call sp_storageGet) apply {equals(callFunc(_x,getSourceLoc),call sp_getActor)};
-            all_of(_meds) 
-            || callFuncParams(_tobjnext,getDistanceTo,call sp_getActor arg true) <= 6
-        } call sp_threadWait;
+        if !isNullReference(_tobjnext) then {
+            {
+                _meds = (["medicine_for_guide",[]] call sp_storageGet) apply {equals(callFunc(_x,getSourceLoc),call sp_getActor)};
+                all_of(_meds) 
+                || callFuncParams(_tobjnext,getDistanceTo,call sp_getActor arg true) <= 6
+            } call sp_threadWait;
+        };        
 
         [false,_hinf] call sp_setNotificationVisible;
         
@@ -320,6 +348,9 @@ cpt2_data_healingSkill = 5;
 }] call sp_addScene;
 
 ["cpt2_trg_shifting",{
+    [true] call sp_setPlayerSprintAllowed;
+    [cpt2_defaultHudWithStamina] call sp_view_setPlayerHudVisible;
+
     {
         _hinf = ["Для быстрого бега вместе с кнопками передвижения удерживайте @turbo"+
         sbr+"Обратите внимание, что постоянный бег приводит к быстрому голоданию и расходу выносливости."] call sp_setNotification;
@@ -447,6 +478,13 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
             !callFunc(call sp_getActor,isUnconscious)
         } call sp_threadWait;
 
+        _thdDamaged = {
+            while {true} do {
+                [50,true] call sp_applyPlayerDamage;
+                0.5 call sp_threadPause;
+            };
+        } call sp_threadStart;
+
         1.5 call sp_threadPause;
 
         ["chap2\gg6"] call sp_audio_sayPlayer;
@@ -483,6 +521,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
             !(_hClick call sp_isValidPlayerHandler)
         } call sp_threadWait;
         refset(_hpain,true);
+        [_thdDamaged] call sp_threadStop;
         [false] call sp_setNotificationVisible;
 
     } call sp_threadStart;
@@ -510,6 +549,8 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
     ["eff1"] call sp_audio_playMusic;
 }] call sp_addScene;
 
+cpt2_data_bandageRefList = [];
+
 ["cpt2_trg_tragdamage",{
     {
         {
@@ -522,6 +563,8 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
         ["chap2\gg7"] call sp_audio_sayPlayer;
         
         callFunc(call sp_getActor,doMoan);
+        
+        sp_canRemoveCloth = true;
 
         hud_bleeding = 5;
         _hbleeding = [{
@@ -537,7 +580,8 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
             ) then {
                 _mes = "Подберите бинт с земли и наложите его на правую ногу.";
                 _pos = callFunc("cpt2_pos_bandageobj" call sp_getObject,getPos);
-                ["Bandage",_pos] call createItemInWorld;
+                
+                cpt2_data_bandageRefList pushBack (["Bandage",_pos] call createItemInWorld);
             };
         } call sp_threadCriticalSection;
 
@@ -575,6 +619,13 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
 
         ["Вы попали в капкан и получили кровоточащую рану. "+_mes+" Затем снимите свою одежду, перетащив её в слот свободной руки. Выберите правую ногу в области взаимодействия и нажмите с бинтом в руке по ""Моей персоне""."] call sp_setNotification;
 
+        _dmgHandle = {
+            while {true} do {
+                [20,true] call sp_applyPlayerDamage;
+                1 call sp_threadPause;
+            };
+        } call sp_threadStart;
+
         _hlegWid = [{
             _wid = widgetNull;
             {
@@ -600,6 +651,14 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
             callFunc(callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R),isBandaged)
         } call sp_threadWait;
 
+        {
+            private _legRef = callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R);
+
+        } call sp_threadCriticalSection;
+
+        [_dmgHandle] call sp_threadStop;
+        sp_canRemoveCloth = false;
+        
 
         refset(_hbleeding,true);
         refset(_hlegWid,true);
@@ -681,6 +740,11 @@ cpt2_restoreTrapMethods = {
     //restore healing skill
     setVar(call sp_getActor,healing,cpt2_data_healingSkill);
 
+    //remove bandage if exists
+    {
+        delete(_x);
+    } foreach cpt2_data_bandageRefList;
+
     [""] call sp_view_setPlayerHudVisible;
     [true] call sp_setHideTaskMessageCtg;
 	[true,1.1] call setBlackScreenGUI;
@@ -701,10 +765,8 @@ cpt2_restoreTrapMethods = {
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
-			["cpt2_pos_cutscenetocpt3","player_cutscene",[
-				["uniform",cpt1_playerUniform]
-			],{
-				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			["cpt2_pos_cutscenetocpt3","player_cutscene",[],{
+				[_this] call sp_copyPlayerInventoryTo;
 			}] call sp_ai_createPersonEx;
 
 		} call sp_threadCriticalSection;

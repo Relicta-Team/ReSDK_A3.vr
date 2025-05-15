@@ -16,6 +16,7 @@ cpt1_playerUniform = "NomadCloth9";
 	};
 
 	//enable input
+	call sp_initializeDefaultPlayerHandlers;
 
 	private _usr = call sp_getActor;
 
@@ -29,17 +30,9 @@ cpt1_playerUniform = "NomadCloth9";
 	callFuncParams(_usr,changeVisionBlock,+1 arg "slp");
 	callFuncParams(_usr,fastSendInfo,"hud_sleep" arg 1);
 	setVar(_usr,sleepStrength,1);
-	setVar(_usr,__isFirstUnsleep,false);
 
 	["right+stats"] call sp_view_setPlayerHudVisible;
 
-	["get_memories",{
-		params ["_mode"];
-		if (_mode == 0) exitWith {["Я помню всё что нужно..."] call chatPrint};
-		if (_mode == 1) exitWith {["Я умею всё что нужно..."] call chatPrint};
-		true
-	}] call sp_addPlayerHandler;
-	
 	{
 		[
 			"Добро пожаловать в Relicta. Любая смена в Сети начинается с пробуждения в кровати."
@@ -47,7 +40,13 @@ cpt1_playerUniform = "NomadCloth9";
 
 		5 call sp_threadPause;
 
-		["open_inventory",{false}] call sp_addPlayerHandler;
+		["open_inventory",false] call sp_setLockPlayerHandler;
+		["press_specact",false] call sp_setLockPlayerHandler;
+		_unsleepHandle = ["press_specact",{
+			params ["_id"];
+			_id != SPECIAL_ACTION_SLEEP
+		}] call sp_addPlayerHandler;
+
 		[
 			"Для начала попробуйте проснуться. Для этого нажмите $input_act_inventory, переместите мышь вправо и нажмите кнопку ""Сон"" и ваш персонаж пробудится."
 		] call sp_setNotification;
@@ -71,6 +70,10 @@ cpt1_playerUniform = "NomadCloth9";
 		{
 			!callFunc(call sp_getActor,isSleep)
 		} call sp_threadWait;
+		
+		//["press_specact",true] call sp_setLockPlayerHandler;
+		_unsleepHandle call sp_removePlayerHandler;
+
 		[false] call sp_setNotificationVisible;
 		refset(_zoneH,true);
 		refset(_ct,true);
@@ -80,7 +83,7 @@ cpt1_playerUniform = "NomadCloth9";
 		1 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
 
-		["resist",{false}] call sp_addPlayerHandler;
+		["resist",false] call sp_setLockPlayerHandler;
 		[
 			"Чтобы встать с кровати нажмите $input_act_resist."
 		] call sp_setNotification;
@@ -101,7 +104,7 @@ cpt1_playerUniform = "NomadCloth9";
 		7 call sp_threadPause;
 		refset(_ct,true);
 		
-		["examine",{false}] call sp_addPlayerHandler;
+		["examine",false] call sp_setLockPlayerHandler;
 		private _h = ["examine",{
 			["examine_count",{ _this + 1},0] call sp_storageUpdate;
 			["examine_has_update",{ true },false] call sp_storageUpdate;
@@ -126,7 +129,7 @@ cpt1_playerUniform = "NomadCloth9";
 		"Например: дверь - открыть, кнопка - нажать, кровать - лечь."+
 		sbr+" Откройте дверь и выходите наружу."] call sp_setNotification;
 
-		["main_action",{false}] call sp_addPlayerHandler;
+		["main_action",false] call sp_setLockPlayerHandler;
 		setVar(["cpt1_bed_door"] call sp_getObject,isLocked,false);
 
 		//wait for door open
@@ -288,14 +291,22 @@ cpt1_playerUniform = "NomadCloth9";
 	["cpt1_loot_objlist_lootCreated",[]] call sp_storageSet;	
 
 	//enable inventory buttons
-	["open_inventory",{false}] call sp_addPlayerHandler;
+	["item_action",false] call sp_setLockPlayerHandler;
 
-	["change_active_hand",{false}] call sp_addPlayerHandler;
-	["click_target",{false}] call sp_addPlayerHandler;
-	["interact_with",{false}] call sp_addPlayerHandler;
-	["transfer_slots_item",{false}] call sp_addPlayerHandler;
-	["drop_item",{false}] call sp_addPlayerHandler;
-	["putdown_item",{false}] call sp_addPlayerHandler;
+	//антизатухалка костра
+	["main_action",{
+		params ["_t"];
+		if equals(_t,"cpt1_loot_campfire" call sp_getObject) exitWith {
+			[pick[
+				"Да я могу затушить этот костёр. Но зачем?..",
+				"Было бы глупо сейчас затушить единственный источник огня.",
+				"Не стоит тушить единственный в округе костёр..."
+			],"mind"] call chatPrint;
+
+			true
+		};
+		null //bypass main action activation
+	}] call sp_addPlayerHandler;
 
 	_h = ["main_action",{
 		params ["_t"];
@@ -356,7 +367,7 @@ cpt1_playerUniform = "NomadCloth9";
 				};
 				if (_newcnt == 2) exitwith {
 					_obj = ["TorchDisabled",_t] call createItemInContainer;
-					["Вы нашли Факел - незаменимую вещь в Сети. Возьмите его и вернитесь к костру."] call sp_setNotification;
+					["Вы нашли Факел - незаменимую вещь в Сети. Он будет вашим лучшим другом в этих мрачных пещерах. Возьмите его и вернитесь к костру."] call sp_setNotification;
 					["cpt1_loot_torchItem",_obj] call sp_storageSet;
 					{
 						_obj = ["cpt1_loot_torchItem",nullPtr] call sp_storageGet;
@@ -403,11 +414,21 @@ cpt1_playerUniform = "NomadCloth9";
 						[false] call sp_setNotificationVisible;
 						[true] call sp_setHideTaskMessageCtg;
 					} call sp_threadStart;
+					call sp_removeCurrentPlayerHandler;
 				};
 			};
 			
+			false
+		} else {
+			//всё кроме контейнеров лочится
+			
+			// и одежды тоже потому что юзер может убрать факел в карман...
+			if (equals(callFuncParams(call sp_getActor,getItemInSlotRedirect,INV_CLOTH),_t)) exitWith {false};
+			// и факел тоже потому что там тест факела в стадии 2
+			if isTypeOf(_t,Torch) exitWith {false};
+
+			true
 		};
-		false
 	}] call sp_addPlayerHandler;
 
 	{
@@ -429,28 +450,42 @@ cpt1_playerUniform = "NomadCloth9";
 
 cpt1_act_openMap = {
 	["updown\paper_up"+str randInt(1,3),player modelToWorldVisual (player selectionPosition "head"),1,null,5,null,0] call soundGlobal_play;
-	_d = call dynamicDisplayOpen;
-	_sizeX = 40;
-	_sizeY = 85; 
-	_w = [_d,PICTURE,[50-(_sizeX/2),50-(_sizeY/2),_sizeX,_sizeY]] call createWidget;
-	widgetSetFade(_w,1,0);
-	[_w,PATH_PICTURE("mapsp_scaled.paa")] call widgetSetPicture;
-	_butposY = (50-(_sizeY/2)) + _sizeY - 2;
-	_butsizeY = 100 - _butposY;
-	_w2 = [_d,BUTTON,[50-(_sizeX/2/2),_butposY,_sizeX/2,_butsizeY]] call createWidget;
-	_w2 ctrlsettext "Закрыть";
-	widgetSetFade(_w2,1,0);
+	
+	if (isInventoryOpen) then {
+		call closeInventory;
+	};
 
-	widgetSetFade(_w,0,0.7);
-	widgetSetFade(_w2,0,0.5);
+	startAsyncInvoke
+	{
+		!isInventoryOpen
+	},{
+		_openMap = {
+			_d = call displayOpen;
+			_sizeX = 40;
+			_sizeY = 85; 
+			_w = [_d,PICTURE,[50-(_sizeX/2),50-(_sizeY/2),_sizeX,_sizeY]] call createWidget;
+			widgetSetFade(_w,1,0);
+			[_w,PATH_PICTURE("mapsp_scaled.paa")] call widgetSetPicture;
+			_butposY = (50-(_sizeY/2)) + _sizeY - 2;
+			_butsizeY = 100 - _butposY;
+			_w2 = [_d,BUTTON,[50-(_sizeX/2/2),_butposY,_sizeX/2,_butsizeY]] call createWidget;
+			_w2 ctrlsettext "Закрыть";
+			widgetSetFade(_w2,1,0);
 
-	_w2 ctrlAddEventHandler ["MouseButtonUp",{
-		_nf = {
-			call displayClose;
-			["updown\paper_up"+str randInt(1,3),player modelToWorldVisual (player selectionPosition "head"),1,null,5,null,0] call soundGlobal_play;
+			widgetSetFade(_w,0,0.7);
+			widgetSetFade(_w2,0,0.5);
+
+			_w2 ctrlAddEventHandler ["MouseButtonUp",{
+				_nf = {
+					call displayClose;
+					["updown\paper_up"+str randInt(1,3),player modelToWorldVisual (player selectionPosition "head"),1,null,5,null,0] call soundGlobal_play;
+				};
+				nextFrame(_nf);
+			}];
 		};
-		nextFrame(_nf);
-	}];
+		nextFrame(_openMap);
+	}
+	endAsyncInvoke
 };
 
 cpt1_act_addMapViewHandler = {
@@ -530,6 +565,7 @@ cpt1_act_addMapViewHandler = {
 }] call sp_addTriggerEnter;
 
 ["cpt1_foundmap",{
+
 	["cpt1_act_mapview"] call sp_startScene;
 	{
 		_h = [
@@ -566,6 +602,10 @@ cpt1_act_addMapViewHandler = {
 	
 	["chap1\gg9"] call sp_audio_sayPlayer;
 	["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
+	
+	["verbs",false] call sp_setLockPlayerHandler;
+	sp_allowebVerbs = ["description","mainact"];
+	
 	["load_verbs",{
 		params ["_targ","_verbs"];
 		if equals(_targ,"cpt1_obj_doortopart2" call sp_getObject) then {
@@ -575,10 +615,10 @@ cpt1_act_addMapViewHandler = {
 			}] call sp_filterVerbsOnHandle;
 		} else {
 			//для всех остальных тоже подключаем фильтрацию
-			[_verbs,{
-				params ["_name","_id"];
-				_name in ["description","mainact"]
-			}] call sp_filterVerbsOnHandle;
+			// [_verbs,{
+			// 	params ["_name","_id"];
+			// 	_name in ["description","mainact"]
+			// }] call sp_filterVerbsOnHandle;
 		};
 		false
 	}] call sp_addPlayerHandler;
@@ -658,10 +698,12 @@ cpt1_act_addMapViewHandler = {
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
 		{
-			["cpt1_pos_cutscenetocpt2","player_cutscene",[
-				["uniform",cpt1_playerUniform]
-			],{
-				["Torch",_this,INV_HAND_R] call createItemInInventory;
+			["cpt1_pos_cutscenetocpt2","player_cutscene",[],{
+				[_this] call sp_copyPlayerInventoryTo;
+
+				if (!callFuncParams(_this,hasItem,"Torch" arg true)) then {
+					["Torch",_this] call createItemInInventory;
+				};
 			}] call sp_ai_createPersonEx;
 
 		} call sp_threadCriticalSection;

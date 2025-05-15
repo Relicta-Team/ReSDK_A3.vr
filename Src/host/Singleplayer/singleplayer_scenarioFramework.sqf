@@ -113,6 +113,10 @@ sp_preloadScenarioEnvironment = {
 sp_cleanupSceneData = {
 	//first - stop all threads
 	call sp_threadStopAll;
+
+	call sp_clearPlayerHandlers;
+
+	call sp_cleanupWidgetHighlightTokens;
 	
 	//now delete all mobs
 	{
