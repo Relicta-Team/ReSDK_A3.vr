@@ -42,7 +42,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 		15 call sp_threadPause;
 
-		["Для начала нажмите $input_act_mainAction"] call sp_setNotification;
+		["Для начала нажмите $input_act_inventory"] call sp_setNotification;
 		["open_inventory",false] call sp_setLockPlayerHandler;
 		{
 			isInventoryOpen
