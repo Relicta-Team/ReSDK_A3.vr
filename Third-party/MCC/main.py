@@ -77,7 +77,12 @@ def generate_config(root_folder, authors, extensions, m_name,pboprefix,reqlist=[
 						f.write(f'    class {model_name} : {m_name}Object {{\n')
 						f.write(f'        displayname = \"{model_name}\";\n')
 						rpathunix = relative_path.replace("/", "\\")
-						f.write(f'        model = \"{realPrefix}\\{m_name}\\{rpathunix}\\{model_name}.{extension}\";\n')
+						
+						if rpathunix != '.':
+							rpathunix = rpathunix + '\\'
+						else:
+							rpathunix = ""
+						f.write(f'        model = \"{realPrefix}\\{m_name}\\{rpathunix}{model_name}.{extension}\";\n')
 						f.write('    };\n')
 		f.write('};\n')
 	print('Config generated successfully!')
