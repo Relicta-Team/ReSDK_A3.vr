@@ -108,11 +108,13 @@ for m_withpref in modelsOut:
 	if pboPrefix:
 		m = m_withpref.replace(pboPrefix.lower(),"")
 		#print("---m:" + m)
-		if m.startswith("\\"):
-			m = m[1:]
-		#removing double leading slash
-		if m.startswith("\\"):
-			m = m[1:]
+		# if m.startswith("\\"):
+		# 	m = m[1:]
+		# #removing double leading slash
+		# if m.startswith("\\"):
+		# 	m = m[1:]
+		# ! best way is lstrip
+		m = m.lstrip("\\")
 	else:
 		m = m_withpref
 	
@@ -143,3 +145,66 @@ for root, _, files in os.walk(toFolder):
 			contents = getPboPathes(fpath,pboPrefix)
 			for c in contents:
 				print("\tfound:" + c)
+
+			dataPathes += contents
+
+#lowersize and unique
+dataPathes = [d.lower() for d in dataPathes]
+dataPathes = list(set(dataPathes))
+print("\t\tCount: " + str(len(dataPathes)))
+
+# copy data files
+print("\n"*3)
+print("=========== CLONING DATA ============")
+bufferedPrefixes = []
+for d in dataPathes:
+	curDirFrom = fromFolder
+	print("before check: " + d)
+	# first step - removing prefix if setted
+	if pboPrefix:
+		pfx = pboPrefix.lower()
+		if (pfx + "\\") not in d:
+			
+			#search in buffered prefixes
+			override = False
+			for (bp,bp_path) in bufferedPrefixes:
+				if (bp + "\\") in d:
+					pfx = bp
+					curDirFrom = bp_path
+					print("override prefix found: " + pfx)
+					override = True
+					break
+			if not override:
+				print("WARNING UNKNOWN PREFIX: " + d)
+				res = input("Input prefix root directory if known or press enter to skip: ")
+				if res == "": continue
+				if not os.path.exists(res):
+					print(f'File {res} doesn\'t exist!')
+					continue
+				with open(os.path.join(res,PBO_PREF_FILENAME), "r") as f:
+					pfxnew = f.read()
+					pfxnew = pfxnew.replace("\n","")
+					pfxnew = pfxnew.replace("\r","")
+				pfx = pfxnew.lower()
+				curDirFrom = res
+				print("Register new prefix: " + pfx + " ===> " + res)
+				bufferedPrefixes.append((pfx,res))
+
+		d = d.replace(pfx,"")
+		d = d.lstrip("\\")
+
+	print("check: " + d)
+
+	if not os.path.exists(os.path.join(curDirFrom, d)):
+		raise Exception(f'ORIG ERROR: File {os.path.join(curDirFrom, d)} doesn\'t exist!')
+	if not os.path.isfile(os.path.join(curDirFrom, d)):
+		raise Exception(f'ORIG ERROR: File {os.path.join(curDirFrom, d)} is not a file!')
+	
+
+	print("copy: " + d)
+	#shutil.copyfile(os.path.join(fromFolder, d), os.path.join(toFolder, d))
+
+
+print(f"Buffered prefixes ({len(bufferedPrefixes)}):")
+for (bp,bp_path) in bufferedPrefixes:
+	print("\t\t" + bp + " => " + bp_path)
