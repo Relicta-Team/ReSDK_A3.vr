@@ -53,8 +53,9 @@ def getPboPathes(p3dpath,prefix=''):
 		lstitr += [f[0] for f in re.finditer(r"(\w+\\)*\w+\.rvmat",data)]
 
 		# убираем все файлы не соответствующие префиксу
-		if prefix:
-			lstitr = [l for l in lstitr if prefix.lower() in l.lower()]
+		#! больше не убираем потому что некоторые г-ны распихивают текстуры по разным пбошкам
+		#if prefix:
+		#	lstitr = [l for l in lstitr if prefix.lower() in l.lower()]
 
 		return list(set(lstitr) )
 	return []
@@ -109,7 +110,7 @@ with open(configFile,"r",encoding="utf-8") as f:
 	images = [m.replace("/","\\") for m in images]
 
 	# remove images starts with \a3\
-	images = [m for m in images if not m.startswith("\\a3\\")]
+	images = [m for m in images if not m.startswith("\\a3\\") and not m.startswith("a3\\data")]
 
 	print(">>>> MODELS: ")
 	for m in models:
@@ -180,6 +181,14 @@ for root, _, files in os.walk(toFolder):
 #lowersize and unique
 dataPathes = [d.lower() for d in dataPathes]
 dataPathes = list(set(dataPathes))
+
+#removing all starts with \\a3\\ or a3\\data
+dataPathes = [d for d in dataPathes if not d.startswith("\\a3\\") and not d.startswith("a3\\data") and not d.startswith("a3\\characters") and not d.startswith("a3\\weapons")]
+
+print(">>> DATA: ")
+for d in dataPathes:
+	print(d)
+
 print("\t\tCount: " + str(len(dataPathes)))
 
 # copy data files
