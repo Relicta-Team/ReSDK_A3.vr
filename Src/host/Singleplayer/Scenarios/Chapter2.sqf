@@ -329,7 +329,7 @@ cpt2_act_enableTorchHadnler = {
             any_of(_nitms apply {"блюдо" in (tolower getVar(_x,name)) || isTypeOf(_x,OrganicDebris1)})
         } call sp_threadWait;
 
-        ["Теперь подождите некоторое время пока блюдо будет готово"] call sp_setNotification;
+        ["Теперь подождите некоторое время пока блюдо не будет готово"] call sp_setNotification;
 
         //хандлеры защиты поднятия сковороды во время готовки
         _hlockfpan_list = [
