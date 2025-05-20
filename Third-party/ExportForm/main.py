@@ -15,8 +15,7 @@ from os.path import basename as pathGetBaseName
 DEBUG_SHOW_MODELS = False
 DEBUG_SHOW_IMAGES = False
 
-# ! enable only after fix
-FEATURE_PREFIX_CHECK_ON_COPY_DATA = False
+FEATURE_PREFIX_CHECK_ON_COPY_DATA = True
 
 # включает пропуск ненайденных ресурсов (используется для модов сделанных рукожопами)
 FORCE_SKIP_NON_EXISTENDATA = False
@@ -115,40 +114,51 @@ with open(configFile,"r",encoding="utf-8") as f:
 	data = f.read()
 	models = []
 	images = []
+	materials = []
 	models += [m[0] for m in re.finditer(r"[\\/]?(\w+[\\/])*\w+\.p3d",data)]
 	models += [m[1] for m in re.finditer(r"model\s*\=\s*['\"]([\\/]?(\w+[\\/])*\w+(\.p3d)?)",data,re.IGNORECASE)]
 	
 	images += [m[0] for m in re.finditer(r"[\\/]?(\w+[\\/])*\w+\.paa",data,re.IGNORECASE)]
 
+	materials += [m[0] for m in re.finditer(r"[\\/]?(\w+[\\/])*\w+\.rvmat",data,re.IGNORECASE)]
+
 	#lower
 	models = [m.lower() for m in models]
-	# add p3d if not setted
+	# add extension if not setted
 	models = [m if m.endswith(".p3d") else m + ".p3d" for m in models]
 	# remove duplicates
 	models = list(set(models))
-	
 	# fix paths
 	models = [m.replace("/","\\") for m in models]
 
-	#also for images
+	#================= also for images
 	images = [m.lower() for m in images]
-	# add p3d if not setted
+	# add extension if not setted
 	images = [m if m.endswith(".paa") else m + ".paa" for m in images]
 	# remove duplicates
 	images = list(set(images))
-	
 	# fix paths
 	images = [m.replace("/","\\") for m in images]
-
 	# remove images starts with \a3\
 	images = [m for m in images if not m.startswith("\\a3\\") and not m.startswith("a3\\data")]
+
+	#================= and then rvmat works
+	materials = [m.lower() for m in materials]
+	# remove duplicates
+	materials = list(set(materials))
+	# fix paths
+	materials = [m.replace("/","\\") for m in materials]
+	# remove images starts with \a3\
+	materials = [m for m in materials if not m.startswith("\\a3\\") and not m.startswith("a3\\data")]
+
+	images += materials
 
 	if DEBUG_SHOW_MODELS:
 		print(">>>> MODELS: ")
 		for m in models:
 			print(m)
 	if DEBUG_SHOW_IMAGES:
-		print(">>>> IMAGES: ")
+		print(">>>> IMAGES (included materials): ")
 		for m in images:
 			print(m)
 	
@@ -168,8 +178,7 @@ for m_withpref in modelsOut:
 		if pboPrefix.lower()==addonName.lower():
 			m = m_withpref
 		else:
-			m = m_withpref.replace(pboPrefix.lower(),"")
-			raise Exception("PREFIX CODE REQUIRE TESTS AND FIXES")
+			m = m_withpref.replace(pboPrefix.lower(),addonName)
 		#print("---m:" + m)
 		# if m.startswith("\\"):
 		# 	m = m[1:]
@@ -199,6 +208,7 @@ for m_withpref in modelsOut:
 
 		realModelPathes.append(destModel_)
 		shutil.copyfile(pathJoin(fromFolder, m), pathJoin(toFolder, m))
+		
 
 realModelPathes = [pathAbs(m).lower() for m in realModelPathes] #lower and abs
 
@@ -274,14 +284,15 @@ bufferedPrefixes:list[(str,str,str)] = [] #buffprefix,buffpathfrom,buffpathto
 for d in dataPathes:
 	curDirFrom = fromFolder
 	curDirTo = toFolder
+	curAddon = addonName
 	#print("before check: " + d)
 
 	# first step - removing prefix if setted
 	if pboPrefix and FEATURE_PREFIX_CHECK_ON_COPY_DATA:
 		pfx = pboPrefix.lower()
-		raise Exception("Prefixes logic obsoleted and required to be updated")
+		# префикс не найден в текущем пути
 		if (pfx + "\\") not in d:
-			
+			raise NotImplementedError("PREFIX SEARCH NOT IMPLEMENTED YET")
 			#search in buffered prefixes
 			override = False
 			for (bp,bp_path,bp_pathdest) in bufferedPrefixes:
@@ -318,13 +329,13 @@ for d in dataPathes:
 				print("Register new prefix: " + pfx + " ===> " + res + "(orig: " + r2 + ")")
 				bufferedPrefixes.append((pfx,res,r2))
 
-		d = d.replace(pfx,"")
+		d = d.replace(pfx,curAddon)
 		d = d.lstrip("\\")
 
 	d = d.lstrip("\\")
 
 	print("check: " + d)
-
+	
 	if not fileExists(pathJoin(curDirFrom, d)):
 		if FORCE_SKIP_NON_EXISTENDATA:
 			print("WARNING: File " + pathJoin(curDirFrom, d) + " doesn\'t exist!")
