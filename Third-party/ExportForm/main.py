@@ -12,6 +12,8 @@ from os.path import abspath as pathAbs
 from os.path import dirname as pathGetDirName
 from os.path import basename as pathGetBaseName
 
+#todo в rvmat-ах возможно тоже могут быть пути, которые надо портировать
+
 DEBUG_SHOW_MODELS = False
 DEBUG_SHOW_IMAGES = False
 
