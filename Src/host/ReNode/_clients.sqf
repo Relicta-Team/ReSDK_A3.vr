@@ -38,9 +38,10 @@ nodeModule_setExecType("pure")
 
 ["findClientByName","Найти клиента по никнейму","(@in.1) call cm_findClientByName","string:Никнейм","ServerClient^:Клиент",
 "Выполняет поиск клиента на сервере по указанному никнейму. Если клиент с проверяемым никнеймом не найден возвращает @[object^ null-ссылку]"] reg_unary
-//uid, 
-["findClientBySteamId","Найти клиента по SteamID","(@in.1) call cm_findClientByUid","string:SteamId","ServerClient^:Клиент",
-"Выполняет поиск клиента на сервере по указанному SteamID. Если клиент с проверяемым SteamID не найден возвращает @[object^ null-ссылку]"] reg_unary
+//uid,
+//! removed because steamid is obsoleted 
+// ["findClientBySteamId","Найти клиента по SteamID","(@in.1) call cm_findClientByUid","string:SteamId","ServerClient^:Клиент",
+// "Выполняет поиск клиента на сервере по указанному SteamID. Если клиент с проверяемым SteamID не найден возвращает @[object^ null-ссылку]"] reg_unary
 
 nodeModule_setColorStyle("Function")
 nodeModule_setExecType("all")

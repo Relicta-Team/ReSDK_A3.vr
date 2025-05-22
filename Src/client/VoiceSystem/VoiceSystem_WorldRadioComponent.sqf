@@ -3,10 +3,15 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
+namespace(VoiceSystem.WorldRadio,vs_)
 
+decl(mesh[])
 vs_allWorldRadios = [];
+
 //Загружает в мир всю инфу о радио. Последний параметр указывает использовать ли радио как наушник
+decl(void(mesh;any[];string;bool))
 vs_loadWorldRadio = {
 	params ["_obj","_radioData","_ptr",["_isHeadpones",false]];
 	
@@ -47,6 +52,7 @@ vs_loadWorldRadio = {
 };
 
 //выгружает мировое радио
+decl(void(mesh))
 vs_unloadWorldRadio = {
 	params ["_obj"];
 	
@@ -83,28 +89,32 @@ vs_unloadWorldRadio = {
 };
 
 //Является ли объект земным радио
-vs_isWorldRadioObject = {!isNull(_this getVariable "__radio_ptr")};
+decl(bool(mesh))
+vs_isWorldRadioObject = { !isNull(_this getVariable "__radio_ptr") };
 
-//Обрабатывает мировые радио записывая их в tf_speakerRadios
+//Обрабатывает мировые радио записывая их в vs_speakerRadios
+decl(void())
 vs_processWorldRadios = {
+	inline_macro
 	#define _eyePosAgl _ep
+	inline_macro
 	#define _currentVolume _cv
 	
 	private ["_pos","_p"];
-	private _br = TF_new_line;
+	private _br = vs_new_line;
 	private _currentVolume = null;
 	private _eyePosAgl = ASLToAGL (eyepos player);
 	
 	{		
 		_pos = _x modelToWorld getRadioVar(_x,bias);
 		
-		//todo distance with TF_speakerDistance
+		//todo distance with vs_speakerDistance
 		
 		_currentVolume = getRadioVar(_x,vol);
 		
 		//Все рации, чья громкость меньше нуля не будут процессится на земле
 		if (_currentVolume >= 0) then {
-			tf_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", 
+			vs_speakerRadios pushBack (format ["%1%2%3%4%5%6%7%8%9%10%11%12%13", 
 				getRadioVar(_x,ptr), _br,
 				getRadioVar(_x,freq), _br,  
 				"", _br, //empty str == inworld radio
@@ -121,6 +131,7 @@ vs_processWorldRadios = {
 };
 
 //Тушит громкость от пересечений
+decl(float(mesh;float))
 vs_calcSpeakerIntersection = {
 	params ["_obj","_curVol"];
 	__rv = getRadioVar(_obj,vol);

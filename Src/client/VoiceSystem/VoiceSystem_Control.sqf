@@ -6,6 +6,10 @@
 #include <..\WidgetSystem\widgets.hpp>
 #include <..\InputSystem\inputKeyHandlers.hpp>
 
+#include <..\..\host\lang.hpp>
+
+namespace(VoiceSystem.Control,vs_)
+
 /*
 
 
@@ -15,36 +19,52 @@
 #define stamina_border_size_y 15
 
 */
+macro_const(vs_changer_border_size_x)
 #define voice_changer_border_size_x 1
+macro_const(vs_changer_border_size_y)
 #define voice_changer_border_size_y 15
 
-
+macro_const(vs_changer_size_h)
 #define voice_changer_size_h 7
+macro_const(vs_changer_size_w)
 #define voice_changer_size_w 20
 
+macro_const(vs_changer_bias_x)
 #define voice_changer_bias_x 1
+macro_const(vs_changer_bias_y)
 #define voice_changer_bias_y 1
 
+inline_macro
 #define vec4(a,b,c,d) [a,b,c,d]
 
+decl(widget[])
 vs_voiceVolumeWidgets = [];
 
+macro_func(vs_getWidgetText,widget())
 #define vs_getWidgetText (vs_voiceVolumeWidgets select 0)
+macro_func(vs_getWidgetProgress,widget())
 #define vs_getWidgetProgress (vs_voiceVolumeWidgets select 1)
+macro_func(vs_getWidgetGroup,widget())
 #define vs_getWidgetGroup (vs_voiceVolumeWidgets select 3)
 
 //время после которого тухнет диспл
+macro_const(vs_voiceDelayFadein)
 #define vs_voiceDelayFadein 4
 
 //сколько за кадр будет тухнуть хуйня
+macro_const(vs_voiceAmountFade)
 #define vs_voiceAmountFade 0.025
 
+decl(int)
 vs_curVoiceMode = 0;
 
+decl(bool)
 vs_canFadeVoiceVolumeWidget = true;
 
+decl(float)
 vs_voiceVolume_lastUpdate = 0;
 
+decl(any[])
 vs_voiceVolumeList = [
 	[vec4(0.212,0.659,0.878,0.3),"Шепот",4],
 	[vec4(0.063,0.294,0.663,0.35),"Тихий",9],
@@ -53,11 +73,13 @@ vs_voiceVolumeList = [
 	[vec4(0.969,0,0.275,0.85),"ОРАТЬ",60]
 ];
 
+decl(float())
 vs_getMaxVolume = {
 	array_selectlast(vs_voiceVolumeList) select 2
 };
 
 //Изменяет громкость разговора
+decl(void(int))
 vs_changeVoiceVolume = {
 	params ["_mode"];
 	
@@ -81,10 +103,11 @@ vs_changeVoiceVolume = {
 	]] call widgetSetPosition;
 	
 	vs_curVoiceMode = _mode;
-	TF_speak_volume_meters = _enumVol;
+	vs_speak_volume_meters = _enumVol;
 	vs_voiceVolume_lastUpdate = tickTime + vs_voiceDelayFadein;
 };
 
+decl(void())
 vs_voiceVolumeOnUpdate = {
 	if (!vs_canFadeVoiceVolumeWidget) exitWith {};
 	
@@ -108,6 +131,7 @@ vs_voiceVolumeOnUpdate = {
 	};
 };
 
+decl(void())
 vs_initChangeVoiceCtrl = {
 	_gui = getGUI;
 	

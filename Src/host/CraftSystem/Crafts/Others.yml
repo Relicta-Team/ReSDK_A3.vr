@@ -1,2 +1,392 @@
-- name: head
-  ignored: true
+- name: Грибная самокрутка
+  type: interact
+  category: Other
+  options:
+    craft_duration: (rta * 2) + irnd(4,7)
+  required:
+    components:
+      hand_item:
+        class: GribChopped
+      target:
+        class: Paper
+        check_type_of: false
+  result:
+    class: SamokrutkaDisabled 
+
+- name: Грибная самокрутка
+  type: interact
+  category: Other
+  options:
+    craft_duration: (rta * 2) + irnd(4,7)
+  required:
+    components:
+      hand_item:
+        class: Paper
+      target:
+        class: GribChopped
+        check_type_of: false
+  result:
+    class: SamokrutkaDisabled
+
+- name: Кухонный нож
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 4
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false 
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: KitchenKnife
+
+- name: Молоток
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 2
+    components:
+      - class: SmallStone
+        count: 2
+        check_type_of: false 
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false 
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1        
+  result: 
+    class: Hammer
+
+- name: Капкан
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+      traps: 4
+    components:
+      - class: MetalDebris(1-2)
+        count: 3
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 2        
+  result: 
+    class: Trap
+
+- name: Лом
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1        
+  result: 
+    class: Crowbar
+
+- name: Колотилка
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    force_visible: true   
+    skills:
+      engineering: 3
+      blacksmithing: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris7
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: Pickaxe
+
+- name: Лопата
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris7
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: Shovel
+
+- name: Кувалда
+  type: default
+  category: Other
+  options:
+     craft_duration: (rta * 7) + irnd(2,5) 
+  required: 
+    skills:
+      engineering: 3
+      blacksmithing: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris7
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: Sledgehammer
+
+- name: Кувалдушка
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: Sledgehammer1
+
+- name: Труба
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: ToolStraigthPipe
+    
+
+- name: Топор
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: WorkingAxe
+
+- name: Отмычка 
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+      theft: 4
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false
+  result:
+    class: Lockpick
+    count: {min: 1, max: 2}
+
+- name: Металлическое ведро
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false
+      - class: Hammer
+        count: 1
+        destroy: false  
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1 
+  result:
+    class: Bucket1
+
+- name: Хорошее металлическое ведро
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false
+      - class: Hammer
+        count: 1
+        destroy: false 
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result:
+    class: Bucket2
+
+- name: Деревяннное ведро
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 3
+    components:
+      - class: WoodenDebris(1-5)
+        count: 3
+        check_type_of: false
+  failed_handler:
+    handler_type: default
+    class: WoodenDebris2
+    count: 2
+  result:
+    class: WoodenBucket
+
+- name: Кастрюля
+  type: default
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false
+      - class: Hammer
+        count: 1
+        destroy: false 
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result:
+    class: Kastrula
+
+- name: Пепельница
+  type: default
+  desc: Положив окурок в баночку, получается пепельница
+  category: Other
+  options:
+    craft_duration: from_skill(12,6)
+  required:
+    skills:
+      engineering: 2
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false
+      - class: SigaretteDisabled
+        count: 1
+        check_type_of: false     
+  result:
+    class: Ashtray
+
+

@@ -2,6 +2,9 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+
+#include <..\..\host\lang.hpp>
+
 #include "..\..\host\struct.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
 /*
@@ -66,6 +69,7 @@
 //#define ENABLE_DRAW_DEBUG_LINES_REGIONS
 
 //рандомные цвета для зон
+macro_def(noe_client_nat_enable_randomization_color)
 #define ENABLE_RANDOMIZATION_COLOR
 
 #ifndef EDITOR
@@ -76,21 +80,21 @@
 #endif
 
 struct(AtmosAreaClient)
-	def(areaId) null;
-	def(lastUpd) 0;
-	def(lastDel) 0;
+	decl(string) def(areaId) null;
+	decl(float) def(lastUpd) 0;
+	decl(float) def(lastDel) 0;
 
-	def(state) NAT_LOADING_STATE_NOT_LOADED;
-	def(isLoaded) {(self getv(state)) == NAT_LOADING_STATE_LOADED}
+	decl(int) def(state) NAT_LOADING_STATE_NOT_LOADED;
+	decl(bool()) def(isLoaded) {(self getv(state)) == NAT_LOADING_STATE_LOADED}
 
-	def(chunks) null; //key:localid,value vec2(cfg,obj)
+	decl(map<int;any[]>) def(chunks) null; //key:localid,value vec2(cfg,obj)
 	
 	//хранящиеся регионы
-	def(_regions) null //list[9] -> list<AtmosClientBatchRegion
+	decl(any[]) def(_regions) null //list[9] -> list<AtmosClientBatchRegion
 
-	def(toUpdateLevels) null
+	decl(int[]) def(toUpdateLevels) null
 
-	def(init)
+	decl(void(string)) def(init)
 	{
 		params ["_aId"];
 		self setv(areaId,_aId);
@@ -104,7 +108,7 @@ struct(AtmosAreaClient)
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
-	def(registerEffects)
+	decl(void(int;int)) def(registerEffects)
 	{
 		params ["_locid","_light"];
 		private _isExist = _locid in (self getv(chunks));
@@ -129,7 +133,7 @@ struct(AtmosAreaClient)
 	}
 
 	//снятие регистрации эффектов чанка. удаляет визуальный объект и выписывает чанк из хранилища
-	def(unregisterEffects)
+	decl(void(int)) def(unregisterEffects)
 	{
 		params ["_locid"];
 		private _chDat = self getv(chunks) GET _locid;
@@ -159,7 +163,7 @@ struct(AtmosAreaClient)
 	}
 
 	//загружает визуал зоны
-	def(loadArea)
+	decl(void()) def(loadArea)
 	{		
 		{
 			self callp(onUpdateChunk,_x);
@@ -178,7 +182,7 @@ struct(AtmosAreaClient)
 		//self callp(optimizeProcess, null);
 	}
 
-	def(unloadArea)
+	decl(void()) def(unloadArea)
 	{
 		{
 			self callp(unloadChunkInternal,_x);
@@ -197,7 +201,7 @@ struct(AtmosAreaClient)
 		//self callp(optimizeProcess, null);
 	}
 
-	def(loadChunkInternal)
+	decl(void(int)) def(loadChunkInternal)
 	{
 		params ["_locid"];
 		//setup vars
@@ -223,7 +227,7 @@ struct(AtmosAreaClient)
 	}
 
 	//вызывает обновление чанка при загруженной зоне
-	def(onUpdateChunk)
+	decl(void(int)) def(onUpdateChunk)
 	{
 		params ["_locid"];
 		private _cDat = self getv(chunks) get _locid;
@@ -239,7 +243,7 @@ struct(AtmosAreaClient)
 		};
 	}
 
-	def(unloadChunkInternal)
+	decl(void(int)) def(unloadChunkInternal)
 	{
 		params ["_locid"];
 		private _cDat = self getv(chunks) get _locid;
@@ -255,7 +259,7 @@ struct(AtmosAreaClient)
 		//_cDat set [NAT_CHUNKDAT_OBJECT,null];
 	}
 
-	def(deleteChunk)
+	decl(void(int)) def(deleteChunk)
 	{
 		params ["_locid"];
 		private _needUpdate = false;
@@ -277,7 +281,7 @@ struct(AtmosAreaClient)
 	}
 
 
-	def(_createVisual)
+	decl(mesh(int;vector3;vector3;vector3)) def(_createVisual)
 	{
 		params ["_light","_pos","_basePos","_chid"];
 		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
@@ -298,7 +302,7 @@ struct(AtmosAreaClient)
 		_obj
 	}
 
-	def(_deleteVisual)
+	decl(void(mesh)) def(_deleteVisual)
 	{
 		params ["_obj"];
 		
@@ -312,36 +316,36 @@ struct(AtmosAreaClient)
 	}
 
 	//load or recreate light
-	def(_loadLight_depr)
-	{
-		params ["_light","_obj"];
-		private _lightObj = [_light,_obj] call le_loadLight;
-		_obj setvariable ["_atmos_light",_lightObj];
+	// def(_loadLight_depr)
+	// {
+	// 	params ["_light","_obj"];
+	// 	private _lightObj = [_light,_obj] call le_loadLight;
+	// 	_obj setvariable ["_atmos_light",_lightObj];
 		
-		//! это пока работает плоховато...
-		// private _basePos = _obj getvariable "_basePos";
-		// if (self callp(hasSnapToDownCfg,_light)) then {
-		// 	private _itDat = [_basePos,_basePos vectorAdd [0,0,ATMOS_SIZE_HALF],_obj] call interact_getRayCastData;
-		// 	if !isNullReference(_itDat select 0) then {
-		// 		_obj setposatl ((_itDat select 1) vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,0]);
-		// 	};
-		// };
+	// 	//! это пока работает плоховато...
+	// 	// private _basePos = _obj getvariable "_basePos";
+	// 	// if (self callp(hasSnapToDownCfg,_light)) then {
+	// 	// 	private _itDat = [_basePos,_basePos vectorAdd [0,0,ATMOS_SIZE_HALF],_obj] call interact_getRayCastData;
+	// 	// 	if !isNullReference(_itDat select 0) then {
+	// 	// 		_obj setposatl ((_itDat select 1) vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,0]);
+	// 	// 	};
+	// 	// };
 		
-		_lightObj
-	}
+	// 	_lightObj
+	// }
 
-	def(hasSnapToDownCfg)
+	decl(bool(int)) def(hasSnapToDownCfg)
 	{
 		params ["_cfg"];
 		_cfg in ["SLIGHT_ATMOS_FIRE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_FIRE_3" call lightSys_getConfigIdByName]
 	}
 
-	def(getChunkIdList)
+	decl(int[]()) def(getChunkIdList)
 	{
 		keys (self getv(chunks))
 	}
 	
-	def(getLightByPos)
+	decl(NULL|mesh(vector3)) def(getLightByPos)
 	{
 		params ["_ps"];
 		private _chId = _ps call atmos_encodeChId;
@@ -350,7 +354,7 @@ struct(AtmosAreaClient)
 		_o select NAT_CHUNKDAT_OBJECT
 	}
 
-	def(str)
+	decl(string()) def(str)
 	{
 		format["Area%1",self getv(areaId)]
 	}
@@ -567,7 +571,7 @@ struct(AtmosAreaClient)
 	// }
 
 	//оптимизация при доабвлении нового блока
-	def(optimizeSingle)
+	decl(void(struct_t.AtmosVirtualLight)) def(optimizeSingle)
 	{
 		params ["_vlight"];
 		
@@ -751,7 +755,7 @@ struct(AtmosAreaClient)
 	}
 
 	//задане объединения регионов
-	def(mergeRegions)
+	decl(void(struct_t.AtmosClientBatchRegion[];int)) def(mergeRegions)
 	{
 		params ["_regions","_z"];
 		
@@ -900,7 +904,7 @@ struct(AtmosAreaClient)
 	}
 
 	//внутренняя функция проверки при расширении
-	def_ret(_isValidCombPos)
+	decl(bool(vector3;mesh[];struct_t.AtmosClientBatchRegion)) def_ret(_isValidCombPos)
 	{
 		params ["_pos","_lts","_region"];
 		
@@ -918,7 +922,7 @@ struct(AtmosAreaClient)
 	}
 
 	//событие при удалении блока с региона
-	def(onDecreaseRegion)
+	decl(void(struct_t.AtmosClientBatchRegion[];struct_t.AtmosClientBatchRegion;mesh)) def(onDecreaseRegion)
 	{
 		params ["_regionList","_region","_ltObj"];
 		
@@ -1014,7 +1018,7 @@ struct(AtmosAreaClient)
 	}
 
 	//возвращает данные региона объекта света. первый элемент - объект региона, второй массив z-уровня региона
-	def(getRegionDatForVLight)
+	decl(any[](any)) def(getRegionDatForVLight)
 	{
 		params ["_ltob"];
 		private _rpinf = _ltob getv(regionPosInfo);
@@ -1032,24 +1036,24 @@ struct(AtmosAreaClient)
 endstruct
 
 struct(AtmosVirtualLight)
-	def(effects) null;
-	def(id) -1; //config id
-	def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
-	def(localId) null //id from 1 to 1000
+	decl(mesh[]) def(effects) null;
+	decl(int) def(id) -1; //config id
+	decl(vector3) def(localChId) null; //local chunk id from [1,1,1] to [10,10,10]
+	decl(int) def(localId) null //id from 1 to 1000
 
-	def(regionPosInfo) null; //vec2<Pos3d,Pos2d>
-	def(isInsideRegion) {!isNull(self getv(regionPosInfo))};
+	decl(any[]) def(regionPosInfo) null; //vec2<Pos3d,Pos2d>
+	decl(bool()) def(isInsideRegion) {!isNull(self getv(regionPosInfo))};
 
 	//do not change this constval
-	def(_fireTypes) noe_client_nat_ltCfg_fire;
-	def(_smokeTypes) noe_client_nat_ltCfg_smoke;
+	decl(int[]) def(_fireTypes) noe_client_nat_ltCfg_fire;
+	decl(int[]) def(_smokeTypes) noe_client_nat_ltCfg_smoke;
 	//check if atmos if firetype
-	def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
-	def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
+	decl(bool()) def(isFireType) {(self getv(id)) in (self getv(_fireTypes))}
+	decl(bool()) def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
 
-	def(effType) -1; //NAT_ATMOS_EFFTYPE_
+	decl(int) def(effType) -1; //NAT_ATMOS_EFFTYPE_
 
-	def(init)
+	decl(void(int;vector3;vector3;vector3)) def(init)
 	{
 		params ["_cfg","_pos","_lcid","_ctrPos"];
 		self setv(localChId,_lcid);
@@ -1059,7 +1063,7 @@ struct(AtmosVirtualLight)
 		self setv(centerPos,_ctrPos);
 	}
 
-	def(loadEmitters)
+	decl(void(int;vector3)) def(loadEmitters)
 	{
 		params ["_cfg","_pos"];
 
@@ -1079,20 +1083,21 @@ struct(AtmosVirtualLight)
 		};
 	}
 
-	def(deleteEmitters)
+	decl(void()) def(deleteEmitters)
 	{
 		{
 			deleteVehicle _x;
 		} foreach (self getv(effects));
 	}
 
-	def(_pos) [0,0,0];
+	decl(vector3) def(_pos) [0,0,0];
 
-	def(getEmitterPos)
+	decl(vector3()) def(getEmitterPos)
 	{
 		self getv(_pos)
 	}
-	def(getEmitterRealPos)
+	
+	decl(vector3()) def(getEmitterRealPos)
 	{
 		private _p = self getv(_unhide_pos);
 		if !isNullVar(_p) then {
@@ -1102,7 +1107,7 @@ struct(AtmosVirtualLight)
 		};
 	}
 
-	def(setEmitterPos)
+	decl(void(vector3)) def(setEmitterPos)
 	{
 		params ["_pos"];
 		private _eff = self getv(effects);
@@ -1119,9 +1124,9 @@ struct(AtmosVirtualLight)
 		} foreach (_eff select [1,count _eff]);
 	}
 
-	def(_unhide_pos) null;
-	def(isHidden) {!isNull(self getv(_unhide_pos))}
-	def(setHidden)
+	decl(NULL|vector3) def(_unhide_pos) null;
+	decl(bool()) def(isHidden) {!isNull(self getv(_unhide_pos))}
+	decl(bool(bool)) def(setHidden)
 	{
 		params ["_mode"];
 		if equals(_mode,self callv(isHidden)) exitWith {false};
@@ -1151,12 +1156,12 @@ struct(AtmosVirtualLight)
 		true
 	}
 
-	def(del)
+	decl(void()) def(del)
 	{
 		self callv(deleteEmitters);
 	}
 	
-	def(updateLight)
+	decl(void(int)) def(updateLight)
 	{
 		params ["_cfg"];
 		private _pos = self callv(getEmitterRealPos);
@@ -1172,12 +1177,12 @@ struct(AtmosVirtualLight)
 	}
 
 	//simple reload light by config
-	def(reloadLight)
+	decl(void()) def(reloadLight)
 	{
 		self callp(updateLight,self getv(id));
 	}
 
-	def(isSameCfgType)
+	decl(bool(struct_t.AtmosVirtualLight)) def(isSameCfgType)
 	{
 		params ["_check"];
 		//(_check getv(id)) == (self getv(id))
@@ -1189,7 +1194,7 @@ struct(AtmosVirtualLight)
 		_equal
 	}
 
-	def(str)
+	decl(string()) def(str)
 	{
 		format["%1%3(%2)",struct_typename(self),self getv(id),self getv(localChId)]
 	}
@@ -1198,35 +1203,35 @@ endstruct
 //структура региона
 struct(AtmosClientBatchRegion)
 	//локальные точки начала и конца зоны
-	def(startPos) [0,0,0]
-	def(endPos) [0,0,0]
-	def(sizes) [0,0] //размер зоны
+	decl(vector3) def(startPos) [0,0,0]
+	decl(vector3) def(endPos) [0,0,0]
+	decl(vector2) def(sizes) [0,0] //размер зоны
 
-	def(areaId) null //айди зоны
+	decl(vector3) def(areaId) null //айди зоны
 
-	def(isEqualPosInfo)
+	decl(bool(vector3;vector2)) def(isEqualPosInfo)
 	{
 		params ["_start","_sizes"];
 		equals(_start,self getv(startPos))
 		&& {equals(_sizes,self getv(sizes))}
 	}
 
-	def(isSameCfgType)
+	decl(bool(struct_t.AtmosClientBatchRegion)) def(isSameCfgType)
 	{
 		params ["_otherVL"];
 		equals(self getv(effType),_otherVL getv(effType))
 	}
-	def(effType) -1; //NAT_ATMOS_EFFTYPE_
+	decl(int) def(effType) -1; //NAT_ATMOS_EFFTYPE_
 
 	//размер зоны оптимизации vec2
-	def(renderZone) null
+	decl(vector2) def(renderZone) null
 	//уменьшение дропа частиц
-	def(decZoneRend) null 
+	decl(float) def(decZoneRend) null 
 
 	//references to AtmosVirtualLight
-	def(virtLights) null //list<AtmosVirtualLight>
+	decl(AtmosVirtualLight[]) def(virtLights) null //list<AtmosVirtualLight>
 
-	def(registerVL)
+	decl(void(struct_t.AtmosVirtualLight[]|struct_t.AtmosVirtualLight)) def(registerVL)
 	{
 		params ["_vlORvlList"];
 		private _rpi = vec2(self getv(startPos),self getv(sizes));
@@ -1241,7 +1246,7 @@ struct(AtmosClientBatchRegion)
 		};
 	}
 
-	def(rebuildData)
+	decl(void()) def(rebuildData)
 	{
 		private _sizes = self getv(sizes);
 
@@ -1259,7 +1264,7 @@ struct(AtmosClientBatchRegion)
 		self setv(batchPos,_midPos);
 	}
 
-	def(init)
+	decl(void(struct_t.AtmosAreaClient;vector2;vector3;struct_t.AtmosVirtualLight[])) def(init)
 	{
 		params ["_area","_sizes","_startPos",["_virtLights",[]]];
 		self setv(startPos,_startPos);
@@ -1302,19 +1307,19 @@ struct(AtmosClientBatchRegion)
 		self setv(batchPos,_midPos);
 	}
 
-	def(str)
+	decl(string()) def(str)
 	{
 		format["ABR:%1=>%2(%3)",self getv(startPos),self getv(endPos),self getv(sizes)];
 	}
 
-	def(del)
+	decl(void()) def(del)
 	{
 		self callv(unloadBatchEmitter);
 	}
 
 	//выполняет задание по ближайшим блокам зоны. 
 	// в параметры qtask отдается объект AtmosVirtualLight (при наличии) и позиция
-	def(nearBlocksQuery)
+	decl(void(any)) def(nearBlocksQuery)
 	{
 		params [["_qtask",{}]];
 		private _startPos = self getv(startPos) vectorAdd [-1,-1];
@@ -1352,7 +1357,7 @@ struct(AtmosClientBatchRegion)
 	}
 
 	//включает или отключает режим рендера зоны. true - включение
-	def(setRenderMode)
+	decl(void(bool)) def(setRenderMode)
 	{
 		params ["_mode"];
 		if (_mode) then {
@@ -1368,7 +1373,7 @@ struct(AtmosClientBatchRegion)
 		};
 	}
 
-	def(setCull)
+	decl(void(bool)) def(setCull)
 	{
 		params ["_hide"];
 		if equals(_hide,self getv(isCulled)) exitWith{};
@@ -1395,17 +1400,17 @@ struct(AtmosClientBatchRegion)
 			self setv(_cull_cache,[]);
 		};
 	};
-	def(isCulled) false
-	def(_cull_cache) null
+	decl(bool) def(isCulled) false
+	decl(any) def(_cull_cache) null
 
-	def(batchCfg) -1 //конфиг батч эмиттера
-	def(batchPos) [0,0,0] //глобальная позиция батч эмиттера
-	def(batchIsLoaded) false //загружен ли визуал
-	def(emitter) null //массив на world эмиттеры
+	decl(int) def(batchCfg) -1 //конфиг батч эмиттера
+	decl(vector3) def(batchPos) [0,0,0] //глобальная позиция батч эмиттера
+	decl(bool) def(batchIsLoaded) false //загружен ли визуал
+	decl(mesh[]) def(emitter) null //массив на world эмиттеры
 
-	def(canUseCullOpt) false
-	def(_nocullLight) -1
-	def(handleCfgCanCulled)
+	decl(bool) def(canUseCullOpt) false
+	decl(int) def(_nocullLight) -1
+	decl(void()) def(handleCfgCanCulled)
 	{
 		if ((self getv(batchCfg)) in ["SLIGHT_ATMOS_SMOKE_1" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_2" call lightSys_getConfigIdByName,"SLIGHT_ATMOS_SMOKE_3" call lightSys_getConfigIdByName]) then {
 			self setv(canUseCullOpt,true);
@@ -1413,7 +1418,7 @@ struct(AtmosClientBatchRegion)
 	}
 
 	//обновляет батч
-	def(reloadBatchEmitter)
+	decl(void()) def(reloadBatchEmitter)
 	{
 		if (self getv(batchIsLoaded)) then {
 			self callv(unloadBatchEmitter);
@@ -1422,7 +1427,7 @@ struct(AtmosClientBatchRegion)
 	}
 
 	//загрузка батч эмиттера
-	def(loadBatchEmitter)
+	decl(void()) def(loadBatchEmitter)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
 		
@@ -1569,7 +1574,7 @@ struct(AtmosClientBatchRegion)
 		#endif
 	}
 
-	def(unloadBatchEmitter)
+	decl(void()) def(unloadBatchEmitter)
 	{
 		if (self getv(batchIsLoaded)) then {
 			self setv(batchIsLoaded,false);

@@ -1426,7 +1426,7 @@ gm_createMob = {
 };
 
 lobby_createDummy = {
-	params ["_pos",["_isWoman",false]];
+	params ["_pos",["_isWoman",false],["_canSim",false]];
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
 	_mob disableAI "MOVE";
 	_mob disableAI "TARGET";
@@ -1440,15 +1440,15 @@ lobby_createDummy = {
 	if (_isWoman) then {
 		_mob forceAddUniform getFieldBaseValue("MobWoman","defaultUniform");
 	};
-
-	_mob ENABLESIMULATIONGLOBAL false;
+	//отключение симуляции сбивает синхронизацию формы
+	_mob ENABLESIMULATIONGLOBAL _canSim;
 	_mob
 };
 private _canCreateDummy = true;
 
 if (_canCreateDummy) then {
 	private _dummyMobPos = [50,50,0];
-	private _dummyMan = [_dummyMobPos arg false] call lobby_createDummy;
+	private _dummyMan = [_dummyMobPos,false,true] call lobby_createDummy;
 	netSetGlobal(lobby_glob_dummy_man,_dummyMan);
 	assert(!isNullReference(_dummyMan));
 };

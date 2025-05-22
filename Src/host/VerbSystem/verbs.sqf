@@ -40,6 +40,10 @@ _onActivateVerb = {
 	};
 	private _action = (verbs_funcData get _probClass) select 1;
 	if equals(_action,{true}) then {_action = verb_act_undefinded};
+	
+	#ifdef SP_MODE
+		sp_checkInput("activate_verb",[_thisObj arg _verbId call verb_getTypeById arg _verbId]);
+	#endif
 
 	[_thisObj, _usrObj, _mob] call _action;
 };
@@ -66,6 +70,10 @@ _onActivateInventoryVerb = {
 	};
 	private _action = (verbs_funcData get _probClass) select 1;
 	if equals(_action,{true}) then {_action = verb_act_undefinded};
+
+	#ifdef SP_MODE
+		sp_checkInput("activate_verb",[_thisObj arg _verbId call verb_getTypeById arg _verbId]);
+	#endif
 
 	[_thisObj, _usrObj, _mob] call _action;
 
@@ -98,6 +106,11 @@ _getObjectVerbs = {
 	unrefObject(_mob,_callbackOwnwer,errorformat("On collect verb (from object) error: Target is %1",_callbackOwnwer));
 
 	_verbs = [_mob,_obj] call verb_tryCollectVerbs;
+	
+	#ifdef SP_MODE
+		sp_checkInput("load_verbs",[_obj arg _verbs]);
+	#endif
+
 	if (_retAsInv) then {
 		rpcSendToObject(_callbackOwnwer,"loadVerbsInventory",[callFunc(_obj,getName) arg _verbs arg -100 arg _objectHash]);
 	} else {
@@ -117,6 +130,10 @@ _getInventoryVerbs = {
 	if isTypeOf(_obj,StolenItem) exitWith {callFuncParams(_obj,onStolen,_mob)};
 	
 	_verbs = [_mob,_obj] call verb_tryCollectVerbs;
+
+	#ifdef SP_MODE
+		sp_checkInput("load_verbs",[_obj arg _verbs]);
+	#endif
 
 	_hash = getVar(_obj,pointer);
 
@@ -179,4 +196,10 @@ verb_tryCollectVerbs = {
 	} foreach _outArr;
 
 	_list
+};
+
+
+verb_getTypeById = {
+	params ["_id"];
+	verb_inverted_list get _id
 };

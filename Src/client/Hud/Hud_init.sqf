@@ -25,7 +25,7 @@ inline_macro
 #define setWidgetVar(_w,var,val) _w setVariable [#var,val]
 
 decl(string[])
-hud_vars = ["oxy","hunger","thirst","encumb","pee","poo","tf_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
+hud_vars = ["oxy","hunger","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
 "holdbreath","tox"];
 decl(map)
 hud_map_defaultValues = createHashMap;
@@ -160,9 +160,9 @@ hud_specAct_overlay = [
 
 //system
 	decl(float)
-	hud_tf_lastError = 0;
+	hud_vs_lastError = 0;
 	decl(any[])
-	hud_tf_lastError_overlay = ["!!!ТИМСПИК!!!",[[0,""],[1,"#ED002F"]],true];
+	hud_vs_lastError_overlay = ["!!!ТИМСПИК!!!",[[0,""],[1,"#ED002F"]],true];
 
 /*hud_canHide = true;
 	hud_hideAfter = 1;
@@ -213,8 +213,8 @@ hud_init = {
 	hud_zone = [];
 
 	//Зависимость от VoiceSystem
-	if isNull(tf_lastError) then {
-		tf_lastError = false;
+	if isNull(vs_lastError) then {
+		vs_lastError = false;
 	};
 
 	{
@@ -258,8 +258,8 @@ hud_init = {
 decl(void())
 hud_onUpdate = {
 
-	//linking tf_lastError
-	hud_tf_lastError = ifcheck(tf_lastError,1,0);
+	//linking vs_lastError
+	hud_vs_lastError = ifcheck(vs_lastError,1,0);
 
 	_needRecalculatePos = false; //Для перерасчета позиций
 	{

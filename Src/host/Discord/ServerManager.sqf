@@ -142,7 +142,22 @@ dsm_callbackHandle = {
 		if (_function == "connection_check_respone") exitwith {
 			dsm_connectedToManager = true;
 		};
+		if (_function == "oauth_response") exitwith {
+			//traceformat("oauth resp: %1",_data);
+			if !isNull(srv_auth_onResponse) then {
+				_list = _data call dsm_deserializeStringList;
+				_list call srv_auth_onResponse;
+			};
+		};
+		if (_function == "oauth_callback") exitWith {
+			//traceformat("oauth callback: %1",_data);
+			if !isNull(srv_auth_onCallback) then {
+				_list = _data call dsm_deserializeStringList;
+				_list call srv_auth_onCallback;
+			};
+		};
 		//Ответ от дискорда (регистрация через лс)
+		//! not used
 		if (_function == "accounting_register_request") exitwith {
 			_list = _data call dsm_deserializeStringList;
 			_list params ["_id","_nick","_hash","_discordUserId"];

@@ -7,27 +7,47 @@
 #include <..\..\WidgetSystem\widgets.hpp>
 #include <CameraControl.hpp>
 
-#include "Camera_ShakeDefs.sqf"
+#include <..\..\..\host\lang.hpp>
 
+namespace(Rendering.Camera,cam_)
 
+macro_const(cam_camTypeDinamic)
 #define dynamicCamera "Land_HandyCam_F"
+macro_const(cam_camTypeStatic)
 #define staticCamera "camera"
-#define initCam(camtype) call{private _c = camtype createVehicleLocal [0,0,0]; _c hideObject true; _c}
+
+decl(mesh(string))
+cam_initCamera = {
+	params ["_camType"];
+	private _c = _camType createVehicleLocal [0,0,0]; 
+	_c hideObject true; 
+	_c
+};
+
+#define initCam(camtype) [camtype] call cam_initCamera
+
+decl(bool)
 cam_isEnabled = true;
+decl(vector3)
 cam_defaultPos = [-0.05,-0.05,0.12];
+decl(mesh)
 cam_lastPlayerObject = objNUll;
+decl(float)
 cam_updateDelay = 0;
+decl(mesh)
 cam_currentCamera = objNUll;
 
-
-if (!cam_isEnabled) exitWith {};
-
+decl(mesh)
 cam_object = initCam(dynamicCamera);
+decl(mesh)
 cam_fixedObject = initCam(staticCamera);
+decl(mesh)
 cam_currentCamera = cam_fixedObject;
 
+decl(string)
 cam_viewMode = "INTERNAL";
 
+decl(void())
 cam_setCameraOnPlayer = {
 	cam_object attachTo [cam_lastPlayerObject, cam_defaultPos
 	//simulate 3rd person
@@ -42,18 +62,27 @@ cam_setCameraOnPlayer = {
 
 };
 
+decl(bool)
 cam_isNewCamera = false;
 
 //Параметры для рендеринга. Нужны при отправке на сервер
+decl(vector3)
 cam_renderPos = [0,0,0]; //data in ATL coordinates
+decl(vector3[])
 cam_renderVec = [[0,0,0],[0,0,1]];
+decl(vector3[])
 cam_renderVecMouse = [[0,0,0],[0,0,1]]; //вектор направления мыши
 
+decl(vector2)
 cam_movingOffest = [0,0];
 
+decl(vector2)
 cam_camshakeDir = [0,0];//x,y
+decl(vector3)
 cam_camshakePos = [0,0,0];
+decl(any[])
 cam_camshake_tasks = []; //here adding tasks for shake
+decl(void())
 cam_camShake_resetAll = {
 	cam_camshakeDir = [0,0];
 	cam_camshakePos = [0,0,0];
@@ -61,6 +90,7 @@ cam_camShake_resetAll = {
 };
 call cam_camShake_resetAll;
 
+decl(void(float;float;float;float))
 cam_addCamShake = {
 	params ["_power","_powerDir","_freq","_duration"];
 
@@ -69,6 +99,8 @@ cam_addCamShake = {
 		pick[-1,1] * _power,
 		pick[-1,1] * _power],[pick[_powerDir,-_powerDir],pick[_powerDir,-_powerDir]],tickTime+_duration,tickTime,tickTime,_freq,[0,0,0],[0,0]];
 };
+
+decl(void())
 cam_camshake_onUpdate = {
 	_xb = 0; _y = 0; _z = 0; _xdir = 0; _ydir = 0;
 
@@ -119,6 +151,7 @@ cam_camshake_onUpdate = {
 		};
 
 		//linearConversion [minFrom, maxFrom, value, minTo, maxTo]
+		inline_macro
 		#define convset(var) _conv = if (var > 0) then { \
 			linearConversion [_fDelta, _fDelta + _freq, tickTime, var, 0] \
 		} else { \
@@ -126,8 +159,10 @@ cam_camshake_onUpdate = {
 			}; var = _conv
 
 		//Процентное соотношение когда движение начнет затухать: меньше знач. раньше начнет -V
+		inline_macro
 		#define convsetFuller(var) _conv = linearConversion [_addTime, _left, tickTime, var*70/100, 0]; var = _conv
 
+		inline_macro
 		#define convset(var,svar) _conv = linearConversion [_fDelta, _fDelta + _freq, tickTime, svar, var]; var = _conv
 
 		//traceformat("DELTA %1 %2",_conv arg [args2( _fx, _px)]);
@@ -174,18 +209,11 @@ cam_camshake_onUpdate = {
 	cam_camshakeDir = [_xdir,_ydir];
 
 };
-cam_camShake_internal_handler = startUpdate(cam_camshake_onUpdate,0);
-(findDisplay 46) displayAddEventHandler ["MouseMoving",{
-	params ["_d","_x","_y"];
-	if ([player] call smd_isSitting) then {
-		if isDisplayOpen exitWith {};
-		_oldv = cam_movingOffest;
-		cam_movingOffest =[clamp((_oldv select 0)+_x,-90,90),clamp((_oldv select 1)+-_y,-90,90)];
-	} else {
-		cam_movingOffest = [0,0];
-	};
-}];
 
+decl(int)
+cam_camShake_internal_handler = -1;
+
+decl(void())
 cam_updateCameraRotation = {
 	//_vecUp = vectorUpVisual cam_fixedObject;
 	//_vecUp = _vecUp vectorMultiply -1; //invert
@@ -258,6 +286,7 @@ cam_updateCameraRotation = {
 	};
 
 	//#define conversion(data) linearConversion [0,1,data,] OR vectorLinearConversion
+	inline_macro
 	#define invertNum(val) -(val)
 	//not invert: value / 2
 
@@ -293,7 +322,13 @@ cam_updateCameraRotation = {
 	};*/
 };
 
+decl(bool)
 cam_internal_isEnabledBisCam = false;
+
+decl(int)
+cam_internal_handleOnFrame = -1;
+
+decl(void())
 cam_onFrame = {
 
 	//sync cma view
@@ -329,9 +364,9 @@ cam_onFrame = {
 	};
 
 	call cam_updateCameraRotation;
-}; startUpdate(cam_onFrame,cam_updateDelay);
+};
 
-
+decl(void(int;bool))
 cam_setCameraSetting = {
 	params ["_camSetting",["_applyToVar",true]];
 
@@ -352,4 +387,20 @@ cam_setCameraSetting = {
 		cam_currentCamera = cam_object;
 	};
 
+};
+
+if (cam_isEnabled) then {
+	cam_internal_handleOnFrame = startUpdate(cam_onFrame,cam_updateDelay);
+
+	cam_camShake_internal_handler = startUpdate(cam_camshake_onUpdate,0);
+	(findDisplay 46) displayAddEventHandler ["MouseMoving",{
+		params ["_d","_x","_y"];
+		if ([player] call smd_isSitting) then {
+			if isDisplayOpen exitWith {};
+			_oldv = cam_movingOffest;
+			cam_movingOffest =[clamp((_oldv select 0)+_x,-90,90),clamp((_oldv select 1)+-_y,-90,90)];
+		} else {
+			cam_movingOffest = [0,0];
+		};
+	}];
 };

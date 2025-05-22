@@ -3,20 +3,17 @@
 // sdk.relicta.ru
 // ======================================================
 
-#include <engine.h>
-#include <script.h>
-#include <VoiceSystem_widgetEnums.h>
+//#include <engine.h>
+#include <..\..\host\engine.hpp>
+#include <..\..\host\lang.hpp>
 
-//Включенный флаг отключает компиляцию старых функций
-#define VOICE_DISABLE_LEGACYCODE
+namespace(VoiceSystem,vs_)
 
 //Новый алгоритм затухания звука
+macro_def(vs_use_new_algoritm_voice_intersection)
 #define VOICE_USE_NEW_ALGORITM_VOICE_INTERSECTION
 
-#include "VoiceSystem_keysConstant.sqf"
 #include "VoiceSystem_uncategorized.sqf"
-//Всё что не влезло в первый файл по препроцессору влезет во вторую часть
-#include "VoiceSystem_part2.sqf"
 
 //Публичный интерфейс управления
 #include "VoiceSystem_publicInterface.sqf"

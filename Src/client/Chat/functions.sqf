@@ -156,6 +156,13 @@ chatprint = {
 	};
 };
 
+decl(void(string))
+chat_clearBuffer = {
+	params ["_mes"];
+	chat_messages_data resize 0;
+	[_mes] call chatprint;
+};
+
 // Отрисовывает чат в лобби. Копирует информацию из основного GUI чата в чат лобби
 decl(void())
 chat_onRenderLobby = {
@@ -179,6 +186,10 @@ chat_onRenderLobby = {
 // Открывает окно истории чата
 decl(void())
 chatshowhistory = {
+	#ifdef SP_MODE
+		sp_checkInput("chat_show_history",[]);
+	#endif
+
 	_d = call dynamicDisplayOpen;
 
 	#define HIST_SIZE_H 70

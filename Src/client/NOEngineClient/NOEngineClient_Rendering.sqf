@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+//! this file is deprecated and will be removed
 
 // RENDERING (not optimized). Need rewrite
 

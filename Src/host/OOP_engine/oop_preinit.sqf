@@ -84,6 +84,9 @@ oop_getTypeSize = {
 };
 
 oop_getTypeSizeFull = {
+	#ifdef SP_MODE
+	if (true) exitWith {-1};
+	#endif
 	if (_this isequaltype nullPtr) exitWith {PTR_SIZE}; //4 for x32
 	if (_this isEqualType true) exitWith {1};
 	if (_this isEqualType 0) exitWith {4};

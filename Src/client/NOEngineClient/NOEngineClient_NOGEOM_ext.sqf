@@ -3,6 +3,9 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(NOEngine.Client.NoGeomExt,NGOExt_;noe_client_)
 
 //Режим отладки NGO позволяет видеть скриптовую геометрию 
 //#define NOE_NGO_DEBUG_MODE
@@ -18,7 +21,7 @@
 //Список моделей без геометрии
 #include <..\..\host\NOEngine\NOEngine_NGO.hpp>
 
-
+decl(mesh(mesh;vector3;bool))
 NGOExt_create = {
 	params ["_obj","_vec",["_imode",false]];
 	
@@ -43,6 +46,7 @@ NGOExt_create = {
 	_bnd
 };
 
+decl(bool(mesh;mesh))
 NGOExt_createSoftlink = {
 	params ["_srcWorldObj","_target"];
 	private _ref = _srcWorldObj getvariable "ref";
@@ -53,12 +57,14 @@ NGOExt_createSoftlink = {
 	true
 };
 
+decl(void(mesh;string))
 NGOExt_registerRef = {
 	params ["_obj","_ptr"];
 	_obj setvariable ["ref",_ptr];
 };
 
 //create virtual object
+decl(mesh(mesh;string|NULL;bool;bool))
 NGOExt_createDummyObject = {
 	params ["_src","_objType",["_imode",true],["_simple",true]];
 	private _ptr = [_src] call noe_client_getObjPtr;
@@ -77,6 +83,7 @@ NGOExt_createDummyObject = {
 	_obj
 };
 
+decl(void(mesh;string))
 noe_client_ngo_check = {
 	params ["_obj","_model"];
 	
@@ -121,11 +128,14 @@ noe_client_ngo_check = {
 // helpers functions
 
 // check if is ngo object
-noe_client_isNGO = {!isNullReference(_this getVariable vec2("ngo_src",objNull))};
+decl(bool(mesh))
+noe_client_isNGO = { !isNullReference(_this getVariable vec2("ngo_src",objNull)) };
 
 // getting ngo 
-noe_client_getNGOSource = {_this getVariable ["ngo_src",objnull]};
+decl(mesh(mesh))
+noe_client_getNGOSource = { _this getVariable ["ngo_src",objnull] };
 
+decl(mesh(mesh))
 noe_client_getObjectNGOSkip = {
 	private _obj = _this;
 	if (_obj call noe_client_isNGO) then {
@@ -137,6 +147,7 @@ noe_client_getObjectNGOSkip = {
 	}
 };
 
+decl(mesh(mesh;ref))
 noe_client_getPtrInfoNGOSkip = {
 	params ["_obj","_worldRef"];
 	_obj = _obj call noe_client_getObjectNGOSkip;

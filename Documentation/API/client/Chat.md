@@ -212,7 +212,7 @@ Replaced value:
 ```sqf
 70
 ```
-File: [client\Chat\functions.sqf at line 184](../../../Src/client/Chat/functions.sqf#L184)
+File: [client\Chat\functions.sqf at line 195](../../../Src/client/Chat/functions.sqf#L195)
 ## chatGettextwidget
 
 Type: function
@@ -273,6 +273,14 @@ Description:
 - Param: _type (optional, default "default")
 
 File: [client\Chat\functions.sqf at line 52](../../../Src/client/Chat/functions.sqf#L52)
+## chat_clearBuffer
+
+Type: function
+
+Description: 
+- Param: _mes
+
+File: [client\Chat\functions.sqf at line 160](../../../Src/client/Chat/functions.sqf#L160)
 ## chat_onRenderLobby
 
 Type: function
@@ -280,7 +288,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\functions.sqf at line 161](../../../Src/client/Chat/functions.sqf#L161)
+File: [client\Chat\functions.sqf at line 168](../../../Src/client/Chat/functions.sqf#L168)
 ## chatshowhistory
 
 Type: function
@@ -288,7 +296,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\functions.sqf at line 181](../../../Src/client/Chat/functions.sqf#L181)
+File: [client\Chat\functions.sqf at line 188](../../../Src/client/Chat/functions.sqf#L188)
 ## chat_resetFadeTimer
 
 Type: function
@@ -296,7 +304,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\functions.sqf at line 216](../../../Src/client/Chat/functions.sqf#L216)
+File: [client\Chat\functions.sqf at line 227](../../../Src/client/Chat/functions.sqf#L227)
 ## chat_restoreVisible
 
 Type: function
@@ -304,7 +312,7 @@ Type: function
 Description: 
 - Param: _now
 
-File: [client\Chat\functions.sqf at line 223](../../../Src/client/Chat/functions.sqf#L223)
+File: [client\Chat\functions.sqf at line 234](../../../Src/client/Chat/functions.sqf#L234)
 ## chat_onUpdate
 
 Type: function
@@ -312,7 +320,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\functions.sqf at line 239](../../../Src/client/Chat/functions.sqf#L239)
+File: [client\Chat\functions.sqf at line 250](../../../Src/client/Chat/functions.sqf#L250)
 ## chat_applyColorTheme
 
 Type: function
@@ -320,7 +328,7 @@ Type: function
 Description: 
 
 
-File: [client\Chat\functions.sqf at line 261](../../../Src/client/Chat/functions.sqf#L261)
+File: [client\Chat\functions.sqf at line 272](../../../Src/client/Chat/functions.sqf#L272)
 # helpers.hpp
 
 ## CHAT_HIDE_CHECK_UPDATE

@@ -552,7 +552,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 239](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L239)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 247](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L247)
 ## input_internal_isMovingButton
 
 Type: function
@@ -560,7 +560,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 241](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L241)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 249](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L249)
 ## input_internal_isMovingForward
 
 Type: function
@@ -568,7 +568,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 243](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L243)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 251](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L251)
 ## input_getKeyNameByInputName
 
 Type: function
@@ -576,7 +576,7 @@ Type: function
 Description: 
 - Param: _inp
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 246](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L246)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 254](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L254)
 # inputManager.sqf
 
 ## isPressed(var)
@@ -590,7 +590,7 @@ Replaced value:
 ```sqf
 isPressedKey(_kupc,var)
 ```
-File: [client\InputSystem\inputManager.sqf at line 63](../../../Src/client/InputSystem/inputManager.sqf#L63)
+File: [client\InputSystem\inputManager.sqf at line 78](../../../Src/client/InputSystem/inputManager.sqf#L78)
 ## attr
 
 Type: constant
@@ -604,7 +604,7 @@ Replaced value:
 ```sqf
 ([#st,#ht,#dx,#iq,#fp,#will,#per,#hp] select ind_stat)
 ```
-File: [client\InputSystem\inputManager.sqf at line 139](../../../Src/client/InputSystem/inputManager.sqf#L139)
+File: [client\InputSystem\inputManager.sqf at line 154](../../../Src/client/InputSystem/inputManager.sqf#L154)
 ## dbg_addAtr(name,amount)
 
 Type: constant
@@ -619,7 +619,7 @@ Replaced value:
 ```sqf
 [(player),amount] call ((player) getVariable 'proto' getVariable ('add'+ name))
 ```
-File: [client\InputSystem\inputManager.sqf at line 140](../../../Src/client/InputSystem/inputManager.sqf#L140)
+File: [client\InputSystem\inputManager.sqf at line 155](../../../Src/client/InputSystem/inputManager.sqf#L155)
 ## onGameInputs_Down
 
 Type: function
@@ -643,7 +643,7 @@ Description:
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 44](../../../Src/client/InputSystem/inputManager.sqf#L44)
+File: [client\InputSystem\inputManager.sqf at line 59](../../../Src/client/InputSystem/inputManager.sqf#L59)
 ## onGameMouseInputs
 
 Type: function
@@ -657,7 +657,7 @@ Description:
 - Param: _ctrl
 - Param: _alt
 
-File: [client\InputSystem\inputManager.sqf at line 170](../../../Src/client/InputSystem/inputManager.sqf#L170)
+File: [client\InputSystem\inputManager.sqf at line 185](../../../Src/client/InputSystem/inputManager.sqf#L185)
 # input_init.sqf
 
 ## input_catchedEscape

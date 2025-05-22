@@ -7,7 +7,9 @@
 #include <..\..\host\engine.hpp>
 #include <..\..\host\text.hpp>
 
+namespace(StaminaSystem,stamina_)
 
+decl(void())
 stamina_init = {
 	private _gui = getGUI;
 
@@ -56,10 +58,44 @@ stamina_init = {
 	stamina_mainHandle = startUpdate(stamina_onUpdate,stamina_widgetUpdate + 0.001);
 };
 
+decl(void())
 stamina_onUpdate = {
-	#include "StaminaOnUpdate.sqf"
+	//Данный код вызывает ошибку прогресса
+	//[getMainBar,[0,0 + rand(-10,10) + stamina_mainbar_size_h / 2]/*,stamina_widgetUpdate / 2*/] call widgetSetPositionOnly;
+
+	_ctg = getCtgBar;
+	_precent = call stamina_convCurToPrec;
+	if (_precent >= 100) then {
+		
+		if (_ctg getVariable ["isVisible",false]) then {
+			/*if (!(_ctg getVariable ["prepToSetInvisible",false])) then {
+				_ctg setVariable ["prepToSetInvisible",true];
+				_ctg setVariable ["timeToSetInvisible",tickTime + 5];
+			};
+			if (tickTime < (_ctg getvariable ["timeToSetInvisible",tickTime + 5])) exitWith {};*/
+			_ctg setVariable ["isVisible",false];
+			_ctg setFade 1;
+			_ctg commit stamina_fadetime_mainctg;
+		};
+		
+	} else {
+		if !(_ctg getVariable ["isVisible",false]) then {
+			_ctg setVariable ["isVisible",true];
+			_ctg setFade 0;
+			_ctg commit stamina_fadetime_mainctg;
+			
+			//_ctg setVariable ["prepToSetInvisible",false];
+		};
+	};
+
+	if (stamina_lastVal != cd_stamina_cur) then {
+		
+		call stamina_syncVisual;
+		stamina_lastVal = cd_stamina_cur;
+	};
 };
 
+decl(void(float))
 stamina_setValue = {
 	params ['_val'];
 
@@ -67,16 +103,18 @@ stamina_setValue = {
 	[_wid,[0,0 + stamina_mainbar_size_h / 2,_val,stamina_mainbar_size_h],stamina_widgetUpdate] call widgetSetPosition;
 };
 
-
+decl(float())
 stamina_convCurToPrec = {
 	(100 * cd_stamina_cur) / cd_stamina_max
 };
 
+decl(void())
 stamina_syncVisual = {
 
 	[call stamina_convCurToPrec] call stamina_setValue
 };
 
+decl(void())
 stamina_applyColorTheme = {
 	getMainBar setBackgroundColor (["sta_strip"] call ct_getValue);
 	getBackroundBar setBackgroundColor (["sta_back"] call ct_getValue);

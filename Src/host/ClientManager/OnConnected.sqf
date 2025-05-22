@@ -8,8 +8,8 @@ params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
 cm_maxClients = (count allPlayers) max cm_maxClients;
 
-logger_client("Client connected. Owner %1; UID:%2; ID %3",_owner arg _uid arg _id);
 
+/*
 if !isNull(CRYPT_ENABLED) then {
 	[[RC_CLIENT_KEY,rc_deflow_cli],
 		if (!isNull(CRYPT_SAVE_AS_BINARY) && {CRYPT_SAVE_AS_BINARY}) then {
@@ -31,23 +31,25 @@ if !isNull(CRYPT_ENABLED) then {
 		}
 	] remoteExecCall ["spawn", _owner];
 };
-
-
-	
+*/	
 
 
 //Запускаем таймер	
 _timer = {
-	params ["_owner","_doNothing"];
+	params ["_pwData"];
 	
-	if (_doNothing) exitWith {};
-	
-	if !(_owner call cm_isRegisteredClient) then {
-		warningformat("Client (%1) did not have time to pass authorization in the allotted time (%2 sec)",_owner arg TIME_TO_INIT_CLIENT);
-		[_owner,"Истекло время ожидания инициализации клиента."] call cm_serverKickById;
-	};
+	_pwData callv(onConnectTimeout);
 }; 
-_parameters = [_owner,false,_uid];
-invokeAfterDelayParams(_timer,TIME_TO_INIT_CLIENT,_parameters);
 
-cm_preAwaitClientData pushBack _parameters;
+_pwData = struct_newp(PreAwaitClientData,_owner);
+invokeAfterDelayParams(_timer,TIME_TO_INIT_CLIENT,[_pwData]);
+
+cm_preAwaitClientData set [_owner,_pwData];
+
+//send client auth process
+[	
+	[_owner],
+	srv_auth_connected
+] remoteExecCall ["spawn", _owner];
+
+logger_client("Client connected. Owner %1; UID:%2; ID %3",_owner arg _uid arg _id);

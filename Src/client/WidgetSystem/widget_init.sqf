@@ -8,15 +8,17 @@
 #include "widgets.hpp"
 #include "blockedButtons.hpp"
 
+namespace(WidgetSystem,NULL)
+
 
 //init gui
 ("GUI" call bis_fnc_rsclayer) cutrsc ["GUI", "PLAIN"];
 _display = uinamespace getvariable ["gui",DisplayNull];
 
 #include "functions.sqf"
-#include "widget_eventSystem.sqf"
 #include "defines.sqf"
 
+decl(void())
 removealldisplayevents = {
 	(findDisplay 46) displayRemoveAllEventHandlers "keydown";
 	(findDisplay 46) displayRemoveAllEventHandlers "keyup";
@@ -133,15 +135,23 @@ if (!isMultiplayer) then {
 			precent_to_real(20) * safezoneW,
 			precent_to_real(10) * safezoneH];
 			_bt ctrlCommit 0;
+			#ifdef SP_MODE
+			_bt ctrlSetText "RELOAD SCENARIO";
+			#else
 			_sysEnabled = call editorDebug_isVisibleWidgets;
 			_bt ctrlSetText ifcheck(_sysEnabled,"Выключить дебагинфо","Включить дебагинфо");
 			_bt ctrlSetTooltip "Переключение отладчика цели,игрока и активной руки";
+			#endif
 			_bt ctrlAddEventHandler ["MouseButtonUp",{
 				_bt = _this select 0;
+				#ifdef SP_MODE
+				call sp_internal_reloadScenario;
+				#else
 				_sysEnabled = call editorDebug_isVisibleWidgets;
 				[!_sysEnabled] call editorDebug_setVisibleWidgets;
 				_sysEnabled = call editorDebug_isVisibleWidgets;
 				_bt ctrlSetText ifcheck(_sysEnabled,"Выключить дебагинфо","Включить дебагинфо");
+				#endif
 				//(findDisplay 49) closeDisplay 0;
 			}];
 

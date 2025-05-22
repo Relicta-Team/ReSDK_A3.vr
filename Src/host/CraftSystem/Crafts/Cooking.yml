@@ -178,6 +178,34 @@
 # =======================================================
 
 - <<: *interacting
+  name: Нарезка грибов
+  required:
+    components:
+      hand_item:        
+        class: Knife
+      target:
+        class: Mushroom
+  result: 
+    class: GribChopped
+    <<: *def_mods
+      
+
+- <<: *interacting
+  name: Нарезка мельтешонка 
+  required: 
+    components:
+      hand_item:
+        class: Knife
+      target:
+        class: Melteshonok
+        check_type_of: false
+  result:
+    class: MeatChopped
+    count: {min: 1, max:  2}
+    <<: *def_mods
+
+
+- <<: *interacting
   name: Нарезка мяса
   required:
     components:
@@ -197,7 +225,12 @@
       - default # дефолт после трансфера чтобы вес правильно расчитался
 
 - <<: *interacting
+  options:
+    craft_duration: from_skill(4,1)
   required:
+    skills:
+      cooking: 3
+      knife: 3
     components:
       hand_item:
         class: Knife

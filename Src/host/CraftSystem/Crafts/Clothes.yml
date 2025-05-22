@@ -33,16 +33,6 @@
     modifiers: [default]
 
 - <<: *ref_main_cloth
-  required:
-    components:
-      - class: Rag
-        count: 2
-        check_type_of: false
-  result:
-    <<: *def_mods
-    class: Bandage
-
-- <<: *ref_main_cloth
   required: 
     components:
       - class: Rag
@@ -97,4 +87,255 @@
   result:
     <<: *def_mods
     class: FabricBagBig1 # TODO random select between FabricBagBig1 and FabricBagBig2
+
+- <<: *ref_main_cloth
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: ClothDebris(1-2)
+        count: 2
+        check_type_of: false
+      - class: NeedleWithThreads 
+        count: 1
+        destroy: false
+  result:
+    class: Rag
+    <<: *def_mods
+    
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CliricCloth
+    <<: *def_mods
+    
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: WhiteRobeCloth
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: NomadCloth1
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: NomadCloth10
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: NomadCloth11
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CitizenCloth1
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CitizenCloth10
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 3
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CitizenCloth11
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 1
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: HoodBrown
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 1 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 1
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: HatBandana
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 1 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 1
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: HatBandana1
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 1 
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 1
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CookerCap1
+    <<: *def_mods
+
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: Rag
+       count: 2
+       check_type_of: false
+     - class: ClothDebris(1-2)
+       count: 2
+       check_type_of: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: HatShemag
+    <<: *def_mods
+
+
 

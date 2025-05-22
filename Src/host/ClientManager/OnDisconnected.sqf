@@ -13,23 +13,28 @@ params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 } foreach (entities [["I_VirtualCurator_F"],[]]);
 
 _cli = _owner call cm_findClientById;
-if equals(_cli,nullPtr) exitWith {
-	errorformat("ClientManager::OnDisconnected() - Cant find client by id %1",_owner);
-};
+if !isNullReference(_cli) then {
+	//errorformat("ClientManager::OnDisconnected() - Cant find client by id %1",_owner);
+	
+	//getting client mob
+	_mob = getVar(_cli,actor) getVariable "link";
+	if (!isNullVar(_mob) && {!isNullReference(_mob)}) then {
+		callFunc(_mob,onDisconnected);
+	};
 
-//getting client mob
-_mob = getVar(_cli,actor) getVariable "link";
-if (!isNullVar(_mob) && {!isNullReference(_mob)}) then {
-	callFunc(_mob,onDisconnected);
+	//удаляем клиента из всех его ролей
+	callFunc(_cli,onFinalize);
+	//delete(_cli)
 };
-
 
 logger_client("Client disconnected. Owner %1; UID:%2; ID %3",_owner arg _uid arg _id);
 
 //удаляем клиента из списка преавайтеров если есть
-_indPreAwait = cm_preAwaitClientData findIf {equals(_x select 0,_owner)};
-if (_indPreAwait != -1) then {cm_preAwaitClientData deleteAt _indPreAwait};
+_pwData = cm_preAwaitClientData get _owner;
+if !isNullVar(_pwData) then {
+	_pwData setv(cancelToken,true); //do nothing on timeout
+	cm_preAwaitClientData deleteAt _owner;
+};
 
-//удаляем клиента из всех его ролей
-callFunc(_cli,onFinalize);
-//delete(_cli)
+//удаляем запись из cm_map_ownerToDisIdAssoc
+cm_map_ownerToDisIdAssoc deleteAt _owner;

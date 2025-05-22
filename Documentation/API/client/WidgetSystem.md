@@ -11,12 +11,12 @@ Replaced value:
 ```sqf
 actionKeys #name
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 6](../../../Src/client/WidgetSystem/blockedButtons.hpp#L6)
+File: [client\WidgetSystem\blockedButtons.hpp at line 11](../../../Src/client/WidgetSystem/blockedButtons.hpp#L11)
 ## GROUP_ACTIONS
 
 Type: constant
 
-Description: Пользовательские меню?!
+Description: 
 
 
 Replaced value:
@@ -28,12 +28,12 @@ ACT(CommandingMenu1) + ACT(CommandingMenu2) + ACT(CommandingMenu3) + ACT(Command
  ACT(CommandingMenuSelect9) + ACT(CommandingMenuSelect0) + \
  ACT(prevAction) + ACT(nextAction) + ACT(Action) + ACT(ActionContext) + ACT(defaultAction)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 9](../../../Src/client/WidgetSystem/blockedButtons.hpp#L9)
+File: [client\WidgetSystem\blockedButtons.hpp at line 15](../../../Src/client/WidgetSystem/blockedButtons.hpp#L15)
 ## GROUP_COMMA_MENU
 
 Type: constant
 
-Description: команды на F1-F12
+Description: 
 
 
 Replaced value:
@@ -42,12 +42,12 @@ ACT(SelectGroupUnit1) + ACT(SelectGroupUnit2) + ACT(SelectGroupUnit3) + \
 ACT(SelectGroupUnit4) + ACT(SelectGroupUnit5) + ACT(SelectGroupUnit6) + ACT(SelectGroupUnit7) + \
 ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(selectAll)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 17](../../../Src/client/WidgetSystem/blockedButtons.hpp#L17)
+File: [client\WidgetSystem\blockedButtons.hpp at line 24](../../../Src/client/WidgetSystem/blockedButtons.hpp#L24)
 ## SIMPLE_PLAYER_INTERACTION
 
 Type: constant
 
-Description: инвентарь и другое пользовательское взаимодействие
+Description: 
 
 
 Replaced value:
@@ -55,19 +55,19 @@ Replaced value:
 ACT(showMap) + ACT(gear) + ACT(navigateMenu) + ACT(EvasiveLeft) + ACT(EvasiveRight) + \
  ACT(Salute) + ACT(SitDown) + ACT(networkStats) + ACT(networkPlayers)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 22](../../../Src/client/WidgetSystem/blockedButtons.hpp#L22)
+File: [client\WidgetSystem\blockedButtons.hpp at line 30](../../../Src/client/WidgetSystem/blockedButtons.hpp#L30)
 ## ESCAPE_BUTTONS
 
 Type: constant
 
-Description: эскейп
+Description: 
 
 
 Replaced value:
 ```sqf
 ACT(ingamePause)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 30](../../../Src/client/WidgetSystem/blockedButtons.hpp#L30)
+File: [client\WidgetSystem\blockedButtons.hpp at line 39](../../../Src/client/WidgetSystem/blockedButtons.hpp#L39)
 ## FORBIDDEN_BUTTONS
 
 Type: constant
@@ -79,7 +79,7 @@ Replaced value:
 ```sqf
 (GROUP_ACTIONS + GROUP_COMMA_MENU + SIMPLE_PLAYER_INTERACTION)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 32](../../../Src/client/WidgetSystem/blockedButtons.hpp#L32)
+File: [client\WidgetSystem\blockedButtons.hpp at line 42](../../../Src/client/WidgetSystem/blockedButtons.hpp#L42)
 ## FORBIDDEN_BUTTONS_SCROLL
 
 Type: constant
@@ -91,7 +91,7 @@ Replaced value:
 ```sqf
 ACT(prevAction) + ACT(nextAction) + ACT(Action) + ACT(ActionContext) + ACT(defaultAction)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 33](../../../Src/client/WidgetSystem/blockedButtons.hpp#L33)
+File: [client\WidgetSystem\blockedButtons.hpp at line 44](../../../Src/client/WidgetSystem/blockedButtons.hpp#L44)
 ## ADDRULE_FORBIDDEN_BUTTONS(forkey)
 
 Type: constant
@@ -103,7 +103,7 @@ Replaced value:
 ```sqf
 (forkey in FORBIDDEN_BUTTONS)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 35](../../../Src/client/WidgetSystem/blockedButtons.hpp#L35)
+File: [client\WidgetSystem\blockedButtons.hpp at line 47](../../../Src/client/WidgetSystem/blockedButtons.hpp#L47)
 ## ADDRULE_FORBIDDEN_SCROLL(forkey)
 
 Type: constant
@@ -115,19 +115,19 @@ Replaced value:
 ```sqf
 (forkey in FORBIDDEN_BUTTONS_SCROLL)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 36](../../../Src/client/WidgetSystem/blockedButtons.hpp#L36)
+File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
 ## LEFT_MOVE_BUTTONS
 
 Type: constant
 
-Description: strafelock check
+Description: 
 
 
 Replaced value:
 ```sqf
 ( ACT(TurnLeft) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 40](../../../Src/client/WidgetSystem/blockedButtons.hpp#L40)
+File: [client\WidgetSystem\blockedButtons.hpp at line 54](../../../Src/client/WidgetSystem/blockedButtons.hpp#L54)
 ## RIGHT_MOVE_BUTTONS
 
 Type: constant
@@ -139,7 +139,7 @@ Replaced value:
 ```sqf
 ( ACT(TurnRight) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 41](../../../Src/client/WidgetSystem/blockedButtons.hpp#L41)
+File: [client\WidgetSystem\blockedButtons.hpp at line 56](../../../Src/client/WidgetSystem/blockedButtons.hpp#L56)
 ## MOVE_FORWARD_BUTTONS
 
 Type: constant
@@ -151,12 +151,12 @@ Replaced value:
 ```sqf
 ( ACT(MoveForward) + ACT(MoveFastForward) + ACT(MoveSlowForward) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 43](../../../Src/client/WidgetSystem/blockedButtons.hpp#L43)
+File: [client\WidgetSystem\blockedButtons.hpp at line 59](../../../Src/client/WidgetSystem/blockedButtons.hpp#L59)
 ## CAN_MOVE_BUTTONS
 
 Type: constant
 
-Description: movement actions
+Description: 
 
 
 Replaced value:
@@ -164,7 +164,7 @@ Replaced value:
 (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
  ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(MoveLeft) + ACT(MoveRight) + ACT(GetOver))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 46](../../../Src/client/WidgetSystem/blockedButtons.hpp#L46)
+File: [client\WidgetSystem\blockedButtons.hpp at line 63](../../../Src/client/WidgetSystem/blockedButtons.hpp#L63)
 ## CHANGE_STANCE_BUTTONS
 
 Type: constant
@@ -176,139 +176,78 @@ Replaced value:
 ```sqf
 (ACT(AdjustUp) + ACT(AdjustDown) + ACT(Crouch) + ACT(Stand) + ACT(MoveUp) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
+File: [client\WidgetSystem\blockedButtons.hpp at line 67](../../../Src/client/WidgetSystem/blockedButtons.hpp#L67)
 ## FAST_DROP_BUTTONS
 
 Type: constant
 
-Description: прыжок на землю в беге
+Description: 
 
 
 Replaced value:
 ```sqf
 (ACT(Crouch) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 51](../../../Src/client/WidgetSystem/blockedButtons.hpp#L51)
+File: [client\WidgetSystem\blockedButtons.hpp at line 70](../../../Src/client/WidgetSystem/blockedButtons.hpp#L70)
 ## SIDEWAYS_MOVEMENT_BUTTONS
 
 Type: constant
 
-Description: защита от стрейфа тупых школьников
+Description: 
 
 
 Replaced value:
 ```sqf
 (ACT(TurnLeft) + ACT(TurnRight))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 53](../../../Src/client/WidgetSystem/blockedButtons.hpp#L53)
+File: [client\WidgetSystem\blockedButtons.hpp at line 73](../../../Src/client/WidgetSystem/blockedButtons.hpp#L73)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER
 
 Type: constant
 
-Description: Размер верхней части окна (драг-зоны)
+Description: 
 
 
 Replaced value:
 ```sqf
 3
 ```
-File: [client\WidgetSystem\defines.sqf at line 31](../../../Src/client/WidgetSystem/defines.sqf#L31)
+File: [client\WidgetSystem\defines.sqf at line 37](../../../Src/client/WidgetSystem/defines.sqf#L37)
 ## createWidget_closeButton
 
 Type: function
 
-Description: Создать виджет типа закрывающая дисплей кнопка
+Description: 
 - Param: _display
 - Param: _text (optional, default "Закрыть")
 - Param: _pos
 - Param: _parent
 
-File: [client\WidgetSystem\defines.sqf at line 12](../../../Src/client/WidgetSystem/defines.sqf#L12)
+File: [client\WidgetSystem\defines.sqf at line 17](../../../Src/client/WidgetSystem/defines.sqf#L17)
 ## createWidget_window
 
 Type: function
 
-Description: Создать виджет типа окно
+Description: 
 - Param: _display
 - Param: _type
 - Param: _pos
 - Param: _parent
 
-File: [client\WidgetSystem\defines.sqf at line 34](../../../Src/client/WidgetSystem/defines.sqf#L34)
+File: [client\WidgetSystem\defines.sqf at line 41](../../../Src/client/WidgetSystem/defines.sqf#L41)
 ## createWidget_square
 
 Type: function
 
-Description: указывать ширину не нужно...
+Description: 
 - Param: _display
 - Param: _type
 - Param: _pos
 - Param: _parent
 
-File: [client\WidgetSystem\defines.sqf at line 52](../../../Src/client/WidgetSystem/defines.sqf#L52)
-## createCtWidget
-
-Type: function
-
-Description: NOT USED
-- Param: _name
-- Param: _params
-
-File: [client\WidgetSystem\defines.sqf at line 69](../../../Src/client/WidgetSystem/defines.sqf#L69)
-## createWidget_backImpl
-
-Type: function
-
-Description: ========================== api ==========================
-- Param: _d
-- Param: _pos
-- Param: _ctg
-
-File: [client\WidgetSystem\defines.sqf at line 76](../../../Src/client/WidgetSystem/defines.sqf#L76)
-## createWidget_back
-
-Type: function
-
-Description: Бэкграунд
-- Param: _d
-- Param: _pos
-- Param: _parent
-
-File: [client\WidgetSystem\defines.sqf at line 82](../../../Src/client/WidgetSystem/defines.sqf#L82)
-## createWidget_back2
-
-Type: function
-
-Description: Бэкграунд
-- Param: _d
-- Param: _pos
-- Param: _parent
-
-File: [client\WidgetSystem\defines.sqf at line 90](../../../Src/client/WidgetSystem/defines.sqf#L90)
-## createWidget_title
-
-Type: function
-
-Description: Заголовок
-- Param: _d
-- Param: _pos
-- Param: _parent
-- Param: _text (optional, default "")
-
-File: [client\WidgetSystem\defines.sqf at line 98](../../../Src/client/WidgetSystem/defines.sqf#L98)
-## createWidget_button
-
-Type: function
-
-Description: Кнопка
-- Param: _d
-- Param: _pos
-- Param: _ctg
-- Param: _txt
-
-File: [client\WidgetSystem\defines.sqf at line 107](../../../Src/client/WidgetSystem/defines.sqf#L107)
+File: [client\WidgetSystem\defines.sqf at line 61](../../../Src/client/WidgetSystem/defines.sqf#L61)
 # functions.sqf
 
 ## HOME_PROTECT
@@ -320,9 +259,9 @@ Description:
 
 Replaced value:
 ```sqf
-if (_key == KEY_HOME) then {call displayClose};
+if (_key == KEY_HOME) then {call displayClose}
 ```
-File: [client\WidgetSystem\functions.sqf at line 18](../../../Src/client/WidgetSystem/functions.sqf#L18)
+File: [client\WidgetSystem\functions.sqf at line 23](../../../Src/client/WidgetSystem/functions.sqf#L23)
 ## INDEX_TYPE
 
 Type: constant
@@ -334,7 +273,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\WidgetSystem\functions.sqf at line 92](../../../Src/client/WidgetSystem/functions.sqf#L92)
+File: [client\WidgetSystem\functions.sqf at line 101](../../../Src/client/WidgetSystem/functions.sqf#L101)
 ## INDEX_CUSTOM
 
 Type: constant
@@ -346,7 +285,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [client\WidgetSystem\functions.sqf at line 93](../../../Src/client/WidgetSystem/functions.sqf#L93)
+File: [client\WidgetSystem\functions.sqf at line 102](../../../Src/client/WidgetSystem/functions.sqf#L102)
 ## precent_to_real(proc_val)
 
 Type: constant
@@ -358,7 +297,7 @@ Replaced value:
 ```sqf
 (proc_val / 100)
 ```
-File: [client\WidgetSystem\functions.sqf at line 503](../../../Src/client/WidgetSystem/functions.sqf#L503)
+File: [client\WidgetSystem\functions.sqf at line 525](../../../Src/client/WidgetSystem/functions.sqf#L525)
 ## STARTX
 
 Type: constant
@@ -370,7 +309,7 @@ Replaced value:
 ```sqf
 (0 * safezoneW + safezoneX)
 ```
-File: [client\WidgetSystem\functions.sqf at line 530](../../../Src/client/WidgetSystem/functions.sqf#L530)
+File: [client\WidgetSystem\functions.sqf at line 554](../../../Src/client/WidgetSystem/functions.sqf#L554)
 ## STARTY
 
 Type: constant
@@ -382,7 +321,7 @@ Replaced value:
 ```sqf
 (0 * safezoneH + safezoneY)
 ```
-File: [client\WidgetSystem\functions.sqf at line 531](../../../Src/client/WidgetSystem/functions.sqf#L531)
+File: [client\WidgetSystem\functions.sqf at line 555](../../../Src/client/WidgetSystem/functions.sqf#L555)
 ## DIAPAZONX
 
 Type: constant
@@ -394,7 +333,7 @@ Replaced value:
 ```sqf
 ((1 * safezoneW + safezoneX) - STARTX)
 ```
-File: [client\WidgetSystem\functions.sqf at line 532](../../../Src/client/WidgetSystem/functions.sqf#L532)
+File: [client\WidgetSystem\functions.sqf at line 556](../../../Src/client/WidgetSystem/functions.sqf#L556)
 ## DIAPAZONY
 
 Type: constant
@@ -406,21 +345,7 @@ Replaced value:
 ```sqf
 ((1 * safezoneH + safezoneY) - STARTY)
 ```
-File: [client\WidgetSystem\functions.sqf at line 533](../../../Src/client/WidgetSystem/functions.sqf#L533)
-## checkRange(numberToCheck,bottom,top)
-
-Type: constant
-
-Description: 
-- Param: numberToCheck
-- Param: bottom
-- Param: top
-
-Replaced value:
-```sqf
-(numberToCheck >= bottom && numberToCheck <= top)
-```
-File: [client\WidgetSystem\functions.sqf at line 643](../../../Src/client/WidgetSystem/functions.sqf#L643)
+File: [client\WidgetSystem\functions.sqf at line 557](../../../Src/client/WidgetSystem/functions.sqf#L557)
 ## low_protect
 
 Type: constant
@@ -432,7 +357,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [client\WidgetSystem\functions.sqf at line 644](../../../Src/client/WidgetSystem/functions.sqf#L644)
+File: [client\WidgetSystem\functions.sqf at line 675](../../../Src/client/WidgetSystem/functions.sqf#L675)
 ## max_protect
 
 Type: constant
@@ -444,7 +369,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [client\WidgetSystem\functions.sqf at line 645](../../../Src/client/WidgetSystem/functions.sqf#L645)
+File: [client\WidgetSystem\functions.sqf at line 677](../../../Src/client/WidgetSystem/functions.sqf#L677)
 ## setwt(wid,_t,_sz)
 
 Type: constant
@@ -458,19 +383,19 @@ Replaced value:
 ```sqf
 [wid,format["<t align='center' size='%2'>%1</t>",_t,_sz]] call widgetSetText
 ```
-File: [client\WidgetSystem\functions.sqf at line 723](../../../Src/client/WidgetSystem/functions.sqf#L723)
+File: [client\WidgetSystem\functions.sqf at line 760](../../../Src/client/WidgetSystem/functions.sqf#L760)
 ## hasEnabledBlackScreen
 
 Type: Variable
 
-Description: other screen support
+Description: 
 
 
 Initial value:
 ```sqf
 false
 ```
-File: [client\WidgetSystem\functions.sqf at line 597](../../../Src/client/WidgetSystem/functions.sqf#L597)
+File: [client\WidgetSystem\functions.sqf at line 627](../../../Src/client/WidgetSystem/functions.sqf#L627)
 ## widget_antiGamma_lastError
 
 Type: Variable
@@ -482,284 +407,275 @@ Initial value:
 ```sqf
 ""
 ```
-File: [client\WidgetSystem\functions.sqf at line 639](../../../Src/client/WidgetSystem/functions.sqf#L639)
+File: [client\WidgetSystem\functions.sqf at line 672](../../../Src/client/WidgetSystem/functions.sqf#L672)
 ## displayOpen
 
 Type: function
 
-Description: Открыть дисплей
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 21](../../../Src/client/WidgetSystem/functions.sqf#L21)
+File: [client\WidgetSystem\functions.sqf at line 27](../../../Src/client/WidgetSystem/functions.sqf#L27)
 ## dynamicDisplayOpen
 
 Type: function
 
-Description: Открыть динамический дисплей
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 50](../../../Src/client/WidgetSystem/functions.sqf#L50)
+File: [client\WidgetSystem\functions.sqf at line 57](../../../Src/client/WidgetSystem/functions.sqf#L57)
 ## displayClose
 
 Type: function
 
-Description: Закрыть дисплей
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 82](../../../Src/client/WidgetSystem/functions.sqf#L82)
+File: [client\WidgetSystem\functions.sqf at line 90](../../../Src/client/WidgetSystem/functions.sqf#L90)
 ## createWidget
 
 Type: function
 
-Description: Создать виджет
+Description: 
 - Param: _display
 - Param: _type
 - Param: _pos
 - Param: _parent
 
-File: [client\WidgetSystem\functions.sqf at line 87](../../../Src/client/WidgetSystem/functions.sqf#L87)
+File: [client\WidgetSystem\functions.sqf at line 96](../../../Src/client/WidgetSystem/functions.sqf#L96)
 ## deleteWidget
 
 Type: function
 
-Description: Удалить виджет
+Description: 
 - Param: _widget
 - Param: _nextFrame (optional, default false)
 
-File: [client\WidgetSystem\functions.sqf at line 154](../../../Src/client/WidgetSystem/functions.sqf#L154)
+File: [client\WidgetSystem\functions.sqf at line 164](../../../Src/client/WidgetSystem/functions.sqf#L164)
 ## widgetSetPosition
 
 Type: function
 
-Description: Устанавливает новую позицию виджету
+Description: 
 - Param: _widget
 - Param: _posarray
 - Param: _time (optional, default -1)
 
-File: [client\WidgetSystem\functions.sqf at line 172](../../../Src/client/WidgetSystem/functions.sqf#L172)
+File: [client\WidgetSystem\functions.sqf at line 183](../../../Src/client/WidgetSystem/functions.sqf#L183)
 ## widgetPosPrecentToSafezone
 
 Type: function
 
-Description: Преобразовать позицию виджета из процента в экранное пространство
+Description: 
 - Param: _widget
 - Param: _prec
 - Param: _index
 
-File: [client\WidgetSystem\functions.sqf at line 214](../../../Src/client/WidgetSystem/functions.sqf#L214)
+File: [client\WidgetSystem\functions.sqf at line 226](../../../Src/client/WidgetSystem/functions.sqf#L226)
 ## widgetSetPositionOnly
 
 Type: function
 
-Description: Устанавливает новую позицию виджету без изменеия размеров
+Description: 
 - Param: _widget
 - Param: _posarray
 - Param: _time (optional, default -1)
 
-File: [client\WidgetSystem\functions.sqf at line 250](../../../Src/client/WidgetSystem/functions.sqf#L250)
+File: [client\WidgetSystem\functions.sqf at line 263](../../../Src/client/WidgetSystem/functions.sqf#L263)
 ## widgetGetPosition
 
 Type: function
 
-Description: Получает позицию виджета
+Description: 
 - Param: _xp
 - Param: _yp
 - Param: _wp
 - Param: _hp
 
-File: [client\WidgetSystem\functions.sqf at line 290](../../../Src/client/WidgetSystem/functions.sqf#L290)
+File: [client\WidgetSystem\functions.sqf at line 304](../../../Src/client/WidgetSystem/functions.sqf#L304)
 ## isMouseInsideWidget
 
 Type: function
 
-Description: Проверяет находится ли мышь внутри контрола
+Description: 
 - Param: _wid
 
-File: [client\WidgetSystem\functions.sqf at line 322](../../../Src/client/WidgetSystem/functions.sqf#L322)
+File: [client\WidgetSystem\functions.sqf at line 337](../../../Src/client/WidgetSystem/functions.sqf#L337)
 ## isMouseInsidePosition
 
 Type: function
 
-Description: Проверяет находится ли мышь внутри позиции
+Description: 
 - Param: _xe
 - Param: _ye
 - Param: _xe2
 - Param: _ye2
 
-File: [client\WidgetSystem\functions.sqf at line 385](../../../Src/client/WidgetSystem/functions.sqf#L385)
+File: [client\WidgetSystem\functions.sqf at line 401](../../../Src/client/WidgetSystem/functions.sqf#L401)
 ## getMousePositionInWidget
 
 Type: function
 
-Description: Получает позицию мыши внутри виджета
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 401](../../../Src/client/WidgetSystem/functions.sqf#L401)
+File: [client\WidgetSystem\functions.sqf at line 418](../../../Src/client/WidgetSystem/functions.sqf#L418)
 ## widgetSetText
 
 Type: function
 
-Description: Устанавливает текст в виджет
+Description: 
 - Param: _obj
 - Param: _text
 
-File: [client\WidgetSystem\functions.sqf at line 450](../../../Src/client/WidgetSystem/functions.sqf#L450)
+File: [client\WidgetSystem\functions.sqf at line 468](../../../Src/client/WidgetSystem/functions.sqf#L468)
 ## widgetSetPicture
 
 Type: function
 
-Description: Устанавливает картинку в виджет
+Description: 
 - Param: _obj
 - Param: _text
 
-File: [client\WidgetSystem\functions.sqf at line 463](../../../Src/client/WidgetSystem/functions.sqf#L463)
+File: [client\WidgetSystem\functions.sqf at line 482](../../../Src/client/WidgetSystem/functions.sqf#L482)
 ## widgetGetTextHeight
 
 Type: function
 
-Description: Получает высоту текста виджета
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 470](../../../Src/client/WidgetSystem/functions.sqf#L470)
+File: [client\WidgetSystem\functions.sqf at line 490](../../../Src/client/WidgetSystem/functions.sqf#L490)
 ## widgetWGScrolldown
 
 Type: function
 
-Description: скроллинг контрол группы WIDGETGROUP_H
+Description: 
 - Param: _wid
 
-File: [client\WidgetSystem\functions.sqf at line 489](../../../Src/client/WidgetSystem/functions.sqf#L489)
+File: [client\WidgetSystem\functions.sqf at line 510](../../../Src/client/WidgetSystem/functions.sqf#L510)
 ## mouseSetPosition
 
 Type: function
 
-Description: Устанавливает позицию мыши в процентах
+Description: 
 - Param: _xpos
 - Param: _ypos
 
-File: [client\WidgetSystem\functions.sqf at line 501](../../../Src/client/WidgetSystem/functions.sqf#L501)
+File: [client\WidgetSystem\functions.sqf at line 523](../../../Src/client/WidgetSystem/functions.sqf#L523)
 ## mouseGetPosition
 
 Type: function
 
-Description: Получает позицию мыши (значения в процентах)
+Description: 
 - Param: _mX
 - Param: _mY
 
-File: [client\WidgetSystem\functions.sqf at line 508](../../../Src/client/WidgetSystem/functions.sqf#L508)
+File: [client\WidgetSystem\functions.sqf at line 531](../../../Src/client/WidgetSystem/functions.sqf#L531)
 ## convertScreenCoords
 
 Type: function
 
-Description: Преобразует позицию мыши в координаты экранного пространства
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 525](../../../Src/client/WidgetSystem/functions.sqf#L525)
+File: [client\WidgetSystem\functions.sqf at line 549](../../../Src/client/WidgetSystem/functions.sqf#L549)
 ## positionWorldToScreen
 
 Type: function
 
-Description: Конвертация мировой позиции в экранные координаты. Всегда возвращает vec2
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 542](../../../Src/client/WidgetSystem/functions.sqf#L542)
-## getScreenPointToWorld
-
-Type: function
-
-Description: screenToWorld scripted alternative (ray to distance, not surface)
-- Param: _screenPos (optional, default getMousePosition)
-- Param: _mulDist (optional, default 1000)
-
-File: [client\WidgetSystem\functions.sqf at line 547](../../../Src/client/WidgetSystem/functions.sqf#L547)
+File: [client\WidgetSystem\functions.sqf at line 567](../../../Src/client/WidgetSystem/functions.sqf#L567)
 ## screenPosToWorldPoint
 
 Type: function
 
-Description: возвращает мировую позицию по экранным координатам
+Description: 
 - Param: _spos (optional, default getMousePosition)
 - Param: _distanceMul (optional, default 1000)
 - Param: _fromNative (optional, default true)
 
-File: [client\WidgetSystem\functions.sqf at line 563](../../../Src/client/WidgetSystem/functions.sqf#L563)
+File: [client\WidgetSystem\functions.sqf at line 589](../../../Src/client/WidgetSystem/functions.sqf#L589)
 ## isPointInScreenPosition
 
 Type: function
 
-Description: Проверяет находится ли позиция внутри другой позиции. Отсчёт позиции с верхнего левого угла всегда
+Description: 
 - Param: _point
 - Param: _sp
 
-File: [client\WidgetSystem\functions.sqf at line 571](../../../Src/client/WidgetSystem/functions.sqf#L571)
+File: [client\WidgetSystem\functions.sqf at line 598](../../../Src/client/WidgetSystem/functions.sqf#L598)
 ## canSeeScreenPoint
 
 Type: function
 
-Description: Можно ли видеть точку на экране
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 586](../../../Src/client/WidgetSystem/functions.sqf#L586)
+File: [client\WidgetSystem\functions.sqf at line 614](../../../Src/client/WidgetSystem/functions.sqf#L614)
 ## hasObjectInScene
 
 Type: function
 
-Description: видно ли объект в сцене. Лучше всего работает с малыми объектами
+Description: 
 - Param: _xPos
 - Param: _yPos
 
-File: [client\WidgetSystem\functions.sqf at line 591](../../../Src/client/WidgetSystem/functions.sqf#L591)
+File: [client\WidgetSystem\functions.sqf at line 620](../../../Src/client/WidgetSystem/functions.sqf#L620)
 ## setBlackScreenGUI
 
 Type: function
 
-Description: Устанавливает режим черного экрана
+Description: 
 - Param: _mode
 - Param: _time (optional, default 0.001)
 
-File: [client\WidgetSystem\functions.sqf at line 600](../../../Src/client/WidgetSystem/functions.sqf#L600)
+File: [client\WidgetSystem\functions.sqf at line 631](../../../Src/client/WidgetSystem/functions.sqf#L631)
 ## setVisibleHUD
 
 Type: function
 
-Description: Устанавливает режим видимости HUD-а
+Description: 
 - Param: _mode
 
-File: [client\WidgetSystem\functions.sqf at line 614](../../../Src/client/WidgetSystem/functions.sqf#L614)
+File: [client\WidgetSystem\functions.sqf at line 646](../../../Src/client/WidgetSystem/functions.sqf#L646)
 ## widget_antiGammaCheck
 
 Type: function
 
-Description: false is not allowed values
+Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 641](../../../Src/client/WidgetSystem/functions.sqf#L641)
+File: [client\WidgetSystem\functions.sqf at line 681](../../../Src/client/WidgetSystem/functions.sqf#L681)
 ## widget_createDisconnectMessage
 
 Type: function
 
-Description: Создание сообщения отключения от сервера
+Description: 
 - Param: _args
 
-File: [client\WidgetSystem\functions.sqf at line 701](../../../Src/client/WidgetSystem/functions.sqf#L701)
+File: [client\WidgetSystem\functions.sqf at line 738](../../../Src/client/WidgetSystem/functions.sqf#L738)
 ## widget_registerInput
 
 Type: function
 
-Description: специальная функция регистрации переноса каретки по нажатию enter
+Description: 
 - Param: _w
 - Param: _key
 
-File: [client\WidgetSystem\functions.sqf at line 737](../../../Src/client/WidgetSystem/functions.sqf#L737)
+File: [client\WidgetSystem\functions.sqf at line 775](../../../Src/client/WidgetSystem/functions.sqf#L775)
 ## widgetModel_objectHelper
 
 Type: function
 
-Description: Внутренняя функция для расчетов размеров объекта в экранном пространстве
+Description: 
 - Param: _func
 - Param: _array
 - Param: _scale (optional, default 1)
 
-File: [client\WidgetSystem\functions.sqf at line 776](../../../Src/client/WidgetSystem/functions.sqf#L776)
+File: [client\WidgetSystem\functions.sqf at line 815](../../../Src/client/WidgetSystem/functions.sqf#L815)
 ## widgetSetMouseMoveColors
 
 Type: function
@@ -769,18 +685,7 @@ Description:
 - Param: _out
 - Param: _in
 
-File: [client\WidgetSystem\functions.sqf at line 824](../../../Src/client/WidgetSystem/functions.sqf#L824)
-## fn_iconViewer
-
-Type: function
-
-> Exists if **EDITOR** defined
-
-Description: https://gist.github.com/HallyG/fa7a6cda10abcb630b1dc325f0523553
-- Param: _mode (optional, default "", expected types: ['""'])
-- Param: _args (optional, default [], expected types: [[]])
-
-File: [client\WidgetSystem\functions.sqf at line 838](../../../Src/client/WidgetSystem/functions.sqf#L838)
+File: [client\WidgetSystem\functions.sqf at line 864](../../../Src/client/WidgetSystem/functions.sqf#L864)
 # widgets.hpp
 
 ## widgetNull
@@ -794,7 +699,7 @@ Replaced value:
 ```sqf
 controlnull
 ```
-File: [client\WidgetSystem\widgets.hpp at line 7](../../../Src/client/WidgetSystem/widgets.hpp#L7)
+File: [client\WidgetSystem\widgets.hpp at line 10](../../../Src/client/WidgetSystem/widgets.hpp#L10)
 ## getGUI
 
 Type: constant
@@ -806,7 +711,7 @@ Replaced value:
 ```sqf
 (uinamespace getvariable ["gui",DisplayNull])
 ```
-File: [client\WidgetSystem\widgets.hpp at line 9](../../../Src/client/WidgetSystem/widgets.hpp#L9)
+File: [client\WidgetSystem\widgets.hpp at line 13](../../../Src/client/WidgetSystem/widgets.hpp#L13)
 ## getDisplay
 
 Type: constant
@@ -818,7 +723,7 @@ Replaced value:
 ```sqf
 (findDisplay 10000)
 ```
-File: [client\WidgetSystem\widgets.hpp at line 10](../../../Src/client/WidgetSystem/widgets.hpp#L10)
+File: [client\WidgetSystem\widgets.hpp at line 15](../../../Src/client/WidgetSystem/widgets.hpp#L15)
 ## isDisplayOpen
 
 Type: constant
@@ -830,19 +735,19 @@ Replaced value:
 ```sqf
 (!(getDisplay isEqualTo displaynull))
 ```
-File: [client\WidgetSystem\widgets.hpp at line 11](../../../Src/client/WidgetSystem/widgets.hpp#L11)
+File: [client\WidgetSystem\widgets.hpp at line 17](../../../Src/client/WidgetSystem/widgets.hpp#L17)
 ## LISTBOX
 
 Type: constant
 
-Description: widgets types
+Description: 
 
 
 Replaced value:
 ```sqf
 "RscListBox"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 16](../../../Src/client/WidgetSystem/widgets.hpp#L16)
+File: [client\WidgetSystem\widgets.hpp at line 23](../../../Src/client/WidgetSystem/widgets.hpp#L23)
 ## TEXT
 
 Type: constant
@@ -854,7 +759,7 @@ Replaced value:
 ```sqf
 "RscStructuredText"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 17](../../../Src/client/WidgetSystem/widgets.hpp#L17)
+File: [client\WidgetSystem\widgets.hpp at line 24](../../../Src/client/WidgetSystem/widgets.hpp#L24)
 ## PICTURE
 
 Type: constant
@@ -866,7 +771,7 @@ Replaced value:
 ```sqf
 "RscPicture"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 18](../../../Src/client/WidgetSystem/widgets.hpp#L18)
+File: [client\WidgetSystem\widgets.hpp at line 25](../../../Src/client/WidgetSystem/widgets.hpp#L25)
 ## ACTIVEPICTURE
 
 Type: constant
@@ -878,7 +783,7 @@ Replaced value:
 ```sqf
 "RscActivePicture"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 19](../../../Src/client/WidgetSystem/widgets.hpp#L19)
+File: [client\WidgetSystem\widgets.hpp at line 26](../../../Src/client/WidgetSystem/widgets.hpp#L26)
 ## BUTTON
 
 Type: constant
@@ -890,7 +795,7 @@ Replaced value:
 ```sqf
 "RLCTRscButton"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 20](../../../Src/client/WidgetSystem/widgets.hpp#L20)
+File: [client\WidgetSystem\widgets.hpp at line 27](../../../Src/client/WidgetSystem/widgets.hpp#L27)
 ## BUTTONMENU
 
 Type: constant
@@ -902,7 +807,7 @@ Replaced value:
 ```sqf
 "RLCTRscButtonMenu"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 21](../../../Src/client/WidgetSystem/widgets.hpp#L21)
+File: [client\WidgetSystem\widgets.hpp at line 28](../../../Src/client/WidgetSystem/widgets.hpp#L28)
 ## INPUT
 
 Type: constant
@@ -914,7 +819,7 @@ Replaced value:
 ```sqf
 "RscEdit"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 22](../../../Src/client/WidgetSystem/widgets.hpp#L22)
+File: [client\WidgetSystem\widgets.hpp at line 29](../../../Src/client/WidgetSystem/widgets.hpp#L29)
 ## INPUTMULTI
 
 Type: constant
@@ -926,7 +831,7 @@ Replaced value:
 ```sqf
 "RscEditMulti"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 23](../../../Src/client/WidgetSystem/widgets.hpp#L23)
+File: [client\WidgetSystem\widgets.hpp at line 30](../../../Src/client/WidgetSystem/widgets.hpp#L30)
 ## INPUTMULTIV2
 
 Type: constant
@@ -938,7 +843,7 @@ Replaced value:
 ```sqf
 "!RscEditMulti!inphndl"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 24](../../../Src/client/WidgetSystem/widgets.hpp#L24)
+File: [client\WidgetSystem\widgets.hpp at line 31](../../../Src/client/WidgetSystem/widgets.hpp#L31)
 ## INPUTCHAT
 
 Type: constant
@@ -950,7 +855,7 @@ Replaced value:
 ```sqf
 "RscEditChat"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 25](../../../Src/client/WidgetSystem/widgets.hpp#L25)
+File: [client\WidgetSystem\widgets.hpp at line 32](../../../Src/client/WidgetSystem/widgets.hpp#L32)
 ## WIDGETGROUP
 
 Type: constant
@@ -962,7 +867,7 @@ Replaced value:
 ```sqf
 "RscControlsGroupNoScrollbars_NEW"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 26](../../../Src/client/WidgetSystem/widgets.hpp#L26)
+File: [client\WidgetSystem\widgets.hpp at line 33](../../../Src/client/WidgetSystem/widgets.hpp#L33)
 ## WIDGETGROUPSCROLLS
 
 Type: constant
@@ -974,7 +879,7 @@ Replaced value:
 ```sqf
 "RscControlsGroup"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 27](../../../Src/client/WidgetSystem/widgets.hpp#L27)
+File: [client\WidgetSystem\widgets.hpp at line 34](../../../Src/client/WidgetSystem/widgets.hpp#L34)
 ## WIDGETGROUP_H
 
 Type: constant
@@ -986,7 +891,7 @@ Replaced value:
 ```sqf
 "RscControlsGroupNoHScrollbars"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 28](../../../Src/client/WidgetSystem/widgets.hpp#L28)
+File: [client\WidgetSystem\widgets.hpp at line 35](../../../Src/client/WidgetSystem/widgets.hpp#L35)
 ## BACKGROUND
 
 Type: constant
@@ -998,7 +903,7 @@ Replaced value:
 ```sqf
 ("!" + TEXT + "!background")
 ```
-File: [client\WidgetSystem\widgets.hpp at line 29](../../../Src/client/WidgetSystem/widgets.hpp#L29)
+File: [client\WidgetSystem\widgets.hpp at line 36](../../../Src/client/WidgetSystem/widgets.hpp#L36)
 ## SLIDERW
 
 Type: constant
@@ -1010,7 +915,7 @@ Replaced value:
 ```sqf
 "RscSlider"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 30](../../../Src/client/WidgetSystem/widgets.hpp#L30)
+File: [client\WidgetSystem\widgets.hpp at line 37](../../../Src/client/WidgetSystem/widgets.hpp#L37)
 ## SLIDERWNEW
 
 Type: constant
@@ -1022,7 +927,7 @@ Replaced value:
 ```sqf
 "RscSliderNew"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 31](../../../Src/client/WidgetSystem/widgets.hpp#L31)
+File: [client\WidgetSystem\widgets.hpp at line 38](../../../Src/client/WidgetSystem/widgets.hpp#L38)
 ## SLIDERH
 
 Type: constant
@@ -1034,7 +939,7 @@ Replaced value:
 ```sqf
 "RscSliderH"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 32](../../../Src/client/WidgetSystem/widgets.hpp#L32)
+File: [client\WidgetSystem\widgets.hpp at line 39](../../../Src/client/WidgetSystem/widgets.hpp#L39)
 ## CHECKBOX
 
 Type: constant
@@ -1046,19 +951,19 @@ Replaced value:
 ```sqf
 "RscCheckBox"
 ```
-File: [client\WidgetSystem\widgets.hpp at line 33](../../../Src/client/WidgetSystem/widgets.hpp#L33)
+File: [client\WidgetSystem\widgets.hpp at line 40](../../../Src/client/WidgetSystem/widgets.hpp#L40)
 ## setBackgroundColor
 
 Type: constant
 
-Description: macro helpers
+Description: 
 
 
 Replaced value:
 ```sqf
 ctrlSetBackgroundColor
 ```
-File: [client\WidgetSystem\widgets.hpp at line 38](../../../Src/client/WidgetSystem/widgets.hpp#L38)
+File: [client\WidgetSystem\widgets.hpp at line 45](../../../Src/client/WidgetSystem/widgets.hpp#L45)
 ## setStructuredText
 
 Type: constant
@@ -1070,7 +975,7 @@ Replaced value:
 ```sqf
 ctrlSetStructuredText
 ```
-File: [client\WidgetSystem\widgets.hpp at line 39](../../../Src/client/WidgetSystem/widgets.hpp#L39)
+File: [client\WidgetSystem\widgets.hpp at line 47](../../../Src/client/WidgetSystem/widgets.hpp#L47)
 ## setFade
 
 Type: constant
@@ -1082,7 +987,7 @@ Replaced value:
 ```sqf
 ctrlSetFade
 ```
-File: [client\WidgetSystem\widgets.hpp at line 40](../../../Src/client/WidgetSystem/widgets.hpp#L40)
+File: [client\WidgetSystem\widgets.hpp at line 49](../../../Src/client/WidgetSystem/widgets.hpp#L49)
 ## getFade
 
 Type: constant
@@ -1094,7 +999,7 @@ Replaced value:
 ```sqf
 ctrlFade
 ```
-File: [client\WidgetSystem\widgets.hpp at line 41](../../../Src/client/WidgetSystem/widgets.hpp#L41)
+File: [client\WidgetSystem\widgets.hpp at line 51](../../../Src/client/WidgetSystem/widgets.hpp#L51)
 ## commit
 
 Type: constant
@@ -1106,7 +1011,7 @@ Replaced value:
 ```sqf
 ctrlCommit
 ```
-File: [client\WidgetSystem\widgets.hpp at line 42](../../../Src/client/WidgetSystem/widgets.hpp#L42)
+File: [client\WidgetSystem\widgets.hpp at line 53](../../../Src/client/WidgetSystem/widgets.hpp#L53)
 ## isCommited
 
 Type: constant
@@ -1118,7 +1023,7 @@ Replaced value:
 ```sqf
 ctrlCommitted
 ```
-File: [client\WidgetSystem\widgets.hpp at line 43](../../../Src/client/WidgetSystem/widgets.hpp#L43)
+File: [client\WidgetSystem\widgets.hpp at line 55](../../../Src/client/WidgetSystem/widgets.hpp#L55)
 ## setFocus
 
 Type: constant
@@ -1130,7 +1035,7 @@ Replaced value:
 ```sqf
 ctrlSetFocus
 ```
-File: [client\WidgetSystem\widgets.hpp at line 44](../../../Src/client/WidgetSystem/widgets.hpp#L44)
+File: [client\WidgetSystem\widgets.hpp at line 57](../../../Src/client/WidgetSystem/widgets.hpp#L57)
 ## transformSizeByAR(val)
 
 Type: constant
@@ -1142,7 +1047,7 @@ Replaced value:
 ```sqf
 ((val) / (getresolution select 4))
 ```
-File: [client\WidgetSystem\widgets.hpp at line 46](../../../Src/client/WidgetSystem/widgets.hpp#L46)
+File: [client\WidgetSystem\widgets.hpp at line 60](../../../Src/client/WidgetSystem/widgets.hpp#L60)
 ## getWidthByHeightToSquare(val)
 
 Type: constant
@@ -1154,19 +1059,19 @@ Replaced value:
 ```sqf
 transformSizeByAR(val)
 ```
-File: [client\WidgetSystem\widgets.hpp at line 47](../../../Src/client/WidgetSystem/widgets.hpp#L47)
+File: [client\WidgetSystem\widgets.hpp at line 62](../../../Src/client/WidgetSystem/widgets.hpp#L62)
 ## widgetGetPicture(val)
 
 Type: constant
 
-Description: case sentivity
+Description: 
 - Param: val
 
 Replaced value:
 ```sqf
 ctrlText (val)
 ```
-File: [client\WidgetSystem\widgets.hpp at line 49](../../../Src/client/WidgetSystem/widgets.hpp#L49)
+File: [client\WidgetSystem\widgets.hpp at line 65](../../../Src/client/WidgetSystem/widgets.hpp#L65)
 ## widgetGetText(val)
 
 Type: constant
@@ -1178,7 +1083,7 @@ Replaced value:
 ```sqf
 ctrlText (val)
 ```
-File: [client\WidgetSystem\widgets.hpp at line 50](../../../Src/client/WidgetSystem/widgets.hpp#L50)
+File: [client\WidgetSystem\widgets.hpp at line 67](../../../Src/client/WidgetSystem/widgets.hpp#L67)
 ## __widgetFadeReset(wid,time,fademode)
 
 Type: constant
@@ -1196,7 +1101,7 @@ wid setFade 0; \
 wid commit time \
 
 ```
-File: [client\WidgetSystem\widgets.hpp at line 52](../../../Src/client/WidgetSystem/widgets.hpp#L52)
+File: [client\WidgetSystem\widgets.hpp at line 70](../../../Src/client/WidgetSystem/widgets.hpp#L70)
 ## widgetFadeout(wid,time)
 
 Type: constant
@@ -1209,7 +1114,7 @@ Replaced value:
 ```sqf
 __widgetFadeReset(wid,time,1)
 ```
-File: [client\WidgetSystem\widgets.hpp at line 57](../../../Src/client/WidgetSystem/widgets.hpp#L57)
+File: [client\WidgetSystem\widgets.hpp at line 76](../../../Src/client/WidgetSystem/widgets.hpp#L76)
 ## widgetFadein(wid,time)
 
 Type: constant
@@ -1222,7 +1127,7 @@ Replaced value:
 ```sqf
 wid setFade 1; wid commit time
 ```
-File: [client\WidgetSystem\widgets.hpp at line 58](../../../Src/client/WidgetSystem/widgets.hpp#L58)
+File: [client\WidgetSystem\widgets.hpp at line 78](../../../Src/client/WidgetSystem/widgets.hpp#L78)
 ## widgetFadeNow(wid,value)
 
 Type: constant
@@ -1235,7 +1140,7 @@ Replaced value:
 ```sqf
 wid setFade value; wid commit 0
 ```
-File: [client\WidgetSystem\widgets.hpp at line 59](../../../Src/client/WidgetSystem/widgets.hpp#L59)
+File: [client\WidgetSystem\widgets.hpp at line 80](../../../Src/client/WidgetSystem/widgets.hpp#L80)
 ## widgetSetFade(wid,val,com)
 
 Type: constant
@@ -1249,49 +1154,19 @@ Replaced value:
 ```sqf
 wid setFade val; wid commit com
 ```
-File: [client\WidgetSystem\widgets.hpp at line 60](../../../Src/client/WidgetSystem/widgets.hpp#L60)
+File: [client\WidgetSystem\widgets.hpp at line 82](../../../Src/client/WidgetSystem/widgets.hpp#L82)
 ## WIDGET_FULLSIZE
 
 Type: constant
 
-Description: other
+Description: 
 
 
 Replaced value:
 ```sqf
 [0,0,100,100]
 ```
-File: [client\WidgetSystem\widgets.hpp at line 63](../../../Src/client/WidgetSystem/widgets.hpp#L63)
-# widget_eventSystem.sqf
-
-## display_internal_onCloseEventList
-
-Type: Variable
-
-Description: 
-
-
-Initial value:
-```sqf
-[]
-```
-File: [client\WidgetSystem\widget_eventSystem.sqf at line 8](../../../Src/client/WidgetSystem/widget_eventSystem.sqf#L8)
-## displayAddCloseEvent
-
-Type: function
-
-Description: 
-- Param: _code
-
-File: [client\WidgetSystem\widget_eventSystem.sqf at line 10](../../../Src/client/WidgetSystem/widget_eventSystem.sqf#L10)
-## displayCallCloseEvent
-
-Type: function
-
-Description: 
-
-
-File: [client\WidgetSystem\widget_eventSystem.sqf at line 15](../../../Src/client/WidgetSystem/widget_eventSystem.sqf#L15)
+File: [client\WidgetSystem\widgets.hpp at line 86](../../../Src/client/WidgetSystem/widgets.hpp#L86)
 # widget_init.sqf
 
 ## precent_to_real(proc_val)
@@ -1307,7 +1182,7 @@ Replaced value:
 ```sqf
 (proc_val / 100)
 ```
-File: [client\WidgetSystem\widget_init.sqf at line 112](../../../Src/client/WidgetSystem/widget_init.sqf#L112)
+File: [client\WidgetSystem\widget_init.sqf at line 114](../../../Src/client/WidgetSystem/widget_init.sqf#L114)
 ## removealldisplayevents
 
 Type: function
@@ -1315,4 +1190,15 @@ Type: function
 Description: 
 
 
-File: [client\WidgetSystem\widget_init.sqf at line 20](../../../Src/client/WidgetSystem/widget_init.sqf#L20)
+File: [client\WidgetSystem\widget_init.sqf at line 22](../../../Src/client/WidgetSystem/widget_init.sqf#L22)
+# _iconviewer.sqf
+
+## fn_iconViewer
+
+Type: function
+
+Description: 
+- Param: _mode (optional, default "", expected types: ['""'])
+- Param: _args (optional, default [], expected types: [[]])
+
+File: [client\WidgetSystem\_iconviewer.sqf at line 6](../../../Src/client/WidgetSystem/_iconviewer.sqf#L6)

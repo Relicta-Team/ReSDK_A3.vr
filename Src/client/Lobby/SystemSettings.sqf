@@ -9,25 +9,32 @@
 #include "..\WidgetSystem\widgets.hpp"
 #include "lobby.hpp"
 
+namespace(LobbySys,lobby_sys_)
+
 /* -----------------------------------------------------------------------------
 	CATEGORY: SYSTEM LOBBY SETTINGS
 ----------------------------------------------------------------------------- */
 
+decl(widget[])
 lobby_sys_listWidgets = [];
+decl(string)
 lobby_sys_curActionCategory = "system";
+decl(int)
 lobby_sys_maxCatPerList = 4; //сколько элементов грузится
+decl(int)
 lobby_sys_curCatList = 0; //индекс начала
+decl(map<string;any[]>)
 lobby_sys_buttonActions = createHashMapFromArray [
 	["system",[
 		["Меню",{[true] call esc_openMenu}],
 		["Окно команд",{[true] call cd_openSendCommandWindow}],
 		["Персонажи",{call lobby_sys_bc_charachters}],
 		["Кто в сети?!","system_whoonline"],
-		["Список изменений","system_whatnews"],
+		["Список изменений","system_whatnews"]
 		//["ref:https://relicta.ru/wiki@На вики",{}],// for references use this
 		//["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki'>На вики</a></t>",{}],//font='Ringbear' colorLink='#77DE4E'
-		["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%23%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B4%D0%B0_%D0%BA_%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%BC%D1%83_%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D1%83'>Инструкция по привязке к Discord</a></t>",{}],
-		["Обучение",{["Ждите в грядущих обновлениях...","event"] call chatPrint}]
+		//["<t colorLink='#ffffff'><a href='https://relicta.ru/wiki/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%23%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B4%D0%B0_%D0%BA_%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%BC%D1%83_%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D1%83'>Инструкция по привязке к Discord</a></t>",{}],
+		//["Обучение",{["Ждите в грядущих обновлениях...","event"] call chatPrint}]
 	]],
 	["wiki",[
 		["ref:https://relicta.ru/wiki@Главная страница",{}]
@@ -52,10 +59,13 @@ lobby_sys_buttonActions = createHashMapFromArray [
 		
 	]]
 ];
+decl(string[])
 lobby_sys_buttonActions_sortedList = ["system","wiki","endgame","server","admin"];
+decl(any[])
 lobby_sys_buttonActions_sortedListName = [["Система","55780E"],["Вики страницы","04B810"],["Конец раунда","55780E"],["Сервер","C4AD68"],["Админ","8F3140"]];
 
 //загружает окно системных настроек
+decl(void())
 lobby_sysLoadMenu = {
 	
 	lobby_sys_listWidgets = [];
@@ -149,6 +159,7 @@ lobby_sysLoadMenu = {
 	
 };
 
+decl(void(string))
 lobby_sysLoadSettings = {
 	params ["_cat"];
 	FORCEUnicode 1;
@@ -218,9 +229,10 @@ lobby_sysLoadSettings = {
 	//};
 };	
 
-
+decl(bool)
 lobby_sys_isActive = false;
 
+decl(void(bool))
 lobby_sysSetEnable = {
 	params ["_mode"]; //режим включения - если true то всё скрывается и становится неактивным
 	
@@ -250,6 +262,7 @@ lobby_sysSetEnable = {
 	lobby_sys_isActive = _mode;
 };	
 
+decl(void(...any[]))
 lobby_thread_textRender = {
 	(_this select 0) params ["_textRender"];
 	
@@ -292,10 +305,15 @@ lobby_thread_textRender = {
 // ====================== custom settings ====================== 
 
 //isnide event calling
+decl(widget[])
 lobby_sys_bc_widgets = [widgetNull,widgetNull]; //виджеты контрольных групп
+decl(any[])
 lobby_sys_bc_slots = []; //виджеты слотов персонажей
+decl(bool())
 lobby_sys_bc_isAsking = {count lobby_sys_bc_isAskingData > 0};
+	decl(any[])
 	lobby_sys_bc_isAskingData = [];
+	decl(void())
 	lobby_sys_bc_restoreAfterAsking = {
 		_ctgsaves = lobby_sys_bc_widgets select 1;
 		_ctgsaves ctrlEnable true;
@@ -304,6 +322,8 @@ lobby_sys_bc_isAsking = {count lobby_sys_bc_isAskingData > 0};
 		{[_x]call deleteWidget} foreach (lobby_sys_bc_isAskingData select 1);
 		lobby_sys_bc_isAskingData = [];
 	};
+
+decl(void())
 lobby_sys_bc_charachters = {
 	
 	if (call gmc_isRoundPreload) exitWith {
@@ -351,6 +371,7 @@ lobby_sys_bc_charachters = {
 	["init"] call lobby_sys_ba_action;
 };
 
+decl(void(string;any[]))
 lobby_sys_ba_action = {
 	params ["_action","_ctxParams"];
 	call {

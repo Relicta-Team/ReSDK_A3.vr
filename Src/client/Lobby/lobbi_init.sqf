@@ -10,9 +10,15 @@
 #include <..\SoundSystem\Music.hpp>
 #include "lobby.hpp"
 
+namespace(Lobby,lobby_)
+
+macro_def(lobby_disable_not_used_settings)
 #define DISABLE_NOT_USED_SETTINGS
 
+decl(bool)
 isLobbyOpen = false;
+
+decl(widget[])
 lobby_widgetList = [
 	widgetNull, // background main
 	widgetNull, //text field
@@ -24,11 +30,20 @@ lobby_widgetList = [
 	widgetNull //main settings ctg
 ];
 
+decl(widget[])
 lobby_charSetWidList = [];
+decl(bool)
 lobby_isOpenCharSetting = false;
+decl(widegt[])
 lobby_openedCharSetWidList = []; //этот лист для виджетов в режиме открытого меню конкрентной настройки
 
+decl(widget[])
 lobby_backgroundWidget = [widgetNull];
+
+//lang question: how to get value (network issue)
+//decl(string)
+//lobby_background = "";
+
 if (isMultiplayer) then {
 	if isNull(lobby_background) then {
 		lobby_background = PATH_PICTURE("lobby\black.paa");
@@ -36,14 +51,21 @@ if (isMultiplayer) then {
 } else {
 	lobby_background = PATH_PICTURE("lobby\black.paa");
 };
+
+decl(string)
 lobby_background_local = PATH_PICTURE("lobby\black.paa");
 
+decl(string[])
 lobby_listResizingName = [];
 
+decl(object)
 lobby_charData = createLocation ["cba_namespacedummy",[100,100,100],0,0];
 
+decl(mesh)
 lobby_internal_rttcamera = "camera" camCreate [0,0,0];
-lobby_internal_backwallObject = objnull;
+decl(mesh)
+lobby_internal_backwallObject = objNull;
+decl(map<string;any[]>)
 lobby_internal_backwallSettings = createHashMapFromArray [
 	["white",[
 		//back
@@ -69,22 +91,32 @@ lobby_internal_backwallSettings = createHashMapFromArray [
 	]
 ];
 //хранилище объектов
+decl(map<string;mesh>)
+lobby_internal_backwallObjects = createHashMap;
+
 lobby_internal_backwallObjects = createHashMapFromArray ((keys lobby_internal_backwallSettings) apply {[_x,objNull]});
 if (!isNull(lobby_internal_rttlight)) then {
 	deletevehicle lobby_internal_rttlight;
 };
+decl(mesh)
 lobby_internal_rttlight = objnull;
 
 
 //net variables
+decl(any[])
 lobby_roleList = []; //Содержит список ролей с описанием, названием и айди
 
 //lobby_handleMainThread = -1;
+decl(float)
 lobby_timeLeft = 0;
+decl(any[])
 lobby_RoleContenders = [];
+decl(bool)
 lobby_isReadyToPlay = false; //готовность к игре в лобби до начала раунда
+decl(bool)
 lobby_isSelectedEmbarkRole = false; //выбранная роль эмбарковая (только во время прогресса раунда)
 
+decl(map<string;string>)
 lobby_faithDesc_map = createHashMap; //клиентские описания вероисповеданий
 lobby_faithDesc_map set ["akkuzat",
 	"Аккузат - вера, широко распространённая за пределами Норы. 
@@ -104,6 +136,7 @@ lobby_faithDesc_map set ["kult",
 	коим несть числа. Отношение к ним разнится, но как Фугу, так и Аккузат 
 	считают их еретиками и в лучшем случае относятся презрительно."];
 
+decl(string[])
 lobby_loading_allHints = [
 	"Самый большой город Сети - Канава.",
 	"Не будь мудаком.",

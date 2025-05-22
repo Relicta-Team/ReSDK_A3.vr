@@ -60,7 +60,6 @@ call struct_initialize; //init all struct
 call mat_initializeMaterialTable;
 
 //another loaded files...
-//DEPREACTED loadFile("src\host\Database\fDB\fDB_init.sqf"); //локальная база данных
 loadFile("src\host\Database\SQLite\SQLite_init.sqf");
 loadFile("src\host\Namings\Naming_init.sqf"); //система имён
 loadFile("src\host\Traits\TraitsInit.sqf"); //пороки, последствия

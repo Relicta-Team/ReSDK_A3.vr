@@ -385,7 +385,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1419](../../../Src/host/GameObjects/GameObject.sqf#L1419)
+File: [host\GameObjects\GameObject.sqf at line 1425](../../../Src/host/GameObjects/GameObject.sqf#L1425)
 ## DEBUG_VISUAL_OPENSPACE
 
 Type: constant
@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1608](../../../Src/host/GameObjects/GameObject.sqf#L1608)
+File: [host\GameObjects\GameObject.sqf at line 1614](../../../Src/host/GameObjects/GameObject.sqf#L1614)
 ## flyingObject
 
 Type: Variable
@@ -433,7 +433,7 @@ Initial value:
 ```sqf
 ["emote","log","act","combat","info","mind","event","system","error","default"]
 ```
-File: [host\GameObjects\GameObject.sqf at line 1084](../../../Src/host/GameObjects/GameObject.sqf#L1084)
+File: [host\GameObjects\GameObject.sqf at line 1090](../../../Src/host/GameObjects/GameObject.sqf#L1090)
 ## go_internal_chatMesMapText
 
 Type: Variable
@@ -445,7 +445,7 @@ Initial value:
 ```sqf
 ["Эмоут:Кастомное пользовательское действие",...
 ```
-File: [host\GameObjects\GameObject.sqf at line 1085](../../../Src/host/GameObjects/GameObject.sqf#L1085)
+File: [host\GameObjects\GameObject.sqf at line 1091](../../../Src/host/GameObjects/GameObject.sqf#L1091)
 ## debug_internal_collectInheritanceDesign
 
 Type: function
@@ -3241,7 +3241,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 799](../../../Src/host/GameObjects/Items/Item.sqf#L799)
+File: [host\GameObjects\Items\Item.sqf at line 804](../../../Src/host/GameObjects/Items/Item.sqf#L804)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3255,7 +3255,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1236](../../../Src/host/GameObjects/Items/Item.sqf#L1236)
+File: [host\GameObjects\Items\Item.sqf at line 1241](../../../Src/host/GameObjects/Items/Item.sqf#L1241)
 ## generateItemSize
 
 Type: function
@@ -3265,7 +3265,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 178](../../../Src/host/GameObjects/Items/Item.sqf#L178)
+File: [host\GameObjects\Items\Item.sqf at line 183](../../../Src/host/GameObjects/Items/Item.sqf#L183)
 ## generateItemInfoList
 
 Type: function
@@ -3276,7 +3276,7 @@ Description:
 - Param: _file (optional, default "unknown_file")
 - Param: _line (optional, default 0)
 
-File: [host\GameObjects\Items\Item.sqf at line 204](../../../Src/host/GameObjects/Items/Item.sqf#L204)
+File: [host\GameObjects\Items\Item.sqf at line 209](../../../Src/host/GameObjects/Items/Item.sqf#L209)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -3998,7 +3998,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1914](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1914)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1922](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1922)
 ## mob_static_assign_signatures
 
 Type: Variable
@@ -4010,7 +4010,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1915](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1915)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1923](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1923)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -4515,7 +4515,7 @@ _o_upd_impl_internal = { \
 	setSelf(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 479](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L479)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 535](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L535)
 ## __onUpdateImplMethod(content,varName)
 
 Type: constant
@@ -4533,7 +4533,7 @@ _o_upd_impl_internal = { \
 	callSelfParams(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 486](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L486)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 542](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L542)
 ## __onUpdateImplMethodNoParams(content,varName)
 
 Type: constant
@@ -4551,7 +4551,7 @@ _o_upd_impl_internal = { \
 	callSelf(varName); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 493](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L493)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 549](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L549)
 ## repl_doLocal
 
 Type: function
@@ -4561,7 +4561,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 653](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L653)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 720](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L720)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
@@ -4652,7 +4652,7 @@ Replaced value:
 ```sqf
 randInt(3,4)
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 830](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L830)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 834](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L834)
 ## hasBP(idx)
 
 Type: constant
@@ -4664,7 +4664,7 @@ Replaced value:
 ```sqf
 !isNullObject(_bpArray getOrDefault [idx arg nullPtr])
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 859](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L859)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 863](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L863)
 ## AMOUNT_REGEN_STAMINA
 
 Type: constant
@@ -4676,7 +4676,7 @@ Replaced value:
 ```sqf
 3.3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1001](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1001)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1005](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1005)
 ## AMOUNT_LESS_STAMINA
 
 Type: constant
@@ -4688,7 +4688,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1002](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1002)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1006](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1006)
 ## UNC_TO_STAMINALOSS_MIN
 
 Type: constant
@@ -4700,7 +4700,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1273](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1273)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1281](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1281)
 ## UNC_TO_STAMINALOSS_MAX
 
 Type: constant
@@ -4712,7 +4712,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1274](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1274)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1282](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1282)
 ## __dmgAndHp
 
 Type: constant
@@ -4724,7 +4724,7 @@ Replaced value:
 ```sqf
 _dmg arg _hp
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1310](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1310)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1322](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1322)
 ## log_performance
 
 Type: constant
@@ -4736,7 +4736,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1311](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1311)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1323](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1323)
 ## lifelog(mes,fmt)
 
 Type: constant
@@ -4749,7 +4749,7 @@ Replaced value:
 ```sqf
 (["[LOG::LIFE]",(mes),fmt,"#1011"] call stdoutPrint)
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1313](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1313)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1325](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1325)
 ## std_check_dam(low,up)
 
 Type: constant
@@ -4762,7 +4762,7 @@ Replaced value:
 ```sqf
 if (_dmg >= (low) && _dmg < (up)) exitWith
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1391](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1391)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1407](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1407)
 # Mob_Skills.sqf
 
 ## skill_def

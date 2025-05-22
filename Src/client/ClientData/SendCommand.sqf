@@ -283,6 +283,10 @@ cd_closeSendCommandWindow = {
 
 decl(void())
 cd_openAhelp = {
+	#ifdef SP_MODE
+		sp_checkInput("open_ahelp",[]);
+	#endif
+
 	if (["cd_openAhelp",5] call input_spamProtect) exitWith {
 		["Подождите немного прежде чем заново попытаться открыть это окно","system"] call chatPrint; 
 	};

@@ -851,6 +851,32 @@ Description:
 - Param: _enumParry
 
 File: [host\CommonComponents\Animator.sqf at line 308](../../../Src/host/CommonComponents/Animator.sqf#L308)
+## anim_addAttach
+
+Type: function
+
+Description: с помощью этого метода можно контролирвать анимированные атачи
+- Param: _dest
+- Param: _ctxAtt
+
+File: [host\CommonComponents\Animator.sqf at line 352](../../../Src/host/CommonComponents/Animator.sqf#L352)
+## anim_removeAttach
+
+Type: function
+
+Description: 
+- Param: _dest
+- Param: _src
+
+File: [host\CommonComponents\Animator.sqf at line 364](../../../Src/host/CommonComponents/Animator.sqf#L364)
+## anim_syncOnFrameAttaches
+
+Type: function
+
+Description: 
+- Param: _mob
+
+File: [host\CommonComponents\Animator.sqf at line 371](../../../Src/host/CommonComponents/Animator.sqf#L371)
 # Assert.sqf
 
 ## sys_int_evalassert
@@ -1544,7 +1570,7 @@ Description:
 
 Initial value:
 ```sqf
-"TF RELICTA ADDON API 1.8"
+"TF RELICTA ADDON API 2.0"
 ```
 File: [host\CommonComponents\Voice.sqf at line 8](../../../Src/host/CommonComponents/Voice.sqf#L8)
 ## vs_list_langs

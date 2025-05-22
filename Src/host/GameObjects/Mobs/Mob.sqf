@@ -235,7 +235,7 @@ class(Mob) extends(BasicMob)
 			callSelfParams(startUpdateMethod, "handle_falling" arg "handleFallingUpdate" arg 0);
 
 			//в редакторе все в сознании
-#ifndef EDITOR
+#ifndef EDITOR_OR_SP_MODE
 			callSelfParams(setCombatMode,false);
 
 			callSelfParams(setSleep,true);

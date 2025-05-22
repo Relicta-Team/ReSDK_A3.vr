@@ -12,7 +12,7 @@
 cm_switchLocality = {
 	params ["_unit", "_player"];
 	
-	#ifdef EDITOR
+	#ifdef EDITOR_OR_SP_MODE
 	if (true) exitWith {_unit setVariable ["OriginalOwner", owner _unit, true];};
 	#endif
 	

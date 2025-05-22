@@ -142,30 +142,29 @@
 // fread subsystem
 
 
-
 //__THIS_FILE_REPLACE__
 //__THIS_MODULE_REPLACE__
 #ifdef DISABLE_REGEX_ON_FILE
 	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo;  call compile __pragma_preprocess (path)
-
-	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
+	
+	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	private _ctx = compile __pragma_prep_cli (path); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 
-	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
+	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; \
 	private _ctx = compile __pragma_prep_cli ("src\host\CommonComponents\" + path); \
 	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
 #else
 	#define loadFile(path) if (server_isLocked) exitWith {error("Compile process aborted - server.isLocked == true")}; logformat("Start loading file %1",path); ["Load file - '%1'",path] call logInfo; call compile __pragma_preprocess (path)
 
-	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
+	#define importClient(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; if (client_isLocked) exitWith {error("Compile process aborted - client.isLocked == true")}; \
 	_macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
-	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
+	private _ctx = compile ((__pragma_prep_cli (path))regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]); if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;  allClientModulePathes pushBack (path);
 
-	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = [];}; \
+	#define importCommon(path) if (isNil {allClientContents}) then {allClientContents = []; allClientModulePathes = [];}; \
 	_macro_file = """shared" +"\" + path + """"; _macro_module = path regexFind ["\w+(?=\.)",0] select 0 select 0 select 0; \
 	__prep = ((__pragma_prep_cli ("src\host\CommonComponents\" + path)) regexReplace ["__THIS_FILE_REPLACE__",(_macro_file regexReplace ["\\","\\\\"])]) regexReplace ["__THIS_MODULE_REPLACE__",""""+ _macro_module+""""]; \
 	private _ctx = compile __prep; \
-	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx;
+	if (_canCallClientCode) then {call _ctx}; allClientContents pushback _ctx; allClientModulePathes pushBack (path);
 #endif
 
 //check if file exists
@@ -459,7 +458,7 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define tickTime diag_tickTime
 #define deltaTime diag_deltaTime
 
-#ifdef EDITOR
+#ifdef EDITOR_OR_SP_MODE
 	#define __alloc_thread_loc__ (cba_common_perFrameHandlerArray select -1) set [6,format["%1 at line %2",[__FILE__,getMissionPath "",""] call stringReplace,__LINE__]]; \
 		(cba_common_perFrameHandlerArray select -1) set [7,diag_stacktrace]
 	#define startUpdate(func,delay) call{private _h = [func,delay] call CBA_fnc_addPerFrameHandler; __alloc_thread_loc__; _h}
@@ -668,12 +667,25 @@ ACRE_IS_ERRORED = false; _ret;}*/
 	#define setLastError(data__)
 #endif
 
+#ifdef SP_MODE
+	#define setLastError(data__) error(data__)
+#endif
+
 
 #define exitScope(cond) if (true) exitWith {cond};
 //TODO: опционально возвращаем только первые несколько функций стека вызова
 #define getCallStack() diag_stacktrace
 //#define CALLSTACK_NAMED(function, functionName) {private ['_ret']; if (ACRE_IS_ERRORED) then { ['AUTO','AUTO'] call ACRE_DUMPSTACK_FNC; ACRE_IS_ERRORED = false; }; ACRE_IS_ERRORED = true; ACRE_STACK_TRACE set [ACRE_STACK_DEPTH, [diag_tickTime, __FILE__, __LINE__, ACRE_CURRENT_FUNCTION, functionName, _this]]; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH + 1; ACRE_CURRENT_FUNCTION = functionName; _ret = _this call ##function; ACRE_STACK_DEPTH = ACRE_STACK_DEPTH - 1; ACRE_IS_ERRORED = false; _ret;}
 //#define DUMPSTACK ([__FILE__, __LINE__] call acre_main_fnc_dumpCallStack
+
+//special spmode macros
+#ifdef SP_MODE
+	#define sp_checkInput(varname,params) if ([varname,params] call sp_gc_handlePlayerInput) exitWith {};
+	#define sp_checkWSim(varname) if (!(varname call sp_wsimIsActive)) exitWith {};
+#else
+	#define sp_checkInput(varname,params)
+	#define sp_checkWSim(varname)
+#endif
 
 
 //common macro

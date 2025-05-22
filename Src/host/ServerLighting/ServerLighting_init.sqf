@@ -14,6 +14,12 @@ slt_internal_fileListBuffer = [];
 
 slt_initScriptedLights = {
 	private _flist = ["src\client\LightEngine\ScriptedConfigs",".sqf",true] call fso_getFiles;
+	
+	//load sp-lights
+	#ifdef SP_MODE
+	_flist = (LOADFILE "src\SP_lightPathes.i") splitString endl;
+	#endif
+
 	assert_str(count _flist > 0,"Scripted configs not found");
 	slt_internal_fileListBuffer = _flist;
 	call lightSys_preInitialize;
@@ -25,10 +31,20 @@ slt_initScriptedLights = {
 		};
 	} foreach _flist;
 
+	private _loadClientLights = false;
+	
 	#ifdef EDITOR
-	assert_str(!isNull(le_initializeScriptedConfigs),"Initialize scripted configs error - function not found");
-	call le_initializeScriptedConfigs;
+	_loadClientLights = true;
 	#endif
+	
+	#ifdef SP_MODE
+	_loadClientLights = true;
+	#endif
+
+	if (_loadClientLights) then {
+		assert_str(!isNull(le_initializeScriptedConfigs),"Initialize scripted configs error - function not found");
+		call le_initializeScriptedConfigs;
+	};
 };
 
 call slt_initScriptedLights;
@@ -160,6 +176,9 @@ slt_destr = {
 //real impl of destroy server light
 slt_destr_impl = {
 	params ["_o"];
+	if isNullVar(_o) exitWith {
+		error("slt::destr::impl() - destruct object already undefined");
+	};
 	if equalTypes(_o,objNull) then {
 		deleteVehicle _o;
 	} else {

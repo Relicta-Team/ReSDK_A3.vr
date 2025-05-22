@@ -1,2 +1,69 @@
-- name: head
-  ignored: true
+- name: Костыль
+  type: default
+  category: Medical
+  options:
+    craft_duration: from_skill(10,4)
+  required:
+    skills:
+      healing: 3
+      engineering: 3
+    components:
+      - class: WoodenDebris6 
+        count: 3
+        check_type_of: false 
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false 
+  result:
+    class: Crutch
+
+- name: Бинт
+  type: default
+  category: Medical
+  options:
+    craft_duration: from_skill(10,4)
+  required:
+    components:
+      - class: Rag
+        count: 2
+        check_type_of: false
+  result:
+    class: Bandage
+
+- name: Скальпель
+  type: default
+  category: Medical
+  options:
+    craft_duration: from_skill(10,4)
+  required:
+    skills:
+      engineering: 3
+      surgery: 3
+    components:
+      - class: ClothDebris(1-2)
+        count: 1
+        check_type_of: false
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false
+  result:
+    class: SurgeryScalpel
+
+- name: Иголка с ниткой
+  type: default
+  category: Medical
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false
+      - class: SyntDebris1
+        count: 1
+        check_type_of: false
+  result:
+    class: NeedleWithThreads
+    count: {min: 2, max: 3}

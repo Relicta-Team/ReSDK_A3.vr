@@ -3,12 +3,16 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
 struct(VSTAttachedObjects) base(VSTBase)
-	def(name) "VST_ATTACHED_OBJECTS";
+	decl(override) def(name) "VST_ATTACHED_OBJECTS";
 
-	def(_objList) [];
+	decl(mesh[]) def(_objList) [];
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		private _list;
@@ -24,7 +28,7 @@ struct(VSTAttachedObjects) base(VSTBase)
 		self setv(_objList,_list);
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		{deleteVehicle _x} foreach (self getv(_objList));

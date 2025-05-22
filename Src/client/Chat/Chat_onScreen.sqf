@@ -352,7 +352,7 @@ if !isNull(relicta_global_textChatEnabled) then {
 		eventHandlerArgs params ["_mob","_isspeaking"];
 		
 		if (_isspeaking && !isDisplayOpen && equals(_mob,player)) then {
-			rpcSendToServer("textchatrequest",[_mob arg TF_speak_volume_meters]);
+			rpcSendToServer("textchatrequest",[_mob arg vs_speak_volume_meters]);
 		};
 	};
 

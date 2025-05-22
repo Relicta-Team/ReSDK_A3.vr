@@ -8,6 +8,9 @@
 namespace(InteractEmote_interactEmote_)
 
 decl(bool)
+interactEmote_disableGlobal = false;
+
+decl(bool)
 interactEmote_isLoadedMenu = false;
 
 decl(string)
@@ -78,6 +81,7 @@ interactEmote_load = {
 	}];
 	_input ctrlAddEventHandler ["KeyUp",{
 		params ["_w","_key"];
+		if (interactEmote_disableGlobal) exitWith {};
 		if (_key == KEY_BACKSPACE) exitWith {
 			forceUnicode 0;
 			_text = ctrlText _w;
@@ -141,6 +145,7 @@ interactEmote_load = {
 	[_t,[0,0.25,0,0.4],[0,0.35,0,0.5]] call widgetSetMouseMoveColors;
 	_t setvariable ["actionmode",-1];
 	_allevs pushBack _t;
+	_ctg setVariable ["ctgPrevActionButton",_t];
 
 	_t = [_d,TEXT,[100-30,0,30,100],_ctgCategs] call createWidget;
 	//[_t,"<t align='center'>" + sgt +"</t>"] call widgetSetText;
@@ -148,6 +153,7 @@ interactEmote_load = {
 	[_t,[0,0.25,0,0.4],[0,0.35,0,0.5]] call widgetSetMouseMoveColors;
 	_t setvariable ["actionmode",1];
 	_allevs pushBack _t;
+	_ctg setVariable ["ctgNextActionButton",_t];
 	
 	_t = [_d,BACKGROUND,[30,0,40,100],_ctgCategs] call createWidget;
 	//<img image='%2' size='1.4'/>
@@ -345,7 +351,7 @@ interactEmote_onMouseMoving = {
 	params ["_display"];
 
 	if (isDragProcess) exitWith {};
-
+	if (interactEmote_disableGlobal) exitWith {};
 	_ctg = _display getVariable "ieMenuCtg";
 
 	if ((_ctg getVariable "checkedPos") call isMouseInsidePosition &&

@@ -3,13 +3,17 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
 struct(VSTStrongArmor) base(VSTBase)
 
-	def(name) "VST_CLOTH_STRONGARMOR";
+	decl(override) def(name) "VST_CLOTH_STRONGARMOR";
 
-	def(_list) [];
+	decl(mesh[]) def(_list) [];
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		private _list = [];
@@ -29,7 +33,7 @@ struct(VSTStrongArmor) base(VSTBase)
 		];
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		{deleteVehicle _x} foreach (self getv(_list));

@@ -18,3 +18,4 @@
 #include "LightConfigValidator.sqf"
 #include "LigthSimulation.sqf"
 #include "LootChecker.sqf"
+#include "ZoneVisualizer.sqf"

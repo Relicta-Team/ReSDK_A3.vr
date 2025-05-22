@@ -56,6 +56,7 @@ csys_cat_debug_allCrafts = [];
 
 csys_init = {
 
+
 	{
 		csys_cat_map_sysnames set [_x,_foreachindex];
 		csys_map_storage set [_foreachindex,[]];
@@ -64,6 +65,9 @@ csys_init = {
 
 	csys_systemController_handleUpdate = startUpdate(csys_systemController_onUpdate,1);
 
+	#ifdef SP_MODE
+	if(true)exitWith{};
+	#endif
 
 	//collecting all files and load into buffer
 	private _files = ["src\host\CraftSystem\Crafts\",".yml",true] call fso_getFiles;

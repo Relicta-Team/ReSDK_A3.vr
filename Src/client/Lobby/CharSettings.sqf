@@ -3,14 +3,16 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\..\host\lang.hpp"
+
 //serverside includes
 #include <..\..\host\Family\Family.hpp>
 #include <..\..\host\MatterSystem\bloodTypes.hpp>
 //serverside includes end
 
+namespace(Lobby,lobby_)
 
-
-
+decl(void())
 lobby_onCloseSetting = {
 	if (!isLobbyOpen) exitWith {
 		error("lobby::onCloseSetting() - lobby already closed");
@@ -28,6 +30,7 @@ lobby_onCloseSetting = {
 };
 
 //событие при ОК имени
+decl(void(widget;int))
 lobby_onSetName = {
 	onPressParams();
 
@@ -77,6 +80,7 @@ lobby_onSetName = {
 };
 
 //событие рандомного имени
+decl(void(widget;int))
 lobby_onSetRandomName = {
 	onPressParams(); //DELAY_TO_PICKRANDOMNAME
 
@@ -111,6 +115,7 @@ lobby_onSetRandomName = {
 };
 
 // событие когда сервер заколбечил и подтвердил изменения
+decl(void(widget;int))
 lobby_onSetNameCode = {
 	params ["_wid","_val"];
 	[_wid,("Имя: " + _val)] call widgetSetText;
@@ -136,6 +141,7 @@ lobby_onSetNameCode = {
 };
 
 //Событие при выборе имени
+decl(void(widget;int))
 lobby_setName = {
 	onPressParams();
 
@@ -161,11 +167,13 @@ lobby_setName = {
 };
 
 //callback on server
+decl(void(widget;int))
 lobby_onSetAgeCode = {
 	params ["_wid","_val"];
 	[_wid,("Возраст: " + str _val)] call widgetSetText;
 };
 
+decl(void(widget;int))
 lobby_setAge = {
 	onPressParams();
 
@@ -195,6 +203,7 @@ lobby_setAge = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetAge = {
 	onPressParams();
 
@@ -217,6 +226,7 @@ lobby_onSetAge = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_setFaith = {
 	onPressParams();
 
@@ -289,6 +299,7 @@ lobby_setFaith = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetFaith = {
 	onPressParams();
 	_faithIndex = lbCurSel getMainWid("currentControl");
@@ -305,6 +316,7 @@ lobby_onSetFaith = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetFaithCode = {
 	params ["_wid","_val"];
 
@@ -326,7 +338,7 @@ lobby_onSetFaithCode = {
 	_wid ctrlSetTooltip _faithName;
 };
 
-
+decl(void(widget;int))
 lobby_setAntag = {
 	onPressParams();
 	
@@ -338,6 +350,7 @@ lobby_setAntag = {
 	["antag",_mode] call lobby_sendToServerSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetAntagCode = {
 	params ["_wid","_val"];
 	
@@ -360,15 +373,18 @@ lobby_onSetAntagCode = {
 	_wid ctrlSetTooltip (_tEnumListDesc select _val);
 };
 
+decl(void(widget;int))
 lobby_setTrait = {
 	rpcSendToServer("onClientPressedTrait",[clientOwner]);
 };
 
+decl(vector3(vector3;float;float))
 lobby_face_internal_relpos = {
 	params ["_posI",["_dirPos",0],["_dropRad",2]];
 	[(_posI select 0) + (sin _dirPos) * _dropRad, (_posI select 1) + (cos _dirPos) * _dropRad, _posI select 2];
 };
 
+decl(void(widget;int))
 lobby_setFace = {
 	onPressParams();
 
@@ -416,6 +432,7 @@ lobby_setFace = {
 	lobby_internal_rttcamera campreparetarget (_camPos vectoradd [-0.05,0,0.11]);
 	lobby_internal_rttcamera camSetFov 0.16;
 	lobby_internal_rttcamera camcommitprepared 0;
+	private _defPos = getPosATL lobby_internal_rttcamera;
 
 	//adding wall
 	// deletevehicle lobby_internal_backwallObject;
@@ -471,36 +488,114 @@ lobby_setFace = {
 		} foreach lobby_internal_backwallObjects;
 	}];
 	
-	//TODO rotate camera around player preview
-		// _pic ctrladdeventhandler ["MouseButtonDown",{
-		// 	params ["_w","_b"];
-		// 	_w setvariable ["moving",true];
-		// }];
-		// _pic ctrladdeventhandler ["MouseExit",{
-		// 	params ["_w"];
-		// 	_w setvariable ["moving",false];
-		// }];
-		// _pic ctrladdeventhandler ["MouseButtonUp",{
-		// 	params ["_w","_b"];
-		// 	_w setvariable ["moving",false];
-		// }];
-		// _pic ctrladdeventhandler ["MouseMoving",{
-		// 	params ["_w","_x","_y"];
-		// 	if (_w getvariable ["moving",false]) then {
-		// 		private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
-		// 		lobby_internal_rttcamera setposatl (_campos vectoradd [0+(_x*10),1+(_y*10),0]);
-		// 	};
-		// }];
+	//camera rotator
+	_pic ctrlEnable true;
+	_pic setvariable ["defPos",_defPos];
+	_pic setvariable ["_interpExit",false];
+	_pic setvariable ["_interpEnter",false];
+	startAsyncInvoke
+	{
+		_this params ["_pic"];
+		if isNullReference(_pic) exitWith {true};
+		
+		//if equals(getPosATL lobby_internal_rttcamera,_pic getvariable "defPos") exitWith {false};
+
+		if (_pic getvariable ["_interpExit",false]) then {
+			
+			_newpos = vectorLinearConversion [
+				(_pic getvariable "_interpStartTime"),
+				(_pic getvariable "_interpStartTime") + 0.7,
+				tickTime,
+				_pic getvariable "_interpCamPos",
+				_pic getvariable "defPos",
+				true
+			];
+			lobby_internal_rttcamera setPosATL _newpos;
+		};
+		if (_pic getvariable ["_interpEnter",false]) then {
+			_stime = _pic getvariable "_interpEnterStartTime";
+			_stimeEnd = _stime+0.5;
+			// if (tickTime > _stimeEnd) exitWith {
+			// 	//_pic setvariable ["_interpEnter",false];
+			// };
+			
+			_endPos = vectorLinearConversion [
+				_stime,
+				_stimeEnd,
+				tickTime,
+				_pic getvariable "_interpCamPos",
+				_pic getvariable "_mouseMovingCamPos",
+				true
+			];
+
+			lobby_internal_rttcamera setPosATL _endPos;
+		};
+		false
+	},
+	{
+		_this params ["_pic","_defPos"];
+		lobby_internal_rttcamera setPosATL _defPos;
+	},
+	[_pic,_defPos]
+	endAsyncInvoke
+	_pic setvariable ["mimicEnable",{
+		params ["_mode"];
+		// if (_mode && {!(simulationEnabled lobby_glob_dummy_man)}) then {
+		// 	lobby_glob_dummy_man enablesimulation _mode;
+		// };
+		//! Это не работает из-за каких-то сетевых ебаных чешких тонкостей.
+		//Для решения проблемы возможно стоит создавать dummy чара для каждого клиента
+		// lobby_glob_dummy_man setMimic "default";
+		// lobby_glob_dummy_man enableMimics _mode;
+	}];
+	_pic ctrladdeventhandler ["MouseExit",{
+		params ["_w"];
+		//lobby_internal_rttcamera setposatl (_w getvariable "defPos");
+		[false] call (_w getvariable "mimicEnable");
+		_w setvariable ["_interpCamPos",getPosATL lobby_internal_rttcamera];
+		_w setvariable ["_interpStartTime",tickTime];
+		_w setvariable ["_interpExit",true];
+		_w setvariable ["_interpEnter",false];
+	}];
+	_pic ctrladdeventhandler ["MouseEnter",{
+		params ["_w"];
+		_w setvariable ["_interpExit",false];
+		_w setvariable ["_interpEnter",true];
+			_w setvariable ["_interpCamPos",getPosATL lobby_internal_rttcamera];
+			_w setvariable ["_interpEnterStartTime",tickTime];
+		[true] call (_w getvariable "mimicEnable");
+		ctrlSetFocus _w;
+	}];
+	_pic ctrladdeventhandler ["MouseMoving",{
+		params ["_w","_xm","_ym"];
+		(ctrlPosition _w) params ["_bpx","_bpy","_szX","_szY"];
+
+		private _campos = (lobby_glob_dummy_man modeltoworldvisual (lobby_glob_dummy_man selectionPosition "head"));
+		private _defPos = _w getvariable "defPos";
+		
+		private _rad = _campos distance _defPos;
+		private _mul = 100;
+		private _dirX = linearConversion [0,_szX,_xm,-_rad* _mul,_rad* _mul];
+		private _dirY = linearConversion [0,_szY,_ym,0.3,-0.3];
+
+		_endPos = (_defPos vectoradd [
+			0 + (sin _dirX) * (_rad),
+			0,
+			_dirY
+		]);
+		_w setvariable ["_mouseMovingCamPos",_endPos];
+		
+	}];
 
 	addWidToList(_pic);
 	_list setvariable ["pic",_pic];
 
 	_text = [getDisplay,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget;
 	_text setBackgroundColor [0,0,0,1];
+	_text ctrlEnable false; //fix for mouseenter rtt-picture
 	_text setFade 0;
 	_text commit 0;
 	_list setvariable ["text",_text];
-
 
 	_onTreeSelChanged = {
 		params ["_list", "_selectedPath"];
@@ -520,7 +615,8 @@ lobby_setFace = {
 			_text commit 0.1;
 		};
 		if (_optionName == "select") exitwith {
-			lobby_glob_dummy_man setFace _config;
+			lobby_glob_dummy_man setFace _config;			
+			
 			_text setFade 1;
 			_text commit 0.2;
 			//_optData here is category (white,black,asian etc...)
@@ -573,6 +669,7 @@ lobby_setFace = {
 
 };
 
+decl(void(widget;int))
 lobby_onSetFace = {
 	onPressParams();
 	_faceIndex = tvCurSel getMainWid("currentControl");
@@ -602,6 +699,7 @@ lobby_onSetFace = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;string))
 lobby_onSetFaceCode = {
 	params ["_wid","_val"];
 
@@ -640,6 +738,7 @@ lobby_onSetFaceCode = {
 	_wid ctrlSetTooltip _text;
 };
 
+decl(void(widget;int))
 lobby_setVice = {
 	onPressParams();
 
@@ -678,6 +777,7 @@ lobby_setVice = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetVice = {
 	onPressParams();
 	_viceIndex = lbCurSel getMainWid("currentControl");
@@ -694,6 +794,7 @@ lobby_onSetVice = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;string))
 lobby_onSetViceCode = {
 	params ["_wid","_val"];
 
@@ -715,6 +816,7 @@ lobby_onSetViceCode = {
 	_wid ctrlSetTooltip _text;
 };
 
+decl(void(widget;int))
 lobby_setBlood = {
 	onPressParams();
 
@@ -763,6 +865,7 @@ lobby_setBlood = {
 	addCloseEvent(_w);
 };
 
+decl(void(widget;int))
 lobby_onSetBlood = {
 	onPressParams();
 
@@ -785,6 +888,7 @@ lobby_onSetBlood = {
 	call lobby_onCloseSetting;
 };
 
+decl(void(widget;int))
 lobby_onSetBloodCode = {
 	params ["_wid","_val"];
 
@@ -804,6 +908,7 @@ lobby_onSetBloodCode = {
 
 };
 
+decl(void(widget;int))
 lobby_onSetGender = {
 	onPressParams();
 
@@ -827,6 +932,7 @@ lobby_onSetGender = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetGenderCode = {
 	params ["_wid","_val"];
 	_gend = if (_val == 0) then {"мужской"} else {"женский"};
@@ -840,6 +946,7 @@ lobby_onSetGenderCode = {
 	//todo blocking beard
 };
 
+decl(void(widget;int))
 lobby_onSetFamily = {
 	onPressParams();
 
@@ -871,6 +978,7 @@ lobby_onSetFamily = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetFamilyCode = {
 	params ["_wid","_val"];
 
@@ -890,6 +998,7 @@ lobby_onSetFamilyCode = {
 	_wid ctrlSetTooltip ("Семейное положение: " + _famText);
 };
 
+decl(void(widget;int))
 lobby_onSetMainHand = {
 	onPressParams();
 
@@ -904,6 +1013,7 @@ lobby_onSetMainHand = {
 	};
 };
 
+decl(void(widget;int))
 lobby_onSetMainHandCode = {
 	params ["_wid","_val"];
 	_eval = ["левая","правая"]; _evalsetting = ["Левша","Правша"];
@@ -913,6 +1023,7 @@ lobby_onSetMainHandCode = {
 };
 
 //событие при выборе
+decl(void(widget;int))
 lobby_onSetRole = {
 	onPressParams();
 
@@ -936,6 +1047,7 @@ lobby_onSetRole = {
 };
 
 //событие вызывается когда сервер подтвердил изменения
+decl(void(widget;int))
 lobby_onSetRoleCode = {
 	params ["_wid","_val"];
 
@@ -971,6 +1083,7 @@ lobby_onSetRoleCode = {
 };
 
 //вызывается когда установлена новая роль и надо изменить размер
+decl(void(int))
 lobby_resizingByRoleChanged = {
 	private _startingInd = _this;
 
@@ -983,6 +1096,7 @@ lobby_resizingByRoleChanged = {
 };
 
 //Событие при выборе роли
+decl(void(widget;int))
 lobby_setRole = {
 	onPressParams();
 	
@@ -1013,9 +1127,6 @@ lobby_setRole = {
 
 	} foreach lobby_roleList;
 
-
-
-
 	_w = [getDisplay,BUTTON,[0,90,50,10],getMainCtg] call createWidget;
 	addWidToList(_w);
 	addOnPressEvent(_w,lobby_onSetRole);
@@ -1034,6 +1145,7 @@ lobby_setRole = {
 ================================================================================
 */
 
+decl(void(bool))
 lobby_setEnableCharSetting = {
 	private _mode = _this;
 
@@ -1048,19 +1160,13 @@ lobby_setEnableCharSetting = {
 	} foreach lobby_charSetWidList;
 };
 
-lobby_createInput = {
-
-};
-
-//создаёт выборку цвета
-lobby_createColorize = {};
-
 /*
 ================================================================================
 	GROUP: COMMON
 ================================================================================
 */
 
+decl(void())
 lobby_initReadyButton = {
 	
 	if isNullReference(getDisplay) exitWith {warning("lobby::initReadyButton() - Display closed")};
@@ -1110,6 +1216,7 @@ lobby_initReadyButton = {
 };
 
 //переключение режима готовности моба
+decl(void(widget;int))
 lobby_switchReady = {
 	params ["_wid","_butt"];
 
@@ -1141,6 +1248,7 @@ lobby_switchReady = {
 	rpcSendToServer("onClientPrepareToPlay",[_newMode arg clientOwner]);
 };
 
+decl(void(int))
 lobby_onSwitchReadyCallback = {
 	params ["_newMode"];
 	

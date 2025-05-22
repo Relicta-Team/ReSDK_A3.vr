@@ -17,6 +17,7 @@ _prepversion = ((LoadFile "src\VERSION") splitString endl) select 0;
 _ctx = compile format["client_version = '%1+%3'; client_compiledDate = '%2'; client_isLocked = false;",_prepversion,__DATE_STR__,_sha];
 if !isNullVar(_canCallClientCode) then {call _ctx};
 allClientContents pushback _ctx;
+allClientModulePathes pushBack "runtime_version";
 
 // !!!В определении модулей не поддерживается комментирование при внешней сборке клиента!!!
 

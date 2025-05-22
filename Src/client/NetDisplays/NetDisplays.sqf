@@ -4,6 +4,7 @@
 // ======================================================
 
 #include <..\..\host\engine.hpp>
+#include <..\..\host\struct.hpp>
 #include <..\..\host\text.hpp>
 #include <..\..\host\keyboard.hpp>
 #include <..\InputSystem\inputKeyHandlers.hpp>
@@ -12,36 +13,48 @@
 #include <..\Interactions\interact.hpp>
 #include <..\Inventory\inventory.hpp>
 
+namespace(NetDisplay,nd_)
 
-
+decl(map<string;any>)
 nd_map_displays = createHashMap;
 //filling hashmap in this file
 #include "Displays\Displays.loader"
 
 if !isNullVar(_IINTERNALCOMPILER) exitWith {};
 
+decl(int)
 nd_handleUpdate = -1;
 
+decl(widget[][])
 nd_list_widgets = [[],[]]; //список виджетов с данными. В левом стеке неочищаемые данные до закрытия окна, в правом обновляемый список
+decl(mesh)
 nd_sourceObject = objNUll;
+decl(float)
 nd_interactionDistance = 0;
+decl(bool)
 nd_isOpenDisplay = false;
+decl(string)
 nd_openedDisplayType = "";
+decl(string)
 nd_sourceRef = "";
+decl(vector3)
 nd_checkedPos = vec3(0,0,0);
 
 //variables for lobby
+decl(bool)
 nd_lobby_isOpen = false;
 
+decl(int)
 nd_internal_attemptLoad = 0;
 
 #ifdef DEBUG
+	decl(void(string;any))
 	nd_createTestDisplay = {
 		params ["_class","_data"];
 		_IINTERNALCOMPILER = true;
 		call compile preprocessFileLineNumbers "src\client\NetDisplays\NetDisplays.sqf";
-		private _code = nd_map_displays get _class;
-		if isNullVar(_code) exitWith {
+		private _obj = [_class] call nd_createNDObject;
+		if isNullVar(_obj) exitWith {
 			errorformat("NetDisplay::createTestDisplay() - cant find display by type %1",_class);
 		};
 		
@@ -49,11 +62,22 @@ nd_internal_attemptLoad = 0;
 		_d displayRemoveAllEventHandlers "KeyDown";
 		_d displayRemoveAllEventHandlers "KeyUp";
 		_d setvariable ['isdebugdisplay',true];
-	
-		[_data,true] call _code;
+
+		_obj callp(assignDisplay,_d);
+
+		_obj callp(process,_data arg true);
 	};	
 #endif
 
+decl(NULL|struct_t.NDBase)
+nd_createNDObject = {
+	params ["_type"];
+	private _allowed = ["NDBase"] call struct_getAllTypesOf;
+	if !array_exists(_allowed,_type) exitWith {null};
+	[_type] call struct_alloc;
+};
+
+decl(void(string;any[];any;float))
 nd_loadDisplay = {
 	params ["_type",["_data",[]],"_srcRef","_interactDistance"];
 	
@@ -107,8 +131,8 @@ nd_loadDisplay = {
 
 	nd_internal_attemptLoad = 0; //free attempt loader
 
-	private _code = nd_map_displays get _type;
-	if isNullVar(_code) exitWith {
+	private _obj = [_type] call nd_createNDObject;
+	if isNullVar(_obj) exitWith {
 		errorformat("NetDisplay::loadDisplay() - cant find display by type %1",_type);
 		call nd_onClose;
 	};
@@ -197,10 +221,13 @@ nd_loadDisplay = {
 		};
 	}];
 
-	[_data,true] call _code;
+	_obj callp(assignDisplay,_d);
+
+	_obj callp(process,_data arg true);
 
 }; rpcAdd("opnND",nd_loadDisplay);
 
+decl(void(string;any[]))
 nd_loadDisplay_lobby = {
 	params ["_type",["_data",[]]];
 	if (!isLobbyOpen) exitWith {
@@ -217,8 +244,8 @@ nd_loadDisplay_lobby = {
 		call nd_closeND_lobby;
 	};
 	
-	private _code = nd_map_displays get _type;
-	if isNullVar(_code) exitWith {
+	private _obj = [_type] call nd_createNDObject;
+	if isNullVar(_obj) exitWith {
 		errorformat("NetDisplay::loadDisplay() - cant find display by type %1",_type);
 		call nd_onClose;
 	};
@@ -231,10 +258,12 @@ nd_loadDisplay_lobby = {
 	nd_openedDisplayType = _type;
 	[true] call lobby_sysSetEnable;
 	private _d = getDisplay;
-	[_data,true] call _code;
+	_obj callp(assignDisplay,_d);
+	_obj callp(process,_data arg true);
 	
 }; rpcAdd("opnNDLobby",nd_loadDisplay_lobby);
 
+decl(void(bool))
 nd_closeND_lobby = {
 	params [["_isRpc",false]];
 	[false] call lobby_sysSetEnable;
@@ -247,13 +276,17 @@ nd_closeND_lobby = {
 	};
 }; rpcAdd("clsNDLobby",nd_closeND_lobby);
 
+decl(void())
 nd_closeND_lobbyImpl = {
 	nd_lobby_isOpen = false;
 	nd_openedDisplayType = "";
 	nd_list_widgets = [[],[]];
+
+	nd_internal_currentStructObj = null;
 };
 
 //отсылает тип ввода пользователем. можно отправлять данные. Вся логика обработки на сервере в onHandleNDInput
+decl(void(any))
 nd_onPressButton = {
 	params ["_data"];
 #ifdef DEBUG
@@ -267,6 +300,7 @@ nd_onPressButton = {
 };
 
 // очистка списка виджетов для полной перегрузки визуала
+decl(void())
 nd_cleanupData = {
 	{
 		[_x] call deleteWidget;
@@ -275,12 +309,14 @@ nd_cleanupData = {
 	nd_list_widgets set [1,[]];
 };
 
+decl(widget(string;vector4;widget;string))
 nd_regWidget = {
 	params ["_type","_vecpos","_probCtg","_dataType"];
-	regNDWidget(_type,_vecpos,_probCtg,_dataType);
-	lastNDWidget
+	nd_internal_currentStructObj callp(addWidget, _type arg _vecpos arg _probCtg arg _dataType);
+	nd_internal_currentStructObj getv(lastNDWidget);
 };
 
+decl(widget(display;vector4;widget;bool))
 nd_addClosingButton = {
 	params ["_display","_vec4Pos",["_ctg",widgetNull],["_registerAsReloaded",false]]; // _registerAsReloaded означает что виджет регистрируется в буфере который чистится при обновлении
 	private _buttonClose = [_display,BUTTON,_vec4Pos,_ctg] call createWidget;
@@ -297,12 +333,14 @@ nd_addClosingButton = {
 	_buttonClose
 };
 
+decl(void())
 nd_onUpdate = {
 	_d = getDisplay;
-	[_this,false] call (nd_map_displays get nd_openedDisplayType)
+	nd_internal_currentStructObj callp(process, _this arg false);
 }; rpcAdd("updND",nd_onUpdate);
 
 
+decl(void())
 nd_onClose = {
 #ifdef DEBUG
 	if (getDisplay getvariable ["isdebugdisplay",false]) exitWith {call nd_unloadDisplay};
@@ -312,7 +350,7 @@ nd_onClose = {
 	call nd_unloadDisplay;
 };
 
-
+decl(void())
 nd_unloadDisplay = {
 	if (!nd_isOpenDisplay) exitWith {};
 	if (nd_handleUpdate > -1) then {stopUpdate(nd_handleUpdate)};
@@ -326,34 +364,40 @@ nd_unloadDisplay = {
 	nd_openedDisplayType = "";
 	nd_sourceRef = "";
 	nd_list_widgets = [[],[]];
+
+	nd_internal_currentStructObj = null;
 }; rpcAdd("clsND",nd_unloadDisplay);
 
+decl(NULL|struct_t.NDBase)
+nd_internal_currentStructObj = null;
 
 //стандартный алгоритм
+decl(widget(float;float;string|bool))
 nd_stdLoad = {
-	params [["_sx",50],["_sy",50],["_btName","Закрыть"]];
-	if (isFirstLoad) then {
-		private _ctg = [thisDisplay,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
-		addSavedWdiget(_ctg);
+	params ["_isFirstCall",["_sx",50],["_sy",50],["_btName","Закрыть"]];
+	private _disp = nd_internal_currentStructObj getv(thisDisplay);
+	if (_isFirstCall) then {
+		private _ctg = [_disp,WIDGETGROUP,[50 - _sx/2,50-_sy/2,_sx,_sy]] call createWidget;
+		nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 		
-		_back = [thisDisplay,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
+		_back = [_disp,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 		_back setBackgroundColor [0.3,0.3,0.3,0.5];
 		
 		if (equalTypes(_btName,true) && {equals(_btName,false)}) then {
 			_ctg
 		} else {
-			_closer = [thisDisplay,[0,90,100,10],_ctg] call nd_addClosingButton;
+			_closer = [_disp,[0,90,100,10],_ctg] call nd_addClosingButton;
 			_closer ctrlSetText _btName;
 			
-			_ctg = [thisDisplay,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
-			addSavedWdiget(_ctg);
+			_ctg = [_disp,WIDGETGROUPSCROLLS,[0,0,100,90],_ctg] call createWidget;
+			nd_internal_currentStructObj callp(addSavedWidget, _ctg);
 			
 			_ctg
 		};
 		
 	} else {
-		private __svcnt = count getSavedWidgets;
+		private __svcnt = count (nd_internal_currentStructObj callv(getSavedWidgets));
 		if (__svcnt == 0) exitWith {widgetNull};
-		getSavedWidgets select (__svcnt - 1);
+		(nd_internal_currentStructObj callv(getSavedWidgets)) select (__svcnt - 1);
 	};
 };

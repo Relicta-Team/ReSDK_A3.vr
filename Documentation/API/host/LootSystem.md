@@ -63,7 +63,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\LootSystem\LootSystem_init.sqf at line 171](../../../Src/host/LootSystem/LootSystem_init.sqf#L171)
+File: [host\LootSystem\LootSystem_init.sqf at line 175](../../../Src/host/LootSystem/LootSystem_init.sqf#L175)
 ## loot_init
 
 Type: function
@@ -95,7 +95,7 @@ Type: function
 Description: 
 - Param: _path
 
-File: [host\LootSystem\LootSystem_init.sqf at line 52](../../../Src/host/LootSystem/LootSystem_init.sqf#L52)
+File: [host\LootSystem\LootSystem_init.sqf at line 56](../../../Src/host/LootSystem/LootSystem_init.sqf#L56)
 ## loot_processObject
 
 Type: function
@@ -104,7 +104,7 @@ Description:
 - Param: _type
 - Param: _obj
 
-File: [host\LootSystem\LootSystem_init.sqf at line 123](../../../Src/host/LootSystem/LootSystem_init.sqf#L123)
+File: [host\LootSystem\LootSystem_init.sqf at line 127](../../../Src/host/LootSystem/LootSystem_init.sqf#L127)
 ## loot_internal_editor_reloadLooting
 
 Type: function
@@ -114,7 +114,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 148](../../../Src/host/LootSystem/LootSystem_init.sqf#L148)
+File: [host\LootSystem\LootSystem_init.sqf at line 152](../../../Src/host/LootSystem/LootSystem_init.sqf#L152)
 ## loot_editor_isLoadedLib
 
 Type: function
@@ -124,7 +124,7 @@ Type: function
 Description: 
 
 
-File: [host\LootSystem\LootSystem_init.sqf at line 157](../../../Src/host/LootSystem/LootSystem_init.sqf#L157)
+File: [host\LootSystem\LootSystem_init.sqf at line 161](../../../Src/host/LootSystem/LootSystem_init.sqf#L161)
 ## loot_editor_getTemplateByInput
 
 Type: function
@@ -134,7 +134,7 @@ Type: function
 Description: 
 - Param: _input
 
-File: [host\LootSystem\LootSystem_init.sqf at line 161](../../../Src/host/LootSystem/LootSystem_init.sqf#L161)
+File: [host\LootSystem\LootSystem_init.sqf at line 165](../../../Src/host/LootSystem/LootSystem_init.sqf#L165)
 # LootSystem_structs.sqf
 
 ## LOOT_COMPARE_BY_NAME

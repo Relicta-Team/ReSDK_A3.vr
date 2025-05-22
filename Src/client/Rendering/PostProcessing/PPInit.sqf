@@ -2,6 +2,14 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+/*
+	Легаси система постпроцесса
+	TODO: перенести на структуры
+
+*/
+#include <..\..\..\host\lang.hpp>
+
+namespace(Rendering.PostProcess,pp_)
 
 #include <postprocessing.h>
 
@@ -18,12 +26,17 @@ if (!isNullVar(pp_allEffects)) then {
 	};
 };
 
+decl(any[])
 pp_buffer_efx = [];
+decl(any[])
 pp_allEffects = [];
+decl(int)
 pp_uniIndex = 5000;
 
+decl(void(bool))
 pp_reload = {
-	
+	params ["_enableUpdated"];
+
 	pp_allEffects = [];
 	pp_uniIndex = 5000;
 	private _copyBuffer = array_copy(pp_buffer_efx);
@@ -33,15 +46,22 @@ pp_reload = {
 		_h = getPPVar(_name + "_handle");
 		stopUpdate(_h);
 		ppEffectDestroy getPPVar(_name);
+
+		//! i think is double initialization. maybee need remove?!
 		call (_x select 6); //reload init statements
+
 		_x call pp_init;
 		//apply enabled
 		if (_x select 7) then {
 			[_name,true] call pp_setEnable;			
 		};
+		if (_enableUpdated && _h != -1) then {
+			[_name,true,false] call pp_setEnable;
+		};
 	} foreach _copyBuffer;
 };
 
+decl(void(string;string;any[];any[];any;float;any;bool))
 pp_init = {
 	params ["_name","_config","_settings",["_args",[]],["_code",{}],["_delay",0],["_initStatement",{}],["_isActive",false]];
 	
@@ -64,17 +84,21 @@ pp_init = {
 	setPPVar(_name + "_args",_args);
 	setPPVar(_name + "_updateDelay",_delay);
 	
-	pp_buffer_efx pushBack [_name,_config,_settings,_args,_code,_delay,_initStatement,_isActive];
+	private _curState = true;
+
+	pp_buffer_efx pushBack [_name,_config,_settings,_args,_code,_delay,_initStatement,_isActive,_curState];
 };
 
+decl(void(...any[]))
 pp_init_active = {
 	_this set [7,true];
 	_this call pp_init;
 	[_this select 0,true] call pp_setEnable
 };
 
+decl(void(string;bool;bool))
 pp_setEnable = {
-	params ["_varName","_mode"];
+	params ["_varName","_mode",["_showError",true]];
 
 	private _effect = getPPVar(_varName);
 
@@ -83,7 +107,9 @@ pp_setEnable = {
 	};
 
 	if (_mode == (ppEffectEnabled _effect)) exitWith {
-		errorformat("PostProcessing::setEnable() - Effect %1 already %2",_varName arg _mode);
+		if (_showError) then {
+			errorformat("PostProcessing::setEnable() - Effect %1 already %2",_varName arg _mode);
+		};
 	};
 
 	_effect ppEffectEnable _mode;
