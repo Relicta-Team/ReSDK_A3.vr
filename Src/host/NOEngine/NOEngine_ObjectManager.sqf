@@ -535,7 +535,7 @@ getGameObjectOnPosition = {
 			if (_x call noe_server_isNGO) then {continue};
 
 			_prob = _x getVariable "link";
-			#ifdef EDITOR
+			#ifdef EDITOR_OR_SP_MODE
 			if isNullVar(_prob) then {continue};
 			#endif
 			if (call _algGet) then {
@@ -547,7 +547,7 @@ getGameObjectOnPosition = {
 			if (_x call noe_server_isNGO) then {continue};
 
 			_prob = _x getVariable "link";
-			#ifdef EDITOR
+			#ifdef EDITOR_OR_SP_MODE
 			if isNullVar(_prob) then {continue};
 			#endif
 			if (call _algGet) exitWith {

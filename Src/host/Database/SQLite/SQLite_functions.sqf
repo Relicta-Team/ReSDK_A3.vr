@@ -102,7 +102,10 @@ db_checkSystemReturn = {
 */
 db_query = {
 	params ["_request",["_retTypes",""],["_singleReturn",false]];
-	
+	#ifdef SP_MODE
+	if (true) exitWith {null};
+	#endif
+
 	#ifdef CATCH_REQUEST_ERROR
 	private _checked = _request;
 	if not_equalTypes(_checked,"") then {_checked = str _checked};

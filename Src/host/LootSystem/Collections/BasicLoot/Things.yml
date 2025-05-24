@@ -10,6 +10,8 @@ Things_tier1:
   items: &things_tier1
     WoodenDebris1:
       prob: 4%
+    WoodenDebris2:
+      prob: 4%   
     WoodenDebris3:
       prob: 4%
     WoodenDebris4:
@@ -19,6 +21,8 @@ Things_tier1:
     WoodenDebris6:
       prob: 4%
     WoodenDebris7:
+      prob: 4%
+    SyntDebris1:
       prob: 4%
      
 #Tier2
@@ -37,6 +41,9 @@ Things_tier2:
       prob: 3%
     CandleDisabled:
       prob: 3%
+    MetalDebris1:
+      prob: 3%
+
 
 #Tier3
 Things_tier3:

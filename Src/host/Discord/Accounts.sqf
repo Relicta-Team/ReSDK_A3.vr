@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+//выклюачем старую систему запроса ролей с диса
+#define DISABLE_OLD_DISCORDID_LOAD
 
 //система аккаунтов.
 //! Внимание! На рантайме если перелкючать этот флаг, то нужно принудительно вызывать dsm_accounts_loadDiscordId на каждом клиенте в сессии
@@ -26,6 +28,7 @@ dsm_accounts_arriveInCityCountNeed = 5;
 
 //возвращает результат проверки наличия. вызывается коллбэком
 //вызывается из лс сообщений у бота. запрос токена авторизации
+//! not used
 dsm_accounts_checkSync = {
 	params ["_nick","_hash","_chanId","_discordUserId"];
 	
@@ -69,6 +72,7 @@ dsm_accounts_checkSync = {
 
 //регистрация аккаунта
 //выполняет привязку дискорда к учетке и проивзодит синхронизацию ролей
+//! not used
 dsm_accounts_register = {
 	params ["_client","_token"];
 
@@ -99,7 +103,7 @@ dsm_accounts_register = {
 
 	[_nick,_discordUserId] call db_da_register;
 	
-	setVar(_client,discordId,_discordUserId);
+	setVar(_client,discordIdAcc,_discordUserId);
 	setVar(_client,arrivedInCity,0);
 
 	[_chanId,format["Игровой аккаунт `%1` привязан к профилю <@%2>",_nick,_discordUserId]] call dsm_sendToChannel;
@@ -119,15 +123,24 @@ dsm_accounts_register = {
 };
 
 //загрузка привязки дискорда. Вызывается когда клиент загружается из БД
+
 dsm_accounts_loadDiscordId = {
 	params ["_client","_nick"];
 
 	if (!call dsm_accounts_canUse) exitwith {};
 
+	#ifdef DISABLE_OLD_DISCORDID_LOAD
+	if (true) exitWith {
+		setVar(_client,discordIdAcc,getVar(_client,discordId));
+		//setVar(_client,arrivedInCity,0);
+		callFunc(_client,requestDiscordRoles);
+	};
+	#endif
+
 	private _ref = refcreate(0);
 	if ([_nick,_ref,true] call db_da_isSynced) then {
 		refget(_ref) params [["_disId",""],["_arrived",0]];
-		setVar(_client,discordId,_disId);
+		setVar(_client,discordIdAcc,_disId);
 		setVar(_client,arrivedInCity,_arrived);
 		
 		callFunc(_client,requestDiscordRoles);
@@ -148,7 +161,7 @@ dsm_accounts_handleRegisterArriveInCity = {
 	modVar(_cli,arrivedInCity, + 1);
 
 	//sync in database
-	[getVar(_cli,name)] call db_da_updateArrivedInCity;
+	[_cli] call db_da_updateStatArrivedInCity;
 
 	//validate count and adjust role
 	if (

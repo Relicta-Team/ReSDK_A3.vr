@@ -8,20 +8,31 @@
 #include "..\WidgetSystem\widgets.hpp"
 #include "..\..\host\thread.hpp"
 
+namespace(LobbySprite,lobby_sprite_)
+
+macro_def(lobby_sprite_using_renderer)
 #define LOBBY_USING_SPRITE_RENDERER
 
+decl(widget[])
 lobby_sprite_list = [];
 
+decl(widget[])
 lobby_sprite_readyButton = [widgetNull];
 
+macro_const(lobby_sprite_lifeTime)
 #define SPRITE_LIFETIME 15
+macro_const(lobby_sprite_counter)
 #define SPRITE_COUNTER 500
 
+macro_func(lobby_sprite_getStartPos,vector2())
 #define SPRITE_STARTPOS [50 + rand(-50,50),-5 - rand(-5,0)]
+macro_func(lobby_sprite_getEndPos,vector2())
 #define SPRITE_ENDPOS [50 + rand(-50,50),100]
 
+macro_const(lobby_sprite_colors)
 #define COLORS [[1,0,0,1],[0,1,0,1],[0,0,1,1]]
 
+decl(void())
 lobby_sprite_onUpdateCode = {
 	if (!isLobbyOpen) exitWith {};
 	

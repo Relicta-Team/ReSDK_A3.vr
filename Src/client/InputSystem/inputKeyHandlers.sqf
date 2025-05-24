@@ -175,6 +175,10 @@ decl(bool(int))
 input_movementCheck = {
 	params ["_key"];
 
+	#ifdef SP_MODE
+		if (_key in (actionKeys "GetOver") && {["getover",[]] call sp_gc_handlePlayerInput}) exitWith {true};
+	#endif
+
 	//disable V in combat mode
 	if ([player] call smd_isCombatModeEnabled && {_key in (actionKeys "GetOver")}) exitWith {true};
 
@@ -189,6 +193,10 @@ input_movementCheck = {
 		call cd_handleRestCustomAnim;
 		true
 	};
+
+	#ifdef SP_MODE
+	if ((_isMov || _isCS) && {!sp_playerCanMove}) exitWith {true};
+	#endif
 
 	//нельзя тащить вперёд
 	if (_isMov && {[player] call smd_isPulling} && {_key call input_internal_isMovingForward}) exitWith {true};

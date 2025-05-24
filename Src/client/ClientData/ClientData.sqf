@@ -193,6 +193,10 @@ cd_onPrepareClient = {
 
 		_tempObject setposatl (_atlPos vectordiff [0,0,0.1]);
 
+		#ifdef SP_MODE
+		_trace = [[0,0,_tempObject]];
+		#endif
+
 		if (count _trace == 0) then {
 			player setPosAtl _atlPos;
 		} else {
@@ -221,6 +225,10 @@ cd_onPrepareClient = {
 				rpcCall("onChangeEyeState",[_vision arg "load"]);
 
 				stopThisUpdate();
+
+				#ifdef SP_MODE
+				[call sp_getActor] call sp_gc_onPlayerAssigned;
+				#endif
 			} else {
 				if (_atlPos distance (getPosATL player) > 1) then {
 					player setPosATL _atlPos;
@@ -530,8 +538,7 @@ cd_authResult = {
 
 			//Do register process account
 			private _nextFrame = {
-				private _uid = if(!isMultiplayer)then{"76561198094364528"}else{getPlayerUID player};
-				rpcSendToServer("onRegClient",[clientOwner arg _uid arg _this]);
+				rpcSendToServer("onRegClient",[clientOwner arg _this]);
 			};
 			nextFrameParams(_nextFrame,_nick);
 		};

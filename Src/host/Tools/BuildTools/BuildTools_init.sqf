@@ -19,6 +19,7 @@ bt_buildClient = {
 	private _time = tickTime;
 	
 	allClientContents = [];
+	allClientModulePathes = [];
 	client_isLocked = false;
 
 	log("Start building client");
@@ -115,9 +116,30 @@ bt_buildClient = {
 
 	logformat("	Compiling done; Modules: %1",count allClientContents);
 
+	if ((count allClientModulePathes) != (count allClientContents)) exitWith {
+		error("Modules count error");
+		BT_ERRCODE(101);	
+	};
+
+	// build codebase metadata
+	private _keyFormatter = "CODEKEY_LINE_PRAGMA_NUMBER_%1;";
+	{
+		private _codebase = (format[_keyFormatter,_foreachIndex]) + (toString _x);
+		allClientContents set [_foreachIndex,compile _codebase];
+	} foreach allClientContents;	
+
 	// --- saving 600-700
 	log("Saving build");
 	private _allContent = str allClientContents;
+	{
+		private _pattern = 
+			//format["\bCODEKEY_LINE_PRAGMA_NUMBER_%1;",_foreachIndex];
+			format[_keyFormatter,_foreachIndex];
+		//! какая-то ебаная ошибка возникает при использовании #line в строке...
+		private _replacer = format['Scopename "%1";%2',_x,ENDL,'#']; //%3line 1 "%1"%2 <- error on preprocess
+		//_allContent = _allContent RegexReplace [_pattern,_replacer];
+		_allContent = [_allContent,_pattern,_replacer] call stringReplace;
+	} foreach allClientModulePathes;
 	logformat("	Content size: %1 kb",(count _allContent)toFixed 0 splitString "." select 0);
 
 	if isNull(file_write) exitWith {

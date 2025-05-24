@@ -344,3 +344,36 @@ anim_doParry = {
 	invokeAfterDelayParams(_onEndAnim,0.4,[_mob]);
 	#endif
 };
+
+
+//! todo implement new attaching logics
+
+//с помощью этого метода можно контролирвать анимированные атачи
+anim_addAttach = {
+	params ["_dest","_ctxAtt"];
+	_dest attachTo _ctxAtt;
+	private _mob = _ctxAtt select 0;
+	private _fd = _mob getvariable "__anim_internal_att_frdt";
+	if isNullVar(_fd) then {
+		_fd = createhashMap;
+		_mob setvariable ["__anim_internal_att_frdt",_fd];
+	};
+	_fd set [hashValue _dest,[_dest,_ctxAtt]];
+};
+
+anim_removeAttach = {
+	params ["_dest","_src"];
+	private _fd = _src getvariable "__anim_internal_att_frdt";
+	if isNullVar(_fd) exitWith {};
+	_fd deleteAt (hashValue _src);
+};
+
+anim_syncOnFrameAttaches = {
+	params ["_mob"];
+	//{_x setposatl (getposatl _x); _x attachto [_obj,[0,0,0],"head",true]} foreach (attachedobjects _obj);
+	{
+		_y params ["_dt","_ca"];
+		_dt setposatl (getposatl _dt);
+		_dt attachto _ca;
+	} foreach (_mob getvariable "__anim_internal_att_frdt");
+};

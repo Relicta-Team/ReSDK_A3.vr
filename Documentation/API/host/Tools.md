@@ -122,9 +122,9 @@ Description:
 
 Replaced value:
 ```sqf
-allClientContents pushBack (compile format['log("Init %1")',fcat]);
+allClientContents pushBack (compile format['log("Init %1")',fcat]); allClientModulePathes pushBack "internal module logging";
 ```
-File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 43](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L43)
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 44](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L44)
 ## cmplog(fcat)
 
 Type: constant
@@ -138,7 +138,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 45](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L45)
+File: [host\Tools\BuildTools\BuildTools_clientLoader.sqf at line 46](../../../Src/host/Tools/BuildTools/BuildTools_clientLoader.sqf#L46)
 # BuildTools_init.sqf
 
 ## BT_ERRCODE(code)

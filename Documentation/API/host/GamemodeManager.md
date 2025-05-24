@@ -1459,5 +1459,6 @@ Type: function
 Description: 
 - Param: _pos
 - Param: _isWoman (optional, default false)
+- Param: _canSim (optional, default false)
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1428](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1428)

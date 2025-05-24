@@ -3,19 +3,31 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
 #include "..\..\host\Atmos\Atmos.hpp"
 #include "NOEngineClient_NetAtmos.hpp"
 
+namespace(NOEngine.Client.AtmosOptimizer,aopt_cli_)
+
+decl(bool)
 aopt_cli_enableSystem = !false;
 
+decl(int)
 aopt_cli_handler = -1;
+decl(thread_handle)
 aopt_cli_thd = threadNull;
+decl(float)
 aopt_cli_lastUpd = 0;
+decl(float)
 aopt_cli_prevCallTime =0;
 
+decl(int)
 aopt_cli_culledCnt = 0; //отсеченные по видимости на буфере глубины
+decl(int)
 aopt_cli_gbuffCull = 0; //отсеченные по видимости на буфере геометрии
 
+decl(void())
 aopt_cli_process = {
 	if !(aopt_cli_enableSystem) exitwith {};
 
@@ -103,6 +115,7 @@ aopt_cli_process = {
 */
 
 // Главная функция для сортировки и проверки видимости объектов
+decl(void(vector3;vector3;mesh[]))
 aopt_cli_processZPass = {
     params ["_cameraPos", "_cameraDir", "_objects"];
 
@@ -186,6 +199,7 @@ aopt_cli_processZPass = {
 };
 
 // Функция для проверки перекрытия двух проекций на экране
+decl(bool(vector2;vector2))
 aopt_cli_checkOverlapWithZone = {
     params ["_screenBoxA", "_screenBoxB"];
 
@@ -202,6 +216,7 @@ aopt_cli_checkOverlapWithZone = {
     // Проверка на пересечение: возвращает true, если экраны перекрываются
     !((_maxXA < _minXB) || (_minXA > _maxXB) || (_maxYA < _minYB) || (_minYA > _maxYB));
 };
+decl(bool(vector2;vector2))
 aopt_cli_checkFullOverlap = {
     params ["_screenBoxA", "_screenBoxB"];
 	if (_screenBoxB isEqualTo []) exitWith {true};
@@ -227,8 +242,12 @@ aopt_cli_checkFullOverlap = {
     _isFullyContained;
 };
 
+decl(mesh[])
 aopt_cli_debug_listobs = [];
+decl(thread_handle)
 aopt_cli_debug_thread = threadNull;
+
+decl(void())
 aopt_cli_testItsc = {
 	threadStop(aopt_cli_debug_thread);
 	deleteVehicle aopt_cli_debug_listobs;

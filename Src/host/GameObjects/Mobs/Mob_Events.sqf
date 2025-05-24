@@ -100,16 +100,25 @@ _iact = {
 	};
 	
 	if (_type == INTERACT_RPC_CLICK) exitWith {
+		#ifdef SP_MODE
+			sp_checkInput("click_target",[_target]);
+		#endif
 		callSelfParams(clickTarget,_target);
 	};
 	if (_type == INTERACT_RPC_CLICK_SELF) exitWith {
 		_target = this;
+		#ifdef SP_MODE
+			sp_checkInput("click_self",[callSelf(getItemInActiveHandRedirect)]);
+		#endif
 		callSelfParams(clickTarget,_target);
 	};
 	if (_type == INTERACT_RPC_ALTCLICK) exitWith {
 
 	};
 	if (_type == INTERACT_RPC_MAIN) exitWith {
+		#ifdef SP_MODE
+			sp_checkInput("main_action",[_target]);
+		#endif
 		callSelfParams(mainAction,_target);
 	};
 	if (_type == INTERACT_RPC_EXAMINE) exitWith {
@@ -121,6 +130,9 @@ _iact = {
 			private __SCRIPT_EXACT_ACTION__ = true;
 			callFuncParams(getVar(_target,__script),onExtraAction,this);
 		};
+		#ifdef SP_MODE
+			sp_checkInput("extra_action",[_target]);
+		#endif
 		callSelfParams(extraAction,_target);
 	};
 
@@ -163,6 +175,9 @@ _emoteTxt = {
 	unrefObject(this,_player,errorformat("emoteTxt() - Mob object has no exists virtual object - %1",_player));
 	
 	if isTypeOf(this,MobGhost) exitWith {};
+	#ifdef SP_MODE
+		sp_checkInput("emote_text",[_txt]);
+	#endif
 
 	[format["(EMOTE) - %1 %2 (%3)",callSelfParams(getNameEx,"кто"),_txt,getVar(getSelf(client),name)]] call rpLog;
 
@@ -175,6 +190,10 @@ _emoteAct = {
 
 	[format["(EMOTE_ACTION) - %1 perform emote '%2' (%3)",callSelfParams(getNameEx,"кто"),_emt,getVar(getSelf(client),name)]] call rpLog;
 
+	#ifdef SP_MODE
+		sp_checkInput("emote_action",[_emt arg _optString]);
+	#endif
+	
 	//Сохраняем строку если она передана по сети
 	setSelf(lastEmoteActionString,_optString);
 
@@ -191,6 +210,10 @@ _onClickTarget = {
 	private _obj = pointer_get(_target);
 	if !pointer_isValidResult(_obj) exitWith {errorformat("onClickTarget() error: Object is %1",_target)};
 	if (isTypeOf(_obj,StolenItem)) exitWith {callFuncParams(_obj,onStolen,this);};
+
+	#ifdef SP_MODE
+		sp_checkInput("click_target",[_obj]);
+	#endif
 
 	callSelfParams(clickTarget,_obj);
 
@@ -218,6 +241,10 @@ _onDropItem = {
 	unrefObject(this,_mobObj,errorformat("onDropItem() - Mob object has no exists virtual object - %1",_mobObj));
 	private _item = callSelfParams(getItemInSlot,_slotId);
 	if (!isNullReference(_item) && {isTypeOf(_obj,StolenItem)}) exitWith {callFuncParams(_item,onStolen,this);};
+	
+	#ifdef SP_MODE
+		sp_checkInput("drop_item",[_slotId arg _isSafePutdown]);
+	#endif
 
 	callSelfParams(dropItem,_slotId arg _isSafePutdown);
 }; rpcAdd("onDropItem",_onDropItem);
@@ -238,6 +265,10 @@ _onPutdownItem = {
 	private _placerObj = pointer_get(_pdPlacePtr);
 	if !pointer_isValidResult(_placerObj) exitWith {errorformat("onPutdownItem() - Placer reference has no exists in pointers table - %1",_pdPlacePtr)};
 	_positionData set [3, _placerObj];
+
+	#ifdef SP_MODE
+		sp_checkInput("putdown_item",[_vObjItem arg _positionData]);
+	#endif
 
 	callFuncParams(_vObjMob,putdownItem, _vObjItem arg _positionData);
 	// 2022-2022 RIP. ЗДЕСЬ БЫЛА ЛОГИКА НА ЗАДЕРЖКУ ПРИ ВЫКЛАДЫВАНИИ С ПОМОЩЬЮ КНОПКИ БЫСТРОГО ВЫКЛАДЫВАНИЯ
@@ -265,6 +296,10 @@ _onTransferItem = {
 	
 	if !callSelfParams(canUseActivePart,false) exitWith {};
 	
+	#ifdef SP_MODE
+		sp_checkInput("transfer_slots_item",[_from arg _to]);
+	#endif
+
 	callSelfParams(transferItem,args2(_from,_to));
 }; rpcAdd("onTransferItem",_onTransferItem);
 
@@ -293,6 +328,11 @@ _onInteractWith = {
 	};
 
 	if (callFunc(_item,isMob) || callFunc(_item,isContainer)) then {
+		
+		#ifdef SP_MODE
+			sp_checkInput("interact_with",[_item arg _withItem]);
+		#endif
+
 		private __DRAG_EXTERNAL_FLAG__ = true;
 		traceformat("ctx: %1",vec3(getVar(_item,pointer),getVar(_withItem,pointer),getVar(this,pointer)))
 		traceformat("ctx2: %1",vec3(getVar(_item,name),getVar(_withItem,name),getVar(this,name)))
@@ -320,6 +360,10 @@ _onInteractInventoryWith = {
 
 	//emplace item into container
 	if callFunc(_item,isContainer) then {
+		#ifdef SP_MODE
+			sp_checkInput("interact_with",[_item arg _withItem]);
+		#endif
+
 		callFuncParams(_item,onInteractWith,_withItem arg this);
 	};
 
@@ -355,6 +399,10 @@ _onMainAction = {
 	if (isTypeOf(_item,StolenItem)) exitWith {callFuncParams(_item,onStolen,this);};
 
 	if callFunc(_item,isScriptedObject) exitWith {callFuncParams(getVar(_item,__script),onMainAction,this)};
+	
+	#ifdef SP_MODE
+		sp_checkInput("interact_with",[_item]);
+	#endif
 
 	callFuncParams(_item,onMainAction,this);
 }; rpcAdd("onMainAction",_onMainAction);
@@ -386,6 +434,10 @@ _onExtraAction = {
 		_itemRef;
 	};
 	if (isTypeOf(_item,StolenItem)) exitWith {callFuncParams(_item,onStolen,this);};
+
+	#ifdef SP_MODE
+		sp_checkInput("extra_action",[_item]);
+	#endif
 
 	callFuncParams(_item,onExtraAction,this);
 }; rpcAdd("onExtraAction",_onExtraAction);
@@ -462,6 +514,10 @@ _getmemories = {
 	params ["_mobObj",["_mode",0]];
 
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
+	
+	#ifdef SP_MODE
+		sp_checkInput("get_memories",[_mode]);
+	#endif
 
 	if (_mode == 1) exitWith {
 		callFunc(this,getSkillsInfoText);
@@ -552,7 +608,9 @@ _onResist = {
 _setCombatMode = {
 	params ["_mobObj","_ctx"];
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
-
+	#ifdef SP_MODE
+		sp_checkInput("set_combat",[_ctx]);
+	#endif
 	callSelfParams(setCombatMode,_ctx);
 }; rpcAdd("setCombatMode",_setCombatMode);
 
@@ -561,6 +619,11 @@ _onCrushingToObject = {
 	params ["_mobObj"];
 	unrefObject(this,_mobObj,errorformat("Mob object has no exists virtual object - %1",_mobObj));
 	callSelf(generateLastInteractOnServer);
+	
+	#ifdef SP_MODE
+		sp_checkInput("crush_contact",[callSelf(getLastInteractTarget)]);
+	#endif
+	
 	callFuncParams(callSelf(getLastInteractTarget),onCrushingContact,this);
 }; rpcAdd("onCrushingToObject",_onCrushingToObject);
 
@@ -627,6 +690,10 @@ _ppc_forceStop = {
 _os_fall = {
 	params ["_mobObj","_ctx"];
 	unrefObject(this,_mobObj,errorformat("OS_FALL: Mob object has no exists virtual object - %1",_mobObj));
+
+	#ifdef SP_MODE
+		sp_checkInput("on_falling",[_ctx]);
+	#endif
 
 	callSelfParams(onFalling,_ctx);
 }; rpcAdd("os_fall",_os_fall);

@@ -35,7 +35,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\ServerLighting\ServerLighting_init.sqf at line 78](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L78)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 94](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L94)
 ## slt_const_dummyMob
 
 Type: Variable
@@ -47,7 +47,7 @@ Initial value:
 ```sqf
 objNull
 ```
-File: [host\ServerLighting\ServerLighting_init.sqf at line 120](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L120)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 136](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L136)
 ## slt_initScriptedLights
 
 Type: function
@@ -63,7 +63,7 @@ Type: function
 Description: 
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 36](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L36)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 52](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L52)
 ## slt_handleScriptedCfgVars
 
 Type: function
@@ -71,7 +71,7 @@ Type: function
 Description: 
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 67](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L67)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 83](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L83)
 ## slt_create
 
 Type: function
@@ -82,7 +82,7 @@ Description:
 - Param: _autolink (optional, default true)
 - Param: _select (optional, default "")
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 122](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L122)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 138](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L138)
 ## slt_destr
 
 Type: function
@@ -90,7 +90,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 153](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L153)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 169](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L169)
 ## slt_destr_impl
 
 Type: function
@@ -98,7 +98,7 @@ Type: function
 Description: real impl of destroy server light
 - Param: _o
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 161](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L161)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 177](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L177)
 ## slt_scriptCfg_doSorting
 
 Type: function
@@ -106,4 +106,4 @@ Type: function
 Description: фикс из le_se_doSorting с доп.оптимизацией
 
 
-File: [host\ServerLighting\ServerLighting_init.sqf at line 171](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L171)
+File: [host\ServerLighting\ServerLighting_init.sqf at line 190](../../../Src/host/ServerLighting/ServerLighting_init.sqf#L190)

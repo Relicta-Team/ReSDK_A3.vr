@@ -207,7 +207,7 @@ Initial value:
 ```sqf
 clientMob//"B_Soldier_F" createVehicleLocal [0,0,0]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 40](../../../Src/client/LightEngine/LightEngine.sqf#L40)
+File: [client\LightEngine\LightEngine.sqf at line 49](../../../Src/client/LightEngine/LightEngine.sqf#L49)
 ## le_allChunkTypes
 
 Type: Variable
@@ -219,7 +219,7 @@ Initial value:
 ```sqf
 [CHUNK_TYPE_ITEM,CHUNK_TYPE_STRUCTURE,CHUNK_TYPE_DECOR]
 ```
-File: [client\LightEngine\LightEngine.sqf at line 47](../../../Src/client/LightEngine/LightEngine.sqf#L47)
+File: [client\LightEngine\LightEngine.sqf at line 56](../../../Src/client/LightEngine/LightEngine.sqf#L56)
 ## le_allLights
 
 Type: Variable
@@ -231,7 +231,7 @@ Initial value:
 ```sqf
 [] //all light points
 ```
-File: [client\LightEngine\LightEngine.sqf at line 50](../../../Src/client/LightEngine/LightEngine.sqf#L50)
+File: [client\LightEngine\LightEngine.sqf at line 59](../../../Src/client/LightEngine/LightEngine.sqf#L59)
 ## le_initializeScriptedConfigs
 
 Type: function
@@ -248,7 +248,7 @@ Description:
 - Param: _type (optional, default -1)
 - Param: _src
 
-File: [client\LightEngine\LightEngine.sqf at line 73](../../../Src/client/LightEngine/LightEngine.sqf#L73)
+File: [client\LightEngine\LightEngine.sqf at line 82](../../../Src/client/LightEngine/LightEngine.sqf#L82)
 ## le_unloadLight
 
 Type: function
@@ -256,7 +256,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 129](../../../Src/client/LightEngine/LightEngine.sqf#L129)
+File: [client\LightEngine\LightEngine.sqf at line 138](../../../Src/client/LightEngine/LightEngine.sqf#L138)
 ## le_isLoadedLight
 
 Type: function
@@ -264,7 +264,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 159](../../../Src/client/LightEngine/LightEngine.sqf#L159)
+File: [client\LightEngine\LightEngine.sqf at line 168](../../../Src/client/LightEngine/LightEngine.sqf#L168)
 ## le_getLoadedLightCfg
 
 Type: function
@@ -272,7 +272,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 166](../../../Src/client/LightEngine/LightEngine.sqf#L166)
+File: [client\LightEngine\LightEngine.sqf at line 175](../../../Src/client/LightEngine/LightEngine.sqf#L175)
 ## le_isLightConfig
 
 Type: function
@@ -280,7 +280,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 174](../../../Src/client/LightEngine/LightEngine.sqf#L174)
+File: [client\LightEngine\LightEngine.sqf at line 183](../../../Src/client/LightEngine/LightEngine.sqf#L183)
 ## le_debug_canViewLight
 
 Type: function
@@ -289,7 +289,7 @@ Description:
 - Param: _src
 - Param: _isLightObject
 
-File: [client\LightEngine\LightEngine.sqf at line 214](../../../Src/client/LightEngine/LightEngine.sqf#L214)
+File: [client\LightEngine\LightEngine.sqf at line 223](../../../Src/client/LightEngine/LightEngine.sqf#L223)
 ## le_se_emitFireAtPos
 
 Type: function
@@ -299,7 +299,7 @@ Description:
 - Param: _type
 - Param: _norm
 
-File: [client\LightEngine\LightEngine.sqf at line 365](../../../Src/client/LightEngine/LightEngine.sqf#L365)
+File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/LightEngine/LightEngine.sqf#L374)
 ## le_se_emitFireAtActor
 
 Type: function
@@ -310,7 +310,7 @@ Description:
 - Param: _sel (optional, default "spine3")
 - Param: _deleteAfter
 
-File: [client\LightEngine\LightEngine.sqf at line 373](../../../Src/client/LightEngine/LightEngine.sqf#L373)
+File: [client\LightEngine\LightEngine.sqf at line 382](../../../Src/client/LightEngine/LightEngine.sqf#L382)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)

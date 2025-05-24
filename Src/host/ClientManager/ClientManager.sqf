@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include "..\oop.hpp"
 #include <..\text.hpp>
 #include <ClientManager.h>
@@ -35,9 +36,19 @@ _event_onClientDisconnected = {
 
 	if (!isMultiplayer) then {
 		log("Init emulated player...");
-		//newParams(ServerClient,["Yodes(emulate)" arg player arg 0 arg "76561198094364528"]);
-		_parameters = [0,false,"76561198094364528"];
-		cm_preAwaitClientData pushBack _parameters;
+		private _pwData = struct_newp(PreAwaitClientData,0);
+		cm_preAwaitClientData set [0,_pwData];
+		
+		private _disId = "12345";
+		private _name = "User";
+
+		_pwData setv(discordId,_disId);
+
+		if (!(([_name] call db_isNickRegistered))) then {
+			[_disId,_name] call db_registerAccount;
+			[_disId] call db_registerStats;
+			[text format["update Accounts set Access='ACCESS_OWNERS' where DiscordId='%1'",_disId]] call db_query;
+		};
 	};
 
 
@@ -45,23 +56,100 @@ _event_onClientDisconnected = {
 	client_handler_onDisconnect = addMissionEventHandler ["PlayerDisconnected",_event_onClientDisconnected]; //HandleDisconnect - не удовлетворяет требованиям
 #endif
 
+//called on client auth success
+cm_onClientAuthSuccess = {
+	params ["_owner","_gameToken","_discId","_atok","_reftok","_expDT"];
+	private _pwData = cm_preAwaitClientData get _owner;
+	if isNullVar(_pwData) exitWith {
+		[_owner,"Внутренняя ошибка. Клиент не найден"] call cm_serverKickById;
+	};
+
+	//save discord id to owner
+	cm_map_ownerToDisIdAssoc set [_owner,_discId];
+
+	_pwData setv(gameToken,_gameToken);
+	_pwData setv(discordId,_discId);
+	_pwData setv(discordToken,_atok);
+	_pwData setv(refreshToken,_reftok);
+	_pwData setv(expiryDate,_expDT);
+
+	// send client load request
+	[[_gameToken],
+		{
+			[_this select 0] call srv_auth_int_successed;
+			call relicta_cli_publicLoader;
+		}
+	] remoteExecCall ["spawn", _owner];
+};
+
+//handle ban client on auth
+cm_handleBanClient = {
+	params ["_owner","_disId"];
+
+	private _ref = refcreate(0);
+	private _isBanned = false;
+	if ([_disId,_ref] call db_checkBan) then {
+		_isBanned = true;
+		refget(_ref) params ["_banTime","_banReason","_unbanAfter","_isPerm"];
+		if (_isPerm) then {
+
+			_mes = format[
+				if (_banReason == "") then {
+					"Доступ заблокирован."
+				} else {
+					"Доступ заблокирован. %1"
+				},_banReason];
+			[_owner,_mes] call cm_serverKickById;
+		} else {
+			_mes = format[
+				if (_banReason == "") then {
+					"Вы забанены до %2."
+				} else {
+					"Вы забанены до %2. %1"
+				}
+			,_banReason,_unbanAfter];
+			[_owner,_mes] call cm_serverKickById;
+		};
+	};
+
+	_isBanned
+};
+
+cm_getDiscordIdByOwner = {
+	params ["_owner"];
+	cm_map_ownerToDisIdAssoc get _owner
+};
+
 //Событие когда клиент готов (загрузил все данные)
 _onClientReady = {
 	params ["_owner"];
 
 	//Убираем из cm_preAwaitClientData нашего клиента (через _doNothing)
-	_index = cm_preAwaitClientData findif {(_x select 0) == _owner};
-	if (_index != -1) then {
-		_el = cm_preAwaitClientData deleteat _index;
-		_el set [1,true];//просто сброс
+	private _pwData = cm_preAwaitClientData get _owner;
+	if !isNullVar(_pwData) then {
+		_pwData = cm_preAwaitClientData deleteAt _owner;
+		_pwData setv(cancelToken,true); //просто сброс
 
-		private _uid = _el select 2;
+		//add or update tokens info
+		[
+			_pwData getv(discordId),
+			_pwData getv(gameToken),
+			_pwData getv(discordToken),
+			_pwData getv(refreshToken),
+			_pwData getv(expiryDate)
+		] call db_registerAuthTokenData;
+
+		private _discordId = _pwData getv(discordId);
 
 		//Регистрируем новый клиент как объект если он ещё не заходил
-		if (!([_uid,_owner] call cm_checkClientInJIPMemory)) then {
-			if ([_uid] call db_isUIDRegistered) then {
-				newParams(ServerClient,[_owner arg _uid]); //_el select 2 == UID
+		if (!([_discordId,_owner] call cm_checkClientInJIPMemory)) then {
+			if ([_discordId] call db_isDiscordIdRegistered) then {
+				newParams(ServerClient,[_owner arg _discordId]);
 			} else {
+				//check account from old table
+				if ([_discordId] call db_port_oldAccountRegistered) exitWith {
+					newParams(ServerClient,[_owner arg _discordId]);
+				};
 				//rpc create conn
 				rpcSendToClient(_owner,"authproc",null);
 			};
@@ -87,11 +175,17 @@ _authRequest = {
 
 //Регистрация клиента
 _onRegClient = {
-	params ["_owner","_uid","_name"];
+	params ["_owner","_name"];
+	private _disId = [_owner] call cm_getDiscordIdByOwner;
+	if isNullVar(_disId) exitWith {
+		[_owner,"Регистрация невозможна. Клиент не найден"] call cm_serverKickById;
+	};
 
-	[_uid,_name] call db_registerAccount;
-
-	newParams(ServerClient,[_owner arg _uid]);
+	[_disId,_name] call db_registerAccount;
+	[_disId] call db_registerStats;
+	
+	private _newClient = newParams(ServerClient,[_owner arg _disId]);
+	callFuncParams(_newClient,addDiscordRole,"Dweller");
 
 }; rpcAdd("onRegClient",_onRegClient);
 
@@ -361,31 +455,8 @@ if (isMultiplayer) then {
 			nextFrameParams(cm_serverKickById,vec2(_owner,"Сервер переполнен."));
 		};
 
-		_ref = refcreate(0);
-		if ([_uid,_ref] call db_checkBan) exitWith {
-			refget(_ref) params ["_banTime","_banReason","_unbanAfter","_isPerm"];
-			if (_isPerm) then {
-
-				_mes = format[
-					if (_banReason == "") then {
-						"Доступ заблокирован."
-					} else {
-						"Доступ заблокирован. %1"
-					},_banReason];
-				nextFrameParams(cm_serverKickById,vec2(_owner,_mes));
-			} else {
-				_mes = format[
-					if (_banReason == "") then {
-						"Вы забанены до %2."
-					} else {
-						"Вы забанены до %2. %1"
-					}
-				,_banReason,_unbanAfter];
-				nextFrameParams(cm_serverKickById,vec2(_owner,_mes));
-			};
-		};
-
 		//whitelist protect
+		//todo replace or remove this
 		#ifdef TEST_WHITELISTED
 			private _listAllow = cm_owners + cm_admins + cm_forsakens;
 			if (!array_exists(_listAllow,_uid)) exitWith {

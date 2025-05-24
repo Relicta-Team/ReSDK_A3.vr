@@ -3,8 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
+namespace(NOEngine.Client.ObjectManager,noe_client_)
 
+decl(mesh(...any[]))
 noe_client_spawnObject = {
 	//_chunkObject and _chunkObjData is out reference
 	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null]];
@@ -76,6 +79,7 @@ noe_client_spawnObject = {
 };
 
 //Обновляет объект
+decl(void(...any[]))
 noe_client_updateObject = {
 	//_chunkObject is out reference
 	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null]];
@@ -166,13 +170,14 @@ noe_client_updateObject = {
 	};
 };
 
+decl(void(vector2;int;any[]))
 noe_client_despawnObjectsInChunk = {
 	params ["_chunk","_type","_chunkObject"];
 	
 	[_chunk,_type] call noe_client_unsubscribeChunkListening;
 	
-	_odel = [];
-	_objData = chunk_getObjectsData(_chunkObject);
+	private _odel = [];
+	private _objData = chunk_getObjectsData(_chunkObject);
 	private _object = objNull;
 	{
 		_object = _y select chunk_objectData_ptr;
@@ -193,7 +198,7 @@ noe_client_despawnObjectsInChunk = {
 	chunk_setProgress(_chunkObject,CHUNK_PROGRESS_NOTLOADED);
 	chunk_setLoadingState(_chunkObject,CHUNK_STATE_NOT_LOADED);
 	
-	call noe_client_remObjsAlg;
+	[_odel] call noe_client_remObjsAlg;
 	/*_handle = _odel spawn {
 		#ifdef NOE_CLIENT_THREAD_DEBUG
 		scriptName "despawn_objs";
@@ -209,6 +214,7 @@ noe_client_despawnObjectsInChunk = {
 	_handle*/
 };
 
+decl(void(any[];string[]))
 noe_client_doRemoveObjects = {
 	params ["_chunkObject","_listPtr"];
 	
@@ -259,7 +265,7 @@ noe_client_doRemoveObjects = {
 		};	
 	} foreach _listPtr;
 	
-	call noe_client_remObjsAlg;
+	[_odel] call noe_client_remObjsAlg;
 	/*_handle = _odel spawn {
 		#ifdef NOE_CLIENT_THREAD_DEBUG
 		scriptName "del_objs";
@@ -275,14 +281,19 @@ noe_client_doRemoveObjects = {
 };
 
 //сколько объектов удаляется за цикл
+macro_const(noe_client_deleteObjectsCount)
 #define NOE_CLIENT_DELETEOBJS_COUNT 50
 //задержки между удалениями объектов
+macro_const(noe_client_deleteObjectsDelay)
 #define NOE_CLIENT_DELETEOBJS_DELAY 0.2
+
+decl(void(mesh[]))
 noe_client_remObjsAlg = {
-	__delMet__ = {
+	params ["_odel"];
+	private __delMet__ = {
 		{deleteVehicle _x} foreach _this
 	};
-	__t__ = 0;
+	private __t__ = 0;
 	for "_i" from 0 to (count _odel) - 1 step NOE_CLIENT_DELETEOBJS_COUNT do {
 		invokeAfterDelayParams(__delMet__,__t__,_odel select vec2(_i,NOE_CLIENT_DELETEOBJS_COUNT));
 		modvar(__t__) + NOE_CLIENT_DELETEOBJS_DELAY;
@@ -290,6 +301,7 @@ noe_client_remObjsAlg = {
 };
 
 //Обновляет информацию об объектах
+decl(void(any[];any[]))
 noe_client_doUpdateObjects = {
 	params ["_chunkObject","_updObjList"];
 	//Ещё одна заглушка
@@ -313,36 +325,39 @@ noe_client_doUpdateObjects = {
 	
 };
 
-#ifdef DEBUG
+decl(any[](string;bool))
 noe_client_debug_findChunkObjectByPointer = {
 	params ["_pointer",["_retAsData",false]];
 	private _ret = [];
 	
-	{
-		_chType = _x;
-		_chStorage = noe_client_cs get _chType;
-		
+	#ifdef DEBUG
+	
 		{
-			_chId = _x;
-			//object list info
-			_oData = _y select chunk_objectsData;
+			_chType = _x;
+			_chStorage = noe_client_cs get _chType;
+			
 			{
-				if (_x == _pointer) then {
-					if (_retAsData) then {
-						_ret pushBack [_x,_oData];
-					} else {
-						_ret pushBack [format["CH:%1:%2",_chId,_chType],_x];
-					};
-				};	
-			} foreach _oData;
-		} foreach _chStorage;
-	} foreach noe_client_allChunkTypes;
+				_chId = _x;
+				//object list info
+				_oData = _y select chunk_objectsData;
+				{
+					if (_x == _pointer) then {
+						if (_retAsData) then {
+							_ret pushBack [_x,_oData];
+						} else {
+							_ret pushBack [format["CH:%1:%2",_chId,_chType],_x];
+						};
+					};	
+				} foreach _oData;
+			} foreach _chStorage;
+		} foreach noe_client_allChunkTypes;
+	#endif
 	
 	_ret
 };	
-#endif
 //DEBUG
 
+decl(string(mesh;bool))
 noe_client_getObjPtr = {
 	params ["_obj",["_checkNGO",true]];
 	if (_checkNGO && {_obj call noe_client_isNGO}) then {

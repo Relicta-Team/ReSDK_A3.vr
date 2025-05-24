@@ -3,6 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(Rendering.Debug,debug_)
+
+decl(void(mesh;vector4;float;any))
 debug_drawBoundingBox = {
 	params ["_obj",["_color",[1,0,1,1]],["_width",3],"_bbdt"];
 	private _bbox = ifcheck(isNullVar(_bbdt),boundingBoxReal _obj,_bbdt);
@@ -34,6 +39,7 @@ debug_drawBoundingBox = {
 	drawLine3D [_p4, _p8, _color,_width];
 };
 
+decl(void(vector3;vector4;float;any))
 debug_drawBoundingBoxPos = {
 	params ["_pos",["_color",[1,0,1,1]],["_width",3],"_bbx"];
 
@@ -64,6 +70,7 @@ debug_drawBoundingBoxPos = {
 	drawLine3D [_p4, _p8, _color,_width];
 };
 
+decl(void(vector3;vector4;float;float))
 debug_drawSphere = {
 	params ["_pos",["_color",[1,0,1,1]],["_width",3],["_radius",1]];
 
@@ -122,6 +129,7 @@ debug_drawSphere = {
 	};
 };
 
+decl(void(vector3;vector4;float;float;int))
 debug_drawSphereEx = {
 	params ["_pos",["_color",[1,0,1,1]],["_width",3],["_radius",1],["_verticalLines",8]];
 
@@ -166,6 +174,7 @@ debug_drawSphereEx = {
 	};
 };
 
+decl(void(vector3;float;float;float;float;float;float;vector4;vector4;float))
 debug_drawLightCone = {
 	params ["_pos", "_pitch", "_bank", "_distance", "_outerAngle", "_innerAngle", ["_attenuation",2], ["_colorOuter", [1, 0.5, 0, 0.5]], ["_colorInner", [1, 1, 0, 1]], ["_width", 2]];
 	assert_str(false,"debug::drawLightCone is unsupported; Use debug::drawLightConeEx instead");
@@ -238,6 +247,7 @@ debug_drawLightCone = {
 	};
 };
 
+decl(void(vector3;vector3;float;float;float;vector4;vector4;float))
 debug_drawLightConeEx = {
     params ["_pos", "_endPos", "_outerAngle", "_innerAngle", "_attenuation", ["_colorOuter", [1, 0.5, 0, 0.5]], ["_colorInner", [1, 1, 0, 1]], ["_width", 2]];
 
@@ -326,12 +336,14 @@ debug_drawLightConeEx = {
     };
 };
 
+decl(struct_t.LoopedFunction(vector3;vector4;float;any))
 debug_addRenderPos = {
 	params ["_pos","_color","_wdt","_bbx"];
 
 	struct_newp(LoopedFunction,debug_drawBoundingBoxPos arg [_pos arg _color arg _wdt arg _bbx]);
 };
 
+decl(int(mesh;float;any))
 debug_addRenderObject = {
 	params ["_obj","_color","_wdt","_bbxVec2"];
 	if !isNullVar(_bbxVec2) then {

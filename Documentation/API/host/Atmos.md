@@ -778,7 +778,7 @@ Initial value:
 ```sqf
 startUpdate(atmos_internal_onUpdate,ATMOS_MAIN_THREAD_UPDATE_DELAY)
 ```
-File: [host\Atmos\Atmos_init.sqf at line 349](../../../Src/host/Atmos/Atmos_init.sqf#L349)
+File: [host\Atmos\Atmos_init.sqf at line 353](../../../Src/host/Atmos/Atmos_init.sqf#L353)
 ## atmos_cv_ca
 
 Type: Variable
@@ -942,7 +942,7 @@ Type: function
 Description: what this?..
 - Param: _bch
 
-File: [host\Atmos\Atmos_init.sqf at line 354](../../../Src/host/Atmos/Atmos_init.sqf#L354)
+File: [host\Atmos\Atmos_init.sqf at line 358](../../../Src/host/Atmos/Atmos_init.sqf#L358)
 # Atmos_raycasts.sqf
 
 ## ATMOS_EXTENDED_INTERSECTION_COUNT

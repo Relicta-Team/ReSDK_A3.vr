@@ -21,9 +21,18 @@ le_initializeScriptedConfigs = {
 	call le_se_initScriptedLights;
 	call le_se_doSorting;
 };
+
+_doInitLights = false;
 #ifndef EDITOR
-call le_initializeScriptedConfigs;
+_doInitLights = true;
 #endif
+#ifdef SP_MODE
+_doInitLights = false;
+#endif
+
+if (_doInitLights) then {
+	call le_initializeScriptedConfigs;
+};	
 
 //create drop emitter map
 call le_se_internal_createDropEmitterMap;

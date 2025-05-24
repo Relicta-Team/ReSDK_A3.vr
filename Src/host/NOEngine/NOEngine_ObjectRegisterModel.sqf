@@ -84,6 +84,9 @@ noe_unregisterObject = {
 	} count chunk_getOwners(_chunkObject);
 
 	if (_deleteVisual) then {
+		
+		if isNullVar(_vis) exitWith {}; //already removed
+
 		if !isNullObject(_vis getVariable vec2("srv_ngo_geom",objNull)) then {
 			deleteVehicle (_vis getVariable "srv_ngo_geom"); //dispose ngo obj
 		};

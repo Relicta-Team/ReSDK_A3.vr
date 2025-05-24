@@ -353,3 +353,20 @@
   result:
     class: SmallSheetMetalHouse
     <<: *def_mods
+
+- <<: *construct
+  name: Клеточки для мельтешат
+  required:
+    skills:
+      engineering: 3
+      farming: 4
+    components:
+      - class: Melteshonok
+        count: 5
+        check_type_of: false      
+      - class: MetalDebris(1-2)
+        count: 5
+        check_type_of: false
+  result:
+    class: RatCage
+    <<: *def_mods

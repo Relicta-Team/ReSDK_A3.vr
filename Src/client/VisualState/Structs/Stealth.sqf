@@ -3,12 +3,17 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
+
+namespace(VisualState.Configs,vst_)
+
+decl(bool)
 vst_human_stealth_allowStepsounds = true;
 
 struct(VSTStealth) base(VSTBase)
-	def(name) "VST_HUMAN_STEALTH";
+	decl(override) def(name) "VST_HUMAN_STEALTH";
 
-	def(onCreated)
+	decl(override) def(onCreated)
 	{
 		params ["_ctx"];
 		if equals(self callv(getLocalPlayer),self getv(_src)) then {
@@ -22,18 +27,21 @@ struct(VSTStealth) base(VSTBase)
 		};
 	}
 
-	def(onDestroy)
+	decl(override) def(onDestroy)
 	{
 		params ["_ctx"];
 		if equals(self callv(getLocalPlayer),self getv(_src)) then {
 			hud_stealth = 0;
 			vst_human_stealth_allowStepsounds = true;
 		} else {
+			(self getv(_src)) hideObject false;
+			[self getv(_src),true] call smd_setSlotDataProcessor;
+			
 			self callp(setHideProxyMeshes,false);
 		};
 	}
 
-	def(setHideProxyMeshes)
+	decl(void(bool)) def(setHideProxyMeshes)
 	{
 		params ["_mode"];
 		private _eaterVst = [self getv(_src),"VST_EATER_NIGHTVISION"] call vst_getSourceHandler;

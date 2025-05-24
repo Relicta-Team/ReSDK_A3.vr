@@ -5,7 +5,7 @@
 
 #include <..\engine.hpp>
 
-TF_ADDON_VERSION = "TF RELICTA ADDON API 1.8";
+TF_ADDON_VERSION = "TF RELICTA ADDON API 2.0";
 //список языков
 vs_list_langs = [
 	"human","eater","ghost","human_notongue","human_block"

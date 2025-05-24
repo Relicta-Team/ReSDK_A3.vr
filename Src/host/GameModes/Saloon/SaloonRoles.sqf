@@ -64,7 +64,7 @@ class(RBarmenSaloon) extends(BasicRoleSaloon)
 	func(getEquipment)
 	{
 		objParams_1(_mob);
-		private _cloth = ["BarmenCloth",_mob,INV_CLOTH] call createItemInInventory;
+		private _cloth = ["VestAndTie",_mob,INV_CLOTH] call createItemInInventory;
 		private _keyOwn = ["bar" arg "barsuper" arg "barowner"];
 		regKeyInUniform(_cloth,_keyOwn,"Ключ от Дыры");
 	};

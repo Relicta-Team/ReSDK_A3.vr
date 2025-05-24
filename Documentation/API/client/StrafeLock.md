@@ -11,19 +11,19 @@ Replaced value:
 ```sqf
 2.4
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 11](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L11)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 14](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L14)
 ## STRAFELOCK_MAXPRESS
 
 Type: constant
 
-Description: check with left and right buttons
+Description: 
 
 
 Replaced value:
 ```sqf
 2
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 14](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L14)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 18](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L18)
 ## strafeLock_lrButtonsCountPress
 
 Type: Variable
@@ -35,7 +35,7 @@ Initial value:
 ```sqf
 [0,0]
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 33](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L33)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 40](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L40)
 ## strafeLock_handleKeyUp
 
 Type: Variable
@@ -47,7 +47,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 34](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L34)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 42](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L42)
 ## strafeLock_handle
 
 Type: Variable
@@ -59,7 +59,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 35](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L35)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 44](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L44)
 ## strafeLock_const_lrButtons
 
 Type: Variable
@@ -71,7 +71,7 @@ Initial value:
 ```sqf
 LEFT_MOVE_BUTTONS + RIGHT_MOVE_BUTTONS
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 36](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L36)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 46](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L46)
 ## strafeLock_catched
 
 Type: Variable
@@ -83,7 +83,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\StrafeLock\StrafeLock_init.sqf at line 37](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L37)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 48](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L48)
 ## strafeLock_setEnable
 
 Type: function
@@ -91,7 +91,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 16](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L16)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 21](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L21)
 ## strafeLock_isEnabled
 
 Type: function
@@ -99,7 +99,7 @@ Type: function
 Description: 
 
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 31](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L31)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 37](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L37)
 ## strafeLock_onUpdate
 
 Type: function
@@ -107,19 +107,19 @@ Type: function
 Description: 
 
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 39](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L39)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 51](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L51)
 ## strafeLock_onKeyUp
 
 Type: function
 
 Description: 
-- Param: 
+- Param: _d
 - Param: _key
 - Param: _shift
 - Param: _ctrl
 - Param: _alt
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 44](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L44)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 57](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L57)
 ## strafeLock_incrementBackMovePress
 
 Type: function
@@ -127,7 +127,7 @@ Type: function
 Description: 
 - Param: _sideIndex
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 57](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L57)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 71](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L71)
 ## strafeLock_checkConditions
 
 Type: function
@@ -135,4 +135,4 @@ Type: function
 Description: 
 
 
-File: [client\StrafeLock\StrafeLock_init.sqf at line 65](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L65)
+File: [client\StrafeLock\StrafeLock_init.sqf at line 80](../../../Src/client/StrafeLock/StrafeLock_init.sqf#L80)

@@ -3,8 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\..\host\lang.hpp>
 
+namespace(Rendering.HDR,render_hdr_)
 
+decl(void())
 render_hdr_init = {
 	setApertureNew [6,30,20,200];
 };
@@ -12,11 +15,12 @@ render_hdr_init = {
 //ставим новый рендеринг
 call render_hdr_init;
 
-#ifdef HDR_DYNAMIC_ENABLED
 
+decl(void())
 render_hdr_setMode = {}; //underground, world
 
+decl(void())
 render_hdr_setWorldTIme = {};
+decl(void())
 render_hdr_initWolrdTime = {};
 
-#endif

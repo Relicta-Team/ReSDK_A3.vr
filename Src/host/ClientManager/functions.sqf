@@ -5,6 +5,7 @@
 
 #include "..\oop.hpp"
 #include "..\engine.hpp"
+#include "..\struct.hpp"
 #include <..\Networking\Network.hpp>
 
 if (IS_INIT_MODULE) then {
@@ -13,8 +14,9 @@ if (IS_INIT_MODULE) then {
 	//закрыт ли сервер
 	cm_isServerLocked = false;
 
-	//список клиентов на ожидание кика. Только значимые типы в массивах
-	cm_preAwaitClientData = [];
+	//список клиентов на ожидание кика. PreAwaitClientData является значением, ключ uint (clientOwner)
+	cm_preAwaitClientData = hashMapNew;
+	cm_map_ownerToDisIdAssoc = hashMapNew;
 
 	cm_allClients = []; //список зарегистрированных объектов клиентов
 	cm_disconnectedClients = hashMapNew; //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
@@ -79,7 +81,7 @@ cm_forsakens = ["76561198096453655","76561198072294284","76561198156220735","765
 //найти клиента по айди. Допускается перегрузка с двумя параметрами, где второй - искать ли клиента в отключенных
 protoFind(Id,id,__compare_equality_hard); //cm_findClientById
 protoFind(Name,name,__compare_equality_soft); //cm_findClientByName
-protoFind(Uid,uid,__compare_equality_hard); //cm_findClientByUid
+protoFind(DisId,discordId,__compare_equality_hard); //cm_findClientByDisId
 protoFind(Access,access,__compare_equality_hard); //cm_findClientByAccess
 
 cm_findClientByAccessLevel = {
@@ -166,15 +168,15 @@ cm_idToName = {
 	getVar(_cli,name);
 };
 
-cm_idToUid = {
+cm_idToDisId = {
 	params ["_id"];
 	private _cli = _id call cm_findClientById;
-	if isNullReference(_cli) exitWith {format["<Unknown uid (%1)>",_id]};
-	getVar(_cli,uid);
+	if isNullReference(_cli) exitWith {format["<Unknown client (%1)>",_id]};
+	getVar(_cli,discordId);
 };
 
 //зарегистрирован в памяти или нет
-cm_isRegisteredClient = {
+cm_isClientExist = {
 	not_equals(_this call cm_findClientById,nullPtr);
 };
 
@@ -241,7 +243,7 @@ cm_serverKickById = {
 
 	// Системная функция при обнаружении подозрительной активности
 	pre_oncheat = {
-		params ["_owner","_ctxCheat","_uid"];
+		params ["_owner","_ctxCheat"];
 		_ctxCheat params [["_mes","nullmes"],["_data",null]];
 		call {
 
@@ -249,19 +251,20 @@ cm_serverKickById = {
 			if (_mes == "EFHmod") exitWith {
 				//[format["[RECHEAT]:	<%1> (%2) : deviation of the frame number by %3 frames",_mes,_uid,_data]] call discLog;
 				
-				private _errorNick = "ERROR_UID_NOT_IN_DATABASE:"+_uid;
-				private _nick = [_uid,_errorNick] call db_uidToNick;
-				private _m = format["[RECHEAT]:	<%1> (%2 -> %4) : deviation of the frame number by %3 frames",_mes,_nick,_data,_uid];
+				//private _errorNick = "ERROR_UID_NOT_IN_DATABASE:"+_uid;
+				//private _nick = [_uid,_errorNick] call db_disIdToNick;
+				private _m = format["[RECHEAT]:	<%1> (owner %2) : deviation of the frame number by %3 frames",_mes,_owner,_data];
 				
-				if (_nick != _errorNick) then {
-					modvar(_m) + "; Attempt execute ban by uid (platform side)";
-				};
+				// if (_nick != _errorNick) then {
+				// 	modvar(_m) + "; Attempt execute ban by uid (platform side)";
+				// };
 
 				["ADMIN_RECHEAT: "+ _m] call adminLog;
 				["@everyone ADMIN_RECHEAT: "+_m] call disc_adminlog_provider;
 
 				[_owner,"Подозрительная активность. Код: 1"] call cm_serverKickById;
 				
+				/*
 				if (_nick != _errorNick) then {
 					private _reason = "Подозрительная активность. Код: 1. Зайдите в discord.relicta.ru";
 					[null,_nick,_reason] call db_banByName;
@@ -270,14 +273,15 @@ cm_serverKickById = {
 					//? Where placed .txt banfile on serverside?
 					private _r = (format["#exec ban %1",_uid]) call cm_serverCommand;
 					["@everyone ADMIN_RECHEAT: Client " + str _uid + "not registered. Executed platform ban; Result: " + str _r] call disc_adminlog_provider;
-				};			
+				};
+				*/	
 			};
 
 		};
 	};
 
 	pre_notifClientAssert = {
-		params ["_message","_owner","_uid"];
+		params ["_message","_owner"];
 		private _id = (str randInt(1,1000)) + "-" + (toUpper generatePtr);
 		_message = format["%1 (ID: %2, UID: %3)",_message,_id,_uid];
 		[__ASSERT_WEBHOOK_PREFIX__ + _message] call discError;
@@ -343,9 +347,9 @@ cm_unregisterMobInGame = {
 
 //Проверяет наличие ранее подключенного клиента
 cm_checkClientInJIPMemory = {
-	params ["_uid","_owner"];
+	params ["_disId","_owner"];
 
-	private _client = cm_disconnectedClients getOrDefault [_uid,nullPtr];
+	private _client = cm_disconnectedClients getOrDefault [_disId,nullPtr];
 	if equals(_client,nullPtr) exitWith {
 		false
 	};

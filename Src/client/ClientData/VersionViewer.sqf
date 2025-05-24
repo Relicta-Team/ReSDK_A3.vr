@@ -45,6 +45,7 @@ cd_vv_syncVisual = {
 	[_txt,format["<t align='right' size='0.9'>%1%1Name: %2%1v%3%1%4</t>",sbr,_cliName,client_version,_rev]] call widgetSetText;
 };
 
+#ifndef SP_MODE
 //Ожидаем пока клиент не загрузится чтобы выдать ему имя
 startAsyncInvoke
 	{
@@ -60,3 +61,5 @@ startAsyncInvoke
 		["ERR:LOAD_TIMEOUT"] call cd_vv_syncVisual;
 	}
 endAsyncInvoke
+
+#endif

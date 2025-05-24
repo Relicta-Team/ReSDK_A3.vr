@@ -341,12 +341,12 @@ class(MobObserver) extends(MobGhost)
 		};
 		if (["cmdjobunban"] call ie_action_check) exitwith {
 			private _h = {
-				private _uid = [_value] call db_NickToUid;
-				if (_uid == "") exitwith {
+				private _disId = [_value] call db_NickToDisId;
+				if (_disId == "") exitwith {
 					callSelf(CloseMessageBox);
 					callSelfParams(localSay,"Неверное имя" arg "system");
 				};
-				private _list = [_uid,{
+				private _list = [_disId,{
 					format["%1 (%2)|%3 %1",
 						_jobClass,
 						getVar(_jobClass call gm_getRoleObject,name),

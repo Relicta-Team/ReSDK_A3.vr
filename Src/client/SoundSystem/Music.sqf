@@ -3,6 +3,9 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
+
+namespace(AudioSystem.Music,music_)
 
 #include <Music.hpp>
 
@@ -54,23 +57,26 @@
 */
 
 //двойная ассоциация класса и пути
+decl(map<string;string>)
 music_internal_class2path = createHashMap;
+decl(map<string;string>)
 music_internal_path2class = createHashMap;
 //хэш карта папок и композиций внутри них
+decl(map<string;string[]>)
 music_internal_folderData = createHashMap;
 //карта длительности (key: musicname, val: duration)
+decl(map<string;float>)
 music_internal_durationMap = createHashMap;
 
 //объект композиции который играет в данную минуту
+decl(map<string;any>|NULL)
 music_playedObject = null;
 
-_cfg = 
+_cfg = missionConfigFile;
 #ifndef USE_LOCAL_PATHES
-configFile
-#else
-missionConfigFile
+_cfg = configFile;
 #endif
-;
+
 
 //инициализация
 _idxMax = getNumber(_cfg >> "cfgMusic" >> "maxRMIndex");
@@ -95,9 +101,10 @@ for "_i" from 0 to _idxMax do {
 		music_internal_folderData set ["",_list];
 	};
 };
-
+macro_const(music_BUFFER_PRIORITY_MAX)
 #define BUFFER_PRIORITY_MAX 32
 
+macro_def(music_debugMode)
 #define MUSIC_DEBUG
 
 #ifdef RELEASE
@@ -105,7 +112,9 @@ for "_i" from 0 to _idxMax do {
 #endif
 
 #ifdef MUSIC_DEBUG
+	inline_macro
 	#define mlog(text) log("[MUSIC::DEBUG]: " + text);
+	inline_macro
 	#define mlogformat(text,args) logformat("[MUSIC::DEBUG]: " + text,args);
 #else
 	#define mlog(text) 
@@ -115,6 +124,10 @@ for "_i" from 0 to _idxMax do {
 //reset vars
 playMusic "";
 0 fadeMusic 1;
+
+decl(any[]) music_internal_priority = [];
+decl(any[]) music_internal_paused = [];
+decl(int) music_internal_lastPriority = -1;
 
 _buffer = [];
 _buffer resize (BUFFER_PRIORITY_MAX+1);
@@ -133,6 +146,7 @@ music_internal_lastPriority = -1;
 	- wait - установите в true чтобы дождаться окончания других звуков на этом канале. в противном случае стартует немедленно
 	- start - стартовая позиция трека. по умолчанию 0
 */
+decl(void(string;int;any[]))
 music_play = {
 	params ["_file",["_priority",0],["_params",[]]];
 	
@@ -244,9 +258,11 @@ music_play = {
 }; rpcAdd("mpl",music_play);
 
 //строковая карта всех каналов
+decl(map<string;int>)
 music_internal_map_chanToEnum = createHashMapFromArray MUSIC_MAP_INTERNAL_ALLCHANNELS;
 
-_mproc = {
+decl(void(...any[]))
+music_internal_mproc = {
 	_t = _this deleteAt 0;
 	
 	private _chanToEnum = {music_internal_map_chanToEnum getOrDefault [_this,MUSIC_CHANNEL_BASE]};
@@ -295,8 +311,11 @@ _mproc = {
 		
 		[_chan] call music_stop;
 	};
-}; rpcAdd("mproc",_mproc);
+}; 
 
+rpcAdd("mproc",music_internal_mproc);
+
+decl(void(int;bool;bool))
 music_setPause = {
 	params ["_chan","_mode",["_smooth",false]];
 	if !inRange(_chan,-1,BUFFER_PRIORITY_MAX) exitWith {
@@ -330,6 +349,7 @@ music_setPause = {
 };
 
 //принудительная остановка музыки на данном канале и очистка канала. параметр -1 чистит все каналы
+decl(void(int))
 music_stop = {
 	params [["_chan",-1]];
 	FHEADER;
@@ -356,11 +376,13 @@ music_stop = {
 	};
 };
 
+decl(void(float;float))
 music_internal_setFade = {
 	params ["_fade",["_time",-1]];
 	_time fadeMusic _fade;
 };
 
+decl(void())
 music_internal_onUpdate = {
 	
 	_buf = music_internal_priority;
@@ -440,4 +462,8 @@ music_internal_onUpdate = {
 	};
 	
 };
+
+decl(int)
+music_internal_handleOnUpdate = -1;
+
 music_internal_handleOnUpdate = startUpdate(music_internal_onUpdate,0);

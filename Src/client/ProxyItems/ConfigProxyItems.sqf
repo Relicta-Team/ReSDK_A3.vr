@@ -3,8 +3,6 @@
 // sdk.relicta.ru
 // ======================================================
 
-#include <ConfigProxyItems.h>
-
 #include <Exported.h>
 
 model("\relicta_models\models\weapons\melee\torch.p3d") [[INV_HAND_L,[[0,0.068,0.037],[-15,13,-37]]],[INV_HAND_R,[[-0.057,0.006,0.037],[19,0,0]]],[INV_BELT,[[-0.182,-0.057,-0.088],[-178,-43,0]]]]

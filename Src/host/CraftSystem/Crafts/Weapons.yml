@@ -1,2 +1,98 @@
-- name: head
-  ignored: true
+- name: Костолом
+  type: default
+  category: Weapon
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+      blacksmithing: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false 
+      - class: WoodenDebris6
+        count: 1
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 2
+  result: 
+    class: BattleSledgehammer
+
+- name: Труба
+  type: default
+  category: Weapon
+  options:
+    craft_duration: from_skill(12,6)
+  required: 
+    skills:
+      engineering: 3
+    components:
+      - class: MetalDebris(1-2)
+        count: 2
+        check_type_of: false 
+      - class: Hammer
+        count: 1
+        destroy: false
+  result: 
+    class: ToolStraigthPipe
+
+- name: Самопал
+  type: default
+  category: Weapon
+  options:
+    craft_duration: from_skill(16,10)
+  required: 
+    skills:
+      engineering: 4
+      shotgun: 4
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false 
+      - class: WoodenDebris(1-5)
+        count: 1
+        check_type_of: false 
+      - class: SyntDebris1
+        count: 1
+        check_type_of: false       
+      - class: Screwdriver
+        count: 1
+        destroy: false
+  failed_handler:
+    handler_type: default
+    class: MetalDebris1
+    count: 1
+  result: 
+    class: PistolOneShoot
+
+- name: Самодельный Патрон
+  type: default 
+  category: Weapon
+  options:
+    craft_duration: from_skill(16,10)
+  required:
+    skills:
+      engineering: 4
+    components:
+      - class: MetalDebris(1-2)
+        count: 1
+        check_type_of: false
+      - class: MatchBox
+        count: 1
+        condition: countLeft>=10
+        check_type_of: false 
+      - class: Paper
+        count: 1
+        check_type_of: false
+      - class: [KitchenKnife, CombatKnife]
+        check_type_of: false
+        destroy: false
+  result:
+    class: AmmoRevolver    
+    count: {min: 1, max: 3}

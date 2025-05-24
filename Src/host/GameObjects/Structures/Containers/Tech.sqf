@@ -1219,7 +1219,12 @@ class(MerchantConsole) extends(ElectronicDevice)
 	regItemDef(MC_CAT_FOOD,"Egg",3,8,8,17)
 
 	regItemDef(MC_CAT_CONTAINERS,"CoinBag",3,5,5,7)
-	regItemDef(MC_CAT_CONTAINERS,"SmallBackpack",8,12,3,7)
+	regItemDef(MC_CAT_CONTAINERS,"LeatherBackpackBrown",8,12,3,7)
+	regItemDef(MC_CAT_CONTAINERS,"LeatherBackpackBlack",8,12,3,7)
+	regItemDef(MC_CAT_CONTAINERS,"BigLeatherBackpackBrown",10,14,2,5)
+	regItemDef(MC_CAT_CONTAINERS,"BigLeatherBackpackBlack",10,14,2,5)
+	regItemDef(MC_CAT_CONTAINERS,"Satchel",8,12,3,7)
+
 	regItemDef(MC_CAT_CONTAINERS,"Briefcase",10,15,1,8)
 	regItemDef(MC_CAT_CONTAINERS,"Suitcase",10,15,1,8)
 	regItemDef(MC_CAT_CONTAINERS,"SteelBrownContainer",10,15,1,8)

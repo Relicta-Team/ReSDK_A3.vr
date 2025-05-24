@@ -5,13 +5,22 @@
 
 #include "host\engine.hpp"
 
-//called only in scheduler (public initializer)
-relicta_cli_publicLoader = {
+relicta_cli_waitForLoaded = {
 	waitUntil {
 		!isNullReference(findDisplay 46) && 
 		getClientStateNumber >= 10 && 
 		count (missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]]) == 0
 	};
+};
+
+//called only in scheduler (public initializer)
+relicta_cli_publicLoader = {
+	// waitUntil {
+	// 	!isNullReference(findDisplay 46) && 
+	// 	getClientStateNumber >= 10 && 
+	// 	count (missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]]) == 0
+	// };
+	call relicta_cli_waitForLoaded;
 		
 	startLoadingScreen["","Relicta_loadingScreen"];
 	
@@ -62,4 +71,5 @@ relicta_cli_publicLoader = {
 
 if (isMultiplayer && isNull(CRYPT_ENABLED)) then {
 	missionnamespace setvariable ["relicta_cli_publicLoader",relicta_cli_publicLoader,true];
+	missionnamespace setvariable ["relicta_cli_waitForLoaded",relicta_cli_waitForLoaded,true];
 };

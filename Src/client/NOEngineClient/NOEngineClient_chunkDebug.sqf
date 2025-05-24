@@ -3,13 +3,16 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include <..\..\host\lang.hpp>
 
+namespace(NOEngine.Client.ChunkDebug,noe_debug_)
 
 //#define enableDebugDraw 1
 //#define enableDebugDrawText 1
 //#define enableDebugDrawInfo 1
 //#define enableDebugDrawSectors 1
 
+inline_macro
 #define upside _size
 
 #ifdef RELEASE
@@ -19,10 +22,10 @@
 	#undef enableDebugDrawSectors
 #endif
 
+decl(bool)
 noe_debug_canDrawInfo = !isNull(enableDebugDrawInfo);
 
-#ifdef enableDebugDraw
-	showHUD true;
+	decl(void(vector2;int;vector4))
 	noe_debug_drawChunkSides_player = {
 		params ["_chunk","_type","_color"];
 
@@ -55,6 +58,7 @@ noe_debug_canDrawInfo = !isNull(enableDebugDrawInfo);
 		drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,upside],_color];
 	};
 	
+	decl(void(vector2;int;vector4))
 	noe_debug_drawChunkInfo = {
 		params ["_chunk","_type","_color"];
 		private _chunkObject = [_chunk,_type] call noe_client_getPosChunkToData;
@@ -114,53 +118,62 @@ noe_debug_canDrawInfo = !isNull(enableDebugDrawInfo);
 		
 	};
 
-	_code = {
+decl(void())
+noe_debug_enableDebugDrawChunks = {
+	#ifdef enableDebugDraw
+		showHUD true;
+		private _code = {
 
-		_colorSide = [0,0,0,1];
-		{
-			_chunk = [getPosATL player, _x] call noe_posToChunk;
-			_pos = [_chunk,_x] call noe_chunkToPos;
+			_colorSide = [0,0,0,1];
+			{
+				_chunk = [getPosATL player, _x] call noe_posToChunk;
+				_pos = [_chunk,_x] call noe_chunkToPos;
 
-			_colorSide set [_forEachIndex,1];
+				_colorSide set [_forEachIndex,1];
 
-			[_chunk,_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk,_x,_colorSide] call noe_debug_drawChunkSides_player;
 
-			[_chunk vectorAdd [1,0],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [-1,0],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [0,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [0,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [1,0],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [-1,0],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [0,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [0,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
 
-			[_chunk vectorAdd [1,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [-1,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [-1,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			[_chunk vectorAdd [1,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
-			
-			//draw info
-			if (noe_debug_canDrawInfo) then {
-				_dist = getChunkSizeByType(_x);
-				[_chunk,_x,_colorSide] call noe_debug_drawChunkInfo;
-				#define remap_ch(x,y) [(getPosATL player) vectorAdd [x*_dist,y*_dist],_x] call noe_posToChunk
-				//other chunks checker
-				[remap_ch(1,0),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(-1,0),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(0,1),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(0,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
-	
-				[remap_ch(1,1),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(-1,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(-1,1),_x,_colorSide] call noe_debug_drawChunkInfo;
-				[remap_ch(1,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
-			};
-			
-		} foreach [chunkType_item,chunkType_structure,chunkType_decor];
-	};
-	startUpdate(_code,0);
-#endif
+				[_chunk vectorAdd [1,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [-1,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [-1,1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				[_chunk vectorAdd [1,-1],_x,_colorSide] call noe_debug_drawChunkSides_player;
+				
+				//draw info
+				if (noe_debug_canDrawInfo) then {
+					_dist = getChunkSizeByType(_x);
+					[_chunk,_x,_colorSide] call noe_debug_drawChunkInfo;
+					inline_macro
+					#define remap_ch(x,y) [(getPosATL player) vectorAdd [x*_dist,y*_dist],_x] call noe_posToChunk
+					//other chunks checker
+					[remap_ch(1,0),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(-1,0),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(0,1),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(0,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
+		
+					[remap_ch(1,1),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(-1,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(-1,1),_x,_colorSide] call noe_debug_drawChunkInfo;
+					[remap_ch(1,-1),_x,_colorSide] call noe_debug_drawChunkInfo;
+				};
+				
+			} foreach [chunkType_item,chunkType_structure,chunkType_decor];
+		};
+		startUpdate(_code,0);
+	#endif
+};
 
-#ifdef enableDebugDrawSectors
+
+	inline_macro
 	#define startSectorIndex 1
+	inline_macro
 	#define sectorSize 1
 	
+	decl(vector3())
 	noe_debug_sector_redraw = {
 		(getPosATL player) params ["_x","_y","_z"];
 	
@@ -171,6 +184,7 @@ noe_debug_canDrawInfo = !isNull(enableDebugDrawInfo);
 		]
 	};
 	
+	decl(void(vector3;vector4))
 	noe_debug_drawSectorSides_player = {
 		params ["_chunk","_color"];
 		
@@ -199,27 +213,33 @@ noe_debug_canDrawInfo = !isNull(enableDebugDrawInfo);
 		drawLine3D [_linePos vectorAdd [0,_size,0],_linePos vectorAdd [0,_size,upside],_color];
 		drawLine3D [_linePos vectorAdd [_size,_size,0],_linePos vectorAdd [_size,_size,upside],_color];
 	};
-	_code = {
-		_chunk = call noe_debug_sector_redraw;
-		_colorSide = [1,0,0,1];
-		//for "_z" from -5 to 5 do {
-			for "_y" from -5 to 5 do {
-				for "_x" from - 5 to 5 do {
-					[_chunk vectorAdd [_x,_y],_colorSide] call noe_debug_drawSectorSides_player;
-				};
-			};
-		//};
-		/*[_chunk vectorAdd [1,0],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [-1,0],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [0,1],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [0,-1],_colorSide] call noe_debug_drawSectorSides_player;
 
-		[_chunk vectorAdd [1,1],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [-1,-1],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [-1,1],_colorSide] call noe_debug_drawSectorSides_player;
-		[_chunk vectorAdd [1,-1],_colorSide] call noe_debug_drawSectorSides_player;*/
-	};
-	startUpdate(_code,0);
-#endif
+decl(void())
+noe_debug_enableDebugDrawSectorsChunks = {
+	#ifdef enableDebugDrawSectors
+		private _code = {
+			_chunk = call noe_debug_sector_redraw;
+			_colorSide = [1,0,0,1];
+			//for "_z" from -5 to 5 do {
+				for "_y" from -5 to 5 do {
+					for "_x" from - 5 to 5 do {
+						[_chunk vectorAdd [_x,_y],_colorSide] call noe_debug_drawSectorSides_player;
+					};
+				};
+			//};
+			/*[_chunk vectorAdd [1,0],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [-1,0],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [0,1],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [0,-1],_colorSide] call noe_debug_drawSectorSides_player;
+
+			[_chunk vectorAdd [1,1],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [-1,-1],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [-1,1],_colorSide] call noe_debug_drawSectorSides_player;
+			[_chunk vectorAdd [1,-1],_colorSide] call noe_debug_drawSectorSides_player;*/
+		};
+		startUpdate(_code,0);
+	#endif
+
+};
 
 #undef upside

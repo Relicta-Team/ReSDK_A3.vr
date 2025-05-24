@@ -9,5 +9,5 @@
 
 #define logger_client(mes,fmt) logformat("[SERVER::MAIN]:    %1",format[mes arg fmt]); [mes arg fmt] call systemLog
 
-//5 секунд на инициализацию
-#define TIME_TO_INIT_CLIENT 120
+//время на инициализацию (доп 30 секунд на предзагрузку и накладные расходы выполнения)
+#define TIME_TO_INIT_CLIENT 60*3 + 30
