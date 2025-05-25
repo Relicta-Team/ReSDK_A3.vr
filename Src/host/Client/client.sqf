@@ -10,6 +10,7 @@
 #include <..\GamemodeManager\GamemodeManager.hpp>
 #include <..\Family\Family.hpp>
 #include <..\MatterSystem\bloodTypes.hpp>
+#include <..\Gender\Gender.hpp>
 #include <..\Networking\Network.hpp>
 
 // TODO: если проблема с назначением не исправится, то рекомендуется вариант динамического создания и выгрузки мобов при необходимости.
@@ -511,9 +512,9 @@ class(ServerClient) /*extends(NetObject)*/
 	// (Client::charSettings) mainhand rule: 0 left, 1 right
 	#define hashPair(key,val) [#key,val]
 	var(charSettings,createHashMapFromArray [
-		hashPair(name,([0] call naming_getRandomName) joinString " ") arg
+		hashPair(name,([GENDER_MALE] call naming_getRandomName) joinString " ") arg
 		hashPair(age,randInt(18,80)) arg
-		hashPair(gender,0) arg
+		hashPair(gender,GENDER_MALE) arg
 		hashPair(face,"rand") arg
 		hashPair(role1,"none") arg
 		hashPair(role2,"none") arg
