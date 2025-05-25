@@ -770,7 +770,14 @@ class(ServerClient) /*extends(NetObject)*/
 	func(getPriorityForRoles)
 	{
 		objParams();
-		getSelf(access)
+		private _status = getSelf(access);
+		if (_status >= (["ACCESS_FORSAKEN"] call cm_accessTypeToNum)) then {
+			//Игрок >= форсекена то приоритет на роли/антаг
+			10
+		} else {
+			//Если меньше форсекена то приоритет 0
+			0
+		};
 	};
 
 	//очистка последней проверки забаненных ролей
