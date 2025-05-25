@@ -10,6 +10,7 @@
 #include <..\GamemodeManager\GamemodeManager.hpp>
 #include <..\Family\Family.hpp>
 #include <..\MatterSystem\bloodTypes.hpp>
+#include <..\Gender\Gender.hpp>
 #include <..\Networking\Network.hpp>
 
 // TODO: если проблема с назначением не исправится, то рекомендуется вариант динамического создания и выгрузки мобов при необходимости.
@@ -511,9 +512,9 @@ class(ServerClient) /*extends(NetObject)*/
 	// (Client::charSettings) mainhand rule: 0 left, 1 right
 	#define hashPair(key,val) [#key,val]
 	var(charSettings,createHashMapFromArray [
-		hashPair(name,([0] call naming_getRandomName) joinString " ") arg
+		hashPair(name,([GENDER_MALE] call naming_getRandomName) joinString " ") arg
 		hashPair(age,randInt(18,80)) arg
-		hashPair(gender,0) arg
+		hashPair(gender,GENDER_MALE) arg
 		hashPair(face,"rand") arg
 		hashPair(role1,"none") arg
 		hashPair(role2,"none") arg
@@ -523,7 +524,7 @@ class(ServerClient) /*extends(NetObject)*/
 		hashPair(family,FAMILY_DEFAULT) arg
 		hashPair(blood,BLOOD_TYPE_RANDOM) arg
 		hashPair(faith,"fugu") arg
-		hashPair(antag,0)
+		hashPair(antag,ANTAG_NONE)
 		]);
 		//antag - 0 none; 1 hide, 2 unical, 3 all
 
@@ -770,7 +771,14 @@ class(ServerClient) /*extends(NetObject)*/
 	func(getPriorityForRoles)
 	{
 		objParams();
-		getSelf(access)
+		private _status = getSelf(access);
+		if (_status >= (["ACCESS_FORSAKEN"] call cm_accessTypeToNum)) then {
+			//Игрок >= форсекена то приоритет на роли/антаг
+			10
+		} else {
+			//Если меньше форсекена то приоритет 0
+			0
+		};
 	};
 
 	//очистка последней проверки забаненных ролей
