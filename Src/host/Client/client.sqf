@@ -524,7 +524,7 @@ class(ServerClient) /*extends(NetObject)*/
 		hashPair(family,FAMILY_DEFAULT) arg
 		hashPair(blood,BLOOD_TYPE_RANDOM) arg
 		hashPair(faith,"fugu") arg
-		hashPair(antag,0)
+		hashPair(antag,ANTAG_NONE)
 		]);
 		//antag - 0 none; 1 hide, 2 unical, 3 all
 

@@ -8,6 +8,7 @@
 //serverside includes
 #include <..\..\host\Family\Family.hpp>
 #include <..\..\host\MatterSystem\bloodTypes.hpp>
+#include <..\..\host\GamemodeManager\GamemodeManager.hpp>
 //serverside includes end
 
 namespace(Lobby,lobby_)
@@ -345,7 +346,7 @@ lobby_setAntag = {
 	_mode = getCurrentCharData("antag");
 	INC(_mode);
 	
-	if (_mode >= 4) then {_mode = 0};
+	if (_mode > ANTAG_ALL) then {_mode = ANTAG_NONE};
 	
 	["antag",_mode] call lobby_sendToServerSetting;
 };
