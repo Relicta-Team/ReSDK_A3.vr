@@ -18,6 +18,11 @@
 			!isMultiplayer &&
 			"enableLogVars" call sdk_hasSystemFlag
 		) then {[true] call clistat_setLogVars;};
+
+		if (
+			!isMultiplayer &&
+			"showMemUsageInfo" call sdk_hasSystemFlag
+		) then {call cli_mem_init;};
 	}; invokeAfterDelay(_aftCheck,2);
 
 #endif
