@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Client\client.sqf at line 18](../../../Src/host/Client/client.sqf#L18)
+File: [host\Client\client.sqf at line 19](../../../Src/host/Client/client.sqf#L19)
 ## debug(var,fmt)
 
 Type: constant
@@ -26,7 +26,7 @@ Replaced value:
 ```sqf
 logformat("[ServerClient::DEBUG]: " + (format[" (client:%1<%2>) " arg getSelf(id) arg getSelf(name)]) + var,fmt);
 ```
-File: [host\Client\client.sqf at line 21](../../../Src/host/Client/client.sqf#L21)
+File: [host\Client\client.sqf at line 22](../../../Src/host/Client/client.sqf#L22)
 ## debug(var,fmt)
 
 Type: constant
@@ -41,7 +41,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\Client\client.sqf at line 23](../../../Src/host/Client/client.sqf#L23)
+File: [host\Client\client.sqf at line 24](../../../Src/host/Client/client.sqf#L24)
 ## hashPair(key,val)
 
 Type: constant
@@ -54,7 +54,7 @@ Replaced value:
 ```sqf
 [#key,val]
 ```
-File: [host\Client\client.sqf at line 512](../../../Src/host/Client/client.sqf#L512)
+File: [host\Client\client.sqf at line 513](../../../Src/host/Client/client.sqf#L513)
 ## getRoleByClass(val)
 
 Type: constant
@@ -66,7 +66,7 @@ Replaced value:
 ```sqf
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
-File: [host\Client\client.sqf at line 706](../../../Src/host/Client/client.sqf#L706)
+File: [host\Client\client.sqf at line 707](../../../Src/host/Client/client.sqf#L707)
 ## serverclient_internal_string_changelogs
 
 Type: Variable
@@ -78,7 +78,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Client\client.sqf at line 1271](../../../Src/host/Client/client.sqf#L1271)
+File: [host\Client\client.sqf at line 1279](../../../Src/host/Client/client.sqf#L1279)
 ## serverclient_internal_map_sysmes
 
 Type: Variable
@@ -90,7 +90,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\Client\client.sqf at line 1275](../../../Src/host/Client/client.sqf#L1275)
+File: [host\Client\client.sqf at line 1283](../../../Src/host/Client/client.sqf#L1283)
 # sysmes.h
 
 ## sysmes(mname)
