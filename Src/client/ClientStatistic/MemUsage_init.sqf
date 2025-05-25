@@ -58,6 +58,4 @@ cli_mem_onupdate = {
 	[_text,_sb joinString ""] call widgetSetText;
 };
 
-
-call cli_mem_init;
 #endif
