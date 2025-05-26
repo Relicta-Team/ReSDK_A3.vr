@@ -5,6 +5,7 @@
 
 #include <..\engine.hpp>
 #include <..\oop.hpp>
+#include "Gender.hpp"
 
 //человеческое имя
 class(HumanNaming) attributeParams(initGlobalSingleton,"naming_default")
@@ -26,20 +27,15 @@ endclass
 
 // Конвертация гендера из типа int в object
 gender_enumToObject = {
-	params [["_genderEnum",0]];
-	if (_genderEnum == 0) exitWith {gender_male};
-	if (_genderEnum == 1) exitWith {gender_female};
+	params [["_genderEnum",GENDER_MALE]];
+	if (_genderEnum == GENDER_MALE) exitWith {gender_male};
+	if (_genderEnum == GENDER_FEMALE) exitWith {gender_female};
 	gender_neuter
 };
 
 gender_objectToEnum = {
-	params [["_genderEnum",gender_male]];
-	private _r = [gender_male,gender_female,gender_neuter] find _genderEnum;
-	if (_r == -1) exitWith {
-		errorformat("gender::objectToEnum() - cannot find gender object %1",_genderEnum);
-		0
-	};
-	_r
+	params [["_genderObj",gender_male]];
+	callFunc(_genderObj,getGenderId);
 };
 
 /*
@@ -146,14 +142,21 @@ class(Gender_base)
 		objParams_1(_num);
 		callSelf(ageText) select callSelfParams(getAgeIndex,_num);
 	};
+
+	getterconst_func(getGenderId,GENDER_MALE);
 	
 endclass
 
 class(Gender_male) extends(Gender_base) 
 	attributeParams(initGlobalSingleton,"gender_male")
+
+	getterconst_func(getGenderId,GENDER_MALE);
 endclass
 
-class(Gender_female) extends(Gender_base) 
+class(Gender_female) extends(Gender_base)
+
+	getterconst_func(getGenderId,GENDER_FEMALE);
+
 	attributeParams(initGlobalSingleton,"gender_female")
 	
 	var(Он,"Она");
@@ -175,7 +178,10 @@ class(Gender_female) extends(Gender_base)
 	getterconst_func(ageText,["дитя" arg "девушка" arg "взрослая" arg "зрелая" arg "пожилая" arg "старуха"]);
 endclass
 
-class(Gender_neuter) extends(Gender_base) 
+class(Gender_neuter) extends(Gender_base)
+
+	getterconst_func(getGenderId,GENDER_NEUTER);
+
 	attributeParams(initGlobalSingleton,"gender_neuter")
 	
 	var(Он,"Оно");

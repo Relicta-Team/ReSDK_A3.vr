@@ -89,6 +89,32 @@
     class: FabricBagBig1 # TODO random select between FabricBagBig1 and FabricBagBig2
 
 - <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 3
+        check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
+      - class: RopeItem
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: Kitbag
+
+- <<: *ref_main_cloth
+  required:
+    components:
+      - class: Rag
+        count: 2
+        check_type_of: false
+      - class: RopeItem
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: WaistBag
+
+- <<: *ref_main_cloth
   required: 
     skills:
       engineering: 3

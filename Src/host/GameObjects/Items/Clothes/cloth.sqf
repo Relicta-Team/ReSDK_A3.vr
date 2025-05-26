@@ -242,14 +242,13 @@ class(NomadCloth21) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_fabtan_
 class(NomadCloth22) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_fabmtp_rs");generateSmartPicture(); endclass
 class(NomadCloth23) extends(NomadCloth1) var(armaClass,"U_FRITH_RUIN_sdr_fabrus_rs");generateSmartPicture(); endclass
 
-
+// Одежда ополчения поселенцев
 class(ArmyCloth1) extends(BodyClothBase)
 	var(name,"Армейская одежда");
 	var(desc,"Используется среди военных и стражей закона");
 	var(armaClass,"U_FRITH_RUIN_cofftan");generateSmartPicture();
 	var(countSlots,6);
 	var(weight,gramm(750));
-
 endclass
 
 class(ArmyCloth2) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_offtan");generateSmartPicture(); endclass
@@ -258,7 +257,7 @@ class(ArmyCloth4) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_offgrn");gener
 class(ArmyCloth5) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_coffdpm");generateSmartPicture(); endclass
 class(ArmyCloth6) extends(ArmyCloth1) var(armaClass,"U_FRITH_RUIN_offdpm");generateSmartPicture(); endclass
 
-
+// Обычная одежда поселенцев, различные обноски
 class(CitizenCloth1) extends(BodyClothBase)
 	var(name,"Одежда");
 	var(desc,"Ничем не примечательная одежда");
@@ -277,6 +276,7 @@ class(CitizenCloth6) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_SDR_Tshi
 class(CitizenCloth7) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_SDR_Tshirt_blk_cyp");generateSmartPicture(); endclass
 class(CitizenCloth8) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_SDR_Tshirt_blk_boy");generateSmartPicture(); endclass
 class(CitizenCloth9) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_SDR_Tshirt_blk_drj");generateSmartPicture(); endclass
+
 //workers
 class(CitizenCloth10) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_WKR_lite");generateSmartPicture(); endclass
 class(CitizenCloth11) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_WKR_dark");generateSmartPicture(); endclass
@@ -292,31 +292,37 @@ class(CitizenCloth20) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_TSH_blk
 class(CitizenCloth21) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_TSH_blk_boy");generateSmartPicture(); endclass
 class(CitizenCloth22) extends(CitizenCloth1) var(armaClass,"U_FRITH_RUIN_TSH_blk_drj");generateSmartPicture(); endclass
 
+// Одежда торговца, надо переместить в другую категорию, зачем она тут отдельно живёт?
 class(TorgashPalthCloth) extends(HeadCloth)
 	var(name,"Клетчатое пальто");
 	var(armaClass,"Skyline_Character_U_CivilA_08_F");
 endclass
 
+// Категоризировать
 class(WhiteRobeCloth) extends(CliricCloth)
 	var(armaClass,"U_TIOW_Priest");
 	var(name,"Белая роба");
 endclass
 
+// Категоризировать
 class(GreatcoatBrown) extends(GreatcoatBlack)
 	var(armaClass,"sovietisher");
 	var(name,"Коричневая шинель");
 endclass
 
+// Категоризировать
 class(GreatcoatWhiteBrown) extends(GreatcoatBlack)
 	var(armaClass,"mantel_snew");
 	var(name,"Светлая коричневая шинель");
 endclass
 
+// Категоризировать
 class(WomanBasicCloth) extends(GreatcoatBlack)
 	var(armaClass,"woman4_5");
 	var(name,"Женская одежда");
 endclass
 
+// Категоризировать
 class(ZnatCloth) extends(GreatcoatBlack)
 	var(armaClass,"rds_uniform_citizen4");
 	var(name,"Знатная одежда");
@@ -368,16 +374,20 @@ endclass
 
 //кожанка
 class(LeatherJacketCloth) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_CivilC_06_F"); endclass
+
 //химза
 class(ChemicalProtectionSuit) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_CivilD_01_F"); endclass
+
 //новоармеец
 class(NewArmyStdCloth) extends(BodyClothBase) var(armaClass,"Skyline_Character_U_Pompier_02_F"); endclass
-//голова
+
+//голова, Категоризировать
 class(HeadCloth) extends(BodyClothBase)
 	var(armaClass,"Skyline_Character_U_CivilA_01_F");
 	var(name,"Роскошное Головинское пальто");
 endclass
-//зам головы
+
+//зам головы, Категоризировать
 class(KnutCloth) extends(BodyClothBase)
 	var(armaClass,"Skyline_Character_U_CivilA_07_F");
 	var(name,"Кнутовка");
@@ -415,6 +425,7 @@ class(BrigadirCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Woodlander1");
 	var(name,"Бригадирка");
 endclass
+
 //грибланка
 class(GriblanCloth) extends(BodyClothBase)
 	var(armaClass,"rds_uniform_Woodlander2");
@@ -440,8 +451,6 @@ class(CleanerCloth) extends(NomadCloth16)
 	var(name,"Одежда Уходника");
 endclass
 
-
-
 class(MerchantCloth) extends(BodyClothBase)
 	var(name,"Торговская шинель");
 	var(armaClass,"nazi_coat");
@@ -464,7 +473,6 @@ endclass
 class(StreakCloth) extends(ArmyCloth4) //или ArmyCloth3 (без шарфа)
 	var(name,"Униформа младшего ополченца");
 endclass
-
 
 //back
 
@@ -825,4 +833,39 @@ class(RespiratorMask) extends(GasmaskBase)
 	var(armaClass,"exoximza_mask_2");
 	var(bodyPartsCovered,FACE);
 	var(weight,gramm(450));
+endclass
+
+// Новые шмотки 24.05.25
+editor_attribute("InterfaceClass")
+class(NewClothes) extends(BodyClothBase)
+endclass
+
+class(OfficerGreatcoat) extends(NewClothes) //ретекстур
+	var(name,"Офицерская шинель");
+	var(armaClass,"colonelautumn_General_uniform");
+endclass
+
+class(VestAndTie) extends(NewClothes)
+	var(name,"Жилетка с галстуком");
+	var(armaClass,"AM_Uniform_CowboyOutfit_S");
+endclass
+
+class(FormNumber4) extends(NewClothes) //ретекстур
+	var(name,"Форма номер 4");
+	var(armaClass,"chinesecommando_03_uniform");
+endclass
+
+class(CoatWithLeather) extends(NewClothes) //ополчение (ретекстур)
+	var(name,"Пальто с кожаными вставками");
+	var(armaClass,"ncr_Boone_02_uniform");
+endclass
+
+class(CaveSuit) extends(NewClothes) //истязатели (ретекст)
+	var(name,"Пещерный комбенизон");
+	var(armaClass,"ncr_boone01_uniform");
+endclass
+
+class(WorkSuit) extends(NewClothes) //слесарь спальник
+	var(name,"Комбенизон работяги");
+var(armaClass,"republican_04_uniform");
 endclass

@@ -63,7 +63,6 @@ ReSDK - это набор инструментов для разработки �
 В проекте используются третьесторонние компоненты:
 
 * [DB Browser for SQLite](https://sqlitebrowser.org/)
-* [SQFVm](https://github.com/SQFvm/runtime)
 * [A3_LOG](https://github.com/Arkensor/A3LOG)
 * [debug_console, url_fetch](http://killzonekid.com/)
 * [CSScriptLib, e_sqlite3](https://github.com/oleg-shilo/cs-script)

@@ -7,7 +7,7 @@
 #include <..\oop.hpp>
 #include <..\text.hpp>
 #include <..\GameObjects\GameConstants.hpp>
-
+#include <..\Gender\Gender.hpp>
 /*
 	How to work new ai system?
 	TODO...
@@ -22,7 +22,7 @@ ai_createMob = {
 	callFuncParams(_mob,initAsActor,_gMob);
 	[_mob,8,10,8,12] call gurps_initSkills;
 	setVar(_mob,name,"Существо");
-	([0] call naming_getRandomName) params ["_f_","_s_"];
+	([GENDER_MALE] call naming_getRandomName) params ["_f_","_s_"];
 	[_mob,_f_,_s_] call naming_generateName;
 
 	smd_allInGameMobs pushBackUnique _gMob;

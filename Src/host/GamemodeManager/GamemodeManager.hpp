@@ -49,3 +49,15 @@ if callFunc(__refroletype,isMainRole) then {gm_preStartMainRoles pushBackUnique 
 errorformat("Cant load late role <%2> in game mode %1: Null reference",gm_gameModeName arg type); \
 } else {gm_roundProgressRoles pushBackUnique __refroletype}
 
+
+//антаги
+//antag - 0 none; 1 hide, 2 unical, 3 all
+#define ANTAG_NONE 0
+#define ANTAG_HIDDEN 1
+#define ANTAG_UNICAL 2
+#define ANTAG_ALL 3
+
+#define ANTAG_LIST_ALL_ [ANTAG_NONE,ANTAG_HIDDEN,ANTAG_UNICAL,ANTAG_ALL]
+#define ANTAG_STR_LIST_ALL_ ["ANTAG_NONE","ANTAG_HIDDEN","ANTAG_UNICAL","ANTAG_ALL"]
+
+#define ANTAG_PARSESTRING(v) (ANTAG_LIST_ALL_ select (ANTAG_STR_LIST_ALL_ find (v)))
