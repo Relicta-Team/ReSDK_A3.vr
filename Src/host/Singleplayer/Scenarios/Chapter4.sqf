@@ -193,6 +193,10 @@ cpt4_internal_func_checkMainAction = {
 		_result = !cpt4_canOpenEnter
 	}] call cpt4_addProcessorMainAct;
 
+	private _porig = "cpt4_obj_paperdoc" call sp_getObject;
+	private _c = getVar(_porig,content);
+	setVar(_porig,content,[_c arg "ИГРОК" arg callFuncParams(call sp_getActor,getNameEx,"кем")] call stringReplace);
+
 	["main_action",{
 		params ["_t"];
 		_ret = false;
@@ -306,14 +310,26 @@ cpt4_internal_func_checkMainAction = {
 			!isNullReference(_plc) && {
 				isTypeOf(_plc,BigRedEdgesRack)
 			}
+			|| {
+				_r = [];
+				_kpos = callFunc(_knife,getPos);
+				{
+					_r = [
+						_kpos,_kpos vectoradd [0,0,-100],
+						null,null,20,true,true
+					] call si_getIntersectObjects;
+				} call sp_threadCriticalSection;
+				({isTypeOf(_x,BigRedEdgesRack)} count _r) > 0
+			}
 		} call sp_threadWait;
 
 		[cpt4_questName_kochevs,"Оформите пропуск на имя ""Карим Сухач"". "
 		+ "Для этого возьмите бланк пропуска из стопки бумаги слева от окна на полке и впишите в него имя."
 		] call sp_setTaskMessageEff;
-
 		2 call sp_threadPause;
-		(["chap4\gg\vaht1_gg6"] call sp_audio_sayPlayer);
+		(["chap4\gg\vaht1_gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+		
+		["Возьмите бланк пропуска нажав по стопке бланков $input_act_mainAction"] call sp_setNotification;
 
 		_karim = "cpt4_karim" call sp_ai_getMobObject;
 		private _tpaper = nullPtr;
@@ -357,7 +373,7 @@ cpt4_internal_func_checkMainAction = {
 ["cpt4_act_koch1_exit",{
 	
 	{
-		["Откройте входные двери, повернув рычаг на стене"] call sp_setNotification;
+		["Откройте входные двери, повернув жёлтый рычаг на стене слева от окна регистрации"] call sp_setNotification;
 		cpt4_canOpenEnter = true;
 		{
 			getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
@@ -552,7 +568,7 @@ cpt4_internal_func_checkMainAction = {
 		["cpt4_data_rejectIbam",false] call sp_storageSet;
 		["main_action",{
 			params ["_t"];
-			if equals(_t,cpt4_gref_doorwindow call sp_getObject) exitWith {
+			if equals(_t,"RedButton_Activator G:0BHVbZgUjcE" call sp_getObject) exitWith {
 				call sp_removeCurrentPlayerHandler;
 				["cpt4_data_rejectIbam",true] call sp_storageSet;
 				false//because cpt4_canOpenWindow = false
@@ -563,6 +579,9 @@ cpt4_internal_func_checkMainAction = {
 
 		["cpt4_act_ibam_result",0] call sp_storageSet;
 		_tOnClose = {
+			
+			("cpt4_ibam" call sp_ai_getMobBody) switchmove "HubStandingUC_idle2";
+
 			_ibam = "cpt4_ibam" call sp_ai_getMobObject;
 			//{!getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)} call sp_threadWait;
 			{["cpt4_data_rejectIbam",false] call sp_storageGet} call sp_threadWait;
@@ -820,7 +839,11 @@ cpt4_internal_func_checkMainAction = {
 }] call sp_addScene;
 
 //event started anim army guys
+cpt4_trg_gotomed_act = false;
 ["cpt4_trg_gotomed",{
+	if (cpt4_trg_gotomed_act) exitWith {};
+	cpt4_trg_gotomed_act = true;
+
 	["cpt4_armyguy1","cpt4_pos_armyfrommeds","cpt4_gotomed1",{
 		params ["_mob"];
 		[_mob,getposatl _mob,null] call sp_ai_setMobPos;
@@ -865,7 +888,7 @@ cpt4_internal_func_checkMainAction = {
 			["cpt4_tobar"] call sp_startScene;
 		} call sp_threadCriticalSection;
 	} call sp_threadStart;
-}] call sp_addScene;
+}] call sp_addTriggerEnter;
 
 ["cpt4_tobar",{
 	{
@@ -1775,6 +1798,15 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 	{
 		[""] call sp_view_setPlayerHudVisible;
 		[true,1.5] call setBlackScreenGUI;
+		
+		[true,true] call sp_audio_setMusicPause;
+		
+		_post = {
+			[] call sp_audio_stopMusic;
+			[!true,true] call sp_audio_setMusicPause;
+		};
+		invokeAfterDelay(_post,4);
+
 		3 call sp_threadPause;
 		
 		["cpt4_topart5"] call sp_startScene;
