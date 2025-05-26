@@ -777,6 +777,7 @@ cpt3_func_damageEvent = {
 		call sp_cam_stopAllInterp;
 		_post = {
 			call sp_cleanupSceneData;
+			call sp_clearPlayerInventory;
         	["cpt4_begin"] call sp_startScene;
 		}; 
 		invokeAfterDelay(_post,2);

@@ -63,10 +63,31 @@ cpt4_addProcessorMainAct = {
 	',_tobjName,toString _code]] call sp_addPlayerHandler;
 };
 
+cpt4_internal_func_checkMainAction = {
+	params ["_t"];
+	if equals(_t,"RedButton G:NJnbP0kznrs" call sp_getObject) exitWith {
+		[pick["Это плохая идея!","Свет мне ещё понадобится...","Включить чтобы выключить? Ну и тупость..."],"error"] call chatPrint;
+		true
+	};
+	if (equals(_t,"cpt4_obj_doorbegin" call sp_getObject) && {getVar(_t,isLocked)}) exitWith {
+		[pick["Тут еще есть дела.","Нужно сначала разобраться с бумагами.","Работа должна быть доделана..."],"mind"] call chatPrint;
+		true
+	};
+	false
+};
+
 ["cpt4_begin",{
 	["cpt4_pos_start",0] call sp_setPlayerPos;
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
-	[false,1.5] call setBlackScreenGUI;
+	call sp_initializeDefaultPlayerHandlers;
+
+	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
+
+	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
+		[cpt4_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+	};
+	
+	[false,2] call setBlackScreenGUI;
+	["right+stats+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
 
 	["cpt4_pos_enterkochevs","cpt4_karim",[
 		["uniform","NomadCloth3"],
@@ -98,6 +119,19 @@ cpt4_addProcessorMainAct = {
 			[false,_h] call sp_setNotificationVisible;
 		};
 
+		_h1act = ["main_action",{
+			params ["_t"];
+			[_t] call cpt4_internal_func_checkMainAction;
+		}] call sp_addPlayerHandler;
+		_h2act = ["activate_verb",{
+			params ["_t","_name"];
+			if (_name == "mainact") exitWith {
+				[_t] call cpt4_internal_func_checkMainAction;
+			};
+			false
+		}] call sp_addPlayerHandler;
+
+
 		["vahta",true] call sp_audio_playMusic;
 
 		[cpt4_questName_begin,"Возвращайтесь к своим рабочим обязанностям"] call sp_setTaskMessageEff;
@@ -106,16 +140,21 @@ cpt4_addProcessorMainAct = {
 			equals("cpt4_obj_chairbegin" call sp_getObject,getVar(call sp_getActor,connectedTo))
 		} call sp_threadWait;
 
-		["Возьмите ручку со стола нажав ЛКМ. Чтобы достать один листок из стопки бумаги нажмите $input_act_mainAction"] call sp_setNotification;
-		//TODO getLastTouched for pen and papers
+		["Вы можете писать на бумаге с помощью ручки или любого пишущего предмета. Возьмите один лист бумаги из стопки нажав $input_act_mainAction"] call sp_setNotification;
+
 		{
 			callFuncParams(call sp_getActor,hasItem,"Paper")
-			&& callFuncParams(call sp_getActor,hasItem,"ItemWritter" arg true)
 		} call sp_threadWait;
 
-		["Чтобы написать на бумаге нажмите ЛКМ ручкой по бумаге."
-		+"Обратите внимание, что вы можете писать как на бумаге, которую держите в руке, так и на бумаге, которая лежит на столе."
-		+sbr+sbr+ "Напишите, что за эту смену в город пришло 5 человек."] call sp_setNotification;
+		
+		["Теперь попробуем написать на бумаге с помощью ручки: возьмите ручку, и нажмите ЛКМ по листку бумаги. Сам листок при этом может быть во второй руке, либо лежать на столе."] call sp_setNotification;
+		
+		{
+			callFuncParams(call sp_getActor,hasItem,"ItemWritter" arg true)
+			&& nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
+		} call sp_threadWait;
+
+		["Вы сейчас читаете пустой лист. Чтобы начать писать на нём нажмите на текст ""Записать"" - так вы перейдете в режим редактирования. Напишите, что за эту смену в город пришло 5 человек."] call sp_setNotification;
 
 		{
 			_papers = callFuncParams(call sp_getActor,getNearObjects,"Paper" arg 3 arg false arg true);
@@ -127,6 +166,16 @@ cpt4_addProcessorMainAct = {
 			} foreach _papers;
 			_found
 		} call sp_threadWait;
+		
+		["Отличная работа! Нажмите кнопку ""Закрыть""."] call sp_setNotification;
+		{
+			!nd_isOpenDisplay
+		} call sp_threadWait;
+
+		["Чтобы просто посмотреть что написано на бумаге нажмите $input_act_mainAction"] call sp_setNotification;
+		
+		6 call sp_threadPause;
+
 		[false] call sp_setNotificationVisible;
 		["cpt4_act_koch1_arrived"] call sp_startScene;
 		
@@ -241,7 +290,7 @@ cpt4_addProcessorMainAct = {
 						if !isNullVar(_dta) then {
 							["cpt4_obj_knifetostore",_dta] call sp_storageSet;
 						};
-					}; invokeAfterDelayParams(_cde,1.8,_par2);
+					}; invokeAfterDelayParams(_cde,2.4,_par2);
 				}]
 			]] 
 			,[player,"chap4\gg\vaht1_gg5"]
@@ -282,6 +331,9 @@ cpt4_addProcessorMainAct = {
 		1 call sp_threadPause;
 		[_karim,_tpaper,INV_HAND_L] call sp_ai_moveItemToMob;
 		1.2 call sp_threadPause;
+		_emotepost = {
+			callFuncParams("cpt4_karim" call sp_ai_getMobObject,meSay,"одобрительно кивает");
+		}; invokeAfterDelay(_emotepost,0.7);
 		{
 			callFuncParams(_tpaper,onMainAction,_karim);
 			[getVar(_karim,owner)] call anim_syncAnim;
@@ -497,12 +549,26 @@ cpt4_addProcessorMainAct = {
 		_hreg = ["Люди, использующие странные слова в речи могут быть опасны. Решите - пропустить кочевника или закрыть окно."
 		+ sbr + "Если решите пропустить его - оформите пропуск на его имя - ""Ибам Шнурок"". В ином случае просто нажмите кнопку, чтобы отказать в регистрации."] call sp_setNotification;
 
-		cpt4_canOpenWindow = true;
+		["cpt4_data_rejectIbam",false] call sp_storageSet;
+		["main_action",{
+			params ["_t"];
+			if equals(_t,cpt4_gref_doorwindow call sp_getObject) exitWith {
+				call sp_removeCurrentPlayerHandler;
+				["cpt4_data_rejectIbam",true] call sp_storageSet;
+				false//because cpt4_canOpenWindow = false
+			};
+			false
+		}] call sp_addPlayerHandler;
+		//cpt4_canOpenWindow = true;
 
 		["cpt4_act_ibam_result",0] call sp_storageSet;
 		_tOnClose = {
 			_ibam = "cpt4_ibam" call sp_ai_getMobObject;
-			{!getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)} call sp_threadWait;
+			//{!getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)} call sp_threadWait;
+			{["cpt4_data_rejectIbam",false] call sp_storageGet} call sp_threadWait;
+			_postclose = {
+				callFuncParams(cpt4_gref_doorwindow call sp_getObject,setDoorOpen,false arg true);
+			}; invokeAfterDelay(_postclose,1.5);
 			//speak ibam
 			([
 				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",20]]
@@ -568,7 +634,7 @@ cpt4_addProcessorMainAct = {
 		{[_x] call sp_threadStop} foreach _threads;
 
 		{
-			if (getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)) then {
+			if (getVar(cpt4_gref_doorenter call sp_getObject,isOpen)) then {
 				callFuncParams(cpt4_gref_doorenter call sp_getObject,setDoorOpen,false arg true);
 			};
 		} call sp_threadCriticalSection;
