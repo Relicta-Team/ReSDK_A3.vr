@@ -69,7 +69,9 @@ sp_callTriggerEvent = {
 
 
 sp_preloadScenarioEnvironment = {
-	
+	//disable saving in spmode
+	enableSaving false;
+
 	private _persetupCode = {
 		setNight = { _dateToSync = [1985,5,20,0,00];setDate _dateToSync; };
 		call setNight;call setNight;[] spawn setNight;
