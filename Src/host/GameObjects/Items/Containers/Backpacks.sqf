@@ -56,6 +56,63 @@ class(CoinBag) extends(Container)
 	var(maxSize,ITEM_SIZE_SMALL);
 endclass
 
+class(KeyChain) extends(Container)
+	var(name,"Связка ключей");
+	var(material,"MatMetal");
+	var(desc,"Кусок проволоки для хранения ключей.");
+	var(model,"a3\structures_f_epa\items\tools\metalwire_f.p3d");
+	var(weight,gramm(20));
+	var(allowedSlots,[INV_BELT]);
+	getter_func(allowedItemClasses,["Key" arg "HandcuffKey"]);
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(3));
+	var(size,ITEM_SIZE_SMALL);
+	var(maxSize,ITEM_SIZE_SMALL);
+	var(isPuttableContainer,true);
+	var(keyOwners,[]);
+	var(handcuffs,[]);
+
+	getter_func(getDropSound,"dropping\keydrop");
+	getter_func(getPickupSound,"updown\keyring_up");
+	getter_func(getPutdownSound,"updown\keyring_up");
+
+	// Обновляет массивы ключей которых держит связка
+	func(updateKeyOwners)
+	{
+		objParams();
+		
+		private _content = getVar(this,content);
+		private _newOwners = [];
+		private _newHandcuffs = [];
+		
+		{
+			private _keyOwner = getVar(_x,keyOwner);
+			_newOwners append _keyOwner;
+
+			private _handcuffs = getVar(_x,handcuffs);
+			_newHandcuffs pushBack _handcuffs;
+		} forEach _content;
+		
+		setVar(this,keyOwners,_newOwners);
+		setVar(this,handcuffs,_newHandcuffs);
+	};
+
+	func(addItem)
+	{
+		objParams_1(_item);
+		private _result = callSuper(Container,addItem);
+		callSelf(updateKeyOwners);
+		_result
+	};
+
+	func(removeItem)
+	{
+		objParams_3(_item,_newLoc,_slot);
+		private _result = callSuper(Container,removeItem);
+		callSelf(updateKeyOwners);
+		_result
+	};
+endclass
+
 class(FabricBagBig1) extends(Container)
 	var(name,"Мешок");
 	var(allowedSlots,[INV_BACKPACK]);

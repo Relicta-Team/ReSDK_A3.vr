@@ -333,11 +333,14 @@ class(HandcuffItem) extends(CaptiveItemBase)
 				callSelfParams(doFree,_usr);
 			};
 		};
-		
-		if (!isTypeOf(_with,Key) && !isTypeOf(_with,Lockpick)) exitwith {
+
+		if (!isTypeOf(_with,HandcuffKey) && !isTypeOf(_with,Lockpick) && !isTypeOf(_with,KeyChain)) exitwith {
 			callFuncParams(_usr,mindSay,"С этим ничего не выйдет...");
 		};
-		if (!isTypeOf(_with,HandcuffKey) && {!callFunc(_with,canOpenWithKey)}) exitwith {
+		if (isTypeOf(_with,HandcuffKey) && {!callSelfParams(canOpenWithKey,_with)}) exitwith {
+			callFuncParams(_usr,mindSay,"Не подходит...");
+		};
+		if (isTypeOf(_with,KeyChain) && {!callSelfParams(canOpenWithKeyChain,_with)}) exitwith {
 			callFuncParams(_usr,mindSay,"Не подходит...");
 		};
 		if isTypeOf(_with,Lockpick) exitWith {
@@ -403,14 +406,25 @@ class(HandcuffItem) extends(CaptiveItemBase)
 	};
 
 	func(canOpenWithKey)
-	{
-		objParams_1(_key);
-		count 
-			((getSelf(keyLockers) splitString "| ;")
-			arrayIntersect
-			(getVar(_key,handcuffs) splitString "| ;"))
-		> 0
-	};
+		{
+			objParams_1(_key);
+			count 
+				((getSelf(keyLockers) splitString " ")
+				arrayIntersect
+				(getVar(_key,handcuffs) splitString " "))
+			> 0
+		};
+
+	func(canOpenWithKeyChain)
+		{
+			objParams_1(_keyChain);
+			if equals(
+				(getSelf(keyLockers) splitString " ")
+				arrayIntersect
+				getVar(_keyChain,handcuffs), []
+			) exitwith {false};
+			true;
+		};
 
 endclass
 
