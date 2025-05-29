@@ -78,21 +78,18 @@ class(Key) extends(Item)
 	// {
 	// 	objParams_2(_with,_usr);
 	// 	if isTypeOf(_with,Key) then {
-    //     private _targetLoc = getVar(_with,loc);
-    //     private _pos = getPosATL _targetLoc;
-        
-    //     private _keyChain = ["KeyChain",_pos] call createGameObjectInWorld;
+	// 		[getSelf(name)] call MessageBox;
+	// 		private _pos = callSelf(getPos);
+			
+	// 		private _keyChain = ["KeyChain",_pos] call createGameObjectInWorld;
 	// 		if isNullReference(_keyChain) exitWith {
-    //         callFuncParams(_usr,localSay,"Не удалось создать связку ключей");
-    //     };
-        
-	// 		if (callFuncParams(_keyChain,addItem,this) && callFuncParams(_keyChain,addItem,_with)) then {
-	// 			callFuncParams(_usr,localSay,"Связываете ключи вместе");
-	// 			callFuncParams(_usr,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
-	// 		} else {
-	// 			delete(_keyChain);
-	// 			callFuncParams(_usr,localSay,"Не удалось связать ключи" arg "error");
+	// 			callFuncParams(_usr,localSay,"Не удалось создать связку ключей");
 	// 		};
+	// 		callSelf(unloadModel);
+	// 		callFuncParams(_keyChain,addItem,this);
+	// 		callFuncParams(_keyChain,addItem,_with);
+	// 		callFuncParams(_usr,meSay,"cвязывает ключи вместе");
+	// 		callFuncParams(_usr,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
 	// 	};
 	// };
 endclass

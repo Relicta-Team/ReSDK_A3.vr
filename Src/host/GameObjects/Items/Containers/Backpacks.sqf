@@ -100,7 +100,7 @@ class(KeyChain) extends(Container)
 	func(addItem)
 	{
 		objParams_1(_item);
-		private _result = callSuper(Container,addItem);
+		private _result = super();
 		callSelf(updateKeyOwners);
 		_result
 	};
@@ -108,7 +108,7 @@ class(KeyChain) extends(Container)
 	func(removeItem)
 	{
 		objParams_3(_item,_newLoc,_slot);
-		private _result = callSuper(Container,removeItem);
+		private _result = super();
 		callSelf(updateKeyOwners);
 		_result
 	};
