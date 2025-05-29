@@ -91,11 +91,10 @@ func(isItemRestricted)
 		objParams_1(_item);
 		private _allowed = callSelf(allowedItemClasses);
 		if (_allowed isEqualTo []) exitWith {false};
-		private _itemClassName = callFunc(_item,getClassName);
 
 		private _isRestricted = true;
 		{
-			if (_itemClassName == _x) exitWith {_isRestricted = false;};
+			if isTypeStringOf(_item,_x) exitWith {_isRestricted = false;};
 		} forEach _allowed;
 		
 		_isRestricted

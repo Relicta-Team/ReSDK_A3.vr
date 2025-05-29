@@ -138,6 +138,11 @@ func(onInteractWith)
 			callFuncParams(_usr,localSay,"Замок выломан" arg "error");
 		};
 
+		if equals(getVar(_with,content),[]) exitWith {
+			private _errmes = pick ["В связке нет ключей.","Там нет ни одного ключа.","В связке ключей пусто."];
+			callFuncParams(_usr,localSay,_errmes arg "error");
+		};
+
 		if equals(getVar(_with,keyOwners) arrayIntersect getSelf(keyTypes),[]) exitWith {
 			private _errmes = pick ["В связке нет подходящего ключа.","Эти ключи не отсюда.","Этими ключами не открыть."];
 			callFuncParams(_usr,localSay,_errmes arg "error");

@@ -63,7 +63,7 @@ class(KeyChain) extends(Container)
 	var(model,"a3\structures_f_epa\items\tools\metalwire_f.p3d");
 	var(weight,gramm(20));
 	var(allowedSlots,[INV_BELT]);
-	getter_func(allowedItemClasses,["Key" arg "HandcuffKey"]);
+	getter_func(allowedItemClasses,["Key"]);
 	var_exprval(countSlots,BASE_STORAGE_CAPACITY(3));
 	var(size,ITEM_SIZE_SMALL);
 	var(maxSize,ITEM_SIZE_SMALL);
@@ -80,20 +80,21 @@ class(KeyChain) extends(Container)
 	{
 		objParams();
 		
-		private _content = getVar(this,content);
+		private _content = getSelf(content);
 		private _newOwners = [];
 		private _newHandcuffs = [];
 		
-		{
+		{	
 			private _keyOwner = getVar(_x,keyOwner);
 			_newOwners append _keyOwner;
-
-			private _handcuffs = getVar(_x,handcuffs);
-			_newHandcuffs pushBack _handcuffs;
+			if isImplementVar(_x,handcuffs) then {
+				private _handcuffs = getVar(_x,handcuffs) splitString ";| ,";
+				_newHandcuffs append _handcuffs;
+			}
 		} forEach _content;
 		
-		setVar(this,keyOwners,_newOwners);
-		setVar(this,handcuffs,_newHandcuffs);
+		setSelf(keyOwners,_newOwners);
+		setSelf(handcuffs,_newHandcuffs);
 	};
 
 	func(addItem)

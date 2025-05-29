@@ -409,9 +409,9 @@ class(HandcuffItem) extends(CaptiveItemBase)
 		{
 			objParams_1(_key);
 			count 
-				((getSelf(keyLockers) splitString " ")
+				((getSelf(keyLockers) splitString ";| ,")
 				arrayIntersect
-				(getVar(_key,handcuffs) splitString " "))
+				(getVar(_key,handcuffs) splitString ";| ,"))
 			> 0
 		};
 
@@ -419,7 +419,7 @@ class(HandcuffItem) extends(CaptiveItemBase)
 		{
 			objParams_1(_keyChain);
 			if equals(
-				(getSelf(keyLockers) splitString " ")
+				(getSelf(keyLockers) splitString ";| ,")
 				arrayIntersect
 				getVar(_keyChain,handcuffs), []
 			) exitwith {false};
@@ -433,7 +433,7 @@ class(HandcuffKey) extends(Key)
 
 	editor_attribute("alias" arg "Handcuffs")
 	editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:128") 
-	editor_attribute("Tooltip" arg "Какие типы наручников можно открыть этим ключом")
+	editor_attribute("Tooltip" arg "Тип или типы ключей, которые подходят к совместимым наручникам (с учетом регистра).\n\nЗдесь можно перечислить типы с разделителями: \n точка с запятой (;)\n запятой (" pcomma ")\n прямой чертой (|)\n пробелом ( )\n\nПример: ""key1;key2;key3""") 
 	var(handcuffs,""); //какие наручники можно открыть этими ключами
 	func(getDescFor)
 	{
@@ -446,7 +446,7 @@ class(HandcuffKey) extends(Key)
 	{
 		objParams();
 		private _lockers = getSelf(handcuffs);
-		private _lockerList = _lockers splitString "|";
+		private _lockerList = _lockers splitString ";| ,";
 		if (_lockers=="" || array_count(_lockerList) == 0) exitwith {"На них нет никаких серийных номеров"};
 
 		private _str = "Для наручников: ";
