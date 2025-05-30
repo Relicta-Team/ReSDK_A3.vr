@@ -771,7 +771,7 @@ cpt4_internal_func_checkMainAction = {
 	widgetFadeNow(_mainback,1);
 
 	_cdesnd = { ["chap4\scream",0.7] call sp_audio_sayPlayer; };
-	invokeAfterDelay(_cdesnd,0.1);
+	invokeAfterDelay(_cdesnd,0.05);
 
 	{
 		_x setFade 0;
@@ -818,7 +818,7 @@ cpt4_internal_func_checkMainAction = {
 			[_mainback,true] call deleteWidget; 
 		},_this] call sp_threadStart;
 	};
-	invokeAfterDelayParams(_cend,4,[_txtlist arg _mainback]);
+	invokeAfterDelayParams(_cend,4.2,[_txtlist arg _mainback]);
 	
 }] call sp_addScene;
 
