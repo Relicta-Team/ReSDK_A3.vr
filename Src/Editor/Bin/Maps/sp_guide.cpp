@@ -8,18 +8,18 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9249;
+		nextID=9250;
 	};
 	class LayerIndexProvider
 	{
-		nextID=367;
+		nextID=370;
 	};
 	class Camera
 	{
-		pos[]={4202.2427,14.691669,3850.5884};
-		dir[]={-0.05075065,-0.65358138,0.75524968};
-		up[]={-0.043818638,0.75687313,0.65208608};
-		aside[]={0.99782878,-2.0027219e-06,0.067054525};
+		pos[]={4141.3394,24.37332,3849.7578};
+		dir[]={0.7932328,-0.55634826,0.24779576};
+		up[]={0.53107637,0.83092487,0.16590254};
+		aside[]={0.29820022,-3.7346035e-07,-0.95457977};
 	};
 };
 binarizationWanted=0;
@@ -710,7 +710,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5421;
+		items=5422;
 		class Item0
 		{
 			dataType="Group";
@@ -28584,7 +28584,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4204.5039,13.902492,3843.6296};
+				position[]={4204.5298,13.902492,3843.8706};
 				angles[]={0.032482725,5.7767761e-06,0.051870868};
 			};
 			side="Empty";
@@ -45869,12 +45869,12 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4204.4111,13.785867,3843.6375};
+				position[]={4204.4385,13.785867,3843.8269};
 			};
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""cpt4_trg_openwindow""],[""triggerdistance"",1.5]]],[""class"",""Struct_SPTrigger""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""cpt4_trg_openwindow""],[""triggerdistance"",2]]],[""class"",""Struct_SPTrigger""]]}";
 			};
 			id=5871;
 			type="Sign_Sphere100cm_Geometry_F";
@@ -45936,7 +45936,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4204.5073,13.881414,3843.2932};
+				position[]={4204.5254,13.881414,3843.5784};
 				angles[]={0,5.2528086,0};
 			};
 			side="Empty";
@@ -48713,7 +48713,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4144.1182,23.076466,3849.1448};
+				position[]={4144.0942,23.076466,3849.4426};
 			};
 			side="Empty";
 			class Attributes
@@ -48729,7 +48729,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4141.5347,23.099302,3848.1221};
+				position[]={4141.7739,23.099302,3848.8953};
 			};
 			side="Empty";
 			class Attributes
@@ -48738,7 +48738,7 @@ class Mission
 			};
 			id=6109;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=0.70311737;
+			atlOffset=0.70371246;
 		};
 		class Item2699
 		{
@@ -95577,7 +95577,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4196.2988,12.916574,3851.0325};
-				angles[]={0,0.50563711,-0};
+				angles[]={0,0.50563711,0};
 			};
 			side="Empty";
 			class Attributes
@@ -96837,7 +96837,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4194.3398,14.146566,3851.7974};
-				angles[]={0,3.0924313,-0};
+				angles[]={0,3.0924313,0};
 			};
 			side="Empty";
 			flags=1;
@@ -96907,7 +96907,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4199.373,13.378458,3852.0012};
-				angles[]={0,1.5300522,-0};
+				angles[]={0,1.5300522,0};
 			};
 			side="Empty";
 			class Attributes
@@ -96917,6 +96917,24 @@ class Mission
 			id=9248;
 			type="Land_ShelvesWooden_F";
 			atlOffset=7.8766689;
+		};
+		class Item5421
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4146.9717,21.909248,3864.6121};
+				angles[]={0,3.1457655,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_SPPoint""],[""mark"",""cpt4_pos_citywalker1_after""]]}";
+			};
+			id=9249;
+			type="VR_GroundIcon_01_F";
+			atlOffset=0.0036792755;
 		};
 	};
 };

@@ -2024,6 +2024,10 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 
 			["cpt4_barsmoker1"] call sp_ai_deletePerson;
 			["cpt4_barsmoker2"] call sp_ai_deletePerson;
+
+			_cw = "cpt4_citywalker1";
+			[_cw,"cpt4_pos_citywalker1_after",0] call sp_ai_setMobPos;
+			(_cw call sp_ai_getMobBody) switchmove "passenger_bench_1_Idle_Unarmed_Idling";
 		} call sp_threadCriticalSection;
 
 		//dialog 
