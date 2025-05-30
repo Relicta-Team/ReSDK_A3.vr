@@ -273,6 +273,7 @@ sp_clearPlayerInventory = {
 };
 
 sp_whitelistClickItems = [];
+sp_blacklistClickItems = [];
 sp_delegateCanClickItem = {
 	true	
 };
@@ -351,6 +352,7 @@ sp_initializeDefaultPlayerHandlers = {
 		true	
 	};
 	sp_whitelistClickItems = [];
+	sp_blacklistClickItems = [];
 
 	[false] call sp_setPlayerSprintAllowed;
 
@@ -381,6 +383,7 @@ sp_initializeDefaultPlayerHandlers = {
 		if (sp_defaultHandlers get "item_action") exitWith {true};
 
 		if array_exists(sp_whitelistClickItems,_t) exitWith {false};
+		if array_exists(sp_blacklistClickItems,_t) exitWith {true};
 		if (_t call sp_delegateCanClickItem) exitWith {false};
 		[pick[
 			"Не стоит трогать это...",
@@ -452,6 +455,18 @@ sp_initializeDefaultPlayerHandlers = {
 		};
 		if (_name == "pickup") exitWith {
 			sp_defaultHandlers get "item_action"
+		};
+		if (_name == "pickup") exitWith {
+			if array_exists(sp_whitelistClickItems,_t) exitWith {false};
+			if array_exists(sp_blacklistClickItems,_t) exitWith {true};
+			if (_t call sp_delegateCanClickItem) exitWith {false};
+			[pick[
+				"Не стоит трогать это...",
+				"Не то, что стоит трогать",
+				"Лушче не трогать.",
+				"Мне это не нужно"
+			],"mind"] call chatPrint;
+			true
 		};
 		false
 	}] call sp_addPlayerHandler;
