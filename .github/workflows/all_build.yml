@@ -180,20 +180,6 @@ jobs:
         working-directory: ${{env.rb_dir}}
         run: ${{ env.rb_exe }} run ${{ matrix.flags }}
 
-  ai-check:
-    name: AI checking
-    runs-on: ubuntu-latest
-    steps:
-      - uses: coderabbitai/ai-pr-reviewer@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        with:
-          debug: true
-          review_simple_changes: true
-          review_comment_lgtm: true
-          language: ru-RU
-
   # Обновление версии и документации (only on main)
 
   #updateversion:
