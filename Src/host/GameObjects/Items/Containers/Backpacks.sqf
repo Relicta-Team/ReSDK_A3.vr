@@ -110,7 +110,34 @@ class(KeyChain) extends(Container)
 		objParams_3(_item,_newLoc,_slot);
 		private _result = super();
 		callSelf(updateKeyOwners);
-		_result
+		// Если остался только один ключ, то вытаскиваем его из связки и удаляем связку
+		if (getSelf(currentsize) == 1) then {
+			private _isInWorld = callSelf(isInWorld);
+			private _loc = getSelf(loc);
+			private _key = getSelf(content) select 0;
+
+			if (_isInWorld) then {
+				callFuncParams(_key,dropItemToWorld,callSelf(getPos) arg 0 arg random 360 arg this arg true);
+			} else {
+				private _keyChainSlot = getSelf(slot);
+				callFuncParams(_loc,removeItem,this);
+				if (_keyChainSlot == INV_BELT) then {
+					callFuncParams(_key,dropItemToWorld,callSelf(getPos) arg 0 arg random 360 arg this arg true);
+				} else {
+					callFuncParams(_loc,addItem,_key arg _keyChainSlot);
+				};
+			};
+			getSelf(content) deleteAt 0;
+			callSelf(onContainerContentUpdate);
+			setSelf(countSlots,0);
+			setSelf(openedBy,[]);
+			if (_isInWorld) then {
+				callSelf(unloadModel);
+			};
+			callFuncParams(this,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+		};
+
+		_result;
 	};
 endclass
 
