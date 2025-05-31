@@ -3882,7 +3882,21 @@ Replaced value:
 ```sqf
 ;
 ```
-File: [host\GameObjects\Items\Clothes\cloth.sqf at line 192](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L192)
+File: [host\GameObjects\Items\Clothes\cloth.sqf at line 200](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L200)
+# port_models.sqf
+
+## REPLACE_REQUIRED
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+IDestructible
+```
+File: [host\GameObjects\Items\Clothes\port_models.sqf at line 6](../../../Src/host/GameObjects/Items/Clothes/port_models.sqf#L6)
 # Books.sqf
 
 ## __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__
