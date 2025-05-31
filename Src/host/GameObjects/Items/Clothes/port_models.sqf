@@ -320,8 +320,7 @@ class(antivenom) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items\misc\drugs\antivenom\antivenom.p3d");
 endclass
 
-class(bloodpack) extends(REPLACE_REQUIRED)
-	var(name,"bloodpack");
+class(BloodPack2) extends(BloodPack)
 	var(model,"\sterben_top\am_items\misc\drugs\bloodpack\bloodpack.p3d");
 endclass
 
