@@ -54,7 +54,7 @@ Count modules: 56
  - [GameEvents](host//GameEvents.md) - 4 files
  - [GamemodeManager](host//GamemodeManager.md) - 10 files
  - [GameModes](host//GameModes.md) - 43 files
- - [GameObjects](host//GameObjects.md) - 150 files
+ - [GameObjects](host//GameObjects.md) - 144 files
  - [Gender](host//Gender.md) - 2 files
  - [GURPS](host//GURPS.md) - 3 files
  - [Logger](host//Logger.md) - 2 files
