@@ -132,6 +132,29 @@ func(onInteractWith)
 			callFuncParams(_usr,worldSay,callFuncParams(_usr,getNameEx,"кто") + _locktext arg "act");
 		};
 	};
+	
+	if isTypeOf(_with,KeyChain) then {
+		if getSelf(isLockBreaked) exitWith {
+			callFuncParams(_usr,localSay,"Замок выломан" arg "error");
+		};
+
+		if equals(getVar(_with,content),[]) exitWith {
+			private _errmes = pick ["В связке нет ключей.","Там нет ни одного ключа.","В связке ключей пусто."];
+			callFuncParams(_usr,localSay,_errmes arg "error");
+		};
+
+		if equals(getVar(_with,keyOwners) arrayIntersect getSelf(keyTypes),[]) exitWith {
+			private _errmes = pick ["В связке нет подходящего ключа.","Эти ключи не отсюда.","Этими ключами не открыть."];
+			callFuncParams(_usr,localSay,_errmes arg "error");
+		};
+		private _lockstate = getSelf(isLocked);
+
+		if (callSelfParams(setDoorLock,!_lockstate)) then {
+			private _locktext = if (_lockstate) then {" отпирает дверь."} else {" запирает дверь."};
+			callFuncParams(_usr,worldSay,callFuncParams(_usr,getNameEx,"кто") + _locktext arg "act");
+		};
+	};
+
 	if isTypeOf(_with,Crowbar) then {
 		if getSelf(isLockBreaked) exitWith {
 			callFuncParams(_usr,localSay,"Замок выломан" arg "error");

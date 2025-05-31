@@ -72,6 +72,33 @@ class(Key) extends(Item)
 		setSelf(preinit@__keyTypesStr,null);
 	};
 
+	//при интеракции ключа с другим ключом они образуют связку ключей
+	func(onInteractWith)
+	{
+		objParams_2(_with,_usr);
+		if isTypeOf(_with,Key) then {
+			private _isInWorld = callSelf(isInWorld);
+			private _pos = callSelf(getPos);
+			
+			private _keyChain = if (_isInWorld) then {
+				["KeyChain",_pos] call createGameObjectInWorld;
+			} else {
+				private _loc = getSelf(loc);
+				callFuncParams(_loc,removeItem,this);
+				callFuncParams(_loc,removeItem,_with);
+				["KeyChain",_loc] call createItemInInventory;
+			};
+
+			if _isInWorld then {
+				callSelf(unloadModel);
+			};
+
+			callFuncParams(_keyChain,addItem,this);
+			callFuncParams(_keyChain,addItem,_with);
+			callFuncParams(_usr,meSay,"cвязывает ключи вместе");
+			callFuncParams(_usr,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+		};
+	};
 endclass
 
 
