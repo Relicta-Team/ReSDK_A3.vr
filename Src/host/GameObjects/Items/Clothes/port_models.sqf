@@ -2783,8 +2783,7 @@ class(console02) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\props\vault\console\console02.p3d");
 endclass
 
-class(intercom) extends(REPLACE_REQUIRED)
-	var(name,"intercom");
+class(Intercom2) extends(Intercom)
 	var(model,"\sterben_top\am_items_2\props\vault\console\intercom.p3d");
 endclass
 
