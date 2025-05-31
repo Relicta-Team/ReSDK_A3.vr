@@ -1807,8 +1807,7 @@ class(beerbottle) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\misc\food\beerbottle\beerbottle.p3d");
 endclass
 
-class(milkbottle) extends(REPLACE_REQUIRED)
-	var(name,"milkbottle");
+class(MilkBottle2) extends(MilkBottle)
 	var(model,"\sterben_top\am_items_2\misc\food\milkbottle.p3d");
 endclass
 
