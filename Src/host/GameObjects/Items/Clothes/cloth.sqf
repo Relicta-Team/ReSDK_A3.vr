@@ -9,6 +9,14 @@
 #include "..\..\GameConstants.hpp"
 
 
+//todo refactor port models
+#include "port_clothes.sqf"
+#include "port_armors.sqf"
+#include "port_backpacks.sqf"
+#include "port_facewears.sqf"
+#include "port_headgears.sqf"
+#include "port_models.sqf"
+
 editor_attribute("InterfaceClass")
 class(Cloth) extends(Container)
 	var(material,"MatCloth");
