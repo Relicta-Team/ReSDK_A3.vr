@@ -590,8 +590,7 @@ class(counductor) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items\misc\junk\counductor\counductor.p3d");
 endclass
 
-class(cuttingboard) extends(REPLACE_REQUIRED)
-	var(name,"cuttingboard");
+class(CuttingBoard2) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items\misc\junk\cuttingboard\cuttingboard.p3d");
 endclass
 
