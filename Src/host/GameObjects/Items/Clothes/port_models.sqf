@@ -625,8 +625,7 @@ class(glasspitcher) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items\misc\junk\glasspitcher\glasspitcher.p3d");
 endclass
 
-class(hammer) extends(REPLACE_REQUIRED)
-	var(name,"hammer");
+class(Hammer2) extends(Hammer)
 	var(model,"\sterben_top\am_items\misc\junk\hammer\hammer.p3d");
 endclass
 
@@ -1850,7 +1849,7 @@ class(fewallmount01) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\misc\junk\fireextinguisher\fewallmount01.p3d");
 endclass
 
-class(fireextinguisher2) extends(FireExtinguisher)
+class(FireExtinguisher2) extends(FireExtinguisher)
 	var(model,"\sterben_top\am_items_2\misc\junk\fireextinguisher\fireextinguisher.p3d");
 endclass
 
