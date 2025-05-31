@@ -525,8 +525,7 @@ class(9vbattery) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items\misc\junk\9battery\9vbattery.p3d");
 endclass
 
-class(ashtray) extends(REPLACE_REQUIRED)
-	var(name,"ashtray");
+class(Ashtray2) extends(Ashtray)
 	var(model,"\sterben_top\am_items\misc\junk\ashtray\ashtray.p3d");
 endclass
 
