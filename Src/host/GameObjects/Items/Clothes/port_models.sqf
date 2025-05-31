@@ -170,8 +170,7 @@ class(bulbousred) extends(REPLACE_REQUIRED)
 	var(model,"\scaliensprops\bulbousred.p3d");
 endclass
 
-class(egg) extends(REPLACE_REQUIRED)
-	var(name,"egg");
+class(Egg2) extends(Egg)
 	var(model,"\scaliensprops\egg.p3d");
 endclass
 
