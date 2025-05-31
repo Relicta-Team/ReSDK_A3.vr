@@ -1850,8 +1850,7 @@ class(fewallmount01) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\misc\junk\fireextinguisher\fewallmount01.p3d");
 endclass
 
-class(fireextinguisher) extends(REPLACE_REQUIRED)
-	var(name,"fireextinguisher");
+class(fireextinguisher2) extends(FireExtinguisher)
 	var(model,"\sterben_top\am_items_2\misc\junk\fireextinguisher\fireextinguisher.p3d");
 endclass
 
