@@ -1,4 +1,4 @@
-name: Fork Run Tests
+name: Local Tests
 
 on:
   push:
@@ -13,7 +13,12 @@ jobs:
     name: Test
     runs-on: windows-2019
     # define LOCAL_BUILD in you repo to enable local build
-    if: github.repository_owner != 'Relicta-Team' && vars.LOCAL_BUILD != ''
+    # or
+    # define LOCAL_BUILD_BRANCHES in you repo to enable local build for specific branches
+    if: |
+      (github.repository_owner != 'Relicta-Team' && vars.LOCAL_BUILD != '') 
+      || 
+      (vars.LOCAL_BUILD_BRANCHES != '' && contains(fromJSON(vars.LOCAL_BUILD_BRANCHES), github.ref_name))
     strategy:
       fail-fast: true
       matrix:
