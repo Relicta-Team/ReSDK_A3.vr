@@ -1888,8 +1888,7 @@ class(toasteraged) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\misc\junk\toasteraged\toasteraged.p3d");
 endclass
 
-class(vase) extends(REPLACE_REQUIRED)
-	var(name,"vase");
+class(Vase2) extends(Vase)
 	var(model,"\sterben_top\am_items_2\misc\junk\vase\vase.p3d");
 endclass
 
@@ -2128,8 +2127,7 @@ class(am_toolbox) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\am_items_2\props\furniture\crafting\am_toolbox.p3d");
 endclass
 
-class(anvil) extends(REPLACE_REQUIRED)
-	var(name,"anvil");
+class(Anvil2) extends(Anvil)
 	var(model,"\sterben_top\am_items_2\props\furniture\crafting\anvil.p3d");
 endclass
 
