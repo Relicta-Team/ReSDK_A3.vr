@@ -56,6 +56,91 @@ class(CoinBag) extends(Container)
 	var(maxSize,ITEM_SIZE_SMALL);
 endclass
 
+class(KeyChain) extends(Container)
+	var(name,"Связка ключей");
+	var(material,"MatMetal");
+	var(desc,"Кусок проволоки для хранения ключей.");
+	var(model,"a3\structures_f_epa\items\tools\metalwire_f.p3d");
+	var(weight,gramm(20));
+	var(allowedSlots,[INV_BELT]);
+	getter_func(allowedItemClasses,["Key"]);
+	var_exprval(countSlots,BASE_STORAGE_CAPACITY(3));
+	var(size,ITEM_SIZE_SMALL);
+	var(maxSize,ITEM_SIZE_SMALL);
+	var(isPuttableContainer,true);
+	var(keyOwners,[]);
+	var(handcuffs,[]);
+
+	getter_func(getDropSound,"dropping\keydrop");
+	getter_func(getPickupSound,"updown\keyring_up");
+	getter_func(getPutdownSound,"updown\keyring_up");
+
+	// Обновляет массивы ключей которых держит связка
+	func(updateKeyOwners)
+	{
+		objParams();
+		
+		private _content = getSelf(content);
+		private _newOwners = [];
+		private _newHandcuffs = [];
+		
+		{	
+			private _keyOwner = getVar(_x,keyOwner);
+			_newOwners append _keyOwner;
+			if isImplementVar(_x,handcuffs) then {
+				private _handcuffs = getVar(_x,handcuffs) splitString ";| ,";
+				_newHandcuffs append _handcuffs;
+			}
+		} forEach _content;
+		
+		setSelf(keyOwners,_newOwners);
+		setSelf(handcuffs,_newHandcuffs);
+	};
+
+	func(addItem)
+	{
+		objParams_1(_item);
+		private _result = super();
+		callSelf(updateKeyOwners);
+		_result
+	};
+
+	func(removeItem)
+	{
+		objParams_3(_item,_newLoc,_slot);
+		private _result = super();
+		callSelf(updateKeyOwners);
+		// Если остался только один ключ, то вытаскиваем его из связки и удаляем связку
+		if (getSelf(currentsize) == 1) then {
+			private _isInWorld = callSelf(isInWorld);
+			private _loc = getSelf(loc);
+			private _key = getSelf(content) select 0;
+
+			if (_isInWorld) then {
+				callFuncParams(_key,dropItemToWorld,callSelf(getPos) arg 0 arg random 360 arg this arg true);
+			} else {
+				private _keyChainSlot = getSelf(slot);
+				callFuncParams(_loc,removeItem,this);
+				if (_keyChainSlot == INV_BELT) then {
+					callFuncParams(_key,dropItemToWorld,callSelf(getPos) arg 0 arg random 360 arg this arg true);
+				} else {
+					callFuncParams(_loc,addItem,_key arg _keyChainSlot);
+				};
+			};
+			getSelf(content) deleteAt 0;
+			callSelf(onContainerContentUpdate);
+			setSelf(countSlots,0);
+			setSelf(openedBy,[]);
+			if (_isInWorld) then {
+				callSelf(unloadModel);
+			};
+			callFuncParams(this,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+		};
+
+		_result;
+	};
+endclass
+
 class(FabricBagBig1) extends(Container)
 	var(name,"Мешок");
 	var(allowedSlots,[INV_BACKPACK]);
