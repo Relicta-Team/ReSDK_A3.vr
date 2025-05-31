@@ -22,5 +22,6 @@ endclass
 
 class(Knight_Maxon_bag) extends(Backpack)
 	var(name,"Knight_Maxon_bag");
+	var(model,"\sterben_top\fallout_uniform\knight_maxon_bag.p3d");
 	var(armaClass,"Knight_Maxon_bag");
 endclass

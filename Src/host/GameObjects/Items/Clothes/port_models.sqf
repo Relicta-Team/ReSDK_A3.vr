@@ -3020,11 +3020,6 @@ class(survivalpack) extends(REPLACE_REQUIRED)
 	var(model,"\sterben_top\fallout_uniform\backpacks\survivalpack\survivalpack.p3d");
 endclass
 
-class(knight_maxon_bag) extends(REPLACE_REQUIRED)
-	var(name,"knight_maxon_bag");
-	var(model,"\sterben_top\fallout_uniform\knight_maxon_bag.p3d");
-endclass
-
 class(prospectors_02_backpack) extends(REPLACE_REQUIRED)
 	var(name,"prospectors_02_backpack");
 	var(model,"\sterben_top\fallout_uniform_02\prospectors_02_backpack.p3d");
