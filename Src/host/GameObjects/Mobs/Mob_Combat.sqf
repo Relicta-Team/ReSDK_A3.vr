@@ -1424,10 +1424,10 @@ region(shooting)
 			modvar(_mod) + 1; //маневр
 		};
 
-		private _isMob = callFunc(_targ,isMob);
+		private _isMob = callFunc(_target,isMob);
 
 		//высчитываем модификатор дистанции
-		private _distMod = [callSelfParams(getDistanceTo,_target),ifcheck(_isMob,callFunc(_targ,getRealSpeed),0)] call gurps_getDistanceModificator;
+		private _distMod = [callSelfParams(getDistanceTo,_target),ifcheck(_isMob,callFunc(_target,getRealSpeed),0)] call gurps_getDistanceModificator;
 
 		modvar(_mod) + _distMod;
 
@@ -1445,7 +1445,7 @@ region(shooting)
 		};
 
 		private _mePos = ((getPosATL callSelf(getBasicLoc)) select 2);
-		private _targPos = ((getPosATL callFunc(_targ,getBasicLoc)) select 2);
+		private _targPos = ((getPosATL callFunc(_target,getBasicLoc)) select 2);
 		//TODO прверка выше/ниже цели
 
 		//куда атакуем

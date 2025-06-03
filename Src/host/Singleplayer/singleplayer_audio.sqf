@@ -12,12 +12,36 @@
 #include "..\NOEngine\NOEngine.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 
+sp_audio_playMusic = {
+	params ["_name",["_looped",false],["_toqueue",false]];
+	if (sp_debug_skipAudio) exitWith {};
+	private _params = [];
+	if (_looped) then {
+		_params pushBack ["repeat",true];
+	};
+	if (_toqueue) then {
+		_params pushback ["wait",true];
+	};
+
+	["sp\" + _name,30,_params] call music_play;
+};
+sp_audio_stopMusic = {
+	params ["_temp"];
+	[30] call music_stop;
+};
+
+sp_audio_setMusicPause = {
+	params ["_mode",["_smooth",true]];
+	if (sp_debug_skipAudio) exitWith {};
+	[30,_mode,_smooth] call music_setPause;
+};
+
 sp_audio_sayPlayer = {
-	params ["_pathPost"];
+	params ["_pathPost",["_vol",1]];
 	if (sp_debug_skipAudio) exitWith {-1};
 
 	["singleplayer\sp_guide\" + _pathPost,
-		null,null,
+		_vol,null,
 		true //redirect to effect audio channel
 	] call soundUI_play;
 };
@@ -43,6 +67,15 @@ sp_audio_sayPlayerList = {
 	
 };
 
+sp_audio_isSoundHandleDone = {
+	params ["_handle"];
+	private _spr = soundParams _handle;
+	if (count soundParams _handle == 0) exitWith {true};
+	if ((_spr select 1) >= 1) exitWith {true};
+	if ((_spr select 2) == (_spr select 3)) exitWith {true};
+	false
+};
+
 sp_audio_sayAtTarget = {
 	params ["_target","_pathPost",["_dist",20],["_startOffset",0]];
 	if (sp_debug_skipAudio) exitWith {-1};
@@ -56,7 +89,18 @@ sp_audio_sayAtTarget = {
 	private _mpath = "singleplayer\sp_guide\" + _pathPost;
 	//params ["_source","_class","_dist",["_pitch",1],["_offset",0]];
 	private _vol = 1;
+	if (typeof _target == BASIC_MOB_TYPE) then {
+		_target = _target modelToWorldVisual (_target selectionPosition "head");
+	};
 	[_mpath,_target,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
+};
+
+sp_audio_playSound = {
+	params ["_pos","_pathPost",["_dist",20]];
+	private _vol = 1;
+	private _startOffset = 0;
+	private _mpath = "singleplayer\sp_guide\" + _pathPost;
+	[_mpath,_pos,_vol,null,_dist,null,_startOffset] call soundGlobal_play;
 };
 
 sp_audio_internal_resolveTarget = {
@@ -64,7 +108,7 @@ sp_audio_internal_resolveTarget = {
 	if equalTypes(_target,"") then {
 		//check mob
 		private _ptarg = sp_ai_mobs getOrDefault [_target,objNull];
-		if !isNullReference(_ptarg) exitWith {_target = getVar(_ptarg,owner)};
+		if !isNullReference(_ptarg) exitWith {_target = _ptarg};
 
 		//check gref
 		private _ptarg = _target call sp_getObject;
@@ -84,7 +128,7 @@ sp_audio_internal_resolveTarget = {
 	canstart - условие возможности старта диалога
 	onstart - код вызываемый при старте диалога
 	onend - код вызываемый при окончании диалога
-	volume - громкость звука
+	distance - дистанция звука
 */
 sp_audio_startDialog = {
 	private _dlg = _this;
@@ -110,6 +154,21 @@ sp_audio_startDialog = {
 	];
 
 	[_stateSeq] call sp_audio_internal_procDialog;
+
+	_stateSeq
+};
+
+sp_audio_isDoneDialog = {
+	params [["_dlglst",[]],["_idx",0]];
+	_idx >= count _dlglst	
+};
+
+sp_audio_waitForEndDialog = {
+	private _dlgData = _this;
+	if (sp_debug_skipAudio) exitWith {};
+	{
+		_dlgData call sp_audio_isDoneDialog
+	} call sp_threadWait;
 };
 
 sp_audio_internal_procDialog = {
@@ -135,11 +194,12 @@ sp_audio_internal_procDialog = {
 		endAsyncInvoke
 	};
 
-	private _handle = [_tgt,_pathPost,_ctxParams get "volume"] call sp_audio_sayAtTarget;
+	private _handle = [_tgt,_pathPost,_ctxParams get "distance"] call sp_audio_sayAtTarget;
 	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg soundParams _handle);
-	if equals(soundParams _handle,[])exitWith{};
+	if (equals(soundParams _handle,[]) && !sp_debug_skipAudio) exitWith{};
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
+	_tgtReal setRandomlip true;
 	startAsyncInvoke
 		{
 			params ["_stateSeq","_handle","_ctxParams"];
@@ -151,23 +211,27 @@ sp_audio_internal_procDialog = {
 			_time>=(_len - _endoffset)
 		},
 		{
-			params ["_stateSeq","_handle","_ctxParams"];
+			params ["_stateSeq","_handle","_ctxParams","_tgtReal"];
+			_tgtReal setRandomlip false;
+
 			//increment stateseq
 			_curId = _stateSeq select 1;
 			_origCurId = _curId;
-			INC(_curId);
-			if (_curId >= (count (_stateSeq select 0))) exitWith {
-				//end of dialog
-			};
-
+			
 			[] call (
 				(_stateSeq select 0 select _origCurId select 2)
 					getOrDefault ["onend",{}]
 			);
+			
+			INC(_curId);
+			if (_curId >= (count (_stateSeq select 0))) exitWith {
+				//end of dialog
+				_stateSeq set [1,_curId];
+			};
 
 			_stateSeq set [1,_curId];
 			[_stateSeq] call sp_audio_internal_procDialog;
 		},
-		[_stateSeq,_handle,_ctxParams]
+		[_stateSeq,_handle,_ctxParams,_tgtReal]
 	endAsyncInvoke
 };

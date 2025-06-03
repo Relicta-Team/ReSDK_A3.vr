@@ -33,7 +33,7 @@ sp_ai_debug_startCapture = {
         call sp_cam_createCinematicCam;
     };
     
-    [true] call sp_cam_setCinematicCam;
+    [true,false] call sp_cam_setCinematicCam;
 
 
     sp_ai_debug_previewPerson = call sp_ai_debug_getPreviewPerson;
@@ -45,10 +45,15 @@ sp_ai_debug_startCapture = {
 
     sp_ai_debug_stateCount = 1;
 
+    //cap v2 use animspeed
+    private _animSpeed = getAnimSpeedCoef _target;
+    sp_ai_debug_previewPerson setAnimSpeedCoef _animSpeed;
+
     sp_ai_debug_captureData = [
-        "cap_v1",
+        "cap_v2",
         [
-            ["usepos",_movecapt]
+            ["usepos",_movecapt],
+            ["animspeed",_animSpeed]
         ]
     ]; //[[frame1, data1], [frame2, data2]]...
     sp_ai_debug_lastAnim = "";
@@ -111,7 +116,19 @@ sp_ai_debug_internal_handleUpdate = {
         "_gProg","_gTime","_gDur","_gBlndFact"
     ];
 
-    _targ setposatl (_basePos vectorAdd [0,0,0]);
+    _rpos = (_basePos vectorAdd [0,0,0]);
+    
+    //more optimized capturing but creates new dummy mob
+    // if isNull(_targ getvariable "sp_aidebug_att_camcapt") then {
+    //     _val = _rpos call gm_createMob;
+    //     _val setposatl _rpos;
+    //     _mptr = struct_newp(AutoModelPtr,_val);
+    //     _targ setvariable ["sp_aidebug_att_camcapt",_mptr];
+    // };
+    //_rpos = getposatl(_targ getvariable "sp_aidebug_att_camcapt" callv(get));
+
+    _targ setposatl (_rpos);
+    _targ setvelocity [0,0,0];
     
     _animState = animationState _targ;
     _deltaTime = tickTime - sp_ai_debug_startTime;
@@ -190,9 +207,13 @@ sp_ai_debug_suspendCapture = {
     [false] call sp_cam_setCinematicCam;
 
     stopUpdate(sp_ai_debug_curCaptureHandle);
+    
+    sp_ai_debug_curCaptureTarget setvariable ["sp_aidebug_att_camcapt",null];
+
     sp_ai_debug_curCaptureHandle = -1;
     sp_ai_debug_headMovingEnable = false;
     sp_ai_debug_curCaptureTarget = objNull;
+
     //sp_ai_debug_curCaptureBasePos = vec3(0,0,0);
 };
 
@@ -202,6 +223,7 @@ sp_ai_playCapture = {
     private _cpydta = array_copy(_cdata);
 
     private _moveproc = true;
+    private _animspeed = 1;
     if equalTypes(_cpydta select 0,"") then {
         _cpydta deleteAt 0;
         private _pars = _cpydta deleteAt 0;
@@ -209,6 +231,10 @@ sp_ai_playCapture = {
             _x params ["_name","_val"];
             if (_name == "usepos") then {
                 _moveproc = _val;
+                continue;
+            };
+            if (_name == "animspeed") then {
+                _animspeed = _val;
                 continue;
             };
         } foreach _pars;
@@ -231,6 +257,8 @@ sp_ai_playCapture = {
 
         ["mapStates",_mapStates],
 
+        ["__anmoffset_delta",0],
+
         ["internalContext",_internalContext]
     ];
 
@@ -238,7 +266,7 @@ sp_ai_playCapture = {
        _ctx set ["internalContext",null];
     };
     
-    _target setanimspeedcoef 1;
+    _target setAnimSpeedCoef _animspeed;
 
     traceformat("CAPINFO: %1 [%2]",_ctx get "capturePos" arg _moveproc)
     if (_ctx get "capturePos") then {
@@ -287,6 +315,18 @@ sp_ai_internal_processPlayingStates = {
         [_obj,getposatl _obj,false] call sp_ai_commitMobPos;
         [_obj,_ctx get "internalContext"] call (_ctx get "postAnimCode");
     };
+
+    _ctxInt = _ctx get "internalContext";
+    if (!isNullVar(_ctxInt) && {refget(_ctxInt get "cancelToken")}) exitWith {
+        stopThisUpdate();
+    };
+
+    if ("__anmawaiter" in _ctx) exitWith {
+        [_ctx] call sp_ai_playAnimAwaiter;
+    };
+
+    _t = _t + (_ctx get "__anmoffset_delta");
+
     _curDelta = tickTime - _t;
     _firstFrame = _cdata select 0;
     _firstFrame params ["_dt","_opType","_frameData"];
@@ -366,6 +406,29 @@ sp_ai_internal_processPlayingStates = {
     };
 };
 
+/*
+    ["state_1",{
+        {
+        
+        }
+    }]
+*/
+sp_ai_animWait = {
+    params ["_codecondition",["_params",[]]];
+    _ctx set ["__anmawaiter",[_codecondition,_params]];
+    _ctx set ["__anmoffset_start",tickTime];
+};
+
+sp_ai_playAnimAwaiter = {
+    params ["_ctx"];
+    (_ctx get "__anmawaiter") params ["_cd__","_pr__"];
+    if (_pr__ call _cd__) then {
+        _offset = tickTime - (_ctx get "__anmoffset_start");
+        _ctx deleteAt "__anmawaiter";
+        _ctx set ["__anmoffset_delta",_offset + (_ctx get "__anmoffset_delta")];
+    };
+};
+
 sp_ai_debug_playLastAnim = {
     if (!array_exists(sp_ai_debug_testmobs,"PREVIEW")) then {
         [sp_ai_debug_curCaptureBasePos,null,"PREVIEW"] call sp_ai_debug_createTestPerson;
@@ -440,6 +503,11 @@ sp_ai_playAnim = {
     [_target,_buff,_basePos,_postCode,_mapStates,_internalContext] call sp_ai_playCapture;
 };
 
+sp_ai_stopAnim = {
+    params ["_animHandle"];
+    stopUpdate(_animHandle);
+};
+
 sp_ai_createPerson = {
     params ["_pos",["_mtype","Mob"],["_target","CREATE_NEW"]];
     if (_target == "CREATE_NEW") then {
@@ -467,18 +535,39 @@ sp_ai_createPersonEx = {
         [_tname] call sp_ai_deletePerson;
     };
 
-    private _body = [_pos,null,_tname] call sp_ai_createPerson;
-    if equalTypes(_pos,"") then {
-        _body setDir (callFunc(_pos call sp_getObject,getDir));
-    };
-    _mob = _body getvariable "link";
     if equalTypes(_params,[]) then {
         _params = createHashMapFromArray _params;
     };
-    setVar(_mob,age,_params getOrDefault vec2("age",randInt(20,40)));
+    private _cls = _params get "class";
+    private _body = [_pos,_cls,_tname] call sp_ai_createPerson;
+    if equalTypes(_pos,"") then {
+        _body setDir (callFunc(_pos call sp_getObject,getDir));
+    };
+    _mob = _body getvariable "link";    
 
     if ("uniform" in _params) then {
         [_params getOrDefault ["uniform","Cloth"],_mob,INV_CLOTH] call createItemInInventory;
+    };
+    if ("face" in _params) then {
+        private _face = _params get "face";
+        if (_face in faces_map_man) then {
+            callFuncParams(_mob,setMobFace,pick(faces_map_man get _face))
+        } else {
+            callFuncParams(_mob,setMobFace,_face);
+        };
+    } else {
+        callFuncParams(_mob,setMobFace,pick(faces_map_man get "white"));
+    };
+
+    if ("age" in _params) then {
+        private _age = _params get "age";
+        if equalTypes(_age,[]) then {
+            setVar(_mob,age,randInt(_age select 0,_age select 1));
+        } else {
+            setVar(_mob,age,_age);
+        };
+    } else {
+        setVar(_mob,age,randInt(20,40));
     };
     
     private _pnm = _params getOrDefault vec2("name",["Мужик" arg "Неизвестный"]);
@@ -489,6 +578,10 @@ sp_ai_createPersonEx = {
 
     _body call _bodyhandler;
     _mob call _mobHandler;
+    
+    //post sync anim
+    [_body] call anim_syncAnim;
+
     _mob
 };
 
@@ -514,14 +607,25 @@ sp_ai_deletePerson = {
 };
 
 sp_ai_getMobObject = {
-    private _body = sp_ai_mobs getOrDefault [_this,objNull];
+    private _body = _this call sp_ai_getMobBody;
     if isNullReference(_body) exitWith {nullPtr};
     _body getvariable ["link",nullPtr]
 };
 
+sp_ai_getMobBody = {
+    sp_ai_mobs getOrDefault [_this,objNull];
+};
+
 sp_ai_commitMobPos = {
     params ["_m","_p",["_doApply",true]];
+    if equalTypes(_m,"") then {
+        _m = _m call sp_ai_getMobBody;
+    };
     
+    if isNullVar(_p) then {
+        _p = getposatl _m;
+    };
+
     _m setvariable ["__sp_ai_internal_commitPos",_p];
     if (_doApply) then {
         _m setposatl _p;
@@ -560,6 +664,7 @@ sp_ai_moveItemToWorld = {
     _it
 };
 
+//перемещение предмета из мира или между слотами
 sp_ai_moveItemToMob = {
     params ["_m","_item","_slot"];
     if (canSuspend) exitWith {
@@ -575,8 +680,31 @@ sp_ai_moveItemToMob = {
         _m = _m getvariable "link";
     };
     if isNullVar(_m) exitWith {};
+    if equalTypes(_item,0) then {
+        _item = callFuncParams(_m,getItemInSlotRedirect,_item);
+    };
     if isNullReference(_item) exitWith {};
     private this = _m;
+
+    if equals(getVar(_item,loc),_m) exitWith {
+        private _slotFrom = getVar(_item,slot);
+        private _slotTo = _slot;
+
+        //standart checker
+		if !callSelfParams(hasSlot,_slotFrom) exitWith {};
+		if !callSelfParams(hasSlot,_slotTo) exitWith {};
+		private _itemFrom = callSelfParams(getItemInSlotRedirect,_slotFrom);
+		if isNullReference(_itemFrom) exitWith {};
+		
+		if !callSelfParams(canSetItemOnSlot,args2(_itemFrom,_slotTo)) exitWith {};
+		
+		if callSelfParams(isHoldedTwoHands,_itemFrom) then {
+			callSelfParams(onTwoHand,_itemFrom);
+		};
+		callSelfParams(interpolate,"trans" arg _itemFrom arg _slotTo);
+		callSelfParams(setItemOnSlot,_itemFrom arg _slotTo);
+    };
+
     //check if in world (server protect)
     if !callFunc(_item,isInWorld) exitWith {};
 
@@ -605,7 +733,8 @@ sp_ai_setMobPos = {
 	if equalTypes(_reforpos,"") then {
 		private _obj = _reforpos call sp_getObject;
 		_pos = callFunc(_obj,getPos);
-		if !isNullVar(_dir) then {
+		//это не баг. в режиме строчной позиции любое число даст автоустановку направления
+        if !isNullVar(_dir) then {
 			_dir = callFunc(_obj,getDir);
 		};	
 	} else {
@@ -629,6 +758,22 @@ sp_ai_setMobPos = {
 	};
 };
 
+sp_ai_isLoadedPos = {
+    params ["_mob"];
+    private _body = _mob call sp_ai_getMobBody;
+    if isNullReference(_body) exitWith {true}; //no body - no loaded
+    private _mptr = _body getvariable "__sp_ai_internal_nftime";
+    if isNullVar(_mptr) exitWith {false};
+    isobjecthidden (_mptr callv(get))
+};
+
+sp_ai_waitForMobLoaded = {
+    params ["_mob"];
+    {
+        [_mob] call sp_ai_isLoadedPos
+    } call sp_threadWait;
+};
+
 sp_ai_internal_onUpdate = {
     _chunkLoaded = {
         params ["_ps"];
@@ -641,9 +786,9 @@ sp_ai_internal_onUpdate = {
         _vpos = _y getvariable "__sp_ai_internal_commitPos";
         _loaded = [_vpos] call _chunkLoaded;
         if (!_loaded) then {
+            _y setvariable [_specvar,null];
             _y setposatl _vpos;
             _y setVelocity [0,0,0];
-            _y setvariable [_specvar,null];
         } else {
             if isNull(_y getvariable _specvar) then {
                 _val = createSimpleObject ["rel_vox\obj\block_dirt.p3d",[0,0,0],true];
@@ -676,8 +821,9 @@ sp_ai_internal_onUpdate = {
                         if (!isNull(_m getvariable _specvar)) then {
                             _mptr = _m getvariable _specvar;
                             _mptr callv(get) setposatl (_vpos vectordiff [0,0,0.1]);
-                            _m setPosAtl (_vpos vectoradd [0,0,0.3]);
+                            _m setPosAtl (_vpos vectoradd [0,0,0.1]);
                             _mptr callv(get) hideObject true;
+                            _m setvelocity [0,0,0];
                         };
                     },
                     [_y,_vpos,_specvar,tickTime + 2]
@@ -696,27 +842,43 @@ sp_ai_internal_onUpdate = {
 sp_ai_playAnimsLooped = {
     params ["_target","_anims",["_commonState",{}]];
     
-    if (count _anims == 0) exitWith {};
+    if (count _anims == 0) exitWith {refcreate(true)};
 
     //_anims -> params ["_target","_basePos","_animName",["_postCode",{}],"_mapStates"];
+    private _cancelToken = refcreate(false);
     private _anmStateContext = createHashMapFromArray [
         ["target",_target], //cur target
         ["curAnim",0], //cur anim
         ["animList",_anims], //animlist
         ["commonState",_commonState],
+        ["cancelToken",_cancelToken],
 
-        ["_tref",objNull]
+        ["_tref",objNull] //назначив _target этой переменной - всё сломается. надо разбираться в причинах
     ];
     
     [_target,_anims select 0,_anmStateContext] call sp_ai_internal_playAnimStateLoop;
+
+    _cancelToken
 };
 
 sp_ai_internal_playAnimStateLoop = {
     params ["_t","_anm","_ctxInt"];
-    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}]];
+    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}],"_states",["_callPreCode",{}]];
     
     _ctxInt set ["pause",_pauseAft];
     _ctxInt set ["callPostAnim",_callPostCode];
+
+    if (refget(_ctxInt get "cancelToken")) exitWith {};
+
+    private _tObj = _t;
+    if equalTypes(_tObj,"") then {
+        _tObj = _tObj call sp_ai_getMobObject;
+    };
+    if equalTypes(_tObj,nullPtr) then {
+        _tObj = getVar(_tObj,owner);
+    };
+
+    [_tObj,_ctxInt] call _callPreCode;
 
     [_t,_p,_anmName,{
         params ["_obj","_ctxInt"];
@@ -727,6 +889,8 @@ sp_ai_internal_playAnimStateLoop = {
         };
 
         if not_equals(_obj,_ctxInt get "_tref") exitWith {}; //exit on obsolete object
+
+        if (refget(_ctxInt get "cancelToken")) exitWith {};
 
         //calculate awaiter
         _pause = _ctxInt getOrDefault ["pause",0];
@@ -763,6 +927,9 @@ sp_ai_internal_playAnimStateLoop = {
 
 sp_ai_setLookAtControl = {
     params ["_mob","_target"];
+    if equalTypes(_mob,"") then {
+        _mob = _mob call sp_ai_getMobBody;
+    };
     if (isNullReference(_mob)) exitWith {};
     if isNullReference(_target) then {
         _mob lookat objnull;

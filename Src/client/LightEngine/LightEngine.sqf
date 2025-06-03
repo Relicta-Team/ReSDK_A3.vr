@@ -372,9 +372,9 @@ le_debug_lightRender = {
 //render damage effect for objects
 decl(bool(vector3;int|string;vector3))
 le_se_emitFireAtPos = {
-	params ["_pos","_type","_norm"];
+	params ["_pos","_type","_norm","_deleteAfter"];
 	traceformat("damage effect normal: %1",_norm)
-	[_type,_pos,_norm] call le_se_fireEmit;
+	[_type,_pos,_norm,_deleteAfter] call le_se_fireEmit;
 };
 rpcAdd("do_fe",le_se_emitFireAtPos);
 
