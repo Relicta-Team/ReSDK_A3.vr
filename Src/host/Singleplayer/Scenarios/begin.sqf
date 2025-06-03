@@ -711,7 +711,7 @@ begin_canStartAttack = false;
 			_thd = {
 				//dialog
 				([
-					["begin_keeper1","begin\start\prov1",["endoffset",0.1]],
+					["begin_keeper1","begin\start\prov1",["endoffset",0.0]],
 					[player,"begin\start\gg1",["endoffset",0.1]],
 					["begin_keeper1","begin\start\prov2",["endoffset",0.4]],
 					[player,"begin\start\gg2",["endoffset",1.3]],

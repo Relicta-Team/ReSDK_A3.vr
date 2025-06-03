@@ -2249,6 +2249,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		_thandle = {
 			while {pp_alc_amount > 0} do {
 				pp_alc_amount = (pp_alc_amount - 0.5) max 0;
+				5 call sp_threadPause;
 			};
 		} call sp_threadStart;
 		["cpt4_data_threaddecreasealctox",_thandle] call sp_storageSet;
