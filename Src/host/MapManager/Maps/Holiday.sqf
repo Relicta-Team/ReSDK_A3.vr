@@ -1589,7 +1589,6 @@ _4009_750003975_0000017_62088 = ['IStruct',[4009.75,3975,17.6209],90.0004,[0,0,1
 _4013_282233971_8225113_39159 = ['MedicalBag',[4013.28,3971.82,13.3916],15,[0,0,1]] call InitItem; 
 _4013_492683972_3432613_87988 = ['HandcuffItem',[4013.49,3972.34,13.8799],0,[0,0,1]] call InitItem; 
 ['RopeItem',[4013.44,3972.59,13.874],10,[0,0,1]] call InitItem; 
-['Key',[4013.37,3972.19,13.874],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"naruch"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 ['WomanBasicCloth',[4008.42,3971.21,12.9934],190,[0,0,1]] call InitItem; 
 ['PistolPBM',[4007.22,3974.25,18.4884,true],[0.866025,0.500001,8.14602e-08],[-0.500001,0.866025,-1.41093e-07]] call InitItem; 
 ['MagazinePBMLoaded_NonLethal',[4007.39,3974.42,13.495],0,[0,0,1]] call InitItem; 
@@ -2181,6 +2180,7 @@ _4056_000004014_7500012_00000 = ['EffectAsStruct',[4056,4014.75,12],0,[0,0,1]] c
 _4030_604494002_3984412_00000 = ['EffectAsStruct',[4030.6,4002.4,12],0,[0,0,1]] call InitStruct; // Effect
 _4031_250003942_7500015_50000 = ['EffectAsStruct',[4031.25,3942.75,15.5],0,[0,0,1]] call InitStruct; // Effect
 _4009_990483921_8183615_50000 = ['EffectAsStruct',[4009.99,3921.82,15.5],0,[0,0,1]] call InitStruct; // Effect
+_4013_359623972_1621113_87399 = ['HandcuffKey',[4013.36,3972.16,13.874],0,[0,0,1]] call InitItem; 
 
 
 
@@ -3040,4 +3040,7 @@ if (!isNil'_4031_250003942_7500015_50000') then {
 };
 if (!isNil'_4009_990483921_8183615_50000') then {
 	[_4009_990483921_8183615_50000,"dust_pieces_10m"] call (_4009_990483921_8183615_50000 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_4013_359623972_1621113_87399') then {
+	_4013_359623972_1621113_87399 setvariable ['handcuffs',"naruch"];
 };
