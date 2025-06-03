@@ -2190,8 +2190,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		{
 			{
 				_bobj = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
-				isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_R))
-				&& isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_L))
+				callFuncParams(_bobj,isEmptySlot,INV_HAND_R)
+				&& callFuncParams(_bobj,isEmptySlot,INV_HAND_L)
 			} call sp_threadWait;
 			[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
 			4 call sp_threadPause;
