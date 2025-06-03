@@ -25,7 +25,7 @@ curl_isAwait = false;//идёт ли ожидание на получение с
 curl_asyncAwaitData = []; //то что будет вызывано когда ответ будет получен
 
 curl_addRequest = {
-	params ["_reference","_callbackCode","_ctxPars"];
+	params ["_reference","_callbackCode",["_ctxPars",[]]];
 	
 	if (!(_ctxPars isEqualType [])) then {_ctxPars = [_ctxPars]};
 	
