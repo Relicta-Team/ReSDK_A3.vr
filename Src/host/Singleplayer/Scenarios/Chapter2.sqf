@@ -88,7 +88,7 @@ cpt2_fnc_clickself_ItemCheck = {
     if isTypeOf(_this,Pill) exitWith {true};
 
     if (isTypeOf(_this,IFoodItem)) exitWith {
-        if (isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) exitWith {
+        if ((isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) exitWith {
             true
         };
 
@@ -372,7 +372,7 @@ cpt2_act_enableTorchHadnler = {
 
         _hClick = ["click_self",{
             params ["_item"];
-            if (isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) then {
+            if ((isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_hunger = 100;
@@ -648,7 +648,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
 
         _hClick = ["click_self",{
             params ["_item"];
-            if (isTypeOf(_item,Pill)) then {
+            if (isTypeOf(_item,Pill) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_pain = 0;

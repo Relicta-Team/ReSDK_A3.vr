@@ -478,7 +478,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			!nd_isOpenDisplay
 		} call sp_threadWait;
 
-		["Чтобы просто посмотреть что написано на бумаге нажмите $input_act_mainAction"] call sp_setNotification;
+		["Чтобы просто посмотреть что написано на бумаге нажмите по ней $input_act_mainAction"] call sp_setNotification;
 		
 		3 call sp_threadPause;
 		[false] call sp_setNotificationVisible;
