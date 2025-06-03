@@ -767,16 +767,17 @@ cpt5_trg_combat_stage1_act = false;
 			_iztbody = _iztref call sp_ai_getMobBody;
 			_iztmob = _iztref call sp_ai_getMobObject;
 			while {true} do {
-				if (getVar(_iztmob,penaltySupressFire) > 1) exitWith {
-					{
+				{
+					if (getVar(_iztmob,penaltySupressFire) > 0) exitWith {
+						setVar(_iztmob,penaltySupressFire,0);
 						["cpt5_data_izt_runaway_count",{_this + 1}] call sp_storageUpdate;
 						//stop anim and play another
 						_refizt = _iztbody getvariable "anim_handler";
 						refset(_refizt,true);
 
 						[_iztref,_iztpos,_iztbody getvariable "runawayanim"] call sp_ai_playAnim;
-					} call sp_threadCriticalSection;
-				};
+					};
+				} call sp_threadCriticalSection;
 				0.1 call sp_threadPause;
 				
 

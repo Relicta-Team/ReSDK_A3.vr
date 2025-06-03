@@ -2195,7 +2195,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			} call sp_threadWait;
 			[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
 			4 call sp_threadPause;
-			callFuncParams("cpt4_brodyaga_bar" call sp_getObject,meSay,"лениво поднимается со стула");
+			callFuncParams("cpt4_brodyaga_bar" call sp_ai_getMobObject,meSay,"лениво поднимается со стула");
 			callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatDisconnect,0);
 			["cpt4_brodyaga_bar","cpt4_pos_brodyaga_bar","cpt4_bar_brodyaga_away",{
 				params ["_body"];
