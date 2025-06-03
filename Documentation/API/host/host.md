@@ -3737,7 +3737,7 @@ Description:
 
 Replaced value:
 ```sqf
-if (!(varname call sp_wsimIsActive)) exitWith {};
+[varname,_this] call sp_internal_wsimHandleAction; if (!(varname call sp_wsimIsActive)) exitWith {};
 ```
 File: [host\engine.hpp at line 684](../../../Src/host/engine.hpp#L684)
 ## sp_checkInput(varname,params)

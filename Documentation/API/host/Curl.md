@@ -170,6 +170,6 @@ Type: function
 Description: то что будет вызывано когда ответ будет получен
 - Param: _reference
 - Param: _callbackCode
-- Param: _ctxPars
+- Param: _ctxPars (optional, default [])
 
 File: [host\Curl\CurlThread.sqf at line 27](../../../Src/host/Curl/CurlThread.sqf#L27)

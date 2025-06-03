@@ -408,7 +408,7 @@ Initial value:
 ```sqf
 startUpdate(music_internal_onUpdate,0)
 ```
-File: [client\SoundSystem\Music.sqf at line 469](../../../Src/client/SoundSystem/Music.sqf#L469)
+File: [client\SoundSystem\Music.sqf at line 471](../../../Src/client/SoundSystem/Music.sqf#L471)
 ## music_play
 
 Type: function
@@ -444,7 +444,7 @@ Type: function
 Description: 
 - Param: _chan (optional, default -1)
 
-File: [client\SoundSystem\Music.sqf at line 353](../../../Src/client/SoundSystem/Music.sqf#L353)
+File: [client\SoundSystem\Music.sqf at line 355](../../../Src/client/SoundSystem/Music.sqf#L355)
 ## music_internal_setFade
 
 Type: function
@@ -453,7 +453,7 @@ Description:
 - Param: _fade
 - Param: _time (optional, default -1)
 
-File: [client\SoundSystem\Music.sqf at line 380](../../../Src/client/SoundSystem/Music.sqf#L380)
+File: [client\SoundSystem\Music.sqf at line 382](../../../Src/client/SoundSystem/Music.sqf#L382)
 ## music_internal_onUpdate
 
 Type: function
@@ -461,7 +461,7 @@ Type: function
 Description: 
 
 
-File: [client\SoundSystem\Music.sqf at line 386](../../../Src/client/SoundSystem/Music.sqf#L386)
+File: [client\SoundSystem\Music.sqf at line 388](../../../Src/client/SoundSystem/Music.sqf#L388)
 # Sound3d.sqf
 
 ## sound3d_internal_list_soundBuff
