@@ -1666,7 +1666,7 @@ begin_finalizer_act = false;
 	call sp_cleanupSceneData;
 	
 	["intro2"] call sp_audio_playMusic;
-
+	{} call sp_setEventDiePlayer;
 	{
 		10 call sp_threadPause;  //because intro2
 		["cpt1_begin"] call sp_startScene;

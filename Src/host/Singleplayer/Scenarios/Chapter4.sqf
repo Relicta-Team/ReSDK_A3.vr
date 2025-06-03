@@ -985,6 +985,10 @@ cpt4_data_refLastTakenDoc = nullPtr;
 					0.5 call sp_threadPause;
 					continue;
 				};
+				if equals(callFunc(_tpaper,getLastTouched),_ibam) exitWith {
+					0.5 call sp_threadPause;
+					continue;
+				};
 
 				1.2 call sp_threadPause;
 				[_ibam,_tpaper,INV_HAND_R] call sp_ai_moveItemToMob;
@@ -2112,11 +2116,20 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 ["cpt4_act_drinklearn",{
 	[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
 	["cpt4_data_drinkcount",0] call sp_storageSet;
+	{
+		while {true} do {
+			pp_alc_amount = ["cpt4_data_drinkcount",0] call sp_storageGet;
+			0.1 call sp_threadPause;
+		};
+	} call sp_threadStart;
 	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	["click_self",{
 		params ["_targ"];
 		if callFunc(_targ,isReagentContainer) then {
-			if (callFunc(_targ,getFilledSpace) > 0) then {
+			if (callFunc(_targ,getFilledSpace) > 0
+			&&
+			getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH
+			) then {
 				_nval = ["cpt4_data_drinkcount",{_this + getVar(_targ,curTransferSize)}] call sp_storageUpdate;
 				if (_nval >= 30) then {
 					call sp_removeCurrentPlayerHandler;
@@ -2174,56 +2187,71 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 	{
 		callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorLock,false arg false);
 
-		callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatDisconnect,0);
-		[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
-		["cpt4_brodyaga_bar","cpt4_pos_brodyaga_bar","cpt4_bar_brodyaga_away",{
-			params ["_body"];
+		{
 			{
-				
+				_bobj = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
+				isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_R))
+				&& isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_L))
+			} call sp_threadWait;
+			[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
+			4 call sp_threadPause;
+			callFuncParams("cpt4_brodyaga_bar" call sp_getObject,meSay,"лениво поднимается со стула");
+			callFuncParams("cpt4_obj_barsit_brod" call sp_getObject,seatDisconnect,0);
+			["cpt4_brodyaga_bar","cpt4_pos_brodyaga_bar","cpt4_bar_brodyaga_away",{
+				params ["_body"];
+				{
+					
 
-				for "_ind" from 1 to 6 do {
-					rand(5,20) call sp_threadPause;
-					{
-						private this = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
-						private _vomitDuration = rand(2,5);
-						private _vparams = [getSelf(owner),"SLIGHT_MOB_VOMIT" call lightSys_getConfigIdByName,
-							["bubbleseffect","Memory"] //"head"
-							,_vomitDuration];
+					for "_ind" from 1 to 6 do {
+						rand(5,20) call sp_threadPause;
 						{
-							callFuncParams(_x,sendInfo,"do_fe_mob" arg _vparams);
-						} foreach callSelfParams(getNearMobs,20 arg false);
-						_m = pick [
-							"блююёт",
-							"рыгается",
-							"рвётся",
-							"трясётся и блюется",
-							"выблёвывает выпитое"
-						];
-						callSelfParams(meSay,_m);
-						callSelfParams(playEmoteSound,"vomit");
+							private this = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
+							private _vomitDuration = rand(2,5);
+							private _vparams = [getSelf(owner),"SLIGHT_MOB_VOMIT" call lightSys_getConfigIdByName,
+								["bubbleseffect","Memory"] //"head"
+								,_vomitDuration];
+							{
+								callFuncParams(_x,sendInfo,"do_fe_mob" arg _vparams);
+							} foreach callSelfParams(getNearMobs,20 arg false);
+							_m = pick [
+								"блююёт",
+								"рыгается",
+								"рвётся",
+								"трясётся и блюется",
+								"выблёвывает выпитое"
+							];
+							callSelfParams(meSay,_m);
+							callSelfParams(playEmoteSound,"vomit");
 
-						callSelfParams(setMobFaceAnim,'dead');
-						callSelfAfter(syncMobFaceAnim,_vomitDuration);
-						
-					} call sp_threadCriticalSection;
-				};
+							callSelfParams(setMobFaceAnim,'dead');
+							callSelfAfter(syncMobFaceAnim,_vomitDuration);
+							
+						} call sp_threadCriticalSection;
+					};
 
-				callFuncParams("cpt4_brodyaga_bar" call sp_ai_getMobObject,setUnconscious,10000000);
-				//hardcoded pos
-				["cpt4_brodyaga_bar",[4128.49,3853.23,16.0964],257.924] call sp_ai_setMobPos;
-				("cpt4_brodyaga_bar" call sp_ai_getMobBody) switchmove "Acts_StaticDeath_12";
-				
-			} call sp_threadStart;
-		},[
-			["state_1",{
-				if !getVar("cpt4_obj_doorbarmain" call sp_getObject,isOpen) then {
-					callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorOpen,true arg true);
-				};
-			}]
-		]] call sp_ai_playAnim;
+					callFuncParams("cpt4_brodyaga_bar" call sp_ai_getMobObject,setUnconscious,10000000);
+					//hardcoded pos
+					["cpt4_brodyaga_bar",[4128.49,3853.23,16.0964],257.924] call sp_ai_setMobPos;
+					("cpt4_brodyaga_bar" call sp_ai_getMobBody) switchmove "Acts_StaticDeath_12";
+					
+				} call sp_threadStart;
+			},[
+				["state_1",{
+					if !getVar("cpt4_obj_doorbarmain" call sp_getObject,isOpen) then {
+						callFuncParams("cpt4_obj_doorbarmain" call sp_getObject,setDoorOpen,true arg true);
+					};
+				}]
+			]] call sp_ai_playAnim;
+		} call sp_threadStart;
 
 
 		[cpt4_questName_tobar,"Идите домой"] call sp_setTaskMessageEff;
+		_thandle = {
+			while {pp_alc_amount > 0} do {
+				pp_alc_amount = (pp_alc_amount - 0.5) max 0;
+			};
+		} call sp_threadStart;
+		["cpt4_data_threaddecreasealctox",_thandle] call sp_storageSet;
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -2251,6 +2279,9 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 }] call sp_addScene;
 
 ["cpt4_topart5",{
+
+	pp_alc_amount = 0;
+	[["cpt4_data_threaddecreasealctox",sp_threadNull] call sp_storageGet] call sp_threadStop;
 	{
 		{
 			["cpt4_pos_cutscenetocpt5","player_cutscene",[],{
@@ -2317,10 +2348,11 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		(["chap4\monolog\gg5"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		2.8 call sp_threadPause;
 		(["chap4\monolog\gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
-		[true,0.5] call sp_gui_setBlackScreenGUI;
+		[true,2.5] call sp_gui_setBlackScreenGUI;
 
 		[false] call sp_cam_setCinematicCam;
 		_post = {
+			call sp_clearPlayerInventory;
 			call sp_cleanupSceneData;
 			["cpt5_begin"] call sp_startScene;
 		};

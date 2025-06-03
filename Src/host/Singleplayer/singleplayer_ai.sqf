@@ -863,12 +863,22 @@ sp_ai_playAnimsLooped = {
 
 sp_ai_internal_playAnimStateLoop = {
     params ["_t","_anm","_ctxInt"];
-    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}],"_states"];
+    _anm params ["_p","_anmName","_pauseAft",["_callPostCode",{}],"_states",["_callPreCode",{}]];
     
     _ctxInt set ["pause",_pauseAft];
     _ctxInt set ["callPostAnim",_callPostCode];
 
     if (refget(_ctxInt get "cancelToken")) exitWith {};
+
+    private _tObj = _t;
+    if equalTypes(_tObj,"") then {
+        _tObj = _tObj call sp_ai_getMobObject;
+    };
+    if equalTypes(_tObj,nullPtr) then {
+        _tObj = getVar(_tObj,owner);
+    };
+
+    [_tObj,_ctxInt] call _callPreCode;
 
     [_t,_p,_anmName,{
         params ["_obj","_ctxInt"];
