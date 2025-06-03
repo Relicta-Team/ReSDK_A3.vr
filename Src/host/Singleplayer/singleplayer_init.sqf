@@ -22,10 +22,10 @@ sp_storage = createHashMap;
 
 sp_debug = false;
 sp_debug_viewOnReload = true;
-sp_debug_skipAudio = true;
+sp_debug_skipAudio = false;
 sp_debug_doNotHideDebugObjects = false;//показ спавнпоинтов
 
-sp_debug_fastThreadSleep = true;
+sp_debug_fastThreadSleep = false;
 
 sp_ai_debug_testmobs = createHashMap;
 sp_ai_mobs = createHashMap;

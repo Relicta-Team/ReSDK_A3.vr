@@ -108,7 +108,7 @@ sp_gc_onPlayerAssigned = {
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
-	["cpt2_begin"] call sp_startScene;
+	["begin_prestart"] call sp_startScene;
 	//["cpt3_begin"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
 };

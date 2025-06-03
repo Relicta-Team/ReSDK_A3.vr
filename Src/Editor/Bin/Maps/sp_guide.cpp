@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=100;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9293;
+		nextID=9315;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4221.4868,18.664856,3694.9824};
-		dir[]={-0.62313223,-0.63118279,-0.46187201};
-		up[]={-0.50707781,0.77562892,-0.37585157};
-		aside[]={-0.59547222,1.0241638e-07,0.80338162};
+		pos[]={3926.1658,103.98108,3807.4883};
+		dir[]={-0.75935715,-0.56034195,0.33074704};
+		up[]={-0.51372635,0.82826138,0.22375962};
+		aside[]={0.39932692,0,0.91680861};
 	};
 };
 binarizationWanted=0;
@@ -710,7 +710,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5457;
+		items=5474;
 		class Item0
 		{
 			dataType="Group";
@@ -31109,14 +31109,14 @@ class Mission
 				angles[]={0.084905826,3.9665673,0.082371019};
 			};
 			side="Empty";
-			flags=1;
+			flags=5;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
 			};
 			id=4758;
 			type="Land_SandbagBarricade_01_F";
-			atlOffset=2.5309381;
+			atlOffset=0.020010948;
 		};
 		class Item1719
 		{
@@ -35069,7 +35069,7 @@ class Mission
 			};
 			id=5040;
 			type="Land_Cliff_wall_long_F";
-			atlOffset=7.2581253;
+			atlOffset=6.595644;
 		};
 		class Item1938
 		{
@@ -35828,8 +35828,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4202.3481,16.330528,3712.9058};
-				angles[]={0.092266835,4.6345186,0.0020131818};
+				position[]={4202.2637,16.330528,3713.0081};
+				angles[]={0.092266873,4.2668533,0.0020131879};
 			};
 			side="Empty";
 			flags=1;
@@ -35839,7 +35839,7 @@ class Mission
 			};
 			id=4749;
 			type="Land_SandbagBarricade_01_F";
-			atlOffset=0.45964527;
+			atlOffset=0.46428967;
 		};
 		class Item1979
 		{
@@ -54377,7 +54377,7 @@ class Mission
 			};
 			id=6494;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=1.19417;
+			atlOffset=0.91577911;
 		};
 		class Item3017
 		{
@@ -97267,7 +97267,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4197.3745,13.244973,3689.061};
+				position[]={4197.2256,13.244973,3688.9976};
 				angles[]={0,1.4855732,0};
 			};
 			side="Empty";
@@ -97278,7 +97278,7 @@ class Mission
 			};
 			id=9271;
 			type="VR_GroundIcon_01_F";
-			atlOffset=0.048791885;
+			atlOffset=0.056671143;
 		};
 		class Item5442
 		{
@@ -97494,7 +97494,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""RedSteelBox""],[""mark"",""cpt5_obj_ammoboxredonattack""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Боеприпасы""]]],[""class"",""RedSteelBox""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""MagazineSVTLoaded""""]]}"",10]]],[""mark"",""cpt5_obj_ammoboxredonattack""]]}";
 			};
 			id=9285;
 			type="box_metal_1";
@@ -97601,6 +97601,302 @@ class Mission
 			id=9292;
 			type="Land_House_Small_02_ruins_F";
 			atlOffset=1.1844006;
+		};
+		class Item5457
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4215.5415,15.738555,3696.9299};
+				angles[]={0,1.4336109,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9293;
+			type="S_Svt_Magazine";
+			atlOffset=0.0072622299;
+		};
+		class Item5458
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4215.5322,15.731293,3697.0247};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9294;
+			type="S_Svt_Magazine";
+		};
+		class Item5459
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4215.3701,15.715829,3697.5505};
+				angles[]={6.1367559,0,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9296;
+			type="S_Svt_Magazine";
+			atlOffset=0.78237152;
+		};
+		class Item5460
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4215.251,15.723825,3697.1301};
+				angles[]={0,1.5998564,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9297;
+			type="S_Svt_Magazine";
+			atlOffset=0.79036808;
+		};
+		class Item5461
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4175.7446,18.012209,3707.4851};
+				angles[]={6.2635136,6.2240729,6.2485113};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9298;
+			type="Land_SandbagBarricade_01_F";
+		};
+		class Item5462
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4177.1582,18.573549,3707.3091};
+				angles[]={0.00024942719,3.2136357,0.24490625};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9299;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=1.2355881;
+		};
+		class Item5463
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4174.5542,16.685089,3708.1123};
+				angles[]={0.38806668,1.751587,6.2558646};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_half_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9300;
+			type="Land_SandbagBarricade_01_half_F";
+			atlOffset=2.8437681;
+		};
+		class Item5464
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4184.0713,15.401098,3716.8325};
+				angles[]={6.2694302,1.5462694,6.2819057};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9301;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=0.20306015;
+		};
+		class Item5465
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4183.5547,15.429322,3718.3574};
+				angles[]={6.2694302,4.1440163,6.2819057};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9302;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=1.0041361;
+		};
+		class Item5466
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4183.1592,15.164239,3722.9131};
+				angles[]={6.2451534,4.7713923,0.036824163};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_half_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9303;
+			type="Land_SandbagBarricade_01_half_F";
+			atlOffset=1.0584402;
+		};
+		class Item5467
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4183.0693,15.884325,3720.7205};
+				angles[]={6.2694302,1.6840832,6.2819057};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9304;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=1.5008497;
+		};
+		class Item5468
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4183.2896,16.074617,3724.9324};
+				angles[]={6.2694302,4.7150216,6.2819057};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9305;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=0.019473076;
+		};
+		class Item5469
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4180.4673,15.886381,3728.2412};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""cpt5_trg_iztdefkilldanger""],[""sizey"",6],[""sizex"",8],[""sizez"",3]]],[""class"",""Struct_SPZoneTrigger""]]}";
+			};
+			id=9306;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=0.88401222;
+		};
+		class Item5470
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4202.5391,17.539309,3713.1333};
+				angles[]={0.042554386,2.3425322,4.6566129e-09};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9308;
+			type="S_Svt_Magazine";
+			atlOffset=0.80491257;
+		};
+		class Item5471
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4199.7515,17.483109,3717.7};
+				angles[]={0.042554725,1.6274697,1.534645e-07};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9309;
+			type="S_Svt_Magazine";
+		};
+		class Item5472
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4175.0713,14.935723,3716.6667};
+				angles[]={6.2378759,0.0900032,6.2393036};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_half_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9311;
+			type="Land_SandbagBarricade_01_half_F";
+			atlOffset=0.12197018;
+		};
+		class Item5473
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4203.3716,15.779602,3713.7979};
+				angles[]={0.063109294,5.5970907,6.2059307};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallDirtLight""]]}";
+			};
+			id=9314;
+			type="gryazyuka3";
+			atlOffset=1.1335707;
 		};
 	};
 };
