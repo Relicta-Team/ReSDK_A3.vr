@@ -16,6 +16,8 @@ loadFile("src\host\GameObjects\Items\Item.sqf");
 loadFile("src\host\GameObjects\Items\Debris\Debris.sqf");
 loadFile("src\host\GameObjects\Items\Clothes\cloth.sqf");
 	loadFile("src\host\GameObjects\Items\Clothes\Armors.sqf");
+	loadFile("src\host\GameObjects\Items\Clothes\Helmets.sqf");
+	loadFile("src\host\GameObjects\Items\Clothes\Masks.sqf");
 loadFile("src\host\GameObjects\Items\MeleeWeapons\Axes.sqf");
 	loadFile("src\host\GameObjects\Items\MeleeWeapons\Swords.sqf");
 	loadFile("src\host\GameObjects\Items\MeleeWeapons\Knives.sqf");
