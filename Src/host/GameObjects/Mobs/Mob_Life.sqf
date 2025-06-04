@@ -2406,6 +2406,8 @@ region(Handle falling)
 		if not_equals(_mob,player) exitwith {
 			//errorformat("Unexpected falling error: mob %1",_mob);
 		};
+		//пакеты на падение отправляются с клиента. не самое лучшее решение, но в данный момент пойдёт...
+		if equals(_mob,player) exitWith {};
 		#endif
 
 		if (isTouchingGround _mob) then {

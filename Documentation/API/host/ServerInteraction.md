@@ -164,7 +164,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 620](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L620)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 634](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L634)
 ## si_throwingProcess
 
 Type: function
@@ -338,7 +338,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [["th",0],["sh",1]]
 ```
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 218](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L218)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 232](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L232)
 ## interact_th_delegates
 
 Type: Variable
@@ -350,7 +350,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 221](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L221)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 235](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L235)
 ## interact_shassoc_idx
 
 Type: Variable
@@ -362,7 +362,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 296](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L296)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 311](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L311)
 ## interact_map_shassoc_keyint
 
 Type: Variable
@@ -374,7 +374,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 297](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L297)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 312](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L312)
 ## interact_map_shassoc_keystr
 
 Type: Variable
@@ -386,7 +386,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 298](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L298)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 313](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L313)
 ## interact_th_getItscData
 
 Type: function
@@ -424,7 +424,7 @@ Type: function
 Description: internal impl. of calculating start point of projectile
 
 
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 72](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L72)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 77](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L77)
 ## interact_th_addTask
 
 Type: function
@@ -433,7 +433,7 @@ Description:
 - Param: _mode
 - Param: _ctx
 
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 80](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L80)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 85](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L85)
 ## interact_th__clith
 
 Type: function
@@ -441,7 +441,7 @@ Type: function
 Description: 
 
 
-File: [host\ServerInteraction\ServerInteractionShared.sqf at line 155](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L155)
+File: [host\ServerInteraction\ServerInteractionShared.sqf at line 169](../../../Src/host/ServerInteraction/ServerInteractionShared.sqf#L169)
 # ServerInteractionTests.sqf
 
 ## SI_DEBUG_TRACELINE

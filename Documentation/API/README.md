@@ -16,7 +16,7 @@ Count modules: 32
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 74 files
+ - [LightEngine](client//LightEngine.md) - 75 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 2 files
  - [NetDisplays](client//NetDisplays.md) - 15 files
@@ -81,7 +81,7 @@ Count modules: 56
  - [ServerRpc](host//ServerRpc.md) - 2 files
  - [ServerSceneTest](host//ServerSceneTest.md) - 2 files
  - [ServerVoice](host//ServerVoice.md) - 1 files
- - [Singleplayer](host//Singleplayer.md) - 12 files
+ - [Singleplayer](host//Singleplayer.md) - 14 files
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
  - [Structs](host//Structs.md) - 2 files

@@ -21,6 +21,7 @@ src\client\LightEngine\ScriptedConfigs\SLIGHT_EFF_DUST_CLOUDS.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_EFF_DUST_GREEN.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_EFF_DUST_PARTICLES.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_EFF_DUST_ROTTEN_HUMAN.sqf
+src\client\LightEngine\ScriptedConfigs\SLIGHT_FX_GRENADE.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_ITAL_LAMP_MEDIUM.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_ITAL_LAMP_STRONG.sqf
 src\client\LightEngine\ScriptedConfigs\SLIGHT_LAMP_HOUSE.sqf

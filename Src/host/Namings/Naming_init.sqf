@@ -38,6 +38,13 @@ naming_generateName = {
 	if !isNullReference(getSelf(naming)) then {
 		delete(getSelf(naming));
 	};
+
+	#ifdef SP_MODE
+	if (true) exitWith {
+		//потому что в сингле у нас нет эдиторных либ
+		[this,_f,_s] call naming_generateName_old;
+	};
+	#endif
 	
 	private _retArr = "RelictaNC" callExtension (_f + " " + _s);
 	
@@ -97,10 +104,16 @@ naming_generateName_old = {
 		objParams_1(_sklons);
 		
 		if not_equals(this,nullPtr) then {
-			
+			//пока лень разбираться
+			#ifdef SP_MODE
+			if not_equals(getSelf(Naming),naming_default) then {
+				delete(getSelf(Naming));
+			};
+			#else
 			if not_equals(getSelf(Naming),naming_default) exitWith {
 				errorformat("Naming module already created for mob with names: %1",_sklons);
 			};
+			#endif
 			
 			private _oname = new(HumanNaming);
 			private _struct = _sklons splitString "|";

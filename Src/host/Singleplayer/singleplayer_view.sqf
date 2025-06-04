@@ -15,8 +15,28 @@ sp_gui_taskMessageWidth = 25;
 
 sp_internal_lastNotification = "";
 
+if !isNull(sp_gui_pphndl_chromabb) then {
+	ppEffectDestroy sp_gui_pphndl_chromabb;
+};
+sp_gui_pphndl_chromabb = ppEffectCreate ["ChromAberration", 10000];
+if !isNull(sp_gui_pphndl_clrinvers) then {
+	ppEffectDestroy sp_gui_pphndl_clrinvers;
+};
+sp_gui_pphndl_clrinvers = ppEffectCreate ["ColorInversion", 10001];
+
+sp_gui_pphndl_chromabb ppEffectEnable true;
+sp_gui_pphndl_clrinvers ppEffectEnable true;
+
+sp_gui_internal_handlePPUpdate = -1;
+
 sp_isGUIInit = false;
 sp_initGUI = {
+	if not_equals(sp_gui_internal_handlePPUpdate,-1) then {
+		stopUpdate(sp_gui_internal_handlePPUpdate);
+	};
+
+	sp_gui_internal_handlePPUpdate = startUpdate(sp_gui_internal_onUpdatePPGUI,0.1);
+
 	if (count sp_gui_taskWidgets > 0) exitWith {};
 	private _d = getGUI;
 	private _ctg = [_d,WIDGETGROUP,[100-sp_gui_taskMessageWidth,2,sp_gui_taskMessageWidth,15]] call createWidget;
@@ -183,11 +203,22 @@ sp_isVisibleNotification = {
 	(getFade (call sp_int_getNotificationWidgetCtg)) == 0;	
 };
 
+sp_allInitializedWidgetHighlightTokens = [];
+
+sp_cleanupWidgetHighlightTokens = {
+	sp_allInitializedWidgetHighlightTokens apply {
+		refset(_x,true);
+	};
+	sp_allInitializedWidgetHighlightTokens resize 0;
+};
 
 sp_createWidgetHighlight = {
 	params ["_w",["_sizePx",0.01]];
 	if equalTypes(_w,{}) exitWith {
 		private _cancelToken = refcreate(false);
+		
+		sp_allInitializedWidgetHighlightTokens pushBack _cancelToken;
+
 		startAsyncInvoke
 		{
 			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
@@ -222,6 +253,9 @@ sp_createWidgetHighlight = {
 			_wlist pushBack ([_dpar,BACKGROUND,[0,0,0,0]] call createWidget);
 		};
 		private _cancelToken = refcreate(false);
+
+		sp_allInitializedWidgetHighlightTokens pushBack _cancelToken;
+
 		startAsyncInvoke
 		{
 			_this params ["_w","_wlist","_sizePx","_cancelToken","_laststart"];
@@ -280,7 +314,7 @@ sp_createWidgetHighlight = {
 
 //включение или отключение отображения худа. для черного экрана используем setBlackScreenGUI
 sp_view_setPlayerHudVisible = {
-	params [["_mode","inv+right+up+left+stats+cursor"]];
+	params [["_mode","inv+right+up+left+stats+cursor+stam"]];
 	private _modesList = _mode splitString " +";
 	["inv" in _modesList] call inventory_setGlobalVisible; //enable inventory slots
 	interactMenu_disableGlobal = !("right" in _modesList); //right menu
@@ -288,6 +322,8 @@ sp_view_setPlayerHudVisible = {
 	interactEmote_disableGlobal = !("left" in _modesList); //left/emote menu
 
 	interact_aim_disableGlobal = !("cursor" in _modesList);
+
+	[("stam" in _modesList)] call stamina_setVisible;
 	
 	{_x ctrlShow ("stats" in _modesList)} foreach hud_widgets; //statuses
 };
@@ -300,5 +336,60 @@ sp_view_setPlayerHeadVisible = {
 		[player,"onChangeFace",true] call smd_syncVar;
 	} else {
 		[player,"onChangeFace",true] call smd_syncVar;
+	};
+};
+
+sp_gui_setPlayerColorInversion = {
+	params ["_r","_g","_b"];
+	private _handle = sp_gui_pphndl_clrinvers;
+	_handle ppEffectAdjust [_r,_g,_b];
+	_handle ppEffectCommit 0.01;	
+};
+
+sp_gui_setPlayerAbberation = {
+	params ["_abberval"];
+	private _handle = sp_gui_pphndl_chromabb;
+	_handle ppEffectAdjust [_abberval,_abberval,true];
+	_handle ppEffectCommit 0.01;
+};
+
+sp_gui_internal_onUpdatePPGUI = {
+	
+	_hp = sp_playerHp;
+
+	if (_hp < 100) then {
+		if (tickTime >= (sp_playerLastDamagedTime + 5)) then {
+			_hp = _hp + 3;
+			sp_playerHp = _hp;
+		};
+	};
+
+	_abber = linearConversion [100,0,_hp,0,0.5,true];
+	[_abber] call sp_gui_setPlayerAbberation;
+	_redclr = linearConversion [100,0,_hp,0,0.6,true];
+	[_redclr,0,0] call sp_gui_setPlayerColorInversion;
+};
+
+sp_gui_internal_cinematicMode = false;
+sp_gui_setCinematicMode = {
+	params ["_mode"];
+	if equals(_mode,sp_gui_internal_cinematicMode) exitWith {};
+	sp_gui_internal_cinematicMode = _mode;
+	if (_mode) then {
+		_d = call displayOpen;
+		setMousePosition [100,100];
+		_d displayAddEventHandler ["MouseMoving",{
+			setMousePosition [100,100];
+		}];
+	} else {
+		call displayClose;
+	};
+};
+
+sp_gui_setBlackScreenGUI = {
+	params ["_mode",["_time",1],["_threadWait",true]];
+	[_mode,_time] call setBlackScreenGUI;
+	if (canSuspend && _threadWait) then {
+		_time call sp_threadPause;
 	};
 };

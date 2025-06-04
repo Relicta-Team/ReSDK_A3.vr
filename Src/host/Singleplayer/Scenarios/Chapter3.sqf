@@ -4,13 +4,24 @@
 // ======================================================
 
 #include "Scenario.h"
-cpt3_hudvis_default = "right+stats+cursor+inv";
+cpt3_hudvis_default = "stam+right+stats+cursor+inv";
 cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 ["cpt3_begin",{
+	call sp_initializeDefaultPlayerHandlers;
+    [true,0] call setBlackScreenGUI;
+
+	call cpt2_act_enableTorchHadnler;
+	cpt2_data_listTorches pushback ("cpt3_obj_torchoneater" call sp_getObject);
 	
+	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
+	[true] call sp_setPlayerSprintAllowed;
+    call cpt1_act_addMapViewHandler;
+
+	sp_allowebVerbs append ["undress"];
+
 	["cpt3_pos_start",0] call sp_setPlayerPos;
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	[cpt3_hudvis_default] call sp_view_setPlayerHudVisible;
 	[false,1.5] call setBlackScreenGUI;
 
 	if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
@@ -18,35 +29,41 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	};
 
 	//create deadbody
-	_posDeadbody = callFunc("cpt3_pos_deadbody_looting" call sp_getObject,getPos);
-	_body = [_posDeadbody,null,"cpt3_deadbody"] call sp_ai_createPerson;
-	_mob = _body getvariable "link";
-
-	callFuncParams(_mob,generateNaming,"Уба" arg "Бахот");
-	setVar(_mob,age,27);
-
-	_cloth = ["NomadCloth10",_mob,INV_CLOTH] call createItemInInventory;
-	["Lockpick",_cloth] call createItemInContainer;
+	_body = objNull;
+	_mob = nullPtr;
+	["cpt3_pos_deadbody_looting","cpt3_deadbody",[
+		["uniform","NomadCloth10"],
+		["name",["Мертвец"]],
+		["age",27]
+	],{
+		_cloth = callFuncParams(_this,getItemInSlot,INV_CLOTH);
+		["Lockpick",_cloth] call createItemInContainer;
+		_mob = _this;
+	},{
+		_body = _this;
+	}] call sp_ai_createPersonEx;
 	
 	callFuncParams(_mob,destroyLimb,BP_INDEX_HEAD);
 	callFuncParams(_mob,destroyLimb,BP_INDEX_LEG_L);
-	//callFuncParams(_mob,destroyLimb,BP_INDEX_ARM_L);
 	callFuncParams(_mob,destroyLimb,BP_INDEX_ARM_R);
 
 	_body switchMove "acts_staticdeath_10";
 	_body enablemimics false;
 
 	//make eater
-	_eaterBdy = ["cpt3_pos_eaterbase","GMPreyMobEater","cpt3_eater"] call sp_ai_createPerson;
+	_eaterBdy = objNull;
+	["cpt3_pos_eaterbase","cpt3_eater",[
+		["class","GMPreyMobEater"],
+		["name",["Сонный","Жрун"]]
+	],{
+		["Castoffs1",_this,INV_CLOTH] call createItemInInventory;
+	},{
+		_eaterBdy = _this;
+	}] call sp_ai_createPersonEx;
 	_eaterBdy setDir (callFunc("cpt3_pos_eaterbase" call sp_getObject,getDir));
 	if (!sp_debug) then {
 		_eaterBdy hideObject true;
 	};
-	_eater = _eaterBdy getvariable "link";
-
-	callFuncParams(_eater,generateNaming,"Сонный" arg "Жрун");
-	["Castoffs1",_eater,INV_CLOTH] call createItemInInventory;
-
 	_eaterBdy switchmove "ApanPercMstpSnonWnonDnon_G01";
 	_eaterBdy setface "persianhead_a3_01_player";//disable eater head
 
@@ -54,16 +71,30 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 }] call sp_addScene;
 
 ["cpt3_trg_katafound",{
+	["katacombs"] call sp_audio_playMusic;
 	["На подступе","Идите через катакомбы"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 
 ["cpt3_trg_foundmushrooms",{
 	{
-		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти ралзичные грибы, в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
+		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти различные грибы, в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
 }] call sp_addScene;
+
+cpt3_trg_enterdarkzone_act = false;
+["cpt3_trg_enterdarkzone",{
+	if (cpt3_trg_enterdarkzone_act) exitWith {};
+	cpt3_trg_enterdarkzone_act = true;
+
+	{
+		_h = ["В Сети бывают действительно темные места. Учитесь ориентироваться на местности в условиях плохой освещённости. Находясь в пещерах ищите и создавайте ориентиры, чтобы не заблудиться."] call sp_setNotification;
+		10 call sp_threadPause;
+		[false,_h] call sp_setNotificationVisible;
+	} call sp_threadStart;
+
+}] call sp_addTriggerEnter;
 
 ["cpt3_trg_founddeadbody",{
 	{
@@ -128,15 +159,20 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 		callFuncParams(_usr,mindSay,"Мне удалось взломать замок... но отмычка не пережила это.");
 		callSelfParams(setDoorLock,false arg false);
-		nextFrame({delete(_this)},_lockpick);
+		nextFrameParams({delete(_this)},_lockpick);
 	};
 
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
 
 	{
+		1 call sp_threadPause;
+		["Для взлома двери с помощью отмычки нажмите ЛКМ по двери. Если у вас есть навыки взлома - вы с лёгкостью откроете дверь."] call sp_setNotification;
+
 		{
 			!getVar("cpt3_obj_lockeddoor" call sp_getObject,isLocked)
 		} call sp_threadWait;
+		
+		[false] call sp_setNotificationVisible;
 
 		[
 			callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),
@@ -155,6 +191,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	setVar("cpt3_obj_lockeddoor" call sp_getObject,isLocked,true);
 
 	[cpt3_hudvis_eaterzone] call sp_view_setPlayerHudVisible;
+
+	[] call sp_audio_stopMusic;
+
 	{
 		_lampSrc = "LampCeiling G:Kym4iXFMOZ0 (3)" call sp_getObject;
 		
@@ -245,10 +284,17 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 }] call sp_addScene;
 
 ["cpt3_foundmonster",{
+	["cpt3_eater","cpt3_pos_eaterbase",0] call sp_ai_setMobPos;
+	("cpt3_eater" call sp_ai_getMobBody) hideObject false;
 	{
+		["eaterstealth"] call sp_audio_playMusic;
+
 		{
 			[0,1.5,0.01,0.5] call cam_addCamShake;
 		} call sp_threadCriticalSection;
+
+		["press_specact",false] call sp_setLockPlayerHandler;
+		["extra_action",false] call sp_setLockPlayerHandler;
 
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
@@ -318,6 +364,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		callFuncParams(_eaterSrc,playSound,"monster\eater\scream2" arg getRandomPitchInRange(0.8,1.3) arg 30 arg 2.2 arg null arg false);
 		[_eaterSrc,null,"cpt3_eater_runaway",{
 			params ["_mob"];
+			_mob setvelocity [0,0,0]; //fix fast moving bug
 			[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 			_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
 		}] call sp_ai_playAnim;
@@ -342,7 +389,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 			[_wall] call deleteGameObject;
 		};
 
-		_h = ["Вы можете драться при помощи любых предметов, взятых в руки. Однако помните, что в бою холодное оружие значительно эффективнее чем подручные предметы"] call sp_setNotification;
+		_h = ["Вы можете драться при помощи любых предметов, взятых в руки. Однако помните, что в бою холодное оружие значительно эффективнее чем подручные предметы."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 		
@@ -386,10 +433,12 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt4_data_eaterHandleLife = threadNull;
+
 ["cpt3_trg_stealthguide",{
 
 	//eater stealth handler
-	{
+	cpt4_data_eaterHandleLife = {
 		_eater = "cpt3_eater" call sp_ai_getMobObject;
 		while {!getVar(_eater,isDead)} do {
 			_refm = refcreate(0);
@@ -402,10 +451,11 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 				if (refget(_refm) >= VISIBILITY_MODE_LOW) then {
 					{
 						
-						[_eater,null,"cpt3_eater_attack",{
+						[_eater,"cpt3_pos_eaterstealth","cpt3_eater_attack",{
 							params ["_mob"];
-							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 							_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
+							_mob setvelocity [0,0,0]; //fix fast moving bug
+							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
 						}] call sp_ai_playAnim;
 
 						callFuncParams(_eater,playSound,"monster\eater\scream5" arg getRandomPitchInRange(0.9,1.1) arg 50 arg 2.2 arg null arg false);
@@ -417,6 +467,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 						
 					} call sp_threadCriticalSection;
 					_post = {
+						
+						["cpt3_eater","cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+
 						["cpt3_flag_caneatercheck",true] call sp_storageSet;
 						["cpt3_pos_onfailstealth",0] call sp_setPlayerPos;
 						[false,1.1] call setBlackScreenGUI;
@@ -470,6 +523,8 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt3_data_doorSeeDialogPerformed = false;
+
 ["cpt3_trg_attackeater",{
 	[cpt3_hudvis_eatercombat] call sp_view_setPlayerHudVisible;
 	["click_target",{
@@ -487,6 +542,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 				};
 				
 				setVar(_eater,isDead,true);
+				[cpt4_data_eaterHandleLife] call sp_threadStop;
 				getVar(_eater,owner) switchMove "Acts_StaticDeath_05";
 				call sp_removeCurrentPlayerHandler;
 			};
@@ -495,6 +551,8 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	}] call sp_addPlayerHandler;
 
 	{
+		["combat",false] call sp_setLockPlayerHandler;
+
 		_h = ["Чтобы атаковать противника перейдите в боевой режим, нажав $input_act_combatMode"] call sp_setNotification;
 		{
 			getVar(call sp_getActor,isCombatModeEnable)
@@ -520,6 +578,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 		["cpt3_lightswitch",false] call sp_storageSet;
 		[true] call sp_setHideTaskMessageCtg;
 
+		[] call sp_audio_stopMusic;
 		1.2 call sp_threadPause;
 
 		_sound = ["chap3\gg3"] call sp_audio_sayPlayer;
@@ -527,15 +586,21 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 		_threadlook = {
 			{
-				callFuncParams(call sp_getActor,canSeeObject,"cpt3_obj_doordestr" call sp_getObject)
+				_obj = "cpt3_obj_doordestr" call sp_getObject;
+				_refobj = (call interact_cursorobject)getVariable ["ref","nullref"];
+				callFuncParams(call sp_getActor,canSeeObject,_obj)
+				|| callFuncParams(call sp_getActor,getDistanceTo,_obj arg true) <= 1.2
+				|| equals(pointerList getOrDefault vec2(_refobj,nullPtr),_obj)
 			} call sp_threadWait;
-			[
+			([
 				"chap3\gg4",
 				"chap3\gg5"
-			] call sp_audio_sayPlayerList;
+			] call sp_audio_sayPlayerList) call sp_threadWaitForEnd;
+
+			cpt3_data_doorSeeDialogPerformed = true;
 		} call sp_threadStart;
 		
-		_threadlook = call sp_threadWaitForEnd;
+		_threadlook call sp_threadWaitForEnd;
 		
 		_h1 = ["main_action",{
 			params ["_t"];
@@ -579,6 +644,8 @@ cpt3_func_damageEvent = {
 
 ["cpt3_dodestroydoor",{
 	{
+		{cpt3_data_doorSeeDialogPerformed} call sp_threadWait;
+
 		["chap3\gg6"] call sp_audio_sayPlayer;
 		
 		1 call sp_threadPause;
@@ -595,6 +662,9 @@ cpt3_func_damageEvent = {
 				_t call cpt3_func_damageEvent;
 				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
 					[false] call sp_setNotificationVisible;
+					
+					call sp_removeCurrentPlayerHandler;
+
 					nextFrameParams(deleteGameObject,[_t]);
 
 					_worldPos = callFunc(_t,getPos) vectorAdd [0,0,0.5];
@@ -610,7 +680,9 @@ cpt3_func_damageEvent = {
 	} call sp_threadStart;
 }] call sp_addScene;
 
-["t3_trg_foundgate",{
+["cpt3_trg_foundgate",{
+	["gate"] call sp_audio_playMusic;
+
 	["chap3\gg7"] call sp_audio_sayPlayer;
 }] call sp_addScene;
 
@@ -642,6 +714,72 @@ cpt3_func_damageEvent = {
 	[true,2] call setBlackScreenGUI;
 	{
         3 call sp_threadPause;
-        ["cpt4_begin"] call sp_startScene;
+		["cpt3_topart4"] call sp_startScene;
     } call sp_threadStart;
+}] call sp_addScene;
+
+
+["cpt3_topart4",{
+	if (sp_debug) then {
+		callFuncParams("GateCity G:6C2bvKArl3c" call sp_getObject,setDoorOpen,false);
+	};
+
+	{
+		
+		["transition1"] call sp_audio_playMusic;
+
+		//cam shown
+		[true] call sp_cam_setCinematicCam;
+		{
+			["cpt3_pos_cutscenetocpt4","player_cutscene",[],{
+				[_this] call sp_copyPlayerInventoryTo;
+			}] call sp_ai_createPersonEx;
+
+			["cpt3_pos_cutscenearmygate","cpt3_armygate",[
+				["uniform","StreakCloth"]
+			],{
+				["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
+				callFunc(_this,switchTwoHands);
+			}] call sp_ai_createPersonEx;
+
+		} call sp_threadCriticalSection;
+
+		_animStartAG = {
+			["cpt3_armygate","cpt3_pos_cutscenearmygate","cutscenes\cpt3_cutscenearmyongate",{}] call sp_ai_playAnim;
+		}; invokeAfterDelay(_animStartAG,4);
+		_eaterScream = {
+			_pos = [4426.8,3777.53,8.74983];
+			_obj = "player_cutscene" call sp_ai_getMobObject;
+			callFuncParams(_obj,playSound,"monster\eater\idle3" arg 0.82 arg 30 arg 1.3 arg _pos arg false);
+			
+		}; invokeAfterDelay(_eaterScream,5.5);
+
+		["vr",[4434.06,3779.81,9.47894],71.3239,0.28,[-0.95584,0],0,0,720,0.198145,0,1,0,1] call sp_cam_prepCamera;
+		"player_cutscene" call sp_ai_waitForMobLoaded;
+		{call sp_isPlayerPosPrepared} call sp_threadWait;
+		["player_cutscene","cpt3_pos_cutscenetocpt4","cutscenes\cpt3_cutscenetocpt4",{},[
+			["state_1",{
+				callFuncParams("GateCity G:6C2bvKArl3c" call sp_getObject,setDoorOpen,true);
+			}]
+		]] call sp_ai_playAnim;
+		[false,4] call setBlackScreenGUI;
+		11 call sp_threadPause;
+
+		
+		_pos2 = ["vr",[4438.88,3781.21,11.979],70.2198,0.91,[-23.9821,0],0,0,720,0.198145,0,1,0,1];
+		["all",_pos2,16.3 + 8] call sp_cam_interpTo;
+		(10) call sp_threadPause;
+		[true,4] call sp_gui_setBlackScreenGUI;
+
+		5 call sp_threadPause;
+
+		[false] call sp_cam_setCinematicCam;
+		call sp_cam_stopAllInterp;
+		_post = {
+			call sp_cleanupSceneData;
+			call sp_clearPlayerInventory;
+        	["cpt4_begin"] call sp_startScene;
+		}; 
+		invokeAfterDelay(_post,2);
+	} call sp_threadStart;
 }] call sp_addScene;

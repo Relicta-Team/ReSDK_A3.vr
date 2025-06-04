@@ -27,6 +27,9 @@ ReNode/noapp.log
 Third-party/gh_build/__pycache__/**
 Third-party/gh_build/TEMP/**
 
+Third-party/SPBuilder/__pycache__/**
+Third-party/SPBuilder/build/**
+
 RBuilder/VM/src
 RBuilder/VM/addons
 RBuilder/VM/preload/**
