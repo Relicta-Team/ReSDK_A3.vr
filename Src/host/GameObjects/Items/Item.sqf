@@ -724,10 +724,12 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		private _dynDisp = getVar(_usr,_internalDynamicND);
 
 		private _getInfo = {
+			private _ctx = getSelf(context);
+
 			[
-				callSelf(getExamine3dItemModel)
-				,format["%1",getSelf(name)]
-				,callSelf(getExamine3dItemType)
+				callFunc(_ctx,getExamine3dItemModel)
+				,format["%1",getVar(_ctx,name)]
+				,callFunc(_ctx,getExamine3dItemType)
 			]
 		};
 		private _handleInp = { objParams_2(_usr,_inp); };

@@ -7,7 +7,7 @@
 
 struct(Examine3d) base(NDBase)
 
-    decl(specFlagList) [
+    def(specFlagList) [
         "obj",
         "cloth",
         "armor",
@@ -16,17 +16,20 @@ struct(Examine3d) base(NDBase)
         "helmet"
     ];
 
-	decl(override) def(process)
-	{
-		params ["_args","_isFirstCall"];
-		private _ctg = [_isFirstCall,30,20,false] call nd_stdLoad;
+
+    cde_debug = {
+        params ["_args","_isFirstCall"];
+        private _sizeX = 80;
+        private _sizeY = 90;
+
+		private _zone = [_isFirstCall,_sizeX,_sizeY,false] call nd_stdLoad;
 		call nd_cleanupData;
 		
 		_args params [["_model",""],["_text",""],["_specFlag","obj"]];
-		
-        private _sizeX = 80;
-        private _sizeY = 90;
-        private _zone = [WIDGETGROUP,[50-_sizeX/2,50-_sizeY/2,_sizeX,_sizeY],_ctg] call nd_regWidget;
+
+        if (!([_model,"\"] call stringStartWith)) then {
+            _model = "\" + _model;
+        };
 
         private _back = [BACKGROUND,WIDGET_FULLSIZE,_zone] call nd_regWidget;
 		_back setBackgroundColor [.1,0.1,0.1,.8];
@@ -35,6 +38,54 @@ struct(Examine3d) base(NDBase)
         [_tUp,format["<t align='center' size='1.2'>%1</t>",_text]] call widgetSetText;
 		
         private _internalZone = [WIDGETGROUP,[0,10,100,80],_zone] call nd_regWidget;
+        _internalZone setvariable ["dragStart",[0,0]];
+        _internalZone setvariable ["isDragActive",false];
+        _internalZone setvariable ["pitch",0];
+        _internalZone setvariable ["bank",0];
+
+        _internalZone ctrlAddEventHandler ["MouseButtonDown",{
+            params ["_internalZone"];
+            _pressPos = getMousePosition;
+            _internalZone setvariable ["isDragActive",true];
+            _internalZone setvariable ["dragStart",_pressPos];
+        }];
+        _internalZone ctrlAddEventHandler ["MouseButtonUp",{
+            params ["_internalZone"];
+            _internalZone setvariable ["isDragActive",false];
+        }];
+        _internalZone ctrlAddEventHandler ["MouseMoving", {
+            params ["_internalZone", "_xPos", "_yPos"];
+            
+            if (_internalZone getVariable ["isDragActive",false]) then {
+                private _lastPos = _internalZone getVariable ["dragStart", [_xPos, _yPos]];
+                private _dx = _xPos - (_lastPos select 0);
+                private _dy = _yPos - (_lastPos select 1);
+
+                // масштаб чувствительности
+                private _sensitivity = 60;
+
+                // Получение текущих углов
+                private _currentPitch = _internalZone getVariable ["pitch", 0];
+                private _currentBank = _internalZone getVariable ["bank", 0];
+
+                _currentPitch = _currentPitch - _dy * _sensitivity;
+                _currentBank = _currentBank + _dx * _sensitivity;
+
+                // Сохраняем
+                _internalZone setVariable ["pitch", _currentPitch];
+                _internalZone setVariable ["bank", _currentBank];
+
+                // Применение вращения к модели
+                nd_internal_currentStructObj callp(_syncModelPos,_internalZone);
+                // private _mdl = _ctrl getVariable ["model", objNull];
+                // if (!isNull _mdl) then {
+                //     _mdl ctrlSetModelDirAndUp [[_currentPitch, _currentBank, 0], [0,1,0]];
+                // };
+
+                _ctrl setVariable ["dragStart", [_xPos, _yPos]];
+            };
+        }];
+
 
 		private _mdlwid = (self getv(thisDisplay)) ctrlCreate ["RscObject",-1,_internalZone];
         _mdlwid ctrlSetModel _model;
@@ -47,36 +98,54 @@ struct(Examine3d) base(NDBase)
         private _lwrYPos = 100-10-_cSizeY;
 		_textWid = [(self getv(thisDisplay)),[50-_cSizeX/2,_lwrYPos,_cSizeX,_cSizeY],_ctg,true] call nd_addClosingButton;
 		_textWid ctrlSetText "Закрыть";
+    };
+
+    cde_objhlp = {
+        params ["_ctg"];
+        private _obj = _ctg getVariable "model";
+        private _scale = 1 / (getResolution select 5);
+
+        // Глубина по умолчанию
+        private _distance = 3 * 4 / 3;
+        if ((getResolution select 4) < (4/3)) then {
+            _distance = _distance * (getResolution select 7); // пример: 5:4 мониторы
+        };
+
+        // Центр зоны
+        private _ctrlPos = ctrlPosition _ctg;
+        private _centerX = (_ctrlPos select 0) + (_ctrlPos select 2) / 2;
+        private _centerY = (_ctrlPos select 1) + (_ctrlPos select 3) / 2;
+
+        // Глубина на основе размера BBX (по z, т.е. высоте модели)
+        private _bbx = core_modelBBX getOrDefault [ctrlModel _obj, [0, 0, 1]];
+        private _depthAdjust = (_bbx select 2) * _distance;
+
+        // Установка позиции в формате: [x, z (depth), y]
+        _centerX = 0.5;
+        _centerY = 0.5;
+        _obj ctrlSetPosition [_centerX, _depthAdjust, _centerY];
+
+        // Масштаб
+        _obj ctrlSetModelScale _scale;
+
+        // Применяем углы
+        private _pitch = _ctg getVariable ["pitch", 0];
+        private _bank = _ctg getVariable ["bank", 0];
+        private _dirUp = [_pitch, _bank, 0] call model_convertPithBankYawToVec;
+        _obj ctrlSetModelDirAndUp _dirUp;
+
+        _obj ctrlCommit 0;
+    };
+
+	decl(override) def(process)
+	{
+        _this call cde_debug;
 		
 	};
 
-    decl(_syncModelPos)
+    def(_syncModelPos)
     {
-        params ["_ctg"];
-        private _obj = _ctg getvariable "model";
-        private _scale = 1 / (getResolution select 5); // keep object the same size for any interface size
-        private _distance = 30 * 4/3;
-        if ((getResolution select 4) < (4/3)) then { _distance = _distance * (getResolution select 7); }; // eg 5x4
-        private _base = ["3d", [
-            (ctrlPosition _ctg) select 0,
-            (ctrlPosition _ctg) select 1,
-            _distance
-        ], _scale] call widgetModel_objectHelper;
-        _base = [((ctrlPosition _ctg) select 0) + (
-            ((ctrlPosition _ctg) select 2)/2
-        ),
-            ((core_modelBBX getOrDefault [ctrlModel _obj,[0,0,1]]) select 2) * (_base select 1), 
-            //_base select 1,
-        ((ctrlPosition _ctg) select 1) + (
-            ((ctrlPosition _ctg) select 3)/2
-        )];
-        
-        _obj ctrlSetPosition _base;
-        _obj ctrlSetModelScale _scale;
-        _obj ctrlSetModelDirAndUp (([60,75,0] call model_convertPithBankYawToVec));
-
-        _obj ctrlSetFadE rand(0.2,0.5);
-        _obj ctrlCommit 0;
-    }
+        _this call cde_objhlp;
+    };
 
 endstruct
