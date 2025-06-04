@@ -34,7 +34,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 
 	getter_func(canApplyDamage,true);
 
-	verbList("pickup twohands",GameObject);
+	verbList("pickup twohands description3d",GameObject);
 	editor_attribute("EditorVisible" arg "custom_provider:size") editor_attribute("Tooltip" arg "Размер предмета")
 	var(size,ITEM_SIZE_TINY);//объём предмета
 
@@ -713,6 +713,28 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		private _newHim = clamp(_germHis + floor(_germsMe * 0.15),0,GERM_COUNT_MAX);
 		setSelf(germs,_newMe);
 		setVar(_p,germs,_newHim);
+	};
+
+	//examine3d
+	getter_func(getExamine3dItemModel,getSelf(model));
+	getterconst_func(getExamine3dItemType,"obj");
+	func(examine3dItem)
+	{
+		objParams_1(_usr);
+		private _dynDisp = getVar(_usr,_internalDynamicND);
+
+		private _getInfo = {
+			[
+				callSelf(getExamine3dItemModel)
+				,format["%1",getSelf(name)]
+				,callSelf(getExamine3dItemType)
+			]
+		};
+		private _handleInp = { objParams_2(_usr,_inp); };
+		private _ctx = this;
+		callFuncParams(_dynDisp,setNDOptions,"Examine3d" arg 5 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
+		
+		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
 	};
 
 endclass

@@ -14,7 +14,7 @@
 #include "Paper.sqf"
 #include "HeadConsole.sqf"
 #include "MerchantConsole.sqf"
-
+#include "Examine3d.sqf"
 
 #include "MobInventory.sqf"
 
