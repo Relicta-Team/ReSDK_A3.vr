@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define REPLACE_REQUIRED IDestructible
+#define REPLACE_REQUIRED IStruct
 
 class(assaultboard) extends(REPLACE_REQUIRED)
 	var(name,"assaultboard");
