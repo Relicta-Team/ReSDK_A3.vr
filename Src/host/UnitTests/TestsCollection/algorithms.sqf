@@ -61,6 +61,34 @@ TEST(Algorithms_searching)
 	ASSERT_EQ(_bestResult,vec2(11,0));
 }
 
+TEST(Algorithms_generators)
+{
+	//base test
+	private _list = generate_list(1,3,null);
+	ASSERT_EQ(count _list,3);
+
+	//inversed test
+	private _list2 = generate_list(3,1,null);
+	ASSERT_EQ(count _list2,3);
+
+	//generate with zero values
+	private _list3 = generate_list(0,0,null);
+	ASSERT_EQ(count _list3,1);
+
+	//usage func
+	private _fnc = {
+		params ["_ival"];
+		_ival * 2;
+	};
+
+	private _list4 = generate_list(1,3,_fnc);
+	ASSERT_EQ(_list4, [2 arg 4 arg 6]);
+
+	//single param usage
+	private _list5 = generate_list(49,null,null);
+	ASSERT_EQ(count _list5,50);
+}
+
 // TEST(Algorithms_sorting)
 // {
  	//! in current version ReSDK does not support custom sorting algorithms

@@ -428,6 +428,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define any_of(values) ([values] call anyOf)
 #define none_of(values) ([values] call noneOf)
 
+#define generate_list(begin,end,fn_) ([begin,end,fn_] call generateList)
+
 //random helpers
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
