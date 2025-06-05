@@ -507,6 +507,26 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #define startAsyncInvoke [
 #define endAsyncInvoke ] call CBA_fnc_waitUntilAndExecute;
 
+/*
+	susspend supported fast thread
+	example:
+
+	sftBegin //[{
+		sftWait(tickTime>5); //},[...],{
+		log("after 5 sec");
+
+		sftSleep(10); //},[...],{
+		log("after 10 sec");
+	sftEnd // }]
+*/
+
+#define sftBegin [sft_processQueue__,{},[{
+
+#define sftEnd },0,tickTime]] call sft_createThread__;
+
+#define sftWait(condition_) },{_canJump = condition_},{
+
+#define sftSleep(await_) },{_canJump = tickTime >= ((await_)+_tstrt)},{
 
 //lang helpers
 

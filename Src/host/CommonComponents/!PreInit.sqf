@@ -655,3 +655,26 @@ pushFront = {
 	};
 	reverse _list;
 };
+
+
+sft_processQueue__ = {
+	private _ctob = _this;
+	params ["_states","_cur","_tstrt"];
+	private _canJump = true;
+	_pfnc = _states select _cur;
+	call _pfnc;
+	if (_canJump) then {
+		_cur = cur+1;
+		_ctob set [1,_cur];
+		_ctob set [2,tickTime];
+		(_cur >= (count _states))
+	} else {
+		false
+	};
+};
+
+sft_createThread__ = {
+	private _args = _this;
+	//TODO: add captured variables, add cancelation token
+	_args call CBA_fnc_waitUntilAndExecute;
+};
