@@ -48,7 +48,7 @@ generateList = {
 	//fill array
 	private __gtv = _s;
 	{
-		_glist set [_foreachindex,[__gtv] call _fn];
+		_glist set [_foreachindex,__gtv call _fn];
 		INC(__gtv);
 	} foreach _glist;
 
