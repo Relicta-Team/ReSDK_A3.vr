@@ -183,6 +183,14 @@ Description:
 - Param: _val
 
 File: [client\StaminaControl\Stamina.sqf at line 99](../../../Src/client/StaminaControl/Stamina.sqf#L99)
+## stamina_setVisible
+
+Type: function
+
+Description: 
+- Param: _mode
+
+File: [client\StaminaControl\Stamina.sqf at line 106](../../../Src/client/StaminaControl/Stamina.sqf#L106)
 ## stamina_convCurToPrec
 
 Type: function
@@ -190,7 +198,7 @@ Type: function
 Description: 
 
 
-File: [client\StaminaControl\Stamina.sqf at line 107](../../../Src/client/StaminaControl/Stamina.sqf#L107)
+File: [client\StaminaControl\Stamina.sqf at line 114](../../../Src/client/StaminaControl/Stamina.sqf#L114)
 ## stamina_syncVisual
 
 Type: function
@@ -198,7 +206,7 @@ Type: function
 Description: 
 
 
-File: [client\StaminaControl\Stamina.sqf at line 112](../../../Src/client/StaminaControl/Stamina.sqf#L112)
+File: [client\StaminaControl\Stamina.sqf at line 119](../../../Src/client/StaminaControl/Stamina.sqf#L119)
 ## stamina_applyColorTheme
 
 Type: function
@@ -206,7 +214,7 @@ Type: function
 Description: 
 
 
-File: [client\StaminaControl\Stamina.sqf at line 118](../../../Src/client/StaminaControl/Stamina.sqf#L118)
+File: [client\StaminaControl\Stamina.sqf at line 125](../../../Src/client/StaminaControl/Stamina.sqf#L125)
 # Stamina_init.sqf
 
 ## stamina_widgets
