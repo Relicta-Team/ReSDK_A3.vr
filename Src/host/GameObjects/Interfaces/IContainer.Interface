@@ -21,7 +21,7 @@ editor_attribute("alias" arg "Открытый контейнер")
 var(canUseContainer,true); //флаг для добавления содержимого
 getterconst_func(allowedItemClasses,[]); //массив классов предметов, которые можно положить в контейнер. Если пустой - то все классы разрешены
 var(isPuttableContainer,false); //флаг, что этот контейнер можно положить в другой контейнер даже если в нем есть предметы. По умолчанию - нет
-getterconst_func(getDamagePercent,0.08); //процент повреждения предметов в контейнере при получении урона. 0 - не повреждаются
+getterconst_func(getContainerDamageCoef,0.08); //процент повреждения предметов в контейнере при получении урона. 0 - не повреждаются
 //proto_func(getContainerClientInfo); //собирает лист информации о каждом предмете в контейнере
 //proto_func(canAdd);//аргумент - _item. Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
 //proto_func(addItem); //добавляет предмет в контейнер с проверками canadd
@@ -546,9 +546,10 @@ func(applyDamage)
 {
 	objParams_4(_amount,_type,_worldPos,_cause);
 	private _content = array_copy(getSelf(content));
+	private _containerDamageCoef = callSelf(getContainerDamageCoef);
 	super();
 
-	private _dmgToContent = round (_amount * callSelf(getDamagePercent));
+	private _dmgToContent = round (_amount * _containerDamageCoef);
 	{
 		callFuncParams(_x,applyDamage,_dmgToContent arg _type arg _worldPos arg DAMAGE_TYPE_CRUSHING);
 	true;
