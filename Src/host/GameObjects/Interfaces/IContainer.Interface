@@ -521,3 +521,34 @@ func(initMoney)
 		};
 	};
 };
+
+// Удаляет все предметы из контейнера и раскидывает их в радиусе
+func(onDestroyed)
+{
+    objParams();
+
+    private _content = getSelf(content);
+
+    {
+        callFuncParams(_x,dropItemToWorld,callSelf(getPos) arg rand(0.2,0.55) arg random 360 arg this arg true);
+    } forEach _content;
+
+    setSelf(content, []);
+    callSelf(onContainerContentUpdate);
+
+	super();
+};
+
+// Уменьшает прочность предметов в контейнере
+func(applyDamage)
+{
+    objParams_4(_amount,_type,_worldPos,_cause);
+
+    private _result = super();
+
+    private _content = getSelf(content);
+    private _dmgToContent = round (_amount * 0.08);
+	{
+		callFuncParams(_x,applyDamage,_dmgToContent arg _type arg _worldPos arg DAMAGE_TYPE_CRUSHING);
+	} forEach _content;
+};
