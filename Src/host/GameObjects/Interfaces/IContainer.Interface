@@ -21,6 +21,7 @@ editor_attribute("alias" arg "Открытый контейнер")
 var(canUseContainer,true); //флаг для добавления содержимого
 getterconst_func(allowedItemClasses,[]); //массив классов предметов, которые можно положить в контейнер. Если пустой - то все классы разрешены
 var(isPuttableContainer,false); //флаг, что этот контейнер можно положить в другой контейнер даже если в нем есть предметы. По умолчанию - нет
+getterconst_func(getDamagePercent,0.08); //процент повреждения предметов в контейнере при получении урона. 0 - не повреждаются
 //proto_func(getContainerClientInfo); //собирает лист информации о каждом предмете в контейнере
 //proto_func(canAdd);//аргумент - _item. Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
 //proto_func(addItem); //добавляет предмет в контейнер с проверками canadd
@@ -525,16 +526,17 @@ func(initMoney)
 // Удаляет все предметы из контейнера и раскидывает их в радиусе
 func(onDestroyed)
 {
-    objParams();
+	objParams();
 
-    private _content = getSelf(content);
+ 	private _content = getSelf(content);
 
-    {
-        callFuncParams(_x,dropItemToWorld,callSelf(getPos) arg rand(0.2,0.55) arg random 360 arg this arg true);
-    } forEach _content;
+	{
+		callFuncParams(_x,dropItemToWorld,callSelf(getPos) arg rand(0.2,0.55) arg random 360 arg this arg true);
+		true;
+	} count _content;
 
-    setSelf(content, []);
-    callSelf(onContainerContentUpdate);
+	setSelf(content, []);
+	callSelf(onContainerContentUpdate);
 
 	super();
 };
@@ -542,13 +544,13 @@ func(onDestroyed)
 // Уменьшает прочность предметов в контейнере
 func(applyDamage)
 {
-    objParams_4(_amount,_type,_worldPos,_cause);
+	objParams_4(_amount,_type,_worldPos,_cause);
+	private _content = array_copy(getSelf(content));
+	super();
 
-    private _result = super();
-
-    private _content = getSelf(content);
-    private _dmgToContent = round (_amount * 0.08);
+	private _dmgToContent = round (_amount * callSelf(getDamagePercent));
 	{
 		callFuncParams(_x,applyDamage,_dmgToContent arg _type arg _worldPos arg DAMAGE_TYPE_CRUSHING);
-	} forEach _content;
-};
+	true;
+	} count _content;
+};	
