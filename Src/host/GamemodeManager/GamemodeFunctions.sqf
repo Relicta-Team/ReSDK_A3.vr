@@ -359,7 +359,7 @@ gm_initGameMode = {
 
 	//Проверяем дефолтные роли из режима
 	{
-		[_x] call gm_validateRolesOnPickGameMode;
+		[_x] call gm_validateAvailableRoles;
 	} foreach cm_allClients;
 
 	[GAME_STATE_LOBBY] call gm_onChangeState;
@@ -410,7 +410,7 @@ gm_loadGamemode = {
 
 	//Проверяем дефолтные роли из режима
 	{
-		[_x] call gm_validateRolesOnPickGameMode;
+		[_x] call gm_validateAvailableRoles;
 	} foreach cm_allClients;
 
 	[GAME_STATE_LOBBY] call gm_onChangeState;

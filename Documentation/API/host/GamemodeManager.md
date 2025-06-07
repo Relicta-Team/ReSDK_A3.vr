@@ -1437,7 +1437,7 @@ Description:
 
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1139](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1139)
-## gm_validateRolesOnPickGameMode
+## gm_validateAvailableRoles
 
 Type: function
 
