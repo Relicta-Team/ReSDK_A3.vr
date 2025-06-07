@@ -1443,6 +1443,7 @@ Type: function
 
 Description: Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
 - Param: this
+- Param: _canPrintMessage (optional, default true)
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1177](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1177)
 ## gm_endRound
