@@ -108,3 +108,134 @@ class(RespiratorMask) extends(GasmaskBase)
 	var(bodyPartsCovered,FACE);
 	var(weight,gramm(450));
 endclass
+
+/**************************************
+
+           NEW EXPORT MASKS
+
+*****************************************/
+
+//!unresloved class
+class(Bface_base_aat) extends(ItemMask)
+	var(name,"Bface_base_aat");
+	var(armaClass,"Bface_base_aat");
+endclass
+
+//!unresolved class
+class(Bface_base_fmsk) extends(ItemMask)
+	var(name,"Bface_base_fmsk");
+	var(armaClass,"Bface_base_fmsk");
+endclass
+
+//!unresolved
+class(Bface_base_fu) extends(ItemMask)
+	var(name,"Bface_base_fu");
+	var(armaClass,"Bface_base_fu");
+endclass
+
+//!unresolved
+class(Bface_base_fu02) extends(ItemMask)
+	var(name,"Bface_base_fu02");
+	var(armaClass,"Bface_base_fu02");
+endclass
+//!unresolved
+class(Bface_base_whml_port) extends(ItemMask)
+	var(name,"Bface_base_whml_port");
+	var(armaClass,"Bface_base_whml_port");
+endclass
+
+class(GasmaskOld) extends(Gasmask)
+	var(name,"Старый противогаз");
+	var(armaClass,"GasMask_fm1");
+endclass
+
+class(DustGlasses) extends(ItemMask)
+	var(name,"Пылевые очки");
+	var(armaClass,"goggles_wastelandclothing03");
+endclass
+
+class(RespiratorMaskTubes) extends(RespiratorMask)
+	var(name,"Респиратор");
+	var(armaClass,"nvrebreather_mask");
+endclass
+
+class(TheatricalMask) extends(ItemMask)
+	var(name,"Маска");
+	var(material,"MatWood");
+	var(armaClass,"Samurai_mask_fm1");
+endclass
+
+class(SlaveCollar) extends(ItemMask)
+	var(name,"Рабский ошейник");
+	var(material,"MatMetal");
+	var(armaClass,"slavecollar_mask");
+endclass
+
+class(FaceShieldSpartan) extends(ItemMask)
+	var(name,"Пластина");
+	var(desc,"Пластина для лица");
+	var(dr,4);
+	var(coverage,60);
+	var(bodyPartsCovered,FACE);
+	var(armaClass,"Spartan_FaceShield_Mask");
+endclass
+
+//red
+class(FaceCoverMaskBig1) extends(ItemMask)
+	var(name,"Большая тряпичная маска");
+	var(armaClass,"trouper_1recon");
+endclass
+
+//brown
+class(FaceCoverMaskBig2) extends(FaceCoverMaskBig1)
+	var(armaClass,"trouper_mask_fm1");
+endclass
+
+//green
+class(FaceCoverMaskBig3) extends(FaceCoverMaskBig1)
+	var(armaClass,"trouper_mask_green_fm1");
+endclass
+
+//gray
+class(FaceCoverMaskBig4) extends(FaceCoverMaskBig1)
+	var(armaClass,"trouper_mask_winter_fm1");
+endclass
+
+class(IronVisorMask) extends(ItemMask)
+	var(name,"Железная маска");
+	var(dr,4);
+	var(coverage,60);
+	var(material,"MatMetal");
+	var(bodyPartsCovered,EYES);
+	var(weight,2);
+	var(armaClass,"WBK_FuedalInquisitor_Mask");
+endclass
+
+class(WatcherMask1) extends(ItemMask)
+	var(name,"Железная маска");
+	var(dr,3);
+	var(coverage,80);
+	var(material,"MatMetal");
+	var(bodyPartsCovered,FACE);
+	var(weight,2);
+	var(armaClass,"WBK_FeudalCultistMask_1");
+endclass
+
+class(WatcherMask2) extends(WatcherMask1)
+	var(coverage,60);
+	var(armaClass,"WBK_FeudalCultistMask_2");
+endclass
+
+class(PlagueMask1) extends(GasmaskBase)
+	var(name,"Маска-носач");
+	var(armaClass,"PlagueMask_fm1");
+	var(coverage,100);
+endclass
+
+class(PlagueMask2) extends(PlagueMask1)
+	var(armaClass,"WBK_FeudalCrowMask_1");
+endclass
+
+class(PlagueMask3) extends(PlagueMask1)
+	var(armaClass,"WBK_FeudalCrowMask_2");
+endclass

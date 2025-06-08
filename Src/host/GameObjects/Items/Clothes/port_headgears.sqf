@@ -4,43 +4,63 @@
 // ======================================================
 
 
-class(EoO_Fant_Aldorf_Helm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_Aldorf_Helm_1");
+class(BigShroomHat1) extends(HeadgearBase)
+	var(name,"Большая грибошляпа");
 	var(armaClass,"EoO_Fant_Aldorf_Helm_1");
 endclass
 
-class(EoO_Fant_Averland_Helm_6) extends(HeadgearBase)
-	var(name,"EoO_Fant_Averland_Helm_6");
+class(SmallSteelHelmet1) extends(HeadgearBase)
+	var(name,"Стальная шлемка");
+	var(material,"MatMetal");
+	var(weight,3);
+	var(dr,3);
+	var(coverage,70);
+	var(bodyPartsCovered,HEAD);
+	var(armaClass,"EoO_Fant_Sallet_Helm_2");
+endclass
+
+class(SmallSteelHelmet2) extends(SmallSteelHelmet1)
+	var(armaClass,"EoO_Fant_Sallet_Helm_4A");
+endclass
+
+class(SmallSteelHelmet3) extends(SmallSteelHelmet1)
 	var(armaClass,"EoO_Fant_Averland_Helm_6");
 endclass
 
-class(EoO_Fant_Averland_Helm_4) extends(HeadgearBase)
-	var(name,"EoO_Fant_Averland_Helm_4");
+class(SmallShroomHat1) extends(HeadgearBase)
+	var(name,"Грибошляпа");
 	var(armaClass,"EoO_Fant_Averland_Helm_4");
 endclass
 
-class(EoO_Fant_Averland_Helm_5) extends(HeadgearBase)
-	var(name,"EoO_Fant_Averland_Helm_5");
+class(SmallShroomHat2) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Averland_Helm_5");
 endclass
 
-class(EoO_Fant_Averland_Helm_1) extends(HeadgearBase)
+class(BigShroomHat2) extends(BigShroomHat1)
 	var(name,"EoO_Fant_Averland_Helm_1");
 	var(armaClass,"EoO_Fant_Averland_Helm_1");
 endclass
 
-class(EoO_Breton_Knight_Helm_1) extends(HeadgearBase)
-	var(name,"EoO_Breton_Knight_Helm_1");
+class(ClosedSteelKnightHelmet) extends(HeadgearBase)
+	var(name,"Закрытый стальной шлем");
+	var(material,"MatMetal");
+	var(weight,4);
+	var(coverage,100);
+	var(bodyPartsCovered,FACE + HEAD);
 	var(armaClass,"EoO_Breton_Knight_Helm_1");
 endclass
 
-class(EoO_Fant_ArcheryHelm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_ArcheryHelm_1");
+class(SmallCoveredSteelHelmet1) extends(HeadgearBase)
+	var(name,"Крытая стальная шлемка");
+	var(material,"MatMetal");
+	var(weight,5);
+	var(dr,4);
+	var(coverage,80);
+	var(bodyPartsCovered,HEAD);
 	var(armaClass,"EoO_Fant_ArcheryHelm_1");
 endclass
 
-class(EoO_Fant_ArcheryHelm_2) extends(HeadgearBase)
-	var(name,"EoO_Fant_ArcheryHelm_2");
+class(SmallCoveredSteelHelmet2) extends(SmallCoveredSteelHelmet1)
 	var(armaClass,"EoO_Fant_ArcheryHelm_2");
 endclass
 
@@ -49,128 +69,136 @@ class(EoO_Fant_FireWizard_Helm_1) extends(HeadgearBase)
 	var(armaClass,"EoO_Fant_FireWizard_Helm_1");
 endclass
 
-class(EoO_Fant_Burgundian_Helm_11) extends(HeadgearBase)
-	var(name,"EoO_Fant_Burgundian_Helm_11");
+class(BlackSteelCrown) extends(HeadgearBase)
+	var(name,"Стальная корона");
+	var(material,"MatMetal");
+	var(dr,4);
+	var(coverage,20);
+	var(bodyPartsCovered,HEAD);
+	var(weight,2.5);
 	var(armaClass,"EoO_Fant_Burgundian_Helm_11");
 endclass
 
-class(EoO_Fant_Burgundian_Helm_15) extends(HeadgearBase)
-	var(name,"EoO_Fant_Burgundian_Helm_15");
-	var(armaClass,"EoO_Fant_Burgundian_Helm_15");
+class(BigSteelOpenableHelmet1) extends(HeadgearBase)
+	var(name,"Тёмный стальной шлем");
+	var(material,"MatMetal");
+	var(dr,5);
+	var(bodyPartsCovered,HEAD);
+	var(armaClass,"EoO_Fant_Burgundian_Helm_15"); //closestate EoO_Fant_Burgundian_Helm_20
 endclass
 
-class(EoO_Fant_Burgundian_Helm_16) extends(HeadgearBase)
-	var(name,"EoO_Fant_Burgundian_Helm_16");
-	var(armaClass,"EoO_Fant_Burgundian_Helm_16");
+class(BigSteelOpenableHelmet2) extends(BigSteelOpenableHelmet1)
+	var(name,"Светлый стальной шлем");
+	var(armaClass,"EoO_Fant_Burgundian_Helm_16"); //!FIXME is closable
 endclass
 
-class(EoO_Fant_Burgundian_Helm_20) extends(HeadgearBase)
-	var(name,"EoO_Fant_Burgundian_Helm_20");
-	var(armaClass,"EoO_Fant_Burgundian_Helm_20");
-endclass
-
-class(EoO_Fant_FlatHelm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_FlatHelm_1");
+class(KnightBucketHelm) extends(HeadgearBase)
+	var(name,"Шлем");
+	var(material,"MatMetal");
+	var(dr,4);
+	var(coverage,70);
+	var(bodyPartsCovered,HEAD);
+	var(weight,4);
 	var(armaClass,"EoO_Fant_FlatHelm_1");
 endclass
 
-class(EoO_Fant_KettleHelm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_KettleHelm_1");
+class(SmallShroomSteelHelmet1) extends(HeadgearBase)
+	var(name,"Грибошлем");
+	var(material,"MatMetal");
+	var(dr,4);
+	var(coverage,70);
+	var(bodyPartsCovered,HEAD);
+	var(weight,4);
 	var(armaClass,"EoO_Fant_KettleHelm_1");
 endclass
 
-class(EoO_Fant_PaddedCap_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_PaddedCap_1");
+class(PeasantHat) extends(HeadgearBase)
+	var(name,"Шапка");
 	var(armaClass,"EoO_Fant_PaddedCap_1");
 endclass
 
-class(EoO_Fant_Sallet_Helm_4A) extends(HeadgearBase)
-	var(name,"EoO_Fant_Sallet_Helm_4A");
-	var(armaClass,"EoO_Fant_Sallet_Helm_4A");
-endclass
-
-class(EoO_Fant_Sallet_Helm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_Sallet_Helm_1");
+class(SmallSteelHelmetCovered1) extends(HeadgearBase)
+	var(name,"Светлый стальной шлем");
+	var(coverage,85);
+	var(bodyPartsCovered,HEAD);
+	var(weight,4);
+	var(material,"MatMetal");
 	var(armaClass,"EoO_Fant_Sallet_Helm_1");
 endclass
 
-class(EoO_Fant_Sallet_Helm_5) extends(HeadgearBase)
-	var(name,"EoO_Fant_Sallet_Helm_5");
+class(SmallSteelHelmetCovered2) extends(SmallSteelHelmetCovered1)
+	var(name,"Темный стальной шлем");
 	var(armaClass,"EoO_Fant_Sallet_Helm_5");
 endclass
 
-class(EoO_Fant_Sallet_Helm_2) extends(HeadgearBase)
-	var(name,"EoO_Fant_Sallet_Helm_2");
-	var(armaClass,"EoO_Fant_Sallet_Helm_2");
-endclass
 
-class(EoO_Fant_Milita_Hat_2) extends(HeadgearBase)
-	var(name,"EoO_Fant_Milita_Hat_2");
+
+class(SmallShroomHat3) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Milita_Hat_2");
 endclass
 
-class(EoO_Fant_Milita_Hat_3) extends(HeadgearBase)
-	var(name,"EoO_Fant_Milita_Hat_3");
+class(SmallShroomHat4) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Milita_Hat_3");
 endclass
 
-class(EoO_Fant_Milita_Hat_4) extends(HeadgearBase)
-	var(name,"EoO_Fant_Milita_Hat_4");
+class(SmallShroomHat5) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Milita_Hat_4");
 endclass
 
-class(EoO_Fant_SkeletonHelm_5) extends(HeadgearBase)
-	var(name,"EoO_Fant_SkeletonHelm_5");
+class(BatHelmet1) extends(HeadgearBase)
+	var(name,"Крылатый шлем");
 	var(armaClass,"EoO_Fant_SkeletonHelm_5");
 endclass
 
-class(EoO_Fant_SkeletonHelm_6) extends(HeadgearBase)
-	var(name,"EoO_Fant_SkeletonHelm_6");
+class(BatHelmet2) extends(BatHelmet1)
 	var(armaClass,"EoO_Fant_SkeletonHelm_6");
 endclass
 
-class(EoO_Fant_SkeletonHelm_2) extends(HeadgearBase)
-	var(name,"EoO_Fant_SkeletonHelm_2");
+class(SteelSpikeHelmet) extends(HeadgearBase)
+	var(name,"Шлем с шипом");
 	var(armaClass,"EoO_Fant_SkeletonHelm_2");
 endclass
 
-class(EoO_Fant_Wissenland_Helm_3) extends(HeadgearBase)
-	var(name,"EoO_Fant_Wissenland_Helm_3");
+class(SmallShroomHat6) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Wissenland_Helm_3");
 endclass
 
-class(EoO_Fant_Wissenland_Helm_4) extends(HeadgearBase)
-	var(name,"EoO_Fant_Wissenland_Helm_4");
+class(SmallShroomHat7) extends(SmallShroomHat1)
 	var(armaClass,"EoO_Fant_Wissenland_Helm_4");
 endclass
 
-class(SC_KatariCap) extends(HeadgearBase)
-	var(name,"SC_KatariCap");
+class(BigSteelShroomHelmet) extends(HeadgearBase)
+	var(name,"Ритуальная грибошляпа");
+	var(material,"MatMetal");
 	var(armaClass,"SC_KatariCap");
 endclass
 
-class(Barbut_Helmet) extends(HeadgearBase)
-	var(name,"Barbut_Helmet");
+class(BarbutHelmet) extends(HeadgearBase)
+	var(name,"Шлем");
+	var(coverage,90);
+	var(bodyPartsCovered,HEAD+FACE);
+	var(material,"MatMetal");
+	var(dr,3);
+	var(weight,5);
 	var(armaClass,"Barbut_Helmet");
 endclass
 
-class(CoatOfPlate_Helmet) extends(HeadgearBase)
-	var(name,"CoatOfPlate_Helmet");
+class(KnightCoveredHelmet1) extends(HeadgearBase)
+	var(name,"Закрытый шлем");
+	var(coverage,95);
+	var(dr,4);
+	var(bodyPartsCovered,HEAD+FACE);
+	var(weight,4);
+	var(material,"MatMetal");
 	var(armaClass,"CoatOfPlate_Helmet");
 endclass
 
-class(Composit_Helmet) extends(HeadgearBase)
-	var(name,"Composit_Helmet");
-	var(armaClass,"Composit_Helmet");
-endclass
-
-class(Composit_Helmet_Open) extends(HeadgearBase)
+class(CompositSteelOpenableHelmet) extends(HeadgearBase)
 	var(name,"Composit_Helmet_Open");
-	var(armaClass,"Composit_Helmet_Open");
+	var(armaClass,"Composit_Helmet_Open"); //closable Composit_Helmet
 endclass
 
-class(Metal_Hat_imsmhelmets) extends(HeadgearBase)
-	var(name,"Metal_Hat_imsmhelmets");
+class(SmallShroomSteelHelmet2) extends(SmallShroomSteelHelmet1)
 	var(armaClass,"Metal_Hat_imsmhelmets");
 endclass
 
@@ -179,252 +207,226 @@ class(Hornedklapp_Helmet) extends(HeadgearBase)
 	var(armaClass,"Hornedklapp_Helmet");
 endclass
 
-class(Hornedklapp_Helmet_Open) extends(HeadgearBase)
-	var(name,"Hornedklapp_Helmet_Open");
-	var(armaClass,"Hornedklapp_Helmet_Open");
+class(InflatedSteelOpenableHelmet) extends(HeadgearBase)
+	var(name,"Дутый шлем");
+	var(coverage,100);
+	var(bodyPartsCovered,HEAD);
+	var(material,"MatLeather");
+	var(weight,3);
+	var(dr,3);
+	var(armaClass,"Hornedklapp_Helmet_Open"); //closable Hornedklapp_Helmet
 endclass
 
-class(Upper_Knight_Helmet) extends(HeadgearBase)
-	var(name,"Upper_Knight_Helmet");
-	var(armaClass,"Upper_Knight_Helmet");
+class(KnightHelmet1) extends(HeadgearBase)
+	var(name,"Стальной шлем");
+	var(armaClass,"Upper_Knight_Helmet"); //closable Upper_Knight_Helmet_Open
 endclass
 
-class(Upper_Knight_Helmet_Open) extends(HeadgearBase)
-	var(name,"Upper_Knight_Helmet_Open");
-	var(armaClass,"Upper_Knight_Helmet_Open");
+class(KnightHelmet2) extends(KnightHelmet1)
+	var(armaClass,"Knight_Helmet_01_Open"); //Knight_Helmet_01
 endclass
 
-class(Knight_Helmet_01) extends(HeadgearBase)
-	var(name,"Knight_Helmet_01");
-	var(armaClass,"Knight_Helmet_01");
-endclass
-
-class(Knight_Helmet_01_Open) extends(HeadgearBase)
-	var(name,"Knight_Helmet_01_Open");
-	var(armaClass,"Knight_Helmet_01_Open");
-endclass
-
-class(Templar_Helmet) extends(HeadgearBase)
-	var(name,"Templar_Helmet");
+class(KnightCoveredHelmet2) extends(KnightCoveredHelmet1)
 	var(armaClass,"Templar_Helmet");
 endclass
 
-class(SC_Turban_ft1) extends(HeadgearBase)
-	var(name,"SC_Turban_ft1");
+//red
+class(Turban1) extends(HeadgearBase)
+	var(name,"Тюрбан");
 	var(armaClass,"SC_Turban_ft1");
 endclass
 
-class(SC_Turban_Black) extends(HeadgearBase)
-	var(name,"SC_Turban_Black");
+//black
+class(Turban2) extends(Turban1)
 	var(armaClass,"SC_Turban_Black");
 endclass
 
-class(SC_Turban_White) extends(HeadgearBase)
-	var(name,"SC_Turban_White");
+//white
+class(Turban3) extends(Turban1)
 	var(armaClass,"SC_Turban_White");
 endclass
 
-class(SC_Turban_Tan) extends(HeadgearBase)
+//green
+class(Turban4) extends(Turban1)
 	var(name,"SC_Turban_Tan");
 	var(armaClass,"SC_Turban_Tan");
 endclass
 
-class(FHair_1_fth) extends(HeadgearBase)
-	var(name,"FHair_1_fth");
-	var(armaClass,"FHair_1_fth");
-endclass
-
-class(FHair_2_fth) extends(HeadgearBase)
-	var(name,"FHair_2_fth");
-	var(armaClass,"FHair_2_fth");
-endclass
-
-class(FHair_3_fth) extends(HeadgearBase)
-	var(name,"FHair_3_fth");
-	var(armaClass,"FHair_3_fth");
-endclass
-
-class(SC_ColdGuardHood) extends(HeadgearBase)
-	var(name,"SC_ColdGuardHood");
+class(InsulatedSnowHood) extends(HoodAbbat)
+	var(name,"Утеплённый капюшон");
 	var(armaClass,"SC_ColdGuardHood");
 endclass
 
-class(Army_Helmet_02) extends(HeadgearBase)
-	var(name,"Army_Helmet_02");
+class(CombatHelmet) extends(HeadgearBase)
+	var(name,"Боевой шлем");
 	var(armaClass,"Army_Helmet_02");
 endclass
 
-class(marked_men_faceless) extends(HeadgearBase)
-	var(name,"marked_men_faceless");
+//обломанные рога и лезвие на верхушке
+class(FormidableHelmet) extends(HeadgearBase)
+	var(name,"Грозный шлем");
 	var(armaClass,"marked_men_faceless");
 endclass
 
-class(Musketeer_Hat) extends(HeadgearBase)
-	var(name,"Musketeer_Hat");
+//cowboy hat
+class(StetsonHat) extends(HeadgearBase)
+	var(name,"Шляпа");
 	var(armaClass,"Musketeer_Hat");
 endclass
 
-class(Raoul_hat) extends(HeadgearBase)
-	var(name,"Raoul_hat");
+class(ShroomUpHat) extends(HeadgearBase)
+	var(name,"Деревенская грибошляпа");
 	var(armaClass,"Raoul_hat");
 endclass
 
-class(salt_wounds) extends(HeadgearBase)
-	var(name,"salt_wounds");
+class(RitualMaskHat) extends(HeadgearBase)
+	var(name,"Ритуальная маска");
 	var(armaClass,"salt_wounds");
 endclass
 
-class(1950_style_hat02) extends(HeadgearBase)
-	var(name,"1950_style_hat02");
+class(Hat3) extends(Hat1)
+	var(name,"Коричневая шляпа");
 	var(armaClass,"1950_style_hat02");
 endclass
 
-class(1950_style_hat) extends(HeadgearBase)
-	var(name,"1950_style_hat");
+class(Hat4) extends(Hat1)
+	var(name,"Черная шляпа");
 	var(armaClass,"1950_style_hat");
 endclass
 
-class(bandanared) extends(HeadgearBase)
-	var(name,"bandanared");
+class(HatBandanaOpen1) extends(HatBandana)
+	var(name,"Красная бандана");
 	var(armaClass,"bandanared");
 endclass
 
-class(boomerhat03) extends(HeadgearBase)
-	var(name,"boomerhat03");
+class(LeatherHat) extends(HeadgearBase)
+	var(name,"Плотная кожаная шапка");
 	var(armaClass,"boomerhat03");
 endclass
 
-class(chinesecommando_cap_old) extends(HeadgearBase)
-	var(name,"chinesecommando_cap_old");
-	var(armaClass,"chinesecommando_cap_old");
-endclass
-
-class(chinesecommando_hat_general) extends(HeadgearBase)
-	var(name,"chinesecommando_hat_general");
+class(HatArmyCap1) extends(HatArmyCap)
+	var(name,"Офицерская фуражка");
 	var(armaClass,"chinesecommando_hat_general");
 endclass
 
-class(chinesecommando_hat) extends(HeadgearBase)
-	var(name,"chinesecommando_hat");
+class(HatUshankaUpArmy) extends(HatUshankaUp)
+	var(name,"Солдатская ушанка");
 	var(armaClass,"chinesecommando_hat");
 endclass
 
-class(cowboy_hat_01) extends(HeadgearBase)
-	var(name,"cowboy_hat_01");
+class(HatUshankaUpArmyOld) extends(HatUshankaUpArmy)
+	var(name,"Старая солдатская ушанка");
+	var(armaClass,"chinesecommando_cap_old");
+endclass
+
+class(StetsonHat1) extends(StetsonHat)
 	var(armaClass,"cowboy_hat_01");
 endclass
 
-class(cowboy_hat_02) extends(HeadgearBase)
-	var(name,"cowboy_hat_02");
+class(StetsonHat2) extends(StetsonHat)
+	var(name,"Плетёная шляпа");
 	var(armaClass,"cowboy_hat_02");
 endclass
 
-class(cowboy_hat_03) extends(HeadgearBase)
-	var(name,"cowboy_hat_03");
+class(StetsonHat3) extends(StetsonHat)
+	var(name,"Светлая шляпа");
 	var(armaClass,"cowboy_hat_03");
 endclass
 
-class(cowboy_hat_05) extends(HeadgearBase)
-	var(name,"cowboy_hat_05");
+class(StetsonHat4) extends(StetsonHat)
+	var(name,"Высокая шляпа");
 	var(armaClass,"cowboy_hat_05");
 endclass
 
-class(fiendhelmet03) extends(HeadgearBase)
-	var(name,"fiendhelmet03");
+class(StetsonHat5) extends(StetsonHat)
+	var(name,"Шляпа");
+	var(armaClass,"lucassimms_hat");
+endclass
+
+class(RitualSkullHat1) extends(HeadgearBase)
+	var(name,"Ритуальная шапка");
 	var(armaClass,"fiendhelmet03");
 endclass
 
-class(fiendhelmet) extends(HeadgearBase)
+class(RitualSkullHat2) extends(RitualSkullHat1)
 	var(name,"fiendhelmet");
 	var(armaClass,"fiendhelmet");
 endclass
 
-class(hat_wasteland_clothing_02) extends(HeadgearBase)
-	var(name,"hat_wasteland_clothing_02");
+class(ScavengerHat) extends(HeadgearBase)
+	var(name,"Шляпа");
 	var(armaClass,"hat_wasteland_clothing_02");
 endclass
 
-class(headwrap_01) extends(HeadgearBase)
-	var(name,"headwrap_01");
+class(HatBandana4) extends(HatBandana)
+	var(name,"Серая повязка на голову");
 	var(armaClass,"headwrap_01");
 endclass
 
-class(headwrap_02) extends(HeadgearBase)
-	var(name,"headwrap_02");
+class(HatBandana5) extends(HatBandana)
+	var(name,"Светлая повязка на голову");
 	var(armaClass,"headwrap_02");
 endclass
 
-class(headwrap_03) extends(HeadgearBase)
-	var(name,"headwrap_03");
+class(HatBandana6) extends(HatBandana)
+	var(name,"Желтая повязка на голову");
 	var(armaClass,"headwrap_03");
 endclass
 
-class(headwrap_04) extends(HeadgearBase)
-	var(name,"headwrap_04");
+class(HatBandana7) extends(HeadgearBase)
+	var(name,"Серая повязка на голову");
 	var(armaClass,"headwrap_04");
 endclass
 
-class(helmet_antagonizer) extends(HeadgearBase)
-	var(name,"helmet_antagonizer");
+class(ToyBugMask) extends(HeadgearBase)
+	var(name,"Жучья масочка");
 	var(armaClass,"helmet_antagonizer");
 endclass
 
-class(jessupbandana) extends(HeadgearBase)
-	var(name,"jessupbandana");
+class(HatBandanaOpen2) extends(HatBandanaOpen1)
+	var(name,"Зелёная бандана");
 	var(armaClass,"jessupbandana");
 endclass
 
-class(jgraham_helmet) extends(HeadgearBase)
-	var(name,"jgraham_helmet");
+class(BandagedHelmet) extends(HeadgearBase)
+	var(name,"Бинты");
 	var(armaClass,"jgraham_helmet");
 endclass
 
-class(legionhood) extends(HeadgearBase)
-	var(name,"legionhood");
+class(CoveredHood) extends(HoodAbbat)
+	var(name,"Крытый тёмный капюшон");
 	var(armaClass,"legionhood");
 endclass
 
-class(lucassimms_hat) extends(HeadgearBase)
-	var(name,"lucassimms_hat");
-	var(armaClass,"lucassimms_hat");
+class(ToyTheaterMask) extends(HeadgearBase)
+	var(name,"Театральная маска");
+	var(armaClass,"mask"); //todo rename class
 endclass
 
-class(mask) extends(HeadgearBase)
-	var(name,"mask");
-	var(armaClass,"mask");
-endclass
-
-class(mechanist_helm) extends(HeadgearBase)
-	var(name,"mechanist_helm");
+class(ToyRobotMask) extends(HeadgearBase)
+	var(name,"Железячная масочка");
 	var(armaClass,"mechanist_helm");
 endclass
 
-class(PlagueMask_Head) extends(HeadgearBase)
-	var(name,"PlagueMask_Head");
+class(StetsonHat6) extends(StetsonHat4)
 	var(armaClass,"PlagueMask_Head");
 endclass
 
-class(stetson_enclave) extends(HeadgearBase)
-	var(name,"stetson_enclave");
+class(StetsonHat6) extends(StetsonHat)
+	var(name,"Строгая шляпа");
 	var(armaClass,"stetson_enclave");
 endclass
 
-class(combat_ranger_helmet_open_rusty) extends(HeadgearBase)
-	var(name,"combat_ranger_helmet_open_rusty");
+class(CombatBowlerHat) extends(HeadgearBase)
+	var(name,"Котелок");
 	var(armaClass,"combat_ranger_helmet_open_rusty");
 endclass
 
-class(WBK_FuedalInquisitor_Cape) extends(HeadgearBase)
-	var(name,"WBK_FuedalInquisitor_Cape");
-	var(armaClass,"WBK_FuedalInquisitor_Cape");
+class(OldGrayClothHood) extends(HoodAbbat)
+	var(name,"Старый капюшон");
+	var(armaClass,"WBK_FuedalInquisitor_Cape"); //closable WBK_FuedalInquisitor_CapeMask
 endclass
 
-class(WBK_FuedalInquisitor_CapeMask) extends(HeadgearBase)
-	var(name,"WBK_FuedalInquisitor_CapeMask");
-	var(armaClass,"WBK_FuedalInquisitor_CapeMask");
-endclass
-
-class(AFO_H_CombatHelmet_BOS) extends(HeadgearBase)
-	var(name,"AFO_H_CombatHelmet_BOS");
+class(CombatHelmet1) extends(CombatHelmet)
 	var(armaClass,"AFO_H_CombatHelmet_BOS");
 endclass

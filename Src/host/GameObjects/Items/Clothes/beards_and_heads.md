@@ -1,3 +1,14 @@
+# new beards
+am_beard_1_blk
+am_beard_1_bln
+am_beard_1_brn
+am_beard_1_wht
+
+# new hairs
+FHair_1_fth - рыжая короткая
+FHair_2_fth - светлое каре
+FHair_3_fth - черные томбойские
+
 # hair extension (for helmet slot)
 
 PLP_RH_Hair_01_brown

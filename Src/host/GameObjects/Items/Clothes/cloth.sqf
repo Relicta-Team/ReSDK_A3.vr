@@ -9,8 +9,6 @@
 #include "..\..\GameConstants.hpp"
 
 
-//todo refactor port models
-#include "port_facewears.sqf"
 #include "port_headgears.sqf"
 #include "port_models.sqf"
 
