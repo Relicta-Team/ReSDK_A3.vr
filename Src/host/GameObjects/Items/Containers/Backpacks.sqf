@@ -278,3 +278,20 @@ class(WaistBag) extends(BackpackBag)
 	var(size,ITEM_SIZE_SMALL);
 	var(maxSize,ITEM_SIZE_SMALL);
 endclass
+
+class(GuitarBackpackHandmadeBlack) extends(Backpack)
+	var(name,"Гитаный рюкзак");
+	var(armaClass,"guitar_black");
+	var(weight,2.8);
+	var(size,ITEM_SIZE_MEDIUM);
+	var(maxSize,ITEM_SIZE_MEDIUM);
+	var(material,"MatWood");
+endclass
+
+class(GuitarBackpackHandmadeBrown) extends(GuitarBackpackHandmadeBlack)
+	var(armaClass,"guitar_brown");
+endclass
+
+class(GuitarBackpackHandmadeLightBrown) extends(GuitarBackpackHandmadeBlack)
+	var(armaClass,"guitar_co");
+endclass

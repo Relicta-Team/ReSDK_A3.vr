@@ -167,6 +167,105 @@ class(ArmorCityNew) extends(Armor)
 	var(allowedSlots,[INV_ARMOR]);
 endclass
 
+class(SteelArmorStrong) extends(Armor)
+	var(name,"Укрепленные доспехи");
+	var(bodyPartsCovered,TORSO + GROIN + NECK + LEG_LEFT);
+	var(coverage,70);
+	var(dr,4);
+	var(armaClass,"EoO_Fant_Averland_Vest_4");
+	var(weight,20);
+	var(material,"MatMetal");
+endclass
+
+class(SteelArmorLight) extends(Armor)
+	var(name,"Легкие доспехи");
+	var(bodyPartsCovered,TORSO + LEG_LEFT);
+	var(coverage,70);
+	var(armaClass,"EoO_Fant_Averland_Vest_1");
+	var(weight,15);
+	var(material,"MatMetal");
+endclass
+
+class(SteelArmorWithChains) extends(Armor)
+	var(name,"Кираса в цепях");
+	var(bodyPartsCovered,TORSO);
+	var(coverage,80);
+	var(armaClass,"EoO_Fant_FireWizard_Vest_1");
+	var(weight,25);
+	var(material,"MatMetal");
+endclass
+
+class(SleevelessOuterwear1) extends(Armor)
+	var(name,"Безрукавица");
+	var(bodyPartsCovered,TORSO + GROIN);
+	var(armaClass,"EoO_Fant_Vest_11");
+	var(coverage,70);
+	var(weight,4);
+	var(material,"MatCloth");
+endclass
+
+class(SleevelessOuterwear2) extends(SleevelessOuterwear1)
+	var(armaClass,"EoO_Fant_Vest_12");
+endclass
+
+class(SleevelessOuterwearCuirass1) extends(SleevelessOuterwear1)
+	var(name,"Безрукавица с кирасой");
+	var(armaClass,"EoO_Fant_Vest_15");
+	var(coverage,80);
+	var(material,"MatMetal");
+	var(weight,8);
+endclass
+
+class(SleevelessOuterwearCuirass2) extends(SleevelessOuterwearCuirass1)
+	var(armaClass,"EoO_Fant_Vest_16");
+endclass
+
+class(LightArmorCuirass1) extends(Armor)
+	var(name,"Легкая кираса");
+	var(bodyPartsCovered,TORSO);
+	var(armaClass,"EoO_Fant_Vest_1A");
+	var(coverage,65);
+	var(dr,6);
+	var(weight,10);
+	var(notes,ARMOR_NOTE_ONLYFRONT);
+endclass
+
+class(LightArmorCuirass2) extends(LightArmorCuirass1)
+	var(armaClass,"EoO_Fant_Vest_2A");
+endclass
+
+class(LightArmorCuirass3) extends(LightArmorCuirass1)
+	var(armaClass,"EoO_Fant_Vest_3A");
+endclass
+
+class(LightArmorCuirass4) extends(LightArmorCuirass1)
+	var(armaClass,"EoO_Fant_Vest_5A");
+endclass
+
+class(FlexibleArmor1) extends(Armor)
+	var(name,"Гибкие доспехи");
+	var(bodyPartsCovered,TORSO + GROIN);
+	var(armaClass,"EoO_Fant_BloodKnight_Vest_1");
+	var(coverage,90);
+	var(weight,35);
+	var(material,"MatMetal");
+	var(dr,7);
+endclass
+
+class(FlexibleArmor2) extends(FlexibleArmor1)
+	var(armaClass,"EoO_Fant_BloodKnight_Vest_2");
+endclass
+
+class(SteelHeavyBelt) extends(Armor)
+	var(name,"Стальной пояс");
+	var(bodyPartsCovered,LOWER_TORSO);
+	var(armaClass,"Knight_Maxon_vest");
+	var(coverage,40);
+	var(weight,7);
+	var(material,"MatMetal");
+	var(dr,3);
+endclass
+
 /*
 vests first 3: (light,med,heavy)
 FRITH_ruin_vestia_lite_ltr
