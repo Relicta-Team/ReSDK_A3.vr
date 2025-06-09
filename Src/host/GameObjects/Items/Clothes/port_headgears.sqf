@@ -412,7 +412,7 @@ class(StetsonHat6) extends(StetsonHat4)
 	var(armaClass,"PlagueMask_Head");
 endclass
 
-class(StetsonHat6) extends(StetsonHat)
+class(StetsonHat7) extends(StetsonHat)
 	var(name,"Строгая шляпа");
 	var(armaClass,"stetson_enclave");
 endclass
