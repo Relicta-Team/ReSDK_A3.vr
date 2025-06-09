@@ -396,6 +396,10 @@ class(ServerClient) /*extends(NetObject)*/
 		if (call gm_isRoundLobby || call gm_isRoundPreload) exitWith {
 
 			callSelfParams(onChangeState,"lobby");
+	
+			if (call gm_isRoundLobby) then {
+				[this, false] call gm_validateAvailableRoles;
+			};
 
 			[format["%1 %2.",getSelf(name),pick ["подключился","зашёл на огонёк","залетел"]]] call cm_sendLobbyMessage;
 

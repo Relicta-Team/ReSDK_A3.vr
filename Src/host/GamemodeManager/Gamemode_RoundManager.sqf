@@ -1174,8 +1174,8 @@ gm_doEmbark = {
 
 //Проверяет роли клиента на наличие в базе gm_preStartRoles дефолтных ролей.
 //Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
-gm_validateRolesOnPickGameMode = {
-	params ['this'];
+gm_validateAvailableRoles = {
+	params ['this', ['_canPrintMessage',true]];
 
 	private _settings = getSelf(charSettings);
 	private _hasRemovedRoles = false;
@@ -1203,7 +1203,7 @@ gm_validateRolesOnPickGameMode = {
 		};
 	};
 
-	if (_hasRemovedRoles) then {
+	if (_hasRemovedRoles && _canPrintMessage) then {
 		callSelfParams(localSay,"Что-то не так пошло с выбранными ролями и некоторые роли были сброшены." arg "log");
 	};
 };
