@@ -155,6 +155,19 @@ struct(Examine3d) base(NDBase)
 			_curX = _curX - _dx / _sensitivity;
 			_curY = _curY - _dy / _sensitivity;
 
+			private _obj = _internalZone getVariable "model";
+			private _scale = 1 / (getResolution select 5);
+
+			// Глубина по умолчанию
+			private _distance = 3 * 4 / 3;
+			if ((getResolution select 4) < (4/3)) then {
+				_distance = _distance * (getResolution select 7); // пример: 5:4 мониторы
+			};
+			private _defDist = _distance/6;
+
+			_curX = clamp(_curX,-_defDist,_defDist);
+			_curY = clamp(_curY,-_defDist,_defDist);
+
 			_internalZone setVariable ["xObjPos",_curX];
 			_internalZone setVariable ["yObjPos",_curY];
 
@@ -173,6 +186,7 @@ struct(Examine3d) base(NDBase)
 		if ((getResolution select 4) < (4/3)) then {
 			_distance = _distance * (getResolution select 7); // пример: 5:4 мониторы
 		};
+		private _defaultDistance = _distance/5;
 
 		// Центр зоны
 		private _ctrlPos = ctrlPosition _ctg;
@@ -189,8 +203,11 @@ struct(Examine3d) base(NDBase)
 		_centerX = 0.5;
 		_centerY = 0.5;
 
-		modvar(_centerX) + (_ctg getvariable ["xObjPos",0]);
-		modvar(_centerY) + (_ctg getvariable ["yObjPos",0]);
+		private _posX = _ctg getvariable ["xObjPos",0];
+		private _posY = _ctg getvariable ["yObjPos",0];
+
+		modvar(_centerX) + _posX;
+		modvar(_centerY) + _posY;
 		_obj ctrlSetPosition [_centerX, _depthAdjust, _centerY];
 
 		// Масштаб
