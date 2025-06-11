@@ -65,8 +65,28 @@ struct(Examine3d) base(NDBase)
 		_internalZone setvariable ["xObjPos",0];
 		_internalZone setvariable ["yObjPos",0];
 
+		_internalZone setvariable ["currentXObjPos",0];
+		_internalZone setvariable ["currentYObjPos",0];
+
 		_internalZone setvariable ["pitch",0];
 		_internalZone setvariable ["bank",0];
+
+		_internalZone setvariable ["currentPitch",0];
+		_internalZone setvariable ["currentBank",0];
+
+		private _mdlwid = (self getv(thisDisplay)) ctrlCreate ["RscObject",-1,_internalZone];
+		_mdlwid ctrlSetModel _model;
+		_internalZone setvariable ["model",_mdlwid];
+
+		private _bbx = core_modelBBX getOrDefault [ctrlModel _mdlwid, [[1,1,1], [1,1,1], 1]] select 1;
+
+		private _width = _bbx select 0;
+		private _length = _bbx select 1;
+		private _height = _bbx select 2;
+
+		private _maxSize = selectMax([_width, _length, _height]);
+
+		_internalZone setvariable ["maxSize",_maxSize];
 
 		_internalZone ctrlAddEventHandler ["MouseButtonDown",{
 			params ["_internalZone","_b"];
@@ -86,13 +106,16 @@ struct(Examine3d) base(NDBase)
 		}];
 		_internalZone ctrlAddEventHandler ["MouseZChanged",{
 			params ["_internalZone","_val"];
+			private _maxSize = _internalZone getVariable ["maxSize",1];
+			private _min = -_maxSize * 2;
+			private _max = _maxSize * 2;
 			modvar(nd_internal_examine3d_distance) + (_val * 0.1);
-			nd_internal_examine3d_distance = clamp(nd_internal_examine3d_distance,-5,5);
+			nd_internal_examine3d_distance = clamp(nd_internal_examine3d_distance,_min,_max);
 			nd_internal_currentStructObj callp(_syncModelPos,_internalZone);
 		}];
 		
 		if (_isFirstCall) then {
-			nd_internal_examine3d_distance = 1;
+			nd_internal_examine3d_distance = 0;
 			startAsyncInvoke
 			{
 				if isNullReference(nd_internal_examine3d_zoneWidget) exitWith {true};
@@ -101,10 +124,6 @@ struct(Examine3d) base(NDBase)
 			}
 			endAsyncInvoke
 		};
-		
-		private _mdlwid = (self getv(thisDisplay)) ctrlCreate ["RscObject",-1,_internalZone];
-		_mdlwid ctrlSetModel _model;
-		_internalZone setvariable ["model",_mdlwid];
 
 		self callp(_syncModelPos,_internalZone);
 		
@@ -113,6 +132,8 @@ struct(Examine3d) base(NDBase)
 		private _lwrYPos = 100-10-_cSizeY;
 		_textWid = [(self getv(thisDisplay)),[50-_cSizeX/2,_lwrYPos,_cSizeX,_cSizeY],_ctg,true] call nd_addClosingButton;
 		_textWid ctrlSetText "Закрыть";
+
+		_internalZone setvariable ["closeButton",_textWid];
 	};
 
 	cde_movingHandle = {
@@ -120,15 +141,14 @@ struct(Examine3d) base(NDBase)
 		if (_internalZone getVariable ["isDragActive",false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _internalZone getVariable ["dragStart", [_xPos, _yPos]];
+			private _currentPitch = _internalZone getVariable ["currentPitch", 0];
+			private _currentBank = _internalZone getVariable ["currentBank", 0];
+
 			private _dx = (_lastPos select 0) - _xPos;
 			private _dy = (_lastPos select 1) - _yPos;
 
 			// масштаб чувствительности
-			private _sensitivity = 10;
-
-			// Получение текущих углов
-			private _currentPitch = _internalZone getVariable ["pitch", 0];
-			private _currentBank = _internalZone getVariable ["bank", 0];
+			private _sensitivity = 100;
 
 			//! убрать переустановку pitch/bank для корректного вращения
 			_currentPitch = _currentPitch - _dy * _sensitivity;
@@ -142,18 +162,28 @@ struct(Examine3d) base(NDBase)
 			nd_internal_currentStructObj callp(_syncModelPos,_internalZone);
 
 			//_ctrl setVariable ["dragStart", [_xPos, _yPos]];
+		} else {
+			private _pitch = _internalZone getVariable ["pitch", 0];
+			private _bank = _internalZone getVariable ["bank", 0];
+
+			_internalZone setVariable ["currentPitch", _pitch];
+			_internalZone setVariable ["currentBank", _bank];
+
+			private _closeButton = _internalZone getVariable ["closeButton", widgetNull];
+
+			ctrlSetFocus _closeButton;
 		};
 		if (_internalZone getVariable ["isPosActive",false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _internalZone getVariable ["posStart", [_xPos, _yPos]];
-			private _curX = _internalZone getVariable ["xObjPos", 0];
-			private _curY = _internalZone getVariable ["yObjPos", 0];
+			private _curX = _internalZone getVariable ["currentXObjPos", 0];
+			private _curY = _internalZone getVariable ["currentYObjPos", 0];
 			private _dx = (_lastPos select 0) - _xPos;
 			private _dy = (_lastPos select 1) - _yPos;
 
-			private _sensitivity = 50;
-			_curX = _curX - _dx / _sensitivity;
-			_curY = _curY - _dy / _sensitivity;
+			private _sensitivity = 1;
+			_curX = _curX - _dx * _sensitivity;
+			_curY = _curY - _dy * _sensitivity;
 
 			private _obj = _internalZone getVariable "model";
 			private _scale = 1 / (getResolution select 5);
@@ -173,6 +203,12 @@ struct(Examine3d) base(NDBase)
 
 			// Применение вращения к модели
 			nd_internal_currentStructObj callp(_syncModelPos,_internalZone);
+		} else {
+			private _x = _internalZone getVariable ["xObjPos", 0];
+			private _y = _internalZone getVariable ["yObjPos", 0];
+
+			_internalZone setVariable ["currentXObjPos", _x];
+			_internalZone setVariable ["currentYObjPos", _y];
 		};
 	};
 
@@ -186,7 +222,8 @@ struct(Examine3d) base(NDBase)
 		if ((getResolution select 4) < (4/3)) then {
 			_distance = _distance * (getResolution select 7); // пример: 5:4 мониторы
 		};
-		private _defaultDistance = _distance/5;
+
+		_distance = _distance / 2;	
 
 		// Центр зоны
 		private _ctrlPos = ctrlPosition _ctg;
