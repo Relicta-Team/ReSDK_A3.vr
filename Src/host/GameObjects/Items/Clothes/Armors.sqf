@@ -17,6 +17,8 @@ class(Armor) extends(Cloth)
 	var(coverage,70);
 	var(bodyPartsCovered,TORSO);
 
+	var(allowedSlots,[INV_ARMOR]);
+
 	getterconst_func(getExamine3dItemType,"armor");
 
 	func(armaItemAddImpl)
