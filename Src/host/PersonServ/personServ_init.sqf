@@ -19,7 +19,7 @@ personServ_registerMob = {
     personServ_map_mobs set [_mobIdAsOwner,_mob];
 
     //send var to local client
-    netSendVar(personCli_localMobRef,_mob,_mobIdAsOwner);
+    netSendVar("personCli_localMobRef",_mob,_mobIdAsOwner);
     netSetGlobal(personCli_updateNeed,true);
 };
 

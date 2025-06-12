@@ -3,4 +3,4 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define PERSONSERV_MOB_POS [100,100,0];
+#define PERSONSERV_MOB_POS [100,100,0]
