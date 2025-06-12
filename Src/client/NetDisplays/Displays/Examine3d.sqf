@@ -5,10 +5,11 @@
 
 #include <..\..\..\host\lang.hpp>
 
-nd_internal_examine3d_zoneWidget = widgetNull;
 nd_internal_examine3d_distance = 1;
 
 struct(Examine3d) base(NDBase)
+
+	def(zoneWidgetRef) widgetNull;
 
 	def(specFlagList) [
 		"obj",
@@ -61,7 +62,7 @@ struct(Examine3d) base(NDBase)
 		[_tUp,format["<t align='center' size='1.2'>%1</t>",_text]] call widgetSetText;
 		
 		private _internalZone = [WIDGETGROUP,[0,10,100,80],_zone] call nd_regWidget;
-		nd_internal_examine3d_zoneWidget = _internalZone;
+		nd_internal_currentStructObj setv(zoneWidgetRef,_internalZone);
 		_internalZone setvariable ["dragStart",[0,0]];
 		_internalZone setvariable ["posStart",[0,0]];
 		_internalZone setvariable ["isDragActive",false];
@@ -123,7 +124,7 @@ struct(Examine3d) base(NDBase)
 			nd_internal_examine3d_distance = 0;
 			startAsyncInvoke
 			{
-				if isNullReference(nd_internal_examine3d_zoneWidget) exitWith {true};
+				if isNullReference(nd_internal_currentStructObj getv(zoneWidgetRef)) exitWith {true};
 				call cde_movingHandle;
 				false
 			}
@@ -142,7 +143,7 @@ struct(Examine3d) base(NDBase)
 	};
 
 	cde_movingHandle = {
-		_internalZone = nd_internal_examine3d_zoneWidget;
+		_internalZone = nd_internal_currentStructObj getv(zoneWidgetRef);
 		if (_internalZone getVariable ["isDragActive",false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _internalZone getVariable ["dragStart", [_xPos, _yPos]];
