@@ -35,6 +35,8 @@ class(Cloth) extends(Container)
 	var(maxSize,ITEM_SIZE_SMALL);
 	var(weight,gramm(520));
 
+	getterconst_func(getExamine3dItemType,"cloth");
+
 	getter_func(getDropSound,"dropping\cloth");
 
 	func(armaItemAddImpl)

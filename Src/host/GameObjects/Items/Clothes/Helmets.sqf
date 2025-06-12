@@ -17,6 +17,8 @@ class(HeadgearBase) extends(Cloth)
 	var(weight,gramm(80));
 	var(allowedSlots,[INV_HEAD]);
 
+	getterconst_func(getExamine3dItemType,"helmet");
+
 	var(canUseContainer,false);
 	var(countSlots,0);
 

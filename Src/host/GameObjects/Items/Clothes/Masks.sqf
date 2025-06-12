@@ -23,6 +23,8 @@ class(ItemMask) extends(Cloth)
 	var(dr,1);
 	var(bodyPartsCovered,FACE);
 
+	getterconst_func(getExamine3dItemType,"mask");
+
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);

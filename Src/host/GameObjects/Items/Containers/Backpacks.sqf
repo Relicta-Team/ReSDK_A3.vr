@@ -10,7 +10,7 @@
 
 editor_attribute("InterfaceClass")
 class(Backpack) extends(Container)
-var(name,"Рюкзак");
+	var(name,"Рюкзак");
 	var(desc,"Отлично подходит для таскания всякого барахла.");
 	var(model,"a3\props_f_enoch\military\decontamination\deconkit_01_f.p3d");
 	var(weight,gramm(600));
@@ -19,6 +19,8 @@ var(name,"Рюкзак");
 	var_exprval(countSlots,DEFAULT_BACKPACK_STORAGE);
 	var(size,ITEM_SIZE_LARGE);
 	var(maxSize,ITEM_SIZE_LARGE);
+
+	getterconst_func(getExamine3dItemType,"backpack");
 
 	var(icon,"\A3\weapons_f\ammoboxes\bags\data\ui\icon_B_C_Gorod_khk_ca.paa");
 

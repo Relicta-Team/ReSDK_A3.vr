@@ -31,6 +31,11 @@ struct(Examine3d) base(NDBase)
 		(_zone getvariable "background") setBackgroundColor [0,0,0,0];
 		
 		_args params [["_model",""],["_text",""],["_specFlag","obj"]];
+		if !array_exists(nd_internal_currentStructObj getv(specFlagList),_specFlag) exitWith {
+			errorformat("Examine3d::cde_debug - invalid specFlag %1",_specFlag);
+			private _textWid = [(nd_internal_currentStructObj getv(thisDisplay)),WIDGET_FULLSIZE,_zone,true] call nd_addClosingButton;
+			_textWid ctrlSetText "Закрыть";
+		};
 
 		if (!([_model,"\"] call stringStartWith)) then {
 			_model = "\" + _model;

@@ -716,8 +716,31 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	};
 
 	//examine3d
-	getter_func(getExamine3dItemModel,getSelf(model));
-	getterconst_func(getExamine3dItemType,"obj");
+	getterconst_func(getExamine3dItemType,"obj"); //one of "obj","cloth","armor","backpack","mask","helmet"
+	
+	func(getExamine3dItemModel)
+	{
+		objParams();
+		private _etype = callSelf(getExamine3dItemType);
+		if equals(_etype,"obj") exitWith {getSelf(model)};
+		if equals(_etype,"cloth") exitWith {
+			private _formClass = GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformClass");
+			GetText (configFile >> "cfgVehicles" >> _formClass >> "model");
+		};
+		if equals(_etype,"armor") exitWith {
+			GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "model");
+		};
+		if equals(_etype,"backpack") exitWith {
+			GetText (configFile >> "cfgVehicles" >> getSelf(armaClass) >> "model");
+		};
+		if equals(_etype,"mask") exitWith {
+			GetText (configFile >> "cfgGlasses" >> getSelf(armaClass) >> "model");
+		};
+		if equals(_etype,"helmet") exitWith {
+			GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformModel");
+		};
+		
+	};
 	func(examine3dItem)
 	{
 		objParams_1(_usr);

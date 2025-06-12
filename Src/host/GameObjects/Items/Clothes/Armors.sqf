@@ -17,6 +17,8 @@ class(Armor) extends(Cloth)
 	var(coverage,70);
 	var(bodyPartsCovered,TORSO);
 
+	getterconst_func(getExamine3dItemType,"armor");
+
 	func(armaItemAddImpl)
 	{
 		objParams_1(_usr);
@@ -36,6 +38,8 @@ class(Armor) extends(Cloth)
 endclass
 
 class(ArmorVST) extends(Armor)
+
+	getterconst_func(getExamine3dItemType,"unknown");
 
 	//use arma class as vst config
 	var(armaClass,-1);
