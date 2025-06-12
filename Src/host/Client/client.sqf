@@ -153,6 +153,11 @@ class(ServerClient) /*extends(NetObject)*/
 			callSelf(onClosedMessageBox);
 		};
 
+		//delete local person
+		if (!([callSelf(getOwner)] call personServ_unregisterMob)) then {
+			["Cant find person %1 for deleting from %2",callSelf(getOwner),(call personServ_getMobIdList) joinString ";"] call logError;
+		};
+
 		//удаляем из претендентов
 		if getSelf(isReady) then {
 			
@@ -361,6 +366,9 @@ class(ServerClient) /*extends(NetObject)*/
 		if array_exists(getSelf(lockedSettings),"run") then {
 			callSelfParams(fastSendInfo,"cd_sp_lockedSetting" arg true);
 		};
+
+		//creating local presonmob
+		[callSelf(getOwner)] call personServ_registerMob;
 
 		private _postCheck = {
 			

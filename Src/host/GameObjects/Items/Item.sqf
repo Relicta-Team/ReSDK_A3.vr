@@ -722,23 +722,32 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	{
 		objParams();
 		private _etype = callSelf(getExamine3dItemType);
+		
+		//проверка корректности типа
+		if !array_exists(["obj" arg "cloth" arg "armor" arg "backpack" arg "mask" arg "helmet"],_etype) exitWith {
+			"" //в любом случае на клиенте обработается неверный тип формы
+		};
+
 		if equals(_etype,"obj") exitWith {getSelf(model)};
-		if equals(_etype,"cloth") exitWith {
-			private _formClass = GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformClass");
-			GetText (configFile >> "cfgVehicles" >> _formClass >> "model");
-		};
-		if equals(_etype,"armor") exitWith {
-			GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "model");
-		};
-		if equals(_etype,"backpack") exitWith {
-			GetText (configFile >> "cfgVehicles" >> getSelf(armaClass) >> "model");
-		};
-		if equals(_etype,"mask") exitWith {
-			GetText (configFile >> "cfgGlasses" >> getSelf(armaClass) >> "model");
-		};
-		if equals(_etype,"helmet") exitWith {
-			GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformModel");
-		};
+		//! мы не можем использовать этот код, потому что некоторые модели сделаные по ебаному + чехи не позволяют в ретекстур отрендереных на ui моделях
+		// if equals(_etype,"cloth") exitWith {
+		// 	private _formClass = GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformClass");
+		// 	GetText (configFile >> "cfgVehicles" >> _formClass >> "model");
+		// };
+		// if equals(_etype,"armor") exitWith {
+		// 	GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "model");
+		// };
+		// if equals(_etype,"backpack") exitWith {
+		// 	GetText (configFile >> "cfgVehicles" >> getSelf(armaClass) >> "model");
+		// };
+		// if equals(_etype,"mask") exitWith {
+		// 	GetText (configFile >> "cfgGlasses" >> getSelf(armaClass) >> "model");
+		// };
+		// if equals(_etype,"helmet") exitWith {
+		// 	GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformModel");
+		// };
+
+		getSelf(armaClass)
 		
 	};
 	func(examine3dItem)

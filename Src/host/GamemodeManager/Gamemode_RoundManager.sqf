@@ -1574,6 +1574,19 @@ gm_createMob = {
 	_mob
 };
 
+gm_createSimpleMob = {
+	params ["_pos"];
+	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	removeUniform _mob;
+	_mob disableAI "MOVE";
+	_mob disableAI "TARGET";
+	_mob disableAI "AUTOTARGET";
+	_mob disableAI "FSM";
+	_mob disableAI "ANIM";
+	_mob setPosAtl _pos;
+	_mob
+}
+
 lobby_createDummy = {
 	params ["_pos",["_isWoman",false],["_canSim",false]];
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
