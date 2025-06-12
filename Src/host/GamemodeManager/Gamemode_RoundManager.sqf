@@ -1585,7 +1585,7 @@ gm_createSimpleMob = {
 	_mob disableAI "ANIM";
 	_mob setPosAtl _pos;
 	_mob
-}
+};
 
 lobby_createDummy = {
 	params ["_pos",["_isWoman",false],["_canSim",false]];
