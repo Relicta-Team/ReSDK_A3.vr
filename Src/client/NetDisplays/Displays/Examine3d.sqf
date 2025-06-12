@@ -38,6 +38,16 @@ struct(Examine3d) base(NDBase)
 			_textWid ctrlSetText "Закрыть";
 		};
 
+		if not_equals(_specFlag,"obj") exitwith {
+			_img = [PICTURE,[0,0,100,90],_zone] call nd_regWidget;
+			call personCli_clearInventory;
+			[null,_specFlag] call personCli_prepCamera;
+			[_specFlag,_model] call personCli_setStat;
+			[_img] call personCli_setPictureRenderTarget;
+			_textWid = [(self getv(thisDisplay)),[0,90,100,10],_zone,true] call nd_addClosingButton;
+			_textWid ctrlSetText "Закрыть";
+		};
+
 		if (!([_model,"\"] call stringStartWith)) then {
 			_model = "\" + _model;
 		};

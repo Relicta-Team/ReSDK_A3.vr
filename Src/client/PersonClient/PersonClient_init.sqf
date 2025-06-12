@@ -139,7 +139,7 @@ personCli_cloneCharVisualFromPlayer = {
 };
 
 personCli_prepCamera = {
-	params [["_fov",0.16]];
+	params [["_fov",0.16],["_specFlag","cloth"]];
 
 	//cleanup light
 	if (!isNullReference(personCli_rttLight)) then {
@@ -149,10 +149,19 @@ personCli_prepCamera = {
 	private _per = call personCli_getLocalMob;
 	personCli_rttCamera cameraEffect ["terminate", "back"];
 	personCli_rttCamera cameraEffect ["INTERNAL", "BACK", "person_cli_rendertarget"];
+	
 	//relpos use head for mask/headgears, spine2/3 for backpacks/armors clothes
-	private _campos = (_per modeltoworldvisual (_per selectionPosition "head"));
-	personCli_rttCamera setposatl (_campos vectoradd [0,1,0.15]);
-	personCli_rttCamera campreparetarget (_campos vectoradd [-0.05,0,0.11]);
+	private _cFlag = ["cloth","armor","backpack","mask","helmet"];
+	private _cSelections = ["spine2","spine3","spine3","head","head"];
+	private _cPos = [[0,3,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15]];
+	private _cPosTarget = [[0,0,0.11],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11]];
+	private _curSel = _cSelections select (_cFlag find _specFlag);
+	private _curPos = _cPos select (_cFlag find _specFlag);
+	private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
+
+	private _campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
+	personCli_rttCamera setposatl (_campos vectoradd _curPos);
+	personCli_rttCamera campreparetarget (_campos vectoradd _curPosTarg);
 	personCli_rttCamera camSetFov _fov;
 	personCli_rttCamera camcommitprepared 0;
 
