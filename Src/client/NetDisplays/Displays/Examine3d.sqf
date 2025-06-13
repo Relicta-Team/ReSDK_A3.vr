@@ -44,25 +44,90 @@ struct(Examine3d) base(NDBase)
 			[null,_specFlag,true] call personCli_prepCamera;
 			[_specFlag,_model] call personCli_setStat;
 			[_img] call personCli_setPictureRenderTarget;
+			_img ctrlEnable true;
 
-			//we can set vars inside img widget (isPressed, pressedMousePos, etc...)
+			_img setvariable ["orbitAngleH",0];
+			_img setvariable ["orbitAngleV",0];
+			_img setvariable ["orbitStart",[0,0]];
+			_img setvariable ["isOrbitActive",false];
+			_img setvariable ["specFlag",_specFlag];
 
-			_img ctrladdeventhandler ["MouseButtonDown",{
+			_img setvariable ["curOrbitAngleH",0];
+			_img setvariable ["curOrbitAngleV",0];
+
+			_img ctrlAddEventHandler ["MouseButtonDown",{
 				params ["_img","_b"];
 				if (_b == MOUSE_LEFT) then {
 					//todo position only (rotation cannot be because here we use camera transform, not object transform)
-					//setup isPressed and pressedMousePos
+					_img setvariable ["isOrbitActive",true];
+					_pressPos = getMousePosition;
+					_img setvariable ["orbitStart",_pressPos];
 				};
 			}];
-			_img ctrladdeventhandler ["MouseButtonUp",{
-				//reset isPressed and save position
+			_img ctrlAddEventHandler ["MouseButtonUp",{
+				params ["_img","_b"];
+				_img setvariable ["isOrbitActive",false];
 			}];
 
 			startAsyncInvoke
 			{
 				params ["_img"];
 				if isNullReference(_img) exitWith {true};
-				//for set campos use [vec3,bool] call presonCli_setCameraPos
+				if (_img getVariable ["isOrbitActive", false]) then {
+					getMousePosition params ["_xPos","_yPos"];
+					private _lastPos = _img getVariable ["orbitStart", [0, 0]];
+					private _orbitAngleH = _img getVariable ["orbitAngleH", 0];
+					private _orbitAngleV = _img getVariable ["orbitAngleV", 0];
+					private _specFlag = _img getVariable ["specFlag", "cloth"];
+					private _sensitivity = 80;
+
+					private _per = call personCli_getLocalMob;
+					private _cFlag = ["cloth","armor","backpack","mask","helmet"];
+					private _cSelections = ["spine2","spine3","spine3","head","head"];
+					private _cPos = [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15]];
+					private _cPosTarget = [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11]];
+					private _curPos = _cPos select (_cFlag find _specFlag);
+					private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
+					private _curSel = _cSelections select (_cFlag find _specFlag);
+
+					private _curOrbitAngleH = _img getVariable ["curOrbitAngleH", 0];
+					private _curOrbitAngleV = _img getVariable ["curOrbitAngleV", 0];
+
+					private _orbitDistance = _curPosTarg distance _curPos;
+
+					private _dx = (_lastPos select 0) - _xPos;
+					private _dy = (_lastPos select 1) - _yPos;
+
+					_curOrbitAngleH = _curOrbitAngleH + (_dx * (_sensitivity * 2));
+                	_curOrbitAngleV = _curOrbitAngleV + (_dy * _sensitivity);
+
+					_curOrbitAngleV = if (_specFlag == "cloth" || _specFlag == "armor") then { clamp(_curOrbitAngleV,-10,80) } else { clamp(_curOrbitAngleV,-85,85) };
+
+					_img setvariable ["orbitAngleH", _curOrbitAngleH];
+					_img setvariable ["orbitAngleV", _curOrbitAngleV];
+
+					_orbitAngleH = _curOrbitAngleH;
+					_orbitAngleV = _curOrbitAngleV;
+
+					private _relPos = [
+						sin(_orbitAngleH) * cos(_orbitAngleV) * _orbitDistance,
+						cos(_orbitAngleH) * cos(_orbitAngleV) * _orbitDistance,
+						sin(_orbitAngleV) * _orbitDistance
+					];
+
+					private _campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
+					_campos = _campos vectoradd _curPosTarg vectoradd _relPos;
+					private _dirVector = _campos vectorDiff _curPosTarg;
+
+					[_campos] call personCli_setCameraPos;
+					personCli_rttCamera setVectorDir _dirVector;
+				} else {
+					private _orbitAngleH = _img getVariable ["orbitAngleH", 0];
+					private _orbitAngleV = _img getVariable ["orbitAngleV", 0];
+
+					_img setvariable ["curOrbitAngleH", _orbitAngleH];
+					_img setvariable ["curOrbitAngleV", _orbitAngleV];
+				};
 				false
 			},{},[_img]
 			endAsyncInvoke

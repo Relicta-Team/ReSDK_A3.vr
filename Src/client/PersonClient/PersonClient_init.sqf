@@ -140,7 +140,7 @@ personCli_clearInventory = {
 };
 
 //установка позиции камеры. _applyLightPos - синхронизировать ли позицию света
-presonCli_setCameraPos = {
+personCli_setCameraPos = {
 	params ["_pos",["_applyLightPos",true]];
 	personCli_rttCamera setposatl _pos;
 	if (_applyLightPos) then {
