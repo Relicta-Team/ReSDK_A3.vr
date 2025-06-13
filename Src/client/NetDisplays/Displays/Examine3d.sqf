@@ -38,12 +38,36 @@ struct(Examine3d) base(NDBase)
 			_textWid ctrlSetText "Закрыть";
 		};
 
+		//TODO сделать чтобы и типы obj так же рисовались через rendertotexture
 		if not_equals(_specFlag,"obj") exitwith {
 			_img = [PICTURE,[0,0,100,90],_zone] call nd_regWidget;
-			call personCli_clearInventory;
-			[null,_specFlag] call personCli_prepCamera;
+			[null,_specFlag,true] call personCli_prepCamera;
 			[_specFlag,_model] call personCli_setStat;
 			[_img] call personCli_setPictureRenderTarget;
+
+			//we can set vars inside img widget (isPressed, pressedMousePos, etc...)
+
+			_img ctrladdeventhandler ["MouseButtonDown",{
+				params ["_img","_b"];
+				if (_b == MOUSE_LEFT) then {
+					//todo position only (rotation cannot be because here we use camera transform, not object transform)
+					//setup isPressed and pressedMousePos
+				};
+			}];
+			_img ctrladdeventhandler ["MouseButtonUp",{
+				//reset isPressed and save position
+			}];
+
+			startAsyncInvoke
+			{
+				params ["_img"];
+				if isNullReference(_img) exitWith {true};
+				//for set campos use [vec3,bool] call presonCli_setCameraPos
+				false
+			},{},[_img]
+			endAsyncInvoke
+
+
 			_textWid = [(self getv(thisDisplay)),[0,90,100,10],_zone,true] call nd_addClosingButton;
 			_textWid ctrlSetText "Закрыть";
 		};

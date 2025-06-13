@@ -17,7 +17,9 @@
 
 //extern (rpc) personCli_localMobRef
 
+//рендер таргет камера
 personCli_rttCamera = "camera" camCreate [0,0,0]; //камера для рендеринга
+//источник освещения для камеры
 personCli_rttLight = objNull;
 
 /*
@@ -26,6 +28,7 @@ personCli_rttLight = objNull;
 */
 personCli_updateNeed = false;
 
+//получает всех мобов
 personCli_getAllMobs = {
 	PERSONSERV_MOB_POS nearEntities 20;
 };
@@ -119,6 +122,7 @@ personCli_setStat = {
 	};
 };
 
+//список доступных опций персоны для изменения
 personCli_const_list_allSettings = [
 	"face",
 	"cloth",
@@ -128,18 +132,37 @@ personCli_const_list_allSettings = [
 	"helmet"
 ];
 
+//очищает инвентарь и лицо
 personCli_clearInventory = {
 	{
 		[_x] call personCli_setStat
 	} foreach personCli_const_list_allSettings;
 };
 
+//установка позиции камеры. _applyLightPos - синхронизировать ли позицию света
+presonCli_setCameraPos = {
+	params ["_pos",["_applyLightPos",true]];
+	personCli_rttCamera setposatl _pos;
+	if (_applyLightPos) then {
+		personCli_rttLight setposatl _pos;
+	};
+};
+
 personCli_cloneCharVisualFromPlayer = {
 	//todo implement (для осмотра себя в зеркале)
 };
 
+/*
+	Подготовка камеры для рендеринга в виджете
+	_fov - значение fov
+	_specFlag - тип визуализации (одежда, броня, рюкзак и т.д.)
+	_pureVisual - визуализация чистого персонажа. скрывает тело персонажа лицо. в случае если идёт визуализация одежды - она будет отображена
+*/
 personCli_prepCamera = {
-	params [["_fov",0.16],["_specFlag","cloth"]];
+	params [["_fov",0.16],["_specFlag","cloth"],["_pureVisual",true]];
+
+	//clear inventory
+	call personCli_clearInventory;
 
 	//cleanup light
 	if (!isNullReference(personCli_rttLight)) then {
@@ -153,8 +176,8 @@ personCli_prepCamera = {
 	//relpos use head for mask/headgears, spine2/3 for backpacks/armors clothes
 	private _cFlag = ["cloth","armor","backpack","mask","helmet"];
 	private _cSelections = ["spine2","spine3","spine3","head","head"];
-	private _cPos = [[0,3,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15]];
-	private _cPosTarget = [[0,0,0.11],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11]];
+	private _cPos = [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15]];
+	private _cPosTarget = [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11]];
 	private _curSel = _cSelections select (_cFlag find _specFlag);
 	private _curPos = _cPos select (_cFlag find _specFlag);
 	private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
@@ -165,16 +188,28 @@ personCli_prepCamera = {
 	personCli_rttCamera camSetFov _fov;
 	personCli_rttCamera camcommitprepared 0;
 
+	//recreate light and setup settings
 	personCli_rttLight = "#lightpoint" createVehicleLocal [0,0,0];
 	personCli_rttLight setposatl (getposatl personCli_rttCamera);
 
-	personCli_rttLight setLightColor [0.5,0.5,0.5];
+	private _distToPoint = ((_campos vectoradd _curPosTarg) distance (getposatl personCli_rttCamera)) + 2;
+
+	//? how change light options in runtime? maybee need additional param (struct/array/map?)
 	personCli_rttLight setLightColor [0.48,0.48,0.45];
 	personCli_rttLight setLightAmbient [0.03,0.03,0.04];
-	personCli_rttLight setLightIntensity 1000;
-	personCli_rttLight setLightAttenuation [1,0,0,0,5,7];
+	personCli_rttLight setLightIntensity 1000 *3; //получше видно с текущими настройками цвета
+	personCli_rttLight setLightAttenuation [1,0,0,0,_distToPoint,_distToPoint + 3];
+
+	if (_pureVisual) then {
+		_per forceAddUniform "U_I_Protagonist_VR";
+		for "_i" from 0 to 3 do {
+			_per setobjectTexture [_i,""];
+			_per setObjectMaterial [_i,""];
+		};
+	};
 };
 
+//установка текстуры рендерт таргета
 personCli_setPictureRenderTarget = {
 	params ["_pic"];
 	_pic ctrlSetText "#(argb,512,512,1)r2t(person_cli_rendertarget,1)";
