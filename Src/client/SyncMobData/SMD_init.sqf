@@ -329,14 +329,24 @@ smd_onAttackOrDamage = {
 		_ctx params ["","","_slotHandAtt","_enumAtt","_probEff"];
 
 		//apply attack particles (лязг метала прим.)
+		private _canPlayAnim = equals(player,_mob);
+		
+		#ifdef SP_MODE
+		_canPlayAnim = true;
+		#endif
 
-		if equals(player,_mob) then {
+		if (_canPlayAnim) then {
 			//Подавление применения анимации при anim::syncAnim()
 			_mob setVariable ["__SMDINT_isSupressedAnimSync",true];
 			//play attack anim
 			[_mob,_slotHandAtt,_enumAtt] call anim_doAttack;
 
 			_mob setVariable ["__SMDINT_isSupressedAnimSync",false];
+
+			//пропуск тряски камеры
+			#ifdef SP_MODE
+			if equals(player,_mob) exitWith {};
+			#endif
 
 			//apply cam shake for attack
 			if isNullVar(_probEff) then {
