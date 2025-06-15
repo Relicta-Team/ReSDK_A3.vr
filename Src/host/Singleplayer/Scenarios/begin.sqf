@@ -5,6 +5,8 @@
 
 #include "Scenario.h"
 
+#include "begin_playerSetup.sqf"
+
 begin_debug_showLogo = true;
 
 begin_logoshown = false;
@@ -425,7 +427,7 @@ begin_handleKeyDown = -1;
 
 	_NAInvData = [
 		["uniform","NewArmyStdCloth"],
-		["name",["Воин"]]
+		["name",["Новоармеец"]]
 	];
 
 	for "_i" from 1 to 6 do {
@@ -449,6 +451,7 @@ begin_handleKeyDown = -1;
 	["begin_pos_cutscene1attack","begin_cutscene1attack",_NAInvData,{
 		["BattleAxe",_this,INV_HAND_R] call createItemInInventory;
 		callFunc(_this,switchTwoHands);
+		callFuncParams(_this,setCombatMode,true);
 	}] call sp_ai_createPersonEx;
 
 
@@ -608,7 +611,10 @@ begin_func_startTalkerAnimations = {
 			["begin_hwcut2man","begin\village\muzh4",[["endoffset",0.4],["onstart",{
 				{
 					1.7 call sp_threadPause;
-					["begin_hwcut2woman","begin_pos_hwcut2woman","begin\village_caca"] call sp_ai_playAnim;
+					["begin_hwcut2woman","begin_pos_hwcut2woman","begin\village_caca",{
+						params ["_obj"];
+						_obj switchmove "Acts_CivilIdle_1";
+					}] call sp_ai_playAnim;
 				} call sp_threadStart;
 			}]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
@@ -711,9 +717,9 @@ begin_canStartAttack = false;
 			_thd = {
 				//dialog
 				([
-					["begin_keeper1","begin\start\prov1",["endoffset",0.0]],
-					[player,"begin\start\gg1",["endoffset",0.1]],
-					["begin_keeper1","begin\start\prov2",["endoffset",0.4]],
+					["begin_keeper1","begin\start\prov1",["endoffset",1.2]],
+					[player,"begin\start\gg1",["endoffset",0.3]],
+					["begin_keeper1","begin\start\prov2",["endoffset",1.1]],
 					[player,"begin\start\gg2",["endoffset",1.3]],
 					["begin_keeper1","begin\start\prov3",["endoffset",0]],
 					["begin_keeper1","begin\start\prov4",["endoffset",0]]
@@ -732,7 +738,7 @@ begin_canStartAttack = false;
 			[{
 				_this call sp_threadWaitForEnd;
 				1 call sp_threadPause;
-				["beginstart"] call sp_audio_playMusic;
+				["beginstart",true] call sp_audio_playMusic;
 				[
 					"Передвижение вперёд @MoveForward,"
 					+ sbr + "передвижение назад @MoveBack,"
@@ -757,6 +763,18 @@ begin_canStartAttack = false;
 	]] call sp_ai_playAnim;
 	
 }] call sp_addScene;
+
+begin_startattack_lockzone_act = false;
+["begin_startattack_lockzone",{
+	if (begin_startattack_lockzone_act) exitWith {};
+
+	if (callFuncParams("begin_pos_keeper1_gate" call sp_getObject,getDistanceTo,call sp_getActor) <= 4) then {
+		begin_startattack_lockzone_act = true;
+		private _ivl = "begin_obj_invvalpreattack_lock" call sp_getObject;
+		private _oldpos = callFunc(_ivl,getPos);
+		callFuncParams(_ivl,changePosition,_oldpos vectoradd vec3(0,0,-4));
+	};
+}] call sp_addTriggerExit;
 
 begin_startattack_activated = false;
 ["begin_startattack",{
@@ -889,9 +907,9 @@ begin_startattack_activated = false;
 		1 call sp_threadPause;
 		([
 			["begin_watcher2","begin\gate\sword1",["distance",25]],
-			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.3]]],
-			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",0.6]]],
-			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",0.01]]],
+			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.4]]],
+			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",0.7]]],
+			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",0.5]]],
 			["begin_startdead3","begin\gate\guy4",[["distance",25],["endoffset",0.1]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
@@ -977,11 +995,6 @@ begin_startattack_activated = false;
 				}],
 				["state_2",{
 					callFuncParams("begin_rundoor2" call sp_getObject,setDoorOpen,true);
-					[
-						["begin_keeper1","begin\gate\prov3",["distance",20]],
-						[player,"begin\gate\gg2",["distance",10]],
-						["begin_keeper1","begin\gate\prov4",["distance",30]]
-					] call sp_audio_startDialog;
 				}]
 			]
 		] call sp_ai_playAnim;
@@ -1072,9 +1085,16 @@ begin_run1_act = false;
 			[getposatl("begin_mainattacker3" call sp_ai_getMobBody),"begin\radio3",35] call sp_audio_playSound;
 		}],
 		["state_3",{
-			[getposatl("begin_mainattacker3" call sp_ai_getMobBody),"begin\radio1",35] call sp_audio_playSound;
-			["begin_mainattacker3" call sp_ai_getMobObject,("begin_keeper1" call sp_ai_getMobBody) modelToWorld [0,0,0.4]] call cpt5_act_doShot;
-			callFuncParams("begin_keeper1" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD)
+			{
+				{!isNull(begin_run3_dialogHandle)} call sp_threadWait;
+				[getposatl("begin_mainattacker3" call sp_ai_getMobBody),"begin\radio1",35] call sp_audio_playSound;
+				begin_run3_dialogHandle call sp_audio_waitForEndDialog;
+				{
+					["begin_mainattacker3" call sp_ai_getMobObject,("begin_keeper1" call sp_ai_getMobBody) modelToWorld [0,0,0.4]] call cpt5_act_doShot;
+					callFuncParams("begin_keeper1" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD)
+				} call sp_threadCriticalSection;
+
+			} call sp_threadStart;
 		}]
 	]] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
@@ -1084,6 +1104,10 @@ begin_enterrun2_act = false;
 	if (begin_enterrun2_act) exitWith {};
 	begin_enterrun2_act = true;
 	callFuncParams("begin_rundoor1" call sp_getObject,setDoorOpen,false);
+
+	for "_i" from 7 to 9 do {
+		(("begin_startdead"+(str _i)) call sp_ai_getMobBody) switchMove ["Acts_ShockedUnarmed_2_Loop",rand(0,1),1,false];
+	};
 
 	["begin_mainattacker4","begin_pos_mainattacker4","begin\mainattacker4",{},[
 		["state_1",{
@@ -1161,9 +1185,16 @@ begin_enterrun2_act = false;
 }] call sp_addTriggerEnter;
 
 begin_run3_act = false;
+begin_run3_dialogHandle = null;
 ["begin_run3",{
 	if (begin_run3_act) exitWith {};
 	begin_run3_act = true;
+
+	begin_run3_dialogHandle = [
+		["begin_keeper1","begin\gate\prov3",["distance",20]],
+		[player,"begin\gate\gg2",["distance",10]],
+		["begin_keeper1","begin\gate\prov4",["distance",30]]
+	] call sp_audio_startDialog;
 
 }] call sp_addTriggerEnter;
 
@@ -1336,6 +1367,10 @@ begin_cutscene1_act = false;
 	begin_cutscene1_act = true;
 
 	begin_run4_processenemy = false; //stop far enemy processing
+
+	_mob = "begin_cutscene1attack" call sp_ai_getMobObject;
+	setVar(_mob,curTargZone,TARGET_ZONE_FACE);
+	setVar(_mob,DX,vec2(30,0));
 
 	[
 		["begin_cutscene1dead","begin\under\cutsdead1",["distance",10]],
@@ -1620,6 +1655,14 @@ begin_chaseend_act = false;
 ["begin_chaseend",{
 	if (begin_chaseend_act) exitWith {};
 	begin_chaseend_act = true;
+
+	{
+		15 call sp_threadPause;
+		while {true} do {
+			[5] call sp_applyPlayerDamage;
+			0.2 call sp_threadPause;
+		};
+	} call sp_threadStart;
 
 	["begin_chase_attacker2","begin_pos_chase_attacker2","begin\chase_attacker2",{
 
