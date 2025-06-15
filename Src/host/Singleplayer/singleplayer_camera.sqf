@@ -114,7 +114,7 @@ sp_cam_interp_internal_orderCommands = [
 sp_cam_interpTo = {
 	params ["_mode","_to",["_time",1]];
 
-	private _from = sp_cam_internal_bufferCamData;
+	private _from = array_copy(sp_cam_internal_bufferCamData);
 	[_mode,_from,_to,_time] call sp_cam_interpCam;
 };
 
@@ -152,6 +152,7 @@ sp_cam_interpCam = {
 			if (_mode == "pos") exitwith {
 				_val = vectorLinearConversion [_start,_end,tickTime,_from,_to,true];
 				[_val] call sp_cam_setCamPos;
+				sp_cam_internal_bufferCamData set [sp_cam_interp_internal_mapCamData get _mode,_val];
 				//if equals(_val,_to) then {stopThisUpdate()};
 			};
 			if (_mode == "fov") exitwith {
@@ -161,14 +162,23 @@ sp_cam_interpCam = {
 				_val = linearConversion [_start,_end,tickTime,_from,_to,true];
 				//if (_from == _to) then {_val = _from};
 				[_val] call sp_cam_setFov;
+				sp_cam_internal_bufferCamData set [sp_cam_interp_internal_mapCamData get _mode,_val];
 				//if equals(_val,_to) then {stopThisUpdate()};
 			};
 			if (_mode == "dir") exitwith {
 				if (_to < _from) then {
-					swap_lvars(_to,_from);
+					//swap_lvars(_to,_from);
 				};
-				_dir = linearConversion [_start,_end,tickTime,_from,_to,true];
+				
+				//_dir = linearConversion [_start,_end,tickTime,_from,_to,true];
+
+				//улучшенное вращение
+				_angleDiff = (_to - _from + 540) % 360 - 180; // -180..180
+				_progressNormalized = linearConversion [_start, _end, tickTime, 0, 1, true];
+				_dir = _from + (_angleDiff * _progressNormalized);
+
 				sp_cam_cinematicCam setdir _dir;
+				sp_cam_internal_bufferCamData set [sp_cam_interp_internal_mapCamData get _mode,_dir];
 			};
 			if (_mode == "pitchbank") exitwith {
 				
@@ -182,6 +192,7 @@ sp_cam_interpCam = {
 					_pitch,
 					_bank
 				] call bis_fnc_setpitchbank;
+				sp_cam_internal_bufferCamData set [sp_cam_interp_internal_mapCamData get _mode,[_pitch,_bank]];
 			};
 		};
 
