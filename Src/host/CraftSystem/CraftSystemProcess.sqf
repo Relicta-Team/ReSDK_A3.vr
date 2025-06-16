@@ -25,7 +25,7 @@ csys_requestOpenMenu = {
 
 	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
-	assert_str(array_contains(_allowedCategReal,_firstCat),"First category is not in allowed categories");
+	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories");
 
 	private _data = [
 		getVar(_objSrc,pointer),
