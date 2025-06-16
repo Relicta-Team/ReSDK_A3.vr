@@ -769,6 +769,31 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		callFuncParams(_dynDisp,setNDOptions,"Examine3d" arg 5 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
 		
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
+		
+		//starting netdisplay handler (because opened as internal (usr is checked target))
+		private _ctxParams = [this,_usr,_dynDisp,getSelf(loc)];
+		startAsyncInvoke
+		{
+			params ["_item","_usr","_dynDisp","_curLoc"];
+			private _maxDist = getVar(_dynDisp,ndInteractDistance);
+			//already closed from clientside
+			if (count getVar(_dynDisp,ndOpenedBy) == 0) exitWith {true};
+			_state = false;
+			call {
+				//localtion changed
+				if not_equals(_curLoc,getVar(_item,loc)) exitWith {_state = true};
+				//too far
+				if (callFuncParams(_usr,getDistanceTo,_item) > _maxDist) exitWith {_state = true};
+			};
+			if (_state) then {
+				if (count getVar(_dynDisp,ndOpenedBy) > 0) then {
+					callFuncParams(_dynDisp,closeNDisplayServer,_usr);
+				};
+			};
+			_state
+		},{}, //in action block do nothing
+		_ctxParams
+		endAsyncInvoke
 	};
 
 endclass
