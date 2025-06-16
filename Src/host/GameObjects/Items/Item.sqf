@@ -727,26 +727,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		if !array_exists(["obj" arg "cloth" arg "armor" arg "backpack" arg "mask" arg "helmet"],_etype) exitWith {
 			"" //в любом случае на клиенте обработается неверный тип формы
 		};
-
 		if equals(_etype,"obj") exitWith {getSelf(model)};
-		//! мы не можем использовать этот код, потому что некоторые модели сделаные по ебаному + чехи не позволяют в ретекстур отрендереных на ui моделях
-		// if equals(_etype,"cloth") exitWith {
-		// 	private _formClass = GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformClass");
-		// 	GetText (configFile >> "cfgVehicles" >> _formClass >> "model");
-		// };
-		// if equals(_etype,"armor") exitWith {
-		// 	GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "model");
-		// };
-		// if equals(_etype,"backpack") exitWith {
-		// 	GetText (configFile >> "cfgVehicles" >> getSelf(armaClass) >> "model");
-		// };
-		// if equals(_etype,"mask") exitWith {
-		// 	GetText (configFile >> "cfgGlasses" >> getSelf(armaClass) >> "model");
-		// };
-		// if equals(_etype,"helmet") exitWith {
-		// 	GetText (configFile >> "cfgWeapons" >> getSelf(armaClass) >> "ItemInfo" >> "uniformModel");
-		// };
-
 		getSelf(armaClass)
 		
 	};
@@ -766,7 +747,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		};
 		private _handleInp = { objParams_2(_usr,_inp); };
 		private _ctx = this;
-		callFuncParams(_dynDisp,setNDOptions,"Examine3d" arg 5 arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
+		private _dist = callFuncParams(_usr,getDistanceTo,this) + 0.5;
+		callFuncParams(_dynDisp,setNDOptions,"Examine3d" arg _dist arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
 		
 		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
 		
