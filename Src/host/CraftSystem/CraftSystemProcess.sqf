@@ -9,7 +9,7 @@ csys_requestOpenMenu = {
 	if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
 	private _allowedCateg = callFunc(_objSrc,getAllowedCraftCategories);
 	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[])) exitWith {
-		errorformat("csys::requestOpenMenu() - catched unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
+		errorformat("csys::requestOpenMenu() - caught unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
 	};
 	
 	if (count _allowedCateg == 0) then {
