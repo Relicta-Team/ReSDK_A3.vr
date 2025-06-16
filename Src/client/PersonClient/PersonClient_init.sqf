@@ -22,6 +22,8 @@ personCli_rttCamera = "camera" camCreate [0,0,0]; //камера для ренд
 //источник освещения для камеры
 personCli_rttLight = objNull;
 
+personCli_dummyObjFloor = objNull;
+
 /*
 	Переменная рассылается сервером
 	Вариант использования обработчика entityCreated рассматривался но возможно это вызовет куда большие проблемы нагрузки на клиент
@@ -216,3 +218,10 @@ personCli_setPictureRenderTarget = {
 };
 
 personCli_internal_threadHandle = startUpdate(personCli_onUpdate,0);
+
+if isNullReference(personCli_dummyObjFloor) then {
+	personCli_dummyObjFloor = "block_dirt" createVehicleLocal [0,0,0];
+	personCli_dummyObjFloor setPosATL PERSONSERV_MOB_POS;
+	personCli_dummyObjFloor setObjectTexture [0,""];
+	personCli_dummyObjFloor setObjectMaterial [0,""];
+};

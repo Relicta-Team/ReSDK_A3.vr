@@ -12,9 +12,18 @@
 
 personServ_map_mobs = createHashMap;
 
+personServ_dummyObjFloor = objNull;
+
 //регистрация сущности
 personServ_registerMob = {
     params ["_mobIdAsOwner"];
+    if isNullReference(personServ_dummyObjFloor) then {
+        personServ_dummyObjFloor = "block_dirt" createVehicleLocal [0,0,0];
+        personServ_dummyObjFloor setPosATL PERSONSERV_MOB_POS;
+        personServ_dummyObjFloor setObjectTexture [0,""];
+        personServ_dummyObjFloor setObjectMaterial [0,""];
+    };
+
     private _mob = [PERSONSERV_MOB_POS] call gm_createSimpleMob;
     personServ_map_mobs set [_mobIdAsOwner,_mob];
 
