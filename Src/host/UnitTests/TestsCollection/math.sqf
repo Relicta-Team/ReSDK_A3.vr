@@ -458,7 +458,7 @@ TEST(testGetPosListCenter)
 	ASSERT_STR(count _center == 3,"getPosListCenter result is not 3 elements");
 	ASSERT_STR(inRange(_center select 2,0,2),"getPosListCenter result is not in range");
 
-	ASSERT_EQ(_center,[1,1,1]);
+	ASSERT_EQ(_center,vec3(1,1,1));
 
 	private _list2 = [[0,0,0],[1,1,1],[2,2,2],[3,3,3]];
 	private _center2 = [_list2] call getPosListCenter;
@@ -466,5 +466,5 @@ TEST(testGetPosListCenter)
 	ASSERT_STR(equalTypes(_center2,[]),"getPosListCenter result is not array");
 	ASSERT_STR(count _center2 == 3,"getPosListCenter result is not 3 elements");
 	ASSERT_STR(inRange(_center2 select 2,0,3),"getPosListCenter result is not in range");
-	ASSERT_EQ(_center2,[1.5,1.5,1.5]);
+	ASSERT_EQ(_center2,vec3(1.5,1.5,1.5));
 }
