@@ -37,7 +37,6 @@ class(SmallShroomHat2) extends(SmallShroomHat1)
 endclass
 
 class(BigShroomHat2) extends(BigShroomHat1)
-	var(name,"EoO_Fant_Averland_Helm_1");
 	var(armaClass,"EoO_Fant_Averland_Helm_1");
 endclass
 
@@ -65,7 +64,7 @@ class(SmallCoveredSteelHelmet2) extends(SmallCoveredSteelHelmet1)
 endclass
 
 class(EoO_Fant_FireWizard_Helm_1) extends(HeadgearBase)
-	var(name,"EoO_Fant_FireWizard_Helm_1");
+	var(name,"Шлем"); //todo correct name
 	var(armaClass,"EoO_Fant_FireWizard_Helm_1");
 endclass
 
@@ -248,7 +247,6 @@ endclass
 
 //green
 class(Turban4) extends(Turban1)
-	var(name,"SC_Turban_Tan");
 	var(armaClass,"SC_Turban_Tan");
 endclass
 
