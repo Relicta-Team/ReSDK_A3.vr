@@ -762,6 +762,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 			if (count getVar(_dynDisp,ndOpenedBy) == 0) exitWith {true};
 			_state = false;
 			call {
+				if isNullReference(_item) exitWith {_state = true};
 				//localtion changed
 				if not_equals(_curLoc,getVar(_item,loc)) exitWith {_state = true};
 				//too far
