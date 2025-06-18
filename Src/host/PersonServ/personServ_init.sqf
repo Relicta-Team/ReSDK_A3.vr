@@ -38,7 +38,7 @@ personServ_unregisterMob = {
     if !array_exists(personServ_map_mobs,_mobIdAsOwner) exitWith {false};
 
     private _mob = personServ_map_mobs get _mobIdAsOwner;
-    personServ_map_mobs deleteAt _mob;
+    personServ_map_mobs deleteAt _mobIdAsOwner;
     deleteVehicle _mob;
     true
 };
