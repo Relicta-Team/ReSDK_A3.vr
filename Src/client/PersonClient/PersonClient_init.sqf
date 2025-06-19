@@ -65,6 +65,20 @@ personCli_getLocalMob = {
 	_m
 };
 
+personCli_getLocalObject = {
+	private _per = call personCli_getLocalMob;
+	if (isNullReference(_per)) exitWith {
+		objNull
+	};
+	
+	private _obj = _per getVariable ["_previewObject", objNull];
+	if (isNullReference(_obj)) exitWith {
+		objNull
+	};
+	
+	_obj
+};
+
 //синхронизация видимости. мы видим только свою локальную персону.
 personCli_syncLocalVisibility = {
 	private _locId = ifcheck(isNull(personCli_localMobRef),objNull,personCli_localMobRef);
@@ -80,6 +94,15 @@ personCli_setStat = {
 	params ["_stateName",["_val",""]];
 	//TODO  if val empty string reset stat to default (removeUniform/removeVest etc...)
 	private _per = call personCli_getLocalMob;
+
+	if equals(_stateName,"obj") exitWith {
+		private _position = getposatl _per vectoradd [0,0,1];
+		if (_val != "") then {
+			private _object = createSimpleObject [_val, _position];
+			_object setposatl _position;
+			_per setVariable ["_previewObject", _object];
+		} 
+	};
 	if equals(_stateName,"face") exitWith {
 		if (_val == "") then {
 			_per setFace ("WhiteHead_23_player");
@@ -134,11 +157,20 @@ personCli_const_list_allSettings = [
 	"helmet"
 ];
 
-//очищает инвентарь и лицо
+//очищает инвентарь, лицо и все объекты на сцене
 personCli_clearInventory = {
+	private _per = call personCli_getLocalMob;
+
 	{
 		[_x] call personCli_setStat
 	} foreach personCli_const_list_allSettings;
+
+	private _existingObj = _per getVariable ["_previewObject", objNull];
+
+	//удаляем объект если он есть
+	if (!isNullReference(_existingObj)) then {
+		deleteVehicle _existingObj;
+	};
 };
 
 //установка позиции камеры. _applyLightPos - синхронизировать ли позицию света
@@ -176,15 +208,18 @@ personCli_prepCamera = {
 	personCli_rttCamera cameraEffect ["INTERNAL", "BACK", "person_cli_rendertarget"];
 	
 	//relpos use head for mask/headgears, spine2/3 for backpacks/armors clothes
-	private _cFlag = ["cloth","armor","backpack","mask","helmet"];
-	private _cSelections = ["spine2","spine3","spine3","head","head"];
-	private _cPos = [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15]];
-	private _cPosTarget = [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11]];
+	private _cFlag = ["cloth","armor","backpack","mask","helmet","obj"];
+	private _cSelections = ["spine2","spine3","spine3","head","head",null];
+	private _cPos = [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15],[0,0.1,0]];
+	private _cPosTarget = [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11],[0,0,0]];
 	private _curSel = _cSelections select (_cFlag find _specFlag);
 	private _curPos = _cPos select (_cFlag find _specFlag);
 	private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
 
-	private _campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
+	// Для объектов используем позицию персонажа +1 метр по вертикали. Для одежды используем позицию относительно конечностей
+	private _campos = if not_equals(_specFlag,"obj") then {(_per modeltoworldvisual (_per selectionPosition _curSel))} else {
+		getposatl _per vectorAdd [0,0,1]
+	};
 	personCli_rttCamera setposatl (_campos vectoradd _curPos);
 	personCli_rttCamera campreparetarget (_campos vectoradd _curPosTarg);
 	personCli_rttCamera camSetFov _fov;
@@ -194,7 +229,7 @@ personCli_prepCamera = {
 	personCli_rttLight = "#lightpoint" createVehicleLocal [0,0,0];
 	personCli_rttLight setposatl (getposatl personCli_rttCamera);
 
-	private _distToPoint = ((_campos vectoradd _curPosTarg) distance (getposatl personCli_rttCamera)) + 2;
+	private _distToPoint = ((_campos vectoradd _curPosTarg) distance (getposatl personCli_rttCamera)) + 6;
 
 	//? how change light options in runtime? maybee need additional param (struct/array/map?)
 	personCli_rttLight setLightColor [0.48,0.48,0.45];
