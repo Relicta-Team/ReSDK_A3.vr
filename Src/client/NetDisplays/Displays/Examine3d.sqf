@@ -148,7 +148,7 @@ struct(Examine3d) base(NDBase)
 				private _dirVector = _campos vectorDiff _curPosTarg;
 
 				private _zoomSensitivity = 1;
-				private _distChange = -(_val * 0.1) * (_distance * _zoomSensitivity);
+				private _distChange = -(_val * 0.1) * _zoomSensitivity;
 				private _newDistance = _distance + _distChange;
 
 				_newDistance = clamp(_newDistance, _minDistance, _maxDistance);
