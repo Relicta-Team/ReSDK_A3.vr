@@ -61,10 +61,10 @@ struct(Examine3d) base(NDBase)
 			_img setvariable ["zoom", 0];
 
 			_img setvariable ["_per", call personCli_getLocalMob];
-			_img setvariable ["_cFlag", ["cloth","armor","backpack","mask","helmet","obj"]];
-			_img setvariable ["_cSelections", ["spine2","spine3","spine3","head","head",null]];
-			_img setvariable ["_cPos", [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15],[0,0.1,0]]];
-			_img setvariable ["_cPosTarget", [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11],[0,0,0]]];
+			_img setvariable ["_cFlag", personCli_const_cFlag];
+			_img setvariable ["_cSelections", personCli_const_cSelections];
+			_img setvariable ["_cPos", personCli_const_cPosList];
+			_img setvariable ["_cPosTarget", personCli_const_cPosTargetList];
 
 			_img setvariable ["pitch", 0];
 			_img setvariable ["yaw", 0];
@@ -124,18 +124,20 @@ struct(Examine3d) base(NDBase)
 				private _specFlag = _img getVariable ["specFlag", "cloth"];
 				private _cPos = _img getVariable ["_cPos", []];
 				private _cPosTarget = _img getVariable ["_cPosTarget", []];
-				private _curPos = _cPos select (_cFlag find _specFlag);
-				private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
+				private _curIndex = _cFlag find _specFlag;
+				private _curPos = _cPos select _curIndex;
+				private _curPosTarg = _cPosTarget select _curIndex;
 				private _distance = _img getVariable ["distance", 1];
 				private _curSel = _cSelections select (_cFlag find _specFlag);
 
 				//Дефолтные значения мин/макс дистанции (одежда)
 				private _minDistance = 1;
-				private _maxDistance = 4.5;
+				private _maxDistance = 6;
 				private _campos = getposatl _per vectorAdd [0,0,1];
 
 				if not_equals(_specFlag,"obj") then {
-					_campos = (_per modeltoworldvisual (_per selectionPosition _curSel))
+					_campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
+					_maxDistance = personCli_const_cPosList select _curIndex select 1;
 				} else {
 					//Расчитываем мин/макс дистанцию (объект)
 					private _bb = _img getVariable ["bb", []];
@@ -214,10 +216,8 @@ struct(Examine3d) base(NDBase)
 
 					private _campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
 					_campos = _campos vectoradd _curPosTarg vectoradd _relPos;
-					private _dirVector = _campos vectorDiff _curPosTarg;
 
 					[_campos] call personCli_setCameraPos;
-					personCli_rttCamera setVectorDir _dirVector;
 				} else {
 					private _orbitAngleH = _img getVariable ["orbitAngleH", 0];
 					private _orbitAngleV = _img getVariable ["orbitAngleV", 0];

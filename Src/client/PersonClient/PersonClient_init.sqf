@@ -186,6 +186,15 @@ personCli_cloneCharVisualFromPlayer = {
 	//todo implement (для осмотра себя в зеркале)
 };
 
+//дистанция от камеры до цели (используется только для персонажных объектов (все кроме obj))
+personCli_const_cPosList = [[0,6,0],[0,4,0],[0,3,0],[0,2.5,0],[0,2,0],[0,0.1,0]];
+// таргет позиция камеры для персонажных объектов (все кроме obj)
+personCli_const_cPosTargetList = [[0.1,0,-0.3],[0,0.05,-0.11],[0,-0.2,-0.05],[-0.05,-0.05,0.10],[-0.07,-0.1,0.1],[0,0,0]];
+// флаги для определения типа визуализации
+personCli_const_cFlag = ["cloth","armor","backpack","mask","helmet","obj"];
+// кости персонажа для определения позиции визуализации
+personCli_const_cSelections = ["spine2","spine3","spine3","head","head",null];
+
 /*
 	Подготовка камеры для рендеринга в виджете
 	_fov - значение fov
@@ -208,14 +217,13 @@ personCli_prepCamera = {
 	personCli_rttCamera cameraEffect ["INTERNAL", "BACK", "person_cli_rendertarget"];
 	
 	//relpos use head for mask/headgears, spine2/3 for backpacks/armors clothes
-	private _cFlag = ["cloth","armor","backpack","mask","helmet","obj"];
-	private _cSelections = ["spine2","spine3","spine3","head","head",null];
-	private _cPos = [[0,6,0.0],[0,3,0.0],[0,3,0.0],[0,1,0.15],[0,1,0.15],[0,0.1,0]];
-	private _cPosTarget = [[0.1,0,0.0],[0,0,0.11],[0,0,0.11],[-0.05,0,0.11],[-0.05,0,0.11],[0,0,0]];
+	private _cFlag = personCli_const_cFlag;
+	private _cSelections = personCli_const_cSelections;
+	private _cPos = personCli_const_cPosList;
+	private _cPosTarget = personCli_const_cPosTargetList;
 	private _curSel = _cSelections select (_cFlag find _specFlag);
 	private _curPos = _cPos select (_cFlag find _specFlag);
 	private _curPosTarg = _cPosTarget select (_cFlag find _specFlag);
-
 	// Для объектов используем позицию персонажа +1 метр по вертикали. Для одежды используем позицию относительно конечностей
 	private _campos = if not_equals(_specFlag,"obj") then {(_per modeltoworldvisual (_per selectionPosition _curSel))} else {
 		getposatl _per vectorAdd [0,0,1]
