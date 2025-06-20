@@ -81,7 +81,7 @@ personCli_setStat = {
 	if equals(_stateName,"obj") exitWith {
 		private _position = getposatl _per vectoradd [0,0,1];
 		if (_val != "") then {
-			private _object = createSimpleObject [_val, _position];
+			private _object = createSimpleObject [_val, _position, true];
 			_object setposatl _position;
 			_per setVariable ["_previewObject", _object];
 		} 
@@ -229,10 +229,12 @@ personCli_prepCamera = {
 	personCli_rttLight setLightAttenuation [1,0,0,0,_distToPoint,_distToPoint + 3];
 
 	if (_pureVisual) then {
-		_per forceAddUniform "U_I_Protagonist_VR";
-		for "_i" from 0 to 3 do {
-			_per setobjectTexture [_i,""];
-			_per setObjectMaterial [_i,""];
+		if (_specFlag != "cloth") then {
+			_per forceAddUniform "U_I_Protagonist_VR";
+			for "_i" from 0 to 3 do {
+				_per setobjectTexture [_i,""];
+				_per setObjectMaterial [_i,""];
+			};
 		};
 	};
 };
