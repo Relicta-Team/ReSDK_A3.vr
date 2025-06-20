@@ -17,7 +17,7 @@ jobs:
 
   deploy:
     name: Build
-    runs-on: windows-2019
+    runs-on: windows-latest
     if: github.repository == 'Relicta-Team/ReSDK_A3.vr'
     steps:
       
