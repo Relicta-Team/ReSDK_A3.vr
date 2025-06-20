@@ -120,7 +120,7 @@ Initial value:
 ```sqf
 startUpdate(personCli_onUpdate,0)
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 246](../../../Src/client/PersonClient/PersonClient_init.sqf#L246)
+File: [client\PersonClient\PersonClient_init.sqf at line 249](../../../Src/client/PersonClient/PersonClient_init.sqf#L249)
 ## personCli_getAllMobs
 
 Type: function
@@ -212,4 +212,4 @@ Type: function
 Description: установка текстуры рендерт таргета
 - Param: _pic
 
-File: [client\PersonClient\PersonClient_init.sqf at line 241](../../../Src/client/PersonClient/PersonClient_init.sqf#L241)
+File: [client\PersonClient\PersonClient_init.sqf at line 244](../../../Src/client/PersonClient/PersonClient_init.sqf#L244)
