@@ -18,6 +18,8 @@ struct(Examine3d) base(NDBase)
 		"helmet"
 	];
 
+	def(imgRef) widgetNull;
+
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
@@ -158,10 +160,13 @@ struct(Examine3d) base(NDBase)
 			[_campos,false] call personCli_setCameraPos;
 		}];
 
+		self setv(imgRef,_img);
+
 		startAsyncInvoke
 		{
 			params ["_ndObj","_img"];
 			if isNullReference(_img) exitWith {true};
+			
 			_ndObj callv(handleOrbit);
 			_ndObj callv(handleMovingObject);
 			false
@@ -175,6 +180,7 @@ struct(Examine3d) base(NDBase)
 
 	def(handleOrbit)
 	{
+		private _img = self getv(imgRef);
 		if (_img getVariable ["isOrbitActive", false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _img getVariable ["orbitStart", [0, 0]];
@@ -237,6 +243,7 @@ struct(Examine3d) base(NDBase)
 
 	def(handleMovingObject)
 	{
+		private _img = self getv(imgRef);
 		if (_img getVariable ["isDragActive",false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _img getVariable ["dragStart", [_xPos, _yPos]];
