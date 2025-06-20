@@ -46,6 +46,7 @@ importClient("src\client\NetDisplays\NetDisplays.sqf"); cmplog("NetDisplays")
 importClient("src\client\Hud\Hud_init.sqf"); cmplog("HUD")//ingame hud
 importClient("src\client\GeometryFixer\GeometryFixer_init.sqf");cmplog("GeoFix") //fix lag geometry
 importClient("src\client\LocalEffects\LocalEffects_init.sqf");cmplog("LocalEffects") //local effects system
+importClient("src\client\PersonClient\PersonClient_init.sqf"); cmplog("Person") //local persons subsystem
 
 importClient("src\client\NOEngineClient\NOEngineClientInit.sqf");cmplog("NOEngine")
 importClient("src\client\VoiceSystem\VoiceSystem_init.sqf"); cmplog("Voice")//tfar interface

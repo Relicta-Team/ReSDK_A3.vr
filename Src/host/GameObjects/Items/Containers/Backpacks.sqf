@@ -10,7 +10,7 @@
 
 editor_attribute("InterfaceClass")
 class(Backpack) extends(Container)
-var(name,"Рюкзак");
+	var(name,"Рюкзак");
 	var(desc,"Отлично подходит для таскания всякого барахла.");
 	var(model,"a3\props_f_enoch\military\decontamination\deconkit_01_f.p3d");
 	var(weight,gramm(600));
@@ -19,6 +19,8 @@ var(name,"Рюкзак");
 	var_exprval(countSlots,DEFAULT_BACKPACK_STORAGE);
 	var(size,ITEM_SIZE_LARGE);
 	var(maxSize,ITEM_SIZE_LARGE);
+
+	getterconst_func(getExamine3dItemType,"backpack");
 
 	var(icon,"\A3\weapons_f\ammoboxes\bags\data\ui\icon_B_C_Gorod_khk_ca.paa");
 
@@ -277,4 +279,21 @@ class(WaistBag) extends(BackpackBag)
 		var(weight,gramm(200));
 	var(size,ITEM_SIZE_SMALL);
 	var(maxSize,ITEM_SIZE_SMALL);
+endclass
+
+class(GuitarBackpackHandmadeBlack) extends(Backpack)
+	var(name,"Гитаный рюкзак");
+	var(armaClass,"guitar_black");
+	var(weight,2.8);
+	var(size,ITEM_SIZE_MEDIUM);
+	var(maxSize,ITEM_SIZE_MEDIUM);
+	var(material,"MatWood");
+endclass
+
+class(GuitarBackpackHandmadeBrown) extends(GuitarBackpackHandmadeBlack)
+	var(armaClass,"guitar_brown");
+endclass
+
+class(GuitarBackpackHandmadeLightBrown) extends(GuitarBackpackHandmadeBlack)
+	var(armaClass,"guitar_co");
 endclass

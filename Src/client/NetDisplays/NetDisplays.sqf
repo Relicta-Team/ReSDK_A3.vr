@@ -383,6 +383,8 @@ nd_stdLoad = {
 		_back = [_disp,BACKGROUND,[0,0,100,100],_ctg] call createWidget;
 		_back setBackgroundColor [0.3,0.3,0.3,0.5];
 		
+		_ctg setvariable ["background",_back];
+		
 		if (equalTypes(_btName,true) && {equals(_btName,false)}) then {
 			_ctg
 		} else {
