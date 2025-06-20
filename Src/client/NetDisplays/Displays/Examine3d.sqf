@@ -135,10 +135,8 @@ struct(Examine3d) base(NDBase)
 				//Расчитываем мин/макс дистанцию (объект)
 				private _bb = _img getVariable ["bb", []];
 				_minDistance = selectMin(_bb select 1);
-				_maxDistance = selectMax(_bb select 1) * 5;
+				_maxDistance = (selectMax(_bb select 1) * 5) + 1;
 			};
-
-			private _dirVector = _campos vectorDiff _curPosTarg;
 
 			private _zoomSensitivity = 1;
 			private _distChange = -(_val * 0.1) * _zoomSensitivity;
@@ -157,7 +155,7 @@ struct(Examine3d) base(NDBase)
 				sin(_orbitAngleV) * _newDistance
 			];
 
-			_campos = _campos vectoradd _curPosTarg vectoradd _relPos;
+			_campos = _campos vectoradd _relPos;
 
 			[_campos,false] call personCli_setCameraPos;
 		}];
@@ -202,6 +200,8 @@ struct(Examine3d) base(NDBase)
 
 			private _orbitDistance = _img getVariable ["distance", 1];
 
+			_orbitDistance = clamp(_orbitDistance, 1, personCli_const_cPosList select _curIndex select 1);
+
 			private _dx = (_lastPos select 0) - _xPos;
 			private _dy = (_lastPos select 1) - _yPos;
 
@@ -224,7 +224,7 @@ struct(Examine3d) base(NDBase)
 			];
 
 			private _campos = (_per modeltoworldvisual (_per selectionPosition _curSel));
-			_campos = _campos vectoradd _curPosTarg vectoradd _relPos;
+			_campos = _campos vectoradd _relPos;
 
 			[_campos,false] call personCli_setCameraPos;
 		} else {
