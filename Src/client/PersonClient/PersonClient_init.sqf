@@ -51,7 +51,7 @@ personCli_getLocalMob = {
 	if !isNullReference(personCli_localMobObjCached) exitWith {
 		personCli_localMobObjCached
 	};
-	private _locid = ifcheck(isNull(personCli_localMobRef),objNull,personCli_localMobRef);
+	private _locId = ifcheck(isNull(personCli_localMobRef),objNull,personCli_localMobRef);
 
 	private _m = objNull;
 	{
