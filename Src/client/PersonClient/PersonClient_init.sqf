@@ -231,6 +231,7 @@ personCli_prepCamera = {
 	if (_pureVisual) then {
 		if (_specFlag != "cloth") then {
 			_per forceAddUniform "U_I_Protagonist_VR";
+			//!синхронизация текстур и материалов правильно отрабатывает только через какое-то время спустя
 			for "_i" from 0 to 3 do {
 				_per setobjectTexture [_i,""];
 				_per setObjectMaterial [_i,""];
