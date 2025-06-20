@@ -77,7 +77,6 @@ struct(Examine3d) base(NDBase)
 		private _cFlag = personCli_const_cFlag;
 		private _cPosTarget = personCli_const_cPosTargetList;
 		private _cPos = personCli_const_cPosList;
-		private _cPosTarget = personCli_const_cPosTargetList;
 		private _curIndex = _cFlag find _specFlag;
 		private _curPos = _cPos select _curIndex;
 		private _curPosTarg = _cPosTarget select _curIndex;
