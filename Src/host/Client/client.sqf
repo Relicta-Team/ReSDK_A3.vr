@@ -367,7 +367,7 @@ class(ServerClient) /*extends(NetObject)*/
 			callSelfParams(fastSendInfo,"cd_sp_lockedSetting" arg true);
 		};
 
-		//creating local presonmob
+		//creating local personmob
 		[callSelf(getOwner)] call personServ_registerMob;
 
 		private _postCheck = {
