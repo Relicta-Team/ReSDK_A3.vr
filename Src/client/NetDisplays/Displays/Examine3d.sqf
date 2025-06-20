@@ -17,9 +17,9 @@ struct(Examine3d) base(NDBase)
 		"mask",
 		"helmet"
 	];
-
-
-	cde_debug = {
+	
+	decl(override) def(process)
+	{
 		params ["_args","_isFirstCall"];
 		private _sizeX = 80;
 		private _sizeY = 90;
@@ -31,7 +31,7 @@ struct(Examine3d) base(NDBase)
 		
 		_args params [["_model",""],["_text",""],["_specFlag","obj"]];
 		if !array_exists(nd_internal_currentStructObj getv(specFlagList),_specFlag) exitWith {
-			errorformat("Examine3d::cde_debug - invalid specFlag %1",_specFlag);
+			errorformat("Examine3d::process - invalid specFlag %1",_specFlag);
 			private _textWid = [(nd_internal_currentStructObj getv(thisDisplay)),WIDGET_FULLSIZE,_zone,true] call nd_addClosingButton;
 			_textWid ctrlSetText "Закрыть";
 		};
@@ -162,21 +162,21 @@ struct(Examine3d) base(NDBase)
 
 		startAsyncInvoke
 		{
-			params ["_img"];
+			params ["_ndObj","_img"];
 			if isNullReference(_img) exitWith {true};
-			call cde_orbitHandle;
-			call cde_movingHandleObj;
+			_ndObj callv(handleOrbit);
+			_ndObj callv(handleMovingObject);
 			false
-		},{},[_img]
+		},{},[self,_img]
 		endAsyncInvoke
 
 
 		_textWid = [(self getv(thisDisplay)),[0,90,100,10],_zone,true] call nd_addClosingButton;
 		_textWid ctrlSetText "Закрыть";
-		
 	};
 
-	cde_orbitHandle = {
+	def(handleOrbit)
+	{
 		if (_img getVariable ["isOrbitActive", false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _img getVariable ["orbitStart", [0, 0]];
@@ -236,7 +236,9 @@ struct(Examine3d) base(NDBase)
 		};
 	};
 
-	cde_movingHandleObj = {
+
+	def(handleMovingObject)
+	{
 		if (_img getVariable ["isDragActive",false]) then {
 			getMousePosition params ["_xPos","_yPos"];
 			private _lastPos = _img getVariable ["dragStart", [_xPos, _yPos]];
@@ -275,11 +277,4 @@ struct(Examine3d) base(NDBase)
 			_img setVariable ["currentYaw", _yaw];
 		};
 	};
-
-	decl(override) def(process)
-	{
-		_this call cde_debug;
-		
-	};
-
 endstruct
