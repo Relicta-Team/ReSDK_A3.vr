@@ -43,26 +43,9 @@ personCli_onUpdate = {
 	};
 };
 
-//!not need (use personCli_localMobRef)
-personCli_localMobObjCached = objNull; //кешированный объект локальной персоны
-
 //получает локальную персону для клиента
 personCli_getLocalMob = {
-	if !isNullReference(personCli_localMobObjCached) exitWith {
-		personCli_localMobObjCached
-	};
-	private _locId = ifcheck(isNull(personCli_localMobRef),objNull,personCli_localMobRef);
-
-	private _m = objNull;
-	{
-		if equals(_locId,_x) exitWith {
-			_m = _x;
-		};
-	} foreach (call personCli_getAllMobs);
-	
-	personCli_localMobObjCached = _m;
-	
-	_m
+	personCli_localMobRef
 };
 
 personCli_getLocalObject = {
@@ -92,7 +75,7 @@ personCli_syncLocalVisibility = {
 //установка опции локального клиента
 personCli_setStat = {
 	params ["_stateName",["_val",""]];
-	//TODO  if val empty string reset stat to default (removeUniform/removeVest etc...)
+	
 	private _per = call personCli_getLocalMob;
 
 	if equals(_stateName,"obj") exitWith {

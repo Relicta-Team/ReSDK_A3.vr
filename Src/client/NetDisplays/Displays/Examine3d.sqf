@@ -17,7 +17,7 @@ struct(Examine3d) base(NDBase)
 		"mask",
 		"helmet"
 	];
-	
+
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
@@ -82,7 +82,6 @@ struct(Examine3d) base(NDBase)
 		private _curPos = _cPos select _curIndex;
 		private _curPosTarg = _cPosTarget select _curIndex;
 		_img setvariable ["distance", _curPosTarg distance _curPos];
-		_img setvariable ["object", call perwsonCli_getLocalObject];
 
 		_img ctrlAddEventHandler ["MouseButtonDown",{
 			params ["_img","_b"];

@@ -347,7 +347,6 @@ class(RitualSkullHat1) extends(HeadgearBase)
 endclass
 
 class(RitualSkullHat2) extends(RitualSkullHat1)
-	var(name,"fiendhelmet");
 	var(armaClass,"fiendhelmet");
 endclass
 
