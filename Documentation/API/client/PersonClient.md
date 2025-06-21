@@ -60,7 +60,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 134](../../../Src/client/PersonClient/PersonClient_init.sqf#L134)
+File: [client\PersonClient\PersonClient_init.sqf at line 135](../../../Src/client/PersonClient/PersonClient_init.sqf#L135)
 ## personCli_const_cPosList
 
 Type: Variable
@@ -72,7 +72,7 @@ Initial value:
 ```sqf
 [[0,6,0],[0,4,0],[0,3,0],[0,2.5,0],[0,2,0],[0,1,0]]
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 173](../../../Src/client/PersonClient/PersonClient_init.sqf#L173)
+File: [client\PersonClient\PersonClient_init.sqf at line 174](../../../Src/client/PersonClient/PersonClient_init.sqf#L174)
 ## personCli_const_cPosTargetList
 
 Type: Variable
@@ -84,7 +84,7 @@ Initial value:
 ```sqf
 [[0.1,0,-0.3],[0,0.05,-0.11],[0,-0.2,-0.05],[-0.05,-0.05,0.10],[-0.07,-0.1,0.1],[0,0,0]]
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 175](../../../Src/client/PersonClient/PersonClient_init.sqf#L175)
+File: [client\PersonClient\PersonClient_init.sqf at line 176](../../../Src/client/PersonClient/PersonClient_init.sqf#L176)
 ## personCli_const_cFlag
 
 Type: Variable
@@ -96,7 +96,7 @@ Initial value:
 ```sqf
 ["cloth","armor","backpack","mask","helmet","obj"]
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 177](../../../Src/client/PersonClient/PersonClient_init.sqf#L177)
+File: [client\PersonClient\PersonClient_init.sqf at line 178](../../../Src/client/PersonClient/PersonClient_init.sqf#L178)
 ## personCli_const_cSelections
 
 Type: Variable
@@ -108,7 +108,19 @@ Initial value:
 ```sqf
 ["spine2","spine3","spine3","head","head",null]
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 179](../../../Src/client/PersonClient/PersonClient_init.sqf#L179)
+File: [client\PersonClient\PersonClient_init.sqf at line 180](../../../Src/client/PersonClient/PersonClient_init.sqf#L180)
+## personCli_internal_refLock
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+refcreate(false)
+```
+File: [client\PersonClient\PersonClient_init.sqf at line 280](../../../Src/client/PersonClient/PersonClient_init.sqf#L280)
 ## personCli_internal_threadHandle
 
 Type: Variable
@@ -120,7 +132,7 @@ Initial value:
 ```sqf
 startUpdate(personCli_onUpdate,0)
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 249](../../../Src/client/PersonClient/PersonClient_init.sqf#L249)
+File: [client\PersonClient\PersonClient_init.sqf at line 288](../../../Src/client/PersonClient/PersonClient_init.sqf#L288)
 ## personCli_getAllMobs
 
 Type: function
@@ -169,7 +181,7 @@ Description: установка опции локального клиента
 - Param: _stateName
 - Param: _val (optional, default "")
 
-File: [client\PersonClient\PersonClient_init.sqf at line 76](../../../Src/client/PersonClient/PersonClient_init.sqf#L76)
+File: [client\PersonClient\PersonClient_init.sqf at line 77](../../../Src/client/PersonClient/PersonClient_init.sqf#L77)
 ## personCli_clearInventory
 
 Type: function
@@ -177,7 +189,7 @@ Type: function
 Description: очищает инвентарь, лицо и все объекты на сцене
 
 
-File: [client\PersonClient\PersonClient_init.sqf at line 144](../../../Src/client/PersonClient/PersonClient_init.sqf#L144)
+File: [client\PersonClient\PersonClient_init.sqf at line 145](../../../Src/client/PersonClient/PersonClient_init.sqf#L145)
 ## personCli_setCameraPos
 
 Type: function
@@ -186,7 +198,7 @@ Description: установка позиции камеры. _applyLightPos - с
 - Param: _pos
 - Param: _applyLightPos (optional, default true)
 
-File: [client\PersonClient\PersonClient_init.sqf at line 160](../../../Src/client/PersonClient/PersonClient_init.sqf#L160)
+File: [client\PersonClient\PersonClient_init.sqf at line 161](../../../Src/client/PersonClient/PersonClient_init.sqf#L161)
 ## personCli_cloneCharVisualFromPlayer
 
 Type: function
@@ -194,7 +206,7 @@ Type: function
 Description: 
 
 
-File: [client\PersonClient\PersonClient_init.sqf at line 168](../../../Src/client/PersonClient/PersonClient_init.sqf#L168)
+File: [client\PersonClient\PersonClient_init.sqf at line 169](../../../Src/client/PersonClient/PersonClient_init.sqf#L169)
 ## personCli_prepCamera
 
 Type: function
@@ -204,7 +216,7 @@ Description:
 - Param: _specFlag (optional, default "cloth")
 - Param: _pureVisual (optional, default true)
 
-File: [client\PersonClient\PersonClient_init.sqf at line 187](../../../Src/client/PersonClient/PersonClient_init.sqf#L187)
+File: [client\PersonClient\PersonClient_init.sqf at line 188](../../../Src/client/PersonClient/PersonClient_init.sqf#L188)
 ## personCli_setPictureRenderTarget
 
 Type: function
@@ -212,4 +224,4 @@ Type: function
 Description: установка текстуры рендерт таргета
 - Param: _pic
 
-File: [client\PersonClient\PersonClient_init.sqf at line 244](../../../Src/client/PersonClient/PersonClient_init.sqf#L244)
+File: [client\PersonClient\PersonClient_init.sqf at line 283](../../../Src/client/PersonClient/PersonClient_init.sqf#L283)

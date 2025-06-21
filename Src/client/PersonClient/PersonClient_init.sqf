@@ -240,8 +240,20 @@ personCli_prepCamera = {
 
 		if (_specFlag != "cloth") then {
 			_per forceAddUniform "U_I_Protagonist_VR";
+			
+			//temp fix
+			private _post = {
+				params ["_per"];
+				for "_i" from 0 to 3 do {
+					_per setObjectTexture [_i,""];
+					_per setObjectMaterial [_i,""];
+				};
+			}; invokeAfterDelayParams(_post,0.5,[_per]);
+
+			
 			//!синхронизация текстур и материалов правильно отрабатывает только через какое-то время спустя
-			startAsyncInvoke
+			//!TODO FIX THIS FUCKING SHIT
+			/*startAsyncInvoke
 			{
 				params ["_per","_ref"];
 				//выход если осмотр выполняется заново
@@ -260,7 +272,7 @@ personCli_prepCamera = {
 					true
 				}
 			},{},[_per,personCli_internal_refLock],10
-			endAsyncInvoke
+			endAsyncInvoke*/
 		};
 	};
 };
