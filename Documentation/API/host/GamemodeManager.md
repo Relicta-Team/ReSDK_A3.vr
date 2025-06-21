@@ -1554,4 +1554,4 @@ Description:
 - Param: _isWoman (optional, default false)
 - Param: _canSim (optional, default false)
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1590](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1590)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1594](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1594)
