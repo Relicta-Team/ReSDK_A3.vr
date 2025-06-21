@@ -23,6 +23,9 @@ struct(Examine3d) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
+
+		call personCli_syncLocalVisibility;
+
 		private _sizeX = 80;
 		private _sizeY = 90;
 
@@ -44,6 +47,14 @@ struct(Examine3d) base(NDBase)
 		[_specFlag,_model] call personCli_setStat;
 		[_img] call personCli_setPictureRenderTarget;
 		_img ctrlEnable true;
+
+		if (!isPiPEnabled) then {
+			private _text = [TEXT,[0,0,100,90],_zone] call nd_regWidget;
+			[_text,"<t color='#ff0000' size='4'>Включите PIP (картинка в картинке) в настройках графики Arma 3</t>"] call widgetSetText;
+			_text setBackgroundColor [0,0,0,1];
+			_text setFade 0;
+			_text commit 0;
+		};
 
 		_img setvariable ["orbitAngleH",0];
 		_img setvariable ["orbitAngleV",0];
