@@ -6,7 +6,8 @@
 csys_requestOpenMenu = {
 	params ["_objSrc","_usr",["_onlyPreviewMode",false]];
 	
-	if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
+	//todo fix logic
+	//if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
 	private _allowedCateg = callFunc(_objSrc,getAllowedCraftCategories);
 	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[])) exitWith {
 		errorformat("csys::requestOpenMenu() - caught unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
