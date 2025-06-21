@@ -1,6 +1,7 @@
 [![Client build](https://img.shields.io/github/actions/workflow/status/Relicta-Team/ReSDK_A3.vr/all_build.yml?branch=main&style=flat-square&logo=github&label=Build+status)](https://github.com/Relicta-Team/ReSDK_A3.vr/actions)
 [![Discord](https://img.shields.io/discord/332607112503099402?style=flat-square&logo=discord&label=Discord+server)](https://discord.relicta.ru)
 ![Size](https://img.shields.io/github/repo-size/Relicta-Team/ReSDK_A3.vr?style=flat-square&label=Project+size)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Relicta-Team/ReSDK_A3.vr)
 
 # Описание
 
@@ -63,7 +64,6 @@ ReSDK - это набор инструментов для разработки �
 В проекте используются третьесторонние компоненты:
 
 * [DB Browser for SQLite](https://sqlitebrowser.org/)
-* [SQFVm](https://github.com/SQFvm/runtime)
 * [A3_LOG](https://github.com/Arkensor/A3LOG)
 * [debug_console, url_fetch](http://killzonekid.com/)
 * [CSScriptLib, e_sqlite3](https://github.com/oleg-shilo/cs-script)

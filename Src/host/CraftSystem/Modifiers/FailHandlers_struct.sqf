@@ -105,6 +105,9 @@ struct(Craft_FailedHandler::default)
 
 			{
 				private _itm = _x;
+				
+				assert(!isNullVar(_itm));
+				assert(!isNullReference(_itm));
 
 				if ((getVar(_itm,getPos) distance _pos) > _maxDistanceRange) then {
 					_maxDistanceRange = getVar(_itm,getPos) distance _pos;

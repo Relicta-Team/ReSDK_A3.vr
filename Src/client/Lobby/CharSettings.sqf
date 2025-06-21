@@ -8,6 +8,7 @@
 //serverside includes
 #include <..\..\host\Family\Family.hpp>
 #include <..\..\host\MatterSystem\bloodTypes.hpp>
+#include <..\..\host\GamemodeManager\GamemodeManager.hpp>
 //serverside includes end
 
 namespace(Lobby,lobby_)
@@ -345,7 +346,7 @@ lobby_setAntag = {
 	_mode = getCurrentCharData("antag");
 	INC(_mode);
 	
-	if (_mode >= 4) then {_mode = 0};
+	if (_mode > ANTAG_ALL) then {_mode = ANTAG_NONE};
 	
 	["antag",_mode] call lobby_sendToServerSetting;
 };
@@ -615,7 +616,12 @@ lobby_setFace = {
 			_text commit 0.1;
 		};
 		if (_optionName == "select") exitwith {
-			lobby_glob_dummy_man setFace _config;			
+			lobby_glob_dummy_man setFace _config;
+
+			#ifdef SP_MODE
+			[format["facecopy: %1",_config]] call chatPrint;
+			copyToClipboard _config;
+			#endif		
 			
 			_text setFade 1;
 			_text commit 0.2;

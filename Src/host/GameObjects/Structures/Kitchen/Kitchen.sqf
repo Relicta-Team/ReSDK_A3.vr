@@ -10,8 +10,8 @@
 
 
 class(MeatGrinder) extends(IStruct)
-	var(name,"Мясодавка");
-	var(desc,"Пригодна для создания фарша или лапши.");
+	var(name,"Фарширатор");
+	var(desc,"Пригоден для создания фарша или лапши.");
 	var(model,"ml\ml_object_new\model_24\press.p3d");
 	var(material,"MatMetal");
 	var(dr,3);

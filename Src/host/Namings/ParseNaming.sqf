@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-
+#include <..\Gender\Gender.hpp>
 
 //Проверяет все имена и фамилии на возможность склонения
 //#define NAMING_VALIDATE_CASING
@@ -78,9 +78,9 @@ _txt = format["First names: %1/%2 (man/woman); Second names: %3/%4 (man/woman); 
 naming_getRandomName = {
 	params ["_gender",["_retAsString",false]];
 	
-	if not_equalTypes(_gender,0) then {_gender = [_gender] call gender_objectToEnum};
+	if not_equalTypes(_gender,GENDER_MALE) then {_gender = [_gender] call gender_objectToEnum};
 	
-	private _result = if (_gender == 0) then {
+	private _result = if (_gender == GENDER_MALE) then {
 		[pick naming_list_ManFirstName,pick naming_list_ManSecondName]
 	} else {
 		[pick naming_list_WomanFirstName,pick naming_list_WomanSecondName]

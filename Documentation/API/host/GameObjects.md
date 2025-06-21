@@ -397,7 +397,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\GameObject.sqf at line 1614](../../../Src/host/GameObjects/GameObject.sqf#L1614)
+File: [host\GameObjects\GameObject.sqf at line 1617](../../../Src/host/GameObjects/GameObject.sqf#L1617)
 ## flyingObject
 
 Type: Variable
@@ -3241,7 +3241,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 804](../../../Src/host/GameObjects/Items/Item.sqf#L804)
+File: [host\GameObjects\Items\Item.sqf at line 868](../../../Src/host/GameObjects/Items/Item.sqf#L868)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3255,7 +3255,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1241](../../../Src/host/GameObjects/Items/Item.sqf#L1241)
+File: [host\GameObjects\Items\Item.sqf at line 1305](../../../Src/host/GameObjects/Items/Item.sqf#L1305)
 ## generateItemSize
 
 Type: function
@@ -3882,7 +3882,21 @@ Replaced value:
 ```sqf
 ;
 ```
-File: [host\GameObjects\Items\Clothes\cloth.sqf at line 192](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L192)
+File: [host\GameObjects\Items\Clothes\cloth.sqf at line 197](../../../Src/host/GameObjects/Items/Clothes/cloth.sqf#L197)
+# port_models.sqf
+
+## REPLACE_REQUIRED
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+IStruct
+```
+File: [host\GameObjects\Items\Clothes\port_models.sqf at line 6](../../../Src/host/GameObjects/Items/Clothes/port_models.sqf#L6)
 # Books.sqf
 
 ## __CONST_WRITABLE_ITEM_CONTENT_MAX_LEN__
@@ -4561,7 +4575,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 720](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L720)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 728](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L728)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)

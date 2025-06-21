@@ -34,7 +34,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 
 	getter_func(canApplyDamage,true);
 
-	verbList("pickup twohands",GameObject);
+	verbList("pickup twohands description3d",GameObject);
 	editor_attribute("EditorVisible" arg "custom_provider:size") editor_attribute("Tooltip" arg "Размер предмета")
 	var(size,ITEM_SIZE_TINY);//объём предмета
 
@@ -713,6 +713,70 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		private _newHim = clamp(_germHis + floor(_germsMe * 0.15),0,GERM_COUNT_MAX);
 		setSelf(germs,_newMe);
 		setVar(_p,germs,_newHim);
+	};
+
+	//examine3d
+	getterconst_func(getExamine3dItemType,"obj"); //one of "obj","cloth","armor","backpack","mask","helmet"
+	
+	func(getExamine3dItemModel)
+	{
+		objParams();
+		private _etype = callSelf(getExamine3dItemType);
+		
+		//проверка корректности типа
+		if !array_exists(["obj" arg "cloth" arg "armor" arg "backpack" arg "mask" arg "helmet"],_etype) exitWith {
+			"" //в любом случае на клиенте обработается неверный тип формы
+		};
+		if equals(_etype,"obj") exitWith {getSelf(model)};
+		getSelf(armaClass)
+		
+	};
+	func(examine3dItem)
+	{
+		objParams_1(_usr);
+		private _dynDisp = getVar(_usr,_internalDynamicND);
+
+		private _getInfo = {
+			private _ctx = getSelf(context);
+
+			[
+				callFunc(_ctx,getExamine3dItemModel)
+				,format["%1",getVar(_ctx,name)]
+				,callFunc(_ctx,getExamine3dItemType)
+			]
+		};
+		private _handleInp = { objParams_2(_usr,_inp); };
+		private _ctx = this;
+		private _dist = callFuncParams(_usr,getDistanceTo,this) + 0.5;
+		callFuncParams(_dynDisp,setNDOptions,"Examine3d" arg _dist arg getSelf(pointer) arg _getInfo arg _handleInp arg _ctx);
+		
+		callFuncParams(_dynDisp,openNDisplayInternal,_usr arg getVar(_usr,owner));
+		
+		//starting netdisplay handler (because opened as internal (usr is checked target))
+		private _ctxParams = [this,_usr,_dynDisp,getSelf(loc)];
+		startAsyncInvoke
+		{
+			params ["_item","_usr","_dynDisp","_curLoc"];
+			private _maxDist = getVar(_dynDisp,ndInteractDistance);
+			//already closed from clientside
+			if (count getVar(_dynDisp,ndOpenedBy) == 0) exitWith {true};
+			_state = false;
+			call {
+				if isNullReference(_item) exitWith {_state = true};
+				//localtion changed
+				if not_equals(_curLoc,getVar(_item,loc)) exitWith {_state = true};
+				//too far
+				if (callFuncParams(_usr,getDistanceTo,_item) > _maxDist) exitWith {_state = true};
+			};
+			if (_state) then {
+				if (count getVar(_dynDisp,ndOpenedBy) > 0) then {
+					callFuncParams(_dynDisp,closeNDisplayServer,_usr);
+				};
+			};
+			_state
+		},{}, //in action block do nothing
+		_ctxParams
+		endAsyncInvoke
 	};
 
 endclass

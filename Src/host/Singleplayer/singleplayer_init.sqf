@@ -9,6 +9,7 @@
 #include "..\text.hpp"
 #include "..\thread.hpp"
 #include "..\..\client\WidgetSystem\widgets.hpp"
+#include "..\GameObjects\GameConstants.hpp"
 
 #include "singleplayer_camera.sqf"
 #include "singleplayer_view.sqf"
@@ -19,10 +20,12 @@
 
 sp_storage = createHashMap;
 
-sp_debug = true;
+sp_debug = false;
 sp_debug_viewOnReload = true;
 sp_debug_skipAudio = false;
 sp_debug_doNotHideDebugObjects = false;//показ спавнпоинтов
+
+sp_debug_fastThreadSleep = false;
 
 sp_ai_debug_testmobs = createHashMap;
 sp_ai_mobs = createHashMap;
@@ -102,8 +105,17 @@ sp_gc_internal_activeTriggers = createhashMap; //key name, value gameobject
 
 sp_initMainModule = {
 	call sp_initGUI;
-	if (isNull(gm_currentMode) || isNullReference(gm_currentMode)) then {
+	
+	private _modeLoaded = !isNull(gm_currentMode);
+	if (!_modeLoaded || isNullReference(gm_currentMode)) then {
 		call sp_preloadScenarioEnvironment;
+	};
+
+
+	//reset triggers
+	if (_modeLoaded) then {
+		sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+		sp_gc_internal_listTriggersZones = ["Struct_SPZoneTrigger",false] call getAllObjectsInWorldTypeOf;
 	};
 
 	private _triggerHandle = {
@@ -193,6 +205,8 @@ sp_createTrigger = {
 	_ctok
 };
 
+sp_threadNull = threadNull;
+
 if !isNull(sp_internal_threads) then {
 	{
 		if not_equals(_x,threadNull) then {
@@ -218,6 +232,15 @@ sp_threadStop = {
 	sp_internal_threads = sp_internal_threads - [_thd];
 };
 
+sp_threadStopAll = {
+	{
+		if not_equals(_x,threadNull) then {
+			threadStop(_x);
+		}
+	} foreach sp_internal_threads;
+	sp_internal_threads = [];
+};
+
 sp_threadCriticalSection = {
 	params ["_code"];
 	isnil _code;
@@ -225,6 +248,7 @@ sp_threadCriticalSection = {
 
 sp_threadPause = {
 	params ["_time"];
+	if (sp_debug_fastThreadSleep) then {_time = 0.001};
 	threadSleep(_time);
 };
 

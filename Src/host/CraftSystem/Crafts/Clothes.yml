@@ -362,6 +362,19 @@
   result: 
     class: HatShemag
     <<: *def_mods
-
-
-
+    
+- <<: *ref_main_cloth
+  required:
+    components: 
+      - class: SewingMachine
+        count: 1
+        destroy: false
+      - class: Rag
+        count: 2
+    skills:
+      engineering: 3
+  options:
+    craft_duration: from_skill(60,10)
+  result:
+    class: BlueRobe
+    <<: *def_mods

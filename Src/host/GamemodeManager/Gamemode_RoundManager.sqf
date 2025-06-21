@@ -3,49 +3,66 @@
 // sdk.relicta.ru
 // ======================================================
 
+//проверка эмуляции подключения клиентов. значение является количеством клиентов
+//#define TEST_SIMULATION_CLIENTS 5
 
-//#define testcase_moreclients
+#ifdef TEST_SIMULATION_CLIENTS
+	/*
+		Здесь можно конфигурировать каждую из ролей
 
-//новая проверка эмуляции подключения клиентов. значение является количеством
-//#define TEST_EMULATE_CLIENT_FROM_DATABASE
+		Каждая установка должна начинаться с новой строки.
+		Допускается указания диапазона клиентов через "-"
+		С включением этой опции режим не стартует пока ваш клиент User не нажмет готовность
+		После старта раунда вам будет показан репорт с информацией кто за кого хотел зайти и за кого фактически подключился
+
+		Формат:
+			<номер клиента>.<свойство> <значение>
+
+		Доступные свойства:
+			role - роль клиента (класс роли зарегистрированный в запускаемом режиме)
+			antag - режим антагониста (ANTAG_\w+ из <src\host\GamemodeManager\GamemodeManager.hpp>)
+			age - возраст (от 18 до 80)
+			gender - пол (GENDER_\w+ из <src\Gender\Gender.hpp>)
+			ready - готовность (нужна если вам необходима рандомная роль для этого клиента). true - готов
+			access - доступ (ACCESS_\w+ из <src\host\clientManager\client.hpp>)
+
+		Пример:
+			3.role RHead < установить для третьего клиента роль RHead
+			3.antag ANTAG_FULL < установить для третьего клиента полного антагониста
+			4-5.age 40 < установить для четвертого и пятого клиента возраст 40
+			5.access ACCESS_FORSAKEN < установить для пятого клиента доступ форсекена
+			6.gender GENDER_FEMALE < установить для шестого клиента пол женский
+	*/
+	gm_editor_test_simCli = 
+	"
+		1-4.role RBanditMainSaloon
+		1-5.access ACCESS_FORSAKEN
+		5.role RBarmenSaloon
+	";
+#endif
+
 
 #ifndef EDITOR
-#undef testcase_moreclients
-#undef TEST_EMULATE_CLIENT_FROM_DATABASE
+	#undef TEST_SIMULATION_CLIENTS
 #endif
-#ifdef testcase_moreclients
-startAsyncInvoke
-{
-	!isNullVar(server_loadingState) && {
-		equals(server_loadingState,1) && ["==","GAME_STATE_LOBBY"] call gm_checkState
+
+
+#ifdef TEST_SIMULATION_CLIENTS
+
+	assert_str(inRange(TEST_SIMULATION_CLIENTS,1,100),"TEST_SIMULATION_CLIENTS must be in range 1-100");
+
+	//async for wait client ready
+	startAsyncInvoke
+	{
+		if isNull(lobby_isReadyToPlay) exitWith {false};
+		gm_lobbyTimeLeft = 123;
+		lobby_isReadyToPlay
+	},
+	{
+		gm_lobbyTimeLeft = 1;
 	}
-},
-{
-	for "_i" from 1 to 15 do {
-		_c = newParams(ServerClient,[_i+5 arg "76561198094364528"]);
-		_c setVariable ["name","Cli:" + str _i];
-		// if (_i == 1) then {
-		// 	callFuncParams(_c,setCharSetting,"role1" arg "rhead");
-		// } else {
-		// 	callFuncParams(_c,setCharSetting,"role1" arg "RMerchant");
-		// };
-		_rl = pick (gm_preStartRoles);
-		callFuncParams(_c,setCharSetting,"role1" arg callFunc(_rl,getClassName));
+	endAsyncInvoke
 
-		callFuncParams(_c,setCharSetting,"r-name" arg 0);
-		callFuncParams(_c,setCharSetting,"antag" arg 2);
-		if (_i <= 2) then {
-			callFuncParams(_c,setCharSetting,"antag" arg 1);
-		};
-
-		rpcCall("onClientPrepareToPlay",vec2(true,_i+5));
-	};
-}
-endAsyncInvoke;
-
-#endif
-
-#ifdef TEST_EMULATE_CLIENT_FROM_DATABASE
 	startAsyncInvoke
 	{
 		!isNullVar(server_loadingState) && {
@@ -53,21 +70,153 @@ endAsyncInvoke;
 		}
 	},
 	{
-		for "_i" from 1 to TEST_EMULATE_CLIENT_FROM_DATABASE do {
-			_baseOffset = 12 + _i;
-			_r = ["SELECT Uid FROM Accounts WHERE id="+ str _baseOffset,"int"] call db_query;
-			if (count _r == 0) exitWith {};
-			(_r select 0) params ["_uid"];
-			_c = newParams(ServerClient,[_baseOffset arg _uid]);
-			_rl = pick (gm_preStartRoles);
-			callFuncParams(_c,setCharSetting,"role1" arg callFunc(_rl,getClassName));
+		assert_str(!isNull(TEST_SIMULATION_CLIENTS),"TEST_SIMULATION_CLIENTS is not defined");
+		assert_str(!isNull(gm_editor_test_simCli),"gm_editor_test_simCli is not defined");
 
-			callFuncParams(_c,setCharSetting,"r-name" arg 0);
-			callFuncParams(_c,setCharSetting,"antag" arg 3);
+		//configure gm_editor_test_simCli
+		private _pat = "(\d+)(\s*-\s*(\d+))?\s*\.(\w+)\s*(.*)";
+		private _readyClients = [];
+		private _propActions = createHashMapFromArray [
+			["role",{
+				params ["_c","_role"];
+				private _rolesList = callFunc(gm_currentMode,getLobbyRoles) apply {tolower _role};
+				private _roleLower = tolower _role;
+				assert_str(array_exists(_rolesList,_roleLower),"Invalid role in gm_editor_test_simCli; Role: " + _role);
+				
+				callFuncParams(_c,setCharSetting,"role1" arg _role);
+			}],
+			["antag",{
+				params ["_c","_mode"];
+				_mode = ANTAG_PARSESTRING(_mode);
+				callFuncParams(_c,setCharSetting,"role1" arg _mode);
+			}],
+			["age",{
+				params ["_c","_age"];
+				_age = clamp(parsenumber _age,18,80);
+				callFuncParams(_c,setCharSetting,"age" arg _age);
+			}],
+			["gender",{
+				params ["_c","_gender"];
+				private _gen = GENDER_PARSESTRING(_gender);
+				callFuncParams(_c,setCharSetting,"gender" arg _gen);
+			}],
+			["ready",{
+				params ["_c","_ready"];
+				if (_ready == "true") then {
+					_readyClients pushBackUnique _c;
+				};
+			}],
+			["access",{
+				params ["_c","_access"];
+				private _acc = [_access] call cm_accessTypeToNum;
+				setVar(_c,access,_acc);
+			}]
+		];
+		private _configList = [];
+		_configList resize TEST_SIMULATION_CLIENTS;
+		_configList = _configList apply {[]};
 
-			rpcCall("onClientPrepareToPlay",vec2(true,_i+5));
+		{
+			private _grp = 1;
+			private _cli = parseNumber([_x,_pat,_grp] call regex_getFirstMatch);
+			assert_str(_cli >= 1 && _cli <= TEST_SIMULATION_CLIENTS,"Invalid client number in gm_editor_test_simCli; Line: " + _x);
+			INC(_grp);
+			
+			//check range
+			private _propOrRangeStart = [_x,_pat,_grp] call regex_getFirstMatch;
+			private _cliEnd = _cli;
+			if ([_propOrRangeStart,"-"] call stringStartWith) then {
+				INC(_grp); //3
+				_cliEnd = parseNumber([_x,_pat,_grp] call regex_getFirstMatch);
+				assert_str(_cliEnd > _cli && _cliEnd <= TEST_SIMULATION_CLIENTS,"Invalid client range in gm_editor_test_simCli; Line: " + _x);
+				INC(_grp); //4
+			};
 
+			//get prop
+			private _propname = [_x,_pat,_grp] call regex_getFirstMatch;
+			assert_str(array_exists(_propActions,_propname),"Invalid property in gm_editor_test_simCli; Line: " + _x);
+			private _action = _propActions get _propname;
+			INC(_grp);
+
+			//get prop value
+			private _propvalue = [_x,_pat,_grp] call regex_getFirstMatch;
+
+			//setprop
+			for "_i" from _cli to _cliEnd do {
+				_configList select (_i-1) pushBack [_action,_propvalue];
+			};
+
+		} foreach (gm_editor_test_simCli splitString (endl + (toString [9])));
+		
+
+		for "_i" from 1 to TEST_SIMULATION_CLIENTS do {
+			
+			//register client in db
+			private _disId = str(100000 + _i);
+			private _name = "DebugClient_"+ (str _i);
+
+			if (!(([_name] call db_isNickRegistered))) then {
+				[_disId,_name] call db_registerAccount;
+				[_disId] call db_registerStats;
+			};
+
+			private _ownerOffset = 10 + _i;
+			private _cobj = newParams(ServerClient,[_ownerOffset arg _disId]);
+			private _cliconfigCur = _configList select (_i-1);
+			{
+				_x params ["_act","_pv"];
+
+				[_cobj,_pv] call _act;
+			} foreach _cliconfigCur;
+
+			if (count _cliconfigCur > 0) then {
+				_readyClients pushBackUnique _cobj;
+			};
 		};
+
+		{
+			rpcCall("onClientPrepareToPlay",vec2(true,callFunc(_x,getOwner)));
+		} foreach _readyClients;
+
+		startAsyncInvoke
+		{
+			(["==","GAME_STATE_PLAY"] call gm_checkState)
+			&& gm_roundDuration > 5
+		},
+		{
+			_report = "All clients:"+(str count cm_allClients)+endl;
+			_lines = [];
+			
+			{
+				private _curActor = callFunc(_x,getActorMob);
+				if isNullReference(_curActor) then {continue}; //skip not ready clients
+
+				private _txt = (format[
+					"%1 (sel %2, spawn %3); %4;",getVar(_x,name),
+					getVar(_x,charSettings) get "role1",
+					callFunc(getVar(_curActor,basicRole),getClassName),
+					[getVar(_x,access)] call cm_accessNumToType
+				]);
+
+				_hidden = array_exists(gm_antagClientsHidden,_x);
+				_full = array_exists(gm_antagClientsFull,_x);
+				if (_full || _hidden) then {
+					_atxt = [];
+					{if(_x select 1)then{_atxt pushBack (_x select 0)} else {""}} foreach [["FULL",_full],["HIDDEN",_hidden]];
+					
+					_txt = _txt + " (ANTAG "+(_atxt joinString ", ")+")";
+				};
+
+				_lines pushBack _txt;
+			} foreach cm_allClients;
+
+			modvar(_report) + (format["Joined: %1",count _lines]) + endl;
+
+			private _fullTxt = _report + endl +endl + (_lines joinString endl);
+			["Report also copied to clipboard"+endl+_fullTxt] call messageBox;
+			copytoClipboard(_fullTxt);
+		}
+		endAsyncInvoke
 	}
 	endAsyncInvoke;
 #endif
@@ -293,7 +442,7 @@ gm_handlePreListAntags = {
 		_x params ["_client","_rObj"];
 		_antag = getVar(_client,charSettings) get "antag";
 		//antag - 0 none; 1 hide, 2 unical, 3 all
-		if (_antag == 3) then {
+		if (_antag == ANTAG_ALL) then {
 			if callFuncParams(_rObj,canBeFullAntag,_client) then {
 				gm_antagClientsFull pushBack _client;
 			};
@@ -302,12 +451,12 @@ gm_handlePreListAntags = {
 			};
 			continue;
 		};
-		if (_antag == 2) then {
+		if (_antag == ANTAG_UNICAL) then {
 			if callFuncParams(_rObj,canBeFullAntag,_client) then {
 				gm_antagClientsFull pushBack _client;
 			};
 		};
-		if (_antag == 1) then {
+		if (_antag == ANTAG_HIDDEN) then {
 			if callFuncParams(_rObj,canBeHiddenAntag,_client) then {
 				gm_antagClientsHidden pushback _client;
 			};
@@ -512,14 +661,14 @@ gm_initHashMapCharSettings = {
 	private _mapSettings = createHashMapFromArray [
 		hashPair(name,"") arg
 		hashPair(age,randInt(18,80)) arg
-		hashPair(gender,0) arg
+		hashPair(gender,GENDER_MALE) arg
 		hashPair(face,"rand") arg
 		hashPair(mainhand,pick vec2(0,1)) arg //0 левая, 1 правая
 		hashPair(vice,"rand") arg
 		hashPair(family,FAMILY_DEFAULT) arg
 		hashPair(blood,BLOOD_TYPE_RANDOM) arg
 		hashPair(faith,"fugu") arg
-		hashPair(antag,0)
+		hashPair(antag,ANTAG_NONE)
 	];
 	{
 		_X params ["_name","_val"];
@@ -574,7 +723,7 @@ gm_spawnClientToRole = {
 	
 	private _gender = getClientSetting(gender);
 	private _genderObject = _gender;
-	if equalTypes(_gender,1) then {
+	if equalTypes(_gender,GENDER_MALE) then {
 		_genderObject = [_gender] call gender_enumToObject;
 	};
 
@@ -601,7 +750,7 @@ gm_spawnClientToRole = {
 	private _charName = getClientSetting(name);
 	private _cliSetName = if (_charName == "Неизвестный") then {
 		//get random name
-		[0] call naming_getRandomName
+		[GENDER_MALE] call naming_getRandomName
 	} else {
 		_charName splitString " ";
 	};
@@ -622,7 +771,7 @@ gm_spawnClientToRole = {
 	//face setting
 	private _face = getClientSetting(face);
 	if (_face == "rand") then {
-		_face = if (_gender == 0) then {pick faces_list_man} else {pick faces_list_woman};
+		_face = if (_gender == GENDER_MALE) then {pick faces_list_man} else {pick faces_list_woman};
 	};
 	callSelfParams(setMobFace,_face);
 	callSelfParams(setMobFaceAnim,"");
@@ -1025,8 +1174,8 @@ gm_doEmbark = {
 
 //Проверяет роли клиента на наличие в базе gm_preStartRoles дефолтных ролей.
 //Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
-gm_validateRolesOnPickGameMode = {
-	params ['this'];
+gm_validateAvailableRoles = {
+	params ['this', ['_canPrintMessage',true]];
 
 	private _settings = getSelf(charSettings);
 	private _hasRemovedRoles = false;
@@ -1054,7 +1203,7 @@ gm_validateRolesOnPickGameMode = {
 		};
 	};
 
-	if (_hasRemovedRoles) then {
+	if (_hasRemovedRoles && _canPrintMessage) then {
 		callSelfParams(localSay,"Что-то не так пошло с выбранными ролями и некоторые роли были сброшены." arg "log");
 	};
 };
@@ -1425,6 +1574,23 @@ gm_createMob = {
 	_mob
 };
 
+gm_createSimpleMob = {
+	params ["_pos"];
+	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	removeUniform _mob;
+	_mob disableAI "MOVE";
+	_mob disableAI "TARGET";
+	_mob disableAI "AUTOTARGET";
+	_mob disableAI "FSM";
+	_mob disableAI "ANIM";
+	
+	_mob setUnitFreefallHeight 5000;
+	_mob setPhysicsCollisionFlag false;
+	
+	_mob setPosAtl _pos;
+	_mob
+};
+
 lobby_createDummy = {
 	params ["_pos",["_isWoman",false],["_canSim",false]];
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
@@ -1433,6 +1599,7 @@ lobby_createDummy = {
 	_mob disableAI "AUTOTARGET";
 	_mob disableAI "FSM";
 	_mob disableAI "ANIM";
+
 	
 
 	removeUniform _mob;

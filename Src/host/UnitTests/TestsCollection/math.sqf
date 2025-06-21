@@ -423,3 +423,48 @@ TEST(GurpsRandom)
 		} foreach _tmap;
 	};
 }
+
+TEST(randomizationVectorsCorrectResults)
+{
+	//use randomRadius, randomPosition, randomGaussian
+	//check if the results are distributed evenly
+
+	private _rrad = [[0,0,0],10] call randomRadius;
+	ASSERT_STR(!isNullVar(_rrad),"null result");
+	ASSERT_STR(equalTypes(_rrad,[]),"randomRadius result is not array");
+	ASSERT_STR(count _rrad == 3,"randomRadius result is not 3 elements");
+	ASSERT_STR(inRange(_rrad select 2,0,10),"randomRadius result is not in range");
+
+	private _rpos = [[0,0,0],10] call randomPosition;
+	ASSERT_STR(!isNullVar(_rpos),"null result");
+	ASSERT_STR(equalTypes(_rpos,[]),"randomPosition result is not array");
+	ASSERT_STR(count _rpos == 3,"randomPosition result is not 3 elements");
+	ASSERT_STR(inRange(_rpos select 2,0,10),"randomPosition result is not in range");
+
+	private _rgau = [[0,0,0],10] call randomGaussian;
+	ASSERT_STR(!isNullVar(_rgau),"null result");
+	ASSERT_STR(equalTypes(_rgau,[]),"randomGaussian result is not array");
+	ASSERT_STR(count _rgau == 3,"randomGaussian result is not 3 elements");
+	ASSERT_STR(inRange(_rgau select 2,0,10),"randomGaussian result is not in range");
+	
+}
+
+TEST(testGetPosListCenter)
+{
+	private _list = [[0,0,0],[1,1,1],[2,2,2]];
+	private _center = [_list] call getPosListCenter;
+	ASSERT_STR(!isNullVar(_center),"null result");
+	ASSERT_STR(equalTypes(_center,[]),"getPosListCenter result is not array");
+	ASSERT_STR(count _center == 3,"getPosListCenter result is not 3 elements");
+	ASSERT_STR(inRange(_center select 2,0,2),"getPosListCenter result is not in range");
+
+	ASSERT_EQ(_center,vec3(1,1,1));
+
+	private _list2 = [[0,0,0],[1,1,1],[2,2,2],[3,3,3]];
+	private _center2 = [_list2] call getPosListCenter;
+	ASSERT_STR(!isNullVar(_center2),"null result");
+	ASSERT_STR(equalTypes(_center2,[]),"getPosListCenter result is not array");
+	ASSERT_STR(count _center2 == 3,"getPosListCenter result is not 3 elements");
+	ASSERT_STR(inRange(_center2 select 2,0,3),"getPosListCenter result is not in range");
+	ASSERT_EQ(_center2,vec3(1.5,1.5,1.5));
+}

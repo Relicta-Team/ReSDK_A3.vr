@@ -298,6 +298,7 @@ Description:
 - Param: _pos
 - Param: _type
 - Param: _norm
+- Param: _deleteAfter
 
 File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/LightEngine/LightEngine.sqf#L374)
 ## le_se_emitFireAtActor

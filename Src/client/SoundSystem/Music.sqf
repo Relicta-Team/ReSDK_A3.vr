@@ -331,15 +331,17 @@ music_setPause = {
 	if !isNull(music_playedObject) then {
 		if (music_playedObject get "priority" in [_chan,-1]) then {
 			music_playedObject set ["isplayed",false];
+			
 			mlogformat("Stopped music (ON PAUSE) %1 at %2",music_playedObject get "class" arg music_playedObject get "curtime")
-			if (_mode && _smooth) then {
+			if (_smooth) then {
 				_obj = music_playedObject;
-				if (_obj get "smooth" >= MUSIC_SMOOTH_END) then {
+				//мы можем тут делать затухание при любом режиме плавной музыки
+				//if (_obj get "smooth" >= MUSIC_SMOOTH_END) then {
 					//TODO: тут можно помозговать маленько
 					[0,_obj get "smoothdelay"] call music_internal_setFade;
-				} else {
-					playMusic "";
-				};
+				//} else {
+					//playMusic "";
+				//};
 			} else {
 				playMusic "";
 			};

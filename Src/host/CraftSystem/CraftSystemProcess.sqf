@@ -6,10 +6,15 @@
 csys_requestOpenMenu = {
 	params ["_objSrc","_usr",["_onlyPreviewMode",false]];
 	
+	//todo fix logic
 	//if !callFunc(_objSrc,canUseAsCraftSpace) exitWith {};
-	private _allowedCateg = CRAFT_CONST_CATEGORY_LIST_IDS;
-	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[]) || count _allowedCateg == 0) exitWith {
-		errorformat("csys::requestOpenMenu() - catched unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
+	private _allowedCateg = callFunc(_objSrc,getAllowedCraftCategories);
+	if (isNullVar(_allowedCateg) || not_equalTypes(_allowedCateg,[])) exitWith {
+		errorformat("csys::requestOpenMenu() - caught unhandled error after calling: %1::getAllowedCraftCategories()",callFunc(_objSrc,getClassName));
+	};
+	
+	if (count _allowedCateg == 0) then {
+		_allowedCateg = CRAFT_CONST_CATEGORY_LIST_IDS;
 	};
 	private _allowedCategReal = [];
 	{
@@ -21,6 +26,8 @@ csys_requestOpenMenu = {
 
 	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
+	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories");
+
 	private _data = [
 		getVar(_objSrc,pointer),
 		getVar(_usr,pointer),

@@ -3737,7 +3737,7 @@ Description:
 
 Replaced value:
 ```sqf
-if (!(varname call sp_wsimIsActive)) exitWith {};
+[varname,_this] call sp_internal_wsimHandleAction; if (!(varname call sp_wsimIsActive)) exitWith {};
 ```
 File: [host\engine.hpp at line 684](../../../Src/host/engine.hpp#L684)
 ## sp_checkInput(varname,params)
@@ -3960,7 +3960,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 108](../../../Src/host/init.sqf#L108)
+File: [host\init.sqf at line 109](../../../Src/host/init.sqf#L109)
 # keyboard.hpp
 
 ## KEY_ESCAPE

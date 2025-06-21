@@ -19,6 +19,9 @@ var_array(openedBy); //кем открыт/просматривается кон
 editor_attribute("EditorVisible" arg "type:bool") editor_attribute("Tooltip" arg "Включает или выключает доступ к контейнеру.\nС выключенным свойством его нельзя открыть или положить в него предмет.")
 editor_attribute("alias" arg "Открытый контейнер")
 var(canUseContainer,true); //флаг для добавления содержимого
+getterconst_func(allowedItemClasses,[]); //массив классов предметов, которые можно положить в контейнер. Если пустой - то все классы разрешены
+var(isPuttableContainer,false); //флаг, что этот контейнер можно положить в другой контейнер даже если в нем есть предметы. По умолчанию - нет
+getterconst_func(getContainerDamageCoef,0.08); //процент повреждения предметов в контейнере при получении урона. 0 - не повреждаются
 //proto_func(getContainerClientInfo); //собирает лист информации о каждом предмете в контейнере
 //proto_func(canAdd);//аргумент - _item. Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
 //proto_func(addItem); //добавляет предмет в контейнер с проверками canadd
@@ -83,6 +86,21 @@ func(getContainerClientInfo)
 	_data
 };
 
+//Проверяет, что предмет нельзя положить в контейнер исходя из массива allowedItemClasses
+func(isItemRestricted)
+	{
+		objParams_1(_item);
+		private _allowed = callSelf(allowedItemClasses);
+		if (_allowed isEqualTo []) exitWith {false};
+
+		private _isRestricted = true;
+		{
+			if isTypeStringOf(_item,_x) exitWith {_isRestricted = false;};
+		} forEach _allowed;
+		
+		_isRestricted
+	};
+
 //Проверяет возможность добавления в контейнер по размеру _item и допустимой вместимости
 func(canAdd)
 {
@@ -90,6 +108,7 @@ func(canAdd)
 	private _size = getVar(_item,size);
 	if (!getSelf(canUseContainer)) exitWith {false};
 	if isTypeOf(_item,SystemItem) exitWith {false};
+	if (callSelfParams(isItemRestricted,_item)) exitWith {false};
 	if (_size > getSelf(maxSize)) exitWith {
 		if (!isNullVar(_FLAG_msFlag__) && {_FLAG_msFlag__}) exitWith {
 			if (!isNullVar(_FLAG_spResize__) && {_FLAG_spResize__}) then {
@@ -106,7 +125,7 @@ func(canAdd)
 		};
 		false
 	};
-	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0}) exitWith {false};
+	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0} && !getVar(_item,isPuttableContainer)) exitWith {false};
 	private _slot = getVar(_item,slot);
 	if (callSelf(isInWorld) && _slot > 0 && !(_slot in INV_LIST_HANDS)) exitWith {false};
 
@@ -284,9 +303,17 @@ func(getReasonForCantPutin) //Получает причину по которо�
 	private _size = getVar(_item,size);
 	if (!getSelf(canUseContainer)) exitWith {""};
 	if isTypeOf(_item,SystemItem) exitWith {""};
+	
+	if (callSelfParams(isItemRestricted,_item)) exitWith {
+		format[selectRandom [
+			"Не подходит для %1.",
+			"Этот предмет нельзя положить в %1."
+		], callSelf(getName)]
+	};
+	
 	if (_size > getSelf(maxSize)) exitWith {selectRandom ["Слишком большой размер.","Не влезает.","Великовато..."]};
 	if (getSelf(currentSize) + BASE_STORAGE_COST(_size) > getSelf(countSlots)) exitWith {callSelf(getContainerOwerflowText)};
-	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0}) exitWith {
+	if (callFunc(_item,isContainer) && {count getVar(_item,content) > 0} && !getVar(_item,isPuttableContainer) ) exitWith {
 		format[selectRandom ["Сначала нужно опустошить %1","Лучше всё вытащить из %1","Для такого потребуется сделать %1 пустым"],callFunc(_item,getName)]
 	};
 	private _slot = getVar(_item,slot);
@@ -495,3 +522,36 @@ func(initMoney)
 		};
 	};
 };
+
+// Удаляет все предметы из контейнера и раскидывает их в радиусе
+func(onDestroyed)
+{
+	objParams();
+
+ 	private _content = getSelf(content);
+
+	{
+		callFuncParams(_x,dropItemToWorld,callSelf(getPos) arg rand(0.2,0.55) arg random 360 arg this arg true);
+		true;
+	} count _content;
+
+	setSelf(content, []);
+	callSelf(onContainerContentUpdate);
+
+	super();
+};
+
+// Уменьшает прочность предметов в контейнере
+func(applyDamage)
+{
+	objParams_4(_amount,_type,_worldPos,_cause);
+	private _content = array_copy(getSelf(content));
+	private _containerDamageCoef = callSelf(getContainerDamageCoef);
+	super();
+
+	private _dmgToContent = round (_amount * _containerDamageCoef);
+	{
+		callFuncParams(_x,applyDamage,_dmgToContent arg _type arg _worldPos arg DAMAGE_TYPE_CRUSHING);
+	true;
+	} count _content;
+};	

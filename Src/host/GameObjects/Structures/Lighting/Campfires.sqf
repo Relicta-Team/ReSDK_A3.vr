@@ -114,7 +114,10 @@ class(Campfire) extends(ICampfireStruct)
 	func(onUpdate)
 	{
 		updateParams();
-
+		#ifdef SP_MODE
+			sp_checkWSim("light");
+		#endif
+		
 		callSelf(handleIgniteArea);
 		modSelf(fuelLeft,-1);
 

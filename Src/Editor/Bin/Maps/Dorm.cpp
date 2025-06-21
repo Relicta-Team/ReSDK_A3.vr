@@ -12,18 +12,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=5934;
+		nextID=6078;
 	};
 	class Camera
 	{
-		pos[]={4040.4861,46.232788,4024.8391};
-		dir[]={-0.50420398,-0.19305433,0.84187472};
-		up[]={-0.099242389,0.98115009,0.16570728};
-		aside[]={0.8580066,-1.5754486e-06,0.51386184};
+		pos[]={3988.7065,43.965927,4029.0522};
+		dir[]={-0.99684125,-0.076432221,-0.026923822};
+		up[]={-0.07652308,0.99704951,-0.0020663377};
+		aside[]={-0.0269998,-1.9864092e-06,0.99975449};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_fork";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -67,6 +67,7 @@ addons[]=
 	"CUP_Editor_Structures_Config",
 	"mushrooms",
 	"sovokgoods",
+	"scaliensprops",
 	"A3_Props_F_Orange_Humanitarian_Garbage",
 	"A3_Props_F_Exp_Commercial_Market",
 	"rabochiystol",
@@ -152,7 +153,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=76;
+		items=77;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -344,252 +345,258 @@ class AddonsMetaData
 		};
 		class Item33
 		{
+			className="scaliensprops";
+			name="scaliensprops";
+			author="yobas";
+		};
+		class Item34
+		{
 			className="A3_Props_F_Exp";
 			name="Arma 3 Apex - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item34
+		class Item35
 		{
 			className="rabochiystol";
 			name="rabochiystol";
 		};
-		class Item35
+		class Item36
 		{
 			className="A3_Structures_F_Enoch_Infrastructure";
 			name="Arma 3 Contact Platform - Infrastructure Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item36
+		class Item37
 		{
 			className="A3_Structures_F_Bootcamp";
 			name="Arma 3 Bootcamp Update - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item37
+		class Item38
 		{
 			className="stelazh_ot_seregi";
 			name="stelazh_ot_seregi";
 		};
-		class Item38
+		class Item39
 		{
 			className="meshok";
 			name="meshok";
 		};
-		class Item39
+		class Item40
 		{
 			className="A3_Structures_F_Heli";
 			name="Arma 3 Helicopters - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item40
+		class Item41
 		{
 			className="A3_Structures_F_EPC";
 			name="Arma 3 Win Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item41
+		class Item42
 		{
 			className="A3_Structures_F_Enoch";
 			name="Arma 3 Contact Platform - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item42
+		class Item43
 		{
 			className="A3_Structures_F_Households";
 			name="Arma 3 - Houses";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item43
+		class Item44
 		{
 			className="A3_Structures_F_Exp_Civilian";
 			name="Arma 3 Apex - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item44
+		class Item45
 		{
 			className="ml_objects_heavy";
 			name="ml_objects_heavy";
 		};
-		class Item45
+		class Item46
 		{
 			className="A3_Structures_F_Exp_Infrastructure";
 			name="Arma 3 Apex - Infrastructure Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item46
+		class Item47
 		{
 			className="A3_Structures_F_Exp_Commercial";
 			name="Arma 3 Apex - Commercial Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item47
+		class Item48
 		{
 			className="BSG_EFT";
 			name="BSG_EFT";
 		};
-		class Item48
+		class Item49
 		{
 			className="xlamdoor";
 			name="xlamdoor";
 		};
-		class Item49
+		class Item50
 		{
 			className="door_solar";
 			name="door_solar";
 		};
-		class Item50
+		class Item51
 		{
 			className="tinfence";
 			name="tinfence";
 		};
-		class Item51
+		class Item52
 		{
 			className="A3_Structures_F_Argo";
 			name="Arma 3 Malden - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item52
+		class Item53
 		{
 			className="stena";
 			name="stena";
 		};
-		class Item53
+		class Item54
 		{
 			className="AtmObjects";
 			name="AtmObjects";
 		};
-		class Item54
+		class Item55
 		{
 			className="rel_vox";
 			name="rel_vox";
 		};
-		class Item55
+		class Item56
 		{
 			className="A3_Structures_F_Enoch_Industrial";
 			name="Arma 3 Contact Platform - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item56
+		class Item57
 		{
 			className="stalkatun";
 			name="stalkatun";
 		};
-		class Item57
+		class Item58
 		{
 			className="l04_catacombs";
 			name="l04_catacombs";
 		};
-		class Item58
+		class Item59
 		{
 			className="NV_props";
 			name="NV_props";
 		};
-		class Item59
+		class Item60
 		{
 			className="A3_Structures_F_Exp_Industrial";
 			name="Arma 3 Apex - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item60
+		class Item61
 		{
 			className="A3_Structures_F_Enoch_Military";
 			name="Arma 3 Contact Platform - Military Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item61
+		class Item62
 		{
 			className="A3_Structures_F_Ind";
 			name="Arma 3 - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item62
+		class Item63
 		{
 			className="CUP_Misc_e_Config";
 			name="CUP_Misc_e_Config";
 		};
-		class Item63
+		class Item64
 		{
 			className="CUP_CAStructures_E_Ind_IndPipes";
 			name="CUP_CAStructures_E_Ind_IndPipes";
 		};
-		class Item64
+		class Item65
 		{
 			className="boxi";
 			name="boxi";
 		};
-		class Item65
+		class Item66
 		{
 			className="SurfacesssAPEX";
 			name="SurfacesssAPEX";
 		};
-		class Item66
+		class Item67
 		{
 			className="l03_camp_1";
 			name="l03_camp_1";
 		};
-		class Item67
+		class Item68
 		{
 			className="ml_germogate";
 			name="ml_germogate";
 		};
-		class Item68
+		class Item69
 		{
 			className="yashikus";
 			name="yashikus";
 		};
-		class Item69
+		class Item70
 		{
 			className="A3_Structures_F_Exp_Cultural";
 			name="Arma 3 Apex - Cultural Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item70
+		class Item71
 		{
 			className="Red_gates";
 			name="Red_gates";
 		};
-		class Item71
+		class Item72
 		{
 			className="tontech";
 			name="tontech";
 		};
-		class Item72
+		class Item73
 		{
 			className="A3_Rocks_F_Argo";
 			name="Arma 3 Malden - Rocks and Stones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item73
+		class Item74
 		{
 			className="A3_Structures_F_Enoch_Civilian";
 			name="Arma 3 Contact Platform - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item74
+		class Item75
 		{
 			className="egl_veg_gliese";
 			name="Vegetation Gliese";
 			author="EAGLE";
 		};
-		class Item75
+		class Item76
 		{
 			className="projector";
 			name="projector";
@@ -4026,7 +4033,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=9610;
-							type="egg";
+							type="Egg";
 							atlOffset=0.98995972;
 						};
 					};
@@ -6147,7 +6154,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=4279;
-							type="egg";
+							type="Egg";
 							atlOffset=0.53121185;
 						};
 						class Item50
@@ -6164,7 +6171,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""prob"",50],[""class"",""Egg""]]}";
 							};
 							id=4282;
-							type="egg";
+							type="Egg";
 							atlOffset=0.50428009;
 						};
 						class Item51
@@ -21182,7 +21189,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=4827;
-							type="egg";
+							type="Egg";
 							atlOffset=0.81000137;
 						};
 						class Item106
@@ -21198,7 +21205,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=4828;
-							type="egg";
+							type="Egg";
 							atlOffset=0.81000137;
 						};
 						class Item107
@@ -21214,7 +21221,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=4829;
-							type="egg";
+							type="Egg";
 							atlOffset=0.81000137;
 						};
 						class Item108
@@ -21230,7 +21237,7 @@ class Mission
 								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Egg""]]}";
 							};
 							id=4830;
-							type="egg";
+							type="Egg";
 							atlOffset=0.6150322;
 						};
 						class Item109
@@ -23140,7 +23147,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""keylockers"""",""""NaruchKey""""]]],[""""class"""",""""HandcuffItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""name"""",""""Ключ от наручников""""],[""""preinit@__keytypesstr"""",""""NaruchKey""""]]],[""""class"""",""""Key""""]]}"",1]]]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__loottemplate"",""Office_tier1""]]],[""class"",""CaseBedroom""],[""containerContent"",[[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""keylockers"""",""""NaruchKey""""]]],[""""class"""",""""HandcuffItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[]],[""""class"""",""""RopeItem""""]]}"",1],[""{createHashMapFromArray[[""""customProps"""",createHashMapFromArray[[""""handcuffs"""",""""NaruchKey""""]]],[""""class"""",""""HandcuffKey""""]]}"",1]]]]}";
 							};
 							id=4174;
 							type="CUP_A1_case_bedroom_b";

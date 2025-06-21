@@ -103,6 +103,13 @@ stamina_setValue = {
 	[_wid,[0,0 + stamina_mainbar_size_h / 2,_val,stamina_mainbar_size_h],stamina_widgetUpdate] call widgetSetPosition;
 };
 
+stamina_setVisible = {
+	params ["_mode"];
+	widgetSetFade(getMainBar,ifcheck(_mode,0,1),0);
+	widgetSetFade(getBackroundBar,ifcheck(_mode,0,1),0);
+	getLowValueBar ctrlShow _mode;
+};
+
 decl(float())
 stamina_convCurToPrec = {
 	(100 * cd_stamina_cur) / cd_stamina_max

@@ -129,7 +129,7 @@ Description:
 - Param: _f (optional, default "")
 - Param: _s (optional, default "")
 
-File: [host\Namings\Naming_init.sqf at line 65](../../../Src/host/Namings/Naming_init.sqf#L65)
+File: [host\Namings\Naming_init.sqf at line 72](../../../Src/host/Namings/Naming_init.sqf#L72)
 # ParseNaming.sqf
 
 ## loadMobNames(filename)

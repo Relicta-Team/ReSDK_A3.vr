@@ -3346,7 +3346,7 @@ if (!isNil'_4003_508544033_3056637_17892') then {
 if (!isNil'_3974_669684030_6586937_18520') then {
 	[_3974_669684030_6586937_18520,'HandcuffItem',1,100,[["var","keylockers","NaruchKey"]]] call (_3974_669684030_6586937_18520 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3974_669684030_6586937_18520,'RopeItem',1,100] call (_3974_669684030_6586937_18520 getvariable 'proto' getvariable 'createItemInContainer');
-	[_3974_669684030_6586937_18520,'Key',1,100,[["var","name","Ключ от наручников"],["var","preinit@__keytypesstr","NaruchKey"]]] call (_3974_669684030_6586937_18520 getvariable 'proto' getvariable 'createItemInContainer');
+	[_3974_669684030_6586937_18520,'HandcuffKey',1,100,[["var","handcuffs","NaruchKey"]]] call (_3974_669684030_6586937_18520 getvariable 'proto' getvariable 'createItemInContainer');
 };
 if (!isNil'_3977_916754034_9587438_64833') then {
 	[_3977_916754034_9587438_64833,'Rag',2,100] call (_3977_916754034_9587438_64833 getvariable 'proto' getvariable 'createItemInContainer');

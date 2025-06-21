@@ -54,6 +54,11 @@ interact_th_getRelRadiusPos = {
 interact_th_onThrowingEnd = {
 	params ["_obj","_targ"];
 	if isNullReference(_obj) exitWith {false};
+
+	#ifdef SP_MODE
+	[_obj,_targ] call sp_internal_handleTargetThrowingContact;
+	#endif
+
 	/*_pos = if (typeof _barrierObj == BASIC_MOB_TYPE) then {
 		[getPosATL _barrierObj] call interact_th_getRelRadiusPos
 	} else {
@@ -94,6 +99,11 @@ interact_th_addTask = {
 
 		_tempObj setPosATL ifcheck(equals(_sourceObj,player),cam_renderPos,_sourceObj modelToWorld (_sourceObj selectionPosition "head"));
 		_tempObj setVectorDirAndUp ifcheck(equals(_sourceObj,player),cam_renderVec,vec2(vectordir _sourceObj,vectorUp _sourceObj));
+		#ifdef SP_MODE
+		if not_equals(_sourceObj,player) then {
+			_tempObj setVectorDirAndUp (_sourceObj getvariable "__sp_temp_lookat_redirect");
+		};
+		#endif
 	} else {
 		_tempObj setPosATL _vp;
 		_tempObj setVectorDirAndUp _vd;
@@ -145,10 +155,14 @@ interact_th_addTask = {
 			] call bfx_doShot;
 		};
 	};
+	#ifdef SP_MODE
+		//do noting
+	#else
 	//Вне МП на клиенте не кидаем
 	if !isMultiplayer exitWith {
 		deleteVehicle _tempObj;
 	};
+	#endif
 	interact_throwlist pushBack _tempObj;
 };
 
@@ -275,6 +289,7 @@ interact_th_delegates = [
 				if !(_x getVariable ["_isCatchedMissSound",false]) then {
 					if not_equals(player,_x getVariable "_throwerObj") then {
 						["guns\miss"+str randInt(1,4),_x,null,rand(0.8,1.3),25] call soundLocal_play;
+						[0.03,5.1,0.12,0.4] call cam_addCamShake; //vfx cam effect
 						_x setVariable ["_isCatchedMissSound",true];
 					};
 				};

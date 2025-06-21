@@ -526,6 +526,20 @@ si_onBulletAct = {
 
 	};
 
+	//подавление при попадании рядом с целью
+	_penaltySupressFire = _tempObj getvariable ["__penaltySupressFire__",0]; 
+	if (_penaltySupressFire > 0) then {
+		if (_tempObj getVariable ["_psf_lastcheckpos",vec3(0,0,0)] distance _p > 5) then {
+			//collect mobs
+			private _list = ["Mob",_p,5,true] call getMobsOnPosition;
+
+			{
+				callFuncParams(_x,handlePenaltySUpressFireAdd,_penaltySupressFire);
+			} foreach (_list-[_thrower]);
+		};
+
+	};
+
 	callFuncParams(_targ,onBulletAct,_dam arg _type arg _selection arg _usr arg _distance arg _throwed);
 
 	debug_t("++++++++++++++DONE++++++++++++++")

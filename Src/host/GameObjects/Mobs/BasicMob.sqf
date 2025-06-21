@@ -781,7 +781,7 @@ region(Mob location info: position; direction; speed)
 		in:GameObject:Объект-цель:Объект, рядом с которым стоит вызывающий.
 		return:enum.DirectionSide:Направление вызывающего моба к цели.
 	" node_met
-	//где стоти this по отношению к цели (this спереди _target, this за спиной у target)
+	//где стоти this по отношению к цели (this спереди _target, this за спиной у target) (к this _target повернут лицом, спиной...)
 	func(getDirTo)
 	{
 		objParams_1(_target);

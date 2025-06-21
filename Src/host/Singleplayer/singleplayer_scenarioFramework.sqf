@@ -24,6 +24,10 @@ sp_loadScenario = {
 
 sp_startScene = {
 	params ["_name",["_doTeleport",false]];
+	if (canSuspend) exitWith {
+		ISNIL {_this call sp_startScene}	
+	};
+
 	call (sp_internal_map_scenes getOrDefault [_name,{
 		errorformat("Scene not found - %1",_name);
 	}]);
@@ -65,7 +69,9 @@ sp_callTriggerEvent = {
 
 
 sp_preloadScenarioEnvironment = {
-	
+	//disable saving in spmode
+	enableSaving false;
+
 	private _persetupCode = {
 		setNight = { _dateToSync = [1985,5,20,0,00];setDate _dateToSync; };
 		call setNight;call setNight;[] spawn setNight;
@@ -95,7 +101,27 @@ sp_preloadScenarioEnvironment = {
 	invokeAfterDelay({ ["onClientPrepareToPlay" arg [true arg 0]] call client_sendToServer},0.3);
 	
 	//auto start game
-	invokeAfterDelay({["processClientCommand" arg vec2("startgame",player)] call client_sendToServer},0.4);
+	_starting = {
+		sp_gc_internal_listTriggers = ["Struct_SPTrigger",false] call getAllObjectsInWorldTypeOf;
+		sp_gc_internal_listTriggersZones = ["Struct_SPZoneTrigger",false] call getAllObjectsInWorldTypeOf;
+		["processClientCommand" arg vec2("startgame",player)] call client_sendToServer;
+	};
+	invokeAfterDelay(_starting,0.4);
 	invokeAfterDelay({["Загрузка..."] call chat_clearBuffer;},0.41);
 	
+};
+
+//cleanup all scene data
+sp_cleanupSceneData = {
+	//first - stop all threads
+	call sp_threadStopAll;
+
+	call sp_clearPlayerHandlers;
+
+	call sp_cleanupWidgetHighlightTokens;
+	
+	//now delete all mobs
+	{
+		[_x] call sp_ai_deletePerson;
+	} foreach sp_ai_mobs;
 };
