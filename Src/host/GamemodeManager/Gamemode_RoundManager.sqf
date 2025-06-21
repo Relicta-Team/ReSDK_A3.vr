@@ -1583,6 +1583,10 @@ gm_createSimpleMob = {
 	_mob disableAI "AUTOTARGET";
 	_mob disableAI "FSM";
 	_mob disableAI "ANIM";
+	
+	_mob setUnitFreefallHeight 5000;
+	_mob setPhysicsCollisionFlag false;
+	
 	_mob setPosAtl _pos;
 	_mob
 };
@@ -1595,6 +1599,7 @@ lobby_createDummy = {
 	_mob disableAI "AUTOTARGET";
 	_mob disableAI "FSM";
 	_mob disableAI "ANIM";
+
 	
 
 	removeUniform _mob;

@@ -68,6 +68,7 @@ personCli_syncLocalVisibility = {
 
 	{
 		_x hideObject (!equals(_locId,_x));
+		_x setPhysicsCollisionFlag false;
 		false
 	} count (call personCli_getAllMobs);
 };
@@ -220,25 +221,51 @@ personCli_prepCamera = {
 	personCli_rttLight = "#lightpoint" createVehicleLocal [0,0,0];
 	personCli_rttLight setposatl (getposatl personCli_rttCamera);
 
-	private _distToPoint = ((_campos vectoradd _curPosTarg) distance (getposatl personCli_rttCamera)) + 6;
+	private _distToPoint = (_campos distance getposatl personCli_rttCamera) + 1.5;
 
 	//? how change light options in runtime? maybee need additional param (struct/array/map?)
 	personCli_rttLight setLightColor [0.48,0.48,0.45];
-	personCli_rttLight setLightAmbient [0.03,0.03,0.04];
-	personCli_rttLight setLightIntensity 1000 *3; //получше видно с текущими настройками цвета
-	personCli_rttLight setLightAttenuation [1,0,0,0,_distToPoint,_distToPoint + 3];
+	//personCli_rttLight setLightAmbient [0.03,0.03,0.04];
+	//personCli_rttLight setLightIntensity 1000 * 3; //получше видно с текущими настройками цвета
+
+	personCli_rttLight setLightColor (getLightingAt cam_object select 2);
+	personCli_rttLight setLightAmbient [1,1,1];
+	
+	personCli_rttLight setLightIntensity (((getLightingAt cam_object) select 3) * 2);
+	personCli_rttLight setLightAttenuation [0,0,0,0,_distToPoint,_distToPoint + 3];
 
 	if (_pureVisual) then {
+		refset(personCli_internal_refLock,true);
+		personCli_internal_refLock = refcreate(false);
+
 		if (_specFlag != "cloth") then {
 			_per forceAddUniform "U_I_Protagonist_VR";
 			//!синхронизация текстур и материалов правильно отрабатывает только через какое-то время спустя
-			for "_i" from 0 to 3 do {
-				_per setobjectTexture [_i,""];
-				_per setObjectMaterial [_i,""];
-			};
+			startAsyncInvoke
+			{
+				params ["_per","_ref"];
+				//выход если осмотр выполняется заново
+				if (refget(_ref)) exitWith {true};
+
+				if (
+					((getObjecttextures _per select 0) != "")
+					&& ((getObjectMaterials _per select 0) != "")
+				) then {
+					for "_i" from 0 to 3 do {
+						_per setObjectTexture [_i,""];
+						_per setObjectMaterial [_i,""];
+					};
+					false
+				} else {
+					true
+				}
+			},{},[_per,personCli_internal_refLock],10
+			endAsyncInvoke
 		};
 	};
 };
+
+personCli_internal_refLock = refcreate(false);
 
 //установка текстуры рендерт таргета
 personCli_setPictureRenderTarget = {

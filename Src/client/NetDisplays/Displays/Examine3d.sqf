@@ -23,6 +23,9 @@ struct(Examine3d) base(NDBase)
 	decl(override) def(process)
 	{
 		params ["_args","_isFirstCall"];
+
+		call personCli_syncLocalVisibility;
+
 		private _sizeX = 80;
 		private _sizeY = 90;
 
@@ -44,6 +47,14 @@ struct(Examine3d) base(NDBase)
 		[_specFlag,_model] call personCli_setStat;
 		[_img] call personCli_setPictureRenderTarget;
 		_img ctrlEnable true;
+
+		if (!isPiPEnabled) then {
+			private _text = [TEXT,[0,0,100,90],_zone] call nd_regWidget;
+			[_text,"<t color='#ff0000' size='4'>Включите PIP (картинка в картинке) в настройках графики Arma 3</t>"] call widgetSetText;
+			_text setBackgroundColor [0,0,0,1];
+			_text setFade 0;
+			_text commit 0;
+		};
 
 		_img setvariable ["orbitAngleH",0];
 		_img setvariable ["orbitAngleV",0];
@@ -134,8 +145,15 @@ struct(Examine3d) base(NDBase)
 			} else {
 				//Расчитываем мин/макс дистанцию (объект)
 				private _bb = _img getVariable ["bb", []];
-				_minDistance = selectMin(_bb select 1);
-				_maxDistance = (selectMax(_bb select 1) * 5) + 1;
+				private _bbMin = selectMin(_bb select 1);
+				private _bbMax = selectMax(_bb select 1);
+
+				if (_bbMin < 0.1) then {
+					_bbMin = 0.3;
+				};
+
+				_minDistance = _bbMin;
+				_maxDistance = (_bbMax * 5) + 1;
 			};
 
 			private _zoomSensitivity = 1;
