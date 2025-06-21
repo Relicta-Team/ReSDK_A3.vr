@@ -145,8 +145,15 @@ struct(Examine3d) base(NDBase)
 			} else {
 				//Расчитываем мин/макс дистанцию (объект)
 				private _bb = _img getVariable ["bb", []];
-				_minDistance = selectMin(_bb select 1);
-				_maxDistance = (selectMax(_bb select 1) * 5) + 1;
+				private _bbMin = selectMin(_bb select 1);
+				private _bbMax = selectMax(_bb select 1);
+
+				if (_bbMin < 0.1) then {
+					_bbMin = 0.3;
+				};
+
+				_minDistance = _bbMin;
+				_maxDistance = (_bbMax * 5) + 1;
 			};
 
 			private _zoomSensitivity = 1;
