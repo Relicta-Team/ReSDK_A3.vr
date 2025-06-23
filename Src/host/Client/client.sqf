@@ -153,6 +153,11 @@ class(ServerClient) /*extends(NetObject)*/
 			callSelf(onClosedMessageBox);
 		};
 
+		//delete local person
+		if (!([callSelf(getOwner)] call personServ_unregisterMob)) then {
+			["Cant find person %1 for deleting from %2",callSelf(getOwner),(call personServ_getMobIdList) joinString ";"] call logError;
+		};
+
 		//удаляем из претендентов
 		if getSelf(isReady) then {
 			
@@ -362,6 +367,9 @@ class(ServerClient) /*extends(NetObject)*/
 			callSelfParams(fastSendInfo,"cd_sp_lockedSetting" arg true);
 		};
 
+		//creating local personmob
+		[callSelf(getOwner)] call personServ_registerMob;
+
 		private _postCheck = {
 			
 			if (rep_system_enable) then {
@@ -396,6 +404,10 @@ class(ServerClient) /*extends(NetObject)*/
 		if (call gm_isRoundLobby || call gm_isRoundPreload) exitWith {
 
 			callSelfParams(onChangeState,"lobby");
+	
+			if (call gm_isRoundLobby) then {
+				[this, false] call gm_validateAvailableRoles;
+			};
 
 			[format["%1 %2.",getSelf(name),pick ["подключился","зашёл на огонёк","залетел"]]] call cm_sendLobbyMessage;
 

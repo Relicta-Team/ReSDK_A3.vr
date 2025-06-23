@@ -14,6 +14,7 @@ verb_inverted_list = createHashMap;
 private _verbLastIndex = 0;
 
 verb(description,"Показать описание",noargs)
+verb(description3d,"Осмотреть",noargs)
 verb(standupfromchair,"Встать",noargs)
 verb(smell,"Понюхать",noargs)
 verb(clean,"Очистить от грязи",noargs)

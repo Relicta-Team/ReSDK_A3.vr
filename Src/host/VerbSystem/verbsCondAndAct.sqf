@@ -22,6 +22,16 @@ VERB(description)
 
 ENDVERB
 
+VERB(description3d)
+	cond
+		skipCond(!isTypeOf(usr,Mob));
+		skipCond(!isTypeOf(src,Item));
+	act
+		callSelfParams(examine3dItem,usr);
+	name
+		setName("Осмотреть");
+ENDVERB
+
 /*VERB(changeatt)
 	act
 		callFuncParams(usr,onChangeAttackType,"next");

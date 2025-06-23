@@ -40,6 +40,7 @@ loadFile("src\host\GameEvents\loader.hpp");
 loadFile("src\host\SpecialActions\SpecialActions.sqf");
 loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
+loadFile("src\host\PersonServ\PersonServ_init.sqf");
 loadFile("src\host\ServerLighting\ServerLighting_init.sqf"); //serverside lighting system (uses atmos, materials)
 loadFile("src\host\Materials\Materials_init.sqf");
 call nodegen_loadClasses;

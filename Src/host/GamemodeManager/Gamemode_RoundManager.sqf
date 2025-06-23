@@ -1174,8 +1174,8 @@ gm_doEmbark = {
 
 //Проверяет роли клиента на наличие в базе gm_preStartRoles дефолтных ролей.
 //Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
-gm_validateRolesOnPickGameMode = {
-	params ['this'];
+gm_validateAvailableRoles = {
+	params ['this', ['_canPrintMessage',true]];
 
 	private _settings = getSelf(charSettings);
 	private _hasRemovedRoles = false;
@@ -1203,7 +1203,7 @@ gm_validateRolesOnPickGameMode = {
 		};
 	};
 
-	if (_hasRemovedRoles) then {
+	if (_hasRemovedRoles && _canPrintMessage) then {
 		callSelfParams(localSay,"Что-то не так пошло с выбранными ролями и некоторые роли были сброшены." arg "log");
 	};
 };
@@ -1574,6 +1574,23 @@ gm_createMob = {
 	_mob
 };
 
+gm_createSimpleMob = {
+	params ["_pos"];
+	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
+	removeUniform _mob;
+	_mob disableAI "MOVE";
+	_mob disableAI "TARGET";
+	_mob disableAI "AUTOTARGET";
+	_mob disableAI "FSM";
+	_mob disableAI "ANIM";
+	
+	_mob setUnitFreefallHeight 5000;
+	_mob setPhysicsCollisionFlag false;
+	
+	_mob setPosAtl _pos;
+	_mob
+};
+
 lobby_createDummy = {
 	params ["_pos",["_isWoman",false],["_canSim",false]];
 	private _mob = createAgent [BASIC_MOB_TYPE, [0,0,0], [], 0, "NONE"];
@@ -1582,6 +1599,7 @@ lobby_createDummy = {
 	_mob disableAI "AUTOTARGET";
 	_mob disableAI "FSM";
 	_mob disableAI "ANIM";
+
 	
 
 	removeUniform _mob;

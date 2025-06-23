@@ -1437,12 +1437,13 @@ Description:
 
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1139](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1139)
-## gm_validateRolesOnPickGameMode
+## gm_validateAvailableRoles
 
 Type: function
 
 Description: Если таких ролей не указано или клиент не имеет возможности взять роль - сбрасываем её
 - Param: this
+- Param: _canPrintMessage (optional, default true)
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1177](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1177)
 ## gm_endRound
@@ -1536,6 +1537,14 @@ Description: создаёт игровую оболочку
 - Param: _pos
 
 File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1544](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1544)
+## gm_createSimpleMob
+
+Type: function
+
+Description: 
+- Param: _pos
+
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1577](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1577)
 ## lobby_createDummy
 
 Type: function
@@ -1545,4 +1554,4 @@ Description:
 - Param: _isWoman (optional, default false)
 - Param: _canSim (optional, default false)
 
-File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1577](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1577)
+File: [host\GamemodeManager\Gamemode_RoundManager.sqf at line 1594](../../../Src/host/GamemodeManager/Gamemode_RoundManager.sqf#L1594)

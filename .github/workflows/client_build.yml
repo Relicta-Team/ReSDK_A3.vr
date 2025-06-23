@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     name: Test
-    runs-on: windows-2019
+    runs-on: windows-latest
     # define LOCAL_BUILD in you repo to enable local build
     # or
     # define LOCAL_BUILD_BRANCHES in you repo to enable local build for specific branches
