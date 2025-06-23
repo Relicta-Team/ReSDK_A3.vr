@@ -3894,7 +3894,7 @@ Description:
 
 Replaced value:
 ```sqf
-IStruct
+FalloutPort
 ```
 File: [host\GameObjects\Items\Clothes\port_models.sqf at line 6](../../../Src/host/GameObjects/Items/Clothes/port_models.sqf#L6)
 # Books.sqf
