@@ -3,7 +3,11 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define REPLACE_REQUIRED IStruct
+#define REPLACE_REQUIRED FalloutPort
+
+editor_attribute("HiddenClass" arg "allChild")
+class(FalloutPort) extends(IStruct)	
+endclass
 
 class(assaultboard) extends(REPLACE_REQUIRED)
 	var(name,"assaultboard");
@@ -3034,3 +3038,5 @@ class(flintlock_land) extends(REPLACE_REQUIRED)
 	var(name,"flintlock_land");
 	var(model,"\wbk_empiresofold_mechanics\model\flintlock_land.p3d");
 endclass
+
+#undef REPLACE_REQUIRED
