@@ -1,0 +1,26 @@
+name: Auto-label Issues with AI assistance
+on:
+  issues:
+    types: ['opened']
+  issue_comment:
+    types: ['created']
+  pull_request_comment:
+    types: ['created']
+  pull_request:
+    types: ['opened']
+
+jobs:
+  label-ai-usage:
+    runs-on: ubuntu-latest
+    if: github.actor == 'coderabbitai[bot]' || contains(github.event.issue.body, '@coderabbitai') || contains(github.event.comment.body, '@coderabbitai')
+    steps:
+      - name: Add Using AI label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['Using AI']
+            })
