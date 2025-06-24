@@ -1,4 +1,4 @@
-name: Auto-label Issues with AI assistance
+name: Auto-label with AI assistance
 on:
   issues:
     types: ['opened']
