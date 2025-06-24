@@ -265,7 +265,7 @@ personCli_prepCamera = {
 };
 
 personCli_internal_refLock = refcreate(false);
-personCli_internal_const_listEmptyTexmat = ["","",""]; //пустой константный массив для сравнения
+personCli_internal_const_listEmptyTexmat = ["","","",""]; //пустой константный массив для сравнения
 
 //установка текстуры рендерт таргета
 personCli_setPictureRenderTarget = {
