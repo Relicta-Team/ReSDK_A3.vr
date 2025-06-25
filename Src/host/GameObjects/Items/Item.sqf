@@ -1017,8 +1017,10 @@ class(SystemHandItem) extends(SystemItem)
 	func(constructor)
 	{
 		objParams();
-		setSelf(loc,ctxParams select 0);
-		setSelf(side,ctxParams select 1);
+		if (!isNullVar(ctxParams) && equalTypes(ctxParams,[])) then {
+			setSelf(loc,ctxParams select 0);
+			setSelf(side,ctxParams select 1);
+		};
 	};
 
 	func(getDescFor)
