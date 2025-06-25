@@ -26,6 +26,7 @@ TEST(GameObjects_ResourceManagement)
         private _liveObjects = getAllAllocatedObjects();
         traceformat("Live objects count: %1",count _liveObjects);
         traceformat("current active objects: %1",oop_cao);
+        private _livObjCtr = 0;
         {
             private _cls = callFunc(_x,getClassName);
             
@@ -33,10 +34,11 @@ TEST(GameObjects_ResourceManagement)
             if (isNullVar(_cls)) then {continue};
 
             traceformat("Live object: %1 (%2)",_x arg _cls);
+            INC(_livObjCtr);
         } foreach _liveObjects;
 
         //checks counters
-        ASSERT_STR(count _liveObjects == oop_cao,"Active objects count is not equal to created objects count after delete " + _type + " => left objects: " + str oop_cao);
+        ASSERT_STR(_livObjCtr == oop_cao,"Active objects count is not equal to created objects count after delete " + _type + " => left objects: " + str oop_cao);
         ASSERT_STR(oop_cao == 0,"Active objects count is not 0 after delete " + _type + " => left objects: " + str oop_cao);
 
     } foreach getAllObjectsTypeOf(GameObject);
