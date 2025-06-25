@@ -21,7 +21,9 @@ TEST(GameObjects_ResourceManagement)
 
 
         delete(_o);
-        private _liveObjects = count getAllCreatedObjects();
+        private _liveObjects = getAllCreatedObjects();
+        traceformat("Live objects count: %1",count _liveObjects);
+        traceformat("current active objects: %1",oop_cao);
         {
             traceformat("Live object: %1 (%2)",_x arg callFunc(_x,getClassName));
         } foreach _liveObjects;
