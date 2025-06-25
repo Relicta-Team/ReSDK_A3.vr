@@ -3,6 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\TestFramework.h"
 
 TEST(GameObjects_ResourceManagement)
 {
