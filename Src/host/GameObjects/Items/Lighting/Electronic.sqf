@@ -29,7 +29,7 @@ class(Flashlight) extends(ILightible)
 
 	getter_func(getHandAnim,ITEM_HANDANIM_FLASHLIGHT);
 
-	var(energySource,nullPtr);
+	autoref var(energySource,nullPtr);
 	var(energyUsage,0.32); //сколько энергии тратися за секунду
 	//Минутная формула вычисления работы: 100 * 1 / 0.32 [/ 60] . без скобок в секундах
 		getter_func(isEnabled,getSelf(lightIsEnabled));
