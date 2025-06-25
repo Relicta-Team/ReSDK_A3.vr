@@ -12,6 +12,7 @@ TEST(GameObjects_ResourceManagement)
         private _runningThreads = call _getActiveThreadCount;
         private _type = _x;
         traceformat("Creating object: %1",_type);
+        private _beforeAllocatedList = getAllAllocatedObjects();
         private _o = instantiate(_type);
 
         ASSERT_STR(!isNullReference(_o),"Null reference on create " + _type);
@@ -21,7 +22,7 @@ TEST(GameObjects_ResourceManagement)
 
 
         delete(_o);
-        private _liveObjects = getAllAllocatedObjects();
+        private _liveObjects = getAllAllocatedObjects() - _beforeAllocatedList;
         traceformat("Live objects count: %1",count _liveObjects);
         traceformat("current active objects: %1",oop_cao);
         private _livObjCtr = 0;
