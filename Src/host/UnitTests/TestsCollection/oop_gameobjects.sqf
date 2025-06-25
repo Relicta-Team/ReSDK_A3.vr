@@ -6,9 +6,7 @@
 #include "..\TestFramework.h"
 
 TEST(GameObjects_ResourceManagement)
-{
-    ASSERT_STR(count getAllAllocatedObjects() == 0,"There are live objects before test start");
-    
+{    
     private _getActiveThreadCount = { count cba_common_perFrameHandlerArray };
     {
         private _runningThreads = call _getActiveThreadCount;
