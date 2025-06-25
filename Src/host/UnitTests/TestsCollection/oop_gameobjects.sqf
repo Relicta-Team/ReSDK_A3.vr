@@ -12,7 +12,7 @@ TEST(GameObjects_ResourceManagement)
         private _runningThreads = call _getActiveThreadCount;
         private _type = _x;
         traceformat("Creating object: %1",_type);
-        private _o = instatiate(_type);
+        private _o = instantiate(_type);
 
         ASSERT_STR(!isNullReference(_o),"Null reference on create " + _type);
 
