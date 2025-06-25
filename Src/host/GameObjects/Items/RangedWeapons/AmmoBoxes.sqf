@@ -31,7 +31,7 @@ class(AmmoBoxBase) extends(Item)
 	};
 	var(weight,gramm(130));
 
-	var(content,[]); //bullets storage
+	autoref var(content,[]); //bullets storage
 
 	func(constructor)
 	{
