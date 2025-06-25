@@ -13,7 +13,7 @@ TEST(GameObjects_ResourceManagement)
     {
         private _runningThreads = call _getActiveThreadCount;
         private _type = _x;
-        traceformat("Creating object: %1",_type);
+        logformat("Creating object: %1",_type);
         private _beforeAllocatedList = getAllAllocatedObjects();
         private _o = instantiate(_type);
 
