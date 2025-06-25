@@ -188,6 +188,9 @@ personCli_const_cSelections = ["spine2","spine3","spine3","head","head",null];
 personCli_prepCamera = {
 	params [["_fov",0.16],["_specFlag","cloth"],["_pureVisual",true]];
 
+	//здесь мы сбрасываем флаг на синхронизацию перед очисткой одежды
+	refset(personCli_internal_refLock,true);
+
 	//clear inventory
 	call personCli_clearInventory;
 
@@ -235,49 +238,34 @@ personCli_prepCamera = {
 	personCli_rttLight setLightAttenuation [0,0,0,0,_distToPoint,_distToPoint + 3];
 
 	if (_pureVisual) then {
-		refset(personCli_internal_refLock,true);
+		
 		personCli_internal_refLock = refcreate(false);
 
 		if (_specFlag != "cloth") then {
 			_per forceAddUniform "U_I_Protagonist_VR";
 			
-			//temp fix
-			private _post = {
-				params ["_per"];
-				for "_i" from 0 to 3 do {
-					_per setObjectTexture [_i,""];
-					_per setObjectMaterial [_i,""];
-				};
-			}; invokeAfterDelayParams(_post,0.5,[_per]);
-
-			
 			//!синхронизация текстур и материалов правильно отрабатывает только через какое-то время спустя
-			//!TODO FIX THIS FUCKING SHIT
-			/*startAsyncInvoke
+			//! В СИНХРОННОМ РЕЖИМЕ НЕ РАБОТАЕТ (либо так, либо с invokeAfterDelay...)
+			startAsyncInvoke
 			{
 				params ["_per","_ref"];
 				//выход если осмотр выполняется заново
 				if (refget(_ref)) exitWith {true};
-
-				if (
-					((getObjecttextures _per select 0) != "")
-					&& ((getObjectMaterials _per select 0) != "")
-				) then {
-					for "_i" from 0 to 3 do {
-						_per setObjectTexture [_i,""];
-						_per setObjectMaterial [_i,""];
-					};
-					false
-				} else {
-					true
-				}
+				if (uniform _per != "U_I_Protagonist_VR") exitWith {false};
+				for "_i" from 0 to 3 do {
+					_per setObjectTexture [_i,""];
+					_per setObjectMaterial [_i,""];
+				};
+				equals(getObjectTextures _per,personCli_internal_const_listEmptyTexmat)
+				&& equals(getObjectMaterials _per,personCli_internal_const_listEmptyTexmat)
 			},{},[_per,personCli_internal_refLock],10
-			endAsyncInvoke*/
+			endAsyncInvoke;
 		};
 	};
 };
 
 personCli_internal_refLock = refcreate(false);
+personCli_internal_const_listEmptyTexmat = ["","","",""]; //пустой константный массив для сравнения
 
 //установка текстуры рендерт таргета
 personCli_setPictureRenderTarget = {
