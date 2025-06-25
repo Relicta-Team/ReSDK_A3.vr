@@ -182,6 +182,8 @@
 	//строковый эквивалент
 	#define getObjectsTypeOfStr(type) ([type,false] call oop_getinhlist)
 	#define getAllObjectsTypeOfStr(type) ([type,true] call oop_getinhlist)
+//сканит всю "виртуальную память" и возвращает все созданные объекты
+#define getAllCreatedObjects() ((nearestLocations [[100,100,100],["CBA_NamespaceDummy"],10]))
 
 //вызывает базовый класс по пользовательскому пути
 //При переопределении изменить и в крафтовых классах
