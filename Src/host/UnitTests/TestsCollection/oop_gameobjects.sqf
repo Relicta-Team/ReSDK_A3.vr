@@ -7,6 +7,8 @@
 
 TEST(GameObjects_ResourceManagement)
 {
+    ASSERT_STR(count getAllAllocatedObjects() == 0,"There are live objects before test start");
+    
     private _getActiveThreadCount = { count cba_common_perFrameHandlerArray };
     {
         private _runningThreads = call _getActiveThreadCount;
@@ -21,11 +23,16 @@ TEST(GameObjects_ResourceManagement)
 
 
         delete(_o);
-        private _liveObjects = getAllCreatedObjects();
+        private _liveObjects = getAllAllocatedObjects();
         traceformat("Live objects count: %1",count _liveObjects);
         traceformat("current active objects: %1",oop_cao);
         {
-            traceformat("Live object: %1 (%2)",_x arg callFunc(_x,getClassName));
+            private _cls = callFunc(_x,getClassName);
+            
+            //must be null if is type or class (not object)
+            if (isNullVar(_cls)) then {continue};
+
+            traceformat("Live object: %1 (%2)",_x arg _cls);
         } foreach _liveObjects;
 
         //checks counters
