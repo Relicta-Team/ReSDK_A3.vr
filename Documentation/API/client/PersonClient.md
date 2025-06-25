@@ -120,7 +120,19 @@ Initial value:
 ```sqf
 refcreate(false)
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 280](../../../Src/client/PersonClient/PersonClient_init.sqf#L280)
+File: [client\PersonClient\PersonClient_init.sqf at line 267](../../../Src/client/PersonClient/PersonClient_init.sqf#L267)
+## personCli_internal_const_listEmptyTexmat
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+["","","",""] //пустой константный массив для сравнения
+```
+File: [client\PersonClient\PersonClient_init.sqf at line 268](../../../Src/client/PersonClient/PersonClient_init.sqf#L268)
 ## personCli_internal_threadHandle
 
 Type: Variable
@@ -132,7 +144,7 @@ Initial value:
 ```sqf
 startUpdate(personCli_onUpdate,0)
 ```
-File: [client\PersonClient\PersonClient_init.sqf at line 288](../../../Src/client/PersonClient/PersonClient_init.sqf#L288)
+File: [client\PersonClient\PersonClient_init.sqf at line 276](../../../Src/client/PersonClient/PersonClient_init.sqf#L276)
 ## personCli_getAllMobs
 
 Type: function
@@ -224,4 +236,4 @@ Type: function
 Description: установка текстуры рендерт таргета
 - Param: _pic
 
-File: [client\PersonClient\PersonClient_init.sqf at line 283](../../../Src/client/PersonClient/PersonClient_init.sqf#L283)
+File: [client\PersonClient\PersonClient_init.sqf at line 271](../../../Src/client/PersonClient/PersonClient_init.sqf#L271)
