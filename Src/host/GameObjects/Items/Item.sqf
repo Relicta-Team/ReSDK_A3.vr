@@ -1343,7 +1343,9 @@ class(SystemInternalND) extends(Item)
 
 	func(constructor)
 	{
-		setSelf(loc,ctxParams);
+		if (!isNullVar(ctxParams) && equalTypes(ctxParams,nullPtr)) then {
+			setSelf(loc,ctxParams);
+		};
 	};
 	getter_func(canApplyDamage,false);
 
