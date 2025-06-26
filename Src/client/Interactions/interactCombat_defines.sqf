@@ -60,7 +60,7 @@ interactCombat_hud_map_Styles = createHashMap;
 } foreach interactCombat_styleMap;
 
 decl(widget[])
-interactCombat_curWidgets = [widgetNull,widgetNull,widgetNull];
+interactCombat_curWidgets = [widgetNull,widgetNull,widgetNull]; //CM_CUR_IND_CS,CM_CUR_IND_ATT,CM_CUR_IND_DEF
 //сюда вносятся типы атак
 decl(any[])
 interactCombat_at_list_types = [];

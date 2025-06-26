@@ -393,3 +393,77 @@ sp_gui_setBlackScreenGUI = {
 		_time call sp_threadPause;
 	};
 };
+
+sp_gui_inventoryVisibleHandlers = [{true},{true},{true}];
+sp_gui_resetInventoryVisibleHandlers = {
+	sp_gui_inventoryVisibleHandlers = [{true},{true},{true}];
+};
+/* 
+	for right
+	{
+        if equals(ctrltext _x,"Рот") exitWith {_wid = _x};
+    } foreach interactMenu_selectionWidgets;
+	{
+		if (!isNullReference(_x) && {(_x getvariable "actionName") == "Сон"}) exitWith {
+			_wid = _x;
+		};
+	} foreach interactMenu_specActWidgets;
+
+	for up
+
+*/
+sp_gui_setInventoryVisibleHandler = {
+	params [["_left",{true}],["_up",{true}],["_right",{true}]];
+	sp_gui_inventoryVisibleHandlers = [_left,_up,_right];
+};
+
+sp_gui_internal_const_baseFadeInvVis = 0.6;
+
+sp_gui_syncInventoryVisible = {
+	private _d = getDisplay;
+	if (isNullReference(_d)) exitWith {};
+	sp_gui_inventoryVisibleHandlers params ["_left","_up","_right"];
+
+	//up handler
+	
+	//right handler
+	{
+		if isNullReference(_x) then {warning("interactMenu_selectionWidgets is null value");};
+		if ([ctrltext _x,_x] call _right) then {
+			
+			if !isNull(_x getvariable "__basefade_spgui") then {
+				_x setFade (_x getvariable "__basefade_spgui");
+				_x commit 0;
+				_x setvariable ["__basefade_spgui",nil];
+			};
+			_x ctrlEnable true;
+		} else {
+			if isNull(_x getvariable "__basefade_spgui") then {
+				_x setvariable ["__basefade_spgui",ctrlFade _x];
+			};
+			_x setFade sp_gui_internal_const_baseFadeInvVis;
+			_x commit 0;
+			_x ctrlEnable false;
+		};
+		
+	} foreach interactMenu_selectionWidgets;
+
+	{
+		if isNullReference(_x) then {warning("interactMenu_specActWidgets is null value");};
+		if ([(_x getvariable "actionName"),_x] call _right) then {
+			if !isNull(_x getvariable "__basefade_spgui") then {
+				_x setFade (_x getvariable "__basefade_spgui");
+				_x commit 0;
+				_x setvariable ["__basefade_spgui",nil];
+			};			
+			_x ctrlEnable true;
+		} else {
+			if isNull(_x getvariable "__basefade_spgui") then {
+				_x setvariable ["__basefade_spgui",ctrlFade _x];
+			};
+			_x setFade sp_gui_internal_const_baseFadeInvVis;
+			_x commit 0;
+			_x ctrlEnable false;
+		};
+	} foreach interactMenu_specActWidgets;
+};

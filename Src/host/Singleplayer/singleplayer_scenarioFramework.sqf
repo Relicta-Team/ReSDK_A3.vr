@@ -118,6 +118,8 @@ sp_cleanupSceneData = {
 
 	call sp_clearPlayerHandlers;
 
+	call sp_gui_resetInventoryVisibleHandlers;
+
 	call sp_cleanupWidgetHighlightTokens;
 	
 	//now delete all mobs

@@ -79,6 +79,7 @@ model("\a3\structures_f\furniture\chairwood_f.p3d") [[INV_HAND_L,[[-0.178,-0.194
 model("\ml\ml_object_new\model_14_10\bottledef.p3d") [[INV_HAND_L,[[0.057,-0.013,0.023],[-76,-80,6]]],[INV_HAND_R,[[-0.132,-0.121,-0.004],[-38,-49,60]]]]
 model("\relicta_models\models\interier\props\cup2.p3d") [[INV_HAND_L,[[0.045,0.028,-0.006],[-52,-80,6]]],[INV_HAND_R,[[-0.088,-0.048,0.003],[-65,-64,60]]]]
 model("\relicta_models\models\interier\props\kitchen\buhlo1.p3d") [[INV_HAND_L,[[0.021,-0.006,0.012],[-56,-80,6]]],[INV_HAND_R,[[-0.084,-0.071,0.01],[-48,-42,60]]]]
+model("\relicta_models\models\interier\props\kitchen\buhlo2.p3d") [[INV_HAND_L,[[0.021,-0.006,0.012],[-56,-80,6]]],[INV_HAND_R,[[-0.084,-0.071,0.01],[-48,-42,60]]]]
 model("\ca\structures\furniture\decoration\bucket\bucket.p3d") [[INV_HEAD,[[-0.055,-0.052,0.276],[0,-9,181]]],[INV_HAND_L,[[-0.194,-0.005,-0.229],[20,-3,20]]],[INV_HAND_R,[[0.158,0.007,-0.22],[52,23,-1]]]]
 model("\ca\structures_e\misc\misc_interier\bucket_ep1.p3d") [[INV_HEAD,[[-0.057,-0.129,0.019],[-90,0,200]]],[INV_HAND_L,[[-0.156,-0.007,-0.135],[-20,14,49]]],[INV_HAND_R,[[0.107,-0.041,-0.105],[3,14,-49]]]]
 
