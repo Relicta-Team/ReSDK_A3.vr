@@ -343,9 +343,9 @@ smd_onAttackOrDamage = {
 
 			_mob setVariable ["__SMDINT_isSupressedAnimSync",false];
 
-			//пропуск тряски камеры
+			//пропуск тряски камеры для неигрока
 			#ifdef SP_MODE
-			if equals(player,_mob) exitWith {};
+			if not_equals(player,_mob) exitWith {};
 			#endif
 
 			//apply cam shake for attack

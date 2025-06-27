@@ -181,6 +181,7 @@ _wsim = [
 	,"damage" //applydamage for mob
 	,"hunger" //hunger loss
 	,"blood" //bloodloss 
+	,"burn" //burn loss
 	,"pain"
 ];
 

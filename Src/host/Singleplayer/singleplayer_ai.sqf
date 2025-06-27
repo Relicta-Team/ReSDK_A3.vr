@@ -223,6 +223,7 @@ sp_ai_playCapture = {
     private _cpydta = array_copy(_cdata);
 
     private _moveproc = true;
+    private _stopOnDie = true;
     private _animspeed = 1;
     if equalTypes(_cpydta select 0,"") then {
         _cpydta deleteAt 0;
@@ -237,6 +238,10 @@ sp_ai_playCapture = {
                 _animspeed = _val;
                 continue;
             };
+            if (_name == "stopOnDie") then {
+                _stopOnDie = _val;
+                continue;
+            };
         } foreach _pars;
     };
 
@@ -245,6 +250,7 @@ sp_ai_playCapture = {
         ["curPos",_basePos],
         ["prevPos",_basePos],
         ["capturePos",_moveproc],
+        ["stopOnDie",_stopOnDie],
         ["prevDir",vectorDirVisual _target],
         ["curDir",vectorDirVisual _target],
         ["prevDeltaPos",0],
@@ -298,6 +304,10 @@ sp_ai_internal_processPlayingStates = {
     if isNullReference(_obj) exitWith {
         stopThisUpdate();
     }; //already destroyed
+    _mob = _obj getvariable ["link",nullPtr];
+    if (getVar(_mob,isDead) && {_ctx get "stopOnDie"}) exitWith {
+        stopThisUpdate();
+    };
     _capmove = _ctx get "capturePos";
     
     if (count _cdata == 0) exitWith {
@@ -323,6 +333,20 @@ sp_ai_internal_processPlayingStates = {
 
     if ("__anmawaiter" in _ctx) exitWith {
         [_ctx] call sp_ai_playAnimAwaiter;
+    };
+    
+    _hasEscAwaiter = "__esc_awaiter" in _ctx;
+    if (!isNullReference(findDisplay 49) || isGamePaused) exitWith {
+        //pressed escape menu
+        if (!_hasEscAwaiter) then {
+            _ctx set ["__anmoffset_start",tickTime];
+            _ctx set ["__esc_awaiter",true];
+        };
+    };
+    if (_hasEscAwaiter) then {
+        _ctx deleteAt "__esc_awaiter";
+        private _offset = tickTime - (_ctx get "__anmoffset_start");
+        _ctx set ["__anmoffset_delta",_offset + (_ctx get "__anmoffset_delta")];
     };
 
     _t = _t + (_ctx get "__anmoffset_delta");

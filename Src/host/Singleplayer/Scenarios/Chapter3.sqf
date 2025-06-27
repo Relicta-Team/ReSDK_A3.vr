@@ -68,6 +68,23 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	_eaterBdy setface "persianhead_a3_01_player";//disable eater head
 
 
+	["click_self",{
+        params ["_t"];
+        if (isTypeOf(_t,Knife)) exitWith {
+            _m = pick[
+                "Я не буду себя резать.",
+                "Что я творю?",
+                "Это глупо.",
+                "В этом нет необходимости.",
+                "Зачем мне резать себя?",
+                "Я не хочу это делать."
+            ];
+            callFuncParams(call sp_getActor,mindSay,_m);
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
+
 }] call sp_addScene;
 
 ["cpt3_trg_katafound",{

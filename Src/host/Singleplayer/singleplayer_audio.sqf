@@ -37,12 +37,14 @@ sp_audio_setMusicPause = {
 };
 
 sp_audio_sayPlayer = {
-	params ["_pathPost",["_vol",1]];
+	params ["_pathPost",["_vol",1],["_offset",0]];
 	if (sp_debug_skipAudio) exitWith {-1};
 
 	["singleplayer\sp_guide\" + _pathPost,
 		_vol,null,
-		true //redirect to effect audio channel
+		true, //redirect to effect audio channel
+		null,
+		_offset
 	] call soundUI_play;
 };
 

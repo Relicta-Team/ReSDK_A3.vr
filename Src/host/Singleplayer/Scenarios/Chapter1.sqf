@@ -109,7 +109,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 		2 call sp_threadPause;
 		callFuncParams(call sp_getActor,playSound, "emotes\sigh_male" arg 0.92);
-		1 call sp_threadPause;
+		1.8 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
 
 		["resist",false] call sp_setLockPlayerHandler;
@@ -274,7 +274,7 @@ cpt1_playerUniform = "NomadCloth9";
 			any_of(_barr apply {callFuncParams(_x,getDistanceTo,call sp_getActor arg true) <= 3})
 		} call sp_threadWait;
 
-		["У вас есть 2 свободных руки, в которые можно взять любые предметы."+
+		_baseInteractHandle = ["У вас есть 2 свободных руки, в которые можно взять любые предметы."+
 		"Чтобы взять предметы с земли нажмите ЛКМ нацелившись на необходимый предмет - он будет взят в активную руку. Для изменения активной руки нажмите $input_act_changeActHand."+
 		sbr+" Попробуйте подобрать бутылку возле костра."] call sp_setNotification;
 
@@ -304,10 +304,10 @@ cpt1_playerUniform = "NomadCloth9";
 			all_of(_barr apply {not_equals(callFunc(_x,getSourceLoc),call sp_getActor)})
 		} call sp_threadWait;
 
-		["Действия с предметами можно проводить в режиме открытого инвентаря ($input_act_inventory). В этом режиме, например, вы так же можете точнее выкладывать предметы, перетягивая их из слота руки в мир и поворачивая колесом мыши"] call sp_setNotification;
+		_baseInteractHandle = ["Действия с предметами можно проводить в режиме открытого инвентаря ($input_act_inventory). В этом режиме, например, вы так же можете точнее выкладывать предметы, перетягивая их из слота руки в мир и поворачивая колесом мыши"] call sp_setNotification;
 		
 		10 call sp_threadPause;
-		[false] call sp_setNotificationVisible;
+		[false,_baseInteractHandle] call sp_setNotificationVisible;
 
 	} call sp_threadStart;
 
@@ -391,11 +391,12 @@ cpt1_playerUniform = "NomadCloth9";
 		
 		while {true} do {
 			if (inventory_isOpenContainer) then {
-				1 call sp_threadPause;
+				0.5 call sp_threadPause;
 				if (inventory_isOpenContainer) then {break};
 			};
 			0.2 call sp_threadPause;
 		};
+		sp_playerCanMove = false;
 
 		_obj = ["cpt_1_lootobj1",nullPtr] call sp_storageGet;
 		["Одежда помогает согреться и защищает вашего персонажа. Только что вы нашли шапку. Перетащите её в слот любой свободной руки, а затем на слот головы."] call sp_setNotification;
@@ -436,11 +437,12 @@ cpt1_playerUniform = "NomadCloth9";
 		refset(_refHead,true);
 
 		[false] call sp_setNotificationVisible;
+		sp_playerCanMove = true;
 
 		// second item check
 		while {true} do {
 			if (inventory_isOpenContainer) then {
-				1 call sp_threadPause;
+				0.5 call sp_threadPause;
 				if (inventory_isOpenContainer && {count _searchedList == 2}) then {break};
 			};
 			0.2 call sp_threadPause;
@@ -453,7 +455,7 @@ cpt1_playerUniform = "NomadCloth9";
 			if isNullReference(_obj) exitWith {};
 
 			{
-				callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.3
+				callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.7
 			} call sp_threadWait;
 
 			["Для того, чтобы зажечь факел нажмите ЛКМ с факелом в активной руке по костру"] call sp_setNotification;
@@ -475,7 +477,7 @@ cpt1_playerUniform = "NomadCloth9";
 		//third item check
 		while {true} do {
 			if (inventory_isOpenContainer) then {
-				1 call sp_threadPause;
+				0.5 call sp_threadPause;
 				if (inventory_isOpenContainer && {count _searchedList == 3}) then {break};
 			};
 			0.2 call sp_threadPause;
@@ -564,6 +566,7 @@ cpt1_act_addMapViewHandler = {
 
 ["cpt1_act_mapview",{
 	{
+		sp_playerCanMove = false;
 		0.5 call sp_threadPause;
 		_d = getGUI;
 		_sizeX = 40;
@@ -579,6 +582,7 @@ cpt1_act_addMapViewHandler = {
 		widgetSetFade(_w,1,0.3);
 		1 call sp_threadPause;
 		[_w,true] call deleteWidget;
+		sp_playerCanMove = true;
 	} call sp_threadStart;
 }] call sp_addScene;
 

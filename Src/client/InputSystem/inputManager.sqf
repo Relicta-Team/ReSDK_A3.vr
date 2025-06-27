@@ -140,7 +140,7 @@ onGameKeyInputs = {
 	};
 
 	// next all debuger inputs
-#ifdef DEBUG
+#ifdef EDITOR
 
 	if (_key == KEY_U) exitWith {
 		call proxEd_openEditor;
