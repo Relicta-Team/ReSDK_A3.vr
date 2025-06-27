@@ -44,3 +44,5 @@ TEST(GameObjects_ResourceManagement)
 
     } foreach getAllObjectsTypeOf(GameObject);
 }
+
+//TODO test for container destroy with contents
