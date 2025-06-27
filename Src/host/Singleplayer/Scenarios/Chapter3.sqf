@@ -11,8 +11,15 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	call sp_initializeDefaultPlayerHandlers;
     [true,0] call setBlackScreenGUI;
 
+	if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
+		["Torch",call sp_getActor] call createItemInInventory;
+	};
+
 	call cpt2_act_enableTorchHadnler;
 	cpt2_data_listTorches pushback ("cpt3_obj_torchoneater" call sp_getObject);
+
+	//левая рука стала правой...
+	setVar("cpt3_obj_armdeadbody" call sp_getObject,side,1);
 	
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
 	[true] call sp_setPlayerSprintAllowed;
@@ -23,10 +30,6 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	["cpt3_pos_start",0] call sp_setPlayerPos;
 	[cpt3_hudvis_default] call sp_view_setPlayerHudVisible;
 	[false,1.5] call setBlackScreenGUI;
-
-	if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
-		["Torch",call sp_getActor] call createItemInInventory;
-	};
 
 	//create deadbody
 	_body = objNull;
@@ -52,7 +55,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 	//make eater
 	_eaterBdy = objNull;
-	["cpt3_pos_eaterbase","cpt3_eater",[
+	["cpt3_pos_eaterbase_pre","cpt3_eater",[
 		["class","GMPreyMobEater"],
 		["name",["Сонный","Жрун"]]
 	],{
@@ -60,9 +63,9 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	},{
 		_eaterBdy = _this;
 	}] call sp_ai_createPersonEx;
-	_eaterBdy setDir (callFunc("cpt3_pos_eaterbase" call sp_getObject,getDir));
+	_eaterBdy setDir (callFunc("cpt3_pos_eaterbase_pre" call sp_getObject,getDir));
 	if (!sp_debug) then {
-		_eaterBdy hideObject true;
+		//_eaterBdy hideObject true;
 	};
 	_eaterBdy switchmove "ApanPercMstpSnonWnonDnon_G01";
 	_eaterBdy setface "persianhead_a3_01_player";//disable eater head
@@ -244,6 +247,16 @@ cpt3_trg_enterdarkzone_act = false;
 			_wid
 		},0.02] call sp_createWidgetHighlight;
 
+		private _switcher = {
+			_d = getDisplay;
+			if isNullReference(_d) exitWith {false};
+			_d getvariable ["ieMenuCtg",widgetNull] getvariable ["categsGroup",widgetNull] getvariable ["isloadedlist",false]
+		};
+		// _switcher = {
+		// 	//(interactEmote_actions select interactEmote_curTabIdx select 0) == "Восприятие"
+		// 	false
+		// };
+
 		//we can also select catname with (interactEmote_actions select interactEmote_curTabIdx)
 		_hWidName = [{
 			_wid = widgetNull;
@@ -253,31 +266,48 @@ cpt3_trg_enterdarkzone_act = false;
 			if (isNullVar(_widName) || {isNullReference(_widName)}) exitwith {_wid};
 			_widName = _widName getVariable "ctgCatAct";
 			if (isNullVar(_widName) || {isNullReference(_widName)}) exitwith {_wid};
+			if (_d getvariable ["ieMenuCtg",widgetNull] getvariable ["categsGroup",widgetNull] getvariable ["isloadedlist",false]) exitWith {_wid};
 			_widName
-		},0.002] call sp_createWidgetHighlight;
+		},0.002,_switcher] call sp_createWidgetHighlight;
 
 		_pvHandler = [{
 			_wid = widgetNull;
 			_d = getDisplay;
 			if isNullReference(_d) exitWith {_wid};
+			if (_d getvariable ["ieMenuCtg",widgetNull] getvariable ["categsGroup",widgetNull] getvariable ["isloadedlist",false]) exitWith {_wid};
 			_wid = _d getVariable ["ieMenuCtg",widgetNull] getvariable ["ctgPrevActionButton",widgetNull];
 			_wid
-		},0.0005] call sp_createWidgetHighlight;
+		},0.002,_switcher] call sp_createWidgetHighlight;
 		_ntHandler = [{
 			_wid = widgetNull;
 			_d = getDisplay;
 			if isNullReference(_d) exitWith {_wid};
+			if (_d getvariable ["ieMenuCtg",widgetNull] getvariable ["categsGroup",widgetNull] getvariable ["isloadedlist",false]) exitWith {_wid};
 			_wid = _d getVariable ["ieMenuCtg",widgetNull] getvariable ["ctgNextActionButton",widgetNull];
 			_wid
-		},0.0005] call sp_createWidgetHighlight;
+		},0.002,_switcher] call sp_createWidgetHighlight;
+
+		//not work
+		// _hCateg = [{
+		// 	_wid = widgetNull;
+		// 	_d = getDisplay;
+		// 	if isNullReference(_d) exitWith {_wid};
+		// 	{
+		// 		if ("Восприятие" in (ctrlText _x)) exitWith {
+		// 			_wid = _x;
+		// 		};
+		// 	} foreach (allControls(_d getvariable ["ieMenuCtg",widgetNull] getvariable ["categsGroup",widgetNull]
+		// 	getvariable ["ctglistcatsie",widgetNull]));
+		// 	_wid
+		// },0.002,{true}] call sp_createWidgetHighlight;
 
 		{
 			(interactEmote_actions select interactEmote_curTabIdx select 0) == "Восприятие";
 		} call sp_threadWait;
+		
 		refset(_hWidName,true);
 		refset(_pvHandler,true);
 		refset(_ntHandler,true);
-		
 
 		_hSee = [{
 			_wid = widgetNull;
@@ -287,22 +317,35 @@ cpt3_trg_enterdarkzone_act = false;
 				}
 			} foreach interactEmote_act_widgets;
 			_wid
-		}] call sp_createWidgetHighlight;
+		},null,_switcher] call sp_createWidgetHighlight;
 
 		{
 			["perform_search_action",false] call sp_storageGet;
 		} call sp_threadWait;
-		
+
 		refset(_hSee,true);
 		refset(_hWidget,true);
-		
+		//refset(_hCateg,true);
 
 	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt3_foundmonster",{
 	["cpt3_eater","cpt3_pos_eaterbase",0] call sp_ai_setMobPos;
-	("cpt3_eater" call sp_ai_getMobBody) hideObject false;
+
+	if (
+		!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)
+	) then {
+		{
+			if isTypeOf(_x,Torch) then {
+				if equals("cpt3_obj_torchoneater" call sp_getObject,_x) exitWith {};
+				[_x] call deleteGameObject;
+			};
+		} foreach (callFuncParams(call sp_getActor,getNearItems,40));
+		["Torch",call sp_getActor] call createItemInInventory;
+	};
+
+	//("cpt3_eater" call sp_ai_getMobBody) hideObject false;
 	{
 		["eaterstealth"] call sp_audio_playMusic;
 
@@ -316,10 +359,14 @@ cpt3_trg_enterdarkzone_act = false;
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
 		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
+
 		_ct = [{
 			_wid = widgetNull;
 			{
-				if (!isNullReference(_x) && {(_x getvariable "actionName") == "Бросок"}) exitWith {
+				if (
+					!isNullReference(_x) 
+					&& {(_x getvariable "actionName") == "Бросок"}
+				) exitWith {
 					_wid = _x;
 				};
 			} foreach interactMenu_specActWidgets;
@@ -333,9 +380,12 @@ cpt3_trg_enterdarkzone_act = false;
 		
 		_hspec = [{
             _w = widgetNull;
+			if (cd_specialAction != SPECIAL_ACTION_THROW) exitWith {_w};
             _w = hud_map_widgets getOrDefault ["specAct",_w];
             _w
-        }] call sp_createWidgetHighlight;
+        },null,{
+			cd_specialAction != SPECIAL_ACTION_THROW
+		}] call sp_createWidgetHighlight;
 
 		_hmes = ["Активное особое действие отображается в статусах справа. Каждое активное действие устанавливается для левой и правой руки отдельно. Для активации особого действия нажмите $input_act_extraAction нацелившись в сторону жруна."] call sp_setNotification;
 		
@@ -518,11 +568,22 @@ cpt4_data_eaterHandleLife = threadNull;
 		{
 			getVar(call sp_getActor,isStealthEnabled)
 		} call sp_threadWait;
-		[false,_notifHandle] call sp_setNotificationVisible;
 		refset(_ct,true);
+		sp_playerCanMove = false;
+		_notifHandle = ["Включенная скрытность отображается в статусах справа. Если вы будете двигаться быстро, то скрытность будет потеряна."] call sp_setNotification;
+		
+		_hspec = [{
+            _w = widgetNull;
+            _w = hud_map_widgets getOrDefault ["stealth",_w];
+            _w
+        },null,{hud_stealth == 0}] call sp_createWidgetHighlight;
 
+		5 call sp_threadPause;
+		sp_playerCanMove = true;
+		[false,_notifHandle] call sp_setNotificationVisible;
+		refset(_hspec,true);
+		
 		["Прятки со смертью","Незаметно подкрадитесь к жруну сзади"] call sp_setTaskMessageEff;
-
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -551,9 +612,11 @@ cpt3_data_doorSeeDialogPerformed = false;
 		if equals(_t,_eater) then {
 			if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
 			if (getVar(call sp_getActor,isCombatModeEnable)) then {
-				_ret = false;
 				_tzSel = [getVar(call sp_getActor,curTargZone)] call gurps_convertTargetZoneToBodyPart;
 				
+				if not_equals(_tzSel,BP_INDEX_HEAD) exitWith {};
+
+				_ret = false;
 				if (_tzSel != BP_INDEX_TORSO) then {
 					callFuncParams(_eater,lossLimb,_tzSel);
 				};
@@ -583,7 +646,7 @@ cpt3_data_doorSeeDialogPerformed = false;
 		},0.02] call sp_createWidgetHighlight;
 
 		_h = ["Нажмите $input_act_inventory. В верхнем меню вы можете настроить способы атаки и защиты, а справа настраивается зона атаки - место куда вы будете бить противника."+
-		sbr+"Как будете готовы атаковать - нажмите ЛКМ для атаки"] call sp_setNotification;
+		sbr+"Выберите зону атаки ""Голова"" и как будете готовы - нажмите ЛКМ для атаки топором по жруну"] call sp_setNotification;
 
 		{
 			getVar("cpt3_eater" call sp_ai_getMobObject,isDead)
@@ -596,6 +659,17 @@ cpt3_data_doorSeeDialogPerformed = false;
 		[true] call sp_setHideTaskMessageCtg;
 
 		[] call sp_audio_stopMusic;
+
+		//удаление головы жруна (она человеческая...)
+		{
+			private _eater = "cpt3_eater" call sp_ai_getMobObject;
+			{
+				if isTypeOf(_x,Head) then {
+					[_x] call deleteGameObject;
+				};
+			} foreach callFuncParams(_eater,getNearItems,10);
+		} call sp_threadCriticalSection;
+
 		1.2 call sp_threadPause;
 
 		_sound = ["chap3\gg3"] call sp_audio_sayPlayer;
@@ -675,7 +749,12 @@ cpt3_func_damageEvent = {
 			params ["_t"];
 			_hret = true;
 			if (!getVar(call sp_getActor,isCombatModeEnable)) exitWith {_hret};
-			if equals(_t,"cpt3_obj_doordestr" call sp_getObject) then {
+			if (
+				equals(_t,"cpt3_obj_doordestr" call sp_getObject)
+				&& getSelf(lastCombatActionTime) <= tickTime
+			) then {
+				if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
+
 				_t call cpt3_func_damageEvent;
 				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
 					[false] call sp_setNotificationVisible;

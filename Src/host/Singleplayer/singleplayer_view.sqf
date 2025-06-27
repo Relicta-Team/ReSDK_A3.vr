@@ -213,7 +213,7 @@ sp_cleanupWidgetHighlightTokens = {
 };
 
 sp_createWidgetHighlight = {
-	params ["_w",["_sizePx",0.01]];
+	params ["_w",["_sizePx",0.01],["_codeRecreate",{}],["_codeParams",[]]];
 	if equalTypes(_w,{}) exitWith {
 		private _cancelToken = refcreate(false);
 		
@@ -221,10 +221,16 @@ sp_createWidgetHighlight = {
 
 		startAsyncInvoke
 		{
-			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
+			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle","_cancelCode"];
 			if (refget(_cancelToken)) exitWith {
 				refset(_refWidHandle,true);
 				true
+			};
+			if ((_cancelCode select 1) call (_cancelCode select 0) && !refget(_refWidHandle)) then {
+				refset(_refWidHandle,true);
+				_widRef = widgetNull;
+				_this set [2,_widRef];
+				_this set [4,refcreate(false)];
 			};
 			if !isNullReference(_widRef) exitWith {false};
 			_probWid = call _code;
@@ -239,7 +245,7 @@ sp_createWidgetHighlight = {
 			_this params ["_code","_cancelToken","_widRef","_sizePx","_refWidHandle"];
 			refset(_refWidHandle,true);
 		},
-		[_w,_cancelToken,widgetNull,_sizePx,refcreate(false)]
+		[_w,_cancelToken,widgetNull,_sizePx,refcreate(false),[_codeRecreate,_codeParams]]
 		endAsyncInvoke
 
 		_cancelToken

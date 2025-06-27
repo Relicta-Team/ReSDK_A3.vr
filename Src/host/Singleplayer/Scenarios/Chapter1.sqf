@@ -723,6 +723,7 @@ cpt1_data_foundFirstMushroom = false;
 		{
 			equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
+		
 		["Новый дом","Откройте дверь"] call sp_setTaskMessageEff;
 
 		["yell"] call sp_audio_playMusic;
@@ -747,6 +748,9 @@ cpt1_data_foundFirstMushroom = false;
 }] call sp_addScene;
 
 ["cpt1_walk_final",{
+	
+	[false] call sp_setNotificationVisible;
+	[true] call sp_setHideTaskMessageCtg;
 
 	{
 		{

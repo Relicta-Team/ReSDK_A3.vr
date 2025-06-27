@@ -305,6 +305,7 @@ sp_ai_internal_processPlayingStates = {
         stopThisUpdate();
     }; //already destroyed
     _mob = _obj getvariable ["link",nullPtr];
+    setVar(_mob,stamina,100);
     if (getVar(_mob,isDead) && {_ctx get "stopOnDie"}) exitWith {
         stopThisUpdate();
     };

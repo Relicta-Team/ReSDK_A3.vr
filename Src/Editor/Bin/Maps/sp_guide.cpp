@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9513;
+		nextID=9514;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4118.9512,30.046583,3959.116};
-		dir[]={0.017120808,-0.41027161,0.91182345};
-		up[]={0.0077023283,0.91195965,0.41020551};
-		aside[]={0.99983913,-5.7792931e-08,-0.018775117};
+		pos[]={4393.7876,12.540954,3813.8801};
+		dir[]={0.74158514,-0.67032355,0.027674142};
+		up[]={0.66986555,0.74206197,0.024997652};
+		aside[]={0.037293475,-6.1688297e-07,-0.99932677};
 	};
 };
 binarizationWanted=0;
@@ -718,7 +718,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5642;
+		items=5643;
 		class Item0
 		{
 			dataType="Group";
@@ -13717,7 +13717,7 @@ class Mission
 			};
 			id=3261;
 			type="Land_Canal_Wall_10m_F";
-			atlOffset=4.5704994;
+			atlOffset=4.0772457;
 		};
 		class Item738
 		{
@@ -14747,8 +14747,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4173.8613,20.967474,3945.2766};
-				angles[]={5.5061755,4.526031,1.1321214};
+				position[]={4173.4785,20.167738,3945.3108};
+				angles[]={5.9246125,5.2989683,0.5902226};
 			};
 			side="Empty";
 			flags=1;
@@ -14758,7 +14758,7 @@ class Mission
 			};
 			id=3383;
 			type="gryazyuka5";
-			atlOffset=16.177202;
+			atlOffset=15.377466;
 		};
 		class Item795
 		{
@@ -41807,7 +41807,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Окровавленная рука""],[""desc"",""Она не твоя...""]]],[""class"",""Arm""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Окровавленная рука""],[""desc"",""Она не твоя...""]]],[""class"",""Arm""],[""mark"",""cpt3_obj_armdeadbody""]]}";
 			};
 			id=5564;
 			type="S_Arm";
@@ -44981,7 +44981,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4377.8428,10.959826,3797.5181};
+				position[]={4377.6567,10.959826,3797.5166};
 				angles[]={0.0098530762,2.4282351,6.2745771};
 			};
 			side="Empty";
@@ -44991,7 +44991,7 @@ class Mission
 			};
 			id=5817;
 			type="axehandmade1";
-			atlOffset=0.90333271;
+			atlOffset=0.90072632;
 		};
 		class Item2489
 		{
@@ -45083,7 +45083,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4377.7153,10.924886,3797.4951};
+				position[]={4376.9219,10.924886,3798.907};
 				angles[]={0.011037804,0,6.2692628};
 			};
 			side="Empty";
@@ -45093,7 +45093,7 @@ class Mission
 			};
 			id=5823;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=0.90282536;
+			atlOffset=1.105238;
 		};
 		class Item2495
 		{
@@ -45625,7 +45625,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4389.8608,10.417695,3812.4521};
+				position[]={4388.8867,10.747663,3812.314};
 				angles[]={6.035428,0,1.0484031};
 			};
 			side="Empty";
@@ -45635,7 +45635,7 @@ class Mission
 			};
 			id=5856;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=0.37467289;
+			atlOffset=0.71512508;
 		};
 		class Item2526
 		{
@@ -45660,7 +45660,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4393.292,10.356945,3817.3164};
+				position[]={4393.0264,10.356945,3817.5156};
 				angles[]={0.025200427,0,6.2460337};
 			};
 			side="Empty";
@@ -45671,7 +45671,7 @@ class Mission
 			};
 			id=5859;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=0.10977936;
+			atlOffset=0.10492897;
 		};
 		class Item2528
 		{
@@ -100846,6 +100846,24 @@ class Mission
 			id=9512;
 			type="Sign_Sphere100cm_Geometry_F";
 			atlOffset=0.7312603;
+		};
+		class Item5642
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4376.8037,5.0166368,3814.439};
+				angles[]={0,1.1051369,0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_SPPoint""],[""mark"",""cpt3_pos_eaterbase_pre""]]}";
+			};
+			id=9513;
+			type="VR_GroundIcon_01_F";
+			atlOffset=0.014136791;
 		};
 	};
 };
