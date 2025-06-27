@@ -7,6 +7,7 @@
 #include <..\client_compiled.hpp>
 
 importCommon("!PreInit.sqf");
+importCommon("JSRuntime.sqf");
 importCommon("Assert.sqf");
 importCommon("Algorithm.sqf");
 importCommon("bitflags.sqf");

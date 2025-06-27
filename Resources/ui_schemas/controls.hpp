@@ -17,6 +17,22 @@ class RLCTRscButton : RscButton {
 	soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundClick",0,0};
 };
 
+class RscWebBrowser
+{
+	type = 106; // 106
+	idc = -1;
+	deletable = 0;
+	style = 0;
+	x = 0;
+	y = 0;
+	w = 1;
+	h = 1;
+	allowExternalURL = 1;
+	allowExternalContent = 1;
+	colorBackground[]= {1,1,1,1};
+	url = "https://relicta.ru";
+};
+
 class MyButton {
 	idc = -1;
 	type = CT_BUTTON;

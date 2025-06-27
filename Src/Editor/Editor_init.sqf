@@ -74,6 +74,9 @@ call compile __pragma_preprocess "src\host\CommonComponents\Assert.sqf";
 #include <..\host\LootSystem\LootSystem_structs.sqf>
 //algorithm
 call compile __pragma_preprocess "src\host\CommonComponents\Algorithm.sqf";
+//js runtime
+call compile __pragma_preprocess "src\host\CommonComponents\JSRuntime.sqf";
+	call jsr_deleteAllRuntimes; //clear all runtimes
 //light system
 call compile __pragma_preprocess "src\host\CommonComponents\LightCfg.sqf";
 //dynamic map loader
