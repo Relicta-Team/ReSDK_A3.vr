@@ -191,6 +191,7 @@ interactCombat_load = {
 		_butt = [_d,BUTTON,sizes,_ctg] call createWidget; \
 		_butt setvariable ['mode',_mode]; \
 		_butt ctrlSetText name; \
+		interactCombat_map_defTypeWidgets set [_mode,_butt]; \
 		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressDef]; \
 		_butt ctrlSetTextColor [0.275,0.58,0,1]
 

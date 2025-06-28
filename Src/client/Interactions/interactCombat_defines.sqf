@@ -69,6 +69,9 @@ interactCombat_at_assocEnum = ATTACK_TYPE_ASSOC_HAND;
 //карта ассоциаций виджетов типов атаки. ключ тип
 decl(map)
 interactCombat_map_attTypeWidgets = createHashMap;
+//карта виджетов типов защиты. ключ тип
+decl(map)
+interactCombat_map_defTypeWidgets = createHashMap;
 //cd_curAttackType - текущий тип атаки
 
 //виджеты комбата в порядке объявления

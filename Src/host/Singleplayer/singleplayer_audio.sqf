@@ -185,14 +185,14 @@ sp_audio_internal_procDialog = {
 	if (!([_tgtReal] call _canStartCode) && _canCheckStartCond) exitWith {
 		startAsyncInvoke
 			{
-				params ["_tgtReal","_canStartCode","_startSeq"];
+				params ["_tgtReal","_canStartCode","_stateSeq"];
 				[_tgtReal] call _canStartCode;
 			},
 			{
-				params ["_tgtReal","_canStartCode","_startSeq"];
-				[_startSeq,false] call sp_audio_internal_procDialog;
+				params ["_tgtReal","_canStartCode","_stateSeq"];
+				[_stateSeq,false] call sp_audio_internal_procDialog;
 			},
-			[_tgtReal,_canStartCode,_startSeq]
+			[_tgtReal,_canStartCode,_stateSeq]
 		endAsyncInvoke
 	};
 

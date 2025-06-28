@@ -430,85 +430,53 @@ sp_gui_syncInventoryVisible = {
 	if (isNullReference(_d)) exitWith {};
 	sp_gui_inventoryVisibleHandlers params ["_left","_up","_right"];
 
-	//left handler
-	{
-		if isNullReference(_x) then {continue};
-		if ([_x getvariable "act",_x] call _left) then {
-			if !isNull(_x getvariable "__basefade_spgui") then {
-				_x setFade (_x getvariable "__basefade_spgui");
-				_x commit 0;
-				_x setvariable ["__basefade_spgui",nil];
+	private _funcHandleWidget = {
+		params ["_fnGetName","_widget","_fnCheck"];
+		if isNullReference(_widget) exitWith {false};
+		if ([call _fnGetName,_widget] call _fnCheck) then {
+			if !isNull(_widget getvariable "__basefade_spgui") then {
+				_widget setFade (_widget getvariable "__basefade_spgui");
+				_widget commit 0;
+				_widget setvariable ["__basefade_spgui",nil];
 			};
-			_x ctrlEnable true;
+			_widget ctrlEnable true;
 		} else {
-			if isNull(_x getvariable "__basefade_spgui") then {
-				_x setvariable ["__basefade_spgui",ctrlFade _x];
+			if isNull(_widget getvariable "__basefade_spgui") then {
+				_widget setvariable ["__basefade_spgui",ctrlFade _widget];
 			};
-			_x setFade sp_gui_internal_const_baseFadeInvVis;
-			_x commit 0;
-			_x ctrlEnable false;
-		};
-	} foreach interactEmote_act_widgets;
-	private _w = _d getvariable ["ieMenuCtg",widgetNull] getvariable ["buttonSend",widgetNull];
-	if !isNullReference(_w) then {
-		if (["buttonSendEmote",_w] call _left) then {
-			if !isNull(_w getvariable "__basefade_spgui") then {
-				_w setFade (_w getvariable "__basefade_spgui");
-				_w commit 0;
-				_w setvariable ["__basefade_spgui",nil];
-			};
-			_w ctrlEnable true;
-		} else {
-			if isNull(_w getvariable "__basefade_spgui") then {
-				_w setvariable ["__basefade_spgui",ctrlFade _w];
-			};
-			_w setFade sp_gui_internal_const_baseFadeInvVis;
-			_w commit 0;
-			_w ctrlEnable false;
+			_widget setFade sp_gui_internal_const_baseFadeInvVis;
+			_widget commit 0;
+			_widget ctrlEnable false;
 		};
 	};
 
+	//left handler
+	{
+		[{_x getvariable "act"},_x,_left] call _funcHandleWidget;
+	} foreach interactEmote_act_widgets;
+	private _w = _d getvariable ["ieMenuCtg",widgetNull] getvariable ["buttonSend",widgetNull];
+	if !isNullReference(_w) then {
+		[{"buttonSendEmote"},_w,_left] call _funcHandleWidget;
+	};
+
 	//up handler
-	
+	{
+		[{_x},_y,_up] call _funcHandleWidget;
+	} foreach interactCombat_map_widgetStyles;
+	{
+		[{_x},_y,_up] call _funcHandleWidget;
+	} foreach interactCombat_map_attTypeWidgets;
+	{
+		[{_x},_y,_up] call _funcHandleWidget;
+	} foreach interactCombat_map_defTypeWidgets;
+
 	
 	//right handler
 	{
-		if isNullReference(_x) then {continue};
-		if ([ctrltext _x,_x] call _right) then {
-			
-			if !isNull(_x getvariable "__basefade_spgui") then {
-				_x setFade (_x getvariable "__basefade_spgui");
-				_x commit 0;
-				_x setvariable ["__basefade_spgui",nil];
-			};
-			_x ctrlEnable true;
-		} else {
-			if isNull(_x getvariable "__basefade_spgui") then {
-				_x setvariable ["__basefade_spgui",ctrlFade _x];
-			};
-			_x setFade sp_gui_internal_const_baseFadeInvVis;
-			_x commit 0;
-			_x ctrlEnable false;
-		};
-		
+		[{ctrltext _x},_x,_right] call _funcHandleWidget;
 	} foreach interactMenu_selectionWidgets;
 
 	{
-		if isNullReference(_x) then {continue};
-		if ([(_x getvariable "actionName"),_x] call _right) then {
-			if !isNull(_x getvariable "__basefade_spgui") then {
-				_x setFade (_x getvariable "__basefade_spgui");
-				_x commit 0;
-				_x setvariable ["__basefade_spgui",nil];
-			};			
-			_x ctrlEnable true;
-		} else {
-			if isNull(_x getvariable "__basefade_spgui") then {
-				_x setvariable ["__basefade_spgui",ctrlFade _x];
-			};
-			_x setFade sp_gui_internal_const_baseFadeInvVis;
-			_x commit 0;
-			_x ctrlEnable false;
-		};
+		[{_x getvariable "actionName"},_x,_right] call _funcHandleWidget;
 	} foreach interactMenu_specActWidgets;
 };

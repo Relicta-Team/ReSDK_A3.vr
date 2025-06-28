@@ -25,6 +25,20 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	[true] call sp_setPlayerSprintAllowed;
     call cpt1_act_addMapViewHandler;
 
+	[{
+        params ["_t","_wid"];
+        _t == "pr_see" || _t == "pr_hear"
+    },{
+		params ["_t","_wid"];
+		array_exists(COMBAT_STYLE_LIST_ALL,_t)
+	},{
+		params ["_t","_wid"];
+        if array_exists(interactMenu_selectionWidgets,_wid) exitWith {true};
+		if ("Бросок" == _t && (["cpt3_data_canUseThrowAction",false] call sp_storageGet)) exitWith {true};
+		if ("Прятаться" == _t && (["cpt3_data_canUseHideAction",false] call sp_storageGet)) exitWith {true};
+		false
+	}] call sp_gui_setInventoryVisibleHandler;
+
 	sp_allowebVerbs append ["undress"];
 
 	["cpt3_pos_start",0] call sp_setPlayerPos;
@@ -356,6 +370,12 @@ cpt3_trg_enterdarkzone_act = false;
 		["press_specact",false] call sp_setLockPlayerHandler;
 		["extra_action",false] call sp_setLockPlayerHandler;
 
+		{
+			["cpt3_data_canUseThrowAction",true] call sp_storageSet;
+			call sp_gui_syncInventoryVisible;
+		} call sp_threadCriticalSection;
+
+
 		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
 		+sbr+sbr
 		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
@@ -399,6 +419,22 @@ cpt3_trg_enterdarkzone_act = false;
 				["cpt3_obj_torchonthrow",_trch] call sp_storageSet;
 				call sp_removeCurrentPlayerHandler;
 				false
+			};
+			false
+		}] call sp_addPlayerHandler;
+		_hthrow = ["extra_action",{
+			params ["_targ"];
+			if (isNullReference(_targ)) exitWith {true};
+			if (cd_specialAction == SPECIAL_ACTION_THROW && isTypeOf(callFunc(call sp_getActor,getItemInActiveHandRedirect),CaveAxe)) exitWith {
+				[
+					pick[
+						"Я не буду кидать единственное нормальное оружие.",
+						"Не стоит разбрасываться хорошим оружием.",
+						"Кидать нельзя - носить с собой..."
+					],
+					"error"
+				] call chatPrint;
+				true;
 			};
 			false
 		}] call sp_addPlayerHandler;
@@ -551,6 +587,9 @@ cpt4_data_eaterHandleLife = threadNull;
 		};
 		
 	} call sp_threadStart;
+
+	["cpt3_data_canUseHideAction",true] call sp_storageSet;
+	call sp_gui_syncInventoryVisible;
 
 	{
 		_notifHandle = ["Чтобы двигаться незаметно для других перейдите в режим скрытности. Для этого в правом меню нажмите ""Прятаться""."] call sp_setNotification;
@@ -785,21 +824,32 @@ cpt3_func_damageEvent = {
 ["cpt3_trg_ongate",{
 	//cpt3_obj_radio - speaker
 	//cpt3_obj_bigspeaker - big speaker
+	
 	{
+		private _distanceCheckDialog = ["canstart",{
+			callFuncParams(call sp_getActor,getDistanceTo,"cpt3_obj_radio" call sp_getObject arg true) <= 10
+		}];
+		private _distSpec = [
+			["distance",30],
+			_distanceCheckDialog
+		];
+
 		[
-			[player,"chap3\gg8"],
-			["cpt3_obj_radio","chap3\radio1",["endoffset",2]],
+			[player,"chap3\gg8",_distanceCheckDialog],
+			["cpt3_obj_radio","chap3\radio1",[["endoffset",2]]+_distSpec],
 
-			[player,"chap3\gg9",["endoffset",3.1]], 
-			["cpt3_obj_radio","chap3\radio2",["endoffset",-2]],
+			[player,"chap3\gg9",[["endoffset",3.1],_distanceCheckDialog]], 
+			["cpt3_obj_radio","chap3\radio2",[["endoffset",-2]]+_distSpec],
 
-			[player,"chap3\gg10",["endoffset",2]], 
-			["cpt3_obj_radio","chap3\radio3",["endoffset",2]],
+			[player,"chap3\gg10",[["endoffset",2],_distanceCheckDialog]], 
+			["cpt3_obj_radio","chap3\radio3",[["endoffset",2]]+_distSpec],
 
-			[player,"chap3\gg11",["endoffset",3.1]], 
-			["cpt3_obj_radio","chap3\radio4",["onend",{
-				["cpt3_onend"] call sp_startScene;
-			}]]
+			[player,"chap3\gg11",[["endoffset",3.1],_distanceCheckDialog]], 
+			["cpt3_obj_radio","chap3\radio4",[
+				["onend",{
+					["cpt3_onend"] call sp_startScene;
+				}]]+_distSpec
+			]
 		] call sp_audio_startDialog;
 	} call sp_threadStart;
 }] call sp_addScene;
