@@ -106,7 +106,8 @@ cpt2_fnc_clickself_ItemCheck = {
 cpt2_fnc_canPickupItem = {
     //check intermediate food
     if ("блюдо" in (tolower getVar(_this,name)) || isTypeOf(_this,OrganicDebris1)) exitWith {
-        ["Надо подождать пока приготовится...","mind"] call chatPrint;
+        //this duplicate message (main from sp_initializeDefaultPlayerHandlers)
+        //["Надо подождать пока приготовится...","mind"] call chatPrint;
         false
     };
     true
@@ -385,41 +386,44 @@ cpt2_act_enableTorchHadnler = {
 
         ["Теперь подождите некоторое время пока блюдо не будет готово"] call sp_setNotification;
 
-        //хандлеры защиты поднятия сковороды во время готовки
-        _hlockfpan_list = [
-            ["click_target",{
+        {
+            //хандлеры защиты поднятия сковороды во время готовки
+            _hlockfpan_list = [
+                ["click_target",{
+                    params ["_t"];
+                    if (isTypeOf(_t,FryingPan)) exitWith {
+                        ["Надо доготовить.","error"] call chatPrint;
+                        true
+                    };
+                    false
+                }] call sp_addPlayerHandler,
+                ["activate_verb",{
+                    params ["_t","_name"];
+                    private _ret = false;
+                    if (_name == "mainact" && isTypeOf(_t,SmallStoveGrill)) exitWith {
+                        ["Надо доготовить.","error"] call chatPrint;
+                        true
+                    };
+                    if (_name == "pickup") then {
+                        if (isTypeOf(_t,FryingPan) || isTypeOf(_t,OrganicDebris1)) then {
+                            ["Надо доготовить.","error"] call chatPrint;
+                            _ret = true;
+                        };
+                    };
+                    _ret
+                }] call sp_addPlayerHandler
+            ];
+
+            _hlockfpan_list pushBack (["main_action",{
                 params ["_t"];
-                if (isTypeOf(_t,FryingPan)) exitWith {
+                if (isTypeOf(_t,SmallStoveGrill)) exitWith {
                     ["Надо доготовить.","error"] call chatPrint;
                     true
                 };
                 false
-            }] call sp_addPlayerHandler,
-            ["activate_verb",{
-                params ["_t","_name"];
-                private _ret = false;
-                if (_name == "mainact" && isTypeOf(_t,SmallStoveGrill)) exitWith {
-                    ["Надо доготовить.","error"] call chatPrint;
-                    true
-                };
-                if (_name == "pickup") then {
-                    if (isTypeOf(_t,FryingPan)) then {
-                        ["Надо доготовить.","error"] call chatPrint;
-                        _ret = true;
-                    };
-                };
-                _ret
-            }] call sp_addPlayerHandler
-        ];
+            }] call sp_addPlayerHandler);
 
-        _hlockfpan_list pushBack (["main_action",{
-            params ["_t"];
-            if (isTypeOf(_t,SmallStoveGrill)) exitWith {
-                ["Надо доготовить.","error"] call chatPrint;
-                true
-            };
-            false
-        }] call sp_addPlayerHandler);
+        } call sp_threadCriticalSection;
 
         {
             _nitms = callFuncParams("cpt2_obj_stove" call sp_getObject,getNearObjects,"IFoodItem" arg 3 arg true arg true);

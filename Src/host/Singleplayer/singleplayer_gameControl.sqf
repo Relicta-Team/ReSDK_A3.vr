@@ -389,7 +389,7 @@ sp_initializeDefaultPlayerHandlers = {
 		[pick[
 			"Не стоит трогать это...",
 			"Не то, что стоит трогать",
-			"Лушче не трогать.",
+			"Лучше не трогать.",
 			"Мне это не нужно"
 		],"mind"] call chatPrint;
 
@@ -464,7 +464,7 @@ sp_initializeDefaultPlayerHandlers = {
 			[pick[
 				"Не стоит трогать это...",
 				"Не то, что стоит трогать",
-				"Лушче не трогать.",
+				"Лучше не трогать.",
 				"Мне это не нужно"
 			],"mind"] call chatPrint;
 			true

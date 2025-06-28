@@ -667,7 +667,7 @@ cpt1_data_foundFirstMushroom = false;
 ["cpt1_trg_founddoor",{
 	
 	["chap1\gg9"] call sp_audio_sayPlayer;
-	["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
+	_msgHndl = ["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
 	
 	["verbs",false] call sp_setLockPlayerHandler;
 	sp_allowebVerbs = ["description","mainact"];
@@ -696,8 +696,6 @@ cpt1_data_foundFirstMushroom = false;
 		params ["_t","_name"];
 		if (_name == "mainact") then {
 			if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
-				["chap1\gg10"] call sp_audio_sayPlayer;
-				[false] call sp_setNotificationVisible;
 				{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
 				["cpt1_walk_searchkey"] call sp_startScene;
 			};
@@ -707,18 +705,38 @@ cpt1_data_foundFirstMushroom = false;
 	_handlers pushBack (["main_action",{
 		params ["_t"];
 		if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
-			["chap1\gg10"] call sp_audio_sayPlayer;
-			[false] call sp_setNotificationVisible;
 			{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
 			["cpt1_walk_searchkey"] call sp_startScene;
 		};
 		false
 	}] call sp_addPlayerHandler);
+
+	[{
+		params ["_msgHndl"];
+		{
+			callFuncParams("cpt1_obj_keytopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 20
+		} call sp_threadWait;
+		{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
+		[false,_msgHndl] call sp_setNotificationVisible;
+		
+		if (sp_lastStartedScene != "cpt1_walk_searchkey") then {
+			["cpt1_walk_searchkey"] call sp_startScene;
+		};
+	},_msgHndl] call sp_threadStart;
 	
 }] call sp_addScene;
 
 ["cpt1_walk_searchkey",{
-	["Новый дом","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+	//ключ пока ещё не в руках игрока
+	if (not_equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))) then {
+		if (callFuncParams("cpt1_obj_doortopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 7) then {
+			["chap1\gg10"] call sp_audio_sayPlayer;
+		};
+		[false] call sp_setNotificationVisible;
+
+		["Новый дом","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+	};
+
 	{
 		{
 			equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
