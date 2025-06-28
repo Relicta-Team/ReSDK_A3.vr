@@ -382,16 +382,18 @@ sp_initializeDefaultPlayerHandlers = {
 	["click_target",{
 		params ["_t"];
 		if (sp_defaultHandlers get "item_action") exitWith {true};
-
+		private __printErr = {
+			[pick[
+				"Не стоит трогать это...",
+				"Не то, что стоит трогать",
+				"Лучше не трогать.",
+				"Мне это не нужно"
+			],"mind"] call chatPrint;			
+		};
 		if array_exists(sp_whitelistClickItems,_t) exitWith {false};
-		if array_exists(sp_blacklistClickItems,_t) exitWith {true};
+		if array_exists(sp_blacklistClickItems,_t) exitWith {call __printErr; true};
 		if (_t call sp_delegateCanClickItem) exitWith {false};
-		[pick[
-			"Не стоит трогать это...",
-			"Не то, что стоит трогать",
-			"Лучше не трогать.",
-			"Мне это не нужно"
-		],"mind"] call chatPrint;
+		call __printErr;
 
 		true
 	}] call sp_addPlayerHandler;
@@ -454,19 +456,24 @@ sp_initializeDefaultPlayerHandlers = {
 		if (_name == "description") exitWith {
 			sp_defaultHandlers get "examine"
 		};
+		//duplicate or typo?
+		// if (_name == "pickup") exitWith {
+		// 	sp_defaultHandlers get "item_action"
+		// };
 		if (_name == "pickup") exitWith {
-			sp_defaultHandlers get "item_action"
-		};
-		if (_name == "pickup") exitWith {
+			if (sp_defaultHandlers get "item_action") exitWith {true};
+			private __printErr = {
+				[pick[
+					"Не стоит трогать это...",
+					"Не то, что стоит трогать",
+					"Лучше не трогать.",
+					"Мне это не нужно"
+				],"mind"] call chatPrint;
+			};
 			if array_exists(sp_whitelistClickItems,_t) exitWith {false};
-			if array_exists(sp_blacklistClickItems,_t) exitWith {true};
+			if array_exists(sp_blacklistClickItems,_t) exitWith {call __printErr; true};
 			if (_t call sp_delegateCanClickItem) exitWith {false};
-			[pick[
-				"Не стоит трогать это...",
-				"Не то, что стоит трогать",
-				"Лучше не трогать.",
-				"Мне это не нужно"
-			],"mind"] call chatPrint;
+			call __printErr;
 			true
 		};
 		false

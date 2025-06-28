@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9514;
+		nextID=9520;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4145.5649,20.103048,3847.05};
-		dir[]={-0.55110508,-0.4832564,-0.68032634};
-		up[]={-0.30420244,0.87545538,-0.37553027};
-		aside[]={-0.77707326,-2.2402673e-07,0.62947994};
+		pos[]={4203.0273,14.379058,3847.0012};
+		dir[]={0.7743814,-0.60136807,0.19680402};
+		up[]={0.58285356,0.79895765,0.1481283};
+		aside[]={0.2463191,2.5611371e-09,-0.96920836};
 	};
 };
 binarizationWanted=0;
@@ -718,7 +718,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5643;
+		items=5648;
 		class Item0
 		{
 			dataType="Group";
@@ -27644,7 +27644,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4204.0371,13.778205,3851.9375};
+				position[]={4203.8647,13.778205,3851.9668};
 				angles[]={0,5.568306,0};
 			};
 			side="Empty";
@@ -28216,7 +28216,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4204.1611,13.897267,3847.1633};
+				position[]={4204.166,13.897267,3847.0938};
 				angles[]={6.2773261,0,0};
 			};
 			side="Empty";
@@ -45853,7 +45853,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4203.9565,13.8274,3847.2266};
+				position[]={4203.917,13.8274,3847.2197};
 				angles[]={0,5.4350677,0};
 			};
 			side="Empty";
@@ -45870,7 +45870,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4203.9434,13.8274,3847.4009};
+				position[]={4204.064,13.833657,3847.3682};
 				angles[]={0,4.4325719,0};
 			};
 			side="Empty";
@@ -45880,15 +45880,15 @@ class Mission
 			};
 			id=5876;
 			type="Land_PenBlack_F";
-			atlOffset=0.8946352;
+			atlOffset=0.90089226;
 		};
 		class Item2540
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4203.7534,13.729096,3851.9309};
-				angles[]={0,0.23292324,0};
+				position[]={4204.0977,13.826914,3847.3298};
+				angles[]={0,1.5474758,-0};
 			};
 			side="Empty";
 			class Attributes
@@ -45897,7 +45897,7 @@ class Mission
 			};
 			id=5877;
 			type="Land_File2_F";
-			atlOffset=0.7900095;
+			atlOffset=0.89465141;
 		};
 		class Item2541
 		{
@@ -100864,6 +100864,92 @@ class Mission
 			id=9513;
 			type="VR_GroundIcon_01_F";
 			atlOffset=0.014136791;
+		};
+		class Item5643
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4167.3569,21.794613,3865.0459};
+				angles[]={0.12520839,5.6055121,0.17525591};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\civ\market\woodencart_f.p3d""],[""name"",""Бомжевозка""],[""desc"",""Запрячь пару сильных бомжиков и повозка доедет в любое место!""]]],[""class"",""MediumWoodenWall""],[""mark"",""cpt4_obj_bomzcar (1)""]]}";
+			};
+			id=9514;
+			type="Land_WoodenCart_F";
+			atlOffset=0.00097465515;
+		};
+		class Item5644
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4167.2524,20.859844,3864.2114};
+				angles[]={0,1.5450474,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonBlockFloor""]]}";
+			};
+			id=9515;
+			type="Land_Sidewalk_01_8m_F";
+			atlOffset=16.004845;
+		};
+		class Item5645
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4172.3052,22.088516,3858.6448};
+				angles[]={6.2821498,0,0.0069996584};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ClayWallBig""]]}";
+			};
+			id=9516;
+			type="CUP_A2_l_5m_ep1";
+			atlOffset=1.2805939;
+		};
+		class Item5646
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4171.1226,20.816238,3863.3967};
+				angles[]={0,1.5450474,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BetonBlockFloor""]]}";
+			};
+			id=9517;
+			type="Land_Sidewalk_01_8m_F";
+			atlOffset=15.961239;
+		};
+		class Item5647
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4203.2329,13.739096,3851.4888};
+				angles[]={0,0.23292322,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f\items\documents\file1_f.p3d""],[""name"",""Список посетителей""],[""preinit@__content"",""Текущая смена" \n "Посетители:" \n "1. Василий Туба, кочевник - пропущен" \n "2. Иризим Хохотач, пещерный артист - пропущен" \n "3. Гоген Щернов, кочевник - не пропущен, подозрение на связи с НА." \n "4. Томил Буба, бомж - не пропущен, возможно ТОМный." \n "5. Кубат Хоронилов, пещерный гриборуб - пропущен" \n "6. Живена Стойкая, лекарка - пропущена (нет языка)" \n "7. Аравим Трудович, торгаш - пропущен" \n "8. Кабахан Леманов, кочевник - болезный вахатец, не пропущен""]]],[""class"",""Documents""],[""mark"",""cpt4_obj_visitorlistpaper""]]}";
+			};
+			id=9519;
+			type="Land_File1_F";
 		};
 	};
 };

@@ -376,15 +376,88 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 		false
 	}] call sp_gui_setInventoryVisibleHandler;
 
+	["main_action",{
+		params ["_t"];
+		if (
+			isTypeOf(_t,BaseElectronicDeviceLighting)
+			&& getVar(_t,lightIsEnabled)
+		) exitWith {
+			true
+		};
+		false
+	}] call sp_addPlayerHandler;
+	["activate_verb",{
+		params ["_t","_name"];
+		if (
+			isTypeOf(_t,BaseElectronicDeviceLighting)
+			&& getVar(_t,lightIsEnabled)
+			&& _name == "mainact"
+		) exitWith {true};
+		false
+	}] call sp_addPlayerHandler;
+
 	//отдавать кариму можно только когда есть transitem в sp_allowebVerbs
 	["interact_with",{
 		params ["_targ","_with"];
 		if equals(_targ,"cpt4_karim" call sp_ai_getMobObject) exitWith {
 			if not_equals(_with,cpt4_data_refLastTakenDoc) exitWith {true};
-			array_exists(sp_allowebVerbs,"transitem");
+			!array_exists(sp_allowebVerbs,"transitem");
 		};
 		false
 	}] call sp_addPlayerHandler;
+
+	//отключаем сжигание бумаги
+	["click_target",{
+		params ["_targ"];
+		private _r = false;
+		private _with = callFunc(call sp_getActor,getItemInActiveHandRedirect);
+		{
+			_x params ["_a","_b"];
+			if (isTypeOf(_a,IPaperItemBase) && callFunc(_b,isFireLight)) exitWith {
+				[
+					pick [
+						"Так и до пожара дойдёт",
+						"Я не буду устраивать поджог",
+						"Зачем это делать?"
+					],
+					"error"
+				] call chatPrint;
+				_r = true;
+			};
+		} foreach [[_targ,_with],[_with,_targ]];
+		_r
+	}] call sp_addPlayerHandler;
+
+	//запрет брать всё (небольшая задержка из-за ожидания ~рендера~ (NOE-загрузчика))
+	_post = {
+		{
+			if isTypeOf(_x,IPaperItemBase) then {continue};
+			if isTypeOf(_x,ItemWritter) then {continue};
+			if isTypeOf(_x,IChairAsItem) then {continue};
+			if isTypeOf(_x,Candle) then {continue};
+			if isTypeOf(callFunc(_x,getObjectPlace),SmallWoodenTable) then {continue};
+			
+			sp_blacklistClickItems pushBack _x;
+		} foreach (callFuncParams(call sp_getActor,getNearItems,20));
+	}; invokeAfterDelay(_post,1);
+
+	//выключаем надрезы ножом
+	["click_self",{
+        params ["_t"];
+        if (isTypeOf(_t,Knife)) exitWith {
+            _m = pick[
+                "Я не буду себя резать.",
+                "Что я творю?",
+                "Это глупо.",
+                "В этом нет необходимости.",
+                "Зачем мне резать себя?",
+                "Я не хочу это делать."
+            ];
+            callFuncParams(call sp_getActor,mindSay,_m);
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
 
 
 	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
@@ -407,6 +480,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	
 	[false,2] call setBlackScreenGUI;
 	["right+stats+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
+	sp_allowebVerbs pushBack "standupfromchair";
 
 	["cpt4_pos_enterkochevs","cpt4_karim",[
 		["uniform","NomadCloth3"],
@@ -420,23 +494,42 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	}] call sp_ai_createPersonEx;	
 
 	callFuncParams("RedButton G:NJnbP0kznrs" call sp_getObject,setEnable,false);
-	
+	_hndls = [
+		["main_action",{
+			params ["_t"];
+			if not_equals(_t,"RedButton G:NJnbP0kznrs" call sp_getObject) exitWith {true};
+			false
+		}] call sp_addPlayerHandler,
+		["activate_verb",{
+			params ["_t","_name"];
+			if not_equals(_t,"RedButton G:NJnbP0kznrs" call sp_getObject) exitWith {true};
+			false
+		}] call sp_addPlayerHandler
+	];
+	["cpt4_data_start_lightButtonEnableHandlers",_hndls] call sp_storageSet;
+
 
 	{
 		[cpt4_questName_begin,"Включите свет"] call sp_setTaskMessageEff;
 
 		_bt = "RedButton G:NJnbP0kznrs" call sp_getObject;
-		_rememberTime = tickTime + 20;
+		_rememberTime = tickTime + 15;
 		{
 			getVar(_bt,edIsEnabled)
 			||  (tickTime >= _rememberTime)
 		} call sp_threadWait;
 
 		if (tickTime >= _rememberTime) then {
-			_h = ["Для включения света нажмите $input_act_mainAction"] call sp_setNotification;
-			{getVar(_bt,edIsEnabled)} call sp_threadWait;
-			[false,_h] call sp_setNotificationVisible;
+			if (!getVar(_bt,edIsEnabled)) then {
+				_h = ["Для включения света нажмите $input_act_mainAction по кнопке на стене"] call sp_setNotification;
+				{getVar(_bt,edIsEnabled)} call sp_threadWait;
+				[false,_h] call sp_setNotificationVisible;
+			};
 		};
+
+		{
+			_x call sp_removePlayerHandler;
+		} foreach (["cpt4_data_start_lightButtonEnableHandlers",[]] call sp_storageGet);
 
 		_h1act = ["main_action",{
 			params ["_t"];
@@ -450,16 +543,32 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			false
 		}] call sp_addPlayerHandler;
 
-
+		
 		["vahta",true] call sp_audio_playMusic;
-
-		[cpt4_questName_begin,"Возвращайтесь к своим рабочим обязанностям"] call sp_setTaskMessageEff;
-		["Сядьте на стул, нажав $input_act_mainAction"] call sp_setNotification;
+		1 call sp_threadPause;
+		
+		[cpt4_questName_begin,"Заполните отчет о посетителях"] call sp_setTaskMessageEff;
+		["Сядьте на стул, нажав $input_act_mainAction по нему"] call sp_setNotification;
+		
 		{
 			equals("cpt4_obj_chairbegin" call sp_getObject,getVar(call sp_getActor,connectedTo))
 		} call sp_threadWait;
+		1 call sp_threadPause;
 
-		["Вы можете писать на бумаге с помощью ручки или любого пишущего предмета. Возьмите один лист бумаги из стопки нажав $input_act_mainAction"] call sp_setNotification;
+		["На столе перед вами лежит коричневая папка. Это список посетителей - людей, которые пытались или прошли в город сегодня. Чтобы посмотреть имена посетителей - нажмите $input_act_mainAction по папке"] call sp_setNotification;
+
+		{
+			nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
+			&& {equals(nd_sourceRef,getVar("cpt4_obj_visitorlistpaper" call sp_getObject,pointer))}
+		} call sp_threadWait;
+
+		["Прочтите список посетителей и посчитайте, сколько из них было пропущено в город. Нажмите ""Закрыть"" как будете готовы."] call sp_setNotification;
+		{
+			!nd_isOpenDisplay
+		} call sp_threadWait;
+		1 call sp_threadPause;
+
+		["Вы можете писать на бумаге с помощью ручки или любого пишущего предмета. Возьмите один лист бумаги из стопки нажав по ней $input_act_mainAction"] call sp_setNotification;
 
 		{
 			callFuncParams(call sp_getActor,hasItem,"Paper")
@@ -473,7 +582,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			&& nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
 		} call sp_threadWait;
 
-		["Вы сейчас читаете пустой лист. Чтобы начать писать на нём нажмите на текст ""Записать"" - так вы перейдете в режим редактирования. Напишите, что за эту смену в город пришло 5 человек."] call sp_setNotification;
+		["Сейчас вы в режиме чтения листа. Чтобы начать писать на нём нажмите на текст в верхней части листа ""Записать"" - так вы перейдете в режим редактирования. Напишите, сколько человек прошло в город за эту смену (числом или словом)."] call sp_setNotification;
 
 		{
 			_papers = callFuncParams(call sp_getActor,getNearObjects,"Paper" arg 3 arg false arg true);
@@ -572,8 +681,17 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		1 call sp_threadPause;
 		(["chap4\gg\vaht1_gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		0.5 call sp_threadPause;
-		
-		[cpt4_questName_kochevs,"В город постоянно приходят новые люди. Опрашивайте, досматривайте и запускайте их внутрь."] call sp_setTaskMessageEff;
+
+		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
+			private _h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+			{
+				isNullReference(getVar(call sp_getActor,connectedTo))
+			} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+			1 call sp_threadPause;
+		};
+
+		[cpt4_questName_kochevs,"К городу подходит человек. Встречайте его и решите, достоин ли он пройти внутрь"] call sp_setTaskMessageEff;
 
 		callFuncParams("cpt4_obj_doorbegin" call sp_getObject,setDoorLock,false arg false);
 
@@ -683,7 +801,15 @@ cpt4_data_refLastTakenDoc = nullPtr;
 			not_equals(_origContent,getVar(cpt4_data_refLastTakenDoc,content))
 		} call sp_threadWait;
 
-		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory и перетащите на него пропуск в вашей руке. Либо нажмите ПКМ и выберите ""Передать пропуск"""] call sp_setNotification;
+		_handlerWid = [{
+            _wid = widgetNull;
+            {
+                if equals(ctrltext _x,"Левая рука") exitWith {_wid = _x};
+            } foreach interactMenu_selectionWidgets;
+            _wid
+        }] call sp_createWidgetHighlight;
+
+		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory, выберите в области взаимодействия руку, в которую будем отдавать предметы и перетащите на него пропуск из вашей руки. Либо просто нажмите ПКМ и выберите ""Передать пропуск"""] call sp_setNotification;
 
 		_karim = "cpt4_karim" call sp_ai_getMobObject;
 		_pap = nullPtr;
@@ -728,6 +854,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		}; invokeAfterDelay(_emotepost,0.7);
 
 		array_remove(sp_allowebVerbs,"transitem");
+		refset(_handlerWid,true);
 		1.8 call sp_threadPause;
 		
 		{
