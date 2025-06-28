@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9520;
+		nextID=9521;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={4203.0273,14.379058,3847.0012};
-		dir[]={0.7743814,-0.60136807,0.19680402};
-		up[]={0.58285356,0.79895765,0.1481283};
-		aside[]={0.2463191,2.5611371e-09,-0.96920836};
+		pos[]={4132.5957,24.393036,3862.9282};
+		dir[]={-0.72614241,-0.68152052,-0.091049738};
+		up[]={-0.67623121,0.731794,-0.084791631};
+		aside[]={-0.12441772,-1.4048419e-07,0.99225253};
 	};
 };
 binarizationWanted=0;
@@ -718,7 +718,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5648;
+		items=5649;
 		class Item0
 		{
 			dataType="Group";
@@ -100950,6 +100950,23 @@ class Mission
 			};
 			id=9519;
 			type="Land_File1_F";
+		};
+		class Item5648
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4127.0205,21.399256,3862.4221};
+				angles[]={6.2762542,0,6.2775226};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""cpt4_trg_nearbumcar""],[""triggerdistance"",3]]],[""class"",""Struct_SPTrigger""]]}";
+			};
+			id=9520;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=0.33747482;
 		};
 	};
 };

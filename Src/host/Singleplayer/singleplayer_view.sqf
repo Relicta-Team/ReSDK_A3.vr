@@ -331,7 +331,10 @@ sp_view_setPlayerHudVisible = {
 
 	[("stam" in _modesList)] call stamina_setVisible;
 	
-	{_x ctrlShow ("stats" in _modesList)} foreach hud_widgets; //statuses
+	{
+		if isNullReference(_x) then {continue};
+		_x ctrlShow ("stats" in _modesList);
+	} foreach hud_widgets; //statuses
 };
 
 //установить видимость головы игрока

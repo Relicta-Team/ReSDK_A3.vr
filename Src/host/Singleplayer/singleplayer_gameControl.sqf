@@ -283,6 +283,9 @@ sp_defaultAllowedVerbs = ["description","mainact","pickup"]; //readonly
 
 sp_canRemoveCloth = false;
 
+sp_canResist = true;
+sp_canExamine = true;
+
 sp_defaultHandlers = createHashMapFromArray [
 	["resist",true],
 	["examine",true],
@@ -366,8 +369,10 @@ sp_initializeDefaultPlayerHandlers = {
 
 	["chat_show_history",{false}] call sp_addPlayerHandler;
 
+	sp_canResist = true;
 	["resist",{!sp_canResist}] call sp_addPlayerHandler;
 
+	sp_canExamine = true;
 	["examine",{!sp_canExamine}] call sp_addPlayerHandler;
 
 	["main_action",{
@@ -475,6 +480,9 @@ sp_initializeDefaultPlayerHandlers = {
 			if (_t call sp_delegateCanClickItem) exitWith {false};
 			call __printErr;
 			true
+		};
+		if (_name == "standupfromchair") exitWith {
+			!sp_canResist
 		};
 		false
 	}] call sp_addPlayerHandler;

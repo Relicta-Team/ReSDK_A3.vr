@@ -35,6 +35,8 @@ cpt4_data_karimFace = "face05_baf";
 
 cpt4_playerUniform = "WatchmanCloth";
 
+cpt4_data_hudStatesDefault = "right+stats+cursor+inv+stam";
+
 cpt4_addProcessorMainAct = {
 	params ["_tobjName","_code"];
 	["main_action",compile format['
@@ -479,7 +481,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	},"replace"] call oop_injectToMethod;
 	
 	[false,2] call setBlackScreenGUI;
-	["right+stats+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
+	[cpt4_data_hudStatesDefault] call sp_view_setPlayerHudVisible;
 	sp_allowebVerbs pushBack "standupfromchair";
 
 	["cpt4_pos_enterkochevs","cpt4_karim",[
@@ -1098,7 +1100,9 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				callFuncParams(cpt4_gref_doorwindow call sp_getObject,setDoorOpen,false arg true);
 			}; invokeAfterDelay(_postclose,1.5);
 
-			[_ibam,_it,INV_HAND_L] call sp_ai_moveItemToMob;
+			if (callFuncParams("cpt4_ibam" call sp_ai_getMobObject,getDistanceTo,_it arg true) <= 2.5) then {
+				[_ibam,_it,INV_HAND_L] call sp_ai_moveItemToMob;
+			};
 
 			//speak ibam
 			([
@@ -1113,7 +1117,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 			_ibam = "cpt4_ibam" call sp_ai_getMobObject;
 			_ibamPos = getposatl getVar(_ibam,owner);
 			_tpaper = nullPtr;
-
+			_takenPapers = [];
 			while {true} do {
 				if isNullReference(cpt4_data_refLastTakenDoc) then {
 					0.5 call sp_threadPause;
@@ -1121,7 +1125,10 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				};
 				_tpaper = cpt4_data_refLastTakenDoc;
 				_nearPapers = callFuncParams(_ibam,getNearObjects,"Paper" arg 2 arg false arg true);
-				if !array_exists(_nearPapers,_tpaper) then {
+				if (
+					!array_exists(_nearPapers,_tpaper)
+					|| {array_exists(_takenPapers,_tpaper)}
+				) then {
 					0.5 call sp_threadPause;
 					continue;
 				};
@@ -1132,6 +1139,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 				1.2 call sp_threadPause;
 				[_ibam,_tpaper,INV_HAND_R] call sp_ai_moveItemToMob;
+				_takenPapers pushBackUnique _tpaper;
 				1 call sp_threadPause;
 
 				{
@@ -1432,7 +1440,8 @@ cpt4_trg_gotomed_act = false;
 		2 call sp_threadPause;
 
 		[true] call sp_setHideTaskMessageCtg;
-		[""] call sp_view_setPlayerHudVisible; //!todo fix error
+		[false] call sp_setNotificationVisible;
+		[""] call sp_view_setPlayerHudVisible;
 		[true,1.5] call setBlackScreenGUI;
 
 		2 call sp_threadPause;
@@ -1551,9 +1560,31 @@ cpt4_pos_bar_aloguys - 3 sits
 
 */
 
+cpt4_data_playerHandlerNamesOnCutscene = ["item_action","main_action","open_inventory"];
+cpt4_func_setLockPlayerInteract = {
+	params ["_lock"];
+	{
+		[_x,_lock] call sp_setLockPlayerHandler;
+	} foreach cpt4_data_playerHandlerNamesOnCutscene;
+};
+
+
 ["cpt4_bar_begin",{
 	["cpt4_pos_p2player",0] call sp_setPlayerPos;
 	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+
+	_post = {
+		{
+			if isTypeOf(_x,IPaperItemBase) then {continue};
+			
+			
+			
+			sp_blacklistClickItems pushBack _x;
+		} foreach (callFuncParams(call sp_getActor,getNearItems,100) - [
+			"cpt4_obj_barbottle" call sp_getObject,
+			"cpt4_obj_barcup" call sp_getObject
+		]);
+	}; invokeAfterDelay(_post,1);
 
 	//prep mobs
 	["cpt4_pos_barlekar","cpt4_barlekar",[
@@ -1763,6 +1794,16 @@ cpt4_trg_barstartmusic_act = false;
 	cpt4_trg_barstartmusic = true;
 	["city",true] call sp_audio_playMusic;
 }] call sp_addTriggerEnter;
+
+["cpt4_trg_nearbumcar",{
+	if (!isNulLReference("cpt4_obj_bomzcar" call sp_getObject)) then {
+		{
+			_h = ["Дорогу к вашему дому перекрывает бомжевозка. Отдохните в баре - скоро путь свободится."] call sp_setNotification;
+			7.5 call sp_threadPause;
+			[false,_h] call sp_setNotificationVisible;
+		} call sp_threadStart;
+	};
+}] call sp_addScene;
 
 ["cpt4_trg_barstartanims",{	
 	//looped state of ohrwalk
@@ -2098,6 +2139,8 @@ cpt4_func_alcoDrinkProcess_forthread = {
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
 
+		sp_canResist = false;
+
 		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0,0],"once"]] call sp_threadStart;
 
 		1.2 call sp_threadPause;
@@ -2119,9 +2162,12 @@ cpt4_func_alcoDrinkProcess_forthread = {
 			["cpt4_karim","chap4\npc_bar\karim_7",["endoffset",0.1]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
+		sp_canResist = true;
+		_h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
 		{
 			not_equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
+		[false,_h] call sp_setNotificationVisible;
 
 		([
 			["cpt4_karim","chap4\npc_bar\karim_8"]
@@ -2152,6 +2198,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barchair_forplayer" call sp_getObject);
 		} call sp_threadWait;
 
+		//disable standup
+		sp_canResist = false;
 
 		//! BAR ENTER EVENT
 		{
@@ -2195,28 +2243,42 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		["Чтобы разделить звяки, нажмите $input_act_mainAction по ним пустой рукой. Разделите 3 звяка и выложите на барную стойку"] call sp_setNotification;
 
 		_barnik = "cpt4_bar_barnik" call sp_ai_getMobObject;
-		private _money = nullPtr;
+		private _moneyList = [];
 		{
-			private _found = false;
+			private _amount = 0;
 			{
-				_found = getVar(_x,stackCount) == 3;
-				if (_found)exitWith{_money = _x};
+				if (_amount + getVar(_x,stackCount) <= 3) then {
+					_moneyList pushBack _x;
+					_amount = _amount + getVar(_x,stackCount);
+				};
 			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 2 arg false arg true);
-			_found
+			
+			if (_amount != 3) then {
+				_moneyList resize 0;
+			};
+
+			_amount == 3
 		} call sp_threadWait;
 
 		[false] call sp_setNotificationVisible;
 
-		if !isNullReference(_money) then {
+		if (count _moneyList > 0) then {
 			1.2 call sp_threadPause;
 			
-			[_barnik,_money,INV_HAND_R] call sp_ai_moveItemToMob;
+			{
+				[_barnik,_x,INV_HAND_R] call sp_ai_moveItemToMob;
+				0.3 call sp_threadPause;
+				{
+					[_x] call deleteGameObject;
+				} call sp_threadCriticalSection;
+			} foreach _moneyList;
 			["cpt4_bar_barnik" call sp_ai_getMobBody,objNull] call sp_ai_setLookAtControl;
 			
 			//talk
 			1 call sp_threadPause;
 			{
-				[_money] call deleteGameObject;
+				//[_money] call deleteGameObject;
+				[true] call cpt4_func_setLockPlayerInteract;
 				
 				[
 					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",["endoffset",0.1]]
@@ -2256,13 +2318,13 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 ["cpt4_act_drinklearn",{
 	[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
 	["cpt4_data_drinkcount",0] call sp_storageSet;
+	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	{
-		while {true} do {
+		while {!(["cpt4_data_drinksuccess",false] call sp_storageGet)} do {
 			pp_alc_amount = ["cpt4_data_drinkcount",0] call sp_storageGet;
 			0.1 call sp_threadPause;
 		};
 	} call sp_threadStart;
-	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	["click_self",{
 		params ["_targ"];
 		if callFunc(_targ,isReagentContainer) then {
@@ -2296,6 +2358,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",["endoffset",0.1]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
+		[false] call cpt4_func_setLockPlayerInteract;
+
 		["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik2",{
 			//onend
 			params ["_body"];
@@ -2318,6 +2382,18 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			["cpt4_data_drinksuccess"] call sp_storageGet
 		} call sp_threadWait;
 		[false,_h] call sp_setNotificationVisible;
+
+		//restore standup from chairs
+		sp_canResist = true;
+
+		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
+			1 call sp_threadPause;
+			_h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+			{
+				isNullReference(getVar(call sp_getActor,connectedTo))
+			} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+		};
 
 		["cpt4_act_gotohome"] call sp_startScene;
 	} call sp_threadStart;
@@ -2389,7 +2465,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		_thandle = {
 			while {pp_alc_amount > 0} do {
 				pp_alc_amount = (pp_alc_amount - 1) max 0;
-				2 call sp_threadPause;
+				1 call sp_threadPause;
 			};
 		} call sp_threadStart;
 		["cpt4_data_threaddecreasealctox",_thandle] call sp_storageSet;
