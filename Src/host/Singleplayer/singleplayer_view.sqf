@@ -430,11 +430,50 @@ sp_gui_syncInventoryVisible = {
 	if (isNullReference(_d)) exitWith {};
 	sp_gui_inventoryVisibleHandlers params ["_left","_up","_right"];
 
+	//left handler
+	{
+		if isNullReference(_x) then {continue};
+		if ([_x getvariable "act",_x] call _left) then {
+			if !isNull(_x getvariable "__basefade_spgui") then {
+				_x setFade (_x getvariable "__basefade_spgui");
+				_x commit 0;
+				_x setvariable ["__basefade_spgui",nil];
+			};
+			_x ctrlEnable true;
+		} else {
+			if isNull(_x getvariable "__basefade_spgui") then {
+				_x setvariable ["__basefade_spgui",ctrlFade _x];
+			};
+			_x setFade sp_gui_internal_const_baseFadeInvVis;
+			_x commit 0;
+			_x ctrlEnable false;
+		};
+	} foreach interactEmote_act_widgets;
+	private _w = _d getvariable ["ieMenuCtg",widgetNull] getvariable ["buttonSend",widgetNull];
+	if !isNullReference(_w) then {
+		if (["buttonSendEmote",_w] call _left) then {
+			if !isNull(_w getvariable "__basefade_spgui") then {
+				_w setFade (_w getvariable "__basefade_spgui");
+				_w commit 0;
+				_w setvariable ["__basefade_spgui",nil];
+			};
+			_w ctrlEnable true;
+		} else {
+			if isNull(_w getvariable "__basefade_spgui") then {
+				_w setvariable ["__basefade_spgui",ctrlFade _w];
+			};
+			_w setFade sp_gui_internal_const_baseFadeInvVis;
+			_w commit 0;
+			_w ctrlEnable false;
+		};
+	};
+
 	//up handler
+	
 	
 	//right handler
 	{
-		if isNullReference(_x) then {warning("interactMenu_selectionWidgets is null value");};
+		if isNullReference(_x) then {continue};
 		if ([ctrltext _x,_x] call _right) then {
 			
 			if !isNull(_x getvariable "__basefade_spgui") then {
@@ -455,7 +494,7 @@ sp_gui_syncInventoryVisible = {
 	} foreach interactMenu_selectionWidgets;
 
 	{
-		if isNullReference(_x) then {warning("interactMenu_specActWidgets is null value");};
+		if isNullReference(_x) then {continue};
 		if ([(_x getvariable "actionName"),_x] call _right) then {
 			if !isNull(_x getvariable "__basefade_spgui") then {
 				_x setFade (_x getvariable "__basefade_spgui");

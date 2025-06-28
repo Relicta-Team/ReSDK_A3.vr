@@ -185,6 +185,8 @@ cpt2_act_enableTorchHadnler = {
     }] call sp_addPlayerHandler;
 };
 
+cpt2_data_canUseSelections = false;
+
 //wait for gate open
 ["cpt2_begin",{
     call sp_initializeDefaultPlayerHandlers;
@@ -231,6 +233,16 @@ cpt2_act_enableTorchHadnler = {
         };
         false
     }] call sp_addPlayerHandler;
+
+
+    [{
+        params ["_t","_wid"];
+        false
+    },null,{
+		params ["_t","_wid"];
+        if (!cpt2_data_canUseSelections) exitWith {false};
+        array_exists(interactMenu_selectionWidgets,_wid)
+	}] call sp_gui_setInventoryVisibleHandler;
 
     //add non-ready dish pickup handler
     sp_delegateCanClickItem = cpt2_fnc_canPickupItem;
@@ -430,6 +442,11 @@ cpt2_act_enableTorchHadnler = {
             any_of(_nitms apply {callFunc(_x,getClassName) == "Pancakes" || callFunc(_x,getClassName) == "Bun"})
         } call sp_threadWait;
         _h call sp_removePlayerHandler;
+
+        {    
+            cpt2_data_canUseSelections = true;
+            call sp_gui_syncInventoryVisible; //for activate selection group on opened inventory
+        } call sp_threadCriticalSection;
 
         ["Заберите приготовленное со сковороды. "+
         "Чтобы съесть какую-либо еду откройте инвентарь, выберите область взаимодействия ""Рот"" и затем нажмите по зоне ""Моя персона"" над слотами инвентаря. "+

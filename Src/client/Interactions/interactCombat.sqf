@@ -394,4 +394,7 @@ interactCombat_syncView_onSBH = {
 	cd_curSelection = _tz;
 	call interactMenu_syncCurSelection;
 	
+	#ifdef SP_MODE
+	call sp_gui_syncInventoryVisible;
+	#endif
 }; rpcAdd("onSBH",interactCombat_syncView_onSBH);
