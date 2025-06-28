@@ -77,7 +77,7 @@ cpt4_internal_func_checkMainAction = {
 };
 
 cpt4_func_genDescDocs = {
-	params [["_name",""],["_role","временное пребывание"],["_note","отсутствует"]];
+	params [["_name",""],["_role","временное пребывание"],["_note","нет"]];
 	
 	if equalTypes(_name,GENDER_MALE) then {
 		_name = [_name,true] call naming_getRandomName;
@@ -90,7 +90,7 @@ cpt4_func_genDescDocs = {
 		"Бумага пребывания"+_nh+sbr+sbr+
 		"Имя: %1"+sbr+
 		"Возраст: " + ([randInt(19,50),["цикл","цикла","циклов"],true] call toNumeralString) + sbr+
-		"Полжение\работа: %2"+sbr+
+		"Положение\работа: %2"+sbr+
 		"Примечания: %3",
 		_name,_role,_note
 	];
@@ -362,6 +362,19 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	call sp_initializeDefaultPlayerHandlers;
 
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
+
+	[{
+        params ["_t","_wid"];
+		false
+    },{
+		params ["_t","_wid"];
+		false
+	},{
+		params ["_t","_wid"];
+        if array_exists(interactMenu_selectionWidgets,_wid) exitWith {true};
+		//if ("Глаза" == _t) exitWith {true};
+		false
+	}] call sp_gui_setInventoryVisibleHandler;
 
 	//отдавать кариму можно только когда есть transitem в sp_allowebVerbs
 	["interact_with",{
