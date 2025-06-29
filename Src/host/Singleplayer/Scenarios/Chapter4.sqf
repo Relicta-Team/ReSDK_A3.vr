@@ -1796,9 +1796,9 @@ cpt4_trg_barstartmusic_act = false;
 }] call sp_addTriggerEnter;
 
 ["cpt4_trg_nearbumcar",{
-	if (!isNulLReference("cpt4_obj_bomzcar" call sp_getObject)) then {
+	if (!isNullReference("cpt4_obj_bomzcar" call sp_getObject)) then {
 		{
-			_h = ["Дорогу к вашему дому перекрывает бомжевозка. Отдохните в баре - скоро путь свободится."] call sp_setNotification;
+			_h = ["Дорогу к вашему дому перекрывает бомжевозка. Отдохните в баре - скоро путь освободится."] call sp_setNotification;
 			7.5 call sp_threadPause;
 			[false,_h] call sp_setNotificationVisible;
 		} call sp_threadStart;
@@ -2251,7 +2251,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 					_moneyList pushBack _x;
 					_amount = _amount + getVar(_x,stackCount);
 				};
-			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 2 arg false arg true);
+			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 1.7 arg false arg true);
 			
 			if (_amount != 3) then {
 				_moneyList resize 0;
