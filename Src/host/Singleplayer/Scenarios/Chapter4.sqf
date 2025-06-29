@@ -1573,6 +1573,28 @@ cpt4_func_setLockPlayerInteract = {
 	["cpt4_pos_p2player",0] call sp_setPlayerPos;
 	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 
+	{
+		_texData = [0,"#(rgb,512,512,3)text(1,1,""Caveat"",0.15,""#00000000"",""#2b1b0ddf"",""/\\nлекарня\n< ПХ-17            \nБар ''Тушняк''>\n  Жилая зона>"")"];
+		_ref = getVar("cpt4_obj_signinfoboard" call sp_getObject,pointer);
+		_objReal = objNull;
+		while {isNullReference(_objReal)} do {
+			_obj = noe_client_allPointers getOrDefault [_ref,objNull];
+			if isNullReference(_obj) then {
+				1 call sp_threadPause;
+				continue;
+			};
+			_objReal = "signad_sponsors_f" createVehicleLocal [0,0,0];
+			_objReal setposatl getposatl _obj;
+			_objReal setVectorDirAndUp [vectorDir _obj,vectorUp _obj];
+			_objReal setObjectTexture _texData;
+			break;
+		};
+
+		{
+			[_ref] call deleteGameObject;;
+		} call sp_threadCriticalSection;
+	} call sp_threadStart;
+
 	_post = {
 		{
 			if isTypeOf(_x,IPaperItemBase) then {continue};
