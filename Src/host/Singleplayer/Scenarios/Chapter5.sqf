@@ -13,6 +13,8 @@ cpt5_questName_preend = "Последний рывок";
 
 cpt5_playerUniform = "StreakCloth";
 
+cpt5_data_rifleSkill = 5;
+
 ["cpt5_begin",{
 	if (!sp_debug) then {cpt5_debug_skipStart = false};
 	["cpt5_pos_start",0] call sp_setPlayerPos;
@@ -48,6 +50,17 @@ cpt5_playerUniform = "StreakCloth";
 		} call sp_threadStart;
 	} call sp_setEventDiePlayer;
 	
+	//save rifle skill
+	cpt5_data_rifleSkill = getVar(call sp_getActor,rifle);
+	//update rifle skill
+	setVar(call sp_getActor,rifle,17);
+
+	//open closecombat door
+	callFuncParams("cpt5_obj_doorclosecombat" call sp_getObject,setDoorOpen,true);
+
+	//no attack my firends
+	//todo
+
 	
 	//making mobs
 	for "_i" from 1 to 2 do {
@@ -168,6 +181,8 @@ cpt5_playerUniform = "StreakCloth";
 		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
 		callFunc(_this,switchTwoHands);
 		callFuncParams(_this,setCombatMode,true);
+	},{
+		_this switchMove "amovpknlmstpsraswpstdnon";
 	}] call sp_ai_createPersonEx;
 
 	["cpt5_pos_armytalker1","cpt5_armytalker1",[
@@ -372,7 +387,7 @@ cpt5_playerUniform = "StreakCloth";
 		}] call sp_addPlayerHandler;
 
 		_thandle = {
-			5 call sp_threadPause;
+			10 call sp_threadPause;
 			["Чтобы проснуться нажмите $input_act_inventory и справа выберите ""Сон""."] call sp_setNotification;
 		} call sp_threadStart;
 
@@ -381,11 +396,17 @@ cpt5_playerUniform = "StreakCloth";
 		} call sp_threadWait;
 		_thandle call sp_threadStop;
 		_unsleepHandle call sp_removePlayerHandler;
-		[false] call sp_setNotificationVisible;
+
+		_thandle = {
+			15 call sp_threadPause;
+			["Чтобы встать с кровати нажмите $input_act_resist"] call sp_setNotification;
+		} call sp_threadStart;
 
 		{
 			!callFunc(call sp_getActor,isConnected)
 		} call sp_threadWait;
+		_thandle call sp_threadStop;
+		[false] call sp_setNotificationVisible;
 		
 		["war_under",true] call sp_audio_playMusic;
 
@@ -411,23 +432,31 @@ cpt5_playerUniform = "StreakCloth";
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt5_trg_underguystalk_act = false;
+["cpt5_trg_underguystalk",{
+	if (cpt5_trg_underguystalk_act) exitWith {};
+	cpt5_trg_underguystalk_act = true;
+
+	{
+
+		(1.5+rand(0.3,0.6)) call sp_threadPause;
+		([
+			["cpt5_bedwall_1","chap5\underground\guy2"]
+		] call sp_audio_startDialog);
+	} call sp_threadStart;
+	{
+		rand(0.01,0.2) call sp_threadPause;
+		([
+			["cpt5_bedwall_2","chap5\underground\guy4"]
+		] call sp_audio_startDialog);
+	} call sp_threadStart;
+}] call sp_addTriggerEnter;
+
 //общение лекарей
 cpt5_act_lekartalks = false;
 ["cpt5_trg_lekarstalks",{
 	if (!cpt5_act_lekartalks) then {
 		cpt5_act_lekartalks = true;
-		
-		{
-
-			([
-				["cpt5_bedwall_1","chap5\underground\guy2"]
-			] call sp_audio_startDialog);
-			rand(2,4) call sp_threadPause;
-
-			([
-				["cpt5_bedwall_2","chap5\underground\guy4"]
-			] call sp_audio_startDialog);
-		} call sp_threadStart;
 
 		{
 			([
@@ -455,18 +484,6 @@ cpt5_act_undergroundmover = false;
 		([
 			["cpt5_underground_mover","chap5\underground\guy1",["endoffset",0.1]]
 		] call sp_audio_startDialog);
-
-		["cpt5_underground_mover",[
-			["cpt5_pos_underground_mover","cpt5_undergroundmover",rand(2,5),{
-				params ["_mob"];
-				[_mob,"cpt5_pos_underground_mover",0] call sp_ai_setMobPos;
-				_mob switchMove "acts_millerDisarming_deskCrouch_loop";
-			},[
-				["state_1",{
-					[{tickTime > _this},tickTime + rand(2,5)] call sp_ai_animWait;
-				}]
-			]]
-		]] call sp_ai_playAnimsLooped;
 	};
 }] call sp_addTriggerEnter;
 
@@ -515,6 +532,34 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 			||
 			(animationState ("cpt5_kapitan" call sp_ai_getMobBody)) == "acts_aidlpercmstpslowwpstdnon_warmup_1_loop"
 		} call sp_threadWait;
+
+		{
+			3 call sp_threadPause;
+			{
+				{
+					callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,getDistanceTo,"cpt5_obj_clothwallunder" call sp_getObject arg true) 
+					<= 2.3
+				} call sp_threadWait;
+				callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,meSay,"резко срывает одеяло");
+				{
+					["cpt5_obj_clothwallunder" call sp_getObject] call deleteGameObject;
+					["cpt5_obj_clothwallunder_invwall" call sp_getObject] call deleteGameObject;
+				} call sp_threadCriticalSection;
+				
+			} call sp_threadStart;
+
+			["cpt5_underground_mover",[
+				["cpt5_pos_underground_mover","cpt5_undergroundmover",rand(2,5),{
+					params ["_mob"];
+					[_mob,"cpt5_pos_underground_mover",0] call sp_ai_setMobPos;
+					_mob switchMove "acts_millerDisarming_deskCrouch_loop";
+				},[
+					["state_1",{
+						[{tickTime > _this},tickTime + rand(2,5)] call sp_ai_animWait;
+					}]
+				]]
+			]] call sp_ai_playAnimsLooped;
+		} call sp_threadStart;
 
 		//dialog kapitan
 		([
@@ -702,7 +747,8 @@ cpt5_trg_combat_enterstrelok_act = false;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
-
+//таймер первой перестрелки
+cpt5_data_first_shootingTimeCanReset = 0;
 cpt5_trg_combat_stage1_act = false;
 //приказ подавления
 ["cpt5_trg_combat_stage1",{
@@ -713,6 +759,24 @@ cpt5_trg_combat_stage1_act = false;
 	["two_hands",false] call sp_setLockPlayerHandler;
 
 	["cpt5_data_izt_runaway_count",0] call sp_storageSet;
+	["cpt5_data_shootCount",0] call sp_storageSet;
+	cpt5_data_first_shootingTimeCanReset = tickTime + (60 * 2);
+	["click_target",{
+		params ["_t"];
+		_it = callFunc(call sp_getActor,getItemInActiveHandRedirect);
+		if !isNullReference(_it) then {
+			if (
+				isTypeOf(_it,RifleSVT)
+				&& {getVar(call sp_getActor,isCombatModeEnable)}
+				&& {callFunc(_it,isCocked)}
+			) then {
+
+				["cpt5_data_shootCount",{_this + 1}] call sp_storageUpdate;
+			};
+		};
+		
+		false
+	}] call sp_addPlayerHandler;
 
 	//thread attackers for suppressing
 	for "_i" from 1 to 2 do {
@@ -765,17 +829,38 @@ cpt5_trg_combat_stage1_act = false;
 			_iztref = "cpt5_izt1_cov"+(str _i);
 			_iztpos = "cpt5_pos_izt1_cov"+(str _i);
 			_iztbody = _iztref call sp_ai_getMobBody;
+			_iztbody setvariable ["secondMobPos","cpt5_pos_izt1_cov2_" + (str _i)];
 			_iztmob = _iztref call sp_ai_getMobObject;
-			while {true} do {
+			_canUpdate = true;
+			while {_canUpdate} do {
 				{
-					if (getVar(_iztmob,penaltySupressFire) > 0) exitWith {
+					if (
+						((getVar(_iztmob,penaltySupressFire) > 0)
+						|| (["cpt5_data_shootCount",0] call sp_storageGet) >= 15)
+					) exitWith {
+						_canUpdate = false;
 						setVar(_iztmob,penaltySupressFire,0);
-						["cpt5_data_izt_runaway_count",{_this + 1}] call sp_storageUpdate;
-						//stop anim and play another
-						_refizt = _iztbody getvariable "anim_handler";
-						refset(_refizt,true);
 
-						[_iztref,_iztpos,_iztbody getvariable "runawayanim"] call sp_ai_playAnim;
+						_post = {
+							params ["_iztref","_iztpos","_iztbody"];
+
+							["cpt5_data_izt_runaway_count",{_this + 1}] call sp_storageUpdate;
+
+							//stop anim and play another
+							_refizt = _iztbody getvariable "anim_handler";
+							refset(_refizt,true);
+
+							[_iztref,_iztpos,_iztbody getvariable "runawayanim",{
+								params ["_body"];
+								[_body,_body getvariable "secondMobPos",0] call sp_ai_setMobPos;
+							}] call sp_ai_playAnim;
+						};
+						_args = [_iztref,_iztpos,_iztbody];
+
+						_leftTime = (cpt5_data_first_shootingTimeCanReset - tickTime) max 0;
+						invokeAfterDelayParams(_post,_leftTime,_args);
+
+						break;
 					};
 				} call sp_threadCriticalSection;
 				0.1 call sp_threadPause;
@@ -892,6 +977,10 @@ cpt5_trg_enterwarzone_entered = false;
 			[callFunc("cpt5_trgobj_event_grenade1" call sp_getObject,getPos)] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
 		["war_v2",true] call sp_audio_playMusic;
+		1.3 call sp_threadPause;
+		{
+			[callFunc("cpt5_trgobj_event_grenade2" call sp_getObject,getPos)] call cpt5_explosionGrenade;
+		} call sp_threadCriticalSection;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
@@ -943,7 +1032,10 @@ cpt5_warzone_danger = true;
 		["cpt5_kapitan","cpt5_pos_capitan4",0] call sp_ai_setMobPos;
 		//dialog
 		([
-			["cpt5_kapitan","chap5\warzone\kap1",[["endoffset",0.8],["distance",80]]],
+			[
+				"cpt5_kapitan"
+				//!throws error callFunc("cpt5_pos_capitan3" call sp_getObject,getPos) vectorAdd [0,0,2]
+			,"chap5\warzone\kap1",[["endoffset",0.8],["distance",80]]],
 			["cpt5_defstrelok","chap5\warzone\strelok2",["endoffset",0.4]],
 			[player,"chap5\warzone\gg1",["endoffset",0.1]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
@@ -985,6 +1077,7 @@ cpt5_trg_savewoundedstart_act = false;
 			};
 		} call sp_threadStart;
 
+		[cpt5_questName_rangedCombat,"Дотащите раненого до ваших позиций"] call sp_setTaskMessageEff;
 		_h = ["Чтобы тащить человека выберите режим ""Схватить"" в правом меню и нажмите $input_act_extraAction по раненому человеку."] call sp_setNotification;
 		
 		["extra_action",false] call sp_setLockPlayerHandler;
@@ -993,7 +1086,6 @@ cpt5_trg_savewoundedstart_act = false;
 		{callFunc(_mob,isGrabbed)} call sp_threadWait;
 		[false,_h] call sp_setNotificationVisible;
 
-		[cpt5_questName_rangedCombat,"Дотащите раненого до ваших позиций"] call sp_setTaskMessageEff;
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -1007,6 +1099,28 @@ cpt5_trg_woundedmansave_act = false;
 	if ((callFuncParams(_kapobjpos,getDistanceTo,_mob arg true)) <= 3.5) then {
 		cpt5_trg_woundedmansave_act = true;
 		[true] call sp_setHideTaskMessageCtg;
+		{
+			_mob = "cpt5_woundedman" call sp_ai_getMobObject;
+			_h = ["Чтобы отпустить раненого нажмите $input_act_dropitem"] call sp_setNotification;
+			{!callFunc(_mob,isGrabbed)} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+		} call sp_threadStart;
+
+		{
+			1.5 call sp_threadPause;
+			_pos = callFunc("cpt5_trgobj_event_grenade_stage2" call sp_getObject,getPos);
+			for "_i" from 1 to 4 do {
+				{
+					[_pos vectorAdd [rand(-2,2),rand(-2,2),rand(0,2)]] call cpt5_explosionGrenade;
+				} call sp_threadCriticalSection;
+				rand(0.1,0.7) call sp_threadPause;
+			};
+			{
+				for "_i" from 1 to 2 do {
+					[("cpt5_obj_wireonstage2_"+(str _i)) call sp_getObject] call deleteGameObject;
+				};
+			} call sp_threadCriticalSection;
+		} call sp_threadStart;
 
 		//dialog
 		{
@@ -1046,6 +1160,8 @@ cpt5_act_shotingStarted = false;
 					if ((({
 						!callFuncParams(this,hasPart,_x)
 					} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
+						if (getVar(this,isDead)) exitWith {};
+
 						_body = getVar(this,owner);
 						["cpt5_data_deadizt",{_this + 1},0] call sp_storageUpdate;
 						refset(_body getvariable "anim_handler",true);
@@ -1072,6 +1188,8 @@ cpt5_act_shotingStarted = false;
 		2 call sp_threadPause;
 
 		[cpt5_questName_rangedCombat,"Продвигайтесь на вражескую позицию"] call sp_setTaskMessageEff;
+		//reset strelok attack handler
+		refset(("cpt5_defstrelok" call sp_ai_getMobBody) getvariable "anim_handler",true);
 		["war_peacefull",true] call sp_audio_playMusic;
 
 	} call sp_threadStart;
@@ -1095,6 +1213,8 @@ cpt5_trg_dialog_onseegate = false;
 				if ((({
 					!callFuncParams(this,hasPart,_x)
 				} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
+					if (getVar(this,isDead)) exitWith {};
+
 					_body = getVar(this,owner);
 					refset(_body getvariable "anim_handler",true);
 					_body switchMove (pick ["Acts_StaticDeath_04","Acts_StaticDeath_05","Acts_StaticDeath_06","Acts_StaticDeath_10","Acts_StaticDeath_13"]);
@@ -1107,6 +1227,12 @@ cpt5_trg_dialog_onseegate = false;
 							[!true,true] call sp_audio_setMusicPause;
 						};
 						invokeAfterDelay(_post,5);
+					};
+					if ((["cpt5_data_deadiztdefcount",0] call sp_storageGet) == 1) then {
+
+						_oldPos = callFunc("cpt5_trgobj_iztdefkilldanger" call sp_getObject,getPos);
+						MODARR(_oldPos,1, + 5);
+						callFuncParams("cpt5_trgobj_iztdefkilldanger" call sp_getObject,setPos__,_oldPos);
 					};
 				};
 			}; invokeAfterDelayParams(_nfHndl,0.1,[this]);
@@ -1158,28 +1284,40 @@ cpt5_trg_dialog_onseegate = false;
 				]]
 			]] call sp_ai_playAnimsLooped
 		];
-		[{
-			params ["_i"];
-			_iztref = "cpt5_izt1_cov"+(str _i);
-			_iztpos = "cpt5_pos_izt1_cov2_"+(str _i);
-			_iztbody = _iztref call sp_ai_getMobBody;
-			_iztmob = _iztref call sp_ai_getMobObject;
-			while {true} do {
-				if (getVar(_iztmob,penaltySupressFire) > 1) exitWith {
-					{
-						["cpt5_data_izt_runaway_count",{_this + 1}] call sp_storageUpdate;
-						//stop anim and play another
-						_refizt = _iztbody getvariable "anim_handler";
-						refset(_refizt,true);
 
-						[_iztref,_iztpos,_iztbody getvariable "runawayanim"] call sp_ai_playAnim;
-					} call sp_threadCriticalSection;
-				};
-				0.1 call sp_threadPause;
+		//если они по какой то причине потеряли оружие - выдаем новое
+		_iztmob = "cpt5_izt1_cov"+(str _i) call sp_ai_getMobObject;
+		if (!callFuncParams(_iztmob,hasItem,"RifleFinisher")) then {
+			["RifleFinisher",_iztmob,INV_HAND_R] call createItemInInventory;
+			callFuncParams(_iztmob,switchTwoHands);
+			callFuncParams(_iztmob,setCombatMode,true);
+			[_iztbody] call anim_syncAnim;
+		};
+
+		//! не уверен что это актуально
+		// [{
+		// 	params ["_i"];
+		// 	_iztref = "cpt5_izt1_cov"+(str _i);
+		// 	_iztpos = "cpt5_pos_izt1_cov2_"+(str _i);
+		// 	_iztbody = _iztref call sp_ai_getMobBody;
+		// 	_iztmob = _iztref call sp_ai_getMobObject;
+		// 	while {true} do {
+		// 		if (getVar(_iztmob,penaltySupressFire) > 1) exitWith {
+		// 			{
+		// 				["cpt5_data_izt_runaway_count",{_this + 1}] call sp_storageUpdate;
+		// 				//stop anim and play another
+		// 				_refizt = _iztbody getvariable "anim_handler";
+		// 				refset(_refizt,true);
+
+		// 				[_iztref,_iztpos,_iztbody getvariable "runawayanim"] call sp_ai_playAnim;
+		// 				break;
+		// 			} call sp_threadCriticalSection;
+		// 		};
+		// 		0.1 call sp_threadPause;
 				
 
-			};
-		},_i] call sp_threadStart;
+		// 	};
+		// },_i] call sp_threadStart;
 	};
 
 	{
@@ -1206,9 +1344,11 @@ cpt5_trg_iztdefkilldanger_process = true;
 		} call sp_threadWait;
 
 		_h = ["Чтобы отодвинуть ящик схватите его. Вы можете сделать это через ПКМ меню, либо выбрав режим ""Схватить"" в правом меню и нажав $input_act_extraAction. Отодвиньте ящик, чтобы освободить проход"] call sp_setNotification; 
-
+		_oldPos = callFunc("cpt5_obj_boxwall" call sp_getObject,getPos);
 		{
 			callFuncParams("cpt5_trgobj_boxposrequired" call sp_getObject,getDistanceTo,"cpt5_obj_boxwall" call sp_getObject arg true) <= 1
+			||
+			(callFunc("cpt5_obj_boxwall" call sp_getObject,getPos) distance2d _oldPos) > 1
 		} call sp_threadWait;
 
 		[false,_h] call sp_setNotificationVisible;
@@ -1216,10 +1356,21 @@ cpt5_trg_iztdefkilldanger_process = true;
 	} call sp_threadStart;
 }] call sp_addScene;
 
+cpt5_trg_closecombat_enterhouse_act = false;
+["cpt5_trg_closecombat_enterhouse",{
+	if (cpt5_trg_closecombat_enterhouse_act) exitWith {};
+	cpt5_trg_closecombat_enterhouse_act = true;
+
+	[false] call sp_setNotificationVisible;
+	//todo клин огнестрела при попытке застрелить ближника
+}] call sp_addTriggerEnter;
+
 cpt5_act_closecombat_started = false;
 ["cpt5_trg_ccomb_activate",{
 	if (cpt5_act_closecombat_started) exitWith {};
 	cpt5_act_closecombat_started = true;
+
+	callFuncParams("cpt5_obj_doorclosecombat" call sp_getObject,setDoorOpen,false);
 	
 	["closecombat",true] call sp_audio_playMusic;
 	sp_playerCanMove = false;
@@ -1241,11 +1392,21 @@ cpt5_act_closecombat_started = false;
 	]] call sp_ai_playAnim;
 }] call sp_addTriggerEnter;
 
+cpt5_data_closecombat_izt_dx = 30;
+
 ["cpt5_act_ccomb_loop",{
 	[cpt5_questName_preend,"Убейте истязателя"] call sp_setTaskMessageEff;
 	["damage",{
-		objParams_1(_am);
+		objParams_1(_am);		
 		if equals(getVar(this,name),"Дико") exitWith {
+			if ((({
+			!callFuncParams(this,hasPart,_x)
+			} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
+				if (getVar(this,isDead)) exitWith {};
+
+				refset(("cpt5_izcombat" call sp_ai_getMobBody)	getvariable "anim_handler",true);
+				setVar(this,isDead,true);
+			};
 			sp_wsim_invokeNextAction = true;
 		};
 	}] call sp_addWsimHandler;
@@ -1258,24 +1419,25 @@ cpt5_act_closecombat_started = false;
 	("cpt5_izcombat" call sp_ai_getMobBody) setvariable ["anim_handler",_refizt];
 	_mob = "cpt5_izcombat" call sp_ai_getMobObject;
 	setVar(_mob,curDefType,DEF_TYPE_PARRY);
-	setVar(_mob,DX,vec2(30,0));
+	setVar(_mob,DX,vec2(cpt5_data_closecombat_izt_dx,0));
 	
 	_thdcombat = {
 		_mob = "cpt5_izcombat" call sp_ai_getMobObject;
+		_defmodeList = [DEF_TYPE_PARRY,DEF_TYPE_DODGE];
 		while {true} do {
-
-			if (callFuncParams(_mob,getDistanceTo,call sp_getActor arg true) <= 1.5) then {
+			setVar(_mob,curDefType,pick _defmodeList);
+			if (callFuncParams(_mob,getDistanceTo,call sp_getActor arg true) <= 1.8) then {
 				
 				{callFuncParams(_mob,attackOtherMob,call sp_getActor)} call sp_threadCriticalSection;
-				2 call sp_threadPause;
+				rand(2,2.3) call sp_threadPause;
 			} else {
-				if prob_new(60) then {
+				if prob_new(40) then {
 					callFuncParams(_mob,playEmoteSound,"laugh");
 					setVar(_mob,DX,vec2(9,0));
-					2 call sp_threadPause;
-					setVar(_mob,DX,vec2(10,0));
+					rand(1.3,2) call sp_threadPause;
+					setVar(_mob,DX,vec2(cpt5_data_closecombat_izt_dx,0));
 				} else {
-					5 call sp_threadPause;
+					rand(2,6) call sp_threadPause;
 				};
 			};
 		};
@@ -1296,6 +1458,9 @@ cpt5_act_closecombat_started = false;
 		["closecombat_after",true] call sp_audio_playMusic;
 		
 		{getVar("SteelGridDoorElectronic G:pubFKk0z1KE" call sp_getObject,isOpen)} call sp_threadWait;
+		{
+			callFuncParams("cpt5_obj_doorclosecombat" call sp_getObject,setDoorOpen,true);
+		} call sp_threadCriticalSection;
 		["cpt5_act_lastscene"] call sp_startScene;
 	
 	},[_thdcombat]] call sp_threadStart;
@@ -1308,6 +1473,8 @@ cpt5_act_closecombat_started = false;
 	[cpt5_questName_preend,"Вернитесь к проходу"] call sp_setTaskMessageEff;
 
 	["cpt5_kapitan","cpt5_pos_capitan5",0] call sp_ai_setMobPos;
+	("cpt5_kapitan" call sp_ai_getMobBody) switchMove "Acts_AidlPercMstpSloWWrflDnon_warmup_3_loop";
+
 	for "_i" from 1 to 5 do {
 		_strI = str _i;
 		["cpt5_pos_attacker" + _strI,"cpt5_attacker" + _strI,[
@@ -1317,6 +1484,18 @@ cpt5_act_closecombat_started = false;
 			[pick["RifleFinisher","RifleAuto","PistolHandmade"],_this,INV_HAND_R] call createItemInInventory;
 			//callFuncParams(_this,setCombatMode,true);
 			callFunc(_this,switchTwoHands);
+		},{
+			_elist = [
+				"Acts_AidlPercMstpSloWWpstDnon_warmup_3_loop",
+				"Acts_AidlPercMstpSloWWpstDnon_warmup_5_loop",
+				"Acts_AidlPercMstpSloWWpstDnon_warmup_6_loop",
+				"Acts_AidlPercMstpSloWWpstDnon_warmup_8_loop",
+				"Acts_AidlPercMstpSloWWrflDnon_warmup_2_loop"
+			];
+			if ((_elist select _i) != "") then {
+				_this switchMove (_elist select _i);
+				
+			};
 		}] call sp_ai_createPersonEx;
 	};
 
@@ -1332,13 +1511,15 @@ cpt5_act_closecombat_started = false;
 			[pick["RifleFinisher","RifleAuto","PistolHandmade"],_this,INV_HAND_R] call createItemInInventory;
 			callFuncParams(_this,setCombatMode,true);
 			callFunc(_this,switchTwoHands);
+		},{
+			_this switchMove "amovpknlmstpsraswpstdnon";
 		}] call sp_ai_createPersonEx;
 	};
 
 	{
 		{
 			callFuncParams("cpt5_kapitan" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true)
-			<= 4
+			<= 5
 		} call sp_threadWait;
 		[true] call sp_setHideTaskMessageCtg;
 
@@ -1397,6 +1578,8 @@ cpt5_data_lastbattle = false;
 ["cpt5_trg_lastbattle",{
 	if (cpt5_data_lastbattle) exitWith {};
 	cpt5_data_lastbattle = true;
+
+	sp_playerCanMove = false;
 
 	_post = {
 		[] call sp_audio_stopMusic;
