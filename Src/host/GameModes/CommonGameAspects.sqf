@@ -226,7 +226,7 @@ endclass
 class(HeadKnownAntagInOldNewOrder) extends(DirtpitGameAspect)
 	var(name,"Мудрый Голова");
 	var(desc,"Голова знает что в городе предатели");
-	var(descRoleplay,"Голова прознал" pcomma " что в город пробрались агенты Новоый Армии.");
+	var(descRoleplay,"Голова прознал" pcomma " что в город пробрались агенты Новой Армии.");
 	
 	var(allowedMaps,["GMOldNewOrder"]);
 	var(weight,DEFAULT_WEIGHT + 0.4);
@@ -294,7 +294,7 @@ class(HeadChildDirtpitAspect) extends(DirtpitGameAspect)
 	};
 endclass
 
-//изгнание из грязноямска самое худжее что может быть (бан роли на месяц)
+//изгнание из грязноямска самое худшее что может быть (бан роли на месяц)
 class(ExileBanDirtpitAspect) extends(DirtpitGameAspect)
 	var(name,"Фатальное изгнание");
 	var(desc,"Бан роли на месяц за изгнание из города");
@@ -435,7 +435,7 @@ endclass
 class(StrongCitizensAspect) extends(DirtpitGameAspect)
 	var(name,"Безделье - сила!");
 	var(desc,"Сильные обывалы и бродяги");
-	var(descRoleplay,"Бездельники и хвосты гряноямска вместо нормальной работы решили подкачаться.");
+	var(descRoleplay,"Бездельники и хвосты грязноямска вместо нормальной работы решили подкачаться.");
 	var(isHidden,true);
 
 	func(onMob)
@@ -502,7 +502,7 @@ endclass
 //Торгаш наторговал в прошлой смене кучу звяков
 class(MerchantMoreMoneyAspect) extends(DirtpitGameAspect)
 	var(name,"Богатый торгаш");
-	var(desc,"Больше средств в тороговой консоли со старта.");
+	var(desc,"Больше средств в торговой консоли со старта.");
 	var(descRoleplay,"Торгаш наторговал в прошлой смене кучу звяков.");
 	
 	func(onRoundBegin)
