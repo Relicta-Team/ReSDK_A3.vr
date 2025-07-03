@@ -100,7 +100,7 @@ endclass
 
 class(Forceps) extends(Item)
 	var(name,"Щипцы");
-	var(desc,"Лекарский инструмент для сшивания орагнов и конечностей.");
+	var(desc,"Лекарский инструмент для сшивания органов и конечностей.");
 	var(model,"a3\structures_f\items\tools\pliers_f.p3d");
 	var(material,"MatMetal");
 	getter_func(objectHealthType,OBJECT_TYPE_COMPLEX);
