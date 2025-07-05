@@ -1979,7 +1979,7 @@ class(IDestructible) extends(GameObject)
 		};
 
 		//germs
-		if isTypeOf(this,Item) then {
+	/*	if isTypeOf(this,Item) then {
 			if isTypeOf(this,SystemItem) exitWith {};
 			if (callSelf(isFood)) exitWith {};
 			if (getSelf(germs) == -1) exitWith {};
@@ -1989,7 +1989,7 @@ class(IDestructible) extends(GameObject)
 			};
 		} else {
 			setSelf(germs,randInt(-10,50) max 0);
-		};
+		}; */
 
 
 		//no damage - no hp
