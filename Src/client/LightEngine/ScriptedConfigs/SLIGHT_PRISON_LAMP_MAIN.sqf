@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2024 the ReSDK_A3 project
+// Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -11,7 +11,7 @@ regScriptEmit(SLIGHT_PRISON_LAMP_MAIN)
 		["linkToSrc",[0,0,0]],
 		["setLightColor",[0.88,0.86,0.75]],
 		["setLightAmbient",[0.02,0,0]],
-		["setLightIntensity",4438.94],
-		["setLightAttenuation",[1.8,8.8,4.6,4.9,15,20]]
+		["setLightIntensity",2500],
+		["setLightAttenuation",[1.8,8.8,4.6,4.9,7.403,8.337]]
 	]
 endScriptEmit
