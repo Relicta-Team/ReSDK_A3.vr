@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=238;
+		nextID=252;
 	};
 	class Camera
 	{
-		pos[]={4085.5686,97.087234,3877.738};
-		dir[]={-0.30182102,0.89742076,-0.32215825};
-		up[]={0.61343461,0.4415611,0.65476888};
-		aside[]={-0.7298491,1.7788261e-06,0.68377787};
+		pos[]={4082.8845,18.834078,3907.8274};
+		dir[]={-0.7415309,-0.32119316,-0.58925861};
+		up[]={-0.25173298,0.94687641,-0.20004064};
+		aside[]={-0.62219614,-4.6100467e-07,0.78299946};
 	};
 };
 binarizationWanted=0;
@@ -71,6 +71,7 @@ addons[]=
 	"carpet",
 	"yashikus",
 	"model_05",
+	"am_items_2",
 	"biblio",
 	"kovrik",
 	"A3_Structures_F_Exp_Walls_Tin",
@@ -119,7 +120,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=60;
+		items=61;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -328,149 +329,155 @@ class AddonsMetaData
 		};
 		class Item36
 		{
+			className="am_items_2";
+			name="am_items_2";
+			author="Yodes";
+		};
+		class Item37
+		{
 			className="biblio";
 			name="biblio";
 		};
-		class Item37
+		class Item38
 		{
 			className="kovrik";
 			name="kovrik";
 		};
-		class Item38
+		class Item39
 		{
 			className="A3_Structures_F_Exp";
 			name="Arma 3 Apex - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item39
+		class Item40
 		{
 			className="egl_veg_gliese";
 			name="Vegetation Gliese";
 			author="EAGLE";
 		};
-		class Item40
+		class Item41
 		{
 			className="autopsy";
 			name="autopsy";
 		};
-		class Item41
+		class Item42
 		{
 			className="ml_objects_heavy";
 			name="ml_objects_heavy";
 		};
-		class Item42
+		class Item43
 		{
 			className="rabochiystol";
 			name="rabochiystol";
 		};
-		class Item43
+		class Item44
 		{
 			className="Thank_you_BIS_for_useless_DLC";
 			name="Thank_you_BIS_for_useless_DLC";
 		};
-		class Item44
+		class Item45
 		{
 			className="A3_Structures_F_Exp_Cultural";
 			name="Arma 3 Apex - Cultural Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item45
+		class Item46
 		{
 			className="A3_Structures_F_Argo";
 			name="Arma 3 Malden - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item46
+		class Item47
 		{
 			className="A3_Rocks_F";
 			name="Arma 3 - Rocks and Stones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item47
+		class Item48
 		{
 			className="A3_Structures_F_Exp_Infrastructure";
 			name="Arma 3 Apex - Infrastructure Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item48
+		class Item49
 		{
 			className="chto_to";
 			name="chto_to";
 		};
-		class Item49
+		class Item50
 		{
 			className="A3_Structures_F_Exp_Civilian";
 			name="Arma 3 Apex - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item50
+		class Item51
 		{
 			className="A3_Structures_F_Exp_Commercial";
 			name="Arma 3 Apex - Commercial Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item51
+		class Item52
 		{
 			className="A3_Structures_F_Households";
 			name="Arma 3 - Houses";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item52
+		class Item53
 		{
 			className="A3_Rocks_F_Argo";
 			name="Arma 3 Malden - Rocks and Stones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item53
+		class Item54
 		{
 			className="A3_Structures_F_Enoch";
 			name="Arma 3 Contact Platform - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item54
+		class Item55
 		{
 			className="A3_Structures_F_Enoch_Cultural";
 			name="Arma 3 Contact Platform - Cultural Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item55
+		class Item56
 		{
 			className="A3_Structures_F_Enoch_Military";
 			name="Arma 3 Contact Platform - Military Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item56
+		class Item57
 		{
 			className="A3_Structures_F_Mil";
 			name="Arma 3 - Military Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item57
+		class Item58
 		{
 			className="A3_Structures_F_Enoch_Civilian";
 			name="Arma 3 Contact Platform - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item58
+		class Item59
 		{
 			className="BSG_EFT";
 			name="BSG_EFT";
 		};
-		class Item59
+		class Item60
 		{
 			className="AtmObjects";
 			name="AtmObjects";
