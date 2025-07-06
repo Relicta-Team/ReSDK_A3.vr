@@ -8,18 +8,18 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9570;
+		nextID=9584;
 	};
 	class LayerIndexProvider
 	{
-		nextID=400;
+		nextID=403;
 	};
 	class Camera
 	{
-		pos[]={4180.208,18.831156,3721.6968};
-		dir[]={0.053847179,-0.53852707,0.84088588};
-		up[]={0.034414764,0.84260821,0.53742629};
-		aside[]={0.99795592,0,-0.063905358};
+		pos[]={4213.0645,16.770411,3715.156};
+		dir[]={-0.62322891,-0.65248048,0.43119702};
+		up[]={-0.53659087,0.75778961,0.371254};
+		aside[]={0.56899375,5.7352008e-07,0.82239228};
 	};
 };
 binarizationWanted=0;
@@ -726,7 +726,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5666;
+		items=5674;
 		class Item0
 		{
 			dataType="Group";
@@ -31017,8 +31017,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4201.5801,16.960402,3714.8467};
-				angles[]={0.053850275,1.0812536,0.018923147};
+				position[]={4200.9336,17.415501,3714.7471};
+				angles[]={0.074917667,1.6245303,0.42137739};
 			};
 			side="Empty";
 			flags=1;
@@ -31028,7 +31028,7 @@ class Mission
 			};
 			id=4750;
 			type="Land_SandbagBarricade_01_F";
-			atlOffset=1.6366997;
+			atlOffset=1.9541531;
 		};
 		class Item1714
 		{
@@ -31089,14 +31089,14 @@ class Mission
 				angles[]={0.084905826,3.9665673,0.082371019};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
 			};
 			id=4758;
 			type="Land_SandbagBarricade_01_F";
-			atlOffset=0.020010948;
+			atlOffset=2.5309381;
 		};
 		class Item1717
 		{
@@ -35809,8 +35809,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4202.2637,16.330528,3713.0081};
-				angles[]={0.092266873,4.2668533,0.0020131879};
+				position[]={4198.8457,17.866594,3714.0012};
+				angles[]={6.0190854,5.16926,0.089304596};
 			};
 			side="Empty";
 			flags=1;
@@ -35820,7 +35820,7 @@ class Mission
 			};
 			id=4749;
 			type="Land_SandbagBarricade_01_F";
-			atlOffset=0.46428967;
+			atlOffset=2.7451887;
 		};
 		class Item1977
 		{
@@ -52968,7 +52968,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Leg""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Leg""],[""mark"",""cpt5_obj_woundedmanleg""]]}";
 			};
 			id=6408;
 			type="S_Leg";
@@ -53651,7 +53651,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ржавый меч""]]],[""class"",""ShortSword""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ржавый меч""]]],[""class"",""ShortSword""],[""mark"",""cpt5_obj_oldshortswordclosecombat""]]}";
 			};
 			id=6453;
 			type="swordefault";
@@ -54356,7 +54356,7 @@ class Mission
 			};
 			id=6494;
 			type="Sign_Sphere100cm_Geometry_F";
-			atlOffset=0.91577911;
+			atlOffset=0.79847908;
 		};
 		class Item3015
 		{
@@ -97519,7 +97519,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4229.6191,12.664005,3708.5864};
-				angles[]={0,5.4712639,-0};
+				angles[]={0,5.4712639,0};
 			};
 			side="Empty";
 			flags=1;
@@ -97813,8 +97813,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4202.6709,17.67671,3712.8772};
-				angles[]={6.2317686,2.3470559,6.1870503};
+				position[]={4199.0869,17.591578,3710.0901};
+				angles[]={0,1.8833463,-0};
 			};
 			side="Empty";
 			class Attributes
@@ -97823,7 +97823,7 @@ class Mission
 			};
 			id=9308;
 			type="S_Svt_Magazine";
-			atlOffset=0.94454956;
+			atlOffset=0.020767212;
 		};
 		class Item5469
 		{
@@ -97866,7 +97866,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4203.3716,15.779602,3713.7979};
+				position[]={4203.3716,15.896902,3713.7979};
 				angles[]={0.063109294,5.5970907,6.2059307};
 			};
 			side="Empty";
@@ -97877,7 +97877,7 @@ class Mission
 			};
 			id=9314;
 			type="gryazyuka3";
-			atlOffset=1.1335707;
+			atlOffset=1.2508707;
 		};
 		class Item5472
 		{
@@ -101240,7 +101240,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={4181.041,16.708487,3743.9294};
-				angles[]={0,4.628727,-0};
+				angles[]={0,4.628727,0};
 			};
 			side="Empty";
 			flags=1;
@@ -101285,6 +101285,161 @@ class Mission
 			id=9569;
 			type="S_Svt_Magazine";
 			atlOffset=0.47984886;
+		};
+		class Item5666
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4194.9351,15.763745,3716.658};
+				angles[]={0.2685169,3.4474225,0.46752903};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ca\misc\fort_razorwire.p3d""]]],[""class"",""SmallSteelRustyFence""]]}";
+			};
+			id=9572;
+			type="CUP_A2_fort_razorwire";
+			atlOffset=1.568594;
+		};
+		class Item5667
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4198.3047,17.483437,3712.1348};
+				angles[]={6.2262793,4.4846044,6.2788596};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9573;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=2.3021803;
+		};
+		class Item5668
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4198.7437,16.972361,3710.3206};
+				angles[]={0.019856552,4.0942211,0.027605155};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_half_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9576;
+			type="Land_SandbagBarricade_01_half_F";
+			atlOffset=0.081159592;
+		};
+		class Item5669
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4199.9375,16.756039,3711.3435};
+						angles[]={0,3.7330992,-0};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						name="debug_mob_gen_53_43_52_117_102_81_49_98_122_107_81";
+					};
+					id=9578;
+					type="B_Survivor_F";
+					atlOffset=0.033737183;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=9577;
+			atlOffset=0.033737183;
+		};
+		class Item5670
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4200.6016,17.699083,3709.7429};
+				angles[]={6.2168679,2.9200482,0.16918342};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_argo\military\fortifications\sandbagbarricade_01_f.p3d""],[""name"",""Укрепление""]]],[""class"",""ClayWallSmall""]]}";
+			};
+			id=9579;
+			type="Land_SandbagBarricade_01_F";
+			atlOffset=2.4068928;
+		};
+		class Item5671
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4199.7104,17.476566,3717.9275};
+				angles[]={0.042554837,3.307426,1.4854595e-07};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9580;
+			type="S_Svt_Magazine";
+			atlOffset=0.76926994;
+		};
+		class Item5672
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4198.603,17.561237,3710.6985};
+				angles[]={0,2.7186811,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MagazineSVTLoaded""]]}";
+			};
+			id=9581;
+			type="S_Svt_Magazine";
+			atlOffset=0.015872955;
+		};
+		class Item5673
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4178.8457,17.999119,3706.4272};
+				angles[]={0,6.2792487,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Struct_SPPoint""],[""mark"",""cpt5_pos_defstrelok_cover""]]}";
+			};
+			id=9583;
+			type="VR_GroundIcon_01_F";
+			atlOffset=0.11766434;
 		};
 	};
 };
