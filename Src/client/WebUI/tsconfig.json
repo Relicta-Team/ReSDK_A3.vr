@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "composite": true,
+    "rootDir": "../",
+    "baseUrl": "../",
+    "paths": {
+      "Core": ["./WebUI/Core.ts"],
+      "A3API": ["./WebUI/A3API.d.ts"]
+    }
+  },
+  "exclude": ["Example.ts"],
+  "include": [
+    "./*.ts",
+  ]
+}

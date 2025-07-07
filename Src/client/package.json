@@ -1,0 +1,25 @@
+{
+  "name": "HtmlUI",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "buildall": "webpack --env mode=production",
+    "runproj": "node WebUI/scripts/runproj.js",
+    "buildproj": "node WebUI/scripts/buildproj.js",
+    "makeproj": "node WebUI/scripts/make-project.js",
+    "serveweb": "node WebUI/scripts/serveweb.js"
+  },
+  
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@web/dev-server": "^0.4.6",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}

@@ -35,4 +35,21 @@
 		"yaml.schemaStore.enable": false,
 		
 	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "chrome",
+				"request": "launch",
+				"name": "Debug Frontend (Chrome)",
+				"url": "http://localhost:8080",
+				"webRoot": "${workspaceFolder}/client",
+				"sourceMaps": true,
+				"trace": true,
+				"sourceMapPathOverrides": {
+					"webpack:///./*": "${workspaceFolder}/client/*"
+				}
+			}
+		]
+	},
 }
