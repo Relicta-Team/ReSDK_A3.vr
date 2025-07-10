@@ -6,24 +6,21 @@ const readline = require('readline');
 const path = require('path');
 const fs = require('fs');
 
-//я так и не смог заставить работать этот вариант...
-throw new Error("Not implemented");
-
 // Парсим аргументы
-const args = process.argv.slice(2);
-let proj;
-for (const arg of args) {
-  if (arg.startsWith('--proj=')) {
-    proj = arg.split('=')[1];
-  }
-}
+let proj =process.env.npm_config_project
 
 function run(proj) {
-  const projDir = path.join(__dirname, '..', 'projects', proj);
+  let projDir = path.join(__dirname, '..', '..',  proj);
   if (!fs.existsSync(projDir) || !fs.statSync(projDir).isDirectory()) {
-    console.error(`Проект ${proj} не найден!`);
+    console.error(`Проект ${proj} не найден по пути ${projDir}`);
     process.exit(1);
   }
+
+  //если в пути есть пробелы - заключаем в кавычки
+  if (projDir.includes(' ')) {
+    projDir = `"${projDir}"`;
+  }
+
   // Запуск @web/dev-server для папки проекта
   const child = spawn('npx', [
     'web-dev-server',

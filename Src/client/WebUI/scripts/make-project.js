@@ -1,17 +1,17 @@
 /*
   Создание проекта
+  npm run make-project --project=test
 */
 const fs = require("fs");
 const path = require("path");
 const readline = require('readline');
 const { colorize, colors } = require("./util");
-const workDir = path.resolve(path.join(__dirname, '..'));
+const workDir = path.resolve(path.join(__dirname, '..', '..'));
 
 let projectName = process.env.npm_config_project;
 
 function createProject(projectName) {
-  const projectPath = path.join(workDir, "projects", projectName);
-  const coreTsconfig = path.join(workDir, "WebUI", "tsconfig.json");
+  const projectPath = path.join(workDir, projectName);
   const targetTsconfig = path.join(projectPath, "tsconfig.json");
   const indexPath = path.join(projectPath, "index.ts");
 
@@ -26,11 +26,11 @@ function createProject(projectName) {
 
   // 3. tsconfig.json
   const tsconfigContent = {
-    extends: "../../WebUI/tsconfig.json",
+    extends: "../WebUI/tsconfig.json",
     compilerOptions: {
-      outDir: `../../dist/${projectName}`
+      outDir: `../WebUI/dist/${projectName}`
     },
-    include: ["**/*.ts","../../WebUI/**/*.ts"]
+    include: ["**/*.ts","../WebUI/**/*.ts"]
   };
 
   fs.writeFileSync(targetTsconfig, JSON.stringify(tsconfigContent, null, 2));

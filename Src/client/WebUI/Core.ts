@@ -7,14 +7,12 @@ import { A3API } from "./A3API";
 export abstract class WebUIContextBase {
 
     // --- singleton-контекст ---
-    private static _currentContext: WebUIContextBase | undefined;
+    private static _currentContext: WebUIContextBase;
 
-    static getCurrent<T extends WebUIContextBase>(): T | undefined {
-        return this._currentContext as T | undefined;
+    static getCurrent<T extends WebUIContextBase>(): T {
+        return this._currentContext as T;
     }
-    static clearCurrent() {
-        this._currentContext = undefined;
-    }
+    
 
     constructor() {
         (this.constructor as typeof WebUIContextBase)._currentContext = this;
@@ -36,7 +34,6 @@ export abstract class WebUIContextBase {
         }
     }
 
-    //TODO добавить обработку синхронизации (например переменная valueTest может иметь обработчик onChange_valueTest)
     private _handleVar(varname: string, varvalue: any) {
         // Обновляет поле по имени
         if (varname in this) {
@@ -143,7 +140,6 @@ export async function initContext<T extends WebUIContextBase>(constructor: new (
     // Автоматическая очистка при закрытии страницы
     window.addEventListener('beforeunload', () => {
         instance.cleanup();
-        (constructor as any).clearCurrent?.();
     });
     return instance;
 }
@@ -219,3 +215,68 @@ window.onunhandledrejection = function(event) {
     }
     // Можно добавить alert или другую обработку
 };
+
+
+export function WUIVar(target: any, context: ClassFieldDecoratorContext)
+{
+    //update var setter
+    let setter = context.addInitializer(function(this: any) {
+        console.log("WUIVar setter", this);
+    });
+    return setter;
+}
+
+//============================
+// Decorators
+//============================
+
+
+export function OnChange(changeHandler?: Function | string, backingField?: string): any {
+
+    return function onChangeDecorator(target: Object, key: string,
+      descriptor: PropertyDescriptor): PropertyDescriptor | undefined {
+  
+      if (descriptor) {
+        return handlePropertyDescriptor(changeHandler, key, descriptor);
+      }
+      return undefined;
+    }
+  }
+  
+  // handle property decorator
+  function handlePropertyDescriptor(changeHandler: Function | string | undefined, key: string,
+    descriptor: PropertyDescriptor) {
+  
+    let onChangeHandler: Function | undefined | null = undefined;
+    const originalSetter = descriptor.set;
+  
+    descriptor.set = function(value: any) {
+      const oldValue = descriptor.get ? descriptor.get.call(this) : null;
+      originalSetter && originalSetter.call(this, value);
+  
+      if (onChangeHandler === undefined) {
+        onChangeHandler = resolveChangeHandler(this, changeHandler, key);
+      }
+      onChangeHandler && onChangeHandler.call(this, value, oldValue);
+    };
+    return descriptor;
+  }
+  
+  
+  
+  function resolveChangeHandler(context: any,
+    changeHandler: Function | string | undefined,
+    key: string): Function | null {
+  
+    if (typeof changeHandler === 'function') {
+      return changeHandler;
+    }
+    const methodKey = typeof changeHandler === 'string' ? changeHandler : key + 'Change';
+    const onChangeCandidate = context[methodKey];
+    if (typeof onChangeCandidate === 'function') {
+      return onChangeCandidate;
+    }
+    return null;
+  }
+
+

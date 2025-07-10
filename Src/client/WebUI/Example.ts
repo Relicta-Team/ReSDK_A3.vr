@@ -1,14 +1,21 @@
-import { initContext, WebUIContextBase } from "./Core";
+import { initContext, OnChange, WebUIContextBase } from "./Core";
+
+
 
 class ExampleUI extends WebUIContextBase {
     // Пример переменных, которые могут быть обновлены платформой
-   
+    @OnChange(()=>{
+        ExampleUI.getCurrent<ExampleUI>().testChanger();
+    })
     score: number = 0;
+
+    testChanger() {}
 
     playerName: string = "";
 
     async initialize(): Promise<void> {
         console.log("Example initialized");
+        let x = this.score;
     }
 
     cleanup(): void {
@@ -34,3 +41,4 @@ initContext(ExampleUI).then(ctx => {
     // window._handleVar("score", 42)
     // window._handleVarList({playerName: "Alice", score: 99})
 });
+

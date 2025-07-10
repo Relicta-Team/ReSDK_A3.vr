@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "buildall": "webpack --env mode=production",
+    "makeproj": "node WebUI/scripts/make-project.js",
+    "serveweb": "node WebUI/scripts/serveweb.js",
     "runproj": "node WebUI/scripts/runproj.js",
     "buildproj": "node WebUI/scripts/buildproj.js",
-    "makeproj": "node WebUI/scripts/make-project.js",
-    "serveweb": "node WebUI/scripts/serveweb.js"
+    "buildall": "webpack --env mode=production"
   },
   
   "devDependencies": {
