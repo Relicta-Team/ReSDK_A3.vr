@@ -4,7 +4,7 @@
 // ======================================================
 
 #include "..\TestFramework.h"
-
+#include "..\..\static_iter.hpp"
 
 TEST(Algorithms_base)
 {
@@ -66,3 +66,30 @@ TEST(Algorithms_searching)
  	//! in current version ReSDK does not support custom sorting algorithms
  	//! only used native "sort"
 // }
+
+TEST(Algorithms_static_for)
+{
+	//generate slow iter
+	private _t = tickTime;
+	private _arun = [];
+	for "_i" from 1 to 100000 do {
+		_arun pushback _i;
+	};
+	_tdelslow = tickTime - _t;
+
+	private _astat = [];
+	private _c = {
+		static_for(_i,1,100000,{_astat pushback _i})
+	};
+	call _c; //first call - generate static iter
+	_t = tickTime;
+	call _c; //second call - check performance
+	_tdelfast = tickTime - _t;
+
+	logformat("slow %1; fast %2",_tdelslow arg _tdelfast);
+
+	ASSERT_EQ(count _astat,100000);
+	ASSERT_EQ(_astat select 0,1);
+	ASSERT_EQ(_astat select 99999,100000);
+	
+}
