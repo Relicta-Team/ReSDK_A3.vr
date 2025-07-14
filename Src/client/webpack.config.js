@@ -1,3 +1,10 @@
+/*
+
+https://github.com/ultralight-ux/Ultralight
+https://github.com/arma3/RVExtensionImGui/blob/main/dllmain.cpp
+
+*/
+
 const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
