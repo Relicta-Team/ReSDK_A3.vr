@@ -17,7 +17,7 @@
         if (isnil "_c") then { \
             private _stack = ['private varname = startindex;']; \
             for "_i" from (startindex) to (endindex) do { \
-                _stack pushBack ((tostring (code))+";"); \
+                _stack pushBack ((tostring (code))+';varname = varname + 1;'); \
             }; \
             _c = compile (_stack joinString endl); \
             statfor_map_generator set [_tok,_c]; \
