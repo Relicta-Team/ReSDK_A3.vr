@@ -77,19 +77,20 @@ TEST(Algorithms_static_for)
 	};
 	_tdelslow = tickTime - _t;
 
-	private _astat = [];
+	private _astat2 = [];
 	private _c = {
-		static_for(_i,1,100000,{_astat pushback _i})
+		static_for(_i,1,100000,{_astat2 pushback _i})
 	};
 	call _c; //first call - generate static iter
+	_astat2 = [];
 	_t = tickTime;
 	call _c; //second call - check performance
 	_tdelfast = tickTime - _t;
 
 	logformat("slow %1; fast %2",_tdelslow arg _tdelfast);
 
-	ASSERT_EQ(count _astat,100000);
-	ASSERT_EQ(_astat select 0,1);
-	ASSERT_EQ(_astat select 99999,100000);
+	ASSERT_EQ(count _astat2,100000);
+	ASSERT_EQ(_astat2 select 0,1);
+	ASSERT_EQ(_astat2 select 99999,100000);
 	
 }
