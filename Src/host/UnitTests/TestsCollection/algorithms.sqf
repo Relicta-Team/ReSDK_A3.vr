@@ -4,6 +4,7 @@
 // ======================================================
 
 #include "..\TestFramework.h"
+#define ENABLE_STATIC_FOR_DEBUG
 #include "..\..\static_iter.hpp"
 
 TEST(Algorithms_base)
@@ -81,10 +82,18 @@ TEST(Algorithms_static_for)
 	private _c = {
 		static_for(_i,1,100000,{_astat2 pushback _i})
 	};
+	private _preinitCount = count statfor_map_generator;
+	log("first call pre");
 	call _c; //first call - generate static iter
+	log("first call post");
+	
+	ASSERT_EQ(count statfor_map_generator,_preinitCount+1);
+
 	_astat2 = [];
 	_t = tickTime;
+	log("second call pre");
 	call _c; //second call - check performance
+	log("second call post");
 	_tdelfast = tickTime - _t;
 
 	logformat("slow %1; fast %2",_tdelslow arg _tdelfast);
