@@ -69,10 +69,10 @@ class(GMPrey) extends(GMBase)
 			"RPreyNomadLeader",
 			"RPreyNomadHealer",
 			"RPreyNomadCaveman",
-			//"RPreyNomadFighter",
+			"RPreyNomadFighter",
 			"RPreyNomadLighter",
 			//"RPreyNomadDragger",
-			"RPreyEaterStandard"
+			"RPreyEaterStandard_Pre"
 		]
 	};
 
@@ -140,7 +140,7 @@ class(GMPrey) extends(GMBase)
 
 		//spawn base furniture
 		["CampfireBig",[2001.43,1998.25,10.1127],null,false,vec3(0,0,1)] call createStructure;
-		["IStruct",[2000-3.5,2000,10],90,vec3(0,0,1),{setSelf(model,"a3\structures_f\households\slum\slum_house03_f.p3d")}] call initStruct;
+		["SmallSheetMetalHouse",[2000-3.5,2000,10],90,vec3(0,0,1),{}] call initStruct;
 		["IStruct",[2001,2000-2,10.3],270,vec3(0,0,1),{setSelf(model,"a3\structures_f\households\slum\cargo_addon01_v2_f.p3d")}] call initStruct;
 		
 		setSelf(eaterSpawnPos,callFunc(getSelf(relicObj),getModelPosition));

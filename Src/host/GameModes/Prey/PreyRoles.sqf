@@ -72,7 +72,11 @@ class(RPreyEater) extends(BasicRole)
 	func(getEquipment)
 	{
 		objParams_1(_mob);
-		["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
+		private _cloth = ["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
+		if !isTypeOf(this,RPreyNomadLeader) then {
+			_itemPool = [""];
+		};
+		_cloth
 	};
 	
 	func(onAssigned)
@@ -107,9 +111,16 @@ class(RPreyNomadLeader) extends(RPreyNomadBase)
 		objParams_1(_mob);
 		_cloth = super();
 		["GMPreyMap",_cloth] call createItemInContainer;
-		["ShortSword",_mob] call createItemInInventory;
 		["Torch",_mob] call createItemInInventory;
 		["WoolCoat",_mob,INV_BACK] call createItemInInventory;
+		if (prob_new(60)) then {
+			private _pistol = ["Revolver",_mob,INV_BELT] call createItemInInventory;
+			callFuncParams(_pistol,createAmmoInMagazine,"AmmoRevolver");
+			private _ammo = ["AmmoRevolver",_cloth] call createItemInContainer; // Патроны в инвентаре
+			callFuncParams(_ammo,initCount,randInt(6,16));
+		} else {
+			["ShortSword",_mob,INV_BELT] call createItemInInventory;
+		};
 	};
 endclass
 
@@ -135,13 +146,14 @@ class(RPreyNomadHealer) extends(RPreyNomadBase)
 		["Syringe",_m] call createItemInContainer;
 		["LiqPainkiller",_m] call createItemInContainer;
 		["LiqTovimin",_m] call createItemInContainer;
-		for "_i" from 0 to randInt(1,6) do {["Bandage",_m] call createItemInContainer;};
+		for "_i" from 0 to randInt(3,6) do {["Rag",_m] call createItemInContainer;};
 	};
 endclass
 
 class(RPreyNomadCaveman) extends(RPreyNomadBase)
 	var(name,"Топорщик");
 	var(desc,"Безжалостно разрубит врагов на две части.");
+	var(count,2);
 	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(axe,2,6) arg 
@@ -157,22 +169,37 @@ class(RPreyNomadCaveman) extends(RPreyNomadBase)
 	};
 endclass
 
-/*class(RPreyNomadFighter) extends(RPreyNomadBase)
+class(RPreyNomadFighter) extends(RPreyNomadBase)
 	var(name,"Боевой кочевник");
 	var(desc,"Молодой, шутливый да ещё и с мечом.");
-endclass*/
-
-class(RPreyNomadLighter) extends(RPreyNomadBase)
-	var(name,"Светоч");
-	var(desc,"Осветит путь в пещерах.");
+	var(count,8);
+	func(getOtherSkills) {[
+		skillrand(fight,1,3) arg
+		skillrand(stealth,1,5) arg
+		skillrand(sword,4,6)
+	]};
 	func(getEquipment)
 	{
 		objParams_1(_mob);
 		_cloth = super();
-		["CaveAxe",_mob] call createItemInInventory;
+		["ShortSword",_mob] call createItemInInventory;
+		["Torch",_mob,INV_BELT] call createItemInInventory;
+	};
+endclass
+
+class(RPreyNomadLighter) extends(RPreyNomadBase)
+	var(name,"Светоч");
+	var(desc,"Осветит путь в пещерах.");
+	var(count,2);
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		_cloth = super();
+		["CaveAxe",_mob,INV_BELT] call createItemInInventory;
+		["CampfireCreator",_mob] call createItemInInventory;
 		["LampKerosene",_mob] call createItemInInventory;
 		_bag = ["FabricBagBig1",_mob,INV_BACKPACK] call createItemInInventory;
-		for "_i" from 1 to 5 do {
+		for "_i" from 1 to 10 do {
 			["TorchDisabled",_bag] call createItemInContainer;
 		};
 	};
@@ -187,19 +214,37 @@ endclass*/
 class(RPreyEaterStrong) extends(RPreyEater)
 	var(name,"Сильный едок");
 	var(desc,"В одиночку всех уложит.");
-	getter_func(getSkills,vec4(randInt(15,18),randInt(10,12),randInt(13,19),randInt(9,11))); //["_st","_iq","_dx","_ht"];
+	var(count,5);
+	getter_func(getSkills,vec4(randInt(16,18),randInt(10,12),randInt(13,19),randInt(9,11))); //["_st","_iq","_dx","_ht"];
 	func(getOtherSkills) {[
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
 	]};
+
+	func(canVisibleAfterStart)
+	{
+		objParams_1(_cli);
+		gm_roundDuration >= t_asMin(20)
+	};
 endclass
 
 class(RPreyEaterStandard) extends(RPreyEater)
 	var(name,"Едок");
 	var(desc,"Мерзкая тварь.");
-	getter_func(getSkills,vec4(randInt(13,16),randInt(10,12),randInt(12,15),randInt(9,11))); //["_st","_iq","_dx","_ht"];
+	getter_func(getSkills,vec4(randInt(13,15),randInt(10,12),randInt(12,15),randInt(9,11))); //["_st","_iq","_dx","_ht"];
 	func(getOtherSkills) {[
 		skillrand(fight,5,8) arg
 		skillrand(stealth,3,7)
 	]};
+
+	func(canVisibleAfterStart)
+	{
+		objParams_1(_cli);
+		gm_roundDuration >= t_asMin(10)
+	};
+
+endclass
+
+class(RPreyEaterStandard_Pre) extends(RPreyEaterStandard)
+	var(count,2);
 endclass
