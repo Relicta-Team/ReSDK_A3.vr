@@ -74,7 +74,10 @@ class(RPreyEater) extends(BasicRole)
 		objParams_1(_mob);
 		private _cloth = ["Castoffs" + str randInt(1,3),_mob,INV_CLOTH] call createItemInInventory;
 		if !isTypeOf(this,RPreyNomadLeader) then {
-			_itemPool = [""];
+			_itemPool = ["SamokrutkaDisabled","Rag","Zhivoglot","Egg","Trap"];
+			for "_i" from 1 to randInt(1,3) do {
+				[pick _itemPool,_cloth] call createItemInContainer;
+			};
 		};
 		_cloth
 	};
@@ -138,7 +141,7 @@ class(RPreyNomadHealer) extends(RPreyNomadBase)
 	{
 		objParams_1(_mob);
 		_cloth = super();
-		["ShortSword",_mob] call createItemInInventory;
+		["ShortSword",_mob,INV_BACK] call createItemInInventory;
 		["Torch",_mob,INV_BELT] call createItemInInventory;
 		
 		_m = ["MedicalBag",_mob] call createItemInInventory;
@@ -163,7 +166,7 @@ class(RPreyNomadCaveman) extends(RPreyNomadBase)
 	{
 		objParams_1(_mob);
 		_cloth = super();
-		["BattleAxe",_mob] call createItemInInventory;
+		["BattleAxe",_mob,INV_BACK] call createItemInInventory;
 		["Torch",_mob,INV_BELT] call createItemInInventory;
 		["ArmorLite",_mob,INV_ARMOR] call createItemInInventory;
 	};
@@ -182,7 +185,7 @@ class(RPreyNomadFighter) extends(RPreyNomadBase)
 	{
 		objParams_1(_mob);
 		_cloth = super();
-		["ShortSword",_mob] call createItemInInventory;
+		["ShortSword",_mob,INV_BACK] call createItemInInventory;
 		["Torch",_mob,INV_BELT] call createItemInInventory;
 	};
 endclass
@@ -221,6 +224,7 @@ class(RPreyEaterStrong) extends(RPreyEater)
 		skillrand(stealth,3,7)
 	]};
 
+	getter_func(canTakeInLobby,false);
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cli);
@@ -237,14 +241,16 @@ class(RPreyEaterStandard) extends(RPreyEater)
 		skillrand(stealth,3,7)
 	]};
 
+	getter_func(canTakeInLobby,false);
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cli);
-		gm_roundDuration >= t_asMin(10)
+		gm_roundDuration >= t_asMin(5)
 	};
 
 endclass
 
 class(RPreyEaterStandard_Pre) extends(RPreyEaterStandard)
+	getter_func(canTakeInLobby,true);
 	var(count,2);
 endclass
