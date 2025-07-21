@@ -51,7 +51,9 @@ sp_audio_sayPlayer = {
 sp_audio_waitForEndSound = {
 	params ["_handle"];
 	if (sp_debug_skipAudio) exitWith {};
-	
+	if equalTypes(_handle,objNull) exitWith {
+		{isNullReference(_handle)} call sp_threadWait;
+	};
 	{count soundParams _handle == 0} call sp_threadWait;
 };
 
@@ -71,12 +73,17 @@ sp_audio_sayPlayerList = {
 
 sp_audio_isSoundHandleDone = {
 	params ["_handle"];
+	if equalTypes(_handle,objNull) exitWith {
+		{isNullReference(_handle)} call sp_threadWait;
+	};
 	private _spr = soundParams _handle;
 	if (count soundParams _handle == 0) exitWith {true};
 	if ((_spr select 1) >= 1) exitWith {true};
 	if ((_spr select 2) == (_spr select 3)) exitWith {true};
 	false
 };
+
+sp_audio_list_soundbuff = [];
 
 sp_audio_sayAtTarget = {
 	params ["_target","_pathPost",["_dist",20],["_startOffset",0]];
@@ -86,6 +93,32 @@ sp_audio_sayAtTarget = {
 
 	if equals(_target,player) exitWith {
 		[_pathPost] call sp_audio_sayPlayer;
+	};
+
+	private _probConfigName = (_pathPost splitstring "\/" joinString "_") splitstring "." select 0;
+	if !isNullReference(missionConfigFile >> "cfgsounds" >> _probConfigName) exitWith {
+
+		{
+			private _list = sp_audio_list_soundbuff;
+			private _found = false;
+			{
+				if (equals(_x select 0,objNull)) then {
+					_list set [_forEachIndex,objnull];
+					_found = true;
+				};
+			} foreach _list;
+			if (_found) then {
+				sp_audio_list_soundbuff = _list - [objNull];
+			};
+
+		} call sp_threadCriticalSection;
+
+		private _obj = [_target,_probConfigName,_dist,null,_startOffset] call sound3d_playOnObject;
+		private _dur = getNumber(missionConfigFile >> "cfgsounds" >> (_probConfigName + "__dur"));
+		_startTime = tickTime;
+		sp_audio_list_soundbuff pushback [_obj,_startTime,_dur];
+
+		_obj
 	};
 
 	private _mpath = "singleplayer\sp_guide\" + _pathPost;
@@ -197,20 +230,29 @@ sp_audio_internal_procDialog = {
 	};
 
 	private _handle = [_tgt,_pathPost,_ctxParams get "distance"] call sp_audio_sayAtTarget;
-	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg soundParams _handle);
-	if (equals(soundParams _handle,[]) && !sp_debug_skipAudio) exitWith{};
+	traceformat("SAY DIALOG %1 (hndl:%2) %3",_pathPost arg _handle arg ifcheck(equalTypes(_handle,objNull),_handle,soundParams _handle));
+	if (ifcheck(equalTypes(_handle,objNull),isNullReference(_handle),equals(soundParams _handle,[])) && !sp_debug_skipAudio) exitWith{};
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
 	_tgtReal setRandomlip true;
 	startAsyncInvoke
 		{
 			params ["_stateSeq","_handle","_ctxParams"];
-			_spar = soundParams _handle;
-			if equals(_spar,[]) exitWith {true};
-			_spar params ["","","_len","_time"];
 			_endoffset = _ctxParams getOrDefault ["endoffset",0];
-			//traceformat("TIMECHECK FOR %1"+endl + "		%2 %3 (-%4) => %5",_spar select 0 arg _time arg _len arg _endoffset arg _time >= (_len - _endoffset));
-			_time>=(_len - _endoffset)
+
+			if (equalTypes(_handle,objNull)) then {
+				_id = sp_audio_list_soundbuff findif {equals(_x select 0,_handle)};
+				if (_id == -1) exitWith {true};
+				(sp_audio_list_soundbuff select _id) params ["","_startTime","_dur"];
+				_time = tickTime - _startTime;
+				_time>=(_dur - _endoffset)
+			} else {
+				_spar = soundParams _handle;
+				if equals(_spar,[]) exitWith {true};
+				_spar params ["","","_len","_time"];
+				//traceformat("TIMECHECK FOR %1"+endl + "		%2 %3 (-%4) => %5",_spar select 0 arg _time arg _len arg _endoffset arg _time >= (_len - _endoffset));
+				_time>=(_len - _endoffset)
+			};
 		},
 		{
 			params ["_stateSeq","_handle","_ctxParams","_tgtReal"];

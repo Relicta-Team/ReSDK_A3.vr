@@ -172,7 +172,8 @@ begin_playerSetup_setHeaderText = {
 	(begin_playerSetup_listCamPos select 0) call sp_cam_prepCamera;
 
 
-	[false,0] call setBlackScreenGUI;
+	[false,5] call setBlackScreenGUI;
+	["prestart"] call sp_audio_playMusic;
 	_d = call displayOpen;
 
 	_tcenter = [_d,TEXT,[0,0,100,5]] call createWidget;
@@ -296,11 +297,19 @@ begin_playerSetup_setHeaderText = {
 	_startplay = [_d,TEXT,[50-_xOffsetCenter + 1,90,_xOffsetCenter*2 - 2,8],_ctg] call createWidget;
 	[_startplay,"<t align='center' valign='middle' size='1.4'>"+sbr+"Начать игру"+"</t>"] call widgetSetText;
 	_startplay ctrladdeventhandler ["MouseButtonUp",{
-		//todo implement
+		
 		nextFrame(displayClose);
 		call sp_cam_stopAllInterp;
 		[true,4] call setBlackScreenGUI;
 		["all",begin_playerSetup_startGameCam,10] call sp_cam_interpTo;
+		[true,true] call sp_audio_setMusicPause;
+		_post = {
+			[] call sp_audio_stopMusic;
+			[!true,true] call sp_audio_setMusicPause;
+			["begin_prestart"] call sp_startScene;
+		};
+		invokeAfterDelay(_post,4);
+		["begin\prestart_ready"] call sp_audio_sayPlayer;
 	}];
 	_backtoface ctrladdeventhandler ["MouseButtonUp",{
 		DEC(begin_playerSetup_mainStage);

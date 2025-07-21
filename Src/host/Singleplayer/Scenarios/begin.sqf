@@ -717,7 +717,7 @@ begin_canStartAttack = false;
 			_thd = {
 				//dialog
 				([
-					["begin_keeper1","begin\start\prov1",["endoffset",1.2]],
+					["begin_keeper1","begin\start\prov1",["endoffset",0.5]],
 					[player,"begin\start\gg1",["endoffset",0.3]],
 					["begin_keeper1","begin\start\prov2",["endoffset",1.1]],
 					[player,"begin\start\gg2",["endoffset",1.3]],
@@ -908,8 +908,8 @@ begin_startattack_activated = false;
 		([
 			["begin_watcher2","begin\gate\sword1",["distance",25]],
 			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.4]]],
-			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",0.7]]],
-			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",0.5]]],
+			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",1.4]]],
+			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",1.1]]],
 			["begin_startdead3","begin\gate\guy4",[["distance",25],["endoffset",0.1]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
