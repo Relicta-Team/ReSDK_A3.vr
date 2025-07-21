@@ -125,5 +125,5 @@ sp_cleanupSceneData = {
 	//now delete all mobs
 	{
 		[_x] call sp_ai_deletePerson;
-	} foreach sp_ai_mobs;
+	} foreach (keys sp_ai_mobs); //get copy of keys
 };

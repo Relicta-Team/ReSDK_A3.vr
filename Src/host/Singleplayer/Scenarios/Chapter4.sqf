@@ -1106,7 +1106,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 			//speak ibam
 			([
-				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",20]]
+				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",40]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 			//4 call sp_threadPause;
 			{["cpt4_ibam"] call sp_ai_deletePerson} call sp_threadCriticalSection;
@@ -1176,7 +1176,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 			[false,_ht] call sp_setNotificationVisible;
 
 			[
-				["cpt4_ibam","chap4\npc_vaht\koch2_good",["distance",20]]
+				["cpt4_ibam","chap4\npc_vaht\koch2_good",["distance",40]]
 			] call sp_audio_startDialog;
 
 			[_ibam,_ibamPos,"cpt4_koch2_exit",{
@@ -1312,6 +1312,9 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
 		
+		[
+			["cpt4_tombomz","chap4\npc_vaht\koch3_6",["endoffset",2.6]]
+		] call sp_audio_startDialog;
 		["cpt4_act_koch3_enter"] call sp_startScene;
 
 		//for test
@@ -1853,7 +1856,11 @@ if !isNull(cpt4_bar_musicHandle) then {
 };
 cpt4_bar_musicHandle = -1;
 if !isNull(cpt4_bar_curMusicPlayed) then {
-	stopSound (cpt4_bar_curMusicPlayed);
+	if equalTypes(cpt4_bar_curMusicPlayed,objNull) then {
+		deleteVehicle cpt4_bar_curMusicPlayed;
+	} else {
+		stopSound (cpt4_bar_curMusicPlayed);
+	};
 };
 cpt4_bar_curMusicPlayed = -1;
 cpt4_bar_curMusicStartTime = 0;
@@ -1912,19 +1919,27 @@ cpt4_bar_curMusicName = "";
 				stopThisUpdate();
 			};
 
-			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) then {
+			if (cpt4_bar_musicUpdateReq && {not_equals(cpt4_bar_curMusicPlayed,-1) && not_equals(cpt4_bar_curMusicPlayed,objNull)}) then {
 				cpt4_bar_musicUpdateReq = false;
 				//_startTime = (soundParams cpt4_bar_curMusicPlayed) select 3;
 				
 				_prevhandler = cpt4_bar_curMusicPlayed;
-				stopSound _prevhandler;
+				if (equalTypes(_prevhandler,objNull)) then {
+					deleteVehicle _prevhandler;
+				} else {
+					stopSound _prevhandler;
+				};
 				if (!(_prevhandler call sp_audio_isSoundHandleDone)) then {
 					warningformat("Sound not stopped at task: %1",_prevhandler);
 					startAsyncInvoke
 						{
 							params ["_v","_t"];
 							warningformat("Attempt to stop: %1",_v);
-							stopSound _v;
+							if (equalTypes(_v,objNull)) then {
+								deleteVehicle _v;
+							} else {
+								stopSound _v;
+							};
 							_v call sp_audio_isSoundHandleDone
 						},
 						{
@@ -1942,7 +1957,7 @@ cpt4_bar_curMusicName = "";
 
 				//[format["update mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
 
-				assert_str(_prevhandler call sp_audio_isSoundHandleDone,"music handle not null: " + (str cpt4_bar_curMusicPlayed) + "; " + (str soundParams cpt4_bar_curMusicPlayed) );
+				assert_str(_prevhandler call sp_audio_isSoundHandleDone,"music handle not null: " + (str cpt4_bar_curMusicPlayed) + "; " + (str ifcheck(equalTypes(cpt4_bar_curMusicPlayed,objNull),cpt4_bar_curMusicPlayed,soundParams cpt4_bar_curMusicPlayed)) );
 			};
 
 			if (cpt4_bar_curMusicPlayed call sp_audio_isSoundHandleDone) then {

@@ -1239,7 +1239,10 @@ cpt5_act_shotingStarted = false;
 
 		[cpt5_questName_rangedCombat,"Продвигайтесь на вражескую позицию"] call sp_setTaskMessageEff;
 		//reset strelok attack handler
-		refset(("cpt5_defstrelok" call sp_ai_getMobBody) getvariable "anim_handler",true);
+		{
+			refset(("cpt5_defstrelok" call sp_ai_getMobBody) getvariable "anim_handler",true);
+			("cpt5_defstrelok" call sp_ai_getMobBody) switchMove "amovpknlmstpsraswpstdnon";
+		} call sp_threadCriticalSection;
 		["war_peacefull",true] call sp_audio_playMusic;
 
 	} call sp_threadStart;
@@ -1591,14 +1594,17 @@ cpt5_internal_data_ctr_canDamage = 0;
 	["damage",{
 		objParams_1(_am);		
 		if equals(getVar(this,name),"Дико") exitWith {
-			if ((({
-			!callFuncParams(this,hasPart,_x)
-			} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
-				if (getVar(this,isDead)) exitWith {};
+			_nf = {
+				params ['this'];
+				if ((({
+				!callFuncParams(this,hasPart,_x)
+				} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
+					if (getVar(this,isDead)) exitWith {};
 
-				refset(("cpt5_izcombat" call sp_ai_getMobBody) getvariable "anim_handler",true);
-				setVar(this,isDead,true);
-			};
+					refset(("cpt5_izcombat" call sp_ai_getMobBody) getvariable "anim_handler",true);
+					setVar(this,isDead,true);
+				};
+			}; invokeAfterDelayParams(_nf,0.1,this);
 			sp_wsim_invokeNextAction = true;
 		};
 		if equals(call sp_getActor,this) then {

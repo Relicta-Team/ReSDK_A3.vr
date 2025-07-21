@@ -74,7 +74,7 @@ sp_audio_sayPlayerList = {
 sp_audio_isSoundHandleDone = {
 	params ["_handle"];
 	if equalTypes(_handle,objNull) exitWith {
-		{isNullReference(_handle)} call sp_threadWait;
+		isNullReference(_handle)
 	};
 	private _spr = soundParams _handle;
 	if (count soundParams _handle == 0) exitWith {true};
