@@ -87,7 +87,10 @@ cpt2_fnc_clickself_ItemCheck = {
     if isTypeOf(_this,Pill) exitWith {true};
 
     if (isTypeOf(_this,IFoodItem)) exitWith {
-        if ((isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) exitWith {
+        if ((isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) 
+            && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH
+            && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)
+        ) exitWith {
             true
         };
 
@@ -454,7 +457,7 @@ cpt2_data_canUseSelections = false;
 
         _hClick = ["click_self",{
             params ["_item"];
-            if ((isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
+            if ((isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_hunger = 100;
@@ -759,7 +762,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
 
         _hClick = ["click_self",{
             params ["_item"];
-            if (isTypeOf(_item,Pill) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
+            if (isTypeOf(_item,Pill) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_pain = 0;
@@ -831,7 +834,7 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                || isTypeOf(_t,TrapEnabled)
+                && isTypeOf(_t,TrapEnabled)
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
@@ -842,7 +845,7 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                || isTypeOf(_t,TrapEnabled)
+                && isTypeOf(_t,TrapEnabled)
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
@@ -852,7 +855,7 @@ cpt2_data_bandageRefList = [];
             params ["_t","_name"];
             if (
                 ((equals(_t,"cpt2_obj_trap1" call sp_getObject))
-                || isTypeOf(_t,TrapEnabled))
+                && isTypeOf(_t,TrapEnabled))
                 && {_name in ["pickup","mainact"]}) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true

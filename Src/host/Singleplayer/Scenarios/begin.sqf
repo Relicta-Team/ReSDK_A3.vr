@@ -577,7 +577,7 @@ begin_func_startTalkerAnimations = {
 			_strI = str _i;
 			rand(0.2,0.8) call sp_threadPause;
 			([
-				["begin_hwcut1","begin\village\kuh" + _strI]
+				["begin_hwcut1","begin\village\kuh" + _strI,["distance",30]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 			rand(1.2,3.8) call sp_threadPause;
@@ -636,7 +636,7 @@ begin_func_startTalkerAnimations = {
 			_strI = str _i;
 			rand(0.2,0.8) call sp_threadPause;
 			([
-				["begin_hwcut3","begin\village\lop" + _strI]
+				["begin_hwcut3","begin\village\lop" + _strI,["distance",35]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 			rand(3.2,5.8) call sp_threadPause;
@@ -812,12 +812,15 @@ begin_startattack_activated = false;
 					if (begin_attackStarted) then {
 						(("begin_mainattacker1") call sp_ai_getMobBody) hideObject false;
 						(("begin_mainattacker2") call sp_ai_getMobBody) hideObject false;
-						_post = {
-							[
-								["begin_mainattacker1","begin\gate\na1_1",["distance",20]],
-								["begin_mainattacker2","begin\gate\na2_1",["distance",20]]
-							] call sp_audio_startDialog;
-						}; invokeAfterDelay(_post,2.3);
+						
+						if equals(_mob,"begin_mainattacker1" call sp_ai_getMobBody) then {
+							_post = {
+								[
+									["begin_mainattacker1","begin\gate\na1_1",["distance",50]],
+									["begin_mainattacker2","begin\gate\na2_1",["distance",50]]
+								] call sp_audio_startDialog;
+							}; invokeAfterDelay(_post,2.3);
+						};
 					};
 					begin_attackStarted
 				}] call sp_ai_animWait;
@@ -836,8 +839,8 @@ begin_startattack_activated = false;
 
 				if equals(_mob,"begin_mainattacker1" call sp_ai_getMobBody) then {
 					[
-						["begin_mainattacker1","begin\gate\na1_2",["distance",20]],
-						["begin_mainattacker2","begin\gate\na2_2",["distance",20]]
+						["begin_mainattacker1","begin\gate\na1_2",["distance",40]],
+						["begin_mainattacker2","begin\gate\na2_2",["distance",40]]
 					] call sp_audio_startDialog;
 
 					{
@@ -907,7 +910,7 @@ begin_startattack_activated = false;
 		1 call sp_threadPause;
 		([
 			["begin_watcher2","begin\gate\sword1",["distance",25]],
-			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.4]]],
+			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.9]]],
 			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",1.4]]],
 			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",1.1]]],
 			["begin_startdead3","begin\gate\guy4",[["distance",25],["endoffset",0.1]]]

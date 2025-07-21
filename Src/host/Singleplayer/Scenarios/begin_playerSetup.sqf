@@ -161,7 +161,7 @@ begin_playerSetup_setHeaderText = {
 			_x setFace (_x getvariable "faces" select 0);
 		} foreach begin_playerSetupObjects;
 	};
-	invokeAfterDelay(_post,0.5);
+	invokeAfterDelay(_post,1);
 
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0] call setBlackScreenGUI;
@@ -173,7 +173,7 @@ begin_playerSetup_setHeaderText = {
 
 
 	[false,5] call setBlackScreenGUI;
-	["prestart"] call sp_audio_playMusic;
+	["prestart",true] call sp_audio_playMusic;
 	_d = call displayOpen;
 
 	_tcenter = [_d,TEXT,[0,0,100,5]] call createWidget;
@@ -308,7 +308,7 @@ begin_playerSetup_setHeaderText = {
 			[!true,true] call sp_audio_setMusicPause;
 			["begin_prestart"] call sp_startScene;
 		};
-		invokeAfterDelay(_post,4);
+		invokeAfterDelay(_post,8);
 		["begin\prestart_ready"] call sp_audio_sayPlayer;
 	}];
 	_backtoface ctrladdeventhandler ["MouseButtonUp",{
