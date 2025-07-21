@@ -3,6 +3,13 @@
 // sdk.relicta.ru
 // ======================================================
 
+#include "..\engine.hpp"
+#include "..\oop.hpp"
+#include "..\struct.hpp"
+#include "..\text.hpp"
+#include "..\thread.hpp"
+#include "..\..\client\WidgetSystem\widgets.hpp"
+
 sp_gui_taskWidgets = [];
 sp_gui_notificationWidgets = [];
 sp_gui_borders = [];
@@ -68,9 +75,12 @@ sp_initGUI = {
 			sp_gui_notificationSizeW,sp_gui_notificationSizeH
 		]
 	] call createWidget;
+
+	_backpulse = [_d,BACKGROUND,[0,0,0,0]] call createWidget;
 	_t = [_d,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget;
 	_t setBackgroundColor [0.2,0.2,0.2,0.3];
-	sp_gui_notificationWidgets = [_ctg,_t];
+	_t setvariable ["orig_color",[0.2,0.2,0.2,0.3]];
+	sp_gui_notificationWidgets = [_ctg,_t,_backpulse];
 	_ctg setFade 1;
 	_ctg commit 0;
 
@@ -115,6 +125,7 @@ sp_int_getTaskTextWidget = { sp_gui_taskWidgets select 2 };
 
 sp_int_getNotificationWidgetCtg = { sp_gui_notificationWidgets select 0 };
 sp_int_getNotificationWidget = { sp_gui_notificationWidgets select 1 };
+sp_int_getNotificationBackPulseWidget = { sp_gui_notificationWidgets select 2 };
 
 sp_setTaskMessage = {
 	params ["_header",["_desc",""]];
@@ -162,6 +173,7 @@ sp_setNotification = {
 	private _tcopy = _text;
 	private _tWid = call sp_int_getNotificationWidget;
 
+	//green inputs (gameside)
 	while {[_text,"\$\w+"] call regex_isMatch} do {
 		private _vname = [_text,"\$\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
@@ -169,11 +181,20 @@ sp_setNotification = {
 		_text = [_text,"\$"+_keyName,format["<t size='1.3' color='#3bad18'>%1</t>",_inpName]] call regex_replace;
 	};
 
+	//red inputs (engine side)
 	while {[_text,"\@\w+"] call regex_isMatch} do {
 		private _vname = [_text,"\@\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
 		private _inpName = actionKeysNames _keyName;
 		_text = [_text,"\@"+_keyName,format["<t size='1.3' color='#e20048'>%1</t>",_inpName]] call regex_replace;
+	};
+
+	//keywords
+	while {[_text,"\#\([^\)]+\)"] call regex_isMatch} do {
+		private _vname = [_text,"\#\([^\)]+\)"] call regex_getFirstMatch;
+		private _txt = _vname select [2,count _vname - 3];
+		
+		_text = [_text,"\#\("+_txt+"\)",format["<t size='1.3' shadow='1' shadowColor='#063014' shadowOffset='0.01' color='#0fab43'>%1</t>",_txt]] call regex_replace;
 	};
 
 	[_tWid,format["%2<t align='center' size='1.2'>%1</t>%2 ",_text,sbr]] call widgetSetText;
@@ -183,7 +204,33 @@ sp_setNotification = {
 		[true] call sp_setNotificationVisible;
 	};
 
+	call sp_int_pulseNotification;
+
 	_tcopy
+};
+
+sp_int_pulseNotificationHandle = sp_threadNull;
+sp_int_pulseNotification = {
+	sp_int_pulseNotificationHandle call sp_threadStop;
+	private _w = (call sp_int_getNotificationWidget);
+	_w setBackgroundColor (_w getvariable "orig_color");
+	sp_int_pulseNotificationHandle = {
+		private _w = (call sp_int_getNotificationWidget);
+		_orig = _w getvariable "orig_color";
+		_upd = [0.6,0.6,0.6,0.3]; //"c1d41c" call color_htmlToRGBA;
+		_t = tickTime;
+		_tEnd = _t + 0.8;
+
+		while {tickTime < _tEnd} do {
+			_nv = vectorLinearConversion [0,0.2,tickTime % 0.2,_orig select [0,3],_upd select [0,3],true];
+			_nv set [3,0.3];
+			_w setBackgroundColor _nv;
+		};
+
+		_w setBackgroundColor _orig;
+		
+	} call sp_threadStart;
+	
 };
 
 sp_setNotificationVisible = {
