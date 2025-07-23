@@ -30,9 +30,6 @@ struct(PostProcessEffectBase)
 		ppEffectDestroy (self getv(_handle));
 	}
 
-	// Указывает на то, что эффект работает в цикле. Выключенный флаг просто проигрывает эффект один раз и уничтожает объект
-	def(isLooped) false;
-
 	// ------------------------------------------------------------
 	// Generic control
 	// ------------------------------------------------------------
@@ -60,11 +57,65 @@ struct(PostProcessEffectBase)
 		ppEffectEnabled (self getv(_handle))
 	}
 
+	// Bindings
+	// Эта функция вызывается до обновления.
+	def(updateBindings)
+	{
+		
+	}
+
 	// ------------------------------------------------------------
 	// Animations
 	// ------------------------------------------------------------
 	
+	// Указывает на то, что эффект работает в цикле. Выключенный флаг просто проигрывает эффект один раз и уничтожает объект
+	def(isLooped) false;
 
+	// Частота обновления в секундах
+	def(updateFrequency) 0;
+
+	// Виртуальная функция, которая вызывается каждый кадр пока анимация активна
+	def(update)
+	{
+
+	}
+
+endstruct
+
+struct(PPAnimatableProperty) 
+	def(name) "";
+	def(value) 0;
+	def(targetValue) 0;
+	def(duration) 1;
+	def(curve) "linear"; //
+	def(_startTime) 0;
+
+	def(init)
+	{
+		self setv(_startTime,tickTime);
+	}
+
+	def(getValue)
+	{
+		private _tS = self getv(_startTime);
+		private _tE = _tS + (self getv(_duration));
+		
+		private _t = linearConversion[_tS,_tE,tickTime,self getv(_value),self getv(_targetValue),true];
+		call {
+			private _curve = self getv(_curve);	
+			if (_curve == "easeInOut") then {
+				_t = 0.5 - cos(pi * _t) * 0.5;
+			};
+			if (_curve == "easeIn") then {
+				_t = _t ^ 2;
+			};
+			if (_curve == "easeOut") then {
+				_t = 1 - (1 - _t) ^ 2;
+			};
+		};
+
+		_t
+	}
 endstruct
 
 
