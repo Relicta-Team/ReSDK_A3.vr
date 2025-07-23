@@ -87,7 +87,7 @@ struct(PPAnimatableProperty)
 	def(value) 0;
 	def(targetValue) 0;
 	def(duration) 1;
-	def(curve) "linear"; //
+	def(curve) "linear"; //linear, easeInOut, easeIn, easeOut
 	def(_startTime) 0;
 
 	def(init)
@@ -118,6 +118,20 @@ struct(PPAnimatableProperty)
 	}
 endstruct
 
+struct(PostProcessAnimationController)
+	def(animations) [];
+
+	def(addAnimation)
+	{
+		params [["_animation",[]]];
+		self getv(_animations) pushBack _animation;
+	}
+
+	def(update)
+	{
+		self getv(_animations) apply {_x callp(update)};
+	}
+endstruct
 
 struct(PPRadialBlur) base(PostProcessEffectBase)
 	def(_priority) 100;
