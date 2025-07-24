@@ -252,7 +252,7 @@
   required:
     components:
       hand_item:
-        class: Item
+        class: IReagentNDItem
         name: Молоко
         destroy: false
         meta_tag: milkContainer
