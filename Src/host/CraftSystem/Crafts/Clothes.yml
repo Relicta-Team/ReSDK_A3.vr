@@ -22,10 +22,9 @@
       hand_item:
         class: Knife
       target:
-        class: [BodyClothBase,HeadCloth] #одежда или шапка
+        class: Cloth #одежда или шапка
         # может быть назначен в один из перечисленных слотов
-        condition: |
-          (:canSetItemOnSlot("INV_CLOTH") || :canSetItemOnSlot("INV_HEAD") || :canSetItemOnSlot("INV_FACE"))
+        condition: isTypeOf(:material,MatCloth)
         check_type_of: true # любые унаследованные от BodyClothBase или HeadCloth
   result:
     # TODO звук рванины
