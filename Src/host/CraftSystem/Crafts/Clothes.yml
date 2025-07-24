@@ -36,7 +36,17 @@
   required: 
     components:
       - class: Rag
-        count: 3
+        count: 1
+        check_type_of: false
+  result:
+    <<: *def_mods
+    class: RopeItem
+
+- <<: *ref_main_cloth
+  required: 
+    components:
+      - class: ClothDebris(1-2)
+        count: 2
         check_type_of: false
   result:
     <<: *def_mods
@@ -45,8 +55,8 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
-        count: 3
+      - class: ClothDebris(1-2)
+        count: 2
         check_type_of: false
       - class: NeedleWithThreads
         destroy: false
@@ -57,7 +67,7 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
+      - class: ClothDebris(1-2)
         count: 1
         check_type_of: false
   result:
@@ -67,8 +77,8 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
-        count: 2
+      - class: ClothDebris(1-2)
+        count: 1
         check_type_of: false
       - class: NeedleWithThreads
         destroy: false
@@ -79,8 +89,8 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
-        count: 5
+      - class: ClothDebris(1-2)
+        count: 3
         check_type_of: false
       - class: NeedleWithThreads
         destroy: false
@@ -91,8 +101,8 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
-        count: 3
+      - class: ClothDebris(1-2)
+        count: 2
         check_type_of: false
       - class: NeedleWithThreads
         destroy: false
@@ -105,7 +115,7 @@
 - <<: *ref_main_cloth
   required:
     components:
-      - class: Rag
+      - class: ClothDebris(1-2)
         count: 2
         check_type_of: false
       - class: RopeItem
@@ -138,7 +148,7 @@
        count: 2 
        check_type_of: false
      - class: ClothDebris(1-2)
-       count: 3
+       count: 1
        check_type_of: false
      - class: NeedleWithThreads 
        count: 1
@@ -146,7 +156,24 @@
   result: 
     class: CliricCloth
     <<: *def_mods
-    
+  
+- <<: *ref_main_cloth
+  required: 
+    skills:  
+      engineering: 3
+    components: 
+     - class: FabricBagBig1
+       count: 1
+     - class: Knife 
+       count: 1
+       destroy: false
+     - class: NeedleWithThreads 
+       count: 1
+       destroy: false
+  result: 
+    class: CliricCloth
+    <<: *def_mods
+
 - <<: *ref_main_cloth
   required: 
     skills:  
@@ -156,7 +183,7 @@
        count: 2 
        check_type_of: false
      - class: ClothDebris(1-2)
-       count: 3
+       count: 1
        check_type_of: false
      - class: NeedleWithThreads 
        count: 1
@@ -170,9 +197,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -188,9 +212,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -206,9 +227,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -224,9 +242,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -242,9 +257,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -260,9 +272,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 3
        check_type_of: false
@@ -278,9 +287,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 2 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 1
        check_type_of: false
@@ -296,14 +302,9 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 1 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 1
        check_type_of: false
-     - class: NeedleWithThreads 
-       count: 1
        destroy: false
   result: 
     class: HatBandana
@@ -314,15 +315,9 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 1 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 1
        check_type_of: false
-     - class: NeedleWithThreads 
-       count: 1
-       destroy: false
   result: 
     class: HatBandana1
     <<: *def_mods
@@ -332,9 +327,6 @@
     skills:  
       engineering: 3
     components: 
-     - class: Rag
-       count: 1 
-       check_type_of: false
      - class: ClothDebris(1-2)
        count: 1
        check_type_of: false
@@ -351,10 +343,10 @@
       engineering: 3
     components: 
      - class: Rag
-       count: 2
+       count: 1
        check_type_of: false
      - class: ClothDebris(1-2)
-       count: 2
+       count: 1
        check_type_of: false
      - class: NeedleWithThreads 
        count: 1

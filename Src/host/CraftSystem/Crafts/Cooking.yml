@@ -28,7 +28,7 @@
     type: interact
     category: Food
     options:
-      craft_duration: from_skill(10,1)
+      craft_duration: from_skill(5,1)
 
 # =======================================================
 # Frying pan
@@ -44,7 +44,7 @@
         check_type_of: false
   result:
     class: Bun
-    count: 3
+    count: {min: 3, max: 6}
     modifiers:
       - name: set_name
         value: "Жареный {basename.lower}"
@@ -87,7 +87,7 @@
             var _curcap = result:getFilledSpace()
             result:setCapacity(_curcap+10)
             result:addReagent("Spice",2)
-            result:addReagent("Nutriment",8)
+            result:addReagent("Nutriment",10)
           }
       - default
 
@@ -131,7 +131,7 @@
       - class: Testo
         check_type_of: false
       - class: Egg
-        count: 2
+        count: 1
   result:
     class: Bread
     <<: *def_mods
@@ -140,7 +140,7 @@
   required:
     components:
       - class: Egg
-        count: 2
+        count: 1
   result:
     class: Omlet
     <<: *def_mods
@@ -152,6 +152,7 @@
         check_type_of: false
   result:
     class: Lepeshka
+    count: {min: 2, max: 3}
     <<: *def_mods
 
 # =======================================================
@@ -171,6 +172,7 @@
       - class: Testo
   result:
     class: Lapsha
+    count: 2
     <<: *def_mods
 
 # =======================================================
@@ -268,7 +270,7 @@
     modifiers:
       - name: transfer_reagents
         get_from: 
-          milkContainer: 30
+          milkContainer: 10
       - name: replace_reagent
         from: Milk
         to: Nutriment
@@ -323,7 +325,7 @@
   required:
     components:
       hand_item:
-        class: ButterPiece
+        class: Cutlet
       target:
         class: BreadChopped
         condition: :name == "Кусок хлеба"
