@@ -816,8 +816,9 @@ cpt2_data_bandageRefList = [];
 
     ["activate_verb",{
         params ["_t","_name"];
-        if (_name == "mainact") then {
+        if (_name == "mainact") exitWith {
             if equals(_t,"cpt2_obj_trap1" call sp_getObject) exitWith {true};
+            false
         };
         false
     }] call sp_addPlayerHandler;
@@ -834,7 +835,7 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                && isTypeOf(_t,TrapEnabled)
+                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
@@ -845,7 +846,7 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                && isTypeOf(_t,TrapEnabled)
+                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
@@ -855,7 +856,8 @@ cpt2_data_bandageRefList = [];
             params ["_t","_name"];
             if (
                 ((equals(_t,"cpt2_obj_trap1" call sp_getObject))
-                && isTypeOf(_t,TrapEnabled))
+                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
+                )
                 && {_name in ["pickup","mainact"]}) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true

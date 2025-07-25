@@ -211,6 +211,10 @@ sp_setNotification = {
 
 sp_int_pulseNotificationHandle = sp_threadNull;
 sp_int_pulseNotification = {
+	if isNull(sp_int_pulseNotificationHandle) then {
+		sp_int_pulseNotificationHandle = sp_threadNull; //fix error for undefined variable
+	};
+
 	sp_int_pulseNotificationHandle call sp_threadStop;
 	private _w = (call sp_int_getNotificationWidget);
 	_w setBackgroundColor (_w getvariable "orig_color");

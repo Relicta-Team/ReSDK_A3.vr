@@ -552,16 +552,23 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 		{
 			3 call sp_threadPause;
 			{
-				{
-					callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,getDistanceTo,"cpt5_obj_clothwallunder" call sp_getObject arg true) 
-					<= 2.3
-				} call sp_threadWait;
-				callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,meSay,"резко срывает одеяло");
-				{
-					["cpt5_obj_clothwallunder" call sp_getObject] call deleteGameObject;
-					["cpt5_obj_clothwallunder_invwall" call sp_getObject] call deleteGameObject;
-				} call sp_threadCriticalSection;
-				
+				while {true} do {
+					{
+						callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,getDistanceTo,"cpt5_obj_clothwallunder" call sp_getObject arg true) 
+						<= 2.3
+						&& !getVar("cpt5_obj_clothwallunder" call sp_getObject,isOpen)
+					} call sp_threadWait;
+					callFuncParams("cpt5_underground_mover" call sp_ai_getMobObject,meSay,"открывает дверь");
+					{
+						//todo remove invwall
+						//["cpt5_obj_clothwallunder_invwall" call sp_getObject] call deleteGameObject;
+						_door = "cpt5_obj_clothwallunder" call sp_getObject;
+						callFuncParams(_door,setDoorLock,false arg false);
+						callFuncParams(_door,setDoorOpen,true);
+					} call sp_threadCriticalSection;
+					
+					3 call sp_threadPause;
+				};
 			} call sp_threadStart;
 
 			["cpt5_underground_mover",[
@@ -579,9 +586,9 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 
 		//dialog kapitan
 		([
-			["cpt5_kapitan","chap5\underground\under_kap1",["endoffset",0.1]],
-			[player,"chap5\underground\under_gg1",["endoffset",0.1]],
-			["cpt5_kapitan","chap5\underground\under_kap2",["endoffset",0.1]]
+			["cpt5_kapitan","chap5\underground\under_kap1",[["endoffset",0.1],["distance",50]]],
+			[player,"chap5\underground\under_gg1",[["endoffset",0.1],["distance",50]]],
+			["cpt5_kapitan","chap5\underground\under_kap2",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 		//2 call sp_threadPause;
 
@@ -889,7 +896,7 @@ cpt5_trg_combat_stage1_act = false;
 	{
 		//dialog
 		([
-			["cpt5_kapitan","chap5\underground\kap_podavl",["endoffset",0.1]]
+			["cpt5_kapitan","chap5\underground\kap_podavl",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 
@@ -1071,7 +1078,7 @@ cpt5_warzone_danger = true;
 			[
 				"cpt5_kapitan"
 				//!throws error callFunc("cpt5_pos_capitan3" call sp_getObject,getPos) vectorAdd [0,0,2]
-			,"chap5\warzone\kap1",[["endoffset",0.8],["distance",80]]],
+			,"chap5\warzone\kap1",[["endoffset",0.8],["distance",100]]],
 			["cpt5_defstrelok","chap5\warzone\strelok2",["endoffset",0.4]],
 			[player,"chap5\warzone\gg1",["endoffset",0.1]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
@@ -1580,6 +1587,15 @@ cpt5_internal_fnc_prepCloseCombatLogic = {
 cpt5_internal_data_ctr_canDamage = 0;
 
 ["cpt5_act_ccomb_loop",{
+
+	{
+		for "_i" from 1 to 6 do {
+			private _covName = "cpt5_obj_preendcov" + (str _i);
+			private _cov = _covName call sp_getObject;
+			[_cov] call deleteGameObject;
+		}
+	} call sp_threadCriticalSection;
+
 	{
 		{
 			[true,0.01] call setBlackScreenGUI;
@@ -1729,7 +1745,7 @@ cpt5_internal_data_ctr_canDamage = 0;
 	{
 		{
 			callFuncParams("cpt5_kapitan" call sp_ai_getMobObject,getDistanceTo,call sp_getActor arg true)
-			<= 5
+			<= 7
 		} call sp_threadWait;
 		[true] call sp_setHideTaskMessageCtg;
 
@@ -1849,7 +1865,7 @@ cpt5_data_lastbattle = false;
 			},[_x getvariable "link",_mobAtt+[player],_forEachIndex]] call sp_threadStart;
 		} foreach _mobIzt;
 
-		5 call sp_threadPause;
+		8 call sp_threadPause;
 		[""] call sp_view_setPlayerHudVisible;
 		[true,0.2] call setBlackScreenGUI;
 		
@@ -1858,7 +1874,7 @@ cpt5_data_lastbattle = false;
 
 			["cpt5_endtitle"] call sp_startScene;
 		};
-		invokeAfterDelay(_ender,2);
+		invokeAfterDelay(_ender,5);
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 

@@ -171,9 +171,6 @@ begin_playerSetup_setHeaderText = {
 
 	(begin_playerSetup_listCamPos select 0) call sp_cam_prepCamera;
 
-
-	[false,5] call setBlackScreenGUI;
-	["prestart",true] call sp_audio_playMusic;
 	_d = call displayOpen;
 
 	_tcenter = [_d,TEXT,[0,0,100,5]] call createWidget;
@@ -375,5 +372,13 @@ begin_playerSetup_setHeaderText = {
 		};
 		
 	} foreach [_prev,_next,_back,_toname,_backtoface,_startplay,_select];
+
+
+	widgetSetFade(begin_playerSetup_zones select 0,1,0);
+	{
+		[false,4] call sp_gui_setBlackScreenGUI;
+		["prestart",true] call sp_audio_playMusic;
+		widgetSetFade(begin_playerSetup_zones select 0,0,0.8);
+	} call sp_threadStart;
 
 }] call sp_addScene;

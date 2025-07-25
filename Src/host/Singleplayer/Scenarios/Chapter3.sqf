@@ -132,6 +132,7 @@ cpt3_trg_enterdarkzone_act = false;
 
 ["cpt3_trg_founddeadbody",{
 	{
+		["strange"] call sp_audio_playMusic;
 		["chap3\gg1"] call sp_audio_sayPlayer;
 
 		["Вы можете обыскивать тела людей не проявляющих активности. Например: мертвых, связанных или спящих." + 
@@ -200,6 +201,9 @@ cpt3_trg_enterdarkzone_act = false;
 
 	{
 		1 call sp_threadPause;
+		{
+			callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true)
+		} call sp_threadWait;
 		["Для взлома двери с помощью отмычки нажмите ЛКМ по двери. Если у вас есть навыки взлома - вы с лёгкостью откроете дверь."] call sp_setNotification;
 
 		{
@@ -817,8 +821,10 @@ cpt3_func_damageEvent = {
 
 ["cpt3_trg_foundgate",{
 	["gate"] call sp_audio_playMusic;
-
-	["chap3\gg7"] call sp_audio_sayPlayer;
+	{
+		2 call sp_threadPause;
+		["chap3\gg7"] call sp_audio_sayPlayer;
+	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt3_trg_ongate",{
@@ -830,7 +836,7 @@ cpt3_func_damageEvent = {
 			callFuncParams(call sp_getActor,getDistanceTo,"cpt3_obj_radio" call sp_getObject arg true) <= 10
 		}];
 		private _distSpec = [
-			["distance",30],
+			["distance",40],
 			_distanceCheckDialog
 		];
 

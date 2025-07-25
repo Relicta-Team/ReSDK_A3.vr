@@ -615,6 +615,11 @@ cpt1_act_addMapViewHandler = {
 
 			[_t] call deleteWidget;
 		} call sp_threadStart;
+	} else {
+		if (["cpt1_data_entercaves",false] call sp_storageGet) then {
+			["cpt1_data_entercaves",true] call sp_storageSet;
+			["transition4"] call sp_audio_playMusic;
+		};
 	};
 }] call sp_addTriggerEnter;
 
@@ -648,7 +653,6 @@ cpt1_act_addMapViewHandler = {
 }] call sp_addScene;
 
 ["cpt1_walk_topart2",{
-	["transition4"] call sp_audio_playMusic;
 	["Новый дом","Отправляйтесь к ближайшему городу"] call sp_setTaskMessageEff;
 }] call sp_addScene;
 

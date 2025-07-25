@@ -102,11 +102,11 @@ begin_logoshown = false;
 			5 call sp_threadPause;
 			(["begin\precutscene\gg2"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 			1 call sp_threadPause;
-			(["begin\precutscene\gg3"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			(["begin\precutscene\gg3",1.5] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 			2.8 call sp_threadPause;
-			(["begin\precutscene\gg4"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
+			(["begin\precutscene\gg4",1.5] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 			3 call sp_threadPause;
-			(["begin\precutscene\gg5"] call sp_audio_sayPlayer);
+			(["begin\precutscene\gg5",2] call sp_audio_sayPlayer);
 		} call sp_threadStart;
 
 		//1 call sp_threadPause;
@@ -592,9 +592,9 @@ begin_func_startTalkerAnimations = {
 ["beging_trg_talker2",{
 	{
 		([
-			["begin_hwcut2man","begin\village\muzh1",["endoffset",0.1]],
-			["begin_hwcut2woman","begin\village\cac1",["endoffset",0.1]],
-			["begin_hwcut2man","begin\village\muzh2",["endoffset",0.4]]
+			["begin_hwcut2man","begin\village\muzh1",[["endoffset",0.1],["distance",30]]],
+			["begin_hwcut2woman","begin\village\cac1",[["endoffset",0.1],["distance",30]]],
+			["begin_hwcut2man","begin\village\muzh2",[["endoffset",0.4],["distance",30]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 		
 		//["begin_hwcut2man",player] call sp_ai_setLookAtControl;
@@ -605,10 +605,10 @@ begin_func_startTalkerAnimations = {
 		} call sp_threadWait;
 
 		([
-			["begin_hwcut2woman","begin\village\cac2",["endoffset",0.1]],
-			["begin_hwcut2man","begin\village\muzh3",["endoffset",0.7]],
-			["begin_hwcut2woman","begin\village\cac3",["endoffset",0.9]],
-			["begin_hwcut2man","begin\village\muzh4",[["endoffset",0.4],["onstart",{
+			["begin_hwcut2woman","begin\village\cac2",[["endoffset",0.1],["distance",30]]],
+			["begin_hwcut2man","begin\village\muzh3",[["endoffset",0.7],["distance",30]]],
+			["begin_hwcut2woman","begin\village\cac3",[["endoffset",1.3],["distance",30]]],
+			["begin_hwcut2man","begin\village\muzh4",[["endoffset",0.4],["distance",30],["onstart",{
 				{
 					1.7 call sp_threadPause;
 					["begin_hwcut2woman","begin_pos_hwcut2woman","begin\village_caca",{
@@ -636,7 +636,7 @@ begin_func_startTalkerAnimations = {
 			_strI = str _i;
 			rand(0.2,0.8) call sp_threadPause;
 			([
-				["begin_hwcut3","begin\village\lop" + _strI,["distance",35]]
+				["begin_hwcut3","begin\village\lop" + _strI,["distance",30]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 			rand(3.2,5.8) call sp_threadPause;
@@ -651,10 +651,10 @@ begin_func_startTalkerAnimations = {
 ["beging_trg_talker4",{
 	{
 		([
-			["begin_hwcut4man1","begin\village\talk1_1",["endoffset",0.1]],
-			["begin_hwcut4man2","begin\village\talk2_1",["endoffset",0.8]],
-			["begin_hwcut4man1","begin\village\talk1_2",["endoffset",0.1]],
-			["begin_hwcut4man2","begin\village\talk2_2",["endoffset",0.8]]
+			["begin_hwcut4man1","begin\village\talk1_1",[["endoffset",0.1],["distance",20]]],
+			["begin_hwcut4man2","begin\village\talk2_1",[["endoffset",0.8],["distance",20]]],
+			["begin_hwcut4man1","begin\village\talk1_2",[["endoffset",0.1],["distance",20]]],
+			["begin_hwcut4man2","begin\village\talk2_2",[["endoffset",0.8],["distance",20]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		["begin_hwcut4man1",player] call sp_ai_setLookAtControl;
@@ -664,9 +664,9 @@ begin_func_startTalkerAnimations = {
 		} call sp_threadWait;
 
 		([
-			["begin_hwcut4man1","begin\village\talk1_3",["endoffset",0.1]],
-			["begin_hwcut4man2","begin\village\talk2_3",["endoffset",0.8]],
-			["begin_hwcut4man1","begin\village\talk1_4",[["endoffset",1],["onstart",{
+			["begin_hwcut4man1","begin\village\talk1_3",[["endoffset",0.1],["distance",20]]],
+			["begin_hwcut4man2","begin\village\talk2_3",[["endoffset",0.8],["distance",20]]],
+			["begin_hwcut4man1","begin\village\talk1_4",[["endoffset",1],["distance",20],["onstart",{
 				{
 					1.5 call sp_threadPause;
 					["begin_hwcut4man2","begin_pos_hwcut4man2","begin\village_guy2",{
@@ -717,12 +717,12 @@ begin_canStartAttack = false;
 			_thd = {
 				//dialog
 				([
-					["begin_keeper1","begin\start\prov1",["endoffset",0.5]],
+					["begin_keeper1","begin\start\prov1",[["endoffset",0.5],["distance",50]]],
 					[player,"begin\start\gg1",["endoffset",0.3]],
-					["begin_keeper1","begin\start\prov2",["endoffset",1.1]],
+					["begin_keeper1","begin\start\prov2",[["endoffset",1.1],["distance",50]]],
 					[player,"begin\start\gg2",["endoffset",1.3]],
-					["begin_keeper1","begin\start\prov3",["endoffset",0]],
-					["begin_keeper1","begin\start\prov4",["endoffset",0]]
+					["begin_keeper1","begin\start\prov3",[["endoffset",0],["distance",50]]],
+					["begin_keeper1","begin\start\prov4",[["endoffset",0],["distance",50]]]
 				] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 				1 call sp_threadPause;
@@ -816,8 +816,8 @@ begin_startattack_activated = false;
 						if equals(_mob,"begin_mainattacker1" call sp_ai_getMobBody) then {
 							_post = {
 								[
-									["begin_mainattacker1","begin\gate\na1_1",["distance",50]],
-									["begin_mainattacker2","begin\gate\na2_1",["distance",50]]
+									["begin_mainattacker1","begin\gate\na1_1",["distance",100]],
+									["begin_mainattacker2","begin\gate\na2_1",["distance",100]]
 								] call sp_audio_startDialog;
 							}; invokeAfterDelay(_post,2.3);
 						};
@@ -839,8 +839,8 @@ begin_startattack_activated = false;
 
 				if equals(_mob,"begin_mainattacker1" call sp_ai_getMobBody) then {
 					[
-						["begin_mainattacker1","begin\gate\na1_2",["distance",40]],
-						["begin_mainattacker2","begin\gate\na2_2",["distance",40]]
+						["begin_mainattacker1","begin\gate\na1_2",["distance",50]],
+						["begin_mainattacker2","begin\gate\na2_2",["distance",50]]
 					] call sp_audio_startDialog;
 
 					{
@@ -909,17 +909,17 @@ begin_startattack_activated = false;
 	{
 		1 call sp_threadPause;
 		([
-			["begin_watcher2","begin\gate\sword1",["distance",25]],
-			["begin_startdead1","begin\gate\guy1",[["distance",25],["endoffset",0.9]]],
-			["begin_startdead5","begin\gate\guy2",[["distance",25],["endoffset",1.4]]],
-			["begin_startdead4","begin\gate\guy3",[["distance",25],["endoffset",1.1]]],
-			["begin_startdead3","begin\gate\guy4",[["distance",25],["endoffset",0.1]]]
+			["begin_watcher2","begin\gate\sword1",["distance",40]],
+			["begin_startdead1","begin\gate\guy1",[["distance",30],["endoffset",0.9]]],
+			["begin_startdead5","begin\gate\guy2",[["distance",40],["endoffset",1.8]]],
+			["begin_startdead4","begin\gate\guy3",[["distance",40],["endoffset",1.6]]],
+			["begin_startdead3","begin\gate\guy4",[["distance",40],["endoffset",0.1]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		{begin_canStartAttack} call sp_threadWait;
 		2.2 call sp_threadPause;
 
-		([["begin_watcher1","begin\gate\watcher",["distance",35]]] call sp_audio_startDialog)
+		([["begin_watcher1","begin\gate\watcher",["distance",50]]] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
 		{
 			_wbody = ("begin_watcher1" call sp_ai_getMobBody);
@@ -929,11 +929,11 @@ begin_startattack_activated = false;
 			] call cpt5_act_doShot;
 		} call sp_threadCriticalSection;
 		
-		0.1 call sp_threadPause;
+		0.01 call sp_threadPause;
 
 		{callFuncParams("begin_watcher1" call sp_ai_getMobObject,lossLimb,BP_INDEX_HEAD)} call sp_threadCriticalSection;
 
-		0.15 call sp_threadPause;
+		0.01 call sp_threadPause;
 
 		player forcewalk false;
 
@@ -944,9 +944,9 @@ begin_startattack_activated = false;
 			[_pos] call cpt5_explosionGrenade;
 		} call sp_threadCriticalSection;
 
-		[["begin_startdead4","begin\gate\guy3_run",["distance",30]]] call sp_audio_startDialog;
+		[["begin_startdead4","begin\gate\guy3_run",["distance",50]]] call sp_audio_startDialog;
 		
-		[["begin_startdead5","begin\gate\guy2_run",["distance",30]]] call sp_audio_startDialog;
+		[["begin_startdead5","begin\gate\guy2_run",["distance",50]]] call sp_audio_startDialog;
 
 		["beginchase",true] call sp_audio_playMusic;
 
@@ -954,7 +954,7 @@ begin_startattack_activated = false;
 		{
 			callFuncParams("begin_doorenter" call sp_getObject,setDoorOpen,true);
 		} call sp_threadCriticalSection;
-		[["begin_startdead3","begin\gate\guy4_run",["distance",30]]] call sp_audio_startDialog;
+		[["begin_startdead3","begin\gate\guy4_run",["distance",50]]] call sp_audio_startDialog;
 
 		{
 			2 call sp_threadPause;
@@ -967,12 +967,12 @@ begin_startattack_activated = false;
 			} call sp_threadCriticalSection;
 		} call sp_threadStart;
 		
-		[["begin_watcher2","begin\gate\sword2",["distance",30]]] call sp_audio_startDialog;
+		[["begin_watcher2","begin\gate\sword2",["distance",40]]] call sp_audio_startDialog;
 
 		begin_attackStarted = true;
 
-		4 call sp_threadPause;
-		[["begin_startdead1","begin\gate\guy1_run",["distance",30]]] call sp_audio_startDialog;
+		2 call sp_threadPause;
+		[["begin_startdead1","begin\gate\guy1_run",["distance",40]]] call sp_audio_startDialog;
 
 		{ [[3755.28,3927.41,7.12903]] call cpt5_explosionGrenade; } call sp_threadCriticalSection;
 		for "_i" from 1 to 2 do {
@@ -1002,9 +1002,9 @@ begin_startattack_activated = false;
 			]
 		] call sp_ai_playAnim;
 		[
-			["begin_keeper1","begin\gate\prov1",["distance",20]],
-			[player,"begin\gate\gg1",["distance",10]],
-			["begin_keeper1","begin\gate\prov2",["distance",20]]
+			["begin_keeper1","begin\gate\prov1",[["distance",20],["endoffset",0.9]]],
+			[player,"begin\gate\gg1",[["distance",10],["endoffset",2]]],
+			["begin_keeper1","begin\gate\prov2",[["distance",30],["endoffset",0.1]]]
 		] call sp_audio_startDialog;
 
 		//loop attack targets
@@ -1194,9 +1194,9 @@ begin_run3_dialogHandle = null;
 	begin_run3_act = true;
 
 	begin_run3_dialogHandle = [
-		["begin_keeper1","begin\gate\prov3",["distance",20]],
-		[player,"begin\gate\gg2",["distance",10]],
-		["begin_keeper1","begin\gate\prov4",["distance",30]]
+		["begin_keeper1","begin\gate\prov3",[["distance",20],["endoffset",1.3]]],
+		[player,"begin\gate\gg2",[["distance",10],["endoffset",1]]],
+		["begin_keeper1","begin\gate\prov4",[["distance",30],["endoffset",0]]]
 	] call sp_audio_startDialog;
 
 }] call sp_addTriggerEnter;
@@ -1207,7 +1207,7 @@ begin_run4_processenemy = true;
 	if (begin_enterrun4) exitWith {};
 	begin_enterrun4 = true;
 
-	[["begin_keeper2","begin\under\sword1"]] call sp_audio_startDialog;
+	[["begin_keeper2","begin\under\sword1",["distance",80]]] call sp_audio_startDialog;
 
 	callFuncParams("begin_rundoor2" call sp_getObject,setDoorOpen,false);
 	{
@@ -1266,11 +1266,11 @@ begin_act_readyToDown = false;
 		state4 - смерть
 	*/
 	[
-		["begin_keeper2","begin\under\sword2",["endoffset",0.3]],
-		[player,"begin\under\gg1",["endoffset",0.4]],
-		["begin_keeper2","begin\under\sword3",["endoffset",0]],
-		[player,"begin\under\gg2",["endoffset",0.1]],
-		["begin_keeper2","begin\under\sword4",[["endoffset",0],["onend",{
+		["begin_keeper2","begin\under\sword2",[["endoffset",0.4],["distance",50]]],
+		[player,"begin\under\gg1",[["endoffset",1.3],["distance",50]]],
+		["begin_keeper2","begin\under\sword3",[["endoffset",0],["distance",50]]],
+		[player,"begin\under\gg2",[["endoffset",0.1],["distance",50]]],
+		["begin_keeper2","begin\under\sword4",[["endoffset",0],["distance",50],["onend",{
 			begin_act_readyToDown = true;
 		}]]]
 	] call sp_audio_startDialog;
@@ -1357,7 +1357,13 @@ begin_playerInVent = false;
 			[false] call begin_internal_setNearCollisionMode;
 			[false] call sp_gui_setCinematicMode;
 
-			["beginchase2",true] call sp_audio_playMusic;
+			[true,true] call sp_audio_setMusicPause;
+			_post = {
+				[!true,true] call sp_audio_setMusicPause;
+				["beginchase2",true] call sp_audio_playMusic;
+			};
+			invokeAfterDelay(_post,4);
+
 			begin_playerInVent = true;
 		}] call sp_ai_playAnim;
 	} call sp_threadStart;
@@ -1376,8 +1382,8 @@ begin_cutscene1_act = false;
 	setVar(_mob,DX,vec2(30,0));
 
 	[
-		["begin_cutscene1dead","begin\under\cutsdead1",["distance",10]],
-		["begin_cutscene1dead","begin\under\cutsdead2",[["distance",10],["onstart",{
+		["begin_cutscene1dead","begin\under\cutsdead1",["distance",20]],
+		["begin_cutscene1dead","begin\under\cutsdead2",[["distance",20],["onstart",{
 			{
 				[getposatl("begin_cutscene1attack" call sp_ai_getMobBody),"begin\radio9",35] call sp_audio_playSound;
 				5.2 call sp_threadPause;
@@ -1385,7 +1391,7 @@ begin_cutscene1_act = false;
 
 			} call sp_threadStart;
 		}]]],
-		["begin_cutscene1dead","begin\under\cutsdead3",["distance",10]]
+		["begin_cutscene1dead","begin\under\cutsdead3",["distance",20]]
 	] call sp_audio_startDialog;
 
 	//begin_pos_cutscene1dead
@@ -1394,7 +1400,7 @@ begin_cutscene1_act = false;
 	["begin_cutscene1attack","begin_pos_cutscene1attack","begin\cutscene1attack",{},[
 		["state_1",{
 			[
-				["begin_cutscene1attack","begin\under\cutsna1",["distance",10]]
+				["begin_cutscene1attack","begin\under\cutsna1",["distance",20]]
 			] call sp_audio_startDialog;
 			_dead = "begin_cutscene1dead" call sp_ai_getMobObject;
 			callFuncParams("begin_cutscene1attack" call sp_ai_getMobObject,attackOtherMob,_dead);
@@ -1402,7 +1408,7 @@ begin_cutscene1_act = false;
 			{
 				2 call sp_threadPause;
 				[
-					["begin_cutscene1attack","begin\under\cutsna2",["distance",10]]
+					["begin_cutscene1attack","begin\under\cutsna2",["distance",15]]
 				] call sp_audio_startDialog;
 			} call sp_threadStart;
 		}]
@@ -1433,25 +1439,32 @@ begin_internal_data_keeper3readytoNextDialog = false;
 	private _post = {
 		{
 			_hndl = ([
-				["begin_keeper3","begin\end\bro1",[["endoffset",0.3],["distance",25]]],
+				["begin_keeper3","begin\end\bro1",[["endoffset",0.3],["distance",40]]],
 				[player,"begin\end\gg1",["endoffset",0.1]],
-				["begin_keeper3","begin\end\bro2",["endoffset",0.1]],
+				["begin_keeper3","begin\end\bro2",[["endoffset",0.1],["distance",30]]],
 				[player,"begin\end\gg2",["endoffset",0.7]],
-				["begin_keeper3","begin\end\bro3",["endoffset",0.1]]
+				["begin_keeper3","begin\end\bro3",[["endoffset",0.1],["distance",30]]]
 			] call sp_audio_startDialog);
 			
 			_hndl call sp_audio_waitForEndDialog;
 			1.2 call sp_threadPause;
 
 			([
-				[player,"begin\end\gg3",[["endoffset",0.2],["onstart",{
+				[player,"begin\end\gg3",[["endoffset",0.2],["distance",30],["onstart",{
 					begin_internal_data_keeper3readytoNextDialog = true;
 				}]]],
-				["begin_keeper3","begin\end\bro4",["endoffset",0.3]],
+				["begin_keeper3","begin\end\bro4",[["endoffset",0.3],["distance",30]]],
 				[player,"begin\end\gg4",["endoffset",0.1]],
-				["begin_keeper3","begin\end\bro5",["endoffset",0.2]],
+				["begin_keeper3","begin\end\bro5",[["endoffset",0.2],["distance",30]]],
 				[player,"begin\end\gg5",["endoffset",0.1]]
-			] call sp_audio_startDialog);
+			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+			5 call sp_threadPause;
+			{
+				player distance ("begin_keeper3" call sp_ai_getMobBody) <= 5
+			} call sp_threadWait;
+			[
+				["begin_keeper3","begin\end\bro6",[["endoffset",0.3],["distance",30]]]
+			] call sp_audio_startDialog;
 		} call sp_threadStart;
 		
 	}; invokeAfterDelay(_post,0.6);
@@ -1582,9 +1595,9 @@ begin_cutscene2_act = false;
 	} call sp_threadStart;
 
 	[
-		["begin_cutscene2dead2","begin\end\dead1",["endoffset",0.1]],
-		["begin_keeper3","begin\end\bro_end",["endoffset",0.3]], 
-		["begin_cutscene2dead2","begin\end\dead2",["endoffset",0.1]]
+		["begin_cutscene2dead2","begin\end\dead1",[["endoffset",0.1],["distance",30]]],
+		["begin_keeper3","begin\end\bro_end",[["endoffset",0.3],["distance",30]]], 
+		["begin_cutscene2dead2","begin\end\dead2",[["endoffset",0.1],["distance",30]]]
 	] call sp_audio_startDialog;
 }] call sp_addTriggerEnter;
 

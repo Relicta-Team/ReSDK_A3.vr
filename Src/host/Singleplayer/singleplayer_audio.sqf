@@ -85,6 +85,12 @@ sp_audio_isSoundHandleDone = {
 
 sp_audio_list_soundbuff = [];
 
+sp_audio_setDistConstant = {
+	params ["_dist"];
+	sp_audio_distConstantSayTarget = _dist;
+};
+sp_audio_distConstantSayTarget = null;
+
 sp_audio_sayAtTarget = {
 	params ["_target","_pathPost",["_dist",20],["_startOffset",0]];
 	if (sp_debug_skipAudio) exitWith {-1};
@@ -93,6 +99,10 @@ sp_audio_sayAtTarget = {
 
 	if equals(_target,player) exitWith {
 		[_pathPost] call sp_audio_sayPlayer;
+	};
+
+	if (!isNull(sp_audio_distConstantSayTarget) && {_dist == 20}) then {
+		_dist = sp_audio_distConstantSayTarget;
 	};
 
 	private _probConfigName = (_pathPost splitstring "\/" joinString "_") splitstring "." select 0;

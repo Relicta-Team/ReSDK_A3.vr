@@ -1884,9 +1884,12 @@ cpt4_bar_curMusicName = "";
 	cpt4_bar_musicUpdateReq = true;
 
 	if (["cpt4_data_drinksuccess",false] call sp_storageGet) then {
-		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_9",["distance",15]]
-		] call sp_audio_startDialog)
+		if !(["cpt4_data_barnik_9_played",false] call sp_storageGet) then {
+			["cpt4_data_barnik_9_played",true] call sp_storageSet;
+			([
+				["cpt4_bar_barnik","chap4\npc_bar\barnik_9",["distance",50]]
+			] call sp_audio_startDialog);
+		};
 	};
 
 }] call sp_addTriggerExit;
@@ -2048,8 +2051,8 @@ cpt4_func_alcoDrinkProcess_forthread = {
 ["cpt4_trg_alcoguys_talk",{
 	{
 		([
-			["cpt4_bar_alсoguys3","chap4\npc_bar\alcoguy_1",["endoffset",1.5]],
-			["cpt4_bar_alсoguys2","chap4\npc_bar\alcoguy_2"]
+			["cpt4_bar_alсoguys3","chap4\npc_bar\alcoguy_1",[["endoffset",1.5],["distance",50]]],
+			["cpt4_bar_alсoguys2","chap4\npc_bar\alcoguy_2",[["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		_thds = [];
@@ -2091,7 +2094,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 				if (_alcoName == "cpt4_bar_alсoguys1") then {
 					_awaiter = [];
 					{
-						_awaiter = [["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_3"]] call sp_audio_startDialog;
+						_awaiter = [["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_3",["distance",50]]] call sp_audio_startDialog;
 					} call sp_threadCriticalSection;
 					_awaiter call sp_audio_waitForEndDialog;
 				};
@@ -2113,7 +2116,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 			<= 1.4
 		} call sp_threadWait;
 
-		[["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_4"]] call sp_audio_startDialog;
+		[["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_4",["distance",50]]] call sp_audio_startDialog;
 
 		//looped state
 		for "_i" from 1 to 3 do {
@@ -2169,7 +2172,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 ["cpt4_trg_barkarim_talk",{
 	{
 		([
-			["cpt4_karim","chap4\npc_bar\karim_1",["endoffset",0.1]]
+			["cpt4_karim","chap4\npc_bar\karim_1",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		{
@@ -2183,20 +2186,20 @@ cpt4_func_alcoDrinkProcess_forthread = {
 		1.2 call sp_threadPause;
 
 		([
-			["cpt4_karim","chap4\npc_bar\karim_2",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_2",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg1",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_3",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_3",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg2",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_4",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_4",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg3",[["endoffset",1.1],["onstart",{
 				[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0.5,1],"once"]] call sp_threadStart;
 			}]
 			]],
-			["cpt4_karim","chap4\npc_bar\karim_5",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_5",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg4",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_6",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_6",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg5",["endoffset",0.7]],
-			["cpt4_karim","chap4\npc_bar\karim_7",["endoffset",0.1]]
+			["cpt4_karim","chap4\npc_bar\karim_7",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		sp_canResist = true;
@@ -2207,7 +2210,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 		[false,_h] call sp_setNotificationVisible;
 
 		([
-			["cpt4_karim","chap4\npc_bar\karim_8"]
+			["cpt4_karim","chap4\npc_bar\karim_8",[["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[2,5],null,3]] call sp_threadStart;
@@ -2226,7 +2229,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 
 		["cpt4_bar_barnik",player] call sp_ai_setLookAtControl;
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",20]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",50]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		[cpt4_questName_tobar,"Сядьте за барную стойку и закажите выпивку"] call sp_setTaskMessageEff;
@@ -2262,9 +2265,9 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		//dialog 
 		["cpt4_bar_barnik" call sp_ai_getMobBody,player] call sp_ai_setLookAtControl;
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_2",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_2",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg1",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",["endoffset",0.1]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		["Достаньте из кармана свои деньги - звяки, взяв их в руки"] call sp_setNotification;
@@ -2318,7 +2321,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 				[true] call cpt4_func_setLockPlayerInteract;
 				
 				[
-					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",["endoffset",0.1]]
+					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",[["endoffset",0.1],["distance",50]]]
 				] call sp_audio_startDialog;
 
 				["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik1",{
@@ -2381,18 +2384,19 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 	{
 		//dialog
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_5",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_5",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg2",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_6",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_6",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg3",["endoffset",0.1]],
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_7",[
 				["endoffset",1.2],
+				["distance",50],
 				["onstart",{
 					("cpt4_bar_barnik" call sp_ai_getMobBody) switchMove "acts_pointingleftunarmed";
 				}]
 			]],
 			[player,"chap4\gg\barmentalk_gg4",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",["endoffset",0.1]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		[false] call cpt4_func_setLockPlayerInteract;
