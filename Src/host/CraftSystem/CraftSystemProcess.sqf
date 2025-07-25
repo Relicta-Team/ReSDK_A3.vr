@@ -217,11 +217,19 @@ csys_processCraftMain = {
 			[_targIngr] call _error_message_provider;
 		};
 
+		if any_of([_handItmIngr arg _targIngr] apply {callFunc(_x getv(targetItem),isInSlot)}) exitWith {
+			RETURN(false);
+		};
+
 		//запоминаем названия предметов для создания
 		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
 		private _targName = callFuncParams(_targ,getNameFor,_usr);
 		["hand_item_name",_handItemName] call _addCraftContext;
 		["target_name",_targName] call _addCraftContext;
+		["create_in_hands",
+			equals(callFunc(_targ,getSourceLoc),_usr) 
+			&& {equals(callFunc(_handItem,getSourceLoc),_usr)}
+		] call _addCraftContext;
 
 		_leftComponents = [_handItmIngr,_targIngr];
 
