@@ -17,6 +17,8 @@
 
 - type: interact
   category: Cloth
+  options:
+    craft_duration: from_skill(6,2)
   required:
     components:
       hand_item:

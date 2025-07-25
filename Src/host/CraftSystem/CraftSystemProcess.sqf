@@ -226,6 +226,10 @@ csys_processCraftMain = {
 		private _targName = callFuncParams(_targ,getNameFor,_usr);
 		["hand_item_name",_handItemName] call _addCraftContext;
 		["target_name",_targName] call _addCraftContext;
+		["create_in_hands",
+			equals(callFunc(_targ,getSourceLoc),_usr) 
+			&& {equals(callFunc(_handItem,getSourceLoc),_usr)}
+		] call _addCraftContext;
 
 		_leftComponents = [_handItmIngr,_targIngr];
 
