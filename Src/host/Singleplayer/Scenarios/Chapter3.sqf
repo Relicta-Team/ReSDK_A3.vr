@@ -111,7 +111,7 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 
 ["cpt3_trg_foundmushrooms",{
 	{
-		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти различные грибы, в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
+		_h = ["В Сети растёт множество разных культур. Чаще всего здесь можно найти различные #(грибы), в том числе съедобные. Будьте осторожны и не ешьте неизвестные вам грибы."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
@@ -123,7 +123,7 @@ cpt3_trg_enterdarkzone_act = false;
 	cpt3_trg_enterdarkzone_act = true;
 
 	{
-		_h = ["В Сети бывают действительно темные места. Учитесь ориентироваться на местности в условиях плохой освещённости. Находясь в пещерах ищите и создавайте ориентиры, чтобы не заблудиться."] call sp_setNotification;
+		_h = ["В Сети много темных мест. Учитесь ориентироваться на местности в условиях плохой освещённости. Ищите и создавайте ориентиры, чтобы не заблудиться."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
@@ -135,10 +135,10 @@ cpt3_trg_enterdarkzone_act = false;
 		["strange"] call sp_audio_playMusic;
 		["chap3\gg1"] call sp_audio_sayPlayer;
 
-		["Вы можете обыскивать тела людей не проявляющих активности. Например: мертвых, связанных или спящих." + 
+		["Вы можете обыскивать тела людей не проявляющих активности: мертвых, связанных или спящих." + 
 		sbr + sbr +
-		"Для этого подойдите к телу, нажмите ПКМ и выберите пункт ""Раздеть"". В открывшемся меню инвентаря чужого персонажа нажмите по слоту с предметом. Выбранный предмет будет взят в активную руку."+
-		sbr+"Попробуйте снять одежду с трупа и проверьте её карманы."] call sp_setNotification;
+		"Подойдите к телу, нажмите ПКМ и выберите пункт #(""Раздеть""). В открывшемся меню инвентаря чужого персонажа нажмите по слоту с предметом и он будет взят в активную руку."+
+		sbr+"Снимите одежду с трупа и осмотрите её карманы."] call sp_setNotification;
 		5 call sp_threadPause;
 		["На подступе","Обыщите тело"] call sp_setTaskMessageEff;
 
@@ -177,8 +177,6 @@ cpt3_trg_enterdarkzone_act = false;
 ["cpt_trg_founddoor",{
 	_baseMethod = getFunc("cpt3_obj_lockeddoor" call sp_getObject,onLockpicking);
 	["lockpick_method_orig",_baseMethod] call sp_storageSet;
-
-	["На подступе","Взломайте замок двери"] call sp_setTaskMessageEff;
 	
 	_newmethod = {
 		objParams_2(_usr,_lockpick);
@@ -200,11 +198,16 @@ cpt3_trg_enterdarkzone_act = false;
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
 
 	{
+		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true)) then {
+			["На подступе","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+		};
 		1 call sp_threadPause;
 		{
 			callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true)
 		} call sp_threadWait;
-		["Для взлома двери с помощью отмычки нажмите ЛКМ по двери. Если у вас есть навыки взлома - вы с лёгкостью откроете дверь."] call sp_setNotification;
+		["На подступе","Взломайте замок двери"] call sp_setTaskMessageEff;
+
+		["Для #(взлома) двери нажмите ЛКМ по двери держа в руке #(отмычку). Если у вас есть соответствующие навыки - вы сможете взломать замок."] call sp_setNotification;
 
 		{
 			!getVar("cpt3_obj_lockeddoor" call sp_getObject,isLocked)
@@ -239,9 +242,9 @@ cpt3_trg_enterdarkzone_act = false;
 		sp_playerCanMove = false;
 		_m = "Я что-то слышу...";
 		callFuncParams(call sp_getActor,mindSay,_m);
-		["Вы можете внимательно всматриваться и прислушиваться к окружению, чтобы замечать подозрительные вещи. "
-		+sbr+sbr+"Нажмите $input_act_inventory, переместите мышь влево и в выезжающем меню перейдите в раздел ""восприятие"". "
-		+"Попробуйте присмотреться к окружению"] call sp_setNotification;
+		["Вы можете внимательно #(всматриваться) и #(прислушиваться) к окружению, чтобы замечать подозрительные вещи. "
+		+sbr+sbr+"Нажмите $input_act_inventory, переместите мышь влево и в выезжающем меню перейдите в раздел #(""восприятие""). "
+		+"Попробуйте присмотреться к окружению."] call sp_setNotification;
 
 		["perform_search_action",false] call sp_storageSet;
 		["emote_action",{
@@ -380,9 +383,9 @@ cpt3_trg_enterdarkzone_act = false;
 		} call sp_threadCriticalSection;
 
 
-		["Вы заметили жруна - опасного монстра, обитающего в Сети. Метните в него факел, чтобы попытаться отпугнуть."
+		["Вы заметили #(жруна) - опасного монстра, обитающего в Сети. Попробуйте отпугнуть его, метнув факел."
 		+sbr+sbr
-		+"Выберите ""Бросок"" в правом меню"] call sp_setNotification;
+		+"Выберите #(""Бросок"") в правом меню."] call sp_setNotification;
 
 		_ct = [{
 			_wid = widgetNull;
@@ -411,7 +414,7 @@ cpt3_trg_enterdarkzone_act = false;
 			cd_specialAction != SPECIAL_ACTION_THROW
 		}] call sp_createWidgetHighlight;
 
-		_hmes = ["Активное особое действие отображается в статусах справа. Каждое активное действие устанавливается для левой и правой руки отдельно. Для активации особого действия нажмите $input_act_extraAction нацелившись в сторону жруна."] call sp_setNotification;
+		_hmes = ["Активное #(особое действие) отображается в статусах справа. Каждое активное действие устанавливается для левой и правой руки отдельно. Для активации особого действия нажмите $input_act_extraAction нацелившись в сторону жруна."] call sp_setNotification;
 		
 		_hact = ["extra_action",{
 			params ["_targ"];
@@ -486,7 +489,7 @@ cpt3_trg_enterdarkzone_act = false;
 
 ["cpt3_trg_takeaxe",{
 	{
-		_h = ["Возьмите топор со стола"] call sp_setNotification;
+		_h = ["Возьмите #(топор) со стола"] call sp_setNotification;
 		{
 			callFuncParams(call sp_getActor,hasItem,"cpt3_obj_caveaxeguide" call sp_getObject);
 		} call sp_threadWait;
@@ -496,7 +499,7 @@ cpt3_trg_enterdarkzone_act = false;
 			[_wall] call deleteGameObject;
 		};
 
-		_h = ["Вы можете драться при помощи любых предметов, взятых в руки. Однако помните, что в бою холодное оружие значительно эффективнее чем подручные предметы."] call sp_setNotification;
+		_h = ["Вы можете #(сражаться) при помощи любых предметов у вас в руках. Однако помните, что в бою #(холодное оружие) значительно эффективнее подручных предметов."] call sp_setNotification;
 		10 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 		
@@ -596,7 +599,7 @@ cpt4_data_eaterHandleLife = threadNull;
 	call sp_gui_syncInventoryVisible;
 
 	{
-		_notifHandle = ["Чтобы двигаться незаметно для других перейдите в режим скрытности. Для этого в правом меню нажмите ""Прятаться""."] call sp_setNotification;
+		_notifHandle = ["Чтобы двигаться незаметно для других перейдите в режим #(скрытности). Для этого в правом меню нажмите #(""Прятаться"")"] call sp_setNotification;
 
 		_ct = [{
 			_wid = widgetNull;
@@ -613,7 +616,7 @@ cpt4_data_eaterHandleLife = threadNull;
 		} call sp_threadWait;
 		refset(_ct,true);
 		sp_playerCanMove = false;
-		_notifHandle = ["Включенная скрытность отображается в статусах справа. Если вы будете двигаться быстро, то скрытность будет потеряна."] call sp_setNotification;
+		_notifHandle = ["Включенная #(скрытность) отображается в статусах справа. Быстрое движение лишает скрытности."] call sp_setNotification;
 		
 		_hspec = [{
             _w = widgetNull;
@@ -632,9 +635,9 @@ cpt4_data_eaterHandleLife = threadNull;
 
 ["cpt3_trg_stealthlightnotif",{
 	{
-		_h = ["<t align='left'>Скрытное передвижение прекратится в следующих случаях:"
+		_h = ["<t align='left'>Скрытное передвижение так же #(прекратится) в следующих случаях:"
 			+sbr+ " - Яркое освещение"
-			+sbr+ " - Быстрое передвижение"
+			+sbr+ " - Бег и быстрое передвижение"
 			+sbr+ " - Враг бдительно осматривается или прислушивается"
 			+sbr+ " - Вы атаковали кого-то или получили урон"
 			+ "</t>"
@@ -676,7 +679,7 @@ cpt3_data_doorSeeDialogPerformed = false;
 	{
 		["combat",false] call sp_setLockPlayerHandler;
 
-		_h = ["Чтобы атаковать противника перейдите в боевой режим, нажав $input_act_combatMode"] call sp_setNotification;
+		_h = ["Чтобы атаковать противника перейдите в #(боевой режим), нажав $input_act_combatMode."] call sp_setNotification;
 		{
 			getVar(call sp_getActor,isCombatModeEnable)
 		} call sp_threadWait;
@@ -688,8 +691,8 @@ cpt3_data_doorSeeDialogPerformed = false;
 			_d getvariable ["combatMenuCtg",widgetNull]
 		},0.02] call sp_createWidgetHighlight;
 
-		_h = ["Нажмите $input_act_inventory. В верхнем меню вы можете настроить способы атаки и защиты, а справа настраивается зона атаки - место куда вы будете бить противника."+
-		sbr+"Выберите зону атаки ""Голова"" и как будете готовы - нажмите ЛКМ для атаки топором по жруну"] call sp_setNotification;
+		_h = ["Нажмите $input_act_inventory. Переместив мышь вверх появится боевое меню - здесь вы можете настроить стили атаки и защиты. В области взаимодействия справа вы можете выбрать место куда атаковать противника."+
+		sbr+"Выберите зону атаки #(""Голова"") и как будете готовы - нажмите ЛКМ для атаки топором по жруну."] call sp_setNotification;
 
 		{
 			getVar("cpt3_eater" call sp_ai_getMobObject,isDead)
@@ -784,7 +787,7 @@ cpt3_func_damageEvent = {
 		
 		1 call sp_threadPause;
 
-		["Вы можете разрушать объекты с помощью вашего оружия. Для этого нажмите ЛКМ в боевом режиме по двери"] call sp_setNotification;
+		["Вы можете #(разрушать) объекты с помощью вашего оружия. Для этого нажмите ЛКМ в #(боевом режиме) по двери."] call sp_setNotification;
 		_obj = "cpt3_obj_doordestr" call sp_getObject;
 		//callFuncParams(_obj,setHPCurrentPrecentage,10);
 

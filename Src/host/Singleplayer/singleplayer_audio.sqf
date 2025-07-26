@@ -106,7 +106,12 @@ sp_audio_sayAtTarget = {
 	};
 
 	private _probConfigName = (_pathPost splitstring "\/" joinString "_") splitstring "." select 0;
-	if !isNullReference(missionConfigFile >> "cfgsounds" >> _probConfigName) exitWith {
+	private _cfgRoot = #ifdef EDITOR
+		missionConfigFile
+	#else
+		configFile
+	#endif
+	if !isNullReference(_cfgRoot >> "cfgsounds" >> _probConfigName) exitWith {
 
 		{
 			private _list = sp_audio_list_soundbuff;
@@ -124,7 +129,7 @@ sp_audio_sayAtTarget = {
 		} call sp_threadCriticalSection;
 
 		private _obj = [_target,_probConfigName,_dist,null,_startOffset] call sound3d_playOnObject;
-		private _dur = getNumber(missionConfigFile >> "cfgsounds" >> (_probConfigName + "__dur"));
+		private _dur = getNumber(_cfgRoot >> "cfgsounds" >> (_probConfigName + "__dur"));
 		_startTime = tickTime;
 		sp_audio_list_soundbuff pushback [_obj,_startTime,_dur];
 

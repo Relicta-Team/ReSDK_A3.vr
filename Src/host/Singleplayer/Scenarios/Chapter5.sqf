@@ -404,7 +404,7 @@ cpt5_data_rifleSkill = 5;
 
 		_thandle = {
 			10 call sp_threadPause;
-			["Чтобы проснуться нажмите $input_act_inventory и справа выберите ""Сон""."] call sp_setNotification;
+			["Чтобы #(проснуться) нажмите $input_act_inventory и справа выберите #(""Сон"")."] call sp_setNotification;
 		} call sp_threadStart;
 
 		{
@@ -415,7 +415,7 @@ cpt5_data_rifleSkill = 5;
 
 		_thandle = {
 			15 call sp_threadPause;
-			["Чтобы встать с кровати нажмите $input_act_resist"] call sp_setNotification;
+			["Чтобы #(встать) с кровати нажмите $input_act_resist"] call sp_setNotification;
 		} call sp_threadStart;
 
 		{
@@ -612,20 +612,20 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 		{cpt5_data_kapitan_startQuest_loadweapon} call sp_threadWait;
 
 		[cpt5_questName_startCombat,"Зарядите магазины."] call sp_setTaskMessageEff;
-		["Откройте коробку с патронами. Для этого нажмите $input_act_mainAction по ней. Чтобы вытащить патроны нажмите ЛКМ. Патроны вытаскиваются по 1 штуке за раз."] call sp_setNotification;
+		["Откройте #(коробку с патронами). Для этого нажмите $input_act_mainAction по ней. Чтобы вытащить патрон нажмите ЛКМ. Патроны вытаскиваются по 1 штуке за раз."] call sp_setNotification;
 
 		{
 			callFuncParams(call sp_getActor,hasItem,"AmmoRifle" arg true)
 		} call sp_threadWait;
 
-		["Чтобы зарядить патрон в магазин нажмите ЛКМ с патроном в руке по магазину. Зарядите несколько полных магазинов."] call sp_setNotification;
+		["Чтобы зарядить патрон в магазин нажмите ЛКМ с патроном в руке по магазину. Зарядите #(несколько полных магазинов)."] call sp_setNotification;
 
 		{
 			_mags = ["cpt5_data_wtable_mags",[]] call sp_storageGet;
 			({callFunc(_x,getAmmoCount) == getVar(_x,maxCount)}count _mags) >= 2
 		} call sp_threadWait;
 
-		["Чтобы вставить магазин в винтовку нажмите ЛКМ с магазином в руке по винтовке."] call sp_setNotification;
+		["Чтобы #(вставить магазин) в винтовку нажмите ЛКМ с магазином в руке по винтовке."] call sp_setNotification;
 
 		{
 			_rifles = ["cpt5_data_wtable_rifles",[]] call sp_storageGet;
@@ -902,7 +902,7 @@ cpt5_trg_combat_stage1_act = false;
 
 		[cpt5_questName_rangedCombat,"Подавите позиции врага"] call sp_setTaskMessageEff;
 		
-		["Возьмите винтовку в руки."] call sp_setNotification;
+		["Возьмите #(винтовку) в руки."] call sp_setNotification;
 
 		_slots = [INV_HAND_L,INV_HAND_R];
 		{
@@ -918,7 +918,7 @@ cpt5_trg_combat_stage1_act = false;
 
 		} call sp_threadWait;
 
-		["Чтобы передёрнуть затвор винтовки нажмите ЛКМ по ней. Винтовка при этом должна находится в активной руке."] call sp_setNotification;
+		["Чтобы #(передёрнуть затвор) винтовки нажмите ЛКМ по ней. Винтовка при этом должна находится в активной руке."] call sp_setNotification;
 
 		{
 			_wpns = _slots apply {
@@ -936,7 +936,7 @@ cpt5_trg_combat_stage1_act = false;
 		} call sp_threadWait;
 
 		if (!callFuncParams(call sp_getActor,isHoldedTwoHands,callFunc(call sp_getActor,getItemInActiveHandRedirect))) then {
-			["Нажмите $input_act_switchTwoHands чтобы схватить винтовку двумя руками."] call sp_setNotification;
+			["Нажмите $input_act_switchTwoHands чтобы схватить винтовку #(двумя руками)."] call sp_setNotification;
 		};
 		{
 			callFuncParams(call sp_getActor,isHoldedTwoHands,callFunc(call sp_getActor,getItemInActiveHandRedirect))
@@ -944,8 +944,8 @@ cpt5_trg_combat_stage1_act = false;
 		
 		
 		_threadGuide = {
-			_h = ["Стрельба на подавление снижает точность противника. Не обязательно попадать по нему, достаточно выстрелить в его сторону."
-			+" Для стрельбы на подавление выбреите режим ""Подавление"" в верхнем меню и начинайте стрельбу по истязателям"] call sp_setNotification;
+			_h = ["#(Стрельба на подавление) снижает точность противника. Не обязательно попадать по нему, достаточно выстрелить в его сторону."
+			+" Для стрельбы на подавление выбреите режим #(""Подавление"") в боевом меню и начинайте стрельбу по #(истязателям)"] call sp_setNotification;
 			_it = callFunc(call sp_getActor,getItemInActiveHandRedirect);
 			{!isNullReference(_it) && isTypeOf(_it,RifleSVT)} call sp_threadWait;
 			
@@ -954,7 +954,7 @@ cpt5_trg_combat_stage1_act = false;
 				&& {(count(getVar(getVar(_it,magazine),content))) == 0}
 				&& {!callFunc(_it,isCocked)}
 			} call sp_threadWait;
-			_h = ["Чтобы вытащить магазин, достаньте его, кликнув ЛКМ по винтовке пустой рукой. Если винтовка лежит на земле - выйдите из боевого режима. Вставьте заряженный магазин и продолжайте стрелять"] call sp_setNotification;
+			_h = ["Чтобы #(вытащить магазин), кликните ЛКМ по винтовке в руке второй пустой рукой. Вставьте заряженный магазин и #(продолжайте стрелять)"] call sp_setNotification;
 			{
 				!isNullReference(getVar(_it,magazine)) 
 				&& {(count(getVar(getVar(_it,magazine),content))) > 0}
@@ -1121,7 +1121,7 @@ cpt5_trg_savewoundedstart_act = false;
 		} call sp_threadStart;
 
 		[cpt5_questName_rangedCombat,"Дотащите раненого до ваших позиций"] call sp_setTaskMessageEff;
-		_h = ["Чтобы тащить человека выберите режим ""Схватить"" в правом меню и нажмите $input_act_extraAction по раненому человеку."] call sp_setNotification;
+		_h = ["Чтобы #(тащить) человека выберите режим #(""Схватить"") в правом меню и нажмите $input_act_extraAction по раненому человеку."] call sp_setNotification;
 		
 		["extra_action",false] call sp_setLockPlayerHandler;
 
@@ -1144,7 +1144,7 @@ cpt5_trg_woundedmansave_act = false;
 		[true] call sp_setHideTaskMessageCtg;
 		{
 			_mob = "cpt5_woundedman" call sp_ai_getMobObject;
-			_h = ["Чтобы отпустить раненого нажмите $input_act_dropitem"] call sp_setNotification;
+			_h = ["Чтобы #(отпустить) раненого нажмите $input_act_dropitem"] call sp_setNotification;
 			{!callFunc(_mob,isGrabbed)} call sp_threadWait;
 			{
 				["cpt5_woundedman",null,false] call sp_ai_commitMobPos;
@@ -1442,7 +1442,7 @@ cpt5_trg_iztdefkilldanger_process = true;
 			callFuncParams(call sp_getActor,hasItem,"ShortSword");
 		} call sp_threadWait;
 
-		_h = ["Чтобы отодвинуть ящик схватите его. Вы можете сделать это через ПКМ меню, либо выбрав режим ""Схватить"" в правом меню и нажав $input_act_extraAction. Отодвиньте ящик, чтобы освободить проход"] call sp_setNotification; 
+		_h = ["Чтобы отодвинуть ящик - схватите его. Вы можете сделать это через ПКМ меню, либо выбрав режим #(""Схватить"") в правом меню и нажав $input_act_extraAction. #(Отодвиньте ящик), чтобы освободить проход"] call sp_setNotification; 
 		_oldPos = callFunc("cpt5_obj_boxwall" call sp_getObject,getPos);
 		{
 			callFuncParams("cpt5_trgobj_boxposrequired" call sp_getObject,getDistanceTo,"cpt5_obj_boxwall" call sp_getObject arg true) <= 1

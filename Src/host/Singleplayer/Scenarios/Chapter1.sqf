@@ -41,9 +41,9 @@ cpt1_playerUniform = "NomadCloth9";
 
 	{
 		[
-			"Добро пожаловать в Relicta. По мере прохождения обучения вам будет постепенно открываться всё больше возможностей. "
-			+"Вас погрузят в основные тонкости управления в игре - не спешите и действуйте инструкциям, появляющимся в этом окне. "
-			+"Однако не думайте, что вас будут всё время вести за руку. В некоторых случаях потребуется проявить смекалку."
+			"Добро пожаловать в #(Relicta)! Впереди вас ждёт пошаговое обучение - новые возможности будут открываться постепенно. "
+			+"Внимательно читайте #(уведомления) в этом окне: они подскажут, как освоиться в игре. "
+			+"Но помните: не всё будет разжёвано - иногда потребуется проявить #(смекалку) и разобраться самому."
 		] call sp_setNotification;
 
 		15 call sp_threadPause;
@@ -55,8 +55,7 @@ cpt1_playerUniform = "NomadCloth9";
 		} call sp_threadWait;
 
 		[
-			"Только что вы перешли в режим взаимодействия и инвентаря. В этом режиме вы будете взаимодействовать с предметами и вашим инвентарём. Переместив мышь вправо вы увидите панель взаимодействия. "
-			+" На ней в верхней части отображаются навыки вашего персонажа, по центру - зоны взаимодействия к живым сущностям а внизу - кнопки особых действий."
+			"Только что вы перешли в режим #(взаимодействия и инвентаря). Переместив мышь вправо вы увидите панель взаимодействия с навыками персонажа, зонами взаимодействия и кнопками особых действий."
 		] call sp_setNotification;
 
 		_zoneH = [{
@@ -75,7 +74,7 @@ cpt1_playerUniform = "NomadCloth9";
 		}] call sp_addPlayerHandler;
 
 		[
-			"Любая смена в Сети начинается с пробуждения в кровати. Попробуем разбудить вашего персонажа. Для этого переместите мышь вправо и нажмите кнопку ""Сон"" в нижней части панели взаимодействия и ваш персонаж начнёт просыпаться."
+			"Любая смена в Сети начинается с пробуждения в кровати. Попробуем разбудить вашего персонажа. Для этого переместите мышь вправо и нажмите кнопку #(""Сон"") в нижней части панели взаимодействия и ваш персонаж начнёт просыпаться."
 		] call sp_setNotification;
 		
 
@@ -125,7 +124,7 @@ cpt1_playerUniform = "NomadCloth9";
 		2 call sp_threadPause;
 
 		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
-		["Курсор в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
+		["#(Прицел) в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [
 			interaction_aim_widgets select 0
 		] call sp_createWidgetHighlight;
@@ -141,7 +140,7 @@ cpt1_playerUniform = "NomadCloth9";
 			false
 		}] call sp_addPlayerHandler;
 		
-		["Для осмотра любых окружающих вас объектов наведитесь на них курсором и нажмите $input_act_examine. В вашем временном пристанище много интересного. Попробуйте осмотреть окружение..."] call sp_setNotification;
+		["Для #(осмотра) любых окружающих вас объектов наведитесь на них прицелом и нажмите $input_act_examine. В вашем временном пристанище много интересного. Попробуйте осмотреть окружение..."] call sp_setNotification;
 		{
 			(["examine_count",0] call sp_storageGet) >= 2
 			&& {(["examine_has_update",false] call sp_storageGet)}
@@ -154,9 +153,7 @@ cpt1_playerUniform = "NomadCloth9";
 		_h = ["chap1\gg2"] call sp_audio_sayPlayer;
 		_h call sp_audio_waitForEndSound;
 
-		["Для основного действия с объектами в мире нажмите $input_act_mainAction. "+
-		"Например: дверь - открыть, кнопка - нажать, кровать - лечь."+
-		sbr+" Откройте дверь и выходите наружу."] call sp_setNotification;
+		["Для #(основного действия) с объектами в мире нажмите $input_act_mainAction. Откройте дверь и выходите наружу."] call sp_setNotification;
 
 		["main_action",false] call sp_setLockPlayerHandler;
 		setVar(["cpt1_bed_door"] call sp_getObject,isLocked,false);
@@ -274,9 +271,8 @@ cpt1_playerUniform = "NomadCloth9";
 			any_of(_barr apply {callFuncParams(_x,getDistanceTo,call sp_getActor arg true) <= 3})
 		} call sp_threadWait;
 
-		_baseInteractHandle = ["У вас есть 2 свободных руки, в которые можно взять любые предметы."+
-		"Чтобы взять предметы с земли нажмите ЛКМ нацелившись на необходимый предмет - он будет взят в активную руку. Для изменения активной руки нажмите $input_act_changeActHand."+
-		sbr+" Попробуйте подобрать бутылку возле костра."] call sp_setNotification;
+		_baseInteractHandle = ["У вас есть 2 свободных руки. Чтобы #(взять предметы) нажмите ЛКМ по ним."
+		+sbr+"Для смены активной руки нажмите $input_act_changeActHand. Попробуйте подобрать бутылку."] call sp_setNotification;
 
 		_actHand = [{getVar(call sp_getActor,activeHand) call inventoryGetWidgetById}] call sp_createWidgetHighlight;
 		["cpt1_looting_evt_changeHandHandler",[_actHand]] call sp_storageSet;
@@ -297,14 +293,15 @@ cpt1_playerUniform = "NomadCloth9";
 		refset(_d select 0,true);
 		_hChangeActHand call sp_removePlayerHandler;
 
-		["Чтобы положить предмет нажмите $input_act_putdownitem. Предметы выкладываются из активной руки на место, в которое смотрит ваш персонаж. Чтобы быстро выбросить предмет - нажмите $input_act_dropitem."+
-		"Однако, будьте осторожны - хрупкие предметы могут разбиться от падения на твёрдые поверхности"] call sp_setNotification;
+		["Чтобы #(положить предмет) нажмите $input_act_putdownitem. Чтобы #(выбросить) - нажмите $input_act_dropitem."] call sp_setNotification;
 
 		{
 			all_of(_barr apply {not_equals(callFunc(_x,getSourceLoc),call sp_getActor)})
 		} call sp_threadWait;
 
-		_baseInteractHandle = ["Действия с предметами можно проводить в режиме открытого инвентаря ($input_act_inventory). В этом режиме, например, вы так же можете точнее выкладывать предметы, перетягивая их из слота руки в мир и поворачивая колесом мыши"] call sp_setNotification;
+		_baseInteractHandle = [
+			"В режиме #(открытого инвентаря) ($input_act_inventory):"
+			+sbr+"ЛКМ = #(подбор), перетаскивание из руки = #(выкладывание) на поверхность, СКМ (крутить) = #(поворот) предмета"] call sp_setNotification;
 		
 		10 call sp_threadPause;
 		[false,_baseInteractHandle] call sp_setNotificationVisible;
@@ -386,7 +383,7 @@ cpt1_playerUniform = "NomadCloth9";
 			any_of(_lst apply {callFuncParams(_x,getDistanceTo,_act arg true) <= 3 && callFuncParams(_act,canSeeObject,_x)})
 		} call sp_threadWait;
 
-		["Чтобы посмотреть содержимое ящиков, сумок, одежды и контейнеров - нажмите $input_act_mainAction"] call sp_setNotification;
+		["Чтобы посмотреть содержимое #(контейнеров) (ящиков, сумок или одежды) - нажмите $input_act_mainAction"] call sp_setNotification;
 
 		
 		while {true} do {
@@ -399,7 +396,7 @@ cpt1_playerUniform = "NomadCloth9";
 		sp_playerCanMove = false;
 
 		_obj = ["cpt_1_lootobj1",nullPtr] call sp_storageGet;
-		["Одежда помогает согреться и защищает вашего персонажа. Только что вы нашли шапку. Перетащите её в слот любой свободной руки, а затем на слот головы."] call sp_setNotification;
+		["Вы нашли шапку. #(Достаньте) её из ящика, перетащив на слот руки, а затем #(наденьте) на себя - перетащив на слот головы."] call sp_setNotification;
 		_refItm = [{
 			
 			_wid = widgetNull;
@@ -449,7 +446,7 @@ cpt1_playerUniform = "NomadCloth9";
 		};
 
 		{
-			["Вы нашли Факел - незаменимую вещь в Сети. Он будет вашим лучшим другом в этих мрачных пещерах. Возьмите его и вернитесь к костру."] call sp_setNotification;
+			["Вы нашли факел. #(Возьмите) его и вернитесь к костру."] call sp_setNotification;
 			_obj = ["cpt1_loot_torchItem",nullPtr] call sp_storageGet;
 			_camp = "cpt1_loot_campfire" call sp_getObject;
 			if isNullReference(_obj) exitWith {};
@@ -458,13 +455,13 @@ cpt1_playerUniform = "NomadCloth9";
 				callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.7
 			} call sp_threadWait;
 
-			["Для того, чтобы зажечь факел нажмите ЛКМ с факелом в активной руке по костру"] call sp_setNotification;
+			["#(Зажгите) факел: нажмите ЛКМ по костру с факелом в #(активной руке)"] call sp_setNotification;
 
 			{
 				getVar(_obj,lightIsEnabled)
 			} call sp_threadWait;
 			
-			["Затушить факел можно, нажав $input_act_mainAction по нему."] call sp_setNotification;
+			["Чтобы #(затушить) факел нажмите $input_act_mainAction по нему"] call sp_setNotification;
 			private _tOff = tickTime + 5;
 			{
 				tickTime >= _tOff
@@ -483,7 +480,7 @@ cpt1_playerUniform = "NomadCloth9";
 			0.2 call sp_threadPause;
 		};
 						
-		["Возьмите карту"] call sp_setNotification;
+		["Вы нашли карту. #(Возьмите) её"] call sp_setNotification;
 		_obj = ["cpt1_loot_mapItem",nullPtr] call sp_storageGet;
 		if !isNullReference(_obj) then {
 			{
@@ -643,7 +640,7 @@ cpt1_act_addMapViewHandler = {
 		
 		call cpt1_act_addMapViewHandler;
 
-		_h = ["Чтобы ещё раз посмотреть карту нажмите $input_act_mainAction по ней"] call sp_setNotification;
+		_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
 		5 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 
@@ -662,8 +659,8 @@ cpt1_data_foundFirstMushroom = false;
 	cpt1_data_foundFirstMushroom = true;
 	
 	{
-		_h = ["Сеть - это сложносплетенная система тоннелей, городов и пещер, пронизанная грибами самых различных видов и размеров. Прожив здесь достаточно времени вы научитесь определять их и узнаете о свойствах каждого из них."] call sp_setNotification;
-		10 call sp_threadPause;
+		_h = ["#(Сеть) - система тоннелей и пещер, наполненная #(грибами). Со временем вы узнаете о них больше..."] call sp_setNotification;
+		15 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -671,7 +668,7 @@ cpt1_data_foundFirstMushroom = false;
 ["cpt1_trg_founddoor",{
 	
 	["chap1\gg9"] call sp_audio_sayPlayer;
-	_msgHndl = ["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
+	_msgHndl = ["#(ПКМ-меню) - универсальный способ взаимодействия. Наведите прицел на объект и нажмите ПКМ: появится меню с действиями для выбранного объекта. Попробуйте #(открыть дверь) этим способом."] call sp_setNotification;
 	
 	["verbs",false] call sp_setLockPlayerHandler;
 	sp_allowebVerbs = ["description","mainact"];
@@ -755,7 +752,7 @@ cpt1_data_foundFirstMushroom = false;
 			&& equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
 
-		["Чтобы отпереть дверь с помощью ключа - возьмите его в руку и нажмите ЛКМ, нацелившись на дверь."] call sp_setNotification;
+		["Чтобы #(отпереть) дверь: возьмите ключ в руку и нажмите ЛКМ по ней"] call sp_setNotification;
 		{
 			!getVar("cpt1_obj_doortopart2" call sp_getObject,isLocked)
 		} call sp_threadWait;

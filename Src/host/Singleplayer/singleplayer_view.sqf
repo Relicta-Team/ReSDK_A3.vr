@@ -173,7 +173,7 @@ sp_setNotification = {
 	private _tcopy = _text;
 	private _tWid = call sp_int_getNotificationWidget;
 
-	//green inputs (gameside)
+	//green inputs (gameside) $text
 	while {[_text,"\$\w+"] call regex_isMatch} do {
 		private _vname = [_text,"\$\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
@@ -181,7 +181,7 @@ sp_setNotification = {
 		_text = [_text,"\$"+_keyName,format["<t size='1.3' color='#3bad18'>%1</t>",_inpName]] call regex_replace;
 	};
 
-	//red inputs (engine side)
+	//red inputs (engine side) @text
 	while {[_text,"\@\w+"] call regex_isMatch} do {
 		private _vname = [_text,"\@\w+"] call regex_getFirstMatch;
 		private _keyName = _vname select [1,count _vname];
@@ -189,7 +189,7 @@ sp_setNotification = {
 		_text = [_text,"\@"+_keyName,format["<t size='1.3' color='#e20048'>%1</t>",_inpName]] call regex_replace;
 	};
 
-	//keywords
+	//keywords #(text and text)
 	while {[_text,"\#\([^\)]+\)"] call regex_isMatch} do {
 		private _vname = [_text,"\#\([^\)]+\)"] call regex_getFirstMatch;
 		private _txt = _vname select [2,count _vname - 3];

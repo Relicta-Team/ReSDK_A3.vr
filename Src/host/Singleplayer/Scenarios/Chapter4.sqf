@@ -523,7 +523,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 
 		if (tickTime >= _rememberTime) then {
 			if (!getVar(_bt,edIsEnabled)) then {
-				_h = ["Для включения света нажмите $input_act_mainAction по кнопке на стене"] call sp_setNotification;
+				_h = ["Для включения света нажмите $input_act_mainAction по #(кнопке) на стене"] call sp_setNotification;
 				{getVar(_bt,edIsEnabled)} call sp_threadWait;
 				[false,_h] call sp_setNotificationVisible;
 			};
@@ -550,41 +550,41 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 		1 call sp_threadPause;
 		
 		[cpt4_questName_begin,"Заполните отчет о посетителях"] call sp_setTaskMessageEff;
-		["Сядьте на стул, нажав $input_act_mainAction по нему"] call sp_setNotification;
+		["Сядьте на #(стул), нажав $input_act_mainAction по нему"] call sp_setNotification;
 		
 		{
 			equals("cpt4_obj_chairbegin" call sp_getObject,getVar(call sp_getActor,connectedTo))
 		} call sp_threadWait;
 		1 call sp_threadPause;
 
-		["На столе перед вами лежит коричневая папка. Это список посетителей - людей, которые пытались или прошли в город сегодня. Чтобы посмотреть имена посетителей - нажмите $input_act_mainAction по папке"] call sp_setNotification;
+		["На столе перед вами лежит #(папка). Это список посетителей - людей, которые пытались или прошли в город сегодня. Чтобы посмотреть имена посетителей - нажмите $input_act_mainAction по папке"] call sp_setNotification;
 
 		{
 			nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
 			&& {equals(nd_sourceRef,getVar("cpt4_obj_visitorlistpaper" call sp_getObject,pointer))}
 		} call sp_threadWait;
 
-		["Прочтите список посетителей и посчитайте, сколько из них было пропущено в город. Нажмите ""Закрыть"" как будете готовы."] call sp_setNotification;
+		["Прочтите список посетителей и #(посчитайте), сколько из них было пропущено в город. Нажмите #(""Закрыть"") как будете готовы."] call sp_setNotification;
 		{
 			!nd_isOpenDisplay
 		} call sp_threadWait;
 		1 call sp_threadPause;
 
-		["Вы можете писать на бумаге с помощью ручки или любого пишущего предмета. Возьмите один лист бумаги из стопки нажав по ней $input_act_mainAction"] call sp_setNotification;
+		["Вы можете писать на бумаге с помощью #(ручки) или любого пишущего предмета. Возьмите один #(лист бумаги) из стопки нажав по ней $input_act_mainAction"] call sp_setNotification;
 
 		{
 			callFuncParams(call sp_getActor,hasItem,"Paper")
 		} call sp_threadWait;
 
 		
-		["Теперь попробуем написать на бумаге с помощью ручки: возьмите ручку, и нажмите ЛКМ по листку бумаги. Сам листок при этом может быть во второй руке, либо лежать на столе."] call sp_setNotification;
+		["Теперь возьмите #(ручку), и нажмите ЛКМ по листку бумаги. Сам листок при этом может быть во второй руке, либо лежать на столе."] call sp_setNotification;
 		
 		{
 			callFuncParams(call sp_getActor,hasItem,"ItemWritter" arg true)
 			&& nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
 		} call sp_threadWait;
 
-		["Сейчас вы в режиме чтения листа. Чтобы начать писать на нём нажмите на текст в верхней части листа ""Записать"" - так вы перейдете в режим редактирования. Напишите, сколько человек прошло в город за эту смену (числом или словом)."] call sp_setNotification;
+		["Сейчас вы в режиме чтения. Чтобы начать писать нажмите на текст в верхней части листа #(""Записать"") - так вы перейдете в режим редактирования. Напишите, #(сколько человек прошло в город) за эту смену (числом или словом)."] call sp_setNotification;
 
 		{
 			_papers = callFuncParams(call sp_getActor,getNearObjects,"Paper" arg 3 arg false arg true);
@@ -597,12 +597,12 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			_found
 		} call sp_threadWait;
 		
-		["Отличная работа! Нажмите кнопку ""Закрыть""."] call sp_setNotification;
+		["Отличная работа! Нажмите кнопку #(""Закрыть"")"] call sp_setNotification;
 		{
 			!nd_isOpenDisplay
 		} call sp_threadWait;
 
-		["Чтобы просто посмотреть что написано на бумаге нажмите по ней $input_act_mainAction"] call sp_setNotification;
+		["Чтобы посмотреть что написано на бумаге нажмите по ней $input_act_mainAction"] call sp_setNotification;
 		
 		3 call sp_threadPause;
 		[false] call sp_setNotificationVisible;
@@ -685,7 +685,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		0.5 call sp_threadPause;
 
 		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
-			private _h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+			private _h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по #(""Моей персоне"") и выбрав #(""Встать"")"] call sp_setNotification;
 			{
 				isNullReference(getVar(call sp_getActor,connectedTo))
 			} call sp_threadWait;
@@ -723,7 +723,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 ["cpt4_trg_openwindow",{
 	{
-		_h = ["Нажмите на красную кнопку под окном с помощью $input_act_mainAction"] call sp_setNotification;
+		_h = ["Нажмите на красную #(кнопку) под окном с помощью $input_act_mainAction, чтобы открыть окно регистрации"] call sp_setNotification;
 		{
 			getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)
 		} call sp_threadWait;
@@ -788,7 +788,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		(["chap4\gg\vaht1_gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		
 		cpt4_data_canTakeDocPaper = true;
-		["Возьмите бланк пропуска нажав по стопке бланков $input_act_mainAction. Стопка бланков лежит на стеллаже слева от окна регистрации"] call sp_setNotification;
+		["Возьмите #(бланк пропуска), нажав по стопке бланков $input_act_mainAction. Стопка бланков лежит на стеллаже #(слева от окна регистрации)"] call sp_setNotification;
 
 		
 		{
@@ -797,7 +797,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		private _origContent = getVar(cpt4_data_refLastTakenDoc,content);
 		sp_allowebVerbs append ["transitem"];		
 		
-		["Подпишите пропуск именем ""Карим Сухач"""] call sp_setNotification;
+		["Подпишите пропуск именем #(""Карим Сухач"")"] call sp_setNotification;
 		
 		{
 			not_equals(_origContent,getVar(cpt4_data_refLastTakenDoc,content))
@@ -811,7 +811,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
             _wid
         }] call sp_createWidgetHighlight;
 
-		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory, выберите в области взаимодействия руку, в которую будем отдавать предметы и перетащите на него пропуск из вашей руки. Либо просто нажмите ПКМ и выберите ""Передать пропуск"""] call sp_setNotification;
+		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory, выберите в области взаимодействия руку, в которую будем отдавать предметы и перетащите на него пропуск из вашей руки. Либо нажмите ПКМ и выберите #(""Передать пропуск"")"] call sp_setNotification;
 
 		_karim = "cpt4_karim" call sp_ai_getMobObject;
 		_pap = nullPtr;
@@ -844,7 +844,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				callFuncParams(_karim,playSound, "emotes\sigh_male" arg 0.92);
 				callFuncParams(_karim,meSay,"мотает головой");
 			} call sp_threadCriticalSection;
-			["Вы неправильно заполнили пропуск. Возьмите новый и напишите на нём имя кочевника - Карим Сухач"] call sp_setNotification;
+			["Вы неправильно заполнили пропуск. Возьмите новый и напишите на нём имя кочевника - #(""Карим Сухач"")"] call sp_setNotification;
 			cpt4_data_canTakeDocPaper = true;
 			3 call sp_threadPause;
 		};
@@ -874,7 +874,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 ["cpt4_act_koch1_exit",{
 	
 	{
-		["Откройте входные двери, повернув жёлтый рычаг на стене слева от окна регистрации"] call sp_setNotification;
+		["Откройте входную дверь, повернув #(рычаг) на стене слева от окна регистрации"] call sp_setNotification;
 		cpt4_canOpenEnter = true;
 		{
 			getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
@@ -1070,8 +1070,8 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		
 		cpt4_data_canTakeDocPaper = true;
 
-		_hreg = ["Люди, использующие странные слова в речи могут быть опасны. Решите - пропустить кочевника или закрыть окно."
-		+ sbr + "Если решите пропустить его - оформите пропуск на имя - ""Ибам Шнурок"" и положите перед ним на стол. В ином случае просто нажмите красную кнопку, чтобы отказать в регистрации."] call sp_setNotification;
+		_hreg = ["Люди, использующие странные слова в речи могут быть #(опасны). Решите - пропустить кочевника или отказать в пропуске."
+		+ sbr + "Если решите пропустить его - оформите #(пропуск) на имя #(""Ибам Шнурок"") и положите перед ним на стол. В ином случае просто нажмите #(красную кнопку), чтобы закрыть окно регистрации."] call sp_setNotification;
 
 		["cpt4_data_rejectIbam",false] call sp_storageSet;
 		["main_action",{
@@ -1161,13 +1161,13 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 				_knifePos = callFunc("cpt4_pos_knifekarimpos" call sp_getObject,getPos) vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),0];
 				[_ibam,INV_HAND_R,_knifePos] call sp_ai_moveItemToWorld;
-				["Вы неправильно написали его имя. Возьмите новый и напишите на нём имя кочевника - Ибам Шнурок"] call sp_setNotification;
+				["Вы неправильно написали его имя. Возьмите новый и напишите на нём имя кочевника - #(""Ибам Шнурок"")"] call sp_setNotification;
 				
 				cpt4_data_canTakeDocPaper = true;
 				1 call sp_threadPause;
 			};
 
-			_ht = ["Теперь можно открыть проход в город"] call sp_setNotification;
+			_ht = ["Теперь можно открыть проход в город, нажав на #(рычаг)"] call sp_setNotification;
 			cpt4_canOpenEnter = true;
 			{
 				getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
@@ -1326,8 +1326,8 @@ cpt4_data_refLastTakenDoc = nullPtr;
 	{
 		
 
-		["Люди, которые ведут себя странно, говорят непонятные слова больны болезнью Тоннельного Образа Мышления (ТОМность)."
-		+sbr + "Избегайте любых контактов с ними, так как ТОМность заразна. Если у вас есть силы и возможность - облегчите муки болезненного и убейте его."
+		["Люди, которые ведут себя странно, говорят непонятные слова больны болезнью #(Тоннельного Образа Мышления) (в народе - ТОМность)."
+		+sbr + "Избегайте любых контактов с ними, так как #(ТОМность заразна). Если у вас есть силы и возможность - облегчите муки болезненного, прервав его жизнь."
 		] call sp_setNotification;
 
 		["cpt4_obj_radio2","chap4\speaker\speak1",50] call sp_audio_sayAtTarget;
@@ -1823,7 +1823,7 @@ cpt4_trg_barstartmusic_act = false;
 ["cpt4_trg_nearbumcar",{
 	if (!isNullReference("cpt4_obj_bomzcar" call sp_getObject)) then {
 		{
-			_h = ["Дорогу к вашему дому перекрывает бомжевозка. Отдохните в баре - скоро путь освободится."] call sp_setNotification;
+			_h = ["Дорогу к вашему дому перекрывает #(бомжевозка). Отдохните в баре - скоро путь освободится."] call sp_setNotification;
 			7.5 call sp_threadPause;
 			[false,_h] call sp_setNotificationVisible;
 		} call sp_threadStart;
@@ -2203,7 +2203,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		sp_canResist = true;
-		_h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+		_h = ["Чтобы #(встать) со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
 		{
 			not_equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
@@ -2270,7 +2270,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
-		["Достаньте из кармана свои деньги - звяки, взяв их в руки"] call sp_setNotification;
+		["Достаньте из кармана свои деньги - #(звяки), взяв их в руки"] call sp_setNotification;
 
 		private _handitems = [];
 		{
@@ -2280,7 +2280,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			any_of(_handitems);
 		} call sp_threadWait;
 
-		["Чтобы разделить звяки, нажмите $input_act_mainAction по ним пустой рукой. Разделите 3 звяка и выложите на барную стойку"] call sp_setNotification;
+		["Чтобы разделить #(звяки), нажмите $input_act_mainAction по ним пустой рукой. Разделите #(3 звяка) и выложите на барную стойку"] call sp_setNotification;
 
 		_barnik = "cpt4_bar_barnik" call sp_ai_getMobObject;
 		private _moneyList = [];
@@ -2417,8 +2417,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		] call sp_ai_playAnim;
 		
 
-		_h = ["Питьё жидкостей работает по аналогии с поеданием. Выберите справа зону ""рот"" и нажмите ЛКМ с кружкой или бутылкой в руке по кнопке ""моя персона"". "
-		+"Для регулирования размера глотков нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
+		_h = ["Питьё жидкостей работает по аналогии с поеданием. Выберите область взаимодействия ""Рот"" и нажмите ЛКМ с кружкой или бутылкой в руке по кнопке ""Моя персона"". "
+		+"Для регулирования #(размера глотка) нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
 		{
 			["cpt4_data_drinksuccess"] call sp_storageGet
 		} call sp_threadWait;
@@ -2429,7 +2429,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 
 		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
 			1 call sp_threadPause;
-			_h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+			_h = ["Чтобы #(встать) со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
 			{
 				isNullReference(getVar(call sp_getActor,connectedTo))
 			} call sp_threadWait;
