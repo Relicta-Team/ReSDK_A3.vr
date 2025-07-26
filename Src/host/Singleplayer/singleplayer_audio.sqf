@@ -106,11 +106,14 @@ sp_audio_sayAtTarget = {
 	};
 
 	private _probConfigName = (_pathPost splitstring "\/" joinString "_") splitstring "." select 0;
-	private _cfgRoot = #ifdef EDITOR
+	private _cfgRoot = 
+	#ifdef EDITOR
 		missionConfigFile
 	#else
 		configFile
 	#endif
+	;
+	
 	if !isNullReference(_cfgRoot >> "cfgsounds" >> _probConfigName) exitWith {
 
 		{
