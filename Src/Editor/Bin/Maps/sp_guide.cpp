@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=9748;
+		nextID=9750;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3735.7656,13.719654,3936.491};
-		dir[]={0.79483426,-0.40163815,-0.45489043};
-		up[]={0.34858736,0.91579843,-0.1994995};
-		aside[]={-0.49671456,1.4901161e-08,-0.86791396};
+		pos[]={4153.3687,31.437065,3953.665};
+		dir[]={-0.91195023,-0.39102161,-0.12470882};
+		up[]={-0.38745698,0.9203651,-0.052985344};
+		aside[]={-0.13549499,5.4700649e-08,0.99082917};
 	};
 };
 binarizationWanted=0;
@@ -727,7 +727,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5768;
+		items=5770;
 		class Item0
 		{
 			dataType="Group";
@@ -103069,6 +103069,40 @@ class Mission
 			id=9747;
 			type="derewobarik";
 			atlOffset=0.43955898;
+		};
+		class Item5768
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3748.7969,12.531279,3912.5371};
+				angles[]={6.276938,4.6460543,0.0063943206};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""begin_prepgate""],[""sizex"",5],[""sizez"",3]]],[""class"",""Struct_SPZoneTrigger""]]}";
+			};
+			id=9748;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=1.306118;
+		};
+		class Item5769
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4147.6523,29.825743,3953.0256};
+				angles[]={6.2737994,5.0168729,0.0053532426};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""triggername"",""cpt2_trg_preend""],[""sizex"",6],[""sizez"",3]]],[""class"",""Struct_SPZoneTrigger""]]}";
+			};
+			id=9749;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=1.2017727;
 		};
 	};
 };

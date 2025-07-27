@@ -444,7 +444,7 @@ sp_gui_setCinematicMode = {
 			{[_x,false] call deleteWidget} foreach sp_gui_internal_cinematicModeWidgets;
 
 			private _gui = getGUI;
-			private _sizeH = 7;
+			private _sizeH = 10;
 			private _w1 = [_gui,BACKGROUND,[0,0,100,_sizeH]] call createWidget;
 			private _w2 = [_gui,BACKGROUND,[0,100-_sizeH,100,_sizeH]] call createWidget;
 			{

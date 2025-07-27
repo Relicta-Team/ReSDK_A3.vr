@@ -668,7 +668,7 @@ cpt2_data_pillMessage = "Достаньте упаковку #(обезболи�
     {
         if (
             (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
-            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),8,true] call getAllItemsOnPosition) == 0)
+            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),4,true] call getAllItemsOnPosition) == 0)
         ) then {
             _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
             _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
@@ -831,7 +831,7 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
+                || {isTypeOf(_t,TrapEnabled) && {!callFunc(_t,isTrapEnabled)}}
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
@@ -842,17 +842,18 @@ cpt2_data_bandageRefList = [];
             params ["_t"];
             if (
                 equals(_t,"cpt2_obj_trap1" call sp_getObject)
-                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
+                //|| {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
             ) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
                 true
             };
+            false
         }] call sp_addPlayerHandler;
         ["activate_verb",{
             params ["_t","_name"];
             if (
                 ((equals(_t,"cpt2_obj_trap1" call sp_getObject))
-                || {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
+                || {isTypeOf(_t,TrapEnabled) && {!callFunc(_t,isTrapEnabled)}}
                 )
                 && {_name in ["pickup","mainact"]}) exitWith {
                 callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
@@ -1039,6 +1040,13 @@ cpt2_restoreTrapMethods = {
 
     } call sp_threadStart;
 }] call sp_addScene;
+
+cpt2_trg_preend_act = false;
+["cpt2_trg_preend",{
+    if (cpt2_trg_preend_act) exitWith {};
+    cpt2_trg_preend_act = true;
+    [false] call sp_setNotificationVisible;
+}] call sp_addTriggerEnter;
 
 ["cpt2_trg_end",{
     //restore healing skill

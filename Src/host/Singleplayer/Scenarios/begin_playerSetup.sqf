@@ -317,7 +317,12 @@ begin_playerSetup_checkName = {
 	_startplay = [_d,TEXT,[50-_xOffsetCenter + 1,90,_xOffsetCenter*2 - 2,8],_ctg] call createWidget;
 	[_startplay,"<t align='center' valign='middle' size='1.4'>"+sbr+"Начать игру"+"</t>"] call widgetSetText;
 	_startplay ctrladdeventhandler ["MouseButtonUp",{
-		
+		params ["_b"];
+
+		_txtWidNames = _b getvariable "txtWidNames";
+
+		callFuncParams(call sp_getActor,generateNaming,ctrltext (_txtWidNames select 0) arg ctrltext (_txtWidNames select 1));
+
 		nextFrame(displayClose);
 		call sp_cam_stopAllInterp;
 		[true,4] call setBlackScreenGUI;
@@ -346,6 +351,7 @@ begin_playerSetup_checkName = {
 
 	_txtFirstNameInput ctrlsettext (pick naming_list_ManFirstName);
 	_txtLastNameInput ctrlsettext (pick naming_list_ManSecondName);
+	_startplay setvariable ["txtWidNames",[_txtFirstNameInput,_txtLastNameInput]];
 
 	{
 		_x setBackgroundColor [0.1,0.1,0.1,0.5];

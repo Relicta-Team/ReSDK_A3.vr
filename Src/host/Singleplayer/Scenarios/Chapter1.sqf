@@ -166,13 +166,17 @@ cpt1_playerUniform = "NomadCloth9";
 		{
 			rand(2,4) call sp_threadPause;
 			{
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа начинает угасать" arg "act");
+				if (getVar("cpt1_obj_beginlamp" call sp_getObject,lightIsEnabled)) then {
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа начинает угасать" arg "act");
+				};
 			} call sp_threadCriticalSection;
 			
 			rand(4,5) call sp_threadPause;
 			{
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,lightSetMode,false);
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа затухает" arg "act");
+				if (getVar("cpt1_obj_beginlamp" call sp_getObject,lightIsEnabled)) then {
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,lightSetMode,false);
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа затухает" arg "act");
+				};
 			} call sp_threadCriticalSection;
 
 		} call sp_threadStart;

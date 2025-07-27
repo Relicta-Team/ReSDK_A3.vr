@@ -281,12 +281,23 @@ begin_logoshown = false;
 		[_mainback] call deleteWidget;
 		[true,0] call setBlackScreenGUI;
 		[false] call sp_cam_setCinematicCam;
+		{
+			call sp_ai_deleteAllPersons;
+		} call sp_threadCriticalSection;
 
 		["begin_start"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
 
 begin_debug_fastTests = sp_debug;
+
+//говорящие ребята и все из первого сегмента
+begin_internal_hwcut_list = [];
+
+begin_internal_NAInvData = [
+	["uniform","NewArmyStdCloth"],
+	["name",["Новоармеец"]]
+];
 
 begin_handleKeyDown = -1;
 ["begin_start",{
@@ -310,89 +321,73 @@ begin_handleKeyDown = -1;
 	[true,0] call setBlackScreenGUI;
 	["begin_pos_player",0] call sp_setPlayerPos;
 	
-	["begin_pos_hwcut1","begin_hwcut1",[
+	
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut1","begin_hwcut1",[
 		["uniform","StreakCloth"]
 	],{},{
 		_this switchmove "Acts_Accessing_Computer_Loop";
-	}] call sp_ai_createPersonEx;
+	}] call sp_ai_createPersonEx);
 
-	["begin_pos_hwcut2man","begin_hwcut2man",[
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut2man","begin_hwcut2man",[
 		["uniform","StreakCloth"]
 	],{},{
 		_this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_3_loop";
-	}] call sp_ai_createPersonEx;
-	["begin_pos_hwcut2woman","begin_hwcut2woman",[
+	}] call sp_ai_createPersonEx);
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut2woman","begin_hwcut2woman",[
 		["uniform","StreakCloth"],
 		["class","MobWoman"],
 		["face","FaceW10"]
 	],{},{
 		_this switchMove "Acts_CivilIdle_1";
-	}] call sp_ai_createPersonEx;
+	}] call sp_ai_createPersonEx);
 
-	["begin_pos_hwcut3","begin_hwcut3",[
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut3","begin_hwcut3",[
 		["uniform","StreakCloth"]
 	],{
 		["Shovel",_this,INV_BACK] call createItemInInventory;
 	},{
 		
-	}] call sp_ai_createPersonEx;
+	}] call sp_ai_createPersonEx);
 
-	["begin_pos_hwcut4man1","begin_hwcut4man1",[
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut4man1","begin_hwcut4man1",[
 		["uniform","StreakCloth"]
-	]] call sp_ai_createPersonEx;
-	["begin_pos_hwcut4man2","begin_hwcut4man2",[
+	]] call sp_ai_createPersonEx);
+	begin_internal_hwcut_list pushback (["begin_pos_hwcut4man2","begin_hwcut4man2",[
 		["uniform","StreakCloth"]
 	],{},{
 		_this switchmove "acts_taking_cover_from_jets_in_loop";
-	}] call sp_ai_createPersonEx;
+	}] call sp_ai_createPersonEx);
 
 	//arounders
 
 		//cageman
-		["begin_pos_arounder1","begin_arounder1",[
+		begin_internal_hwcut_list pushback (["begin_pos_arounder1","begin_arounder1",[
 			["uniform","StreakCloth"]
 		],{},{
 			_this switchmove "Acts_JetsCrewaidF_idle2";
-		}] call sp_ai_createPersonEx;
+		}] call sp_ai_createPersonEx);
 		//lookat cages
-		["begin_pos_arounder2","begin_arounder2",[
+		begin_internal_hwcut_list pushback (["begin_pos_arounder2","begin_arounder2",[
 			["uniform","StreakCloth"]
 		],{},{
 			_this switchmove "InBaseMoves_table1";
-		}] call sp_ai_createPersonEx;
+		}] call sp_ai_createPersonEx);
 		//campfire sitter
-		["begin_pos_arounder3","begin_arounder3",[
+		begin_internal_hwcut_list pushback (["begin_pos_arounder3","begin_arounder3",[
 			["uniform","StreakCloth"]
 		],{},{
 			_this switchmove "passenger_flatground_3_Idle_Unarmed";
-		}] call sp_ai_createPersonEx;
+		}] call sp_ai_createPersonEx);
 		//bench sitter
-		["begin_pos_arounder4","begin_arounder4",[
+		begin_internal_hwcut_list pushback (["begin_pos_arounder4","begin_arounder4",[
 			["uniform","StreakCloth"]
 		],{
 			callFuncParams("begin_obj_hwbench" call sp_getObject,seatConnect,_this);
-		}] call sp_ai_createPersonEx;
+		}] call sp_ai_createPersonEx);
 
 	//end arounders
-
-
-
-	["begin_pos_watcher1","begin_watcher1",[
-		["uniform","StreakCloth"],
-		["name",["Смотрящий"]]
-	],{
-		["DBShotgun",_this,INV_HAND_R] call createItemInInventory;
-		callFunc(_this,switchTwoHands);
-	}] call sp_ai_createPersonEx;
 	
-	["begin_pos_watcher2","begin_watcher2",[
-		["uniform","StreakCloth"],
-		["name",["Смотрящий"]]
-	],{
-		["ShortSword",_this,INV_HAND_R] call createItemInInventory;
-		callFunc(_this,switchTwoHands);
-	}] call sp_ai_createPersonEx;
-	
+	//keepers
 	for "_i" from 1 to 3 do {
 		_strI = str _i;
 		["begin_pos_keeper" + _strI,"begin_keeper"+_strI,
@@ -412,66 +407,6 @@ begin_handleKeyDown = -1;
 			}
 		] call sp_ai_createPersonEx;
 	};
-
-	for "_i" from 1 to 9 do {
-		_strI = str _i;
-		["begin_pos_startdead" + _strI,"begin_startdead"+_strI,
-			[
-				["uniform","StreakCloth"],
-				["name",["Житель"]]
-			],{
-
-			}
-		] call sp_ai_createPersonEx;
-	};
-
-	_NAInvData = [
-		["uniform","NewArmyStdCloth"],
-		["name",["Новоармеец"]]
-	];
-
-	for "_i" from 1 to 6 do {
-		_strI = str _i;
-		["begin_pos_mainattacker" + _strI,"begin_mainattacker" + _strI,
-			_NAInvData,{
-				if (_i == 3) then {
-					["PistolHandmade",_this,INV_HAND_R] call createItemInInventory;
-				} else {
-					["RifleAuto",_this,INV_HAND_R] call createItemInInventory;
-				};
-				callFuncParams(_this,setCombatMode,true);
-				callFunc(_this,switchTwoHands);
-			}
-		] call sp_ai_createPersonEx;
-	};
-
-
-	//cutscene1
-	["begin_pos_cutscene1dead","begin_cutscene1dead",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
-	["begin_pos_cutscene1attack","begin_cutscene1attack",_NAInvData,{
-		["BattleAxe",_this,INV_HAND_R] call createItemInInventory;
-		callFunc(_this,switchTwoHands);
-		callFuncParams(_this,setCombatMode,true);
-	}] call sp_ai_createPersonEx;
-
-
-	//cutscene2 with keeper
-	["begin_pos_cutscene2attack1","begin_cutscene2attack1",_NAInvData,{
-		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
-		callFunc(_this,switchTwoHands);
-		callFuncParams(_this,setCombatMode,true);
-	}] call sp_ai_createPersonEx;
-	["begin_pos_cutscene2dead2","begin_cutscene2dead2",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
-
-	_na_chase_weapons = {
-		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
-		callFunc(_this,switchTwoHands);
-		callFuncParams(_this,setCombatMode,true);
-	};
-	//chase behinder
-	["begin_pos_chase_attacker1","begin_chase_attacker1",_NAInvData,_na_chase_weapons] call sp_ai_createPersonEx;
-	//chase last
-	["begin_pos_chase_attacker2","begin_chase_attacker2",_NAInvData,_na_chase_weapons] call sp_ai_createPersonEx;
 
 
 	//["begin_naattacked"] call sp_startScene;
@@ -570,9 +505,10 @@ begin_func_startTalkerAnimations = {
 	] call sp_ai_playAnimsLooped;
 };
 
+begin_internal_list_hwcut = [];
 //kuhar
 ["beging_trg_talker1",{
-	{
+	begin_internal_list_hwcut pushback ({
 		for "_i" from 1 to 3 do {
 			_strI = str _i;
 			rand(0.2,0.8) call sp_threadPause;
@@ -586,11 +522,11 @@ begin_func_startTalkerAnimations = {
 			} call sp_threadWait;
 
 		};
-	} call sp_threadStart;
+	} call sp_threadStart);
 }] call sp_addScene;
 //man and woman
 ["beging_trg_talker2",{
-	{
+	begin_internal_list_hwcut pushback ({
 		([
 			["begin_hwcut2man","begin\village\muzh1",[["endoffset",0.1],["distance",30]]],
 			["begin_hwcut2woman","begin\village\cac1",[["endoffset",0.1],["distance",30]]],
@@ -627,11 +563,11 @@ begin_func_startTalkerAnimations = {
 		}] call sp_ai_playAnim;
 
 
-	} call sp_threadStart;
+	} call sp_threadStart);
 }] call sp_addScene;
 //mushroomer
 ["beging_trg_talker3",{
-	{
+	begin_internal_list_hwcut pushback ({
 		for "_i" from 1 to 3 do {
 			_strI = str _i;
 			rand(0.2,0.8) call sp_threadPause;
@@ -645,11 +581,11 @@ begin_func_startTalkerAnimations = {
 			} call sp_threadWait;
 
 		};
-	} call sp_threadStart;
+	} call sp_threadStart);
 }] call sp_addScene;
 //guys
 ["beging_trg_talker4",{
-	{
+	begin_internal_list_hwcut pushback ({
 		([
 			["begin_hwcut4man1","begin\village\talk1_1",[["endoffset",0.1],["distance",20]]],
 			["begin_hwcut4man2","begin\village\talk2_1",[["endoffset",0.8],["distance",20]]],
@@ -683,7 +619,7 @@ begin_func_startTalkerAnimations = {
 			//sitdown
 			_obj switchMove "passenger_flatground_3_idle_unarmed";
 		}] call sp_ai_playAnim;
-	} call sp_threadStart;
+	} call sp_threadStart);
 }] call sp_addScene;
 
 begin_attackStarted = false;
@@ -776,13 +712,80 @@ begin_startattack_lockzone_act = false;
 	};
 }] call sp_addTriggerExit;
 
+begin_prepgate_act = false;
+begin_gate_list_deadcivils = [];
+begin_gate_list_attackers = [];
+["begin_prepgate",{
+	if (begin_prepgate_act) exitWith {};
+	begin_prepgate_act = true;
+
+	["begin_pos_watcher1","begin_watcher1",[
+		["uniform","StreakCloth"],
+		["name",["Смотрящий"]]
+	],{
+		["DBShotgun",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
+	}] call sp_ai_createPersonEx;
+	
+	["begin_pos_watcher2","begin_watcher2",[
+		["uniform","StreakCloth"],
+		["name",["Смотрящий"]]
+	],{
+		["ShortSword",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
+	}] call sp_ai_createPersonEx;
+
+	for "_i" from 1 to 9 do {
+		_civCreate = {
+			params ["_i"];
+			_strI = str _i;
+			begin_gate_list_deadcivils pushback (["begin_pos_startdead" + _strI,"begin_startdead"+_strI,
+				[
+					["uniform","StreakCloth"],
+					["name",["Житель"]]
+				],{
+
+				}
+			] call sp_ai_createPersonEx);
+		};
+		invokeAfterDelayParams(_civCreate,(_foreachindex) * 0.3,[_i]);
+	};
+
+	for "_i" from 1 to 6 do {
+		_attackerCreate = {
+			params ["_i"];
+			_strI = str _i;
+			begin_gate_list_attackers pushback (["begin_pos_mainattacker" + _strI,"begin_mainattacker" + _strI,
+				begin_internal_NAInvData,{
+					if (_i == 3) then {
+						["PistolHandmade",_this,INV_HAND_R] call createItemInInventory;
+					} else {
+						["RifleAuto",_this,INV_HAND_R] call createItemInInventory;
+					};
+					callFuncParams(_this,setCombatMode,true);
+					callFunc(_this,switchTwoHands);
+				}
+			] call sp_ai_createPersonEx);
+		};
+		invokeAfterDelayParams(_attackerCreate,(_foreachindex) * 0.3,[_i]);
+	};
+
+
+}] call sp_addTriggerEnter;
+
 begin_startattack_activated = false;
 ["begin_startattack",{
-	
-	
-
 	if (begin_startattack_activated) exitWith {};
 	begin_startattack_activated = true;
+
+	{
+		[_x] call sp_threadStop;
+	} foreach begin_internal_list_hwcut;
+
+	{
+		//[_x] call sp_ai_deletePerson;
+		invokeAfterDelayParams({_this call sp_ai_deletePerson},_foreachindex * 0.1,[_x]);
+	} foreach begin_internal_hwcut_list;
 	
 	[true,true] call sp_audio_setMusicPause;
 	_post = {
@@ -1253,6 +1256,7 @@ begin_run4_processenemy = true;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
+begin_internal_list_cutscene1 = [];
 begin_run4enterercutscene_act = false;
 begin_act_readyToDown = false;
 ["begin_run4enterercutscene",{
@@ -1272,6 +1276,14 @@ begin_act_readyToDown = false;
 		[player,"begin\under\gg2",[["endoffset",0.1],["distance",50]]],
 		["begin_keeper2","begin\under\sword4",[["endoffset",0],["distance",50],["onend",{
 			begin_act_readyToDown = true;
+		}],["onstart",{
+			//cutscene1
+			begin_internal_list_cutscene1 pushback (["begin_pos_cutscene1dead","begin_cutscene1dead",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx);
+			begin_internal_list_cutscene1 pushback (["begin_pos_cutscene1attack","begin_cutscene1attack",begin_internal_NAInvData,{
+				["BattleAxe",_this,INV_HAND_R] call createItemInInventory;
+				callFunc(_this,switchTwoHands);
+				callFuncParams(_this,setCombatMode,true);
+			}] call sp_ai_createPersonEx);
 		}]]]
 	] call sp_audio_startDialog;
 
@@ -1297,6 +1309,7 @@ begin_act_readyToDown = false;
 			}; invokeAfterDelay(_post,1.8);
 		}],
 		["state_3",{
+
 			//sounds sword
 			_obj = "begin_keeper2" call sp_ai_getMobObject;
 			callFunc(_obj,switchTwoHands);
@@ -1344,6 +1357,10 @@ begin_playerInVent = false;
 ["begin_run5",{
 	if (begin_run5_act) exitWith {};
 	begin_run5_act = true;
+
+	{
+		invokeAfterDelayParams({_this call sp_ai_deletePerson},_foreachindex * 1,[_x]);
+	} foreach begin_gate_list_deadcivils;
 
 	{
 		{begin_act_readyToDown} call sp_threadWait;
@@ -1419,6 +1436,24 @@ begin_run6_act = false;
 ["begin_run6",{
 	if (begin_run6_act) exitWith {};
 	begin_run6_act = true;
+
+	{
+		[_x] call sp_ai_deletePerson;
+	} foreach begin_internal_list_cutscene1;
+
+	//удаленные атакеры вызывают ошибки
+	// {
+	// 	invokeAfterDelayParams({_this call sp_ai_deletePerson},_foreachindex * 0.3,[_x]);
+	// } foreach begin_gate_list_attackers;
+
+	//cutscene2 with keeper
+	["begin_pos_cutscene2attack1","begin_cutscene2attack1",begin_internal_NAInvData,{
+		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
+		callFuncParams(_this,setCombatMode,true);
+	}] call sp_ai_createPersonEx;
+	["begin_pos_cutscene2dead2","begin_cutscene2dead2",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
+
 	//begin_pos_playerautoanim2
 	[true] call begin_internal_setNearCollisionMode;
 	[true] call sp_gui_setCinematicMode;
@@ -1605,6 +1640,17 @@ begin_prechase_act = false;
 ["begin_prechase",{
 	if (begin_prechase_act) exitWith {};
 	begin_prechase_act = true;
+
+	_na_chase_weapons = {
+		["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
+		callFunc(_this,switchTwoHands);
+		callFuncParams(_this,setCombatMode,true);
+	};
+	//chase behinder
+	["begin_pos_chase_attacker1","begin_chase_attacker1",begin_internal_NAInvData,_na_chase_weapons] call sp_ai_createPersonEx;
+	//chase last
+	["begin_pos_chase_attacker2","begin_chase_attacker2",begin_internal_NAInvData,_na_chase_weapons] call sp_ai_createPersonEx;
+
 	
 	[true,true] call sp_audio_setMusicPause;
 
@@ -1652,9 +1698,17 @@ begin_chase_act = false;
 				//check player cheating with ai
 				if (
 					callFuncParams(call sp_getActor,getDirTo,"begin_chase_attacker1" call sp_ai_getMobObject) == DIR_BACK
-					&& callFuncParams(call sp_getActor,getDistanceTo,"begin_chase_attacker1" call sp_ai_getMobObject arg true) > 15
+					&& callFuncParams(call sp_getActor,getDistanceTo,"begin_chase_attacker1" call sp_ai_getMobObject arg true) > 3
 				) then {
 					call sp_callEventDiePlayer;
+					break;
+				};
+				if (
+					callFuncParams(call sp_getActor,getDistanceTo,"begin_chase_attacker1" call sp_ai_getMobObject arg true) <= 2
+					|| callFuncParams(call sp_getActor,getDistanceTo,"begin_chase_attacker2" call sp_ai_getMobObject arg true) <= 2
+				) then {
+					call sp_callEventDiePlayer;
+					break;
 				};
 
 				rand(0.5,0.7) call sp_threadPause;

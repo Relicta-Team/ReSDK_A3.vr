@@ -363,6 +363,9 @@ cpt3_trg_enterdarkzone_act = false;
 				[_x] call deleteGameObject;
 			};
 		} foreach (callFuncParams(call sp_getActor,getNearItems,40));
+		if !isNullReference(callFunc(call sp_getActor,getItemInActiveHandRedirect)) then {
+			callFuncParams(call sp_getActor,dropItem,getVar(call sp_getActor,activeHand));
+		};
 		["Torch",call sp_getActor] call createItemInInventory;
 	};
 

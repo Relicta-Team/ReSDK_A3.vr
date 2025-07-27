@@ -123,7 +123,5 @@ sp_cleanupSceneData = {
 	call sp_cleanupWidgetHighlightTokens;
 	
 	//now delete all mobs
-	{
-		[_x] call sp_ai_deletePerson;
-	} foreach (keys sp_ai_mobs); //get copy of keys
+	call sp_ai_deleteAllPersons;
 };

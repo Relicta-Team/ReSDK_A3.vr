@@ -964,3 +964,9 @@ sp_ai_setLookAtControl = {
         _mob lookat _target;
     };
 };
+
+sp_ai_deleteAllPersons = {
+    {
+		[_x] call sp_ai_deletePerson;
+	} foreach (keys sp_ai_mobs); //get copy of keys
+};
