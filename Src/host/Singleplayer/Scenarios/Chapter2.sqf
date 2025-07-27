@@ -328,7 +328,7 @@ cpt2_data_canUseSelections = false;
             _w = hud_map_widgets getOrDefault ["hunger",_w];
             _w
         }] call sp_createWidgetHighlight;
-        _notifHandle = ["Со временем вы начинаете испытывать #(голод). Нагрузка и интенсивные движения ускоряют голодание. Если не будете питаться - упадёте в #(обморок)."] call sp_setNotification;
+        _notifHandle = ["Со временем вы начинаете испытывать #(голод). Нагрузка и интенсивные движения ускоряют голодание. Если не будете питаться - упадёте #(в обморок)."] call sp_setNotification;
         10 call sp_threadPause;
         refset(_h,true);
         [false,_notifHandle] call sp_setNotificationVisible;

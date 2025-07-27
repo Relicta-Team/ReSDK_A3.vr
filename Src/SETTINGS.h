@@ -95,8 +95,10 @@
 #define SERVER_PASSWORD server_password
 
 #ifndef EDITOR
-	#ifndef SP_MODE
+	#ifdef SP_MODE
 		#define __FORCE_DISABLE_LOCAL_PATHES__
+		//по умолчанию в прод.сп скриптовый эскейп включен всегда
+		#undef DISABLE_SCRIPTED_ESCAPE_MENU
 	#endif
 #endif
 
@@ -186,6 +188,11 @@
 	#undef RELEASE
 	#undef TEST_WHITELISTED
 	#undef PRIVATELAUNCH
+
+	//прод.запуск сп режима
+	#ifdef SP_MODE
+		#define RELEASE
+	#endif
 #endif
 
 // -preprocDefine=CMD__MACRONAME

@@ -10,6 +10,8 @@ begin_playerSetup_listCamPos = [
 	["VR",[3604.28,3993.36,18.2531],0.0480745,0.68,[-22.1169,0],0,0,720,0,0,1,0,1]
 ];
 
+begin_playerSetup_camPosPreload = ["VR",[3606.74,3989.36,19.0532],90.4817,0.87,[-20.6313,0],0,0,720,0,0,1,0,1];
+
 begin_playerSetup_selectFaceListCamPos = [
 	["VR",[3608.32,3989.74,18.6532],88.1785,0.33,[-5.5102,0],0,0,5.55562,0,1,1,0,1],
 	["VR",[3605.75,3987.47,18.0531],171.823,0.38,[-10.6603,0],0,0,720,0,1,1,0,1],
@@ -77,17 +79,17 @@ begin_playerSetup_syncCamPos = {
 
 	[_tleft,format["<t align='left' size='2'>%2%2%2%2%1</t>",_desc,sbr]] call widgetSetText;
 };
-
+begin_playerSetup_isLoading = true;
 begin_playerSetup_syncUIRender = {
 	{
 		if (begin_playerSetup_mainStage == _foreachIndex) then {
 			_x ctrlEnable true;
 			_x setFade 0;
-			_x commit 0.5;
+			_x commit ifcheck(begin_playerSetup_isLoading,0,0.5);
 		} else {
 			_x ctrlEnable false;
 			_x setFade 1;
-			_x commit 0.2;
+			_x commit ifcheck(begin_playerSetup_isLoading,0,0.2);
 		};
 	} foreach begin_playerSetup_zones;
 
@@ -106,6 +108,10 @@ begin_playerSetup_syncUIRender = {
 	} foreach (_mob getvariable "faces");
 	if (_curi != -1) then {
 		_list lbSetCurSel _curi;
+	} else {
+		errorformat("Invalid face for mob: %1",_f);
+		_list lbSetCurSel 0;
+		_mob setFace (_mob getvariable "faces" select 0);
 	};
 };
 
@@ -117,8 +123,30 @@ begin_playerSetup_setHeaderText = {
 	[(begin_playerSetup_widgets select 1),format["<t align='center' size='1.5'>%1</t>",_txt]] call widgetSetText;
 };
 
+begin_playerSetup_checkName = {
+	params ["_txtFirstNameInput","_txtLastNameInput","_startplay"];
+	forceunicode 0;
+	private _canPlay = true;
+	{
+		if (count ctrltext _x > 32) exitWith {_canPlay = false};
+		if (_foreachindex == 0 && count ctrltext _x <= 2) exitWith {_canPlay = false};
+		if (!([ctrltext _x,"А-Я[а-я]+"] call regex_isMatch)) exitWith {_canPlay = false};
+	} foreach [_txtFirstNameInput,_txtLastNameInput];
+
+	_startplay ctrlEnable _canPlay;
+	if (_canPlay) then {
+		widgetSetFade(_startplay,0,0.2);
+	} else {
+		widgetSetFade(_startplay,1,0.2);
+	};
+};
+
 ["begin_playerSetup",{
 	
+	_gui = getGUI;
+	_blackgui = [_gui,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
+	_blackgui setBackgroundColor [0,0,0,1];
+
 	private _cur = "white";
 	private _listPoses = [];
 	private _listNames = [];
@@ -156,27 +184,22 @@ begin_playerSetup_setHeaderText = {
 		}] call sp_ai_createPersonEx;
 	} foreach face_list_category;
 
-	_post = {
-		{
-			_x setFace (_x getvariable "faces" select 0);
-		} foreach begin_playerSetupObjects;
-	};
-	invokeAfterDelay(_post,1);
-
 	[""] call sp_view_setPlayerHudVisible;
 	[true,0] call setBlackScreenGUI;
 	[_listPoses select 0,0] call sp_setPlayerPos;
 	
 	[true] call sp_cam_setCinematicCam;
 
-	(begin_playerSetup_listCamPos select 0) call sp_cam_prepCamera;
+	_dpos = array_copy(begin_playerSetup_listCamPos select 0);
+	_dpos select 1 set [2,1000];
+	_dpos call sp_cam_prepCamera;
 
 	_d = call displayOpen;
 
 	_tcenter = [_d,TEXT,[0,0,100,5]] call createWidget;
 	_tcenter setBackgroundColor [0.1,0.1,0.1,0.5];
 	begin_playerSetup_widgets set [1,_tcenter];
-	["Выберите народность"] call widgetSetText;
+	[_tcenter,"Выберите народность"] call widgetSetText;
 
 
 	_ctg = [_d,WIDGETGROUP,WIDGET_FULLSIZE] call createWidget;
@@ -321,8 +344,8 @@ begin_playerSetup_setHeaderText = {
 	[_txtLastName,sbr+"<t size='1.3'>Фамилия:</t>"] call widgetSetText;
 	_txtLastNameInput = [_d,INPUT,[40,_yps+10,20,8],_ctg] call createWidget;
 
-	_txtFirstNameInput ctrlsettext callFunc(call sp_getActor,getFirstName);
-	_txtLastNameInput ctrlsettext callFunc(call sp_getActor,getSecondName);
+	_txtFirstNameInput ctrlsettext (pick naming_list_ManFirstName);
+	_txtLastNameInput ctrlsettext (pick naming_list_ManSecondName);
 
 	{
 		_x setBackgroundColor [0.1,0.1,0.1,0.5];
@@ -332,15 +355,18 @@ begin_playerSetup_setHeaderText = {
 	} foreach [_txtFirstNameInput,_txtLastNameInput];
 
 	//todo text validation
-	// {
-	// 	_x ctrladdeventhandler ["KeyUp",{
-	// 		params ["_b"];
-			
-	// 	}];
-	// } foreach [_txtFirstNameInput,_txtLastNameInput];
+	private _adata = [_txtFirstNameInput,_txtLastNameInput,_startplay];
+	{
+		_x setvariable ["adata",_adata];
+		_x ctrladdeventhandler ["KeyUp",{
+			params ["_b"];
+			(_b getvariable "adata") call begin_playerSetup_checkName;
+		}];
+	} foreach [_txtFirstNameInput,_txtLastNameInput];
 
 	call begin_playerSetup_syncCamPos;
 	call begin_playerSetup_syncUIRender;
+	_adata call begin_playerSetup_checkName;
 
 	{
 		_x setBackgroundColor [0.1,0.1,0.1,0.5];
@@ -373,12 +399,27 @@ begin_playerSetup_setHeaderText = {
 		
 	} foreach [_prev,_next,_back,_toname,_backtoface,_startplay,_select];
 
-
+	
 	widgetSetFade(begin_playerSetup_zones select 0,1,0);
+	widgetSetFade(begin_playerSetup_widgets select 1,1,0);
+	[_blackgui,true] call deleteWidget;
+	begin_playerSetup_isLoading = false;
+	
 	{
+		"begin_playerselwhite" call sp_ai_waitForMobLoaded;
+		{
+			_x setFace (_x getvariable "faces" select 0);
+		} foreach begin_playerSetupObjects;	
+		begin_playerSetup_camPosPreload call sp_cam_prepCamera;
+		0.1 call sp_threadPause;
+		["all",begin_playerSetup_listCamPos select 0,6] call sp_cam_interpTo;
 		[false,4] call sp_gui_setBlackScreenGUI;
-		["prestart",true] call sp_audio_playMusic;
-		widgetSetFade(begin_playerSetup_zones select 0,0,0.8);
+
+		{
+			["prestart",true] call sp_audio_playMusic;
+			widgetSetFade(begin_playerSetup_zones select 0,0,1.4);
+			widgetSetFade(begin_playerSetup_widgets select 1,0,1.4);
+		} call sp_threadCriticalSection;
 	} call sp_threadStart;
 
 }] call sp_addScene;

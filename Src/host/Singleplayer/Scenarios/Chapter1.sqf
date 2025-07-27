@@ -613,7 +613,7 @@ cpt1_act_addMapViewHandler = {
 			[_t] call deleteWidget;
 		} call sp_threadStart;
 	} else {
-		if (["cpt1_data_entercaves",false] call sp_storageGet) then {
+		if !(["cpt1_data_entercaves",false] call sp_storageGet) then {
 			["cpt1_data_entercaves",true] call sp_storageSet;
 			["transition4"] call sp_audio_playMusic;
 		};
