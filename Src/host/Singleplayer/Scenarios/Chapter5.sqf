@@ -79,7 +79,9 @@ cpt5_data_rifleSkill = 5;
 
 	
 	//making mobs
+	_beder = [];
 	for "_i" from 1 to 2 do {
+		_beder pushback ("cpt5_bedwall_" + (str _i));
 		["cpt5_pos_bedwall","cpt5_bedwall_" + (str _i),[
 			["uniform","StreakCloth"],
 			["name",["Защитник"]]
@@ -91,6 +93,7 @@ cpt5_data_rifleSkill = 5;
 	
 	for "_i" from 1 to 3 do {
 		_iReal = (_i %2) + 1;
+		_beder pushback ("cpt5_bednear_" + (str _iReal));
 		["cpt5_pos_bednear","cpt5_bednear_" + (str _iReal),[
 			["uniform","StreakCloth"],
 			["name",["Защитник"]]
@@ -102,6 +105,15 @@ cpt5_data_rifleSkill = 5;
 			callFuncParams(_this,setCloseEyes,true);
 		}] call sp_ai_createPersonEx;
 	};
+
+	[{
+		params ["_beder"];
+		while {true} do {
+			_m = (pick _beder) call sp_ai_getMobObject;
+			callFuncParams(_m,playSound,"singleplayer\sp_guide\chap5\sfx\sleeper" + (str randInt(1,3)) arg rand(0.8,1.3) arg 15);
+			rand(1.5,7) call sp_threadPause;
+		};
+	},[_beder]] call sp_threadStart;
 
 	["cpt5_pos_lekarstand","cpt5_lekarstand",[
 		["uniform","DoctorCloth"],

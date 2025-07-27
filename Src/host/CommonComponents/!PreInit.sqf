@@ -41,8 +41,12 @@ stdoutPrint = {
 	private _args = _this;
 	private _PREF = _args deleteAt 0;
 	private _color = _args deleteAt (count _args - 1);
-	conDllCall (_PREF + (format _args) + _color);
-	__post_message_RB(_PREF + (format _args))
+	#ifdef SP_PROD
+		diag_log text format _this;
+	#else
+		conDllCall (_PREF + (format _args) + _color);
+		__post_message_RB(_PREF + (format _args))
+	#endif
 };
 
 cprint = {
@@ -52,7 +56,11 @@ cprint = {
 		//[format _this] call discLog;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (format _this + "#1111");
+			#ifdef SP_PROD
+				diag_log text format _this;
+			#else
+				"debug_console" callExtension (format _this + "#1111");
+			#endif
 		} else {
 			[format _this, "log"] call chatPrint;
 		};

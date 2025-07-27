@@ -432,18 +432,45 @@ sp_gui_internal_onUpdatePPGUI = {
 };
 
 sp_gui_internal_cinematicMode = false;
+sp_gui_internal_cinematicModeWidgets = [];
 sp_gui_setCinematicMode = {
 	params ["_mode"];
 	if equals(_mode,sp_gui_internal_cinematicMode) exitWith {};
 	sp_gui_internal_cinematicMode = _mode;
 	if (_mode) then {
-		_d = call displayOpen;
+		private _d = call displayOpen;
+		{
+			{[_x,false] call deleteWidget} foreach sp_gui_internal_cinematicModeWidgets;
+
+			private _gui = getGUI;
+			private _sizeH = 7;
+			private _w1 = [_gui,BACKGROUND,[0,0,100,_sizeH]] call createWidget;
+			private _w2 = [_gui,BACKGROUND,[0,100-_sizeH,100,_sizeH]] call createWidget;
+			{
+				_x setBackgroundColor [0,0,0,1];
+				widgetSetFade(_x,1,0);
+				widgetSetFade(_x,0,0.5);
+			} foreach [_w1,_w2];
+			sp_gui_internal_cinematicModeWidgets = [_w1,_w2];
+		} call sp_threadCriticalSection;
+
 		setMousePosition [100,100];
 		_d displayAddEventHandler ["MouseMoving",{
 			setMousePosition [100,100];
 		}];
 	} else {
 		call displayClose;
+		{
+			{
+				widgetSetFade(_x,1,0.5);
+			} foreach sp_gui_internal_cinematicModeWidgets;
+			private _code = {
+				{
+					[_x,false] call deleteWidget;
+				} foreach sp_gui_internal_cinematicModeWidgets;
+			};
+			invokeAfterDelay(_code,0.6);
+		} call sp_threadCriticalSection;
 	};
 };
 

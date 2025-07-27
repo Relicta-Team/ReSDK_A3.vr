@@ -597,7 +597,7 @@ cpt2_data_canUseSelections = false;
     [cpt2_defaultHudWithStamina] call sp_view_setPlayerHudVisible;
 
     {
-        _hinf = ["Для #(быстрого бега) вместе с кнопками передвижения удерживайте @turbo"+
+        _hinf = ["Для #(быстрого бега) вместе с кнопками передвижения удерживайте @turbo ."+
         "Постоянный бег приводит к #(быстрому голоданию) и расходу #(выносливости)."] call sp_setNotification;
         _tNext = tickTime + 10;
         {

@@ -130,7 +130,7 @@ begin_playerSetup_checkName = {
 	{
 		if (count ctrltext _x > 32) exitWith {_canPlay = false};
 		if (_foreachindex == 0 && count ctrltext _x <= 2) exitWith {_canPlay = false};
-		if (!([ctrltext _x,"А-Я[а-я]+"] call regex_isMatch)) exitWith {_canPlay = false};
+		if (!([ctrltext _x,"[А-Я][а-я]+"] call regex_isMatch)) exitWith {_canPlay = false};
 	} foreach [_txtFirstNameInput,_txtLastNameInput];
 
 	_startplay ctrlEnable _canPlay;
@@ -412,11 +412,11 @@ begin_playerSetup_checkName = {
 		} foreach begin_playerSetupObjects;	
 		begin_playerSetup_camPosPreload call sp_cam_prepCamera;
 		0.1 call sp_threadPause;
+		["prestart",true] call sp_audio_playMusic;
 		["all",begin_playerSetup_listCamPos select 0,6] call sp_cam_interpTo;
 		[false,4] call sp_gui_setBlackScreenGUI;
 
 		{
-			["prestart",true] call sp_audio_playMusic;
 			widgetSetFade(begin_playerSetup_zones select 0,0,1.4);
 			widgetSetFade(begin_playerSetup_widgets select 1,0,1.4);
 		} call sp_threadCriticalSection;
