@@ -172,6 +172,7 @@ sp_setNotification = {
 	sp_internal_lastNotification = _text;
 	private _tcopy = _text;
 	private _tWid = call sp_int_getNotificationWidget;
+	forceUnicode 1;
 
 	//green inputs (gameside) $text
 	while {[_text,"\$\w+"] call regex_isMatch} do {
