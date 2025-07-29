@@ -31,6 +31,8 @@
 //uncomment for enable singleplayer
 //#define SP_MODE
 #define SP_DEBUG
+//#define SP_PROD
+//#define SP_DEBUG
 
 #ifdef SP_MODE
 	#define SP_MODE_OR_EDITOR
@@ -188,10 +190,16 @@
 	#undef RELEASE
 	#undef TEST_WHITELISTED
 	#undef PRIVATELAUNCH
+#endif
 
-	//прод.запуск сп режима
+//прод.запуск сп режима
+#ifdef SP_PROD
+	#undef DEBUG
+	#define RELEASE
+#else
 	#ifdef SP_MODE
-		#define RELEASE
+		#undef RELEASE
+		#define DEBUG
 	#endif
 #endif
 
@@ -258,8 +266,3 @@
 #endif
 
 
-#ifdef SP_MODE
-	#undef EDITOR
-	#define DEBUG
-	#undef RELEASE
-#endif
