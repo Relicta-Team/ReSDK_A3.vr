@@ -1594,7 +1594,7 @@ cpt4_func_setLockPlayerInteract = {
 		};
 
 		{
-			[_ref] call deleteGameObject;;
+			[_ref] call deleteGameObject;
 		} call sp_threadCriticalSection;
 	} call sp_threadStart;
 
