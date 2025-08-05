@@ -605,11 +605,15 @@ begin_internal_list_hwcut = [];
 			["begin_hwcut4man1","begin\village\talk1_4",[["endoffset",1],["distance",20],["onstart",{
 				{
 					1.5 call sp_threadPause;
-					["begin_hwcut4man2","begin_pos_hwcut4man2","begin\village_guy2",{
-						params ["_obj"];
-						//sitdown
-						callFuncParams("begin_obj_hwbench" call sp_getObject,seatConnect,"begin_hwcut4man2" call sp_ai_getMobObject);
-					}] call sp_ai_playAnim;
+					{
+						if !isNullReference("begin_hwcut4man2" call sp_ai_getMobObject) then {
+							["begin_hwcut4man2","begin_pos_hwcut4man2","begin\village_guy2",{
+								params ["_obj"];
+								//sitdown
+								callFuncParams("begin_obj_hwbench" call sp_getObject,seatConnect,"begin_hwcut4man2" call sp_ai_getMobObject);
+							}] call sp_ai_playAnim;
+						};
+					} call sp_threadCriticalSection;
 				} call sp_threadStart;
 			}]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
@@ -1495,7 +1499,7 @@ begin_internal_data_keeper3readytoNextDialog = false;
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 			5 call sp_threadPause;
 			{
-				player distance ("begin_keeper3" call sp_ai_getMobBody) <= 5
+				player distance ("begin_keeper3" call sp_ai_getMobBody) <= 3
 			} call sp_threadWait;
 			[
 				["begin_keeper3","begin\end\bro6",[["endoffset",0.3],["distance",30]]]

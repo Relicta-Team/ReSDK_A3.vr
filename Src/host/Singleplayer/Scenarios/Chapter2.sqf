@@ -175,6 +175,8 @@ cpt2_act_enableTorchHadnler = {
 
     ["click_target",{
         params ["_t"];
+        if isNullReference(callFunc(call sp_getActor,getItemInActiveHandRedirect)) exitWith {false};
+        
         if (
             callFunc(_t,isContainer)
             && {
@@ -665,18 +667,6 @@ cpt2_data_pillMessage = "Достаньте упаковку #(обезболи�
     
     [] call sp_audio_stopMusic;
 
-    {
-        if (
-            (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
-            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),4,true] call getAllItemsOnPosition) == 0)
-        ) then {
-            _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
-            _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
-            setVar(_pbox,pillCount,2);
-            cpt2_data_pillMessage = "Подберите упаковку #(обезболивающего) на земле.";
-        };
-    } call sp_threadCriticalSection;
-
     callFuncParams(call sp_getActor,playSound, "agony\falling_down_scream2" arg getRandomPitchInRange(0.85,1.2));
 
     callFuncParams(call sp_getActor,setUnconscious,5);
@@ -685,6 +675,18 @@ cpt2_data_pillMessage = "Достаньте упаковку #(обезболи�
     
     //best anim
     player switchMove "acts_staticdeath_10";
+
+    {
+        if (
+            (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
+            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),2,true] call getAllItemsOnPosition) == 0)
+        ) then {
+            _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
+            _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
+            setVar(_pbox,pillCount,2);
+            cpt2_data_pillMessage = "Подберите упаковку #(обезболивающего) на земле.";
+        };
+    } call sp_threadCriticalSection;
 
     //thread teleport
     {

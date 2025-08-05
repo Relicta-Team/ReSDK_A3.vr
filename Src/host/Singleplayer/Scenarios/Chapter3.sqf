@@ -11,6 +11,10 @@ cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 	call sp_initializeDefaultPlayerHandlers;
     [true,0] call setBlackScreenGUI;
 
+	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
+		[cpt1_playerUniform,call sp_getActor,INV_CLOTH] call createItemInInventory;
+	};
+
 	if (!callFuncParams(call sp_getActor,hasItem,"Torch" arg true)) then {
 		["Torch",call sp_getActor] call createItemInInventory;
 	};
@@ -198,12 +202,12 @@ cpt3_trg_enterdarkzone_act = false;
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
 
 	{
-		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true)) then {
+		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg false)) then {
 			["На подступе","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
 		};
 		1 call sp_threadPause;
 		{
-			callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true)
+			callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg false)
 		} call sp_threadWait;
 		["На подступе","Взломайте замок двери"] call sp_setTaskMessageEff;
 
@@ -425,12 +429,12 @@ cpt3_trg_enterdarkzone_act = false;
 			if (isNullReference(_trch)) exitWith {true};
 			if !isTypeOf(_trch,Torch) exitWith {true};
 			
-			if (callFuncParams(call sp_getActor,getDirFrom,(sp_ai_debug_testmobs get "cpt3_eater") getvariable "link") == DIR_FRONT) exitWith {
+			if (callFuncParams(call sp_getActor,getDirFrom,"cpt3_eater" call sp_ai_getMobObject) == DIR_FRONT) exitWith {
 				["cpt3_obj_torchonthrow",_trch] call sp_storageSet;
 				call sp_removeCurrentPlayerHandler;
 				false
 			};
-			false
+			true
 		}] call sp_addPlayerHandler;
 		_hthrow = ["extra_action",{
 			params ["_targ"];
@@ -486,6 +490,35 @@ cpt3_trg_enterdarkzone_act = false;
 		["chap3\gg2"] call sp_audio_sayPlayer;
 
 		["Прятки со смертью","Проберитесь через пропускную зону к городу"] call sp_setTaskMessageEff;
+
+		//хандлер броска предмета в жруна или рядом с ним
+		["cpt4_data_eaterThrowObjectHandle",sp_threadNull] call sp_storageSet;
+		["extra_action",{
+			params ["_targ"];
+			private _eater = "cpt3_eater" call sp_ai_getMobObject;
+			private _res = false;
+			if (cd_specialAction == SPECIAL_ACTION_THROW) then {
+				if (equals(_targ,_eater)) exitWith {
+					if (call cpt4_func_isEaterAlive) then {
+						call cpt4_func_eaterAttack;
+					};
+				};
+				(["cpt4_data_eaterThrowObjectHandle",sp_threadNull] call sp_storageGet) call sp_threadStop;
+				["cpt4_data_eaterThrowObjectHandle",[{
+					params ["_obj","_eater"];
+					{
+						callFunc(_obj,isInWorld) && !callFunc(_obj,isFlying)
+					} call sp_threadWait;
+					if (callFuncParams(_obj,getDistanceTo,_eater arg true) < 5) then {
+						if (call cpt4_func_isEaterAlive) then {
+							call cpt4_func_eaterAttack;
+						};
+					};
+				},[callFunc(call sp_getActor,getItemInActiveHandRedirect),_eater]] call sp_threadStart] call sp_storageSet;
+			};
+			
+			false
+		}] call sp_addPlayerHandler;
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -548,12 +581,44 @@ cpt3_trg_enterdarkzone_act = false;
 
 cpt4_data_eaterHandleLife = threadNull;
 
+cpt4_func_isEaterAlive = {
+	!getVar("cpt3_eater" call sp_ai_getMobObject,isDead)
+};
+
+cpt4_func_eaterAttack = {
+	private _eater = "cpt3_eater" call sp_ai_getMobObject;
+	{
+		[_eater,"cpt3_pos_eaterstealth","cpt3_eater_attack",{
+			params ["_mob"];
+			_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
+			_mob setvelocity [0,0,0]; //fix fast moving bug
+			[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+		}] call sp_ai_playAnim;
+
+		callFuncParams(_eater,playSound,"monster\eater\scream5" arg getRandomPitchInRange(0.9,1.1) arg 50 arg 2.2 arg null arg false);
+		_c = { [0.23,30.5,0.05,0.8] call cam_addCamShake; };
+		invokeAfterDelay(_c,0.45);
+		[true,1.8] call setBlackScreenGUI;
+		callFuncParams(call sp_getActor,setStealth,false);
+		["cpt3_flag_caneatercheck",false] call sp_storageSet;
+		
+	} call sp_threadCriticalSection;
+	_post = {
+		
+		["cpt3_eater","cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
+
+		["cpt3_flag_caneatercheck",true] call sp_storageSet;
+		["cpt3_pos_onfailstealth",0] call sp_setPlayerPos;
+		[false,1.1] call setBlackScreenGUI;
+	}; invokeAfterDelay(_post,3);
+};
+
 ["cpt3_trg_stealthguide",{
 
 	//eater stealth handler
 	cpt4_data_eaterHandleLife = {
 		_eater = "cpt3_eater" call sp_ai_getMobObject;
-		while {!getVar(_eater,isDead)} do {
+		while {call cpt4_func_isEaterAlive} do {
 			_refm = refcreate(0);
 			if (callFuncParams(_eater,canSeeObject,call sp_getActor arg _refm)
 				&& !getVar(call sp_getActor,isStealthEnabled)
@@ -562,31 +627,7 @@ cpt4_data_eaterHandleLife = threadNull;
 				if (callFuncParams(call sp_getActor,getDirTo,_eater) == DIR_BACK) exitWith {};
 
 				if (refget(_refm) >= VISIBILITY_MODE_LOW) then {
-					{
-						
-						[_eater,"cpt3_pos_eaterstealth","cpt3_eater_attack",{
-							params ["_mob"];
-							_mob switchmove "ApanPercMstpSnonWnonDnon_G01";
-							_mob setvelocity [0,0,0]; //fix fast moving bug
-							[_mob,"cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
-						}] call sp_ai_playAnim;
-
-						callFuncParams(_eater,playSound,"monster\eater\scream5" arg getRandomPitchInRange(0.9,1.1) arg 50 arg 2.2 arg null arg false);
-						_c = { [0.23,30.5,0.05,0.8] call cam_addCamShake; };
-						invokeAfterDelay(_c,0.45);
-						[true,1.8] call setBlackScreenGUI;
-						callFuncParams(call sp_getActor,setStealth,false);
-						["cpt3_flag_caneatercheck",false] call sp_storageSet;
-						
-					} call sp_threadCriticalSection;
-					_post = {
-						
-						["cpt3_eater","cpt3_pos_eaterstealth",0] call sp_ai_setMobPos;
-
-						["cpt3_flag_caneatercheck",true] call sp_storageSet;
-						["cpt3_pos_onfailstealth",0] call sp_setPlayerPos;
-						[false,1.1] call setBlackScreenGUI;
-					}; invokeAfterDelay(_post,3);
+					call cpt4_func_eaterAttack;
 
 					{
 						(["cpt3_flag_caneatercheck",false] call sp_storageGet)
@@ -654,12 +695,14 @@ cpt3_data_doorSeeDialogPerformed = false;
 
 ["cpt3_trg_attackeater",{
 	[cpt3_hudvis_eatercombat] call sp_view_setPlayerHudVisible;
+	//eater attack handler
 	["click_target",{
 		params ["_t"];
 		_ret = true;
 		_eater = "cpt3_eater" call sp_ai_getMobObject;
 		if equals(_t,_eater) then {
 			if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
+			if (callFuncParams(call sp_getActor,getDistanceTo,_eater) > 1.5) exitWith {};
 			if (getVar(call sp_getActor,isCombatModeEnable)) then {
 				_tzSel = [getVar(call sp_getActor,curTargZone)] call gurps_convertTargetZoneToBodyPart;
 				
@@ -805,6 +848,10 @@ cpt3_func_damageEvent = {
 				if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
 
 				_t call cpt3_func_damageEvent;
+				//fix unc state error (because dropping weapon from hands and cannot pick it up)
+				if (getVar(call sp_getActor,stamina) <= 10) then {
+					setVar(call sp_getActor,stamina,100);
+				};
 				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
 					[false] call sp_setNotificationVisible;
 					
