@@ -284,7 +284,7 @@ region(Getters and checkers)
 	//_item может быть строкой, кодом или объектом
 	func(hasItem)
 	{
-		params ['this',"_item",["_checkSubTypes",false]];
+		params ['this',"_item",["_checkSubTypes",false],["_checkInContainers",true]];
 
 		private _checkMethod = if equalTypes(_item,"") then {
 			if (_checkSubTypes) then {
@@ -322,6 +322,7 @@ region(Getters and checkers)
 			};
 
 			if callFunc(_itmSlot,isContainer) then {
+				if (!_checkInContainers) exitWith {};
 				{
 					if (_x call _checkMethod) exitWith {_hasItem = true};
 				} foreach getVar(_itmSlot,content);
