@@ -903,7 +903,13 @@ sp_ai_internal_playAnimStateLoop = {
         _tObj = getVar(_tObj,owner);
     };
 
-    [_tObj,_ctxInt] call _callPreCode;
+    if !isNullReference(_tObj) then {
+        [_tObj,_ctxInt] call _callPreCode;
+    } else {
+        refset(_ctxInt get "cancelToken",true);
+    };
+
+    if (refget(_ctxInt get "cancelToken")) exitWith {};
 
     [_t,_p,_anmName,{
         params ["_obj","_ctxInt"];
@@ -911,6 +917,9 @@ sp_ai_internal_playAnimStateLoop = {
         //save object reference (for hotreload checks)
         if !isNullReference(_obj) then {
             _ctxInt set ["_tref",_obj];
+        } else {
+            //object is null - cancel anim
+            refset(_ctxInt get "cancelToken",true);
         };
 
         if not_equals(_obj,_ctxInt get "_tref") exitWith {}; //exit on obsolete object

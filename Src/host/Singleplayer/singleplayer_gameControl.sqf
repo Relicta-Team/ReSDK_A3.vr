@@ -94,6 +94,8 @@ sp_clearPlayerHandlers = {
 	sp_gc_internal_map_playerInputHandlers = createHashMap;
 };
 
+sp_gc_isPlayerInitialized = false;
+
 //used for on assigned handler
 sp_gc_onPlayerAssigned = {
 	params ["_mob"];

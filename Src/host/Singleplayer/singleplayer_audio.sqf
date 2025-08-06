@@ -12,6 +12,11 @@
 #include "..\NOEngine\NOEngine.hpp"
 #include "..\GameObjects\GameConstants.hpp"
 
+sp_audio_setMusicVolume = {
+	params ["_vol",["_dur",0]];
+	[_vol,_dur] call music_internal_setFade;
+};
+
 sp_audio_playMusic = {
 	params ["_name",["_looped",false],["_toqueue",false]];
 	if (sp_debug_skipAudio) exitWith {};
@@ -253,6 +258,10 @@ sp_audio_internal_procDialog = {
 	
 	[_tgtReal] call (_ctxParams getOrDefault ["onstart",{}]);
 	_tgtReal setRandomlip true;
+	
+	//can cause error on change distance 
+	//[0.6,0.5] call sp_audio_setMusicVolume;
+	
 	startAsyncInvoke
 		{
 			params ["_stateSeq","_handle","_ctxParams"];
@@ -275,6 +284,7 @@ sp_audio_internal_procDialog = {
 		{
 			params ["_stateSeq","_handle","_ctxParams","_tgtReal"];
 			_tgtReal setRandomlip false;
+			//[1,0.5] call sp_audio_setMusicVolume;
 
 			//increment stateseq
 			_curId = _stateSeq select 1;

@@ -38,7 +38,8 @@ class(GMSp_game_BasicRole) extends(BasicRole) // BasicRole - базовая ро
 	var(classWoman,"MobWoman");
 
 	// Если данное поле true, то после смерти персонажа игрока сразу вернет в лобби вместо возможности зайти в призрака
-	var(returnInLobbyAfterDead,true);
+	var(returnInLobbyAfterDead,false);
+	var(deadTimeout,999999);
 
 	getter_func(spawnLocation,null);
 
