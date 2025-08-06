@@ -5970,7 +5970,7 @@ _4203_232913851_488778_73047 = ['Documents',[4203.23,3851.49,8.73047],13.3455,[0
 8. Кабахан Леманов, кочевник - болезный вахатец, не пропущен"]; go_editor_globalRefs set ["cpt4_obj_visitorlistpaper",_thisObj];
  _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; // !!! realocated model !!!
 _4127_020513862_4221216_39926 = ['Struct_SPTrigger',[4127.02,3862.42,21.3993,true],0,[0.00566271,-0.00693096,0.99996]] call InitStruct; 
-_4157_871093860_8359415_62400 = ['DynamicStruct',[4157.87,3860.84,15.624],181.928,[0,0,1], {_thisObj setvariable ['model','a3\signs_f\signs_ad\signsad_sponsors_f.p3d']; go_editor_globalRefs set ["cpt4_obj_signinfoboard",_thisObj];
+_4157_871093860_8359415_62400 = ['IStruct',[4157.87,3860.84,15.624],181.928,[0,0,1], {_thisObj setvariable ['model','a3\signs_f\signs_ad\signsad_sponsors_f.p3d']; go_editor_globalRefs set ["cpt4_obj_signinfoboard",_thisObj];
 }] call InitStruct; // !!! realocated model !!!
 _4236_951663669_365722_88994 = ['Struct_SPZoneTrigger',[4236.95,3669.37,7.88994,true],[-0.0163234,0.998081,-0.0597327],[0.0943655,0.0610118,0.993666]] call InitStruct; 
 _4241_897953690_476324_88207 = ['LongWeaponContainer',[4241.9,3690.48,9.88207,true],[0.999951,0.00881241,-0.00459294],[0.00334006,0.137255,0.99053]] call InitStruct; 

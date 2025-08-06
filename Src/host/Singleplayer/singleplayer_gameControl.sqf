@@ -346,8 +346,15 @@ sp_internal_torchHandler = {
 
 sp_initializeDefaultPlayerHandlers = {
 
+	private _actor = call sp_getActor;
+	setVar(_actor,specialAction,SPECIAL_ACTION_NO);
+	setVar(_actor,otherSpecialAction,SPECIAL_ACTION_NO);
+	callFuncParams(_actor,onChangeAttackType,"sync");
+
+	callFuncParams(_actor,setCombatMode,false);
+
 	//bypass first unsleep message
-	setVar(call sp_getActor,__isFirstUnsleep,false);
+	setVar(_actor,__isFirstUnsleep,false);
 
 	sp_defaultHandlers = array_copy(sp_const_defaultHandlersCopy);
 

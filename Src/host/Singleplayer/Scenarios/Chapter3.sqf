@@ -170,10 +170,13 @@ cpt3_trg_enterdarkzone_act = false;
 			_itsHands = INV_LIST_HANDS apply {callFuncParams(call sp_getActor,getItemInSlotRedirect,_x)};
 			any_of(_itsHands apply {!isNullReference(_x) && isTypeOf(_x,Lockpick)})
 		} call sp_threadWait;
-		[false,_h] call sp_setNotificationVisible;
+
 		refset(_refItm,true);
 
-		[true] call sp_setHideTaskMessageCtg;
+		if !(["cpt4_data_foundlockpickdoor",false] call sp_storageGet) then {
+			[false,_h] call sp_setNotificationVisible;
+			[true] call sp_setHideTaskMessageCtg;
+		};
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -200,6 +203,8 @@ cpt3_trg_enterdarkzone_act = false;
 	};
 
 	[callFunc("cpt3_obj_lockeddoor" call sp_getObject,getClassName),"onLockpicking",_newmethod,"replace"] call oop_injectToMethod;
+	
+	["cpt4_data_foundlockpickdoor",true] call sp_storageSet;
 
 	{
 		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg false)) then {
@@ -509,7 +514,7 @@ cpt3_trg_enterdarkzone_act = false;
 					{
 						callFunc(_obj,isInWorld) && !callFunc(_obj,isFlying)
 					} call sp_threadWait;
-					if (callFuncParams(_obj,getDistanceTo,_eater arg true) < 5) then {
+					if (callFuncParams(_obj,getDistanceTo,_eater arg true) <= 9) then {
 						if (call cpt4_func_isEaterAlive) then {
 							call cpt4_func_eaterAttack;
 						};
@@ -766,6 +771,41 @@ cpt3_data_doorSeeDialogPerformed = false;
 
 		_sound = ["chap3\gg3"] call sp_audio_sayPlayer;
 		_sound call sp_audio_waitForEndSound;
+	
+
+		// door destroy handler
+		["click_target",{
+			params ["_t"];
+			_hret = true;
+			if (!getVar(call sp_getActor,isCombatModeEnable)) exitWith {_hret};
+			if (
+				equals(_t,"cpt3_obj_doordestr" call sp_getObject)
+				&& getSelf(lastCombatActionTime) <= tickTime
+			) then {
+				if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
+
+				_t call cpt3_func_damageEvent;
+				//fix unc state error (because dropping weapon from hands and cannot pick it up)
+				if (getVar(call sp_getActor,stamina) <= 10) then {
+					setVar(call sp_getActor,stamina,100);
+				};
+				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
+					[false] call sp_setNotificationVisible;
+					
+					call sp_removeCurrentPlayerHandler;
+
+					nextFrameParams(deleteGameObject,[_t]);
+
+					_worldPos = callFunc(_t,getPos) vectorAdd [0,0,0.5];
+					for "_i" from 1 to 4 do {
+						private _wpos = _worldPos vectoradd [rand(-0.8,0.8),rand(-0.8,0.8),0.5];
+						_w = ["WoodenDebris" + (str randInt(3,4)),_wpos,null,true] call createItemInWorld;
+					};
+				};
+				_hret = false;
+			};
+			_hret
+		}] call sp_addPlayerHandler;
 
 		_threadlook = {
 			{
@@ -837,38 +877,7 @@ cpt3_func_damageEvent = {
 		_obj = "cpt3_obj_doordestr" call sp_getObject;
 		//callFuncParams(_obj,setHPCurrentPrecentage,10);
 
-		["click_target",{
-			params ["_t"];
-			_hret = true;
-			if (!getVar(call sp_getActor,isCombatModeEnable)) exitWith {_hret};
-			if (
-				equals(_t,"cpt3_obj_doordestr" call sp_getObject)
-				&& getSelf(lastCombatActionTime) <= tickTime
-			) then {
-				if not_equals(callFunc(call sp_getActor,getItemInActiveHandRedirect),"cpt3_obj_caveaxeguide" call sp_getObject) exitWith {};
-
-				_t call cpt3_func_damageEvent;
-				//fix unc state error (because dropping weapon from hands and cannot pick it up)
-				if (getVar(call sp_getActor,stamina) <= 10) then {
-					setVar(call sp_getActor,stamina,100);
-				};
-				if ((["cpt3_ctr_doordam",{_this + 1},0] call sp_storageUpdate) >= 4) then {
-					[false] call sp_setNotificationVisible;
-					
-					call sp_removeCurrentPlayerHandler;
-
-					nextFrameParams(deleteGameObject,[_t]);
-
-					_worldPos = callFunc(_t,getPos) vectorAdd [0,0,0.5];
-					for "_i" from 1 to 4 do {
-						private _wpos = _worldPos vectoradd [rand(-0.8,0.8),rand(-0.8,0.8),0.5];
-						_w = ["WoodenDebris" + (str randInt(3,4)),_wpos,null,true] call createItemInWorld;
-					};
-				};
-				_hret = false;
-			};
-			_hret
-		}] call sp_addPlayerHandler;
+		
 	} call sp_threadStart;
 }] call sp_addScene;
 

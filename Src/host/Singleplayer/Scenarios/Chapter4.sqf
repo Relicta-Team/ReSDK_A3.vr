@@ -1517,9 +1517,6 @@ cpt4_trg_gotomed_act = false;
 		[false] call sp_cam_setCinematicCam;
 		call sp_cam_stopAllInterp;
 
-		_cloth = callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH);
-		[callFunc(_cloth,getClassName),"removeItem",cpt4_internal_delegate_baseClothRemoveItem,"replace"] call oop_injectToMethod;
-
 		["cpt4_bar_begin"] call sp_startScene;
 	} call sp_threadStart;
 	
@@ -2270,6 +2267,11 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
+		{
+			private _cloth = callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH);
+			[callFunc(_cloth,getClassName),"removeItem",cpt4_internal_delegate_baseClothRemoveItem,"replace"] call oop_injectToMethod;
+		} call sp_threadCriticalSection;
+
 		["Достаньте из кармана свои деньги - #(звяки), взяв их в руки"] call sp_setNotification;
 
 		private _handitems = [];
@@ -2291,7 +2293,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 					_moneyList pushBack _x;
 					_amount = _amount + getVar(_x,stackCount);
 				};
-			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 1.7 arg false arg true);
+			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 1.5 arg false arg true);
 			
 			if (_amount != 3) then {
 				_moneyList resize 0;
@@ -2356,7 +2358,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 }] call sp_addScene;
 
 ["cpt4_act_drinklearn",{
-	[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
+	
 	["cpt4_data_drinkcount",0] call sp_storageSet;
 	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	{
@@ -2398,6 +2400,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			[player,"chap4\gg\barmentalk_gg4",["endoffset",0.1]],
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
 
 		[false] call cpt4_func_setLockPlayerInteract;
 

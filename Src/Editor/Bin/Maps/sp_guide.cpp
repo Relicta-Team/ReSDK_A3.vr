@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=418;
+		nextID=427;
 	};
 	class Camera
 	{
-		pos[]={4153.3687,31.437065,3953.665};
-		dir[]={-0.91195023,-0.39102161,-0.12470882};
-		up[]={-0.38745698,0.9203651,-0.052985344};
-		aside[]={-0.13549499,5.4700649e-08,0.99082917};
+		pos[]={4159.4399,25.716681,3863.7869};
+		dir[]={-0.085171759,-0.6692571,-0.73813325};
+		up[]={-0.076715253,0.74303091,-0.66484571};
+		aside[]={-0.99340856,0,0.11462747};
 	};
 };
 binarizationWanted=0;
@@ -100975,7 +100975,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""signad_sponsors_f""],[""name"",""Указатель""]]],[""class"",""DynamicStruct""],[""mark"",""cpt4_obj_signinfoboard""]]}";
+				init="call{{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""signad_sponsors_f""],[""name"",""Указатель""]]],[""class"",""IStruct""],[""mark"",""cpt4_obj_signinfoboard""]]}}";
 			};
 			id=9531;
 			type="SignAd_SponsorS_F";
