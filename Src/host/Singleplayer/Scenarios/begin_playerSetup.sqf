@@ -130,7 +130,7 @@ begin_playerSetup_checkName = {
 	{
 		if (count ctrltext _x > 32) exitWith {_canPlay = false};
 		if (_foreachindex == 0 && count ctrltext _x <= 2) exitWith {_canPlay = false};
-		if (!([ctrltext _x,"[А-Я][а-я]+"] call regex_isMatch)) exitWith {_canPlay = false};
+		if (!([ctrltext _x,"^[А-Яа-я]+$"] call regex_isMatch)) exitWith {_canPlay = false};
 	} foreach [_txtFirstNameInput,_txtLastNameInput];
 
 	_startplay ctrlEnable _canPlay;
@@ -166,7 +166,12 @@ begin_playerSetup_checkName = {
 		_listFaces pushBack (faces_map_man get _t);
 
 		[_posname,_mobname,[
-			["uniform","Castoffs1"]
+			["uniform",[
+				"CaretakerCloth",
+				"TorgashPalthCloth",
+				"NomadCloth9",
+				"GriblanCloth"
+			] select _foreachindex]
 		],{},{
 
 			_this setvariable ["faces",faces_map_man get _t];
@@ -320,8 +325,9 @@ begin_playerSetup_checkName = {
 		params ["_b"];
 
 		_txtWidNames = _b getvariable "txtWidNames";
-
-		callFuncParams(call sp_getActor,generateNaming,ctrltext (_txtWidNames select 0) arg ctrltext (_txtWidNames select 1));
+		_fn = ctrltext (_txtWidNames select 0);
+		_ln = ctrltext (_txtWidNames select 1);
+		callFuncParams(call sp_getActor,generateNaming, capitalize(_fn) arg capitalize(_ln));
 
 		nextFrame(displayClose);
 		call sp_cam_stopAllInterp;
@@ -341,21 +347,31 @@ begin_playerSetup_checkName = {
 		call begin_playerSetup_syncCamPos;
 		call begin_playerSetup_syncUIRender;
 	}];
-	_yps = 70;
-	_txtFirstName = [_d,TEXT,[30,_yps,10,8],_ctg] call createWidget;
+	_yps = 60;
+	_rnd = [_d,TEXT,[30,_yps,10+20,8],_ctg] call createWidget;
+	[_rnd,"<t align='center' valign='middle' size='1.4'>"+sbr+"Случайно</t>"] call widgetSetText;
+	_rnd ctrlAddEventHandler ["MouseButtonUp",{
+		params ["_b"];
+		(_b getvariable "nameWidgets") params ["_txtFirstNameInput","_txtLastNameInput"];
+		_txtFirstNameInput ctrlsettext (pick naming_list_ManFirstName);
+		_txtLastNameInput ctrlsettext (pick naming_list_ManSecondName);
+	}];
+
+	_txtFirstName = [_d,TEXT,[30,_yps+10,10,8],_ctg] call createWidget;
 	[_txtFirstName,sbr+"<t size='1.3'>Имя:</t>"] call widgetSetText;
-	_txtFirstNameInput = [_d,INPUT,[40,_yps,20,8],_ctg] call createWidget;
-	_txtLastName = [_d,TEXT,[30,_yps+10,10,8],_ctg] call createWidget;
+	_txtFirstNameInput = [_d,INPUT,[40,_yps+10,20,8],_ctg] call createWidget;
+	_txtLastName = [_d,TEXT,[30,_yps+20,10,8],_ctg] call createWidget;
 	[_txtLastName,sbr+"<t size='1.3'>Фамилия:</t>"] call widgetSetText;
-	_txtLastNameInput = [_d,INPUT,[40,_yps+10,20,8],_ctg] call createWidget;
+	_txtLastNameInput = [_d,INPUT,[40,_yps+20,20,8],_ctg] call createWidget;
 
 	_txtFirstNameInput ctrlsettext (pick naming_list_ManFirstName);
 	_txtLastNameInput ctrlsettext (pick naming_list_ManSecondName);
+	_rnd setvariable ["nameWidgets",[_txtFirstNameInput,_txtLastNameInput]];
 	_startplay setvariable ["txtWidNames",[_txtFirstNameInput,_txtLastNameInput]];
 
 	{
 		_x setBackgroundColor [0.1,0.1,0.1,0.5];
-	} foreach [_txtFirstName,_txtLastName];
+	} foreach [_txtFirstName,_txtLastName,_rnd];
 	{
 		_x ctrlsetfontHeight 0.1;
 	} foreach [_txtFirstNameInput,_txtLastNameInput];
@@ -403,7 +419,7 @@ begin_playerSetup_checkName = {
 			}];
 		};
 		
-	} foreach [_prev,_next,_back,_toname,_backtoface,_startplay,_select];
+	} foreach [_prev,_next,_back,_toname,_backtoface,_startplay,_select,_rnd];
 
 	
 	widgetSetFade(begin_playerSetup_zones select 0,1,0);

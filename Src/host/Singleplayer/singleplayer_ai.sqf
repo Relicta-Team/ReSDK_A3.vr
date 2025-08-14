@@ -573,6 +573,14 @@ sp_ai_createPersonEx = {
     if ("uniform" in _params) then {
         [_params getOrDefault ["uniform","Cloth"],_mob,INV_CLOTH] call createItemInInventory;
     };
+    if ("head" in _params) then {
+        private _t = _params getOrDefault ["head","Hat"];
+        if equals(_t,"Hat") exitWith {};
+        if !isImplementClass(_t) exitWith {};
+        
+        [_t,_mob,INV_HEAD] call createItemInInventory;
+        
+    };
     if ("face" in _params) then {
         private _face = _params get "face";
         if (_face in faces_map_man) then {

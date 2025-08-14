@@ -77,7 +77,7 @@ cpt2_json_allowedRecipes = '
 
 cpt2_data_healingSkill = 5;
 
-cpt2_defaultHud = "right+stats+cursor+inv";
+cpt2_defaultHud = "chat+right+stats+cursor+inv";
 cpt2_defaultHudWithStamina = cpt2_defaultHud + "+stam";
 
 cpt2_canClickByFood = false;
@@ -730,7 +730,7 @@ cpt2_data_pillMessage = "Достаньте упаковку #(обезболи�
 
         _thdDamaged = {
             while {true} do {
-                [50,true] call sp_applyPlayerDamage;
+                [20,true] call sp_applyPlayerDamage;
                 0.5 call sp_threadPause;
             };
         } call sp_threadStart;
@@ -1078,6 +1078,7 @@ cpt2_trg_preend_act = false;
 
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
+        [true] call sp_gui_setCinematicMode;
 		{
 			["cpt2_pos_cutscenetocpt3","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
@@ -1104,7 +1105,9 @@ cpt2_trg_preend_act = false;
 		5 call sp_threadPause;
 
 		[false] call sp_cam_setCinematicCam;
+        [false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
+		[2] call sp_onChapterDone;
 		_post = {
             call sp_cleanupSceneData;
             ["cpt3_begin"] call sp_startScene;

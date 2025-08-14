@@ -34,7 +34,7 @@ begin_logoshown = false;
 		_this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_5_loop";
 	}] call sp_ai_createPersonEx;
 	["begin_pos_intromob3","begin_intromob3",[
-		["uniform","NomadCloth21"]
+		["uniform","HuntingCaveCloak2"]
 	],{
 		["Torch",_this,INV_HAND_L] call createItemInInventory;
 	},{
@@ -43,7 +43,7 @@ begin_logoshown = false;
 
 	//walker nomad
 	["begin_pos_intromob4","begin_intromob4",[
-		["uniform","NomadCloth14"]
+		["uniform","LeatherCaveArmor1"]
 	],{
 		["Torch",_this,INV_HAND_R] call createItemInInventory;
 	},{
@@ -52,7 +52,7 @@ begin_logoshown = false;
 
 	//caveguy
 	["begin_pos_intromob5","begin_intromob5",[
-		["uniform","NomadCloth2"]
+		["uniform","CaveCombatUniform"]
 	],{
 		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
 		callFunc(_this,switchTwoHands);
@@ -97,6 +97,113 @@ begin_logoshown = false;
 		{
 			3 call sp_threadPause;
 			["intro"] call sp_audio_playMusic;
+			_post = {
+				{
+					_d = getGUI;
+					_mainBack = widgetNull;
+					_ctg = widgetNull;
+					_b = widgetNull;
+					_logo = widgetNull;
+
+					{
+						_mainBack = [_d,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
+						_mainBack setBackgroundColor [0,0,0,1];
+						_ctg = [_d,WIDGETGROUP,WIDGET_FULLSIZE] call createWidget;
+						_b = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctg] call createWidget;
+						_b setBackgroundColor [0,0,0,1];
+						_sx = 40;
+						_sy = 40;
+						_logo = [_d,PICTURE,[50-_sx/2,50-_sy/2,_sx,_sy],_ctg] call createWidget;
+						[_logo,"rel_ui\Assets\log.paa"] call widgetSetPicture;
+						{widgetSetFade(_x,1,0)} foreach [_logo,_b,_mainBack];
+					} call sp_threadCriticalSection;
+
+					widgetSetFade(_b,0,0.05);
+					0.1 call sp_threadPause;
+					widgetSetFade(_logo,0,0.15);
+
+					//fog effect
+					{
+						_localFogs = [];
+						for "_i" from 1 to 100 do {
+							
+							_h = 70;
+							_args = [_d,PICTURE,[-100,-100,rand(40,70),rand(40,70)],_ctg];
+							
+							_fog = _args call createWidget;
+							_fog ctrlEnable false;
+							_fog ctrlSetTextColor [1,1,1,0.4];
+							
+							_localFogs pushback _fog;
+							
+							[_fog,PATH_PICTURE("lobby\fog.paa")] call widgetSetPicture;
+							_fog setVariable ['lastupdate',tickTime + rand(0.1,1)];
+							
+						};
+						
+						private _onFrameCodeFog = {
+							
+							_lifetime = 12;
+							
+							{
+								if isNullReference(_x) exitWith {
+									stopThisUpdate();
+								};
+
+								_sprStartPos = [50 + rand(-0,50),100 - rand(-5,0)];
+								_sprEndPos = [50 + rand(-50,50),30];
+
+								_lastUpd = _x getVariable 'lastupdate';
+								if (tickTime >= _lastUpd) then {
+									if (begin_logoshown) exitWith {
+										_x setVariable ['lastupdate',tickTime + 1000];
+										_x setFade 1;
+										[_x,[rand(0,50),-50],rand(2.8,3)] call widgetSetPositionOnly
+									};
+									_x setFade 0;
+									_sp = _sprStartPos;
+									[_x,_sp] call widgetSetPositionOnly;
+									_randBias = rand(1,8);
+									_x setFade 0;
+									_x ctrlSetAngle [random 360, 0.5, 0.5,false];
+									[_x,_sprEndPos,_lifetime - _randBias] call widgetSetPositionOnly;
+									_x setVariable ['lastupdate',tickTime + _lifetime-_randBias];
+								};
+							} foreach (_this select 0);
+						};
+						
+						startUpdateParams(_onFrameCodeFog,0,_localFogs);
+					} call sp_threadCriticalSection;	
+
+					if (begin_debug_showLogo) then {
+						5 call sp_threadPause;
+						//enable native background
+						widgetSetFade(_mainBack,0,0);
+					
+						//hide logo
+						widgetSetFade(_logo,1,1);
+						1 call sp_threadPause;
+						begin_logoshown = true;
+						//hide ctg (smoke effect)
+						//widgetSetFade(_ctg,1,3);
+						
+						7 call sp_threadPause;
+					};
+					[_ctg] call deleteWidget;
+					[_mainback] call deleteWidget;
+					[true,0] call setBlackScreenGUI;
+					[false] call sp_cam_setCinematicCam;
+					{
+						call sp_ai_deleteAllPersons;
+					} call sp_threadCriticalSection;
+
+					["begin_start"] call sp_startScene;
+				} call sp_threadStart;
+
+			}; 
+			_t = 42.5; //logo time
+			invokeAfterDelay(_post,_t);
+
 			6 call sp_threadPause;
 			(["begin\precutscene\gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 			5 call sp_threadPause;
@@ -185,107 +292,7 @@ begin_logoshown = false;
 
 		begin_debug_timingIntro = tickTime - begin_debug_timingIntro;
 
-		_d = getGUI;
-		_mainBack = widgetNull;
-		_ctg = widgetNull;
-		_b = widgetNull;
-		_logo = widgetNull;
-
-		{
-			_mainBack = [_d,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
-			_mainBack setBackgroundColor [0,0,0,1];
-			_ctg = [_d,WIDGETGROUP,WIDGET_FULLSIZE] call createWidget;
-			_b = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctg] call createWidget;
-			_b setBackgroundColor [0,0,0,1];
-			_sx = 40;
-			_sy = 40;
-			_logo = [_d,PICTURE,[50-_sx/2,50-_sy/2,_sx,_sy],_ctg] call createWidget;
-			[_logo,"rel_ui\Assets\log.paa"] call widgetSetPicture;
-			{widgetSetFade(_x,1,0)} foreach [_logo,_b,_mainBack];
-		} call sp_threadCriticalSection;
 		
-		
-
-		widgetSetFade(_b,0,0.05);
-		0.1 call sp_threadPause;
-		widgetSetFade(_logo,0,0.15);
-
-		//fog effect
-		{
-			_localFogs = [];
-			for "_i" from 1 to 100 do {
-				
-				_h = 70;
-				_args = [_d,PICTURE,[-100,-100,rand(40,70),rand(40,70)],_ctg];
-				
-				_fog = _args call createWidget;
-				_fog ctrlEnable false;
-				_fog ctrlSetTextColor [1,1,1,0.4];
-				
-				_localFogs pushback _fog;
-				
-				[_fog,PATH_PICTURE("lobby\fog.paa")] call widgetSetPicture;
-				_fog setVariable ['lastupdate',tickTime + rand(0.1,1)];
-				
-			};
-			
-			private _onFrameCodeFog = {
-				
-				_lifetime = 12;
-				
-				{
-					if isNullReference(_x) exitWith {
-						stopThisUpdate();
-					};
-
-					_sprStartPos = [50 + rand(-0,50),100 - rand(-5,0)];
-					_sprEndPos = [50 + rand(-50,50),30];
-
-					_lastUpd = _x getVariable 'lastupdate';
-					if (tickTime >= _lastUpd) then {
-						if (begin_logoshown) exitWith {
-							_x setVariable ['lastupdate',tickTime + 1000];
-							_x setFade 1;
-							[_x,[rand(0,50),-50],rand(2.8,3)] call widgetSetPositionOnly
-						};
-						_x setFade 0;
-						_sp = _sprStartPos;
-						[_x,_sp] call widgetSetPositionOnly;
-						_randBias = rand(1,8);
-						_x setFade 0;
-						_x ctrlSetAngle [random 360, 0.5, 0.5,false];
-						[_x,_sprEndPos,_lifetime - _randBias] call widgetSetPositionOnly;
-						_x setVariable ['lastupdate',tickTime + _lifetime-_randBias];
-					};
-				} foreach (_this select 0);
-			};
-			
-			startUpdateParams(_onFrameCodeFog,0,_localFogs);
-		} call sp_threadCriticalSection;	
-
-		if (begin_debug_showLogo) then {
-			5 call sp_threadPause;
-			//enable native background
-			widgetSetFade(_mainBack,0,0);
-		
-			//hide logo
-			widgetSetFade(_logo,1,1);
-			1 call sp_threadPause;
-			begin_logoshown = true;
-			//hide ctg (smoke effect)
-			//widgetSetFade(_ctg,1,3);
-			
-			7 call sp_threadPause;
-		};
-		[_ctg] call deleteWidget;
-		[_mainback] call deleteWidget;
-		[true,0] call setBlackScreenGUI;
-		[false] call sp_cam_setCinematicCam;
-		{
-			call sp_ai_deleteAllPersons;
-		} call sp_threadCriticalSection;
-
-		["begin_start"] call sp_startScene;
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -323,18 +330,18 @@ begin_handleKeyDown = -1;
 	
 	
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut1","begin_hwcut1",[
-		["uniform","StreakCloth"]
+		["uniform","CitizenCloth5"]
 	],{},{
 		_this switchmove "Acts_Accessing_Computer_Loop";
 	}] call sp_ai_createPersonEx);
 
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut2man","begin_hwcut2man",[
-		["uniform","StreakCloth"]
+		["uniform","GreenWorkerCloth"]
 	],{},{
 		_this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_3_loop";
 	}] call sp_ai_createPersonEx);
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut2woman","begin_hwcut2woman",[
-		["uniform","StreakCloth"],
+		["uniform","BlueRobe"],
 		["class","MobWoman"],
 		["face","FaceW10"]
 	],{},{
@@ -342,7 +349,7 @@ begin_handleKeyDown = -1;
 	}] call sp_ai_createPersonEx);
 
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut3","begin_hwcut3",[
-		["uniform","StreakCloth"]
+		["uniform","WorkSuit"]
 	],{
 		["Shovel",_this,INV_BACK] call createItemInInventory;
 	},{
@@ -350,10 +357,10 @@ begin_handleKeyDown = -1;
 	}] call sp_ai_createPersonEx);
 
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut4man1","begin_hwcut4man1",[
-		["uniform","StreakCloth"]
+		["uniform","CitizenCloth4"]
 	]] call sp_ai_createPersonEx);
 	begin_internal_hwcut_list pushback (["begin_pos_hwcut4man2","begin_hwcut4man2",[
-		["uniform","StreakCloth"]
+		["uniform","LuxRusticCloth4"]
 	],{},{
 		_this switchmove "acts_taking_cover_from_jets_in_loop";
 	}] call sp_ai_createPersonEx);
@@ -362,25 +369,27 @@ begin_handleKeyDown = -1;
 
 		//cageman
 		begin_internal_hwcut_list pushback (["begin_pos_arounder1","begin_arounder1",[
-			["uniform","StreakCloth"]
+			["uniform","CookerCloth"],
+			["head","CookerCap"]
 		],{},{
 			_this switchmove "Acts_JetsCrewaidF_idle2";
 		}] call sp_ai_createPersonEx);
 		//lookat cages
 		begin_internal_hwcut_list pushback (["begin_pos_arounder2","begin_arounder2",[
-			["uniform","StreakCloth"]
+			["uniform","LuxRusticCloth19"]
 		],{},{
 			_this switchmove "InBaseMoves_table1";
 		}] call sp_ai_createPersonEx);
 		//campfire sitter
 		begin_internal_hwcut_list pushback (["begin_pos_arounder3","begin_arounder3",[
-			["uniform","StreakCloth"]
+			["uniform","LuxRusticCloth15"],
+			["head","PeasantHat"]
 		],{},{
 			_this switchmove "passenger_flatground_3_Idle_Unarmed";
 		}] call sp_ai_createPersonEx);
 		//bench sitter
 		begin_internal_hwcut_list pushback (["begin_pos_arounder4","begin_arounder4",[
-			["uniform","StreakCloth"]
+			["uniform","HuntingCaveCloak3"]
 		],{
 			callFuncParams("begin_obj_hwbench" call sp_getObject,seatConnect,_this);
 		}] call sp_ai_createPersonEx);
@@ -392,11 +401,14 @@ begin_handleKeyDown = -1;
 		_strI = str _i;
 		["begin_pos_keeper" + _strI,"begin_keeper"+_strI,
 			[
-				["uniform","StreakCloth"],
+				["uniform",ifcheck(_i!=2,"NomadCloth10","CaveChainArmor1")],
 				["name",["Житель"]]
 			],{
 				if (_i == 2) then {
 					["ShortSword",_this,INV_HAND_L] call createItemInInventory;
+				};
+				if (_i == 0) then {
+					["PeasantHat",_this,INV_HEAD] call createItemInInventory;
 				};
 			},
 			{
@@ -724,7 +736,8 @@ begin_gate_list_attackers = [];
 	begin_prepgate_act = true;
 
 	["begin_pos_watcher1","begin_watcher1",[
-		["uniform","StreakCloth"],
+		["uniform","NomadCloth10"],
+		["head","Turban2"],
 		["name",["Смотрящий"]]
 	],{
 		["DBShotgun",_this,INV_HAND_R] call createItemInInventory;
@@ -732,7 +745,8 @@ begin_gate_list_attackers = [];
 	}] call sp_ai_createPersonEx;
 	
 	["begin_pos_watcher2","begin_watcher2",[
-		["uniform","StreakCloth"],
+		["uniform","CaveChainArmor1"],
+		["head","LeatherHat"],
 		["name",["Смотрящий"]]
 	],{
 		["ShortSword",_this,INV_HAND_R] call createItemInInventory;
@@ -745,7 +759,8 @@ begin_gate_list_attackers = [];
 			_strI = str _i;
 			begin_gate_list_deadcivils pushback (["begin_pos_startdead" + _strI,"begin_startdead"+_strI,
 				[
-					["uniform","StreakCloth"],
+					["head",pick["Turban2","HatBandanaOpen1","PeasantHat","WorkerCap","","","",""]],
+					["uniform",pick["NomadCloth"+(str randInt(1,23)),"HuntingCaveCloak" + (str randInt(1,3)),"CookerCloth","GriblanCloth"]],
 					["name",["Житель"]]
 				],{
 
@@ -1282,7 +1297,7 @@ begin_act_readyToDown = false;
 			begin_act_readyToDown = true;
 		}],["onstart",{
 			//cutscene1
-			begin_internal_list_cutscene1 pushback (["begin_pos_cutscene1dead","begin_cutscene1dead",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx);
+			begin_internal_list_cutscene1 pushback (["begin_pos_cutscene1dead","begin_cutscene1dead",[["uniform","NomadCloth23"],["name",["Житель"]]],{}] call sp_ai_createPersonEx);
 			begin_internal_list_cutscene1 pushback (["begin_pos_cutscene1attack","begin_cutscene1attack",begin_internal_NAInvData,{
 				["BattleAxe",_this,INV_HAND_R] call createItemInInventory;
 				callFunc(_this,switchTwoHands);
@@ -1456,7 +1471,7 @@ begin_run6_act = false;
 		callFunc(_this,switchTwoHands);
 		callFuncParams(_this,setCombatMode,true);
 	}] call sp_ai_createPersonEx;
-	["begin_pos_cutscene2dead2","begin_cutscene2dead2",[["uniform","StreakCloth"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
+	["begin_pos_cutscene2dead2","begin_cutscene2dead2",[["uniform","CitizenCloth4"],["name",["Житель"]]],{}] call sp_ai_createPersonEx;
 
 	//begin_pos_playerautoanim2
 	[true] call begin_internal_setNearCollisionMode;
@@ -1783,6 +1798,7 @@ begin_finalizer_act = false;
 	call sp_cleanupSceneData;
 	
 	["intro2"] call sp_audio_playMusic;
+	[0] call sp_onChapterDone;
 	{} call sp_setEventDiePlayer;
 	{
 		10 call sp_threadPause;  //because intro2

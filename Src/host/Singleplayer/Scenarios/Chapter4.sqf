@@ -35,7 +35,7 @@ cpt4_data_karimFace = "face05_baf";
 
 cpt4_playerUniform = "WatchmanCloth";
 
-cpt4_data_hudStatesDefault = "right+stats+cursor+inv+stam";
+cpt4_data_hudStatesDefault = "chat+right+stats+cursor+inv+stam";
 
 cpt4_addProcessorMainAct = {
 	params ["_tobjName","_code"];
@@ -1503,6 +1503,7 @@ cpt4_trg_gotomed_act = false;
 		} call sp_threadCriticalSection;
 
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		["vr",[4152.96,3809.78,17.8719],270.399,0.59,[-26.5285,0],0,0,720,0.0524573,0,1,0,1] call sp_cam_prepCamera;
 		
 		"player_cutscene" call sp_ai_waitForMobLoaded;
@@ -1515,6 +1516,7 @@ cpt4_trg_gotomed_act = false;
 		15 call sp_threadPause;
 		[true,5] call sp_gui_setBlackScreenGUI;
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
 
 		["cpt4_bar_begin"] call sp_startScene;
@@ -1571,7 +1573,7 @@ cpt4_func_setLockPlayerInteract = {
 
 ["cpt4_bar_begin",{
 	["cpt4_pos_p2player",0] call sp_setPlayerPos;
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	["chat+right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 
 	{
 		_texData = [0,"#(rgb,512,512,3)text(1,1,""Caveat"",0.15,""#00000000"",""#2b1b0ddf"",""/\\nлекарня\n< ПХ-17            \nБар ''Тушняк''>\n  Жилая зона>"")"];
@@ -2566,6 +2568,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		} call sp_threadCriticalSection;
 		
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 
 		["vr",[4200.24,3846.01,10.3988],146.569,0.53,[-26.2951,-4.11871],0,0,2.26073,0,0,1,0,1] call sp_cam_prepCamera;
 		"player_cutscene" call sp_ai_waitForMobLoaded;
@@ -2613,6 +2616,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		[true,2.5] call sp_gui_setBlackScreenGUI;
 
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
+		[4] call sp_onChapterDone;
 		_post = {
 			call sp_clearPlayerInventory;
 			call sp_cleanupSceneData;

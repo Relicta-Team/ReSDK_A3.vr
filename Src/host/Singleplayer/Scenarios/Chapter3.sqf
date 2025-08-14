@@ -4,7 +4,7 @@
 // ======================================================
 
 #include "Scenario.h"
-cpt3_hudvis_default = "stam+right+stats+cursor+inv";
+cpt3_hudvis_default = "chat+stam+right+stats+cursor+inv";
 cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 ["cpt3_begin",{
@@ -944,6 +944,7 @@ cpt3_func_damageEvent = {
 
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		{
 			["cpt3_pos_cutscenetocpt4","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
@@ -988,7 +989,9 @@ cpt3_func_damageEvent = {
 		5 call sp_threadPause;
 
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
+		[3] call sp_onChapterDone;
 		_post = {
 			call sp_cleanupSceneData;
 			call sp_clearPlayerInventory;

@@ -372,7 +372,7 @@ sp_createWidgetHighlight = {
 
 //включение или отключение отображения худа. для черного экрана используем setBlackScreenGUI
 sp_view_setPlayerHudVisible = {
-	params [["_mode","inv+right+up+left+stats+cursor+stam"]];
+	params [["_mode","inv+right+up+left+stats+cursor+stam+chat"]];
 	private _modesList = _mode splitString " +";
 	["inv" in _modesList] call inventory_setGlobalVisible; //enable inventory slots
 	interactMenu_disableGlobal = !("right" in _modesList); //right menu
@@ -388,6 +388,8 @@ sp_view_setPlayerHudVisible = {
 		if isNullReference(_x) then {continue};
 		_x ctrlShow ("stats" in _modesList);
 	} foreach hud_widgets; //statuses
+
+	(chat_widgets select 0) ctrlShow ("chat" in _modesList);
 };
 
 //установить видимость головы игрока
@@ -439,6 +441,10 @@ sp_gui_setCinematicMode = {
 	if equals(_mode,sp_gui_internal_cinematicMode) exitWith {};
 	sp_gui_internal_cinematicMode = _mode;
 	if (_mode) then {
+		if (isDisplayOpen) then {
+			call displayClose;
+		};
+		
 		private _d = call displayOpen;
 		{
 			{[_x,false] call deleteWidget} foreach sp_gui_internal_cinematicModeWidgets;
@@ -446,11 +452,17 @@ sp_gui_setCinematicMode = {
 			private _gui = getGUI;
 			private _sizeH = 10;
 			private _w1 = [_gui,BACKGROUND,[0,0,100,_sizeH]] call createWidget;
+			_w1 setvariable ["_outpos",[0,0-_sizeH,100,_sizeH]];
+			_w1 setvariable ["_inpos",[0,0,100,_sizeH]];
 			private _w2 = [_gui,BACKGROUND,[0,100-_sizeH,100,_sizeH]] call createWidget;
+			_w2 setvariable ["_outpos",[0,100,100,_sizeH]];
+			_w2 setvariable ["_inpos",[0,100-_sizeH,100,_sizeH]];
 			{
 				_x setBackgroundColor [0,0,0,1];
 				widgetSetFade(_x,1,0);
 				widgetSetFade(_x,0,0.5);
+				[_x,_x getvariable "_outpos"] call widgetSetPosition;
+				[_x,_x getvariable "_inpos",0.5] call widgetSetPosition;
 			} foreach [_w1,_w2];
 			sp_gui_internal_cinematicModeWidgets = [_w1,_w2];
 		} call sp_threadCriticalSection;
@@ -463,14 +475,15 @@ sp_gui_setCinematicMode = {
 		call displayClose;
 		{
 			{
-				widgetSetFade(_x,1,0.5);
+				widgetSetFade(_x,1,0.8);
+				[_x,_x getvariable "_outpos",0.8] call widgetSetPosition;
 			} foreach sp_gui_internal_cinematicModeWidgets;
 			private _code = {
 				{
 					[_x,false] call deleteWidget;
 				} foreach sp_gui_internal_cinematicModeWidgets;
 			};
-			invokeAfterDelay(_code,0.6);
+			invokeAfterDelay(_code,0.9);
 		} call sp_threadCriticalSection;
 	};
 };

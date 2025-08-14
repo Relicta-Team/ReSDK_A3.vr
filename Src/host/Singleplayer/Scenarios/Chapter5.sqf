@@ -467,7 +467,7 @@ cpt5_data_rifleSkill = 5;
 
 
 	{
-		["right+stats+up+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
+		["chat+right+stats+up+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
 		["press_specact",false] call sp_setLockPlayerHandler;
 		_unsleepHandle = ["press_specact",{
 			params ["_id"];
@@ -2080,14 +2080,18 @@ cpt5end_trg_ghostenterdoor_act = false;
 		} call sp_threadWait;
 
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		["VR",[3808.41,3620.74,6.37576],269.908,0.96,[-7.26865,0],0,0,720.001,0.0493299,0,1,0,1] call sp_cam_prepCamera;
-		private _t = 10;
+		private _t = 30;
 		["all",["VR",[3807.31,3620.73,6.37576],269.908,0.39,[-7.26865,0],0,0,720.001,0.0493299,0,1,0,1],_t] call sp_cam_interpTo;
 		[false,1] call sp_gui_setBlackScreenGUI;
-		7 call sp_threadPause;
+		10 call sp_threadPause;
 
 		[true,0.1] call sp_gui_setBlackScreenGUI;
 		call sp_cam_stopAllInterp;
+		[5] call sp_onChapterDone;
+		//[false] call sp_gui_setCinematicMode;
+
 
 		["cpt5_endtitle"] call sp_startScene;
 

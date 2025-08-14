@@ -125,3 +125,32 @@ sp_cleanupSceneData = {
 	//now delete all mobs
 	call sp_ai_deleteAllPersons;
 };
+
+sp_onChapterDone = {
+	params ["_chapId"];
+	{
+		private _chapList = profilenamespace getvariable ["rel_spdone",[]];
+		//check base type
+		if not_equalTypes(_chapList,[]) then {
+			_chapList = [];
+		};
+		//check count
+		if (count _chapList > 6) then {
+			_chapList = [];
+		};
+		//check values
+		{
+			if not_equalTypes(_x,0) then {
+				_chapList = [];
+			}
+		} foreach _chapList;
+
+		for "_i" from 0 to _chapId do {
+			_chapList pushBackUnique _i;
+		};
+
+		profilenamespace setvariable ["rel_spdone",_chapList];
+		saveProfileNamespace;
+
+	} call sp_threadCriticalSection;
+};

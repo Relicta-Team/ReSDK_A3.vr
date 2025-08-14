@@ -111,6 +111,13 @@ cpt1_playerUniform = "NomadCloth9";
 		1.8 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
 
+		if (isInventoryOpen) then {
+			["Снова нажмите $input_act_inventory чтобы закрыть режим взаимодействия и инвентаря"] call sp_setNotification;
+			{
+				!isInventoryOpen
+			} call sp_threadWait;
+		};	
+
 		["resist",false] call sp_setLockPlayerHandler;
 		[
 			"Чтобы встать с кровати нажмите $input_act_resist."
@@ -123,7 +130,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 		2 call sp_threadPause;
 
-		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
+		["chat+right+stats+cursor"] call sp_view_setPlayerHudVisible;
 		["#(Прицел) в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [
 			interaction_aim_widgets select 0
@@ -253,7 +260,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 //spawn cpt1_pos_looting
 ["cpt1_looting",{
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	["chat+right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 	["Остатки цивилизации","Осмотрите ящики на наличие ценных предметов"] call sp_setTaskMessageEff;
 
 	{
@@ -261,7 +268,7 @@ cpt1_playerUniform = "NomadCloth9";
 		["hellocave"] call sp_audio_playMusic;
 	} call sp_threadStart;
 
-	{
+	private _scrHndl = {
 		_bpref = "cpt1_looting_bottle";
 		_barr = [];
 		for "_i" from 1 to 2 do {
@@ -288,9 +295,11 @@ cpt1_playerUniform = "NomadCloth9";
 			];
 			false
 		}] call sp_addPlayerHandler;
+		["cpt1_looting_evt_handleChangeActiveHand",_hChangeActHand] call sp_storageSet;
 
 		{
 			any_of(_barr apply {equals(callFunc(_x,getSourceLoc),call sp_getActor)})
+			|| !callFunc(call sp_getActor,isEmptyActiveHand)
 		} call sp_threadWait;
 
 		_d = ["cpt1_looting_evt_changeHandHandler",[refcreate(false)]] call sp_storageGet;
@@ -298,7 +307,6 @@ cpt1_playerUniform = "NomadCloth9";
 		_hChangeActHand call sp_removePlayerHandler;
 
 		["Чтобы #(положить предмет) нажмите $input_act_putdownitem. Чтобы #(выбросить) - нажмите $input_act_dropitem."] call sp_setNotification;
-
 		{
 			all_of(_barr apply {not_equals(callFunc(_x,getSourceLoc),call sp_getActor)})
 		} call sp_threadWait;
@@ -311,6 +319,7 @@ cpt1_playerUniform = "NomadCloth9";
 		[false,_baseInteractHandle] call sp_setNotificationVisible;
 
 	} call sp_threadStart;
+	["cpt1_looting_data_firstinventory_threadhandle",_scrHndl] call sp_storageSet;
 
 	_objname = "cpt1_obj_loot";
 	_objlist = [];
@@ -386,6 +395,18 @@ cpt1_playerUniform = "NomadCloth9";
 		{
 			any_of(_lst apply {callFuncParams(_x,getDistanceTo,_act arg true) <= 3 && callFuncParams(_act,canSeeObject,_x)})
 		} call sp_threadWait;
+
+		{
+			_h = ["cpt1_looting_data_firstinventory_threadhandle",nullPtr] call sp_storageGet;
+			_h call sp_threadStop;
+			private _hinv = ["cpt1_looting_evt_changeHandHandler",[refcreate(false)]] call sp_storageGet;
+			refset(_hinv select 0,true);
+
+			private _hsw = ["cpt1_looting_evt_handleChangeActiveHand",null] call sp_storageGet;
+			if !isNullVar(_hsw) then {
+				_hsw call sp_removePlayerHandler;
+			};
+		} call sp_threadCriticalSection;
 
 		["Чтобы посмотреть содержимое #(контейнеров) (ящиков, сумок или одежды) - нажмите $input_act_mainAction"] call sp_setNotification;
 
@@ -793,6 +814,7 @@ cpt1_data_foundFirstMushroom = false;
 	{
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		{
 			["cpt1_pos_cutscenetocpt2","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
@@ -825,7 +847,9 @@ cpt1_data_foundFirstMushroom = false;
 		6 call sp_threadPause;
 
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
+		[1] call sp_onChapterDone;
 		_post = {
 			call sp_cleanupSceneData;
 			["cpt2_begin"] call sp_startScene;
