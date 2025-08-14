@@ -2174,6 +2174,8 @@ cpt5_endtitle_text = "Дату следующего запуска вы може
 		};
 	},[]] call curl_addRequest;
 	{
+		["kollector_underground",false] call sp_audio_playMusic;
+
 		_d = call displayOpen;
 		_sX = 70;
 		_sY = 5;
