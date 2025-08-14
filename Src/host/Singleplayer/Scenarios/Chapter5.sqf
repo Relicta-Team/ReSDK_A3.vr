@@ -2084,7 +2084,9 @@ cpt5_end_fnc_effOnDoor = {
 			["main_action",{
 				params ["_t"];
 				if (isTypeOf(_t,DoorDynamic) || isTypeOf(_t,DoorStatic)) then {
-					call cpt5_end_fnc_effOnDoor;
+					if (callFuncParams(call sp_getActor,getDistanceTo,_t arg true) <= 5) then {
+						call cpt5_end_fnc_effOnDoor;
+					};
 				};
 				false
 			}] call sp_addPlayerHandler;
@@ -2092,7 +2094,9 @@ cpt5_end_fnc_effOnDoor = {
 				params ["_t","_name"];
 				if (_name == "mainact") then {
 					if (isTypeOf(_t,DoorDynamic) || isTypeOf(_t,DoorStatic)) then {
-						call cpt5_end_fnc_effOnDoor;
+						if (callFuncParams(call sp_getActor,getDistanceTo,_t arg true) <= 5) then {
+							call cpt5_end_fnc_effOnDoor;
+						};
 					};
 				};
 				false
