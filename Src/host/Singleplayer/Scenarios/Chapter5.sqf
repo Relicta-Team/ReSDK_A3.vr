@@ -211,6 +211,7 @@ cpt5_data_rifleSkill = 5;
 
 		callFuncParams(_this,setCloseEyes,true);
 	},{
+		_this addHeadgear "H_HeadBandage_stained_F";
 		_this enablemimics false;
 		_this switchMove "Acts_Accessing_Computer_Loop";
 	}] call sp_ai_createPersonEx;
@@ -254,6 +255,7 @@ cpt5_data_rifleSkill = 5;
 		["face","facepoet"],
 		["age",29]
 	],{
+		["ArmorLite",_this,INV_ARMOR] call createItemInInventory;
 		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
 		callFunc(_this,switchTwoHands);
 	}] call sp_ai_createPersonEx;
@@ -261,6 +263,7 @@ cpt5_data_rifleSkill = 5;
 	["cpt5_pos_defstrelok","cpt5_defstrelok",[
 		["uniform","StreakCloth"],
 		["name",["Боец"]],
+		["head","HatBandana4"],
 		["age",37]
 	],{
 		["RifleSVT",_this,INV_HAND_R] call createItemInInventory;
@@ -286,6 +289,7 @@ cpt5_data_rifleSkill = 5;
 		//switchmove
 		params ["_mob"];
 		_mob switchMove "passenger_flatground_3_idle_unarmed";
+		_mob addHeadgear "H_HeadBandage_stained_F";
 	}] call sp_ai_createPersonEx;
 
 	//wounded and static
@@ -302,7 +306,8 @@ cpt5_data_rifleSkill = 5;
 		private _strnum = str _i;
 		["cpt5_pos_armyguy"+_strnum,"cpt5_armyguy"+_strnum,[
 			["uniform","StreakCloth"],
-			["name",["Боец"]]
+			["name",["Боец"]],
+			["head",pick["HatBandana4","HatBandana5","HatBandana6","HatBandana7","CombatHelmet",""]]
 		],{},{
 			_this switchMove (_animlist select (_i-1));
 		}] call sp_ai_createPersonEx;
@@ -324,7 +329,7 @@ cpt5_data_rifleSkill = 5;
 	//----------------------------------------------------------------------
 	//-------------------------- spawn emeny -----------------------------
 	["cpt5_pos_izt1","cpt5_izt1",[
-		["uniform","StreakCloth"],
+		["uniform","BlackLightweightArmyCloth2"],
 		["name",["Истязатель"]],
 		["face","asian"]
 	],{
@@ -376,7 +381,7 @@ cpt5_data_rifleSkill = 5;
 	for "_i" from 1 to 2 do {
 		_strI = str _i;
 		["cpt5_pos_izt1_cov" + _strI,"cpt5_izt1_cov" + _strI,[
-			["uniform","StreakCloth"],
+			["uniform",["TorturerCloth1","TorturerCloth2"] select (_i-1)],
 			["name",["Истязатель"]],
 			["face","asian"]
 		],{
@@ -387,7 +392,7 @@ cpt5_data_rifleSkill = 5;
 	};
 
 	["cpt5_pos_izt2","cpt5_izt2",[
-		["uniform","StreakCloth"],
+		["uniform","BlackLightweightArmyCloth2"],
 		["name",["Истязатель"]],
 		["face","asian"]
 	],{
@@ -396,7 +401,7 @@ cpt5_data_rifleSkill = 5;
 		callFunc(_this,switchTwoHands);
 	}] call sp_ai_createPersonEx;
 	["cpt5_pos_izt3","cpt5_izt3",[
-		["uniform","StreakCloth"],
+		["uniform","LeatherCoatWithoutSleeves"],
 		["name",["Истязатель"]],
 		["face","asian"]
 	],{
@@ -458,7 +463,7 @@ cpt5_data_rifleSkill = 5;
 
 	//moving pos (left->right) cpt5_pos_izcombat1 cpt5_pos_izcombat2
 	["cpt5_pos_izcombat_spawn","cpt5_izcombat",[
-		["uniform","StreakCloth"],
+		["uniform","KnightCaveArmor2"],
 		["name",["Дико","Убивать"]],
 		["face","face60"]
 	],{
@@ -1710,6 +1715,9 @@ cpt5_internal_data_ctr_canDamage = 0;
 	} call sp_setEventDiePlayer;
 	
 	[cpt5_questName_preend,"Убейте истязателя"] call sp_setTaskMessageEff;
+	if (!callFuncParams(call sp_getActor,hasItem,"ShortSword")) then {
+		["ShortSword",call sp_getActor,INV_HAND_R] call createItemInInventory;
+	};
 
 	{
 		["В ближнем бою будьте максимально внимательны и осторожны. Одно неверное действие может полностью изменить ход сражения. Комбинируйте разные #(стили атаки) и #(зоны попадания), не забывая следить за вашей #(выносливостью)."] call sp_setNotification;
@@ -1757,6 +1765,7 @@ cpt5_internal_data_ctr_canDamage = 0;
 		
 		while {true} do {
 			setVar(_mob,curDefType,pick _defmodeList);
+			
 			if (callFuncParams(_mob,getDistanceTo,call sp_getActor arg true) <= 1.8) then {
 				
 				{callFuncParams(_mob,attackOtherMob,call sp_getActor)} call sp_threadCriticalSection;
@@ -1816,7 +1825,8 @@ cpt5_internal_data_ctr_canDamage = 0;
 		_strI = str _i;
 		["cpt5_pos_attacker" + _strI,"cpt5_attacker" + _strI,[
 			["uniform","StreakCloth"],
-			["name",["Боец"]]
+			["name",["Боец"]],
+			["head",pick["HatBandana4","HatBandana5","HatBandana6","HatBandana7","CombatHelmet",""]]
 		],{
 			[pick["RifleFinisher","RifleAuto","PistolHandmade"],_this,INV_HAND_R] call createItemInInventory;
 			//callFuncParams(_this,setCombatMode,true);
@@ -1987,6 +1997,22 @@ cpt5_data_lastbattle = false;
 	} call sp_threadStart;
 }] call sp_addTriggerEnter;
 
+cpt5_end_fnc_effOnDoor = {
+
+	{
+		_handle = ppEffectCreate ["Fisheye", 3000];
+		_handle ppEffectEnable true; 
+		_handle ppEffectAdjust [0.05,0.31,-0.1]; 
+		_handle ppEffectCommit 0.4;
+		0.4 call sp_threadpause;
+		_handle ppEffectAdjust [0.1,0.1,0.1]; 
+		_handle ppEffectCommit 0.5;
+		0.5 call sp_threadpause;
+
+		_handle ppEffectEnable false;
+		ppEffectDestroy _handle;
+	} call sp_threadStart;
+};
 
 ["cpt5end_start",{
 	call sp_threadStopAll;
@@ -2052,6 +2078,26 @@ cpt5_data_lastbattle = false;
 		[false,5] call sp_gui_setBlackScreenGUI;
 		//fix broken unhiding (sp reasons...)
 		player hideobject false;
+		sp_playerCanMove = true;
+
+		{
+			["main_action",{
+				params ["_t"];
+				if (isTypeOf(_t,DoorDynamic) || isTypeOf(_t,DoorStatic)) then {
+					call cpt5_end_fnc_effOnDoor;
+				};
+				false
+			}] call sp_addPlayerHandler;
+			["activate_verb",{
+				params ["_t","_name"];
+				if (_name == "mainact") then {
+					if (isTypeOf(_t,DoorDynamic) || isTypeOf(_t,DoorStatic)) then {
+						call cpt5_end_fnc_effOnDoor;
+					};
+				};
+				false
+			}] call sp_addPlayerHandler;
+		} call sp_threadCriticalSection;
 	} call sp_threadStart;
 
 
@@ -2089,10 +2135,11 @@ cpt5end_trg_ghostenterdoor_act = false;
 
 		[true,0.1] call sp_gui_setBlackScreenGUI;
 		call sp_cam_stopAllInterp;
+		
 		[5] call sp_onChapterDone;
-		//[false] call sp_gui_setCinematicMode;
+		[false] call sp_gui_setCinematicMode;
 
-
+		3 call sp_threadPause;
 		["cpt5_endtitle"] call sp_startScene;
 
 	} call sp_threadStart;

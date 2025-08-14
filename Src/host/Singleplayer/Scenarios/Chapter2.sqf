@@ -939,15 +939,17 @@ cpt2_data_bandageRefList = [];
             _wid
         }] call sp_createWidgetHighlight;
 
-        // _hClick = ["click_self",{
-        //     params ["_item"];
-        //     if (isTypeOf(_item,Bandage)) then {
-        //         call sp_removeCurrentPlayerHandler;
-        //         //consumed food
-        //         hud_bleeding = 0;
-        //     };
-        //     false
-        // }] call sp_addPlayerHandler;
+        _hClick = ["click_self",{
+            params ["_item"];
+            _r = false;
+            if (isTypeOf(_item,Bandage)) then {
+                if (getVar(call sp_getActor,curTargZone) != TARGET_ZONE_LEG_R) then {
+                    _r = true;
+                    ["Нужно бинтовать ПРАВУЮ НОГУ","error"] call chatPrint;
+                };
+            };
+            _r
+        }] call sp_addPlayerHandler;
 
         // {
         //     !(_hClick call sp_isValidPlayerHandler)
@@ -957,6 +959,7 @@ cpt2_data_bandageRefList = [];
             callFunc(callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R),isBandaged)
         } call sp_threadWait;
         hud_bleeding = 0;
+        _hClick call sp_removePlayerHandler;
 
         {
             private _legRef = callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R);

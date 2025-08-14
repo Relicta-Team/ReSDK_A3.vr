@@ -815,12 +815,16 @@ cpt3_data_doorSeeDialogPerformed = false;
 				|| callFuncParams(call sp_getActor,getDistanceTo,_obj arg true) <= 1.2
 				|| equals(pointerList getOrDefault vec2(_refobj,nullPtr),_obj)
 			} call sp_threadWait;
+			
+			sp_playerCanMove = false;
 			([
 				"chap3\gg4",
 				"chap3\gg5"
 			] call sp_audio_sayPlayerList) call sp_threadWaitForEnd;
+			sp_playerCanMove = true;
 
 			cpt3_data_doorSeeDialogPerformed = true;
+			["Прятки со смертью","Попробуйте открыть дверь"] call sp_setTaskMessageEff;
 		} call sp_threadStart;
 		
 		_threadlook call sp_threadWaitForEnd;
@@ -882,6 +886,8 @@ cpt3_func_damageEvent = {
 }] call sp_addScene;
 
 ["cpt3_trg_foundgate",{
+	[true] call sp_setHideTaskMessageCtg;
+	
 	["gate"] call sp_audio_playMusic;
 	{
 		2 call sp_threadPause;

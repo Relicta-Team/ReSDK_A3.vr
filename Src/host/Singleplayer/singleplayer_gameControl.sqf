@@ -240,7 +240,7 @@ sp_internal_handleTargetThrowingContact = {
 sp_applyPlayerDamage = {
 	params ["_val",["_isSet",false]];
 	if (_isSet) then {
-		sp_playerHp = clamp(_val,0,100);
+		sp_playerHp = clamp(100-_val,0,100);
 	} else {
 		sp_playerHp = (sp_playerHp - _val) max 0;
 	};
@@ -509,6 +509,13 @@ sp_copyPlayerInventoryTo = {
 			};
 		};
 	} foreach INV_LIST_ALL;
+	setVar(_target,face,getVar(_player,face));
+	private _p = {
+		params ["_body","_face"];
+		_body setFace _face;
+	};
+	_a = [getVar(_target,owner),getVar(call sp_getActor,face)];
+	invokeAfterDelayParams(_p,0.5,_a);
 };
 
 //sprint control

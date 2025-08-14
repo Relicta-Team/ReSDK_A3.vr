@@ -834,8 +834,13 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				[getVar(_karim,owner)] call anim_syncAnim;
 			} call sp_threadCriticalSection;
 
+			private _content = "";
+			if isTypeOf(_pap,Paper) then {
+				_content = getVar(_pap,content);
+			};
+
 			if (
-				[tolower getVar(_pap,content),"(карим\s*сухач|сухач\s*карим)"] call regex_isMatch
+				[tolower _content,"(карим\s*сухач|сухач\s*карим)"] call regex_isMatch
 			) exitWith {};
 
 			_knifePos = callFunc("cpt4_pos_knifekarimpos" call sp_getObject,getPos) vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),0];
@@ -1326,7 +1331,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 	{
 		
 
-		["Люди, которые ведут себя странно, говорят непонятные слова больны болезнью #(Тоннельного Образа Мышления) (в народе - ТОМность)."
+		["Люди, которые ведут себя странно и говорят непонятные слова - больны болезнью #(Тоннельного Образа Мышления) (в народе - ТОМность)."
 		+sbr + "Избегайте любых контактов с ними, так как #(ТОМность заразна). Если у вас есть силы и возможность - облегчите муки болезненного, прервав его жизнь."
 		] call sp_setNotification;
 
@@ -1671,8 +1676,9 @@ cpt4_func_setLockPlayerInteract = {
 
 
 	["cpt4_pos_citywalker1","cpt4_citywalker1",[
-		["uniform","CitizenCloth6"]
+		["uniform","CitizenCloth3"]
 	],{
+		["SleevelessOuterwear1",_this,INV_ARMOR] call createItemInInventory;
 		["Sigarette",_this,INV_FACE] call createItemInInventory;
 	}] call sp_ai_createPersonEx;
 
@@ -1692,7 +1698,7 @@ cpt4_func_setLockPlayerInteract = {
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_barsmoker1","cpt4_barsmoker1",[
-		["uniform","WhitePlaidCoat"]
+		["uniform","TorgashPalthCloth"]
 	],{
 		["Sigarette",_this,INV_FACE] call createItemInInventory;
 	}, { _this switchMove "acts_commenting_on_fight_loop" }] call sp_ai_createPersonEx;
@@ -1711,7 +1717,7 @@ cpt4_func_setLockPlayerInteract = {
 	},{ _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"; }] call sp_ai_createPersonEx;
 
 	["cpt4_pos_bomzowner","cpt4_bomzowner",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","ZnatCloth"],
 		["name",["Архатил","Вялов"]],
 		["face","face73"]
 	],{
@@ -1744,7 +1750,7 @@ cpt4_func_setLockPlayerInteract = {
 
 	//-------------------------- bar spawn -------------------
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys1",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","ZnatCloth"],
 		["name",["Выха","Забойщик"]],
 		["face","face123_pmc"],
 		["age",36]
@@ -1752,7 +1758,7 @@ cpt4_func_setLockPlayerInteract = {
 		callFuncParams("cpt4_obj_barsit_party1" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys2",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreatcoatWhiteBrown"],
 		["name",["Губан","Мощин"]],
 		["face","face109_pmc"],
 		["age",23]
@@ -1760,7 +1766,7 @@ cpt4_func_setLockPlayerInteract = {
 		callFuncParams("cpt4_obj_barsit_party2" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys3",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreenCoat"],
 		["name",["Иванур","Володин"]],
 		["face","livonianhead_1"],
 		["age",32]
@@ -1770,7 +1776,7 @@ cpt4_func_setLockPlayerInteract = {
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_brodyaga_bar","cpt4_brodyaga_bar",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreenJacketCloth"],
 		["name",["Алкашня",""]],
 		["face","face08"]
 	],{
@@ -2423,8 +2429,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		] call sp_ai_playAnim;
 		
 
-		_h = ["Питьё жидкостей работает по аналогии с поеданием. Выберите область взаимодействия ""Рот"" и нажмите ЛКМ с кружкой или бутылкой в руке по кнопке ""Моя персона"". "
-		+"Для регулирования #(размера глотка) нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
+		_h = ["Питьё жидкостей работает по аналогии с поеданием. Чтобы #(налить) брагу в кружку нажмите ЛКМ бутылкой по ней. Выберите область взаимодействия ""Рот"" и нажмите ЛКМ с кружкой в руке по кнопке ""Моя персона"". "
+		+"Для регулирования #(размера глотка и объема переливания) нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
 		{
 			["cpt4_data_drinksuccess"] call sp_storageGet
 		} call sp_threadWait;
@@ -2550,6 +2556,12 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		{
 			["cpt4_pos_cutscenetocpt5","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
+				{
+					_it = callFuncParams(_this,getItemInSlotRedirect,_x);
+					if !isNullReference(_it) then {
+						[_it] call deleteGameObject;
+					};
+				} foreach [INV_HAND_L,INV_HAND_R];
 			},{
 				_this switchmove "Acts_Accessing_Computer_Loop";
 			}] call sp_ai_createPersonEx;
@@ -2558,7 +2570,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 				_strI = str _i;
 				_pos = "cpt4_pos_cutscenetocpt5_iz" + _strI;
 				[_pos,"cpt4_iztpre" + _strI,[
-					["uniform","StreakCloth"]
+					["uniform",["BlackLightweightArmyCloth1","BlackLightweightArmyCloth2"] select (_i-1)]
 				],{
 					["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
 					callFunc(_this,switchTwoHands);
