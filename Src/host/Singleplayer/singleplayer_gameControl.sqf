@@ -110,9 +110,24 @@ sp_gc_onPlayerAssigned = {
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
+	#ifdef SP_PROD
+	private _chidx = uiNameSpace getVariable ["rel_sp_selchapter",0];
+	if not_equalTypes(_chidx,0) then {
+		_chidx = 0;
+	};
+
+	private _sceneList = ["begin_playerSetup","cpt1_begin","cpt2_begin","cpt3_begin","cpt4_begin","cpt5_begin"];
+	if (_chidx < 0 || _chidx >= count _sceneList) then {
+		_chidx = 0;
+	};
+
+	[_sceneList select _chidx] call sp_startScene;
+
+	#else
+	//["begin_prestart"] call sp_startScene;
 	["begin_prestart"] call sp_startScene;
-	//["cpt3_begin"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
+	#endif
 };
 
 //устанавливает позицию игрока
