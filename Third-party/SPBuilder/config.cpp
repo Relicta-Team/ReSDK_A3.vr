@@ -21,7 +21,7 @@ class CfgFunctions
 		{
 		class Bootstrap 
 			{
-				file = "\sp_mode";
+				//file = "\sp_mode";
 				/* file = "\rel\bootstrap";
 				class preInitClient {postInit  = 1;}; // postInit  preInit */
 				//class preInitServer {preInit  = 1;}; //выполнение перед инициализацией объектов на миссии
