@@ -511,7 +511,7 @@ cpt3_trg_enterdarkzone_act = false;
 				(["cpt4_data_eaterThrowObjectHandle",sp_threadNull] call sp_storageGet) call sp_threadStop;
 				["cpt4_data_eaterThrowObjectHandle",[{
 					params ["_obj","_eater"];
-					if isNullreference(_obj) exitWith {};
+					if isNullReference(_obj) exitWith {};
 					
 					{
 						callFunc(_obj,isInWorld) && !callFunc(_obj,isFlying)

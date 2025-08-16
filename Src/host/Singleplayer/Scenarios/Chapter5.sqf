@@ -713,6 +713,8 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 		} call sp_threadWait;
 
 		["two_hands",false] call sp_setLockPlayerHandler;
+		[cpt5_questName_startCombat,"Поднимайтесь наверх"] call sp_setTaskMessageEff;
+
 		if (!callFuncParams(call sp_getActor,isHoldedTwoHands,callFunc(call sp_getActor,getItemInActiveHandRedirect))) then {
 			["Нажмите $input_act_switchTwoHands чтобы схватить винтовку #(двумя руками)."] call sp_setNotification;
 		};
@@ -722,7 +724,6 @@ cpt5_data_kapitan_startQuest_loadweapon = false;
 
 		[false] call sp_setNotificationVisible;
 
-		[cpt5_questName_startCombat,"Поднимайтесь наверх"] call sp_setTaskMessageEff;
 
 	} call sp_threadStart;
 }] call sp_addScene;
@@ -970,6 +971,7 @@ cpt5_trg_combat_stage1_act = false;
 							[_iztref,_iztpos,_iztbody getvariable "runawayanim",{
 								params ["_body"];
 								[_body,_body getvariable "secondMobPos",0] call sp_ai_setMobPos;
+								_body hideObject true;
 							}] call sp_ai_playAnim;
 						};
 						_args = [_iztref,_iztpos,_iztbody];
@@ -1272,13 +1274,15 @@ cpt5_trg_woundedmansave_act = false;
 				["cpt5_kapitan","chap5\warzone\kap4",["endoffset",0.1]],
 				[player,"chap5\warzone\gg3",["endoffset",0.7]],
 				["cpt5_kapitan","chap5\warzone\kap5",[
-					["endoffset",1],
+					["endoffset",1]
+				]],
+				[player,"chap5\warzone\gg4",["endoffset",1.4]],
+				["cpt5_kapitan","chap5\warzone\kap6",[
+					["endoffset",0.1],
 					["onstart",{
 						["cpt5_data_destroywallonstage2",true] call sp_storageSet;
 					}]
-				]],
-				[player,"chap5\warzone\gg4",["endoffset",1.4]],
-				["cpt5_kapitan","chap5\warzone\kap6",["endoffset",0.1]]
+				]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 			[cpt5_questName_rangedCombat,"Отправляйтесь к позиции на возвышености"] call sp_setTaskMessageEff;
@@ -1308,10 +1312,10 @@ cpt5_act_shotingStarted = false;
 					if ((({
 						!callFuncParams(this,hasPart,_x)
 					} count BP_INDEX_ALL) > 0) || getVar(this,isDead) || !callFunc(this,isActive)) then {
+						callFuncParams(this,Die,null);
 						_body = getVar(this,owner);
 						if (_body getvariable ["__die_action",false]) exitWith {};
 						_body setvariable ["__die_action",true];
-
 						["cpt5_data_deadizt",{_this + 1},0] call sp_storageUpdate;
 						refset(_body getvariable "anim_handler",true);
 						_body switchMove (pick ["Acts_StaticDeath_04","Acts_StaticDeath_05","Acts_StaticDeath_06","Acts_StaticDeath_10","Acts_StaticDeath_13"]);
@@ -1432,6 +1436,7 @@ cpt5_trg_dialog_onseegate = false;
 		};
 
 		_iztbody = "cpt5_izt1_cov"+(str _i) call sp_ai_getMobBody;
+		_iztbody hideobject false;
 		_iztbody setvariable ["runawayanim","cpt5_iztsuppress"+(str _i)+"_run"];
 		_iztbody setvariable ["anim_handler",
 			["cpt5_izt1_cov"+(str _i),[
@@ -1716,7 +1721,10 @@ cpt5_internal_data_ctr_canDamage = 0;
 	
 	[cpt5_questName_preend,"Убейте истязателя"] call sp_setTaskMessageEff;
 	if (!callFuncParams(call sp_getActor,hasItem,"ShortSword")) then {
-		["ShortSword",call sp_getActor,INV_HAND_R] call createItemInInventory;
+		if !isNullReference(callFunc(call sp_getActor,getItemInActiveHandRedirect)) then {
+			callFuncParams(call sp_getActor,dropItem,getVar(call sp_getActor,activeHand));
+		};
+		["ShortSword",call sp_getActor,getVar(call sp_getActor,activeHand)] call createItemInInventory;
 	};
 
 	{
@@ -1998,7 +2006,7 @@ cpt5_data_lastbattle = false;
 }] call sp_addTriggerEnter;
 
 cpt5_end_fnc_effOnDoor = {
-
+	callFuncParams(call sp_getActor,playSound,"internal\skillcheckdx.wav" arg getRandomPitch);
 	{
 		_handle = ppEffectCreate ["Fisheye", 3000];
 		_handle ppEffectEnable true; 
@@ -2075,7 +2083,7 @@ cpt5_end_fnc_effOnDoor = {
 			[_w,true] call deleteWidget;
 		} call sp_threadCriticalSection;
 
-		[false,5] call sp_gui_setBlackScreenGUI;
+		[false,5,false] call sp_gui_setBlackScreenGUI;
 		//fix broken unhiding (sp reasons...)
 		player hideobject false;
 		sp_playerCanMove = true;

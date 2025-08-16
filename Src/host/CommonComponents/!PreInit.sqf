@@ -76,7 +76,11 @@ cprintErr = {
 		//[format _this] call discError;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (PRFX__ + format _this + "#1001");
+			#ifdef SP_PROD
+				diag_log text (PRFX__ + format _this);
+			#else
+				"debug_console" callExtension (PRFX__ + format _this + "#1001");
+			#endif
 		} else {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
@@ -93,7 +97,11 @@ cprintWarn = {
 		//[format _this] call discWarning;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (PRFX__ + format _this + "#1101");
+			#ifdef SP_PROD
+				diag_log text (PRFX__ + format _this);
+			#else
+				"debug_console" callExtension (PRFX__ + format _this + "#1101");
+			#endif
 		} else {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
