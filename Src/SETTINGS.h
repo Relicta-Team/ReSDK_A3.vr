@@ -29,9 +29,8 @@
 #endif
 
 //uncomment for enable singleplayer
-//#define SP_MODE
-#define SP_DEBUG
-//#define SP_PROD
+#define SP_MODE
+#define SP_PROD
 //#define SP_DEBUG
 
 #ifdef SP_MODE
