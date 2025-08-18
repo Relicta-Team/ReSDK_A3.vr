@@ -19,7 +19,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 4
+        count: 2
         check_type_of: false
   result:
     class: WoodenSmallFence
@@ -31,7 +31,9 @@
   required:
     components:
       - class: LogDebris(1-2)
-        count: 2
+        count: 1
+      - class: WoodenDebris(1-5)
+        count: 1
         check_type_of: false
       - class: WoodenSmallFence
         name: Легкий деревянный забор
@@ -48,7 +50,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 5
+        count: 3
         check_type_of: false
   result:
     class: WoodenSmallFence2
@@ -59,7 +61,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 8
+        count: 2
         check_type_of: false
   result:
     class: WoodenSmallFence1
@@ -69,11 +71,11 @@
   name: Палочная ограда
   required:
     components:
-      - class: LogDebris(1-2)
+      - class: WoodenDebris(1-5)
         count: 1
         check_type_of: false
       - class: WoodenDebris7
-        count: 4
+        count: 2
   result:
     class: SmallFenceMadeOfSticks
     <<: *def_mods
@@ -87,7 +89,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 6
+        count: 3
         check_type_of: false
   result:
     class: Wicket
@@ -98,7 +100,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 6
+        count: 3
         check_type_of: false
   result:
     class: WoodenDoor
@@ -112,7 +114,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 10
+        count: 4
         check_type_of: false
       - class: MetalDebris(1-2)
   result:
@@ -124,7 +126,7 @@
   required:
     components:
       - class: MetalDebris(1-2)
-        count: 6
+        count: 2
         check_type_of: false
   result:
     class: SheetMetalTinFence
@@ -135,7 +137,7 @@
   required:
     components:
       - class: MetalDebris(1-2)
-        count: 6
+        count: 3
         check_type_of: false
       - class: SheetMetalTinFence
         name: Стальная ограда
@@ -149,7 +151,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 8
+        count: 4
         check_type_of: false
   result:
     class: MediumWoodenWall
@@ -160,7 +162,7 @@
   required:
     components:
       - class: StoneDebris(1-5)
-        count: 10
+        count: 5
         check_type_of: false
   result:
     class: StoneWall
@@ -175,7 +177,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 6
+        count: 3
         check_type_of: false
   result:
     class: ShortRottenBoards
@@ -186,7 +188,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 8
+        count: 5
         check_type_of: false
   result:
     class: LongRottenBoards
@@ -197,7 +199,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 8
+        count: 4
         check_type_of: false
   result:
     class: WoodenSmallFloor
@@ -208,7 +210,7 @@
   required:
     components:
       - class: StoneDebris(1-5)
-        count: 6
+        count: 2
         check_type_of: false
   result:
     class: SmallStoneRoad
@@ -223,7 +225,7 @@
   required:
     components:
       - class: LogDebris(1-2)
-        count: 5
+        count: 3
         check_type_of: false
   result:
     class: Gallows
@@ -234,7 +236,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 4
+        count: 2
         check_type_of: false
   result:
     class: WoodCross
@@ -245,7 +247,7 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 2
+        count: 1
         check_type_of: false
   result:
     class: WoodenGraveCross
@@ -297,10 +299,12 @@
   required:
     components:
       - class: WoodenDebris(1-5)
-        count: 4
+        count: 2
       - class: ClothDebris(1-2)
-        count: 6
+        count: 3
         check_type_of: false
+      - class: NeedleWithThreads
+        destroy: false
   result:
     class: SmallClothShelter
     <<: *def_mods
@@ -310,10 +314,10 @@
   required:
     components:
       - class: WoodenDebris7
-        count: 4
+        count: 2
         check_type_of: false
       - class: ClothDebris(1-2)
-        count: 8
+        count: 3
         check_type_of: false
       - class: NeedleWithThreads
         destroy: false
@@ -325,8 +329,8 @@
   name: Кабина туалета
   required:
     components:
-      - class: WoodenDebris(1-2)
-        count: 10
+      - class: WoodenDebris(1-5)
+        count: 5
         check_type_of: false
   result:
     class: WoodenToiletSmall
@@ -336,8 +340,11 @@
   name: Сарай (малый)
   required:
     components:
-      - class: WoodenDebris(1-2)
-        count: 16
+      - class: WoodenDebris(1-5)
+        count: 6
+        check_type_of: false
+      - class: MetalDebris(1-2)
+        count: 2
         check_type_of: false
   result:
     class: SmallSheetMetalHouse2
@@ -347,8 +354,11 @@
   name: Сарай (большой)
   required:
     components:
-      - class: WoodenDebris(1-2)
-        count: 24
+      - class: WoodenDebris(1-5)
+        count: 8
+        check_type_of: false
+      - class: MetalDebris(1-2)
+        count: 3
         check_type_of: false
   result:
     class: SmallSheetMetalHouse
@@ -362,10 +372,10 @@
       farming: 4
     components:
       - class: Melteshonok
-        count: 5
+        count: 2
         check_type_of: false      
       - class: MetalDebris(1-2)
-        count: 5
+        count: 2
         check_type_of: false
   result:
     class: RatCage
