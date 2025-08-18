@@ -35,6 +35,8 @@ cpt4_data_karimFace = "face05_baf";
 
 cpt4_playerUniform = "WatchmanCloth";
 
+cpt4_data_hudStatesDefault = "chat+right+stats+cursor+inv+stam";
+
 cpt4_addProcessorMainAct = {
 	params ["_tobjName","_code"];
 	["main_action",compile format['
@@ -77,7 +79,7 @@ cpt4_internal_func_checkMainAction = {
 };
 
 cpt4_func_genDescDocs = {
-	params [["_name",""],["_role","временное пребывание"],["_note","отсутствует"]];
+	params [["_name",""],["_role","временное пребывание"],["_note","нет"]];
 	
 	if equalTypes(_name,GENDER_MALE) then {
 		_name = [_name,true] call naming_getRandomName;
@@ -90,7 +92,7 @@ cpt4_func_genDescDocs = {
 		"Бумага пребывания"+_nh+sbr+sbr+
 		"Имя: %1"+sbr+
 		"Возраст: " + ([randInt(19,50),["цикл","цикла","циклов"],true] call toNumeralString) + sbr+
-		"Полжение\работа: %2"+sbr+
+		"Положение\работа: %2"+sbr+
 		"Примечания: %3",
 		_name,_role,_note
 	];
@@ -363,15 +365,101 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
 
+	[{
+        params ["_t","_wid"];
+		false
+    },{
+		params ["_t","_wid"];
+		false
+	},{
+		params ["_t","_wid"];
+        if array_exists(interactMenu_selectionWidgets,_wid) exitWith {true};
+		//if ("Глаза" == _t) exitWith {true};
+		false
+	}] call sp_gui_setInventoryVisibleHandler;
+
+	["main_action",{
+		params ["_t"];
+		if (
+			isTypeOf(_t,BaseElectronicDeviceLighting)
+			&& getVar(_t,lightIsEnabled)
+		) exitWith {
+			true
+		};
+		false
+	}] call sp_addPlayerHandler;
+	["activate_verb",{
+		params ["_t","_name"];
+		if (
+			isTypeOf(_t,BaseElectronicDeviceLighting)
+			&& getVar(_t,lightIsEnabled)
+			&& _name == "mainact"
+		) exitWith {true};
+		false
+	}] call sp_addPlayerHandler;
+
 	//отдавать кариму можно только когда есть transitem в sp_allowebVerbs
 	["interact_with",{
 		params ["_targ","_with"];
 		if equals(_targ,"cpt4_karim" call sp_ai_getMobObject) exitWith {
 			if not_equals(_with,cpt4_data_refLastTakenDoc) exitWith {true};
-			array_exists(sp_allowebVerbs,"transitem");
+			!array_exists(sp_allowebVerbs,"transitem");
 		};
 		false
 	}] call sp_addPlayerHandler;
+
+	//отключаем сжигание бумаги
+	["click_target",{
+		params ["_targ"];
+		private _r = false;
+		private _with = callFunc(call sp_getActor,getItemInActiveHandRedirect);
+		{
+			_x params ["_a","_b"];
+			if (isTypeOf(_a,IPaperItemBase) && callFunc(_b,isFireLight)) exitWith {
+				[
+					pick [
+						"Так и до пожара дойдёт",
+						"Я не буду устраивать поджог",
+						"Зачем это делать?"
+					],
+					"error"
+				] call chatPrint;
+				_r = true;
+			};
+		} foreach [[_targ,_with],[_with,_targ]];
+		_r
+	}] call sp_addPlayerHandler;
+
+	//запрет брать всё (небольшая задержка из-за ожидания ~рендера~ (NOE-загрузчика))
+	_post = {
+		{
+			if isTypeOf(_x,IPaperItemBase) then {continue};
+			if isTypeOf(_x,ItemWritter) then {continue};
+			if isTypeOf(_x,IChairAsItem) then {continue};
+			if isTypeOf(_x,Candle) then {continue};
+			if isTypeOf(callFunc(_x,getObjectPlace),SmallWoodenTable) then {continue};
+			
+			sp_blacklistClickItems pushBack _x;
+		} foreach (callFuncParams(call sp_getActor,getNearItems,20));
+	}; invokeAfterDelay(_post,1);
+
+	//выключаем надрезы ножом
+	["click_self",{
+        params ["_t"];
+        if (isTypeOf(_t,Knife)) exitWith {
+            _m = pick[
+                "Я не буду себя резать.",
+                "Что я творю?",
+                "Это глупо.",
+                "В этом нет необходимости.",
+                "Зачем мне резать себя?",
+                "Я не хочу это делать."
+            ];
+            callFuncParams(call sp_getActor,mindSay,_m);
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
 
 
 	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {
@@ -393,7 +481,8 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	},"replace"] call oop_injectToMethod;
 	
 	[false,2] call setBlackScreenGUI;
-	["right+stats+cursor+inv+stam"] call sp_view_setPlayerHudVisible;
+	[cpt4_data_hudStatesDefault] call sp_view_setPlayerHudVisible;
+	sp_allowebVerbs pushBack "standupfromchair";
 
 	["cpt4_pos_enterkochevs","cpt4_karim",[
 		["uniform","NomadCloth3"],
@@ -407,23 +496,42 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 	}] call sp_ai_createPersonEx;	
 
 	callFuncParams("RedButton G:NJnbP0kznrs" call sp_getObject,setEnable,false);
-	
+	_hndls = [
+		["main_action",{
+			params ["_t"];
+			if not_equals(_t,"RedButton G:NJnbP0kznrs" call sp_getObject) exitWith {true};
+			false
+		}] call sp_addPlayerHandler,
+		["activate_verb",{
+			params ["_t","_name"];
+			if not_equals(_t,"RedButton G:NJnbP0kznrs" call sp_getObject) exitWith {true};
+			false
+		}] call sp_addPlayerHandler
+	];
+	["cpt4_data_start_lightButtonEnableHandlers",_hndls] call sp_storageSet;
+
 
 	{
 		[cpt4_questName_begin,"Включите свет"] call sp_setTaskMessageEff;
 
 		_bt = "RedButton G:NJnbP0kznrs" call sp_getObject;
-		_rememberTime = tickTime + 20;
+		_rememberTime = tickTime + 15;
 		{
 			getVar(_bt,edIsEnabled)
 			||  (tickTime >= _rememberTime)
 		} call sp_threadWait;
 
 		if (tickTime >= _rememberTime) then {
-			_h = ["Для включения света нажмите $input_act_mainAction"] call sp_setNotification;
-			{getVar(_bt,edIsEnabled)} call sp_threadWait;
-			[false,_h] call sp_setNotificationVisible;
+			if (!getVar(_bt,edIsEnabled)) then {
+				_h = ["Для включения света нажмите $input_act_mainAction по #(кнопке) на стене"] call sp_setNotification;
+				{getVar(_bt,edIsEnabled)} call sp_threadWait;
+				[false,_h] call sp_setNotificationVisible;
+			};
 		};
+
+		{
+			_x call sp_removePlayerHandler;
+		} foreach (["cpt4_data_start_lightButtonEnableHandlers",[]] call sp_storageGet);
 
 		_h1act = ["main_action",{
 			params ["_t"];
@@ -437,30 +545,46 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			false
 		}] call sp_addPlayerHandler;
 
-
+		
 		["vahta",true] call sp_audio_playMusic;
-
-		[cpt4_questName_begin,"Возвращайтесь к своим рабочим обязанностям"] call sp_setTaskMessageEff;
-		["Сядьте на стул, нажав $input_act_mainAction"] call sp_setNotification;
+		1 call sp_threadPause;
+		
+		[cpt4_questName_begin,"Заполните отчет о посетителях"] call sp_setTaskMessageEff;
+		["Сядьте на #(стул), нажав $input_act_mainAction по нему"] call sp_setNotification;
+		
 		{
 			equals("cpt4_obj_chairbegin" call sp_getObject,getVar(call sp_getActor,connectedTo))
 		} call sp_threadWait;
+		1 call sp_threadPause;
 
-		["Вы можете писать на бумаге с помощью ручки или любого пишущего предмета. Возьмите один лист бумаги из стопки нажав $input_act_mainAction"] call sp_setNotification;
+		["На столе перед вами лежит #(папка). Это список посетителей - людей, которые пытались или прошли в город сегодня. Чтобы посмотреть имена посетителей - нажмите $input_act_mainAction по папке"] call sp_setNotification;
+
+		{
+			nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
+			&& {equals(nd_sourceRef,getVar("cpt4_obj_visitorlistpaper" call sp_getObject,pointer))}
+		} call sp_threadWait;
+
+		["Прочтите список посетителей и #(посчитайте), сколько из них было пропущено в город. Нажмите #(""Закрыть"") как будете готовы."] call sp_setNotification;
+		{
+			!nd_isOpenDisplay
+		} call sp_threadWait;
+		1 call sp_threadPause;
+
+		["Вы можете писать на бумаге с помощью #(ручки) или любого пишущего предмета. Возьмите один #(лист бумаги) из стопки нажав по ней $input_act_mainAction"] call sp_setNotification;
 
 		{
 			callFuncParams(call sp_getActor,hasItem,"Paper")
 		} call sp_threadWait;
 
 		
-		["Теперь попробуем написать на бумаге с помощью ручки: возьмите ручку, и нажмите ЛКМ по листку бумаги. Сам листок при этом может быть во второй руке, либо лежать на столе."] call sp_setNotification;
+		["Теперь возьмите #(ручку), и нажмите ЛКМ по листку бумаги. Сам листок при этом может быть во второй руке, либо лежать на столе."] call sp_setNotification;
 		
 		{
 			callFuncParams(call sp_getActor,hasItem,"ItemWritter" arg true)
 			&& nd_isOpenDisplay && {equals(nd_openedDisplayType,"Paper")}
 		} call sp_threadWait;
 
-		["Вы сейчас читаете пустой лист. Чтобы начать писать на нём нажмите на текст ""Записать"" - так вы перейдете в режим редактирования. Напишите, что за эту смену в город пришло 5 человек."] call sp_setNotification;
+		["Сейчас вы в режиме чтения. Чтобы начать писать нажмите на текст в верхней части листа #(""Записать"") - так вы перейдете в режим редактирования. Напишите, #(сколько человек прошло в город) за эту смену (числом или словом)."] call sp_setNotification;
 
 		{
 			_papers = callFuncParams(call sp_getActor,getNearObjects,"Paper" arg 3 arg false arg true);
@@ -473,12 +597,12 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 			_found
 		} call sp_threadWait;
 		
-		["Отличная работа! Нажмите кнопку ""Закрыть""."] call sp_setNotification;
+		["Отличная работа! Нажмите кнопку #(""Закрыть"")"] call sp_setNotification;
 		{
 			!nd_isOpenDisplay
 		} call sp_threadWait;
 
-		["Чтобы просто посмотреть что написано на бумаге нажмите по ней $input_act_mainAction"] call sp_setNotification;
+		["Чтобы посмотреть что написано на бумаге нажмите по ней $input_act_mainAction"] call sp_setNotification;
 		
 		3 call sp_threadPause;
 		[false] call sp_setNotificationVisible;
@@ -559,8 +683,17 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		1 call sp_threadPause;
 		(["chap4\gg\vaht1_gg1"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		0.5 call sp_threadPause;
-		
-		[cpt4_questName_kochevs,"В город постоянно приходят новые люди. Опрашивайте, досматривайте и запускайте их внутрь."] call sp_setTaskMessageEff;
+
+		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
+			private _h = ["Чтобы встать со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по #(""Моей персоне"") и выбрав #(""Встать"")"] call sp_setNotification;
+			{
+				isNullReference(getVar(call sp_getActor,connectedTo))
+			} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+			1 call sp_threadPause;
+		};
+
+		[cpt4_questName_kochevs,"К городу подходит человек. Встречайте его и решите, достоин ли он пройти внутрь"] call sp_setTaskMessageEff;
 
 		callFuncParams("cpt4_obj_doorbegin" call sp_getObject,setDoorLock,false arg false);
 
@@ -590,7 +723,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 ["cpt4_trg_openwindow",{
 	{
-		_h = ["Нажмите на красную кнопку под окном с помощью $input_act_mainAction"] call sp_setNotification;
+		_h = ["Нажмите на красную #(кнопку) под окном с помощью $input_act_mainAction, чтобы открыть окно регистрации"] call sp_setNotification;
 		{
 			getVar(cpt4_gref_doorwindow call sp_getObject,isOpen)
 		} call sp_threadWait;
@@ -655,7 +788,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		(["chap4\gg\vaht1_gg6"] call sp_audio_sayPlayer) call sp_audio_waitForEndSound;
 		
 		cpt4_data_canTakeDocPaper = true;
-		["Возьмите бланк пропуска нажав по стопке бланков $input_act_mainAction. Стопка бланков лежит на стеллаже слева от окна регистрации"] call sp_setNotification;
+		["Возьмите #(бланк пропуска), нажав по стопке бланков $input_act_mainAction. Стопка бланков лежит на стеллаже #(слева от окна регистрации)"] call sp_setNotification;
 
 		
 		{
@@ -664,13 +797,21 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		private _origContent = getVar(cpt4_data_refLastTakenDoc,content);
 		sp_allowebVerbs append ["transitem"];		
 		
-		["Подпишите пропуск именем ""Карим Сухач"""] call sp_setNotification;
+		["Подпишите пропуск именем #(""Карим Сухач"")"] call sp_setNotification;
 		
 		{
 			not_equals(_origContent,getVar(cpt4_data_refLastTakenDoc,content))
 		} call sp_threadWait;
 
-		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory и перетащите на него пропуск в вашей руке. Либо нажмите ПКМ и выберите ""Передать пропуск"""] call sp_setNotification;
+		_handlerWid = [{
+            _wid = widgetNull;
+            {
+                if equals(ctrltext _x,"Левая рука") exitWith {_wid = _x};
+            } foreach interactMenu_selectionWidgets;
+            _wid
+        }] call sp_createWidgetHighlight;
+
+		["Отдайте пропуск кочевнику. Для этого нажмите $input_act_inventory, выберите в области взаимодействия руку, в которую будем отдавать предметы и перетащите на него пропуск из вашей руки. Либо нажмите ПКМ и выберите #(""Передать пропуск"")"] call sp_setNotification;
 
 		_karim = "cpt4_karim" call sp_ai_getMobObject;
 		_pap = nullPtr;
@@ -693,8 +834,13 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				[getVar(_karim,owner)] call anim_syncAnim;
 			} call sp_threadCriticalSection;
 
+			private _content = "";
+			if isTypeOf(_pap,Paper) then {
+				_content = getVar(_pap,content);
+			};
+
 			if (
-				[tolower getVar(_pap,content),"(карим\s*сухач|сухач\s*карим)"] call regex_isMatch
+				[tolower _content,"(карим\s*сухач|сухач\s*карим)"] call regex_isMatch
 			) exitWith {};
 
 			_knifePos = callFunc("cpt4_pos_knifekarimpos" call sp_getObject,getPos) vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),0];
@@ -703,7 +849,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				callFuncParams(_karim,playSound, "emotes\sigh_male" arg 0.92);
 				callFuncParams(_karim,meSay,"мотает головой");
 			} call sp_threadCriticalSection;
-			["Вы неправильно заполнили пропуск. Возьмите новый и напишите на нём имя кочевника - Карим Сухач"] call sp_setNotification;
+			["Вы неправильно заполнили пропуск. Возьмите новый и напишите на нём имя кочевника - #(""Карим Сухач"")"] call sp_setNotification;
 			cpt4_data_canTakeDocPaper = true;
 			3 call sp_threadPause;
 		};
@@ -715,6 +861,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		}; invokeAfterDelay(_emotepost,0.7);
 
 		array_remove(sp_allowebVerbs,"transitem");
+		refset(_handlerWid,true);
 		1.8 call sp_threadPause;
 		
 		{
@@ -732,7 +879,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 ["cpt4_act_koch1_exit",{
 	
 	{
-		["Откройте входные двери, повернув жёлтый рычаг на стене слева от окна регистрации"] call sp_setNotification;
+		["Откройте входную дверь, повернув #(рычаг) на стене слева от окна регистрации"] call sp_setNotification;
 		cpt4_canOpenEnter = true;
 		{
 			getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
@@ -928,8 +1075,8 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		
 		cpt4_data_canTakeDocPaper = true;
 
-		_hreg = ["Люди, использующие странные слова в речи могут быть опасны. Решите - пропустить кочевника или закрыть окно."
-		+ sbr + "Если решите пропустить его - оформите пропуск на имя - ""Ибам Шнурок"" и положите перед ним на стол. В ином случае просто нажмите красную кнопку, чтобы отказать в регистрации."] call sp_setNotification;
+		_hreg = ["Люди, использующие странные слова в речи могут быть #(опасны). Решите - пропустить кочевника или отказать в пропуске."
+		+ sbr + "Если решите пропустить его - оформите #(пропуск) на имя #(""Ибам Шнурок"") и положите перед ним на стол. В ином случае просто нажмите #(красную кнопку), чтобы закрыть окно регистрации."] call sp_setNotification;
 
 		["cpt4_data_rejectIbam",false] call sp_storageSet;
 		["main_action",{
@@ -958,11 +1105,13 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				callFuncParams(cpt4_gref_doorwindow call sp_getObject,setDoorOpen,false arg true);
 			}; invokeAfterDelay(_postclose,1.5);
 
-			[_ibam,_it,INV_HAND_L] call sp_ai_moveItemToMob;
+			if (callFuncParams("cpt4_ibam" call sp_ai_getMobObject,getDistanceTo,_it arg true) <= 2.5) then {
+				[_ibam,_it,INV_HAND_L] call sp_ai_moveItemToMob;
+			};
 
 			//speak ibam
 			([
-				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",20]]
+				["cpt4_ibam","chap4\npc_vaht\koch2_bad",["distance",40]]
 			] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 			//4 call sp_threadPause;
 			{["cpt4_ibam"] call sp_ai_deletePerson} call sp_threadCriticalSection;
@@ -973,7 +1122,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 			_ibam = "cpt4_ibam" call sp_ai_getMobObject;
 			_ibamPos = getposatl getVar(_ibam,owner);
 			_tpaper = nullPtr;
-
+			_takenPapers = [];
 			while {true} do {
 				if isNullReference(cpt4_data_refLastTakenDoc) then {
 					0.5 call sp_threadPause;
@@ -981,7 +1130,10 @@ cpt4_data_refLastTakenDoc = nullPtr;
 				};
 				_tpaper = cpt4_data_refLastTakenDoc;
 				_nearPapers = callFuncParams(_ibam,getNearObjects,"Paper" arg 2 arg false arg true);
-				if !array_exists(_nearPapers,_tpaper) then {
+				if (
+					!array_exists(_nearPapers,_tpaper)
+					|| {array_exists(_takenPapers,_tpaper)}
+				) then {
 					0.5 call sp_threadPause;
 					continue;
 				};
@@ -992,6 +1144,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 				1.2 call sp_threadPause;
 				[_ibam,_tpaper,INV_HAND_R] call sp_ai_moveItemToMob;
+				_takenPapers pushBackUnique _tpaper;
 				1 call sp_threadPause;
 
 				{
@@ -1013,13 +1166,13 @@ cpt4_data_refLastTakenDoc = nullPtr;
 
 				_knifePos = callFunc("cpt4_pos_knifekarimpos" call sp_getObject,getPos) vectoradd [rand(-0.1,0.1),rand(-0.1,0.1),0];
 				[_ibam,INV_HAND_R,_knifePos] call sp_ai_moveItemToWorld;
-				["Вы неправильно написали его имя. Возьмите новый и напишите на нём имя кочевника - Ибам Шнурок"] call sp_setNotification;
+				["Вы неправильно написали его имя. Возьмите новый и напишите на нём имя кочевника - #(""Ибам Шнурок"")"] call sp_setNotification;
 				
 				cpt4_data_canTakeDocPaper = true;
 				1 call sp_threadPause;
 			};
 
-			_ht = ["Теперь можно открыть проход в город"] call sp_setNotification;
+			_ht = ["Теперь можно открыть проход в город, нажав на #(рычаг)"] call sp_setNotification;
 			cpt4_canOpenEnter = true;
 			{
 				getVar(cpt4_gref_doorenter call sp_getObject,isOpen)
@@ -1028,7 +1181,7 @@ cpt4_data_refLastTakenDoc = nullPtr;
 			[false,_ht] call sp_setNotificationVisible;
 
 			[
-				["cpt4_ibam","chap4\npc_vaht\koch2_good",["distance",20]]
+				["cpt4_ibam","chap4\npc_vaht\koch2_good",["distance",40]]
 			] call sp_audio_startDialog;
 
 			[_ibam,_ibamPos,"cpt4_koch2_exit",{
@@ -1164,6 +1317,9 @@ cpt4_data_refLastTakenDoc = nullPtr;
 		] call sp_audio_startDialog)
 			call sp_audio_waitForEndDialog;
 		
+		[
+			["cpt4_tombomz","chap4\npc_vaht\koch3_6",["endoffset",2.6]]
+		] call sp_audio_startDialog;
 		["cpt4_act_koch3_enter"] call sp_startScene;
 
 		//for test
@@ -1175,8 +1331,8 @@ cpt4_data_refLastTakenDoc = nullPtr;
 	{
 		
 
-		["Люди, которые ведут себя странно, говорят непонятные слова больны болезнью Тоннельного Образа Мышления (ТОМность)."
-		+sbr + "Избегайте любых контактов с ними, так как ТОМность заразна. Если у вас есть силы и возможность - облегчите муки болезненного и убейте его."
+		["Люди, которые ведут себя странно и говорят непонятные слова - больны болезнью #(Тоннельного Образа Мышления) (в народе - ТОМность)."
+		+sbr + "Избегайте любых контактов с ними, так как #(ТОМность заразна). Если у вас есть силы и возможность - облегчите муки болезненного, прервав его жизнь."
 		] call sp_setNotification;
 
 		["cpt4_obj_radio2","chap4\speaker\speak1",50] call sp_audio_sayAtTarget;
@@ -1292,7 +1448,8 @@ cpt4_trg_gotomed_act = false;
 		2 call sp_threadPause;
 
 		[true] call sp_setHideTaskMessageCtg;
-		[""] call sp_view_setPlayerHudVisible; //!todo fix error
+		[false] call sp_setNotificationVisible;
+		[""] call sp_view_setPlayerHudVisible;
 		[true,1.5] call setBlackScreenGUI;
 
 		2 call sp_threadPause;
@@ -1351,6 +1508,7 @@ cpt4_trg_gotomed_act = false;
 		} call sp_threadCriticalSection;
 
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		["vr",[4152.96,3809.78,17.8719],270.399,0.59,[-26.5285,0],0,0,720,0.0524573,0,1,0,1] call sp_cam_prepCamera;
 		
 		"player_cutscene" call sp_ai_waitForMobLoaded;
@@ -1363,10 +1521,8 @@ cpt4_trg_gotomed_act = false;
 		15 call sp_threadPause;
 		[true,5] call sp_gui_setBlackScreenGUI;
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
-
-		_cloth = callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH);
-		[callFunc(_cloth,getClassName),"removeItem",cpt4_internal_delegate_baseClothRemoveItem,"replace"] call oop_injectToMethod;
 
 		["cpt4_bar_begin"] call sp_startScene;
 	} call sp_threadStart;
@@ -1411,9 +1567,53 @@ cpt4_pos_bar_aloguys - 3 sits
 
 */
 
+cpt4_data_playerHandlerNamesOnCutscene = ["item_action","main_action","open_inventory"];
+cpt4_func_setLockPlayerInteract = {
+	params ["_lock"];
+	{
+		[_x,_lock] call sp_setLockPlayerHandler;
+	} foreach cpt4_data_playerHandlerNamesOnCutscene;
+};
+
+
 ["cpt4_bar_begin",{
 	["cpt4_pos_p2player",0] call sp_setPlayerPos;
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	["chat+right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+
+	{
+		_texData = [0,"#(rgb,512,512,3)text(1,1,""Caveat"",0.15,""#00000000"",""#2b1b0ddf"",""/\\nлекарня\n< ПХ-17            \nБар ''Тушняк''>\n  Жилая зона>"")"];
+		_ref = getVar("cpt4_obj_signinfoboard" call sp_getObject,pointer);
+		_objReal = objNull;
+		while {isNullReference(_objReal)} do {
+			_obj = noe_client_allPointers getOrDefault [_ref,objNull];
+			if isNullReference(_obj) then {
+				1 call sp_threadPause;
+				continue;
+			};
+			_objReal = "signad_sponsors_f" createVehicleLocal [0,0,0];
+			_objReal setposatl getposatl _obj;
+			_objReal setVectorDirAndUp [vectorDir _obj,vectorUp _obj];
+			_objReal setObjectTexture _texData;
+			break;
+		};
+
+		{
+			[_ref] call deleteGameObject;
+		} call sp_threadCriticalSection;
+	} call sp_threadStart;
+
+	_post = {
+		{
+			if isTypeOf(_x,IPaperItemBase) then {continue};
+			
+			
+			
+			sp_blacklistClickItems pushBack _x;
+		} foreach (callFuncParams(call sp_getActor,getNearItems,100) - [
+			"cpt4_obj_barbottle" call sp_getObject,
+			"cpt4_obj_barcup" call sp_getObject
+		]);
+	}; invokeAfterDelay(_post,1);
 
 	//prep mobs
 	["cpt4_pos_barlekar","cpt4_barlekar",[
@@ -1476,8 +1676,9 @@ cpt4_pos_bar_aloguys - 3 sits
 
 
 	["cpt4_pos_citywalker1","cpt4_citywalker1",[
-		["uniform","CitizenCloth6"]
+		["uniform","CitizenCloth3"]
 	],{
+		["SleevelessOuterwear1",_this,INV_ARMOR] call createItemInInventory;
 		["Sigarette",_this,INV_FACE] call createItemInInventory;
 	}] call sp_ai_createPersonEx;
 
@@ -1497,7 +1698,7 @@ cpt4_pos_bar_aloguys - 3 sits
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_barsmoker1","cpt4_barsmoker1",[
-		["uniform","WhitePlaidCoat"]
+		["uniform","TorgashPalthCloth"]
 	],{
 		["Sigarette",_this,INV_FACE] call createItemInInventory;
 	}, { _this switchMove "acts_commenting_on_fight_loop" }] call sp_ai_createPersonEx;
@@ -1516,7 +1717,7 @@ cpt4_pos_bar_aloguys - 3 sits
 	},{ _this switchMove "Acts_AidlPercMstpSnonWnonDnon_warmup_2_loop"; }] call sp_ai_createPersonEx;
 
 	["cpt4_pos_bomzowner","cpt4_bomzowner",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","ZnatCloth"],
 		["name",["Архатил","Вялов"]],
 		["face","face73"]
 	],{
@@ -1549,7 +1750,7 @@ cpt4_pos_bar_aloguys - 3 sits
 
 	//-------------------------- bar spawn -------------------
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys1",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","ZnatCloth"],
 		["name",["Выха","Забойщик"]],
 		["face","face123_pmc"],
 		["age",36]
@@ -1557,7 +1758,7 @@ cpt4_pos_bar_aloguys - 3 sits
 		callFuncParams("cpt4_obj_barsit_party1" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys2",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreatcoatWhiteBrown"],
 		["name",["Губан","Мощин"]],
 		["face","face109_pmc"],
 		["age",23]
@@ -1565,7 +1766,7 @@ cpt4_pos_bar_aloguys - 3 sits
 		callFuncParams("cpt4_obj_barsit_party2" call sp_getObject,seatConnect,_this);
 	}] call sp_ai_createPersonEx;
 	["cpt4_pos_bar_alсoguys","cpt4_bar_alсoguys3",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreenCoat"],
 		["name",["Иванур","Володин"]],
 		["face","livonianhead_1"],
 		["age",32]
@@ -1575,7 +1776,7 @@ cpt4_pos_bar_aloguys - 3 sits
 	}] call sp_ai_createPersonEx;
 
 	["cpt4_pos_brodyaga_bar","cpt4_brodyaga_bar",[
-		["uniform","WhitePlaidCoat"],
+		["uniform","GreenJacketCloth"],
 		["name",["Алкашня",""]],
 		["face","face08"]
 	],{
@@ -1624,6 +1825,16 @@ cpt4_trg_barstartmusic_act = false;
 	["city",true] call sp_audio_playMusic;
 }] call sp_addTriggerEnter;
 
+["cpt4_trg_nearbumcar",{
+	if (!isNullReference("cpt4_obj_bomzcar" call sp_getObject)) then {
+		{
+			_h = ["Дорогу к вашему дому перекрывает #(бомжевозка). Отдохните в баре - скоро путь освободится."] call sp_setNotification;
+			7.5 call sp_threadPause;
+			[false,_h] call sp_setNotificationVisible;
+		} call sp_threadStart;
+	};
+}] call sp_addScene;
+
 ["cpt4_trg_barstartanims",{	
 	//looped state of ohrwalk
 	_anims = {
@@ -1650,7 +1861,11 @@ if !isNull(cpt4_bar_musicHandle) then {
 };
 cpt4_bar_musicHandle = -1;
 if !isNull(cpt4_bar_curMusicPlayed) then {
-	stopSound (cpt4_bar_curMusicPlayed);
+	if equalTypes(cpt4_bar_curMusicPlayed,objNull) then {
+		deleteVehicle cpt4_bar_curMusicPlayed;
+	} else {
+		stopSound (cpt4_bar_curMusicPlayed);
+	};
 };
 cpt4_bar_curMusicPlayed = -1;
 cpt4_bar_curMusicStartTime = 0;
@@ -1674,9 +1889,12 @@ cpt4_bar_curMusicName = "";
 	cpt4_bar_musicUpdateReq = true;
 
 	if (["cpt4_data_drinksuccess",false] call sp_storageGet) then {
-		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_9",["distance",15]]
-		] call sp_audio_startDialog)
+		if !(["cpt4_data_barnik_9_played",false] call sp_storageGet) then {
+			["cpt4_data_barnik_9_played",true] call sp_storageSet;
+			([
+				["cpt4_bar_barnik","chap4\npc_bar\barnik_9",["distance",50]]
+			] call sp_audio_startDialog);
+		};
 	};
 
 }] call sp_addTriggerExit;
@@ -1709,19 +1927,27 @@ cpt4_bar_curMusicName = "";
 				stopThisUpdate();
 			};
 
-			if (cpt4_bar_musicUpdateReq && cpt4_bar_curMusicPlayed != -1) then {
+			if (cpt4_bar_musicUpdateReq && {not_equals(cpt4_bar_curMusicPlayed,-1) && not_equals(cpt4_bar_curMusicPlayed,objNull)}) then {
 				cpt4_bar_musicUpdateReq = false;
 				//_startTime = (soundParams cpt4_bar_curMusicPlayed) select 3;
 				
 				_prevhandler = cpt4_bar_curMusicPlayed;
-				stopSound _prevhandler;
+				if (equalTypes(_prevhandler,objNull)) then {
+					deleteVehicle _prevhandler;
+				} else {
+					stopSound _prevhandler;
+				};
 				if (!(_prevhandler call sp_audio_isSoundHandleDone)) then {
 					warningformat("Sound not stopped at task: %1",_prevhandler);
 					startAsyncInvoke
 						{
 							params ["_v","_t"];
 							warningformat("Attempt to stop: %1",_v);
-							stopSound _v;
+							if (equalTypes(_v,objNull)) then {
+								deleteVehicle _v;
+							} else {
+								stopSound _v;
+							};
 							_v call sp_audio_isSoundHandleDone
 						},
 						{
@@ -1739,7 +1965,7 @@ cpt4_bar_curMusicName = "";
 
 				//[format["update mus: %1 (%2m) dur: %3",cpt4_bar_curMusicName,cpt4_bar_curMusicDist,_startTime]] call chatPrint;
 
-				assert_str(_prevhandler call sp_audio_isSoundHandleDone,"music handle not null: " + (str cpt4_bar_curMusicPlayed) + "; " + (str soundParams cpt4_bar_curMusicPlayed) );
+				assert_str(_prevhandler call sp_audio_isSoundHandleDone,"music handle not null: " + (str cpt4_bar_curMusicPlayed) + "; " + (str ifcheck(equalTypes(cpt4_bar_curMusicPlayed,objNull),cpt4_bar_curMusicPlayed,soundParams cpt4_bar_curMusicPlayed)) );
 			};
 
 			if (cpt4_bar_curMusicPlayed call sp_audio_isSoundHandleDone) then {
@@ -1830,8 +2056,8 @@ cpt4_func_alcoDrinkProcess_forthread = {
 ["cpt4_trg_alcoguys_talk",{
 	{
 		([
-			["cpt4_bar_alсoguys3","chap4\npc_bar\alcoguy_1",["endoffset",1.5]],
-			["cpt4_bar_alсoguys2","chap4\npc_bar\alcoguy_2"]
+			["cpt4_bar_alсoguys3","chap4\npc_bar\alcoguy_1",[["endoffset",1.5],["distance",50]]],
+			["cpt4_bar_alсoguys2","chap4\npc_bar\alcoguy_2",[["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		_thds = [];
@@ -1873,7 +2099,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 				if (_alcoName == "cpt4_bar_alсoguys1") then {
 					_awaiter = [];
 					{
-						_awaiter = [["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_3"]] call sp_audio_startDialog;
+						_awaiter = [["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_3",["distance",50]]] call sp_audio_startDialog;
 					} call sp_threadCriticalSection;
 					_awaiter call sp_audio_waitForEndDialog;
 				};
@@ -1895,7 +2121,7 @@ cpt4_func_alcoDrinkProcess_forthread = {
 			<= 1.4
 		} call sp_threadWait;
 
-		[["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_4"]] call sp_audio_startDialog;
+		[["cpt4_bar_alсoguys1","chap4\npc_bar\alcoguy_4",["distance",50]]] call sp_audio_startDialog;
 
 		//looped state
 		for "_i" from 1 to 3 do {
@@ -1951,40 +2177,45 @@ cpt4_func_alcoDrinkProcess_forthread = {
 ["cpt4_trg_barkarim_talk",{
 	{
 		([
-			["cpt4_karim","chap4\npc_bar\karim_1",["endoffset",0.1]]
+			["cpt4_karim","chap4\npc_bar\karim_1",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		{
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
 
+		sp_canResist = false;
+
 		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0,0],"once"]] call sp_threadStart;
 
 		1.2 call sp_threadPause;
 
 		([
-			["cpt4_karim","chap4\npc_bar\karim_2",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_2",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg1",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_3",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_3",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg2",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_4",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_4",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg3",[["endoffset",1.1],["onstart",{
 				[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[0.5,1],"once"]] call sp_threadStart;
 			}]
 			]],
-			["cpt4_karim","chap4\npc_bar\karim_5",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_5",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg4",["endoffset",0.1]],
-			["cpt4_karim","chap4\npc_bar\karim_6",["endoffset",0.1]],
+			["cpt4_karim","chap4\npc_bar\karim_6",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\karmitalk_gg5",["endoffset",0.7]],
-			["cpt4_karim","chap4\npc_bar\karim_7",["endoffset",0.1]]
+			["cpt4_karim","chap4\npc_bar\karim_7",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
+		sp_canResist = true;
+		_h = ["Чтобы #(встать) со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
 		{
 			not_equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barseat_karimdialog" call sp_getObject)
 		} call sp_threadWait;
+		[false,_h] call sp_setNotificationVisible;
 
 		([
-			["cpt4_karim","chap4\npc_bar\karim_8"]
+			["cpt4_karim","chap4\npc_bar\karim_8",[["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		[cpt4_func_alcoDrinkProcess_forthread,["cpt4_obj_cupforkarim","cpt4_karim",[2,5],null,3]] call sp_threadStart;
@@ -2003,7 +2234,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 
 		["cpt4_bar_barnik",player] call sp_ai_setLookAtControl;
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",20]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_1",["distance",50]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
 		[cpt4_questName_tobar,"Сядьте за барную стойку и закажите выпивку"] call sp_setTaskMessageEff;
@@ -2012,6 +2243,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			equals(getVar(call sp_getActor,connectedTo),"cpt4_obj_barchair_forplayer" call sp_getObject);
 		} call sp_threadWait;
 
+		//disable standup
+		sp_canResist = false;
 
 		//! BAR ENTER EVENT
 		{
@@ -2037,12 +2270,17 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		//dialog 
 		["cpt4_bar_barnik" call sp_ai_getMobBody,player] call sp_ai_setLookAtControl;
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_2",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_2",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg1",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",["endoffset",0.1]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_3",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
 
-		["Достаньте из кармана свои деньги - звяки, взяв их в руки"] call sp_setNotification;
+		{
+			private _cloth = callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH);
+			[callFunc(_cloth,getClassName),"removeItem",cpt4_internal_delegate_baseClothRemoveItem,"replace"] call oop_injectToMethod;
+		} call sp_threadCriticalSection;
+
+		["Достаньте из кармана свои деньги - #(звяки), взяв их в руки"] call sp_setNotification;
 
 		private _handitems = [];
 		{
@@ -2052,34 +2290,48 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 			any_of(_handitems);
 		} call sp_threadWait;
 
-		["Чтобы разделить звяки, нажмите $input_act_mainAction по ним пустой рукой. Разделите 3 звяка и выложите на барную стойку"] call sp_setNotification;
+		["Чтобы разделить #(звяки), нажмите $input_act_mainAction по ним пустой рукой. Разделите #(3 звяка) и выложите на барную стойку"] call sp_setNotification;
 
 		_barnik = "cpt4_bar_barnik" call sp_ai_getMobObject;
-		private _money = nullPtr;
+		private _moneyList = [];
 		{
-			private _found = false;
+			private _amount = 0;
 			{
-				_found = getVar(_x,stackCount) == 3;
-				if (_found)exitWith{_money = _x};
-			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 2 arg false arg true);
-			_found
+				if (_amount + getVar(_x,stackCount) <= 3) then {
+					_moneyList pushBack _x;
+					_amount = _amount + getVar(_x,stackCount);
+				};
+			} foreach callFuncParams(_barnik,getNearObjects,"Zvak" arg 1.5 arg false arg true);
+			
+			if (_amount != 3) then {
+				_moneyList resize 0;
+			};
+
+			_amount == 3
 		} call sp_threadWait;
 
 		[false] call sp_setNotificationVisible;
 
-		if !isNullReference(_money) then {
+		if (count _moneyList > 0) then {
 			1.2 call sp_threadPause;
 			
-			[_barnik,_money,INV_HAND_R] call sp_ai_moveItemToMob;
+			{
+				[_barnik,_x,INV_HAND_R] call sp_ai_moveItemToMob;
+				0.3 call sp_threadPause;
+				{
+					[_x] call deleteGameObject;
+				} call sp_threadCriticalSection;
+			} foreach _moneyList;
 			["cpt4_bar_barnik" call sp_ai_getMobBody,objNull] call sp_ai_setLookAtControl;
 			
 			//talk
 			1 call sp_threadPause;
 			{
-				[_money] call deleteGameObject;
+				//[_money] call deleteGameObject;
+				[true] call cpt4_func_setLockPlayerInteract;
 				
 				[
-					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",["endoffset",0.1]]
+					["cpt4_bar_barnik","chap4\npc_bar\barnik_4",[["endoffset",0.1],["distance",50]]]
 				] call sp_audio_startDialog;
 
 				["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik1",{
@@ -2114,15 +2366,15 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 }] call sp_addScene;
 
 ["cpt4_act_drinklearn",{
-	[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
+	
 	["cpt4_data_drinkcount",0] call sp_storageSet;
+	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	{
-		while {true} do {
+		while {!(["cpt4_data_drinksuccess",false] call sp_storageGet)} do {
 			pp_alc_amount = ["cpt4_data_drinkcount",0] call sp_storageGet;
 			0.1 call sp_threadPause;
 		};
 	} call sp_threadStart;
-	["cpt4_data_drinksuccess",false] call sp_storageSet;
 	["click_self",{
 		params ["_targ"];
 		if callFunc(_targ,isReagentContainer) then {
@@ -2142,19 +2394,24 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 	{
 		//dialog
 		([
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_5",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_5",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg2",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_6",["endoffset",0.1]],
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_6",[["endoffset",0.1],["distance",50]]],
 			[player,"chap4\gg\barmentalk_gg3",["endoffset",0.1]],
 			["cpt4_bar_barnik","chap4\npc_bar\barnik_7",[
 				["endoffset",1.2],
+				["distance",50],
 				["onstart",{
 					("cpt4_bar_barnik" call sp_ai_getMobBody) switchMove "acts_pointingleftunarmed";
 				}]
 			]],
 			[player,"chap4\gg\barmentalk_gg4",["endoffset",0.1]],
-			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",["endoffset",0.1]]
+			["cpt4_bar_barnik","chap4\npc_bar\barnik_8",[["endoffset",0.1],["distance",50]]]
 		] call sp_audio_startDialog) call sp_audio_waitForEndDialog;
+
+		[cpt4_questName_tobar,"Отдыхайте..."] call sp_setTaskMessageEff;
+
+		[false] call cpt4_func_setLockPlayerInteract;
 
 		["cpt4_bar_barnik","cpt4_pos_barnik","cpt4_bar_barnik2",{
 			//onend
@@ -2172,12 +2429,24 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		] call sp_ai_playAnim;
 		
 
-		_h = ["Питьё жидкостей работает по аналогии с поеданием. Выберите справа зону ""рот"" и нажмите ЛКМ с кружкой или бутылкой в руке по кнопке ""моя персона"". "
-		+"Для регулирования размера глотков нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
+		_h = ["Питьё жидкостей работает по аналогии с поеданием. Чтобы #(налить) брагу в кружку нажмите ЛКМ бутылкой по ней. Выберите область взаимодействия ""Рот"" и нажмите ЛКМ с кружкой в руке по кнопке ""Моя персона"". "
+		+"Для регулирования #(размера глотка и объема переливания) нажмите $input_act_mainAction по емкости для жидкости"] call sp_setNotification;
 		{
 			["cpt4_data_drinksuccess"] call sp_storageGet
 		} call sp_threadWait;
 		[false,_h] call sp_setNotificationVisible;
+
+		//restore standup from chairs
+		sp_canResist = true;
+
+		if !isNullReference(getVar(call sp_getActor,connectedTo)) then {
+			1 call sp_threadPause;
+			_h = ["Чтобы #(встать) со стула нажмите $input_act_resist, либо через ПКМ меню, нажав по ""Моей персоне"" и выбрав ""Встать""."] call sp_setNotification;
+			{
+				isNullReference(getVar(call sp_getActor,connectedTo))
+			} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+		};
 
 		["cpt4_act_gotohome"] call sp_startScene;
 	} call sp_threadStart;
@@ -2190,8 +2459,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		{
 			{
 				_bobj = "cpt4_brodyaga_bar" call sp_ai_getMobObject;
-				isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_R))
-				&& isNullReference(callFuncParams(_bobj,isEmptySlot,INV_HAND_L))
+				callFuncParams(_bobj,isEmptySlot,INV_HAND_R)
+				&& callFuncParams(_bobj,isEmptySlot,INV_HAND_L)
 			} call sp_threadWait;
 			[cpt4_internal_brodyagaDrink_threadHandle] call sp_threadStop;
 			4 call sp_threadPause;
@@ -2248,8 +2517,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		[cpt4_questName_tobar,"Идите домой"] call sp_setTaskMessageEff;
 		_thandle = {
 			while {pp_alc_amount > 0} do {
-				pp_alc_amount = (pp_alc_amount - 0.5) max 0;
-				5 call sp_threadPause;
+				pp_alc_amount = (pp_alc_amount - 1) max 0;
+				1 call sp_threadPause;
 			};
 		} call sp_threadStart;
 		["cpt4_data_threaddecreasealctox",_thandle] call sp_storageSet;
@@ -2287,6 +2556,12 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		{
 			["cpt4_pos_cutscenetocpt5","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
+				{
+					_it = callFuncParams(_this,getItemInSlotRedirect,_x);
+					if !isNullReference(_it) then {
+						[_it] call deleteGameObject;
+					};
+				} foreach [INV_HAND_L,INV_HAND_R];
 			},{
 				_this switchmove "Acts_Accessing_Computer_Loop";
 			}] call sp_ai_createPersonEx;
@@ -2295,7 +2570,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 				_strI = str _i;
 				_pos = "cpt4_pos_cutscenetocpt5_iz" + _strI;
 				[_pos,"cpt4_iztpre" + _strI,[
-					["uniform","StreakCloth"]
+					["uniform",["BlackLightweightArmyCloth1","BlackLightweightArmyCloth2"] select (_i-1)]
 				],{
 					["RifleFinisher",_this,INV_HAND_R] call createItemInInventory;
 					callFunc(_this,switchTwoHands);
@@ -2305,6 +2580,7 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		} call sp_threadCriticalSection;
 		
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 
 		["vr",[4200.24,3846.01,10.3988],146.569,0.53,[-26.2951,-4.11871],0,0,2.26073,0,0,1,0,1] call sp_cam_prepCamera;
 		"player_cutscene" call sp_ai_waitForMobLoaded;
@@ -2352,6 +2628,8 @@ cpt4_internal_brodyagaDrink_threadHandle = sp_threadNull;
 		[true,2.5] call sp_gui_setBlackScreenGUI;
 
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
+		[4] call sp_onChapterDone;
 		_post = {
 			call sp_clearPlayerInventory;
 			call sp_cleanupSceneData;

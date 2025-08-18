@@ -7,13 +7,14 @@
 
 //startpos: cpt2_pos_start
 
+cpt2_craftDuration = 15;
 cpt2_json_allowedRecipes = '
 [
     {
         "type": "system",
         "category": "Food",
         "options": {
-        "craft_duration": "10"
+        "craft_duration": "'+str cpt2_craftDuration+'"
         },
         "system_specific": "FryingPanSystem",
         "name": "Бибка",
@@ -45,7 +46,7 @@ cpt2_json_allowedRecipes = '
         "type": "system",
         "category": "Food",
         "options": {
-        "craft_duration": "10"
+            "craft_duration": "'+str cpt2_craftDuration+'"
         },
         "system_specific": "FryingPanSystem",
         "name": "Блинец",
@@ -74,11 +75,9 @@ cpt2_json_allowedRecipes = '
 ]
 ';
 
-cpt2_craftDuration = 60; //TODO inject to json string
-
 cpt2_data_healingSkill = 5;
 
-cpt2_defaultHud = "right+stats+cursor+inv";
+cpt2_defaultHud = "chat+right+stats+cursor+inv";
 cpt2_defaultHudWithStamina = cpt2_defaultHud + "+stam";
 
 cpt2_canClickByFood = false;
@@ -88,14 +87,20 @@ cpt2_fnc_clickself_ItemCheck = {
     if isTypeOf(_this,Pill) exitWith {true};
 
     if (isTypeOf(_this,IFoodItem)) exitWith {
-        if ((isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) exitWith {
+        if ((isTypeOf(_this,Bun) || isTypeOf(_this,Pancakes)) 
+            && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH
+            && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)
+        ) exitWith {
             true
         };
 
-        [
-            pick["Это не готово","Лучше сначала приготовить","Это надо готовить.","Не стоит есть сырым"]
-            ,"mind"
-        ] call chatPrint;
+        if (getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
+            [
+                pick["Это не готово","Лучше сначала приготовить","Это надо готовить.","Не стоит есть сырым"]
+                ,"mind"
+            ] call chatPrint;
+        };
+        
         false;
     };
     true
@@ -104,7 +109,8 @@ cpt2_fnc_clickself_ItemCheck = {
 cpt2_fnc_canPickupItem = {
     //check intermediate food
     if ("блюдо" in (tolower getVar(_this,name)) || isTypeOf(_this,OrganicDebris1)) exitWith {
-        ["Надо подождать пока приготовится...","mind"] call chatPrint;
+        //this duplicate message (main from sp_initializeDefaultPlayerHandlers)
+        //["Надо подождать пока приготовится...","mind"] call chatPrint;
         false
     };
     true
@@ -169,6 +175,8 @@ cpt2_act_enableTorchHadnler = {
 
     ["click_target",{
         params ["_t"];
+        if isNullReference(callFunc(call sp_getActor,getItemInActiveHandRedirect)) exitWith {false};
+        
         if (
             callFunc(_t,isContainer)
             && {
@@ -181,6 +189,8 @@ cpt2_act_enableTorchHadnler = {
         false
     }] call sp_addPlayerHandler;
 };
+
+cpt2_data_canUseSelections = false;
 
 //wait for gate open
 ["cpt2_begin",{
@@ -211,6 +221,34 @@ cpt2_act_enableTorchHadnler = {
         !_canuse
     }] call sp_addPlayerHandler;
 
+
+    ["click_self",{
+        params ["_t"];
+        if (isTypeOf(_t,Knife)) exitWith {
+            _m = pick[
+                "Я не буду себя резать.",
+                "Что я творю?",
+                "Это глупо.",
+                "В этом нет необходимости.",
+                "Зачем мне резать себя?",
+                "Я не хочу это делать."
+            ];
+            callFuncParams(call sp_getActor,mindSay,_m);
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
+
+
+    [{
+        params ["_t","_wid"];
+        false
+    },null,{
+		params ["_t","_wid"];
+        if (!cpt2_data_canUseSelections) exitWith {false};
+        array_exists(interactMenu_selectionWidgets,_wid)
+	}] call sp_gui_setInventoryVisibleHandler;
+
     //add non-ready dish pickup handler
     sp_delegateCanClickItem = cpt2_fnc_canPickupItem;
 
@@ -223,6 +261,20 @@ cpt2_act_enableTorchHadnler = {
 
     [cpt2_defaultHud] call sp_view_setPlayerHudVisible;
 	[false,3] call setBlackScreenGUI;
+
+    _hlist = [];
+    _hlist pushBack (["main_action",{
+        params ["_t"];
+        if isTypeOf(_t,PowerSwitcherBig_Activator) exitWith {true};
+        false
+    }] call sp_addPlayerHandler);
+    _hlist pushBack (["activate_verb",{
+        params ["_t","_name"];
+        if (_name == "mainact" && isTypeOf(_t,PowerSwitcherBig_Activator)) exitWith {true};
+        false
+    }] call sp_addPlayerHandler);
+    ["cpt2_data_handlerLockPowerSwitcher",_hlist] call sp_storageSet;
+
     {
         2.5 call sp_threadPause;
         _h = [
@@ -232,19 +284,25 @@ cpt2_act_enableTorchHadnler = {
 		] call sp_audio_sayPlayerList;
 		_h call sp_threadWaitForEnd;
 
-        ["Все хвосты ведут домой","Откройте ворота"] call sp_setTaskMessageEff;
+        {
+            _hlist = ["cpt2_data_handlerLockPowerSwitcher",[]] call sp_storageGet;
+            {
+                _x call sp_removePlayerHandler;
+            } foreach _hlist;
+        } call sp_threadCriticalSection;
+
+        ["Темные стоки","Откройте ворота"] call sp_setTaskMessageEff;
 
         1 call sp_threadPause;
 
-        ["Для открытие автоматических дверей и ворот используются рычаги, кнопки и щитки. Перед вами один из таких примеров - старые ворота." +
-        " Рядом с ними находится переключатель. Попробуйте активировать его, нажав ПКМ и выбрав пункт ""Нажать"", либо нажмите $input_act_mainAction нацелившись на него."] call sp_setNotification;
+        ["Автоматические двери и ворота открываются с помощью #(рычагов) и #(кнопок). Рядом с воротами - #(переключатель). Активируйте его, нажав ПКМ и выбрав ""Нажать"" или нажмите $input_act_mainAction."] call sp_setNotification;
 
         {
             getVar("cpt2_obj_gate" call sp_getObject,isOpen)
         } call sp_threadWait;
 
         [false] call sp_setNotificationVisible;
-        ["Все хвосты ведут домой","Идите через коллекторы"] call sp_setTaskMessageEff;
+        ["Темные стоки","Идите через коллекторы"] call sp_setTaskMessageEff;
         0.7 call sp_threadPause;
 
         ["chap2\gg4"] call sp_audio_sayPlayer;
@@ -265,15 +323,14 @@ cpt2_act_enableTorchHadnler = {
         2 call sp_threadPause;
         ["chap2\gg5"] call sp_audio_sayPlayer;
         
-        ["Все хвосты ведут домой","Утолите свой голод"] call sp_setTaskMessageEff;
+        ["Темные стоки","Утолите свой голод"] call sp_setTaskMessageEff;
 
         _h = [{
             _w = widgetNull;
             _w = hud_map_widgets getOrDefault ["hunger",_w];
             _w
         }] call sp_createWidgetHighlight;
-        _notifHandle = ["Со временем вы начинаете испытывать голод. Большая нагрузка и интенсивные движения быстрее приведут к голоданию. "+
-        "Если своевременно не употреблять пищу - вы упадете в голодный обморок."] call sp_setNotification;
+        _notifHandle = ["Со временем вы начинаете испытывать #(голод). Нагрузка и интенсивные движения ускоряют голодание. Если не будете питаться - упадёте #(в обморок)."] call sp_setNotification;
         10 call sp_threadPause;
         refset(_h,true);
         [false,_notifHandle] call sp_setNotificationVisible;
@@ -284,13 +341,24 @@ cpt2_act_enableTorchHadnler = {
     {
         sp_allowebVerbs append ["craft","craft_here"];
 
-        ["Вы нашли кухню. Здесь вы можете приготовить немного еды. Для начала подожгите огонь печи, нажав ЛКМ по ней с факелом в руке"] call sp_setNotification;
+        ["Вы нашли кухню. Здесь вы можете приготовить немного еды. Зажгите огонь #(печи), нажав ЛКМ по ней с факелом в руке"] call sp_setNotification;
         {
             getVar("cpt2_obj_stove" call sp_getObject,lightIsEnabled)
         } call sp_threadWait;
+
+        ["cpt2_data_canstart_cooking",false] call sp_storageSet;
+        {
+            while {!(["cpt2_data_canstart_cooking",false] call sp_storageGet)} do {
+                _frypan = "cpt2_obj_frypan" call sp_getObject;
+                if !isNullReference(_frypan) then {
+                    getVar(_frypan,craftComponent) setv(procStage,0);
+                };
+                0.1 call sp_threadPause;
+            };
+        } call sp_threadStart;
         1 call sp_threadPause;
 
-        ["Теперь нажмите ПКМ по сковороде на бетонном столе и выберите пункт ""Вспомнить рецепты"". В появившемся окне нажмите на желаемый рецепт, чтобы посмотреть необходимые ингредиенты."] call sp_setNotification;
+        ["Нажмите ПКМ по #(сковороде) и выберите #(""Вспомнить рецепты""). В окне выберите рецепт для просмотра #(ингредиентов)."] call sp_setNotification;
         
         ["activate_verb",{
             params ["_t","_name"];
@@ -310,8 +378,10 @@ cpt2_act_enableTorchHadnler = {
         {
             !craft_isMenuOpen;
         } call sp_threadWait;
+        
+        ["cpt2_data_canstart_cooking",true] call sp_storageSet;
 
-        ["Возьмите сковороду и поставьте её на печь. Затем возьмите с полок необходимые ингредиенты и выложите их на сковороде. Если вы сделаете всё правильно, то блюдо начнёт готовиться."] call sp_setNotification;
+        ["Возьмите #(сковороду) и поставьте на #(печь). Добавьте #(ингредиенты) с полок на сковороду и #(блюдо) начнёт готовиться."] call sp_setNotification;
         _h = ["click_target",{
             params ["_t"];
             if (
@@ -329,30 +399,46 @@ cpt2_act_enableTorchHadnler = {
             any_of(_nitms apply {"блюдо" in (tolower getVar(_x,name)) || isTypeOf(_x,OrganicDebris1)})
         } call sp_threadWait;
 
-        ["Теперь подождите некоторое время пока блюдо не будет готово"] call sp_setNotification;
+        ["Подождите пока #(блюдо) приготовится."] call sp_setNotification;
 
-        //хандлеры защиты поднятия сковороды во время готовки
-        _hlockfpan_list = [
-            ["click_target",{
+        {
+            //хандлеры защиты поднятия сковороды во время готовки
+            _hlockfpan_list = [
+                ["click_target",{
+                    params ["_t"];
+                    if (isTypeOf(_t,FryingPan)) exitWith {
+                        ["Надо доготовить.","error"] call chatPrint;
+                        true
+                    };
+                    false
+                }] call sp_addPlayerHandler,
+                ["activate_verb",{
+                    params ["_t","_name"];
+                    private _ret = false;
+                    if (_name == "mainact" && isTypeOf(_t,SmallStoveGrill)) exitWith {
+                        ["Надо доготовить.","error"] call chatPrint;
+                        true
+                    };
+                    if (_name == "pickup") then {
+                        if (isTypeOf(_t,FryingPan) || isTypeOf(_t,OrganicDebris1)) then {
+                            ["Надо доготовить.","error"] call chatPrint;
+                            _ret = true;
+                        };
+                    };
+                    _ret
+                }] call sp_addPlayerHandler
+            ];
+
+            _hlockfpan_list pushBack (["main_action",{
                 params ["_t"];
-                if isTypeOf(_t,FryingPan) exitWith {
+                if (isTypeOf(_t,SmallStoveGrill)) exitWith {
                     ["Надо доготовить.","error"] call chatPrint;
                     true
                 };
                 false
-            }] call sp_addPlayerHandler,
-            ["activate_verb",{
-                params ["_t","_name"];
-                private _ret = false;
-                if (_name == "pickup") then {
-                    if (isTypeOf(_t,FryingPan)) then {
-                        ["Надо доготовить.","error"] call chatPrint;
-                        _ret = true;
-                    };
-                };
-                _ret
-            }] call sp_addPlayerHandler
-        ];
+            }] call sp_addPlayerHandler);
+
+        } call sp_threadCriticalSection;
 
         {
             _nitms = callFuncParams("cpt2_obj_stove" call sp_getObject,getNearObjects,"IFoodItem" arg 3 arg true arg true);
@@ -360,19 +446,16 @@ cpt2_act_enableTorchHadnler = {
         } call sp_threadWait;
         _h call sp_removePlayerHandler;
 
-        ["Заберите приготовленное со сковороды. "+
-        "Чтобы съесть какую-либо еду откройте инвентарь, выберите область взаимодействия ""Рот"" и затем нажмите по зоне ""Моя персона"" над слотами инвентаря. "+
-        "Еда при этом должна находиться в активной руке."] call sp_setNotification;
-
-        {
-            {
-                _x call sp_removePlayerHandler;
-            } foreach _hlockfpan_list;
+        {    
+            cpt2_data_canUseSelections = true;
+            call sp_gui_syncInventoryVisible; //for activate selection group on opened inventory
         } call sp_threadCriticalSection;
+
+        ["Заберите #(блюдо) со сковороды. Чтобы съесть #(еду): откройте инвентарь, выберите #(Рот) в области взаимодействия и нажмите по #(Моей персоне) с едой в #(активной руке)."] call sp_setNotification;
 
         _hClick = ["click_self",{
             params ["_item"];
-            if ((isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
+            if ((isTypeOf(_item,Bun) || isTypeOf(_item,Pancakes)) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_hunger = 100;
@@ -402,14 +485,23 @@ cpt2_act_enableTorchHadnler = {
         refset(_h,true);
 
         [false] call sp_setNotificationVisible;
-        ["cpt2_roadtomedicine"] call sp_startScene;
+        {
+            ["cpt2_roadtomedicine"] call sp_startScene;
+        } call sp_threadCriticalSection;
+
+        {callFuncParams("cpt2_obj_stove" call sp_getObject,getDistanceTo,call sp_getActor arg true) >= 10} call sp_threadWait;
+        {
+            {
+                _x call sp_removePlayerHandler;
+            } foreach _hlockfpan_list;
+        } call sp_threadCriticalSection;
     } call sp_threadStart
     
 }] call sp_addScene;
 
 
 ["cpt2_roadtomedicine",{
-    ["Все хвосты ведут домой","Идите через коллекторы"] call sp_setTaskMessageEff;
+    ["Темные стоки","Доберитесь до города"] call sp_setTaskMessageEff;
     //delete wall
     _wall = "cpt2_obj_kol_wallbeforecooking" call sp_getObject;
     if !isNullReference(_wall) then {
@@ -422,17 +514,21 @@ cpt2_act_enableTorchHadnler = {
         } call sp_threadWait;
         _notif = ["Чтобы перешагнуть через препятствие нажмите @GetOver"] call sp_setNotification;
         _h = ["getover",{
-            call sp_removeCurrentPlayerHandler;
             false
         }] call sp_addPlayerHandler;
-
-        {!(_h call sp_isValidPlayerHandler)} call sp_threadWait;
-
-        [false,_notif] call sp_setNotificationVisible;
+        ["cpt2_data_handlerGetOver_notif",[_h,_notif]] call sp_storageSet;
+        
     } call sp_threadStart;
 }] call sp_addScene;
 
+["cpt2_trg_removeGetOverHandler",{
+    (["cpt2_data_handlerGetOver_notif",[null,null]] call sp_storageGet) params ["_h","_notif"];
+    _h call sp_removePlayerHandler;
+    [false,_notif] call sp_setNotificationVisible;
+}] call sp_addScene;
+
 ["cpt2_trg_rememberX",{
+    
     {
         _rememberTime = tickTime + 10;
         {
@@ -465,12 +561,23 @@ cpt2_act_enableTorchHadnler = {
     setVar(_o,name,"Старый бинт");
     setVar(_o,desc,"Для остановки слабых ран сойдёт.");
 
+    _hmain = ["main_action",{
+        params ["_t"];
+        if isTypeOf(_t,PainkillerBox) exitWith {
+            callFuncParams(call sp_getActor,mindSay,"Не стоит сейчас это делать.");
+            true
+        };
+        false
+    }] call sp_addPlayerHandler;
+    ["cpt2_data_handlerPainkillerLocker",_hmain] call sp_storageSet;
+
+
     ["medicine_for_guide",_st] call sp_storageSet;
 
     {
-        _hinf = ["Вы можете хранить в караманах своей одежды несколько предметов. Попробуйте вытащить из медицинского шкафа всё что найдёте. "+
-        "Чтобы посмотреть содержимое шкафа нажмите $input_act_mainAction (либо через ПКМ-меню по предмету) и перетащите предмет из него себе в свободную руку. "+
-        "Затем, чтобы убрать предмет в карман - перетащите его на иконку одежды, либо нажав по одежде с предметом в руке."]
+        _hinf = ["Вы можете носить предметы в карманах своей одежды. Попробуйте достать что-то из #(медицинского шкафа). "+
+        "Для этого нажмите $input_act_mainAction (либо через ПКМ-меню). "+
+        "Перетащите предмет в руку и уберите в карман, перетянув его на иконку #(одежды) в инвентаре, либо нажав по ЛКМ по ней. Для осмотра своих карманов используйте $input_act_mainAction или ПКМ-меню."]
             call sp_setNotification;
 
         _tobjnext = "cpt2_trg_shifting" call sp_getTriggerByName;
@@ -492,8 +599,8 @@ cpt2_act_enableTorchHadnler = {
     [cpt2_defaultHudWithStamina] call sp_view_setPlayerHudVisible;
 
     {
-        _hinf = ["Для быстрого бега вместе с кнопками передвижения удерживайте @turbo"+
-        sbr+"Обратите внимание, что постоянный бег приводит к быстрому голоданию и расходу выносливости."] call sp_setNotification;
+        _hinf = ["Для #(быстрого бега) вместе с кнопками передвижения удерживайте @turbo ."+
+        "Постоянный бег приводит к #(быстрому голоданию) и расходу #(выносливости)."] call sp_setNotification;
         _tNext = tickTime + 10;
         {
             callFunc(call sp_getActor,isSprinting)
@@ -555,22 +662,10 @@ cpt2_act_enableTorchHadnler = {
     
 }] call sp_addScene;
 
-cpt2_data_pillMessage = "Достаньте упаковку обезболивающего из вашего инвентаря.";
+cpt2_data_pillMessage = "Достаньте упаковку #(обезболивающего) из вашего инвентаря.";
 ["cpt2_trg_onfall",{
     
     [] call sp_audio_stopMusic;
-
-    {
-        if (
-            (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
-            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),8,true] call getAllItemsOnPosition) == 0)
-        ) then {
-            _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
-            _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
-            setVar(_pbox,pillCount,2);
-            cpt2_data_pillMessage = "Подберите упаковку обезболивающего на земле.";
-        };
-    } call sp_threadCriticalSection;
 
     callFuncParams(call sp_getActor,playSound, "agony\falling_down_scream2" arg getRandomPitchInRange(0.85,1.2));
 
@@ -580,6 +675,18 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
     
     //best anim
     player switchMove "acts_staticdeath_10";
+
+    {
+        if (
+            (count ([call sp_getActor,"PainkillerBox"] call getAllItemsInInventory) == 0)
+            && (count (["PainkillerBox",callFunc(call sp_getActor,getPos),2,true] call getAllItemsOnPosition) == 0)
+        ) then {
+            _pboxpos = callFunc("cpt2_pos_pillbox" call sp_getObject,getPos);
+            _pbox = ["PainkillerBox",_pboxpos] call createItemInWorld;
+            setVar(_pbox,pillCount,2);
+            cpt2_data_pillMessage = "Подберите упаковку #(обезболивающего) на земле.";
+        };
+    } call sp_threadCriticalSection;
 
     //thread teleport
     {
@@ -612,6 +719,9 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
         };
     } call sp_threadStart;
 
+    //разрешаем доставание таблеток
+    (["cpt2_data_handlerPainkillerLocker",null] call sp_storageGet) call sp_removePlayerHandler;
+
     hud_pain = 3;
     {
         {
@@ -620,17 +730,19 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
 
         _thdDamaged = {
             while {true} do {
-                [50,true] call sp_applyPlayerDamage;
+                [20,true] call sp_applyPlayerDamage;
                 0.5 call sp_threadPause;
             };
         } call sp_threadStart;
 
         1.5 call sp_threadPause;
 
-        ["chap2\gg6"] call sp_audio_sayPlayer;
+        //fix offset on broken boards
+        private _offsetSound = ifcheck(!isNullReference("cpt2_obj_rottenboards" call sp_getObject),2.7,0);
+        ["chap2\gg6",null,_offsetSound] call sp_audio_sayPlayer;
         private _mes = cpt2_data_pillMessage;
-        ["Вы получили урон от падения и испытываете умеренную боль. "+_mes+" "+
-        sbr+sbr+"Чтобы достать таблетку из коробки нажмите по ней пустой рукой $input_act_mainAction, либо через ПКМ-меню"] call sp_setNotification;
+        ["Вы получили урон от падения и испытываете умеренную #(боль). "+_mes+" "+
+        sbr+sbr+"Чтобы достать #(таблетку) из коробки нажмите по ней пустой рукой $input_act_mainAction, либо через ПКМ-меню."] call sp_setNotification;
 
         _hpain = [{
             _w = widgetNull;
@@ -644,11 +756,11 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
             isTypeOf(_probPill,Pill)
         } call sp_threadWait;
 
-        ["Проглотите таблетку. Не забудьте - для употребления нужно выбрать ""Рот"" и нажать с таблеткой в руке по ""Моя персона"" над слотами инвентаря."] call sp_setNotification;
+        ["Проглотите #(таблетку). Не забудьте - для употребления нужно выбрать #(""Рот"") в области взаимодействия и нажать по #(""Моей персоне"") над слотами инвентаря."] call sp_setNotification;
 
         _hClick = ["click_self",{
             params ["_item"];
-            if (isTypeOf(_item,Pill) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH) then {
+            if (isTypeOf(_item,Pill) && getVar(call sp_getActor,curTargZone) == TARGET_ZONE_MOUTH && callFuncParams(call sp_getActor,isEmptySlot,INV_FACE)) then {
                 call sp_removeCurrentPlayerHandler;
                 //consumed food
                 hud_pain = 0;
@@ -671,7 +783,7 @@ cpt2_data_pillMessage = "Достаньте упаковку обезболив�
     _items = [call sp_getActor,"Torch",true] call getAllItemsInInventory;
     if (count _items == 0) then {
         {
-            _h = ["Не забудьте взять свой факел."] call sp_setNotification;
+            _h = ["Не забудьте взять свой #(факел)."] call sp_setNotification;
             5 call sp_threadPause;
             [false,_h] call sp_setNotificationVisible;
         } call sp_threadStart;
@@ -702,8 +814,9 @@ cpt2_data_bandageRefList = [];
 
     ["activate_verb",{
         params ["_t","_name"];
-        if (_name == "mainact") then {
+        if (_name == "mainact") exitWith {
             if equals(_t,"cpt2_obj_trap1" call sp_getObject) exitWith {true};
+            false
         };
         false
     }] call sp_addPlayerHandler;
@@ -714,6 +827,42 @@ cpt2_data_bandageRefList = [];
             _pos = callFunc(_trap,getPos);
             callFuncParams(_trap,changePosition,_pos vectoradd vec3(0,0,10));
         } call sp_threadCriticalSection;
+
+        //отключаем подбирание капкана
+        ["click_target",{
+            params ["_t"];
+            if (
+                equals(_t,"cpt2_obj_trap1" call sp_getObject)
+                || {isTypeOf(_t,TrapEnabled) && {!callFunc(_t,isTrapEnabled)}}
+            ) exitWith {
+                callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
+                true
+            };
+            false
+        }] call sp_addPlayerHandler;
+        ["main_action",{
+            params ["_t"];
+            if (
+                equals(_t,"cpt2_obj_trap1" call sp_getObject)
+                //|| {isTypeOf(_t,TrapEnabled) && {callFunc(_t,isTrapEnabled)}}
+            ) exitWith {
+                callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
+                true
+            };
+            false
+        }] call sp_addPlayerHandler;
+        ["activate_verb",{
+            params ["_t","_name"];
+            if (
+                ((equals(_t,"cpt2_obj_trap1" call sp_getObject))
+                || {isTypeOf(_t,TrapEnabled) && {!callFunc(_t,isTrapEnabled)}}
+                )
+                && {_name in ["pickup","mainact"]}) exitWith {
+                callFuncParams(call sp_getActor,mindSay,"Больше я нему не притронусь...");
+                true
+            };
+            false
+        }] call sp_addPlayerHandler;
 
         [0.5,3.5,.05,0.5] call cam_addCamShake;
         ["chap2\gg7"] call sp_audio_sayPlayer;
@@ -729,12 +878,12 @@ cpt2_data_bandageRefList = [];
             _w
         }] call sp_createWidgetHighlight;
         
-        private _mes = "Достаньте бинт из инвентаря и наложите его на правую ногу.";
+        private _mes = "Снимите свою одежду, перетащив её в слот свободной руки. Затем достаньте бинт из инвентаря.";
         {
             if (count ([call sp_getActor,"Bandage"] call getAllItemsInInventory) == 0
                 && (count (["Bandage",callFunc(call sp_getActor,getPos),20,true] call getAllItemsOnPosition) == 0)
             ) then {
-                _mes = "Подберите бинт с земли и наложите его на правую ногу.";
+                _mes = "Снимите свою одежду, перетащив её в слот свободной руки. Затем подберите #(бинт) с земли рядом с вами.";
                 _pos = callFunc("cpt2_pos_bandageobj" call sp_getObject,getPos);
                 
                 cpt2_data_bandageRefList pushBack (["Bandage",_pos] call createItemInWorld);
@@ -773,7 +922,7 @@ cpt2_data_bandageRefList = [];
             };
         } call sp_threadStart;
 
-        ["Вы попали в капкан и получили кровоточащую рану. "+_mes+" Затем снимите свою одежду, перетащив её в слот свободной руки. Выберите правую ногу в области взаимодействия и нажмите с бинтом в руке по ""Моей персоне""."] call sp_setNotification;
+        ["Вы попали в капкан и получили #(кровоточащую рану). "+_mes+" Выберите #(правую ногу) в области взаимодействия и нажмите ЛКМ с бинтом в руке по ""Моей персоне""."] call sp_setNotification;
 
         _dmgHandle = {
             while {true} do {
@@ -790,22 +939,27 @@ cpt2_data_bandageRefList = [];
             _wid
         }] call sp_createWidgetHighlight;
 
-        // _hClick = ["click_self",{
-        //     params ["_item"];
-        //     if (isTypeOf(_item,Bandage)) then {
-        //         call sp_removeCurrentPlayerHandler;
-        //         //consumed food
-        //         hud_bleeding = 0;
-        //     };
-        //     false
-        // }] call sp_addPlayerHandler;
+        _hClick = ["click_self",{
+            params ["_item"];
+            _r = false;
+            if (isTypeOf(_item,Bandage)) then {
+                if (getVar(call sp_getActor,curTargZone) != TARGET_ZONE_LEG_R) then {
+                    _r = true;
+                    ["Нужно бинтовать ПРАВУЮ НОГУ","error"] call chatPrint;
+                };
+            };
+            _r
+        }] call sp_addPlayerHandler;
 
         // {
         //     !(_hClick call sp_isValidPlayerHandler)
         // } call sp_threadWait;
         {
+            hud_bleeding = 5;
             callFunc(callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R),isBandaged)
         } call sp_threadWait;
+        hud_bleeding = 0;
+        _hClick call sp_removePlayerHandler;
 
         {
             private _legRef = callFuncParams(call sp_getActor,getPart,BP_INDEX_LEG_R);
@@ -880,8 +1034,8 @@ cpt2_restoreTrapMethods = {
         ["unlocked_trap",false] call sp_storageSet;
         ["failed_trap",false] call sp_storageSet;
 
-        ["Вы можете обезвреживать капканы при достаточных навыках. Для этого подойдите к ловушке и нажмите $input_act_mainAction (либо через ПКМ-меню)."+
-        " Обратите внимание, что заряженную ловушку не стоит пытаться поднять, если вам дороги ваши руки."] call sp_setNotification;
+        ["Вы можете обезвреживать капканы при достаточном умении. Для этого подойдите к ловушке и нажмите $input_act_mainAction (либо через ПКМ-меню)."+
+        " Не стоит пытаться поднимать заряженную ловушку, если вам дороги ваши руки."] call sp_setNotification;
 
         {
             ["unlocked_trap",false] call sp_storageGet;
@@ -891,6 +1045,13 @@ cpt2_restoreTrapMethods = {
 
     } call sp_threadStart;
 }] call sp_addScene;
+
+cpt2_trg_preend_act = false;
+["cpt2_trg_preend",{
+    if (cpt2_trg_preend_act) exitWith {};
+    cpt2_trg_preend_act = true;
+    [false] call sp_setNotificationVisible;
+}] call sp_addTriggerEnter;
 
 ["cpt2_trg_end",{
     //restore healing skill
@@ -920,6 +1081,7 @@ cpt2_restoreTrapMethods = {
 
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
+        [true] call sp_gui_setCinematicMode;
 		{
 			["cpt2_pos_cutscenetocpt3","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
@@ -946,7 +1108,9 @@ cpt2_restoreTrapMethods = {
 		5 call sp_threadPause;
 
 		[false] call sp_cam_setCinematicCam;
+        [false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
+		[2] call sp_onChapterDone;
 		_post = {
             call sp_cleanupSceneData;
             ["cpt3_begin"] call sp_startScene;

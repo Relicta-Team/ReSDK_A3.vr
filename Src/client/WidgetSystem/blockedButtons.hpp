@@ -25,10 +25,16 @@ macro_func(widget_getCommandingMenu,int[]())
 ACT(SelectGroupUnit4) + ACT(SelectGroupUnit5) + ACT(SelectGroupUnit6) + ACT(SelectGroupUnit7) + \
 ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(selectAll)
 
+#ifdef SP_MODE
+	#define SP_MODE_LOCKED_BUTTONS + ACT(timeInc) + ACT(timeDec)
+#else
+	#define SP_MODE_LOCKED_BUTTONS 
+#endif
+
 //инвентарь и другое пользовательское взаимодействие
 macro_func(widget_getSimplePlayerInteractions,int[]())
 #define SIMPLE_PLAYER_INTERACTION ACT(showMap) + ACT(gear) + ACT(navigateMenu) + ACT(EvasiveLeft) + ACT(EvasiveRight) + \
- ACT(Salute) + ACT(SitDown) + ACT(networkStats) + ACT(networkPlayers)
+ ACT(Salute) + ACT(SitDown) + ACT(networkStats) + ACT(networkPlayers) + ACT(diary) SP_MODE_LOCKED_BUTTONS
 
 // + ACT(TactShort) -> TactShort - тактический шаг на 3 секунды
 

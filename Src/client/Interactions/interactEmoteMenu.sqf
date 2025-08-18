@@ -74,6 +74,7 @@ interactEmote_load = {
 	// _buttonSend ctrlSetTextColorSecondary _zCol;
 
 	_ctg setVariable ["input",_input];
+	_ctg setVariable ["buttonSend",_buttonSend];
 
 	_input ctrlAddEventHandler ["MouseButtonUp",{
 		params ["","_key"];
@@ -471,6 +472,10 @@ interactEmote_loadActions = {
 
 	//now resize background
 	[_ctg getVariable "background",[0,0,100,(if (_itmPerLine==1) then {_lastY+_biasY} else {_lastY+_sizeH+_biasY}) max 100]] call widgetSetPosition;
+
+	#ifdef SP_MODE
+	call sp_gui_syncInventoryVisible;
+	#endif
 };
 
 //Отправка эмоута

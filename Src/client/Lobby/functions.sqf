@@ -376,6 +376,25 @@ lobbyOpen = {
 	"lobby" call client_setState;
 
 	call lobby_initLoadingScreen;
+
+	#ifdef SP_MODE
+		private _b = [_d,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
+		_b setBackgroundColor [0,0,0,1];
+		_b ctrlEnable true;
+		ctrlSetFocus _b;
+		startAsyncInvoke
+		{
+			params ["_b"];
+			if !isNullReference(_b) then {
+				ctrlSetFocus _b;
+			};
+
+			isNullReference(_b)
+		},{},
+		[_b]
+		endAsyncInvoke
+		
+	#endif
 };
 
 decl(bool)

@@ -630,16 +630,17 @@ hasEnabledBlackScreen = false;
 decl(void(bool;float))
 setBlackScreenGUI = {
 	params ["_mode",["_time",0.001]];
-
+	private _ateff = activeTitleEffectParams 0;
+	private _isEnabled = count _ateff > 0 && {_ateff select 1 == "BLACK"};
 	hasEnabledBlackScreen = _mode;
 
+	if equals(_isEnabled,_mode) exitWith {};
 	if (_mode) then {
 		titleCut ["","BLACK", _time];
 	} else {
 		titleCut ["","BLACK IN", _time];
 	};
 };
-
 
 // Устанавливает режим видимости HUD-а
 decl(void(bool))

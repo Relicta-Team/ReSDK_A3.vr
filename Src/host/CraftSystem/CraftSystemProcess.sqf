@@ -26,7 +26,11 @@ csys_requestOpenMenu = {
 
 	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
-	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories");
+	#ifdef SP_MODE
+	if (count _allowedCategReal == 0) exitWith {};
+	#endif
+
+	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories: " + format ["first cat %1; allowed list %2" arg _firstCat arg _allowedCategReal]);
 
 	private _data = [
 		getVar(_objSrc,pointer),

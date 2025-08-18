@@ -41,8 +41,12 @@ stdoutPrint = {
 	private _args = _this;
 	private _PREF = _args deleteAt 0;
 	private _color = _args deleteAt (count _args - 1);
-	conDllCall (_PREF + (format _args) + _color);
-	__post_message_RB(_PREF + (format _args))
+	#ifdef SP_PROD
+		diag_log text format _this;
+	#else
+		conDllCall (_PREF + (format _args) + _color);
+		__post_message_RB(_PREF + (format _args))
+	#endif
 };
 
 cprint = {
@@ -52,7 +56,11 @@ cprint = {
 		//[format _this] call discLog;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (format _this + "#1111");
+			#ifdef SP_PROD
+				diag_log text format _this;
+			#else
+				"debug_console" callExtension (format _this + "#1111");
+			#endif
 		} else {
 			[format _this, "log"] call chatPrint;
 		};
@@ -68,7 +76,11 @@ cprintErr = {
 		//[format _this] call discError;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (PRFX__ + format _this + "#1001");
+			#ifdef SP_PROD
+				diag_log text (PRFX__ + format _this);
+			#else
+				"debug_console" callExtension (PRFX__ + format _this + "#1001");
+			#endif
 		} else {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
@@ -85,7 +97,11 @@ cprintWarn = {
 		//[format _this] call discWarning;
 	} else {
 		if (cprint_usestdout) then {
-			"debug_console" callExtension (PRFX__ + format _this + "#1101");
+			#ifdef SP_PROD
+				diag_log text (PRFX__ + format _this);
+			#else
+				"debug_console" callExtension (PRFX__ + format _this + "#1101");
+			#endif
 		} else {
 			[PRFX__ + format _this, "log"] call chatPrint;
 		};
@@ -654,4 +670,27 @@ pushFront = {
 		_list pushBack _element;
 	};
 	reverse _list;
+};
+
+
+sft_processQueue__ = {
+	private _ctob = _this;
+	params ["_states","_cur","_tstrt"];
+	private _canJump = true;
+	_pfnc = _states select _cur;
+	call _pfnc;
+	if (_canJump) then {
+		_cur = cur+1;
+		_ctob set [1,_cur];
+		_ctob set [2,tickTime];
+		(_cur >= (count _states))
+	} else {
+		false
+	};
+};
+
+sft_createThread__ = {
+	private _args = _this;
+	//TODO: add captured variables, add cancelation token
+	_args call CBA_fnc_waitUntilAndExecute;
 };

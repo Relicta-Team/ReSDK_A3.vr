@@ -18,6 +18,12 @@ cpt1_playerUniform = "NomadCloth9";
 	//enable input
 	call sp_initializeDefaultPlayerHandlers;
 
+	[null,null,{
+		params ["_t","_wid"];
+		_tlist = ["Сон"];
+		array_exists(_tlist,_t);
+	}] call sp_gui_setInventoryVisibleHandler;
+
 	private _usr = call sp_getActor;
 
 	private _bedObj = "cpt1_obj_bed" call sp_getObject;
@@ -35,9 +41,9 @@ cpt1_playerUniform = "NomadCloth9";
 
 	{
 		[
-			"Добро пожаловать в Relicta. По мере прохождения обучения вам будет постепенно открываться всё больше возможностей. "
-			+"Вас погрузят в основные тонкости управления в игре - не спешите и действуйте инструкциям, появляющимся в этом окне. "
-			+"Однако не думайте, что вас будут всё время вести за руку. В некоторых случаях потребуется проявить смекалку."
+			"Добро пожаловать в #(Relicta)! Впереди вас ждёт пошаговое обучение - новые возможности будут открываться постепенно. "
+			+"Внимательно читайте #(уведомления) в этом окне: они подскажут, как освоиться в игре. "
+			+"Но помните: не всё будет разжёвано - иногда потребуется проявить #(смекалку) и разобраться самому."
 		] call sp_setNotification;
 
 		15 call sp_threadPause;
@@ -49,8 +55,7 @@ cpt1_playerUniform = "NomadCloth9";
 		} call sp_threadWait;
 
 		[
-			"Только что вы перешли в режим взаимодействия и инвентаря. В этом режиме вы будете взаимодействовать с предметами и вашим инвентарём. Переместив мышь вправо вы увидите панель взаимодействия. "
-			+" На ней в верхней части отображаются навыки вашего персонажа, по центру - зоны взаимодействия к живым сущностям а внизу - кнопки особых действий."
+			"Только что вы перешли в режим #(взаимодействия и инвентаря). Переместив мышь вправо вы увидите панель взаимодействия с навыками персонажа, зонами взаимодействия и кнопками особых действий."
 		] call sp_setNotification;
 
 		_zoneH = [{
@@ -69,7 +74,7 @@ cpt1_playerUniform = "NomadCloth9";
 		}] call sp_addPlayerHandler;
 
 		[
-			"Любая смена в Сети начинается с пробуждения в кровати. Попробуем разбудить вашего персонажа. Для этого переместите мышь вправо и нажмите кнопку ""Сон"" в нижней части панели взаимодействия и ваш персонаж начнёт просыпаться."
+			"Любая смена в Сети начинается с пробуждения в кровати. Попробуем разбудить вашего персонажа. Для этого переместите мышь вправо и нажмите кнопку #(""Сон"") в нижней части панели взаимодействия и ваш персонаж начнёт просыпаться."
 		] call sp_setNotification;
 		
 
@@ -89,6 +94,13 @@ cpt1_playerUniform = "NomadCloth9";
 		
 		//["press_specact",true] call sp_setLockPlayerHandler;
 		_unsleepHandle call sp_removePlayerHandler;
+		["press_specact",{
+			params ["_id"];
+			if (_id == SPECIAL_ACTION_SLEEP) then {
+				callFuncParams(call sp_getActor,mindSay,"Я не хочу больше спать");
+			};
+			true
+		}] call sp_addPlayerHandler;
 
 		[false] call sp_setNotificationVisible;
 		refset(_zoneH,true);
@@ -96,8 +108,15 @@ cpt1_playerUniform = "NomadCloth9";
 
 		2 call sp_threadPause;
 		callFuncParams(call sp_getActor,playSound, "emotes\sigh_male" arg 0.92);
-		1 call sp_threadPause;
+		1.8 call sp_threadPause;
 		["chap1\gg1"] call sp_audio_sayPlayer;
+
+		if (isInventoryOpen) then {
+			["Снова нажмите $input_act_inventory чтобы закрыть режим взаимодействия и инвентаря"] call sp_setNotification;
+			{
+				!isInventoryOpen
+			} call sp_threadWait;
+		};	
 
 		["resist",false] call sp_setLockPlayerHandler;
 		[
@@ -111,8 +130,8 @@ cpt1_playerUniform = "NomadCloth9";
 
 		2 call sp_threadPause;
 
-		["right+stats+cursor"] call sp_view_setPlayerHudVisible;
-		["Курсор в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
+		["chat+right+stats+cursor"] call sp_view_setPlayerHudVisible;
+		["#(Прицел) в центре обозначает вашу цель - то, на что вы смотрите и с чем собираетесь взаимодействовать. Его яркость отражает уровень освещённости вашего персонажа."] call sp_setNotification;
 		_ct = [
 			interaction_aim_widgets select 0
 		] call sp_createWidgetHighlight;
@@ -128,7 +147,7 @@ cpt1_playerUniform = "NomadCloth9";
 			false
 		}] call sp_addPlayerHandler;
 		
-		["Для осмотра любых окружающих вас объектов наведитесь на них курсором и нажмите $input_act_examine. В вашем временном пристанище много интересного. Попробуйте осмотреть окружение..."] call sp_setNotification;
+		["Для #(осмотра) любых окружающих вас объектов наведитесь на них прицелом и нажмите $input_act_examine. В вашем временном пристанище много интересного. Попробуйте осмотреть окружение..."] call sp_setNotification;
 		{
 			(["examine_count",0] call sp_storageGet) >= 2
 			&& {(["examine_has_update",false] call sp_storageGet)}
@@ -141,9 +160,7 @@ cpt1_playerUniform = "NomadCloth9";
 		_h = ["chap1\gg2"] call sp_audio_sayPlayer;
 		_h call sp_audio_waitForEndSound;
 
-		["Для основного действия с объектами в мире нажмите $input_act_mainAction. "+
-		"Например: дверь - открыть, кнопка - нажать, кровать - лечь."+
-		sbr+" Откройте дверь и выходите наружу."] call sp_setNotification;
+		["Для #(основного действия) с объектами в мире нажмите $input_act_mainAction. Откройте дверь и выходите наружу."] call sp_setNotification;
 
 		["main_action",false] call sp_setLockPlayerHandler;
 		setVar(["cpt1_bed_door"] call sp_getObject,isLocked,false);
@@ -156,13 +173,17 @@ cpt1_playerUniform = "NomadCloth9";
 		{
 			rand(2,4) call sp_threadPause;
 			{
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа начинает угасать" arg "act");
+				if (getVar("cpt1_obj_beginlamp" call sp_getObject,lightIsEnabled)) then {
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа начинает угасать" arg "act");
+				};
 			} call sp_threadCriticalSection;
 			
 			rand(4,5) call sp_threadPause;
 			{
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,lightSetMode,false);
-				callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа затухает" arg "act");
+				if (getVar("cpt1_obj_beginlamp" call sp_getObject,lightIsEnabled)) then {
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,lightSetMode,false);
+					callFuncParams("cpt1_obj_beginlamp" call sp_getObject,worldSay,"Лампа затухает" arg "act");
+				};
 			} call sp_threadCriticalSection;
 
 		} call sp_threadStart;
@@ -239,7 +260,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 //spawn cpt1_pos_looting
 ["cpt1_looting",{
-	["right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
+	["chat+right+stats+cursor+inv"] call sp_view_setPlayerHudVisible;
 	["Остатки цивилизации","Осмотрите ящики на наличие ценных предметов"] call sp_setTaskMessageEff;
 
 	{
@@ -247,7 +268,7 @@ cpt1_playerUniform = "NomadCloth9";
 		["hellocave"] call sp_audio_playMusic;
 	} call sp_threadStart;
 
-	{
+	private _scrHndl = {
 		_bpref = "cpt1_looting_bottle";
 		_barr = [];
 		for "_i" from 1 to 2 do {
@@ -261,9 +282,8 @@ cpt1_playerUniform = "NomadCloth9";
 			any_of(_barr apply {callFuncParams(_x,getDistanceTo,call sp_getActor arg true) <= 3})
 		} call sp_threadWait;
 
-		["У вас есть 2 свободных руки, в которые можно взять любые предметы."+
-		"Чтобы взять предметы с земли нажмите ЛКМ нацелившись на необходимый предмет - он будет взят в активную руку. Для изменения активной руки нажмите $input_act_changeActHand."+
-		sbr+" Попробуйте подобрать бутылку возле костра."] call sp_setNotification;
+		_baseInteractHandle = ["У вас есть 2 свободных руки. Чтобы #(взять предметы) нажмите ЛКМ по ним."
+		+sbr+"Для смены активной руки нажмите $input_act_changeActHand. Попробуйте подобрать бутылку."] call sp_setNotification;
 
 		_actHand = [{getVar(call sp_getActor,activeHand) call inventoryGetWidgetById}] call sp_createWidgetHighlight;
 		["cpt1_looting_evt_changeHandHandler",[_actHand]] call sp_storageSet;
@@ -275,28 +295,31 @@ cpt1_playerUniform = "NomadCloth9";
 			];
 			false
 		}] call sp_addPlayerHandler;
+		["cpt1_looting_evt_handleChangeActiveHand",_hChangeActHand] call sp_storageSet;
 
 		{
 			any_of(_barr apply {equals(callFunc(_x,getSourceLoc),call sp_getActor)})
+			|| !callFunc(call sp_getActor,isEmptyActiveHand)
 		} call sp_threadWait;
 
 		_d = ["cpt1_looting_evt_changeHandHandler",[refcreate(false)]] call sp_storageGet;
 		refset(_d select 0,true);
 		_hChangeActHand call sp_removePlayerHandler;
 
-		["Чтобы положить предмет нажмите $input_act_putdownitem. Предметы выкладываются из активной руки на место, в которое смотрит ваш персонаж. Чтобы быстро выбросить предмет - нажмите $input_act_dropitem."+
-		"Однако, будьте осторожны - хрупкие предметы могут разбиться от падения на твёрдые поверхности"] call sp_setNotification;
-
+		["Чтобы #(положить предмет) нажмите $input_act_putdownitem. Чтобы #(выбросить) - нажмите $input_act_dropitem."] call sp_setNotification;
 		{
 			all_of(_barr apply {not_equals(callFunc(_x,getSourceLoc),call sp_getActor)})
 		} call sp_threadWait;
 
-		["Действия с предметами можно проводить в режиме открытого инвентаря ($input_act_inventory). В этом режиме, например, вы так же можете точнее выкладывать предметы, перетягивая их из слота руки в мир и поворачивая колесом мыши"] call sp_setNotification;
+		_baseInteractHandle = [
+			"В режиме #(открытого инвентаря) ($input_act_inventory):"
+			+sbr+"ЛКМ = #(подбор), перетаскивание из руки = #(выкладывание) на поверхность, СКМ (крутить) = #(поворот) предмета"] call sp_setNotification;
 		
 		10 call sp_threadPause;
-		[false] call sp_setNotificationVisible;
+		[false,_baseInteractHandle] call sp_setNotificationVisible;
 
 	} call sp_threadStart;
+	["cpt1_looting_data_firstinventory_threadhandle",_scrHndl] call sp_storageSet;
 
 	_objname = "cpt1_obj_loot";
 	_objlist = [];
@@ -325,140 +348,175 @@ cpt1_playerUniform = "NomadCloth9";
 	}] call sp_addPlayerHandler;
 
 	_h = ["main_action",{
-		params ["_t"];
-		if (_t in (["cpt1_loot_objlist",[]] call sp_storageGet)) then {
-			_catch = ["cpt1_loot_objlist_lootCreated",[]] call sp_storageGet;
-			if !(_t in _catch) then {
-				_catch pushBack _t;
-				_newcnt = count _catch ;
-				if (_newcnt == 1) exitWith {
-					_obj = ["HatUshanka",_t] call createItemInContainer;
-					["cpt_1_lootobj1",_obj] call sp_storageSet;
-
-					setVar(_obj,name,"Старая шапка");
-					["Одежда помогает согреться и защищает вашего персонажа. Только что вы нашли шапку. Перетащите её в слот любой свободной руки, а затем на слот головы."] call sp_setNotification;
-					_refItm = [{
-						
-						_wid = widgetNull;
-						{
-							private _desc = ctrltooltip (_x getvariable "icon");
-							if (equals("Старая шапка",_desc)) then { //SD_NAME
-								_wid = _x getvariable "icon";
-							};
-						} foreach inventory_containerSlots;
-						_wid
-					},0.04] call sp_createWidgetHighlight;
-
-					_refHandLeft = [
-						INV_HAND_L call inventoryGetWidgetById
-					] call sp_createWidgetHighlight;
-					_refHandRight = [
-						INV_HAND_R call inventoryGetWidgetById
-					] call sp_createWidgetHighlight;
-
-					_refHead = [{
-						INV_HEAD call inventoryGetWidgetById;
-					}] call sp_createWidgetHighlight;
-
-
-					[{
-						params ["_obj","_refItm","_refHndArr","_refHead"];
-						{
-							equals(call sp_getActor,callFunc(_obj,getSourceLoc))
-						} call sp_threadWait;
-
-						refset(_refItm,true);
-						{refset(_x,true)} foreach _refHndArr;
-
-						{
-							!callFuncParams(call sp_getActor,isEmptySlot,INV_HEAD)
-						} call sp_threadWait;
-
-						refset(_refHead,true);
-
-						[false] call sp_setNotificationVisible;
-
-					},[_obj,_refItm,[_refHandLeft,_refHandRight],_refHead]] call sp_threadStart;
-
-				};
-				if (_newcnt == 2) exitwith {
-					_obj = ["TorchDisabled",_t] call createItemInContainer;
-					["Вы нашли Факел - незаменимую вещь в Сети. Он будет вашим лучшим другом в этих мрачных пещерах. Возьмите его и вернитесь к костру."] call sp_setNotification;
-					["cpt1_loot_torchItem",_obj] call sp_storageSet;
-					{
-						_obj = ["cpt1_loot_torchItem",nullPtr] call sp_storageGet;
-						_camp = "cpt1_loot_campfire" call sp_getObject;
-						if isNullReference(_obj) exitWith {};
-
-						{
-							callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.3
-						} call sp_threadWait;
-
-						["Для того, чтобы зажечь факел нажмите ЛКМ с факелом в активной руке по костру"] call sp_setNotification;
-
-						{
-							getVar(_obj,lightIsEnabled)
-						} call sp_threadWait;
-						
-						["Затушить факел можно, нажав $input_act_mainAction по нему."] call sp_setNotification;
-						private _tOff = tickTime + 5;
-						{
-							tickTime >= _tOff
-							|| !getVar(_obj,lightIsEnabled)
-						} call sp_threadWait;
-						[false] call sp_setNotificationVisible;
-
-					} call sp_threadStart;
-				};
-				if (_newcnt == 3) exitWith {
-					_obj = ["Paper",_t] call createItemInContainer;
-					setVar(_obj,name,"Карта");
-					setVar(_obj,desc,"Нарисованная от руки схема ближайших пещер.");
-					["cpt1_loot_mapItem",_obj] call sp_storageSet;
+			params ["_t"];
+			if (_t in (["cpt1_loot_objlist",[]] call sp_storageGet)) then {
+				_catch = ["cpt1_loot_objlist_lootCreated",[]] call sp_storageGet;
+				if !(_t in _catch) then {
+					_catch pushBack _t;
+					_newcnt = count _catch ;
 					
-					["Возьмите карту"] call sp_setNotification;
-					{
-						_obj = ["cpt1_loot_mapItem",nullPtr] call sp_storageGet;
-						if isNullReference(_obj) exitWith {};
-
-						{
-							equals(call sp_getActor,callFunc(_obj,getSourceLoc))
-						} call sp_threadWait;
-
-						["cpt1_foundmap"] call sp_startScene;
-
-						[false] call sp_setNotificationVisible;
-						[true] call sp_setHideTaskMessageCtg;
-					} call sp_threadStart;
-					call sp_removeCurrentPlayerHandler;
+					if (_newcnt == 1) exitWith {
+						_obj = ["HatUshanka",_t] call createItemInContainer;
+						["cpt_1_lootobj1",_obj] call sp_storageSet;
+						setVar(_obj,name,"Старая шапка");
+					};
+					if (_newcnt == 2) exitwith {
+						_obj = ["TorchDisabled",_t] call createItemInContainer;
+						["cpt1_loot_torchItem",_obj] call sp_storageSet;
+						
+					};
+					if (_newcnt == 3) exitWith {
+						_obj = ["Paper",_t] call createItemInContainer;
+						setVar(_obj,name,"Карта");
+						setVar(_obj,desc,"Нарисованная от руки схема ближайших пещер.");
+						["cpt1_loot_mapItem",_obj] call sp_storageSet;
+						call sp_removeCurrentPlayerHandler;
+					};
 				};
-			};
-			
-			false
-		} else {
-			//всё кроме контейнеров лочится
-			
-			// и одежды тоже потому что юзер может убрать факел в карман...
-			if (equals(callFuncParams(call sp_getActor,getItemInSlotRedirect,INV_CLOTH),_t)) exitWith {false};
-			// и факел тоже потому что там тест факела в стадии 2
-			if isTypeOf(_t,Torch) exitWith {false};
+				
+				false
+			} else {
+				//всё кроме контейнеров лочится
+				
+				// и одежды тоже потому что юзер может убрать факел в карман...
+				if (equals(callFuncParams(call sp_getActor,getItemInSlotRedirect,INV_CLOTH),_t)) exitWith {false};
+				// и факел тоже потому что там тест факела в стадии 2
+				if isTypeOf(_t,Torch) exitWith {false};
 
-			true
-		};
-	}] call sp_addPlayerHandler;
+				true
+			};
+		}] call sp_addPlayerHandler;
 
 	{
 		_lst = (["cpt1_loot_objlist",[]] call sp_storageGet);
+		_searchedList = ["cpt1_loot_objlist_lootCreated",[]] call sp_storageGet;
+		
 		_act = call sp_getActor;
 		{
 			any_of(_lst apply {callFuncParams(_x,getDistanceTo,_act arg true) <= 3 && callFuncParams(_act,canSeeObject,_x)})
 		} call sp_threadWait;
 
-		["Чтобы посмотреть содержимое ящиков, сумок, одежды и контейнеров - нажмите $input_act_mainAction"] call sp_setNotification;
+		{
+			_h = ["cpt1_looting_data_firstinventory_threadhandle",nullPtr] call sp_storageGet;
+			_h call sp_threadStop;
+			private _hinv = ["cpt1_looting_evt_changeHandHandler",[refcreate(false)]] call sp_storageGet;
+			refset(_hinv select 0,true);
+
+			private _hsw = ["cpt1_looting_evt_handleChangeActiveHand",null] call sp_storageGet;
+			if !isNullVar(_hsw) then {
+				_hsw call sp_removePlayerHandler;
+			};
+		} call sp_threadCriticalSection;
+
+		["Чтобы посмотреть содержимое #(контейнеров) (ящиков, сумок или одежды) - нажмите $input_act_mainAction"] call sp_setNotification;
+
+		
+		while {true} do {
+			if (inventory_isOpenContainer) then {
+				0.5 call sp_threadPause;
+				if (inventory_isOpenContainer) then {break};
+			};
+			0.2 call sp_threadPause;
+		};
+		sp_playerCanMove = false;
+
+		_obj = ["cpt_1_lootobj1",nullPtr] call sp_storageGet;
+		["Вы нашли шапку. #(Достаньте) её из ящика, перетащив на слот руки, а затем #(наденьте) на себя - перетащив на слот головы."] call sp_setNotification;
+		_refItm = [{
+			
+			_wid = widgetNull;
+			{
+				private _desc = ctrltooltip (_x getvariable "icon");
+				if (equals("Старая шапка",_desc)) then { //SD_NAME
+					_wid = _x getvariable "icon";
+				};
+			} foreach inventory_containerSlots;
+			_wid
+		},0.04] call sp_createWidgetHighlight;
+
+		_refHandLeft = [
+			INV_HAND_L call inventoryGetWidgetById
+		] call sp_createWidgetHighlight;
+		_refHandRight = [
+			INV_HAND_R call inventoryGetWidgetById
+		] call sp_createWidgetHighlight;
+
+		_refHead = [{
+			INV_HEAD call inventoryGetWidgetById;
+		}] call sp_createWidgetHighlight;
+		
+		{
+			equals(call sp_getActor,callFunc(_obj,getSourceLoc))
+		} call sp_threadWait;
+
+		refset(_refItm,true);
+		{refset(_x,true)} foreach [_refHandLeft,_refHandRight];
 
 		{
-			inventory_isOpenContainer
+			!callFuncParams(call sp_getActor,isEmptySlot,INV_HEAD)
 		} call sp_threadWait;
+
+		refset(_refHead,true);
+
+		[false] call sp_setNotificationVisible;
+		sp_playerCanMove = true;
+
+		// second item check
+		while {true} do {
+			if (inventory_isOpenContainer) then {
+				0.5 call sp_threadPause;
+				if (inventory_isOpenContainer && {count _searchedList == 2}) then {break};
+			};
+			0.2 call sp_threadPause;
+		};
+
+		{
+			["Вы нашли факел. #(Возьмите) его и вернитесь к костру."] call sp_setNotification;
+			_obj = ["cpt1_loot_torchItem",nullPtr] call sp_storageGet;
+			_camp = "cpt1_loot_campfire" call sp_getObject;
+			if isNullReference(_obj) exitWith {};
+
+			{
+				callFuncParams(callFunc(_obj,getSourceLoc),getDistanceTo,_camp arg true) <= 1.7
+			} call sp_threadWait;
+
+			["#(Зажгите) факел: нажмите ЛКМ по костру с факелом в #(активной руке)"] call sp_setNotification;
+
+			{
+				getVar(_obj,lightIsEnabled)
+			} call sp_threadWait;
+			
+			["Чтобы #(затушить) факел нажмите $input_act_mainAction по нему"] call sp_setNotification;
+			private _tOff = tickTime + 5;
+			{
+				tickTime >= _tOff
+				|| !getVar(_obj,lightIsEnabled)
+			} call sp_threadWait;
+			[false] call sp_setNotificationVisible;
+
+		} call sp_threadStart;
+
+		//third item check
+		while {true} do {
+			if (inventory_isOpenContainer) then {
+				0.5 call sp_threadPause;
+				if (inventory_isOpenContainer && {count _searchedList == 3}) then {break};
+			};
+			0.2 call sp_threadPause;
+		};
+						
+		["Вы нашли карту. #(Возьмите) её"] call sp_setNotification;
+		_obj = ["cpt1_loot_mapItem",nullPtr] call sp_storageGet;
+		if !isNullReference(_obj) then {
+			{
+				equals(call sp_getActor,callFunc(_obj,getSourceLoc))
+			} call sp_threadWait;
+
+			[false] call sp_setNotificationVisible;
+			[true] call sp_setHideTaskMessageCtg;
+
+			["cpt1_foundmap"] call sp_startScene;
+		};
 
 	} call sp_threadStart;
 
@@ -530,6 +588,7 @@ cpt1_act_addMapViewHandler = {
 
 ["cpt1_act_mapview",{
 	{
+		sp_playerCanMove = false;
 		0.5 call sp_threadPause;
 		_d = getGUI;
 		_sizeX = 40;
@@ -545,6 +604,7 @@ cpt1_act_addMapViewHandler = {
 		widgetSetFade(_w,1,0.3);
 		1 call sp_threadPause;
 		[_w,true] call deleteWidget;
+		sp_playerCanMove = true;
 	} call sp_threadStart;
 }] call sp_addScene;
 
@@ -577,6 +637,11 @@ cpt1_act_addMapViewHandler = {
 
 			[_t] call deleteWidget;
 		} call sp_threadStart;
+	} else {
+		if !(["cpt1_data_entercaves",false] call sp_storageGet) then {
+			["cpt1_data_entercaves",true] call sp_storageSet;
+			["transition4"] call sp_audio_playMusic;
+		};
 	};
 }] call sp_addTriggerEnter;
 
@@ -600,7 +665,7 @@ cpt1_act_addMapViewHandler = {
 		
 		call cpt1_act_addMapViewHandler;
 
-		_h = ["Чтобы ещё раз посмотреть карту нажмите $input_act_mainAction по ней"] call sp_setNotification;
+		_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
 		5 call sp_threadPause;
 		[false,_h] call sp_setNotificationVisible;
 
@@ -610,14 +675,25 @@ cpt1_act_addMapViewHandler = {
 }] call sp_addScene;
 
 ["cpt1_walk_topart2",{
-	["transition4"] call sp_audio_playMusic;
 	["Новый дом","Отправляйтесь к ближайшему городу"] call sp_setTaskMessageEff;
+}] call sp_addScene;
+
+cpt1_data_foundFirstMushroom = false;
+["cpt1_trg_foundfirstmushroom",{
+	if (cpt1_data_foundFirstMushroom) exitWith {};
+	cpt1_data_foundFirstMushroom = true;
+	
+	{
+		_h = ["#(Сеть) - система тоннелей и пещер, наполненная #(грибами). Со временем вы узнаете о них больше..."] call sp_setNotification;
+		15 call sp_threadPause;
+		[false,_h] call sp_setNotificationVisible;
+	} call sp_threadStart;
 }] call sp_addScene;
 
 ["cpt1_trg_founddoor",{
 	
 	["chap1\gg9"] call sp_audio_sayPlayer;
-	["Вы также можете взаимодействовать с миром через ПКМ меню. Попробуйте открыть дверь с помощью ПКМ, выбрав пункт ""Открыть"""] call sp_setNotification;
+	_msgHndl = ["#(ПКМ-меню) - универсальный способ взаимодействия. Наведите прицел на объект и нажмите ПКМ: появится меню с действиями для выбранного объекта. Попробуйте #(открыть дверь) этим способом."] call sp_setNotification;
 	
 	["verbs",false] call sp_setLockPlayerHandler;
 	sp_allowebVerbs = ["description","mainact"];
@@ -639,37 +715,59 @@ cpt1_act_addMapViewHandler = {
 		false
 	}] call sp_addPlayerHandler;
 
-	["activate_verb",{
+	private _handlers = [];
+	["cpt1_data_openDoorHandlers",_handlers] call sp_storageSet;
+
+	_handlers pushBack (["activate_verb",{
 		params ["_t","_name"];
 		if (_name == "mainact") then {
 			if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
-				["chap1\gg10"] call sp_audio_sayPlayer;
-				[false] call sp_setNotificationVisible;
-				call sp_removeCurrentPlayerHandler;
+				{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
 				["cpt1_walk_searchkey"] call sp_startScene;
 			};
 		};
-	}] call sp_addPlayerHandler;
+	}] call sp_addPlayerHandler);
 
-	// ["main_action",{
-	// 	params ["_t"];
-	// 	if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
-	// 		["chap1\gg10"] call sp_audio_sayPlayer;
-	// 		[false] call sp_setNotificationVisible;
-	// 		call sp_removeCurrentPlayerHandler;
-	// 		["cpt1_walk_searchkey"] call sp_startScene;
-	// 	};
-	// 	false
-	// }] call sp_addPlayerHandler;
+	_handlers pushBack (["main_action",{
+		params ["_t"];
+		if equals(_t,"cpt1_obj_doortopart2" call sp_getObject) then {
+			{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
+			["cpt1_walk_searchkey"] call sp_startScene;
+		};
+		false
+	}] call sp_addPlayerHandler);
+
+	[{
+		params ["_msgHndl"];
+		{
+			callFuncParams("cpt1_obj_keytopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 20
+		} call sp_threadWait;
+		{ _x call sp_removePlayerHandler } foreach (["cpt1_data_openDoorHandlers",[]] call sp_storageGet);
+		[false,_msgHndl] call sp_setNotificationVisible;
+		
+		if (sp_lastStartedScene != "cpt1_walk_searchkey") then {
+			["cpt1_walk_searchkey"] call sp_startScene;
+		};
+	},_msgHndl] call sp_threadStart;
 	
 }] call sp_addScene;
 
 ["cpt1_walk_searchkey",{
-	["Новый дом","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+	//ключ пока ещё не в руках игрока
+	if (not_equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))) then {
+		if (callFuncParams("cpt1_obj_doortopart2" call sp_getObject,getDistanceTo,call sp_getActor arg true) <= 7) then {
+			["chap1\gg10"] call sp_audio_sayPlayer;
+		};
+		[false] call sp_setNotificationVisible;
+
+		["Новый дом","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
+	};
+
 	{
 		{
 			equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
+		
 		["Новый дом","Откройте дверь"] call sp_setTaskMessageEff;
 
 		["yell"] call sp_audio_playMusic;
@@ -679,7 +777,7 @@ cpt1_act_addMapViewHandler = {
 			&& equals(call sp_getActor,callFunc("cpt1_obj_keytopart2" call sp_getObject,getSourceLoc))
 		} call sp_threadWait;
 
-		["Чтобы отпереть дверь с помощью ключа - возьмите его в руку и нажмите ЛКМ, нацелившись на дверь."] call sp_setNotification;
+		["Чтобы #(отпереть) дверь: возьмите ключ в руку и нажмите ЛКМ по ней"] call sp_setNotification;
 		{
 			!getVar("cpt1_obj_doortopart2" call sp_getObject,isLocked)
 		} call sp_threadWait;
@@ -694,6 +792,9 @@ cpt1_act_addMapViewHandler = {
 }] call sp_addScene;
 
 ["cpt1_walk_final",{
+	
+	[false] call sp_setNotificationVisible;
+	[true] call sp_setHideTaskMessageCtg;
 
 	{
 		{
@@ -713,6 +814,7 @@ cpt1_act_addMapViewHandler = {
 	{
 		//cam shown
 		[true] call sp_cam_setCinematicCam;
+		[true] call sp_gui_setCinematicMode;
 		{
 			["cpt1_pos_cutscenetocpt2","player_cutscene",[],{
 				[_this] call sp_copyPlayerInventoryTo;
@@ -745,7 +847,9 @@ cpt1_act_addMapViewHandler = {
 		6 call sp_threadPause;
 
 		[false] call sp_cam_setCinematicCam;
+		[false] call sp_gui_setCinematicMode;
 		call sp_cam_stopAllInterp;
+		[1] call sp_onChapterDone;
 		_post = {
 			call sp_cleanupSceneData;
 			["cpt2_begin"] call sp_startScene;

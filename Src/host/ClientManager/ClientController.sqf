@@ -34,7 +34,7 @@ rpcAdd("setNewOwner",cm_setOwner);
 
 _connectToMob = {
 	params ["_mob","_curClient"];
-	#ifndef EDITOR
+	#ifndef EDITOR_OR_SP_MODE
 	if (typeof _mob != BASIC_MOB_TYPE || typeof _curClient == BASIC_MOB_TYPE) exitWith {
 		errorformat("rpc::connectToMob() - Error types: mob::%1; client::%2",typeof _mob arg typeof _curClient);
 	};	
@@ -44,7 +44,7 @@ _connectToMob = {
 
 _disconnectFromMob = {
 	params ["_client","_curMob"];
-	#ifndef EDITOR
+	#ifndef EDITOR_OR_SP_MODE
 	if (typeof _client == BASIC_MOB_TYPE || typeof _curMob != BASIC_MOB_TYPE) exitWith {
 		errorformat("rpc::disconnectFromMob() - Error types: client::%1; mob::%2",typeof _client arg typeof _curMob);
 	};
