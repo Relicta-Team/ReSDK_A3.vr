@@ -894,13 +894,16 @@ begin_startattack_activated = false;
 						if (begin_attackStarted) then {
 							[{
 								params ["_body"];
+								if isNullVar(_body) exitWith {};
+								if isNullReference(_body) exitWith {};
 
 								//задержка перед смертью убегающийх
 								rand(4,7) call sp_threadPause;
-								_bmob = _body getvariable "link";
-								if !callFunc(_bmob,isActive) exitWith {};
-
 								{
+									_bmob = _body getvariable ["link",nullPtr];
+									if (isNullReference(_bmob)) exitWith {};
+									if !callFunc(_bmob,isActive) exitWith {};
+
 									_ps = _body modelToWorld (_body selectionPosition "head");
 									[("begin_mainattacker"+str(randInt(1,2))) call sp_ai_getMobObject,_ps] call cpt5_act_doShot;
 									_refv = _body getvariable "anim_handle";
