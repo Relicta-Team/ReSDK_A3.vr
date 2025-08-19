@@ -595,7 +595,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [client\Lobby\functions.sqf at line 427](../../../Src/client/Lobby/functions.sqf#L427)
+File: [client\Lobby\functions.sqf at line 446](../../../Src/client/Lobby/functions.sqf#L446)
 ## DEFADE_GUI_ELEMENTS_TIME
 
 Type: constant
@@ -607,7 +607,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [client\Lobby\functions.sqf at line 587](../../../Src/client/Lobby/functions.sqf#L587)
+File: [client\Lobby\functions.sqf at line 606](../../../Src/client/Lobby/functions.sqf#L606)
 ## lobby_isMusicEnabled
 
 Type: Variable
@@ -619,7 +619,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [client\Lobby\functions.sqf at line 382](../../../Src/client/Lobby/functions.sqf#L382)
+File: [client\Lobby\functions.sqf at line 401](../../../Src/client/Lobby/functions.sqf#L401)
 ## lobby_internal_progressclose
 
 Type: Variable
@@ -631,7 +631,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\Lobby\functions.sqf at line 571](../../../Src/client/Lobby/functions.sqf#L571)
+File: [client\Lobby\functions.sqf at line 590](../../../Src/client/Lobby/functions.sqf#L590)
 ## lobbyOpen
 
 Type: function
@@ -647,7 +647,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Lobby\functions.sqf at line 385](../../../Src/client/Lobby/functions.sqf#L385)
+File: [client\Lobby\functions.sqf at line 404](../../../Src/client/Lobby/functions.sqf#L404)
 ## lobby_onLoad
 
 Type: function
@@ -655,7 +655,7 @@ Type: function
 Description: 
 - Param: _isOpenMode
 
-File: [client\Lobby\functions.sqf at line 403](../../../Src/client/Lobby/functions.sqf#L403)
+File: [client\Lobby\functions.sqf at line 422](../../../Src/client/Lobby/functions.sqf#L422)
 ## lobby_initLoadingScreen
 
 Type: function
@@ -663,7 +663,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 442](../../../Src/client/Lobby/functions.sqf#L442)
+File: [client\Lobby\functions.sqf at line 461](../../../Src/client/Lobby/functions.sqf#L461)
 ## lobby_loadSettings
 
 Type: function
@@ -671,7 +671,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 548](../../../Src/client/Lobby/functions.sqf#L548)
+File: [client\Lobby\functions.sqf at line 567](../../../Src/client/Lobby/functions.sqf#L567)
 ## lobby_onSendChatMessage
 
 Type: function
@@ -679,7 +679,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Lobby\functions.sqf at line 556](../../../Src/client/Lobby/functions.sqf#L556)
+File: [client\Lobby\functions.sqf at line 575](../../../Src/client/Lobby/functions.sqf#L575)
 ## lobbyClose
 
 Type: function
@@ -687,7 +687,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 574](../../../Src/client/Lobby/functions.sqf#L574)
+File: [client\Lobby\functions.sqf at line 593](../../../Src/client/Lobby/functions.sqf#L593)
 ## lobby_onChangeGameState
 
 Type: function
@@ -696,7 +696,7 @@ Description:
 - Param: _oldState
 - Param: _newState
 
-File: [client\Lobby\functions.sqf at line 604](../../../Src/client/Lobby/functions.sqf#L604)
+File: [client\Lobby\functions.sqf at line 623](../../../Src/client/Lobby/functions.sqf#L623)
 ## lobby_openSelectLateRole
 
 Type: function
@@ -704,7 +704,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 637](../../../Src/client/Lobby/functions.sqf#L637)
+File: [client\Lobby\functions.sqf at line 656](../../../Src/client/Lobby/functions.sqf#L656)
 ## lobby_onSelectedLateRole
 
 Type: function
@@ -712,7 +712,7 @@ Type: function
 Description: 
 
 
-File: [client\Lobby\functions.sqf at line 726](../../../Src/client/Lobby/functions.sqf#L726)
+File: [client\Lobby\functions.sqf at line 745](../../../Src/client/Lobby/functions.sqf#L745)
 # lobbi_init.sqf
 
 ## DISABLE_NOT_USED_SETTINGS

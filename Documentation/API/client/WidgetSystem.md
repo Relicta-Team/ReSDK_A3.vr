@@ -43,6 +43,34 @@ ACT(SelectGroupUnit4) + ACT(SelectGroupUnit5) + ACT(SelectGroupUnit6) + ACT(Sele
 ACT(SelectGroupUnit8) + ACT(SelectGroupUnit9) + ACT(SelectGroupUnit0) + ACT(selectAll)
 ```
 File: [client\WidgetSystem\blockedButtons.hpp at line 24](../../../Src/client/WidgetSystem/blockedButtons.hpp#L24)
+## SP_MODE_LOCKED_BUTTONS
+
+Type: constant
+
+> Exists if **SP_MODE** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
++ ACT(timeInc) + ACT(timeDec)
+```
+File: [client\WidgetSystem\blockedButtons.hpp at line 29](../../../Src/client/WidgetSystem/blockedButtons.hpp#L29)
+## SP_MODE_LOCKED_BUTTONS
+
+Type: constant
+
+> Exists if **SP_MODE** not defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [client\WidgetSystem\blockedButtons.hpp at line 31](../../../Src/client/WidgetSystem/blockedButtons.hpp#L31)
 ## SIMPLE_PLAYER_INTERACTION
 
 Type: constant
@@ -53,9 +81,9 @@ Description:
 Replaced value:
 ```sqf
 ACT(showMap) + ACT(gear) + ACT(navigateMenu) + ACT(EvasiveLeft) + ACT(EvasiveRight) + \
- ACT(Salute) + ACT(SitDown) + ACT(networkStats) + ACT(networkPlayers)
+ ACT(Salute) + ACT(SitDown) + ACT(networkStats) + ACT(networkPlayers) + ACT(diary) SP_MODE_LOCKED_BUTTONS
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 30](../../../Src/client/WidgetSystem/blockedButtons.hpp#L30)
+File: [client\WidgetSystem\blockedButtons.hpp at line 36](../../../Src/client/WidgetSystem/blockedButtons.hpp#L36)
 ## ESCAPE_BUTTONS
 
 Type: constant
@@ -67,7 +95,7 @@ Replaced value:
 ```sqf
 ACT(ingamePause)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 39](../../../Src/client/WidgetSystem/blockedButtons.hpp#L39)
+File: [client\WidgetSystem\blockedButtons.hpp at line 45](../../../Src/client/WidgetSystem/blockedButtons.hpp#L45)
 ## FORBIDDEN_BUTTONS
 
 Type: constant
@@ -79,7 +107,7 @@ Replaced value:
 ```sqf
 (GROUP_ACTIONS + GROUP_COMMA_MENU + SIMPLE_PLAYER_INTERACTION)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 42](../../../Src/client/WidgetSystem/blockedButtons.hpp#L42)
+File: [client\WidgetSystem\blockedButtons.hpp at line 48](../../../Src/client/WidgetSystem/blockedButtons.hpp#L48)
 ## FORBIDDEN_BUTTONS_SCROLL
 
 Type: constant
@@ -91,7 +119,7 @@ Replaced value:
 ```sqf
 ACT(prevAction) + ACT(nextAction) + ACT(Action) + ACT(ActionContext) + ACT(defaultAction)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 44](../../../Src/client/WidgetSystem/blockedButtons.hpp#L44)
+File: [client\WidgetSystem\blockedButtons.hpp at line 50](../../../Src/client/WidgetSystem/blockedButtons.hpp#L50)
 ## ADDRULE_FORBIDDEN_BUTTONS(forkey)
 
 Type: constant
@@ -103,7 +131,7 @@ Replaced value:
 ```sqf
 (forkey in FORBIDDEN_BUTTONS)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 47](../../../Src/client/WidgetSystem/blockedButtons.hpp#L47)
+File: [client\WidgetSystem\blockedButtons.hpp at line 53](../../../Src/client/WidgetSystem/blockedButtons.hpp#L53)
 ## ADDRULE_FORBIDDEN_SCROLL(forkey)
 
 Type: constant
@@ -115,7 +143,7 @@ Replaced value:
 ```sqf
 (forkey in FORBIDDEN_BUTTONS_SCROLL)
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 49](../../../Src/client/WidgetSystem/blockedButtons.hpp#L49)
+File: [client\WidgetSystem\blockedButtons.hpp at line 55](../../../Src/client/WidgetSystem/blockedButtons.hpp#L55)
 ## LEFT_MOVE_BUTTONS
 
 Type: constant
@@ -127,7 +155,7 @@ Replaced value:
 ```sqf
 ( ACT(TurnLeft) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 54](../../../Src/client/WidgetSystem/blockedButtons.hpp#L54)
+File: [client\WidgetSystem\blockedButtons.hpp at line 60](../../../Src/client/WidgetSystem/blockedButtons.hpp#L60)
 ## RIGHT_MOVE_BUTTONS
 
 Type: constant
@@ -139,7 +167,7 @@ Replaced value:
 ```sqf
 ( ACT(TurnRight) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 56](../../../Src/client/WidgetSystem/blockedButtons.hpp#L56)
+File: [client\WidgetSystem\blockedButtons.hpp at line 62](../../../Src/client/WidgetSystem/blockedButtons.hpp#L62)
 ## MOVE_FORWARD_BUTTONS
 
 Type: constant
@@ -151,7 +179,7 @@ Replaced value:
 ```sqf
 ( ACT(MoveForward) + ACT(MoveFastForward) + ACT(MoveSlowForward) )
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 59](../../../Src/client/WidgetSystem/blockedButtons.hpp#L59)
+File: [client\WidgetSystem\blockedButtons.hpp at line 65](../../../Src/client/WidgetSystem/blockedButtons.hpp#L65)
 ## CAN_MOVE_BUTTONS
 
 Type: constant
@@ -164,7 +192,7 @@ Replaced value:
 (ACT(MoveForward) + ACT(MoveBack) + ACT(TurnLeft) + ACT(TurnRight) + \
  ACT(MoveFastForward) + ACT(MoveSlowForward) + ACT(turbo) + ACT(TurboToggle) + ACT(MoveLeft) + ACT(MoveRight) + ACT(GetOver))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 63](../../../Src/client/WidgetSystem/blockedButtons.hpp#L63)
+File: [client\WidgetSystem\blockedButtons.hpp at line 69](../../../Src/client/WidgetSystem/blockedButtons.hpp#L69)
 ## CHANGE_STANCE_BUTTONS
 
 Type: constant
@@ -176,7 +204,7 @@ Replaced value:
 ```sqf
 (ACT(AdjustUp) + ACT(AdjustDown) + ACT(Crouch) + ACT(Stand) + ACT(MoveUp) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 67](../../../Src/client/WidgetSystem/blockedButtons.hpp#L67)
+File: [client\WidgetSystem\blockedButtons.hpp at line 73](../../../Src/client/WidgetSystem/blockedButtons.hpp#L73)
 ## FAST_DROP_BUTTONS
 
 Type: constant
@@ -188,7 +216,7 @@ Replaced value:
 ```sqf
 (ACT(Crouch) + ACT(MoveDown))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 70](../../../Src/client/WidgetSystem/blockedButtons.hpp#L70)
+File: [client\WidgetSystem\blockedButtons.hpp at line 76](../../../Src/client/WidgetSystem/blockedButtons.hpp#L76)
 ## SIDEWAYS_MOVEMENT_BUTTONS
 
 Type: constant
@@ -200,7 +228,7 @@ Replaced value:
 ```sqf
 (ACT(TurnLeft) + ACT(TurnRight))
 ```
-File: [client\WidgetSystem\blockedButtons.hpp at line 73](../../../Src/client/WidgetSystem/blockedButtons.hpp#L73)
+File: [client\WidgetSystem\blockedButtons.hpp at line 79](../../../Src/client/WidgetSystem/blockedButtons.hpp#L79)
 # defines.sqf
 
 ## HEIGHT_WINDOW_DRAGGER
@@ -357,7 +385,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [client\WidgetSystem\functions.sqf at line 675](../../../Src/client/WidgetSystem/functions.sqf#L675)
+File: [client\WidgetSystem\functions.sqf at line 676](../../../Src/client/WidgetSystem/functions.sqf#L676)
 ## max_protect
 
 Type: constant
@@ -369,7 +397,7 @@ Replaced value:
 ```sqf
 1.1
 ```
-File: [client\WidgetSystem\functions.sqf at line 677](../../../Src/client/WidgetSystem/functions.sqf#L677)
+File: [client\WidgetSystem\functions.sqf at line 678](../../../Src/client/WidgetSystem/functions.sqf#L678)
 ## setwt(wid,_t,_sz)
 
 Type: constant
@@ -383,7 +411,7 @@ Replaced value:
 ```sqf
 [wid,format["<t align='center' size='%2'>%1</t>",_t,_sz]] call widgetSetText
 ```
-File: [client\WidgetSystem\functions.sqf at line 760](../../../Src/client/WidgetSystem/functions.sqf#L760)
+File: [client\WidgetSystem\functions.sqf at line 761](../../../Src/client/WidgetSystem/functions.sqf#L761)
 ## hasEnabledBlackScreen
 
 Type: Variable
@@ -407,7 +435,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [client\WidgetSystem\functions.sqf at line 672](../../../Src/client/WidgetSystem/functions.sqf#L672)
+File: [client\WidgetSystem\functions.sqf at line 673](../../../Src/client/WidgetSystem/functions.sqf#L673)
 ## displayOpen
 
 Type: function
@@ -640,7 +668,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\WidgetSystem\functions.sqf at line 646](../../../Src/client/WidgetSystem/functions.sqf#L646)
+File: [client\WidgetSystem\functions.sqf at line 647](../../../Src/client/WidgetSystem/functions.sqf#L647)
 ## widget_antiGammaCheck
 
 Type: function
@@ -648,7 +676,7 @@ Type: function
 Description: 
 
 
-File: [client\WidgetSystem\functions.sqf at line 681](../../../Src/client/WidgetSystem/functions.sqf#L681)
+File: [client\WidgetSystem\functions.sqf at line 682](../../../Src/client/WidgetSystem/functions.sqf#L682)
 ## widget_createDisconnectMessage
 
 Type: function
@@ -656,7 +684,7 @@ Type: function
 Description: 
 - Param: _args
 
-File: [client\WidgetSystem\functions.sqf at line 738](../../../Src/client/WidgetSystem/functions.sqf#L738)
+File: [client\WidgetSystem\functions.sqf at line 739](../../../Src/client/WidgetSystem/functions.sqf#L739)
 ## widget_registerInput
 
 Type: function
@@ -665,7 +693,7 @@ Description:
 - Param: _w
 - Param: _key
 
-File: [client\WidgetSystem\functions.sqf at line 775](../../../Src/client/WidgetSystem/functions.sqf#L775)
+File: [client\WidgetSystem\functions.sqf at line 776](../../../Src/client/WidgetSystem/functions.sqf#L776)
 ## widgetModel_objectHelper
 
 Type: function
@@ -675,7 +703,7 @@ Description:
 - Param: _array
 - Param: _scale (optional, default 1)
 
-File: [client\WidgetSystem\functions.sqf at line 815](../../../Src/client/WidgetSystem/functions.sqf#L815)
+File: [client\WidgetSystem\functions.sqf at line 816](../../../Src/client/WidgetSystem/functions.sqf#L816)
 ## widgetSetMouseMoveColors
 
 Type: function
@@ -685,7 +713,7 @@ Description:
 - Param: _out
 - Param: _in
 
-File: [client\WidgetSystem\functions.sqf at line 864](../../../Src/client/WidgetSystem/functions.sqf#L864)
+File: [client\WidgetSystem\functions.sqf at line 865](../../../Src/client/WidgetSystem/functions.sqf#L865)
 # widgets.hpp
 
 ## widgetNull

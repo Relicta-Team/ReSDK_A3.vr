@@ -407,7 +407,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 89](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L89)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 93](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L93)
 ## csys_internal_editor_lastRecipe
 
 Type: Variable
@@ -421,7 +421,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 117](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L117)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 121](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L121)
 ## csys_internal_editor_lastIngredients
 
 Type: Variable
@@ -433,7 +433,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 118](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L118)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 122](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L122)
 ## csys_requestOpenMenu
 
 Type: function
@@ -454,7 +454,7 @@ Description: возвращает массив данных: vec2(recipeId,name 
 - Param: _src
 - Param: _onlyPreview (optional, default false)
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 45](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L45)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 49](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L49)
 ## csys_requestLoadCateg
 
 Type: function
@@ -465,7 +465,7 @@ Description: запрос загрузки новой категории
 - Param: _cat
 - Param: _isPreview (optional, default false)
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 59](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L59)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 63](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L63)
 ## csys_tryCraft
 
 Type: function
@@ -475,7 +475,7 @@ Description:
 - Param: _srcptr
 - Param: _recipeID
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 72](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L72)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 76](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L76)
 ## csys_onCraftEndPreview
 
 Type: function
@@ -485,7 +485,7 @@ Description:
 - Param: _isApply
 - Param: _tfmOpt
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 100](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L100)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 104](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L104)
 ## csys_processCraftMain
 
 Type: function
@@ -495,7 +495,7 @@ Description:
 - Param: _objectColleciton
 - Param: _recipeIdOrSystem
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 125](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L125)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 129](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L129)
 # CraftSystem_init.sqf
 
 ## csys_map_allCraftRefs

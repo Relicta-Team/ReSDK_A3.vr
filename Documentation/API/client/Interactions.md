@@ -711,7 +711,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 529](../../../Src/client/Interactions/interact.sqf#L529)
+File: [client\Interactions\interact.sqf at line 530](../../../Src/client/Interactions/interact.sqf#L530)
 ## interact_closeMouseMode_handle
 
 Type: function
@@ -719,7 +719,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 584](../../../Src/client/Interactions/interact.sqf#L584)
+File: [client\Interactions\interact.sqf at line 585](../../../Src/client/Interactions/interact.sqf#L585)
 ## interact_onMouseButtonUp
 
 Type: function
@@ -733,7 +733,7 @@ Description:
 - Param: _ctrl
 - Param: _alt
 
-File: [client\Interactions\interact.sqf at line 600](../../../Src/client/Interactions/interact.sqf#L600)
+File: [client\Interactions\interact.sqf at line 601](../../../Src/client/Interactions/interact.sqf#L601)
 ## interact_getReachItem
 
 Type: function
@@ -741,7 +741,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 678](../../../Src/client/Interactions/interact.sqf#L678)
+File: [client\Interactions\interact.sqf at line 679](../../../Src/client/Interactions/interact.sqf#L679)
 ## setpostestmobinmouse
 
 Type: function
@@ -751,7 +751,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interact.sqf at line 747](../../../Src/client/Interactions/interact.sqf#L747)
+File: [client\Interactions\interact.sqf at line 748](../../../Src/client/Interactions/interact.sqf#L748)
 # interactCombat.hpp
 
 ## CS_MAP_INDEX_TEXT
@@ -1057,6 +1057,7 @@ Replaced value:
 		_butt = [_d,BUTTON,sizes,_ctg] call createWidget; \
 		_butt setvariable ['mode',_mode]; \
 		_butt ctrlSetText name; \
+		interactCombat_map_defTypeWidgets set [_mode,_butt]; \
 		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressDef]; \
 		_butt ctrlSetTextColor [0.275,0.58,0,1]
 ```
@@ -1080,7 +1081,7 @@ Replaced value:
 		_butt ctrlAddEventHandler ["MouseButtonUp",interactCombat_onPressAttType]; \
 		_butt ctrlSetTextColor [0.886,0,0.282,1]
 ```
-File: [client\Interactions\interactCombat.sqf at line 197](../../../Src/client/Interactions/interactCombat.sqf#L197)
+File: [client\Interactions\interactCombat.sqf at line 198](../../../Src/client/Interactions/interactCombat.sqf#L198)
 ## getMode(wid)
 
 Type: constant
@@ -1092,7 +1093,7 @@ Replaced value:
 ```sqf
 wid getVariable "mode"
 ```
-File: [client\Interactions\interactCombat.sqf at line 302](../../../Src/client/Interactions/interactCombat.sqf#L302)
+File: [client\Interactions\interactCombat.sqf at line 303](../../../Src/client/Interactions/interactCombat.sqf#L303)
 ## interactCombat_initCombatStyles
 
 Type: function
@@ -1127,7 +1128,7 @@ Type: function
 Description: 
 - Param: _display
 
-File: [client\Interactions\interactCombat.sqf at line 273](../../../Src/client/Interactions/interactCombat.sqf#L273)
+File: [client\Interactions\interactCombat.sqf at line 274](../../../Src/client/Interactions/interactCombat.sqf#L274)
 ## interactCombat_onPressCS
 
 Type: function
@@ -1136,7 +1137,7 @@ Description:
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 307](../../../Src/client/Interactions/interactCombat.sqf#L307)
+File: [client\Interactions\interactCombat.sqf at line 308](../../../Src/client/Interactions/interactCombat.sqf#L308)
 ## interactCombat_onPressDef
 
 Type: function
@@ -1145,7 +1146,7 @@ Description:
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 323](../../../Src/client/Interactions/interactCombat.sqf#L323)
+File: [client\Interactions\interactCombat.sqf at line 324](../../../Src/client/Interactions/interactCombat.sqf#L324)
 ## interactCombat_onPressAttType
 
 Type: function
@@ -1154,7 +1155,7 @@ Description:
 - Param: _ct
 - Param: _butt
 
-File: [client\Interactions\interactCombat.sqf at line 346](../../../Src/client/Interactions/interactCombat.sqf#L346)
+File: [client\Interactions\interactCombat.sqf at line 347](../../../Src/client/Interactions/interactCombat.sqf#L347)
 ## interactCombat_syncView_onSBH
 
 Type: function
@@ -1162,7 +1163,7 @@ Type: function
 Description: 
 - Param: _buffer
 
-File: [client\Interactions\interactCombat.sqf at line 356](../../../Src/client/Interactions/interactCombat.sqf#L356)
+File: [client\Interactions\interactCombat.sqf at line 357](../../../Src/client/Interactions/interactCombat.sqf#L357)
 # interactCombat_defines.sqf
 
 ## addCStyle(_color,name,nameranged,_enum)
@@ -1261,7 +1262,7 @@ Description:
 
 Initial value:
 ```sqf
-[widgetNull,widgetNull,widgetNull]
+[widgetNull,widgetNull,widgetNull] //CM_CUR_IND_CS,CM_CUR_IND_ATT,CM_CUR_IND_DEF
 ```
 File: [client\Interactions\interactCombat_defines.sqf at line 63](../../../Src/client/Interactions/interactCombat_defines.sqf#L63)
 ## interactCombat_at_list_types
@@ -1300,6 +1301,18 @@ Initial value:
 createHashMap
 ```
 File: [client\Interactions\interactCombat_defines.sqf at line 71](../../../Src/client/Interactions/interactCombat_defines.sqf#L71)
+## interactCombat_map_defTypeWidgets
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\Interactions\interactCombat_defines.sqf at line 74](../../../Src/client/Interactions/interactCombat_defines.sqf#L74)
 ## interactCombat_at_widgets
 
 Type: Variable
@@ -1311,7 +1324,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\Interactions\interactCombat_defines.sqf at line 76](../../../Src/client/Interactions/interactCombat_defines.sqf#L76)
+File: [client\Interactions\interactCombat_defines.sqf at line 79](../../../Src/client/Interactions/interactCombat_defines.sqf#L79)
 # interactEmoteMenu.sqf
 
 ## INTERACT_EMOTE_SIZE_H
@@ -1438,7 +1451,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 197](../../../Src/client/Interactions/interactEmoteMenu.sqf#L197)
+File: [client\Interactions\interactEmoteMenu.sqf at line 198](../../../Src/client/Interactions/interactEmoteMenu.sqf#L198)
 ## interactEmote_cleanupInputText
 
 Type: function
@@ -1446,7 +1459,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 271](../../../Src/client/Interactions/interactEmoteMenu.sqf#L271)
+File: [client\Interactions\interactEmoteMenu.sqf at line 272](../../../Src/client/Interactions/interactEmoteMenu.sqf#L272)
 ## interactEmote_getInputTextParams
 
 Type: function
@@ -1454,7 +1467,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 278](../../../Src/client/Interactions/interactEmoteMenu.sqf#L278)
+File: [client\Interactions\interactEmoteMenu.sqf at line 279](../../../Src/client/Interactions/interactEmoteMenu.sqf#L279)
 ## interactEmote_handleInputText
 
 Type: function
@@ -1462,7 +1475,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 285](../../../Src/client/Interactions/interactEmoteMenu.sqf#L285)
+File: [client\Interactions\interactEmoteMenu.sqf at line 286](../../../Src/client/Interactions/interactEmoteMenu.sqf#L286)
 ## interactEmote_onSendEmote
 
 Type: function
@@ -1470,7 +1483,7 @@ Type: function
 Description: 
 - Param: _text
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 334](../../../Src/client/Interactions/interactEmoteMenu.sqf#L334)
+File: [client\Interactions\interactEmoteMenu.sqf at line 335](../../../Src/client/Interactions/interactEmoteMenu.sqf#L335)
 ## interactEmote_onMouseMoving
 
 Type: function
@@ -1478,7 +1491,7 @@ Type: function
 Description: 
 - Param: _display
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 350](../../../Src/client/Interactions/interactEmoteMenu.sqf#L350)
+File: [client\Interactions\interactEmoteMenu.sqf at line 351](../../../Src/client/Interactions/interactEmoteMenu.sqf#L351)
 ## interactEmote_switchActionMenu
 
 Type: function
@@ -1487,7 +1500,7 @@ Description:
 - Param: _mode
 - Param: _isSetMode (optional, default false)
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 375](../../../Src/client/Interactions/interactEmoteMenu.sqf#L375)
+File: [client\Interactions\interactEmoteMenu.sqf at line 376](../../../Src/client/Interactions/interactEmoteMenu.sqf#L376)
 ## interactEmote_loadActions
 
 Type: function
@@ -1495,7 +1508,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 396](../../../Src/client/Interactions/interactEmoteMenu.sqf#L396)
+File: [client\Interactions\interactEmoteMenu.sqf at line 397](../../../Src/client/Interactions/interactEmoteMenu.sqf#L397)
 ## interactEmote_doEmoteAction
 
 Type: function
@@ -1503,7 +1516,7 @@ Type: function
 Description: 
 - Param: _act
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 478](../../../Src/client/Interactions/interactEmoteMenu.sqf#L478)
+File: [client\Interactions\interactEmoteMenu.sqf at line 483](../../../Src/client/Interactions/interactEmoteMenu.sqf#L483)
 ## interactEmote_unloadActions
 
 Type: function
@@ -1511,7 +1524,7 @@ Type: function
 Description: 
 - Param: _acts
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 502](../../../Src/client/Interactions/interactEmoteMenu.sqf#L502)
+File: [client\Interactions\interactEmoteMenu.sqf at line 507](../../../Src/client/Interactions/interactEmoteMenu.sqf#L507)
 ## interactEmote_RpcLoadEmotes
 
 Type: function
@@ -1519,7 +1532,7 @@ Type: function
 Description: 
 
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 507](../../../Src/client/Interactions/interactEmoteMenu.sqf#L507)
+File: [client\Interactions\interactEmoteMenu.sqf at line 512](../../../Src/client/Interactions/interactEmoteMenu.sqf#L512)
 ## interactEmote_RpcUpdateCateg
 
 Type: function
@@ -1528,7 +1541,7 @@ Description:
 - Param: _cat
 - Param: _list
 
-File: [client\Interactions\interactEmoteMenu.sqf at line 516](../../../Src/client/Interactions/interactEmoteMenu.sqf#L516)
+File: [client\Interactions\interactEmoteMenu.sqf at line 521](../../../Src/client/Interactions/interactEmoteMenu.sqf#L521)
 # interactMenu.hpp
 
 ## SIZE_HITPART_ZONE

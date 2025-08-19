@@ -83,7 +83,7 @@ Count modules: 57
  - [ServerRpc](host//ServerRpc.md) - 2 files
  - [ServerSceneTest](host//ServerSceneTest.md) - 2 files
  - [ServerVoice](host//ServerVoice.md) - 1 files
- - [Singleplayer](host//Singleplayer.md) - 14 files
+ - [Singleplayer](host//Singleplayer.md) - 15 files
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
  - [Structs](host//Structs.md) - 2 files

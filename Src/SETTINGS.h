@@ -108,6 +108,10 @@
 	#undef USE_LOCAL_PATHES
 #endif
 
+//in RBUILDER mode force disable local pathes
+#ifdef RBUILDER
+	#undef USE_LOCAL_PATHES
+#endif
 
 //Пути до разных сегментов
 #ifdef USE_LOCAL_PATHES
