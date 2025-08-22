@@ -104,6 +104,9 @@ sp_gc_internal_listTriggersZones = [];
 sp_gc_internal_activeTriggers = createhashMap; //key name, value gameobject
 
 sp_initMainModule = {
+	//fix error trigger activate on prestart game
+	player setposatl [0,0,0];
+
 	//fix for ghost enter
 	startAsyncInvoke
 	{
