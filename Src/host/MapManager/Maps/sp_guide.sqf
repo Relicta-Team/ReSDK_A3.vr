@@ -2905,7 +2905,7 @@ _4151_966803834_4272518_81273 = ['SignMedical',[4151.97,3834.43,24.0873,true],18
 ['BrickThinWallWindow',[4147.53,3833.84,16.745],270.751,[0,0,1]] call InitStruct; 
 ['OfficeCabinet',[4145.07,3834.11,17.0479],357.374,[0,0,1]] call InitStruct; 
 ['PaperHolder',[4145.73,3832.64,17.7427],30.6954,[0,0,1]] call InitItem; 
-_4147_740723833_4936517_75491 = ['Paper',[4147.74,3833.49,17.7549],18.173,[0,0,1], {_thisObj setvariable ['preinit@__content',"В связи с большим количество пациентов в этой смене прием окончен.
+_4147_740723833_4936517_75491 = ['Paper',[4147.74,3833.49,17.7549],18.173,[0,0,1], {_thisObj setvariable ['preinit@__content',"В связи с большим количеством пациентов в этой смене прием окончен.
 Приходите в следующую смену."]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
 _4147_431643833_6440417_65846 = ['ShortRottenBoards',[4147.43,3833.64,17.6585],0,[0,0,1]] call InitStruct; 
 ['Candle',[4145.7,3832.3,17.7427],0,[0,0,1]] call InitItem; 

@@ -2334,7 +2334,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1085](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1085)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1088](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1088)
 ## begin_enterrun2_act
 
 Type: Variable
@@ -2346,7 +2346,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1127](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1127)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1130](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1130)
 ## begin_run3_act
 
 Type: Variable
@@ -2358,7 +2358,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1212](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1212)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1215](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1215)
 ## begin_run3_dialogHandle
 
 Type: Variable
@@ -2370,7 +2370,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1213](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1213)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1216](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1216)
 ## begin_enterrun4
 
 Type: Variable
@@ -2382,7 +2382,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1226](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1226)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1229](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1229)
 ## begin_run4_processenemy
 
 Type: Variable
@@ -2394,7 +2394,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1227](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1227)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1230](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1230)
 ## begin_internal_list_cutscene1
 
 Type: Variable
@@ -2406,7 +2406,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1278](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1278)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1281](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1281)
 ## begin_run4enterercutscene_act
 
 Type: Variable
@@ -2418,7 +2418,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1279](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1279)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1282](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1282)
 ## begin_act_readyToDown
 
 Type: Variable
@@ -2430,7 +2430,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1280](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1280)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1283](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1283)
 ## begin_internal_collisionObjects
 
 Type: Variable
@@ -2442,7 +2442,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1356](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1356)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1359](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1359)
 ## begin_run5_act
 
 Type: Variable
@@ -2454,7 +2454,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1374](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1374)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1377](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1377)
 ## begin_playerInVent
 
 Type: Variable
@@ -2466,7 +2466,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1375](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1375)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1378](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1378)
 ## begin_cutscene1_act
 
 Type: Variable
@@ -2478,7 +2478,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1409](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1409)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1412](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1412)
 ## begin_run6_act
 
 Type: Variable
@@ -2490,7 +2490,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1454](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1454)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1457](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1457)
 ## begin_tokeeper3_act
 
 Type: Variable
@@ -2502,7 +2502,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1485](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1485)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1488](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1488)
 ## begin_internal_data_keeper3readytoNextDialog
 
 Type: Variable
@@ -2514,7 +2514,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1486](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1486)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1489](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1489)
 ## begin_data_behinddoorEnd
 
 Type: Variable
@@ -2526,7 +2526,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1625](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1625)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1628](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1628)
 ## begin_cutscene2_act
 
 Type: Variable
@@ -2538,7 +2538,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1637](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1637)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1640](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1640)
 ## begin_prechase_act
 
 Type: Variable
@@ -2550,7 +2550,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1658](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1658)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1661](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1661)
 ## begin_chase_act
 
 Type: Variable
@@ -2562,7 +2562,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1685](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1685)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1688](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1688)
 ## begin_chaseend_act
 
 Type: Variable
@@ -2574,7 +2574,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1743](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1743)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1746](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1746)
 ## begin_finalizer_act
 
 Type: Variable
@@ -2586,7 +2586,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1786](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1786)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1789](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1789)
 ## begin_func_startTalkerAnimations
 
 Type: function
@@ -2603,7 +2603,7 @@ Description:
 - Param: _mode
 - Param: _dist (optional, default 10)
 
-File: [host\Singleplayer\Scenarios\begin.sqf at line 1357](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1357)
+File: [host\Singleplayer\Scenarios\begin.sqf at line 1360](../../../Src/host/Singleplayer/Scenarios/begin.sqf#L1360)
 # begin_playerSetup.sqf
 
 ## begin_playerSetup_listCamPos

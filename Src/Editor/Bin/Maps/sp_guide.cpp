@@ -50086,7 +50086,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Уведомление""],[""preinit@__content"",""В связи с большим количество пациентов в этой смене прием окончен." \n "Приходите в следующую смену.""]]],[""class"",""Paper""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Уведомление""],[""preinit@__content"",""В связи с большим количеством пациентов в этой смене прием окончен." \n "Приходите в следующую смену.""]]],[""class"",""Paper""]]}";
 			};
 			id=6213;
 			type="Leaflet_05_Old_F";
