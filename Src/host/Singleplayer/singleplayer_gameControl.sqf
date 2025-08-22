@@ -125,7 +125,7 @@ sp_gc_onPlayerAssigned = {
 
 	#else
 	//["begin_prestart"] call sp_startScene;
-	["begin_prestart"] call sp_startScene;
+	["begin_playerSetup"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
 	#endif
 };
