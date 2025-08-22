@@ -524,13 +524,8 @@ sp_copyPlayerInventoryTo = {
 			};
 		};
 	} foreach INV_LIST_ALL;
-	setVar(_target,face,getVar(_player,face));
-	private _p = {
-		params ["_body","_face"];
-		_body setFace _face;
-	};
-	_a = [getVar(_target,owner),getVar(call sp_getActor,face)];
-	invokeAfterDelayParams(_p,0.5,_a);
+
+	callFuncParams(_target,setMobFace,callFunc(_player,getMobFace));
 };
 
 //sprint control

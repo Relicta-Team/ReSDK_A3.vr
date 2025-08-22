@@ -1472,6 +1472,7 @@ cpt4_trg_gotomed_act = false;
 				["uniform",cpt4_playerUniform]
 			],{
 				callFuncParams("cpt4_obj_medtobarchair" call sp_getObject,seatConnect,_this);
+				callFuncParams(_this,setMobFace,callFunc(call sp_getActor,getMobFace));
 			},{
 				invokeAfterDelay({("player_cutscene" call sp_ai_getMobBody) switchmove "re_HubSittingChairC_idle1"},0.1);
 			}] call sp_ai_createPersonEx;
