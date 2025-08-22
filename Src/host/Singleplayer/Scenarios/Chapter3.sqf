@@ -176,6 +176,8 @@ cpt3_trg_enterdarkzone_act = false;
 		if !(["cpt4_data_foundlockpickdoor",false] call sp_storageGet) then {
 			[false,_h] call sp_setNotificationVisible;
 			[true] call sp_setHideTaskMessageCtg;
+		} else {
+			["На подступе","Взломайте замок двери"] call sp_setTaskMessageEff;
 		};
 
 	} call sp_threadStart;
@@ -207,13 +209,15 @@ cpt3_trg_enterdarkzone_act = false;
 	["cpt4_data_foundlockpickdoor",true] call sp_storageSet;
 
 	{
-		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg false)) then {
+		if (!callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg true)) then {
 			["На подступе","Найдите способ открыть дверь"] call sp_setTaskMessageEff;
 		};
 		1 call sp_threadPause;
 		{
-			callFuncParams(call sp_getActor,hasItem,"Lockpick" arg true arg false)
+			["found_lockpick",false] call sp_storageGet
+			&& callFuncParams(call sp_getActor,getDistanceTo,"cpt3_obj_lockeddoor" call sp_getObject) <= 2.4
 		} call sp_threadWait;
+		
 		["На подступе","Взломайте замок двери"] call sp_setTaskMessageEff;
 
 		["Для #(взлома) двери нажмите ЛКМ по двери держа в руке #(отмычку). Если у вас есть соответствующие навыки - вы сможете взломать замок."] call sp_setNotification;
