@@ -1204,7 +1204,7 @@ Type: function
 Description: sprint control
 - Param: _mode
 
-File: [host\Singleplayer\singleplayer_gameControl.sqf at line 537](../../../Src/host/Singleplayer/singleplayer_gameControl.sqf#L537)
+File: [host\Singleplayer\singleplayer_gameControl.sqf at line 532](../../../Src/host/Singleplayer/singleplayer_gameControl.sqf#L532)
 # singleplayer_init.sqf
 
 ## sp_storage
@@ -1398,7 +1398,7 @@ Initial value:
 ```sqf
 threadNull
 ```
-File: [host\Singleplayer\singleplayer_init.sqf at line 218](../../../Src/host/Singleplayer/singleplayer_init.sqf#L218)
+File: [host\Singleplayer\singleplayer_init.sqf at line 221](../../../Src/host/Singleplayer/singleplayer_init.sqf#L221)
 ## sp_internal_threads
 
 Type: Variable
@@ -1410,7 +1410,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Singleplayer\singleplayer_init.sqf at line 227](../../../Src/host/Singleplayer/singleplayer_init.sqf#L227)
+File: [host\Singleplayer\singleplayer_init.sqf at line 230](../../../Src/host/Singleplayer/singleplayer_init.sqf#L230)
 ## sp_storageGet
 
 Type: function
@@ -1462,7 +1462,7 @@ Type: function
 Description: 
 - Param: _searchName
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 173](../../../Src/host/Singleplayer/singleplayer_init.sqf#L173)
+File: [host\Singleplayer\singleplayer_init.sqf at line 176](../../../Src/host/Singleplayer/singleplayer_init.sqf#L176)
 ## sp_getActor
 
 Type: function
@@ -1470,7 +1470,7 @@ Type: function
 Description: get actor
 
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 187](../../../Src/host/Singleplayer/singleplayer_init.sqf#L187)
+File: [host\Singleplayer\singleplayer_init.sqf at line 190](../../../Src/host/Singleplayer/singleplayer_init.sqf#L190)
 ## sp_createTrigger
 
 Type: function
@@ -1478,7 +1478,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 198](../../../Src/host/Singleplayer/singleplayer_init.sqf#L198)
+File: [host\Singleplayer\singleplayer_init.sqf at line 201](../../../Src/host/Singleplayer/singleplayer_init.sqf#L201)
 ## sp_threadStart
 
 Type: function
@@ -1487,7 +1487,7 @@ Description:
 - Param: _thdCode
 - Param: _args (optional, default [])
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 229](../../../Src/host/Singleplayer/singleplayer_init.sqf#L229)
+File: [host\Singleplayer\singleplayer_init.sqf at line 232](../../../Src/host/Singleplayer/singleplayer_init.sqf#L232)
 ## sp_threadStop
 
 Type: function
@@ -1495,7 +1495,7 @@ Type: function
 Description: 
 - Param: _thd
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 239](../../../Src/host/Singleplayer/singleplayer_init.sqf#L239)
+File: [host\Singleplayer\singleplayer_init.sqf at line 242](../../../Src/host/Singleplayer/singleplayer_init.sqf#L242)
 ## sp_threadStopAll
 
 Type: function
@@ -1503,7 +1503,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 245](../../../Src/host/Singleplayer/singleplayer_init.sqf#L245)
+File: [host\Singleplayer\singleplayer_init.sqf at line 248](../../../Src/host/Singleplayer/singleplayer_init.sqf#L248)
 ## sp_threadCriticalSection
 
 Type: function
@@ -1511,7 +1511,7 @@ Type: function
 Description: 
 - Param: _code
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 254](../../../Src/host/Singleplayer/singleplayer_init.sqf#L254)
+File: [host\Singleplayer\singleplayer_init.sqf at line 257](../../../Src/host/Singleplayer/singleplayer_init.sqf#L257)
 ## sp_threadPause
 
 Type: function
@@ -1519,7 +1519,7 @@ Type: function
 Description: 
 - Param: _time
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 259](../../../Src/host/Singleplayer/singleplayer_init.sqf#L259)
+File: [host\Singleplayer\singleplayer_init.sqf at line 262](../../../Src/host/Singleplayer/singleplayer_init.sqf#L262)
 ## sp_threadWait
 
 Type: function
@@ -1527,7 +1527,7 @@ Type: function
 Description: called only when result is true
 
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 266](../../../Src/host/Singleplayer/singleplayer_init.sqf#L266)
+File: [host\Singleplayer\singleplayer_init.sqf at line 269](../../../Src/host/Singleplayer/singleplayer_init.sqf#L269)
 ## sp_threadWaitForEnd
 
 Type: function
@@ -1535,7 +1535,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\singleplayer_init.sqf at line 270](../../../Src/host/Singleplayer/singleplayer_init.sqf#L270)
+File: [host\Singleplayer\singleplayer_init.sqf at line 273](../../../Src/host/Singleplayer/singleplayer_init.sqf#L273)
 # singleplayer_scenarioFramework.sqf
 
 ## sp_map_scenario
@@ -3077,7 +3077,7 @@ Type: function
 Description: eater stealth handler
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 626](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L626)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 630](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L630)
 ## cpt3_data_doorSeeDialogPerformed
 
 Type: Variable
@@ -3089,7 +3089,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 701](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L701)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 705](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L705)
 ## cpt4_func_isEaterAlive
 
 Type: function
@@ -3097,7 +3097,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 591](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L591)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 595](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L595)
 ## cpt4_func_eaterAttack
 
 Type: function
@@ -3105,7 +3105,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 595](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L595)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 599](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L599)
 ## cpt3_func_damageEvent
 
 Type: function
@@ -3113,7 +3113,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 856](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L856)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 860](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L860)
 # Chapter4.sqf
 
 ## cpt4_questName_begin
@@ -3295,7 +3295,7 @@ Initial value:
 ```sqf
 ["item_action","main_action","open_inventory"]
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1570](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1570)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1571](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1571)
 ## cpt4_trg_barstartmusic_act
 
 Type: Variable
@@ -3307,7 +3307,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1821](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1821)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1822](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1822)
 ## cpt4_bar_musicProc
 
 Type: Variable
@@ -3319,7 +3319,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1857](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1857)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1858](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1858)
 ## cpt4_bar_musicUpdateReq
 
 Type: Variable
@@ -3331,7 +3331,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1858](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1858)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1859](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1859)
 ## cpt4_bar_musicHandle
 
 Type: Variable
@@ -3343,7 +3343,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1862](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1862)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1863](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1863)
 ## cpt4_bar_curMusicPlayed
 
 Type: Variable
@@ -3355,7 +3355,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1870](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1870)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1871](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1871)
 ## cpt4_bar_curMusicStartTime
 
 Type: Variable
@@ -3367,7 +3367,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1871](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1871)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1872](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1872)
 ## cpt4_bar_curMusicDist
 
 Type: Variable
@@ -3379,7 +3379,7 @@ Initial value:
 ```sqf
 10
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1872](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1872)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1873](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1873)
 ## cpt4_bar_curMusicName
 
 Type: Variable
@@ -3391,7 +3391,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1873](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1873)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1874](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1874)
 ## cpt4_internal_brodyagaDrink_threadHandle
 
 Type: Variable
@@ -3403,7 +3403,7 @@ Initial value:
 ```sqf
 sp_threadNull
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2226](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2226)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2227](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2227)
 ## cpt4_addProcessorMainAct
 
 Type: function
@@ -3446,7 +3446,7 @@ Type: function
 Description: 
 - Param: _lock
 
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1571](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1571)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1572](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1572)
 ## cpt4_func_alcoDrinkProcess_forthread
 
 Type: function
@@ -3454,7 +3454,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2001](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2001)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2002](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2002)
 # Chapter5.sqf
 
 ## cpt5_debug_skipStart
