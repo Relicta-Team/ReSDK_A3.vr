@@ -703,11 +703,11 @@ cpt1_act_addMapViewHandler = {
 		
 		call cpt1_act_addMapViewHandler;
 
-		_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
-		5 call sp_threadPause;
-		[false,_h] call sp_setNotificationVisible;
+		2 call sp_threadPause;
+		
 		{
-			2 call sp_threadPause;
+			_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
+			10 call sp_threadPause;
 			_h = ["В вашей #(одежде) можно хранить предметы. Попробуйте перетащить #(карту) из руки в одежду. Чтобы посмотреть содержимое карманов - наведите мышку на одежду и нажмите $input_act_mainAction по ней."] call sp_setNotification;
 			{
 				count getVar(callFuncParams(call sp_getActor,getItemInSlotRedirect,INV_CLOTH),content) > 0
