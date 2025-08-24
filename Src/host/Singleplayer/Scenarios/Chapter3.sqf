@@ -9,6 +9,7 @@ cpt3_hudvis_eaterzone = cpt3_hudvis_default + "+left";
 cpt3_hudvis_eatercombat = cpt3_hudvis_eaterzone + "+up";
 ["cpt3_begin",{
 	call sp_initializeDefaultPlayerHandlers;
+	[call sp_getActor] call sp_loadCharacterData;
     [true,0] call setBlackScreenGUI;
 
 	if isNullReference(callFuncParams(call sp_getActor,getItemInSlot,INV_CLOTH)) then {

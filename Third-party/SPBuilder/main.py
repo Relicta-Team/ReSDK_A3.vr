@@ -2,10 +2,12 @@
 import os
 import shutil
 import tools
+import re
 
 TEMP_FOLDER = os.path.join(os.path.dirname(__file__), 'build')
 SDK_ROOT = os.path.join(os.path.dirname(__file__),'..','..')
-SDK_FOLDER = os.path.join(SDK_ROOT, 'Src')
+
+SDK_FOLDER = os.path.join(SDK_ROOT, 'Src') # src folder path
 EXCLUDED_PATHES=[
 	"private.h",
 	"CHANGELOGS.txt",
@@ -28,6 +30,21 @@ if os.path.exists(TEMP_FOLDER):
 	shutil.rmtree(TEMP_FOLDER)
 
 sources = os.path.join(TEMP_FOLDER, "singleplayer.vr","Src")
+
+#prevalidate settings.h
+settings_path = os.path.join(SDK_FOLDER, "SETTINGS.h")
+if not os.path.exists(settings_path):
+	print("SETTINGS.h not found in ", settings_path)
+	exit()
+with open(settings_path, "r",encoding="utf-8") as file:
+	settings_content = "\n".join(file.readlines())
+	if not re.search(r"^\s*#define\s+SP_MODE", settings_content, re.MULTILINE):
+		print("SP_MODE not found or not defined in SETTINGS.h")
+		exit()
+	if not re.search(r"^\s*#define\s+SP_PROD", settings_content, re.MULTILINE):
+		print("SP_PROD not found or not defined in SETTINGS.h")
+		exit()
+
 tools.copy_directory_excluding(SDK_FOLDER, sources, exclude=EXCLUDED_PATHES)
 
 # replacing config.cpp
