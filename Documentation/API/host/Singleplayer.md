@@ -1683,6 +1683,23 @@ Description:
 - Param: _chapId
 
 File: [host\Singleplayer\singleplayer_scenarioFramework.sqf at line 129](../../../Src/host/Singleplayer/singleplayer_scenarioFramework.sqf#L129)
+## sp_saveCharacterData
+
+Type: function
+
+Description: 
+- Param: _t (optional, default call sp_getActor)
+- Param: _data (optional, default null)
+
+File: [host\Singleplayer\singleplayer_scenarioFramework.sqf at line 158](../../../Src/host/Singleplayer/singleplayer_scenarioFramework.sqf#L158)
+## sp_loadCharacterData
+
+Type: function
+
+Description: 
+- Param: _t (optional, default call sp_getActor)
+
+File: [host\Singleplayer\singleplayer_scenarioFramework.sqf at line 173](../../../Src/host/Singleplayer/singleplayer_scenarioFramework.sqf#L173)
 # singleplayer_view.sqf
 
 ## sp_gui_taskWidgets
@@ -2829,7 +2846,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 681](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L681)
+File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 727](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L727)
 ## cpt1_act_openMap
 
 Type: function
@@ -2837,7 +2854,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 525](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L525)
+File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 563](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L563)
 ## cpt1_act_addMapViewHandler
 
 Type: function
@@ -2845,7 +2862,7 @@ Type: function
 Description: 
 - Param: _t
 
-File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 565](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L565)
+File: [host\Singleplayer\Scenarios\Chapter1.sqf at line 603](../../../Src/host/Singleplayer/Scenarios/Chapter1.sqf#L603)
 # Chapter2.sqf
 
 ## cpt2_craftDuration
@@ -2955,7 +2972,7 @@ Initial value:
 ```sqf
 "Достаньте упаковку #(обезболивающего) из вашего инвентаря."
 ```
-File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 665](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L665)
+File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 666](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L666)
 ## cpt2_data_bandageRefList
 
 Type: Variable
@@ -2967,7 +2984,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 804](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L804)
+File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 805](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L805)
 ## cpt2_trg_preend_act
 
 Type: Variable
@@ -2979,7 +2996,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 1049](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L1049)
+File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 1050](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L1050)
 ## cpt2_fnc_clickself_ItemCheck
 
 Type: function
@@ -3019,7 +3036,7 @@ Type: function
 Description: restore methods
 
 
-File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 985](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L985)
+File: [host\Singleplayer\Scenarios\Chapter2.sqf at line 986](../../../Src/host/Singleplayer/Scenarios/Chapter2.sqf#L986)
 # Chapter3.sqf
 
 ## cpt3_hudvis_default
@@ -3069,7 +3086,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 124](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L124)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 125](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L125)
 ## cpt4_data_eaterHandleLife
 
 Type: function
@@ -3077,7 +3094,7 @@ Type: function
 Description: eater stealth handler
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 630](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L630)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 631](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L631)
 ## cpt3_data_doorSeeDialogPerformed
 
 Type: Variable
@@ -3089,7 +3106,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 705](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L705)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 706](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L706)
 ## cpt4_func_isEaterAlive
 
 Type: function
@@ -3097,7 +3114,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 595](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L595)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 596](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L596)
 ## cpt4_func_eaterAttack
 
 Type: function
@@ -3105,7 +3122,7 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 599](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L599)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 600](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L600)
 ## cpt3_func_damageEvent
 
 Type: function
@@ -3113,7 +3130,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 860](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L860)
+File: [host\Singleplayer\Scenarios\Chapter3.sqf at line 861](../../../Src/host/Singleplayer/Scenarios/Chapter3.sqf#L861)
 # Chapter4.sqf
 
 ## cpt4_questName_begin
@@ -3259,7 +3276,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 617](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L617)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 618](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L618)
 ## cpt4_data_refLastTakenDoc
 
 Type: Variable
@@ -3271,7 +3288,7 @@ Initial value:
 ```sqf
 nullPtr
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 618](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L618)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 619](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L619)
 ## cpt4_trg_gotomed_act
 
 Type: Variable
@@ -3283,7 +3300,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1410](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1410)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1411](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1411)
 ## cpt4_data_playerHandlerNamesOnCutscene
 
 Type: Variable
@@ -3295,7 +3312,7 @@ Initial value:
 ```sqf
 ["item_action","main_action","open_inventory"]
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1571](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1571)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1572](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1572)
 ## cpt4_trg_barstartmusic_act
 
 Type: Variable
@@ -3307,7 +3324,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1822](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1822)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1823](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1823)
 ## cpt4_bar_musicProc
 
 Type: Variable
@@ -3319,7 +3336,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1858](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1858)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1859](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1859)
 ## cpt4_bar_musicUpdateReq
 
 Type: Variable
@@ -3331,7 +3348,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1859](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1859)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1860](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1860)
 ## cpt4_bar_musicHandle
 
 Type: Variable
@@ -3343,7 +3360,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1863](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1863)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1864](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1864)
 ## cpt4_bar_curMusicPlayed
 
 Type: Variable
@@ -3355,7 +3372,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1871](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1871)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1872](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1872)
 ## cpt4_bar_curMusicStartTime
 
 Type: Variable
@@ -3367,7 +3384,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1872](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1872)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1873](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1873)
 ## cpt4_bar_curMusicDist
 
 Type: Variable
@@ -3379,7 +3396,7 @@ Initial value:
 ```sqf
 10
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1873](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1873)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1874](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1874)
 ## cpt4_bar_curMusicName
 
 Type: Variable
@@ -3391,7 +3408,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1874](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1874)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1875](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1875)
 ## cpt4_internal_brodyagaDrink_threadHandle
 
 Type: Variable
@@ -3403,7 +3420,7 @@ Initial value:
 ```sqf
 sp_threadNull
 ```
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2227](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2227)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2228](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2228)
 ## cpt4_addProcessorMainAct
 
 Type: function
@@ -3446,7 +3463,7 @@ Type: function
 Description: 
 - Param: _lock
 
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1572](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1572)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 1573](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L1573)
 ## cpt4_func_alcoDrinkProcess_forthread
 
 Type: function
@@ -3454,7 +3471,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2002](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2002)
+File: [host\Singleplayer\Scenarios\Chapter4.sqf at line 2003](../../../Src/host/Singleplayer/Scenarios/Chapter4.sqf#L2003)
 # Chapter5.sqf
 
 ## cpt5_debug_skipStart
@@ -3540,7 +3557,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 528](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L528)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 529](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L529)
 ## cpt5_act_lekartalks
 
 Type: Variable
@@ -3552,7 +3569,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 549](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L549)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 550](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L550)
 ## cpt5_act_undergroundmover
 
 Type: Variable
@@ -3564,7 +3581,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 572](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L572)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 573](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L573)
 ## cpt5_act_kapitanunderground
 
 Type: Variable
@@ -3576,7 +3593,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 584](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L584)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 585](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L585)
 ## cpt5_act_kapitanreadytoup
 
 Type: Variable
@@ -3588,7 +3605,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 585](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L585)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 586](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L586)
 ## cpt5_data_kapitan_startQuest_loadweapon
 
 Type: Variable
@@ -3600,7 +3617,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 586](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L586)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 587](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L587)
 ## cpt5_internal_handleUpdateFire
 
 Type: Variable
@@ -3612,7 +3629,7 @@ Initial value:
 ```sqf
 startUpdate(interact_th__clith,0) //start fire update
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 822](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L822)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 823](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L823)
 ## cpt5_internal_warzoneGrenades
 
 Type: Variable
@@ -3624,7 +3641,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 824](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L824)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 825](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L825)
 ## cpt5_trg_combat_enterstrelok_act
 
 Type: Variable
@@ -3636,7 +3653,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 826](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L826)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 827](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L827)
 ## cpt5_data_first_shootingTimeCanReset
 
 Type: Variable
@@ -3648,7 +3665,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 870](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L870)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 871](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L871)
 ## cpt5_trg_combat_stage1_act
 
 Type: Variable
@@ -3660,7 +3677,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 871](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L871)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 872](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L872)
 ## cpt5_trg_enterwarzone_entered
 
 Type: Variable
@@ -3672,7 +3689,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1099](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1099)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1100](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1100)
 ## cpt5_warzone_danger
 
 Type: Variable
@@ -3684,7 +3701,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1121](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1121)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1122](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1122)
 ## cpt5_trg_savewoundedstart_act
 
 Type: Variable
@@ -3696,7 +3713,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1182](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1182)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1183](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1183)
 ## cpt5_trg_woundedmansave_act
 
 Type: Variable
@@ -3708,7 +3725,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1229](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1229)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1230](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1230)
 ## cpt5_act_shotingStarted
 
 Type: Variable
@@ -3720,7 +3737,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1293](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1293)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1294](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1294)
 ## cpt5_trg_dialog_onseegate
 
 Type: Variable
@@ -3732,7 +3749,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1354](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1354)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1355](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1355)
 ## cpt5_trg_iztdefkilldanger_process
 
 Type: Variable
@@ -3744,7 +3761,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1533](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1533)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1534](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1534)
 ## cpt5_trg_closecombat_enterhouse_act
 
 Type: Variable
@@ -3756,7 +3773,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1569](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1569)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1570](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1570)
 ## cpt5_act_closecombat_started
 
 Type: Variable
@@ -3768,7 +3785,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1578](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1578)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1579](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1579)
 ## cpt5_data_closecombat_izt_dx
 
 Type: Variable
@@ -3780,7 +3797,7 @@ Initial value:
 ```sqf
 30
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1605](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1605)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1606](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1606)
 ## cpt5_internal_data_list_cacheRestoreInject
 
 Type: Variable
@@ -3792,7 +3809,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1622](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1622)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1623](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1623)
 ## cpt5_internal_data_closecombat_shoothandler
 
 Type: Variable
@@ -3804,7 +3821,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1623](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1623)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1624](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1624)
 ## cpt5_internal_data_ctr_canDamage
 
 Type: Variable
@@ -3816,7 +3833,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1700](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1700)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1701](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1701)
 ## cpt5_data_lastbattle
 
 Type: Variable
@@ -3828,7 +3845,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1932](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1932)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1933](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1933)
 ## cpt5end_trg_ghostenterdoor_act
 
 Type: Variable
@@ -3840,7 +3857,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2125](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2125)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2126](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2126)
 ## cpt5_endtitle_text
 
 Type: Variable
@@ -3852,7 +3869,7 @@ Initial value:
 ```sqf
 "Дату следующего запуска вы можете узнать в дискорде " + (["https://discord.relicta.ru"] call cpt5_func_createRef)
 ```
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2165](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2165)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2166](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2166)
 ## cpt5_act_doShot
 
 Type: function
@@ -3861,7 +3878,7 @@ Description:
 - Param: _mob
 - Param: _targetPos
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 731](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L731)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 732](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L732)
 ## cpt5_getLookAt
 
 Type: function
@@ -3871,7 +3888,7 @@ Description:
 - Param: _end (optional, default ['0.0', '0.0', '0.0'])
 - Param: _default (optional, default [['0.0', '0.0', '0.0'], ['0.0', '0.0', '0.0']])
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 778](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L778)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 779](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L779)
 ## cpt5_explosionGrenade
 
 Type: function
@@ -3879,7 +3896,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 790](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L790)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 791](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L791)
 ## cpt5_getVisMode
 
 Type: function
@@ -3887,7 +3904,7 @@ Type: function
 Description: 
 - Param: _src
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 806](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L806)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 807](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L807)
 ## cpt5_debug_internal_fnc_testCloseCombat
 
 Type: function
@@ -3897,7 +3914,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1608](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1608)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1609](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1609)
 ## cpt5_internal_fnc_prepCloseCombatLogic
 
 Type: function
@@ -3905,7 +3922,7 @@ Type: function
 Description: 
 - Param: _t
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1624](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1624)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 1625](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L1625)
 ## cpt5_end_fnc_effOnDoor
 
 Type: function
@@ -3913,7 +3930,7 @@ Type: function
 Description: 
 
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2008](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2008)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2009](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2009)
 ## cpt5_func_createRef
 
 Type: function
@@ -3922,4 +3939,4 @@ Description:
 - Param: _txt
 - Param: _color (optional, default "#ffffff")
 
-File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2160](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2160)
+File: [host\Singleplayer\Scenarios\Chapter5.sqf at line 2161](../../../Src/host/Singleplayer/Scenarios/Chapter5.sqf#L2161)
