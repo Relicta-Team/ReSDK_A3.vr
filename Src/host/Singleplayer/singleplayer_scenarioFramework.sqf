@@ -154,3 +154,35 @@ sp_onChapterDone = {
 
 	} call sp_threadCriticalSection;
 };
+
+sp_saveCharacterData = {
+	params [["_t",call sp_getActor],["_data",null]];
+
+	if (isNullVar(_data)) then {
+		_data = [
+			callFunc(_t,getFirstName),
+			callFunc(_t,getLastName),
+			callFunc(_t,getFace)
+		];
+	};
+
+	profilenamespace setvariable ["rel_spchardata",_data];
+	saveProfileNamespace;
+};
+
+sp_loadCharacterData = {
+	params [["_t",call sp_getActor]];
+	private _data = profilenamespace getvariable ["rel_spchardata",[]];
+	
+	if not_equalTypes(_data,[]) exitWith {};
+	if (count _data != 3) exitWith {};
+
+	_data params ["_fn","_ln","_face"];
+	if (isNullVar(_fn) || isNullVar(_ln) || isNullVar(_face)) exitWith {};
+	if (not_equalTypes(_fn,"") || not_equalTypes(_ln,"") || not_equalTypes(_face,"")) exitWith {};
+
+	callFuncParams(_t,generateNaming,capitalize(_fn) arg capitalize(_ln));
+	if (_face call facesys_hasFace) then {
+		callFuncParams(_t,setMobFace,_face);
+	};
+};

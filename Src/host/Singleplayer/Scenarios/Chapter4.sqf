@@ -362,6 +362,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 
 	["cpt4_pos_start",0] call sp_setPlayerPos;
 	call sp_initializeDefaultPlayerHandlers;
+	[call sp_getActor] call sp_loadCharacterData;
 
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
 

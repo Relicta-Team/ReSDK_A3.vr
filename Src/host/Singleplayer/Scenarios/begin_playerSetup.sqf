@@ -334,6 +334,8 @@ begin_playerSetup_checkName = {
 		private _face = face (call begin_playerSetup_getCurMob);
 		callFuncParams(call sp_getActor,setMobFace,_face);
 
+		[call sp_getActor,[capitalize(_fn),capitalize(_ln),_face]] call sp_saveCharacterData;
+
 		nextFrame(displayClose);
 		call sp_cam_stopAllInterp;
 		[true,4] call setBlackScreenGUI;
