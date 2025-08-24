@@ -388,30 +388,32 @@ cpt1_playerUniform = "NomadCloth9";
 			};
 		}] call sp_addPlayerHandler;
 		["cpt1_looting_evt_clothHandler",
-			//disable cloth closer
-			["main_action",{
-				params ["_t"];
-				if (isTypeOf(_t,Cloth)) exitWith {
-					true
-				};
-				false
-			}] call sp_addPlayerHandler,
-			//disable torch transfer with interact
-			["interact_with",{
-        		params ["_item","_with"];
-				if (callFunc(_item,isContainer) && {isTypeOf(_with,Torch)}) exitWith {
-					true
-				};
-				false
-			}] call sp_addPlayerHandler,
-			//disable torch transfer with click
-			["click_target",{
-				params ["_t"];
-				if (callFunc(_t,isContainer) && isTypeOf(callFunc(call sp_getActor,getItemInActiveHandRedirect),Torch)) exitWith {
-					true
-				};
-				false
-			}] call sp_addPlayerHandler
+			[
+				//disable cloth closer
+				["main_action",{
+					params ["_t"];
+					if (isTypeOf(_t,Cloth)) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler,
+				//disable torch transfer with interact
+				["interact_with",{
+					params ["_item","_with"];
+					if (callFunc(_item,isContainer) && {isTypeOf(_with,Torch)}) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler,
+				//disable torch transfer with click
+				["click_target",{
+					params ["_t"];
+					if (callFunc(_t,isContainer) && isTypeOf(callFunc(call sp_getActor,getItemInActiveHandRedirect),Torch)) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler
+			]
 		] call sp_storageSet;
 
 	{
