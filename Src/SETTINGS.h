@@ -96,11 +96,9 @@
 #define SERVER_PASSWORD server_password
 
 #ifndef EDITOR
-	#ifdef SP_MODE
-		#define __FORCE_DISABLE_LOCAL_PATHES__
-		//по умолчанию в прод.сп скриптовый эскейп включен всегда
-		#undef DISABLE_SCRIPTED_ESCAPE_MENU
-	#endif
+	#define __FORCE_DISABLE_LOCAL_PATHES__
+	//по умолчанию в прод.сп скриптовый эскейп включен всегда
+	#undef DISABLE_SCRIPTED_ESCAPE_MENU
 #endif
 
 #ifdef __FORCE_DISABLE_LOCAL_PATHES__
