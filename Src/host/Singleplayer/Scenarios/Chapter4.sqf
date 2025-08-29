@@ -362,6 +362,7 @@ cpt4_internal_delegate_baseClothRemoveItem = {};
 
 	["cpt4_pos_start",0] call sp_setPlayerPos;
 	call sp_initializeDefaultPlayerHandlers;
+	[call sp_getActor] call sp_loadCharacterData;
 
 	[sp_const_list_stdPlayerHandlers,false] call sp_setLockPlayerHandler;
 
@@ -1472,6 +1473,7 @@ cpt4_trg_gotomed_act = false;
 				["uniform",cpt4_playerUniform]
 			],{
 				callFuncParams("cpt4_obj_medtobarchair" call sp_getObject,seatConnect,_this);
+				callFuncParams(_this,setMobFace,callFunc(call sp_getActor,getMobFace));
 			},{
 				invokeAfterDelay({("player_cutscene" call sp_ai_getMobBody) switchmove "re_HubSittingChairC_idle1"},0.1);
 			}] call sp_ai_createPersonEx;

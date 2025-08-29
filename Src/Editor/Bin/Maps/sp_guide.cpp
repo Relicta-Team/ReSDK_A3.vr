@@ -8,18 +8,18 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=11823;
+		nextID=11834;
 	};
 	class LayerIndexProvider
 	{
-		nextID=439;
+		nextID=448;
 	};
 	class Camera
 	{
-		pos[]={4127.0815,20.024918,4023.3694};
-		dir[]={0.57865292,-0.50895774,0.63727766};
-		up[]={0.34213847,0.8607915,0.37680134};
-		aside[]={0.74033916,0,-0.67223352};
+		pos[]={4130.2271,27.374321,3861.1829};
+		dir[]={0.089292541,-0.31912872,-0.94362885};
+		up[]={0.03007667,0.94761699,-0.31779751};
+		aside[]={-0.99564785,1.1882403e-06,-0.094219692};
 	};
 };
 binarizationWanted=0;
@@ -734,7 +734,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=7138;
+		items=7140;
 		class Item0
 		{
 			dataType="Group";
@@ -881,7 +881,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14.491868,5.039001,8100.1079};
+				position[]={14.499227,5.0390015,8100.1094};
 			};
 			side="Empty";
 			flags=4;
@@ -40672,7 +40672,7 @@ class Mission
 			};
 			id=5470;
 			type="Land_BridgeWooden_01_pillar_F";
-			atlOffset=8.4738884;
+			atlOffset=8.4731178;
 		};
 		class Item2250
 		{
@@ -125362,7 +125362,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3842.8638,9.5384617,3622.71};
-				angles[]={0.60143286,0.58590311,1.5676699};
+				angles[]={1.5663012,1.5589467,5.3231378};
 			};
 			side="Empty";
 			flags=4;
@@ -125521,7 +125521,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3843.4631,9.5495863,3622.9656};
-				angles[]={3.1416006,3.1416006,1.5305614};
+				angles[]={4.6717782,4.717905,6.1470108};
 			};
 			side="Empty";
 			class Attributes
@@ -125538,7 +125538,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3843.6816,9.5543804,3623.696};
-				angles[]={3.1416006,3.1416006,1.5305614};
+				angles[]={1.6323361,1.5242188,5.4252977};
 			};
 			side="Empty";
 			class Attributes
@@ -125555,7 +125555,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3842.4133,9.5373449,3622.4956};
-				angles[]={4.5155787,4.905098,4.9195805};
+				angles[]={4.6636968,4.6849627,0.5980438};
 			};
 			side="Empty";
 			class Attributes
@@ -125571,8 +125571,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3838.7798,9.5660515,3623.7957};
-				angles[]={3.1416008,7.8032863e-06,1.5305614};
+				position[]={3838.906,9.5248737,3623.7869};
+				angles[]={4.6627369,1.5416933,0.62588209};
 			};
 			side="Empty";
 			class Attributes
@@ -125581,25 +125581,24 @@ class Mission
 			};
 			id=11736;
 			type="izh43_sawedoff";
-			atlOffset=0.34074497;
+			atlOffset=0.31202793;
 		};
 		class Item7055
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3837.177,9.5772247,3623.6716};
-				angles[]={3.1416006,3.1416006,1.5305614};
+				position[]={3837.4097,9.5519562,3623.6052};
+				angles[]={1.611129,1.5736041,0.069635384};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SawedOff""]]}";
 			};
 			id=11737;
 			type="izh43_sawedoff";
-			atlOffset=9.5367432e-07;
+			atlOffset=0.16718292;
 		};
 		class Item7056
 		{
@@ -125640,17 +125639,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3844.8696,9.6098757,3622.3342};
-				angles[]={0,0,1.5644674};
+				position[]={3844.8696,9.5462589,3622.3342};
+				angles[]={4.7190938,4.714602,0.33635616};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""PistolPBM""]]}";
 			};
 			id=11740;
 			type="type94";
+			atlOffset=4.474844;
 		};
 		class Item7059
 		{
@@ -125692,7 +125691,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3843.4182,9.6098757,3622.5215};
-				angles[]={0,0,1.5644674};
+				angles[]={4.728889,4.6971512,5.1060643};
 			};
 			side="Empty";
 			flags=4;
@@ -125709,7 +125708,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3840.7588,9.5278311,3622.582};
-				angles[]={3.2247298,0,1.5644674};
+				angles[]={1.5782865,4.6252098,5.7134323};
 			};
 			side="Empty";
 			flags=4;
@@ -125727,7 +125726,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3841.0127,9.5432653,3622.3462};
-				angles[]={0,0,1.5644674};
+				angles[]={1.5627868,1.5757052,5.6234903};
 			};
 			side="Empty";
 			class Attributes
@@ -125847,7 +125846,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3843.9585,9.6072121,3624.0676};
-				angles[]={3.1415985,3.1415985,1.5342922};
+				angles[]={4.6664472,4.6844883,0.65233117};
 			};
 			side="Empty";
 			flags=4;
@@ -125864,7 +125863,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3843.7278,9.6072121,3622.5144};
-				angles[]={3.1415985,3.1415985,1.5342922};
+				angles[]={4.6643729,4.6811895,0.70691359};
 			};
 			side="Empty";
 			flags=4;
@@ -125880,17 +125879,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3842.2661,9.6072121,3623.7847};
+				position[]={3842.2661,9.543601,3623.7847};
 				angles[]={1.6091404,1.5590583,5.9722123};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Revolver""]]}";
 			};
 			id=11754;
 			type="nagan";
+			atlOffset=0.95679474;
 		};
 		class Item7073
 		{
@@ -126742,7 +126741,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3602.4346,21.789833,3995.7122};
-				angles[]={6.217576,5.2150369,-0};
+				angles[]={6.217576,5.2150369,0};
 			};
 			side="Empty";
 			flags=5;
@@ -126981,6 +126980,42 @@ class Mission
 			id=11822;
 			type="zvak";
 			atlOffset=11.335094;
+		};
+		class Item7138
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4163.7236,24.565008,3863.2827};
+				angles[]={0,4.7180614,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml\ml_object_new\model_24\opengate.p3d""]]],[""class"",""GateCity""]]}";
+			};
+			id=11831;
+			type="opengate";
+			atlOffset=15.954758;
+		};
+		class Item7139
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4164.3276,31.468361,3863.2742};
+				angles[]={3.141788,4.7255821,0.0087732645};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""a3\structures_f_exp\infrastructure\bridges\bridgewooden_01_pillar_f.p3d""]]],[""class"",""IStruct""]]}";
+			};
+			id=11833;
+			type="Land_BridgeWooden_01_pillar_F";
+			atlOffset=13.367416;
 		};
 	};
 };

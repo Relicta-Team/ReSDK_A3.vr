@@ -322,10 +322,11 @@ region(Getters and checkers)
 			};
 
 			if callFunc(_itmSlot,isContainer) then {
-				if (!_checkInContainers) exitWith {};
-				{
-					if (_x call _checkMethod) exitWith {_hasItem = true};
-				} foreach getVar(_itmSlot,content);
+				if (_checkInContainers) then {
+					{
+						if (_x call _checkMethod) exitWith {_hasItem = true};
+					} foreach getVar(_itmSlot,content);
+				};
 			};
 
 		} forEach INV_LIST_ALL;

@@ -17,6 +17,7 @@ cpt1_playerUniform = "NomadCloth9";
 
 	//enable input
 	call sp_initializeDefaultPlayerHandlers;
+	[call sp_getActor] call sp_loadCharacterData;
 
 	[null,null,{
 		params ["_t","_wid"];
@@ -386,6 +387,34 @@ cpt1_playerUniform = "NomadCloth9";
 				true
 			};
 		}] call sp_addPlayerHandler;
+		["cpt1_looting_evt_clothHandler",
+			[
+				//disable cloth closer
+				["main_action",{
+					params ["_t"];
+					if (isTypeOf(_t,Cloth)) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler,
+				//disable torch transfer with interact
+				["interact_with",{
+					params ["_item","_with"];
+					if (callFunc(_item,isContainer) && {isTypeOf(_with,Torch)}) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler,
+				//disable torch transfer with click
+				["click_target",{
+					params ["_t"];
+					if (callFunc(_t,isContainer) && isTypeOf(callFunc(call sp_getActor,getItemInActiveHandRedirect),Torch)) exitWith {
+						true
+					};
+					false
+				}] call sp_addPlayerHandler
+			]
+		] call sp_storageSet;
 
 	{
 		_lst = (["cpt1_loot_objlist",[]] call sp_storageGet);
@@ -408,13 +437,13 @@ cpt1_playerUniform = "NomadCloth9";
 			};
 		} call sp_threadCriticalSection;
 
-		["Чтобы посмотреть содержимое #(контейнеров) (ящиков, сумок или одежды) - нажмите $input_act_mainAction"] call sp_setNotification;
+		["Чтобы посмотреть содержимое #(контейнеров) в мире - нажмите $input_act_mainAction"] call sp_setNotification;
 
 		
 		while {true} do {
 			if (inventory_isOpenContainer) then {
 				0.5 call sp_threadPause;
-				if (inventory_isOpenContainer) then {break};
+				if (inventory_isOpenContainer && {!isNullReference(["cpt_1_lootobj1" arg nullPtr] call sp_storageGet)}) then {break};
 			};
 			0.2 call sp_threadPause;
 		};
@@ -465,7 +494,7 @@ cpt1_playerUniform = "NomadCloth9";
 		while {true} do {
 			if (inventory_isOpenContainer) then {
 				0.5 call sp_threadPause;
-				if (inventory_isOpenContainer && {count _searchedList == 2}) then {break};
+				if (inventory_isOpenContainer && {count _searchedList == 2} && {!isNullReference(["cpt1_loot_torchItem" arg nullPtr] call sp_storageGet)}) then {break};
 			};
 			0.2 call sp_threadPause;
 		};
@@ -494,13 +523,18 @@ cpt1_playerUniform = "NomadCloth9";
 			} call sp_threadWait;
 			[false] call sp_setNotificationVisible;
 
+			{
+				//disable torch light off
+				call cpt2_act_enableTorchHadnler;
+			} call sp_threadCriticalSection;
+
 		} call sp_threadStart;
 
 		//third item check
 		while {true} do {
 			if (inventory_isOpenContainer) then {
 				0.5 call sp_threadPause;
-				if (inventory_isOpenContainer && {count _searchedList == 3}) then {break};
+				if (inventory_isOpenContainer && {count _searchedList == 3} && {!isNullReference(["cpt1_loot_mapItem" arg nullPtr] call sp_storageGet)}) then {break};
 			};
 			0.2 call sp_threadPause;
 		};
@@ -514,6 +548,10 @@ cpt1_playerUniform = "NomadCloth9";
 
 			[false] call sp_setNotificationVisible;
 			[true] call sp_setHideTaskMessageCtg;
+
+			{
+				{_x call sp_removePlayerHandler} foreach (array_copy(["cpt1_looting_evt_clothHandler" arg []] call sp_storageGet));
+			} call sp_threadCriticalSection;
 
 			["cpt1_foundmap"] call sp_startScene;
 		};
@@ -665,9 +703,17 @@ cpt1_act_addMapViewHandler = {
 		
 		call cpt1_act_addMapViewHandler;
 
-		_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
-		5 call sp_threadPause;
-		[false,_h] call sp_setNotificationVisible;
+		2 call sp_threadPause;
+		
+		{
+			_h = ["Чтобы ещё раз #(посмотреть карту) нажмите $input_act_mainAction по ней"] call sp_setNotification;
+			10 call sp_threadPause;
+			_h = ["В вашей #(одежде) можно хранить предметы. Попробуйте перетащить #(карту) из руки в одежду. Чтобы посмотреть содержимое карманов - наведите мышку на одежду и нажмите $input_act_mainAction по ней."] call sp_setNotification;
+			{
+				count getVar(callFuncParams(call sp_getActor,getItemInSlotRedirect,INV_CLOTH),content) > 0
+			} call sp_threadWait;
+			[false,_h] call sp_setNotificationVisible;
+		} call sp_threadStart;
 
 		["cpt1_walk_topart2"] call sp_startScene;
 
