@@ -83,12 +83,18 @@ struct(CraftRecipeInteractResult) base(CraftRecipeResult)
 		private _usr = _craftCtx get "user";
 		private _robj = _craftCtx get "recipe";
 		private _newObj = nullPtr;
+		private _createInHands = _craftCtx getOrDefault ["create_in_hands",false];
 
 		private _class = self getv(class);
 		if !isNullVar(_class) then {
+
 			for "_i" from 1 to (_craftCtx get "result_count") do {
 				private _realPos = [_pos,self getv(radius)] call randomRadius;
-				_newObj = [_class,_realPos,_dir] call createGameObjectInWorld;
+				_newObj = if (_i == 1 && {_createInHands}) then {
+					[_class,_usr] call createItemInInventory;
+				} else {
+					[_class,_realPos,_dir] call createGameObjectInWorld;
+				};
 
 				//apply modifiers to created object
 				private _modCtxList = _craftCtx get "modifier_context_list";

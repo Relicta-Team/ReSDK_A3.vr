@@ -145,7 +145,7 @@ soundLocal_play = {
 
 
 soundUI_play = {
-	params ["_file", ["_volume",1], ["_soundPitch",1], ["_isEffect",false],["_soundExtension","ogg"]];
+	params ["_file", ["_volume",1], ["_soundPitch",1], ["_isEffect",false],["_soundExtension","ogg"],["_offset",0]];
 
 	if (!("." in _file)) then {
 		MOD(_file,+"."+_soundExtension);
@@ -155,5 +155,5 @@ soundUI_play = {
 
 	_file = PATH_SOUND(_file);
 	
-	playSoundUI[_file,_volume,_soundPitch,_isEffect];
+	playSoundUI[_file,_volume,_soundPitch,_isEffect,_offset];
 };

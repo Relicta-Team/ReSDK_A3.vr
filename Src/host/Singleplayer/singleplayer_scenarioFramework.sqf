@@ -118,10 +118,71 @@ sp_cleanupSceneData = {
 
 	call sp_clearPlayerHandlers;
 
+	call sp_gui_resetInventoryVisibleHandlers;
+
 	call sp_cleanupWidgetHighlightTokens;
 	
 	//now delete all mobs
+	call sp_ai_deleteAllPersons;
+};
+
+sp_onChapterDone = {
+	params ["_chapId"];
 	{
-		[_x] call sp_ai_deletePerson;
-	} foreach sp_ai_mobs;
+		private _chapList = profilenamespace getvariable ["rel_spdone",[]];
+		//check base type
+		if not_equalTypes(_chapList,[]) then {
+			_chapList = [];
+		};
+		//check count
+		if (count _chapList > 6) then {
+			_chapList = [];
+		};
+		//check values
+		{
+			if not_equalTypes(_x,0) then {
+				_chapList = [];
+			}
+		} foreach _chapList;
+
+		for "_i" from 0 to _chapId do {
+			_chapList pushBackUnique _i;
+		};
+
+		profilenamespace setvariable ["rel_spdone",_chapList];
+		saveProfileNamespace;
+
+	} call sp_threadCriticalSection;
+};
+
+sp_saveCharacterData = {
+	params [["_t",call sp_getActor],["_data",null]];
+
+	if (isNullVar(_data)) then {
+		_data = [
+			callFunc(_t,getFirstName),
+			callFunc(_t,getLastName),
+			callFunc(_t,getFace)
+		];
+	};
+
+	profilenamespace setvariable ["rel_spchardata",_data];
+	saveProfileNamespace;
+};
+
+sp_loadCharacterData = {
+	params [["_t",call sp_getActor]];
+	private _data = profilenamespace getvariable ["rel_spchardata",[]];
+	
+	if not_equalTypes(_data,[]) exitWith {};
+	if (count _data != 3) exitWith {};
+
+	_data params ["_fn","_ln","_face"];
+	if (isNullVar(_fn) || isNullVar(_ln) || isNullVar(_face)) exitWith {};
+	if (not_equalTypes(_fn,"") || not_equalTypes(_ln,"") || not_equalTypes(_face,"")) exitWith {};
+
+	callFuncParams(_t,generateNaming,capitalize(_fn) arg capitalize(_ln));
+	if (_face call facesys_hasFace) then {
+		callFuncParams(_t,setMobFace,_face);
+	};
 };

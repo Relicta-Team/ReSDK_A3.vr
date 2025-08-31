@@ -26,7 +26,11 @@ csys_requestOpenMenu = {
 
 	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
-	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories");
+	#ifdef SP_MODE
+	if (count _allowedCategReal == 0) exitWith {};
+	#endif
+
+	assert_str(array_exists(_allowedCategReal,_firstCat),"First category is not in allowed categories: " + format ["first cat %1; allowed list %2" arg _firstCat arg _allowedCategReal]);
 
 	private _data = [
 		getVar(_objSrc,pointer),
@@ -217,11 +221,19 @@ csys_processCraftMain = {
 			[_targIngr] call _error_message_provider;
 		};
 
+		if any_of([_handItmIngr arg _targIngr] apply {callFunc(_x getv(targetItem),isInSlot)}) exitWith {
+			RETURN(false);
+		};
+
 		//запоминаем названия предметов для создания
 		private _handItemName = callFuncParams(_handItem,getNameFor,_usr);
 		private _targName = callFuncParams(_targ,getNameFor,_usr);
 		["hand_item_name",_handItemName] call _addCraftContext;
 		["target_name",_targName] call _addCraftContext;
+		["create_in_hands",
+			equals(callFunc(_targ,getSourceLoc),_usr) 
+			&& {equals(callFunc(_handItem,getSourceLoc),_usr)}
+		] call _addCraftContext;
 
 		_leftComponents = [_handItmIngr,_targIngr];
 

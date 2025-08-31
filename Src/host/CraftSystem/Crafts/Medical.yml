@@ -2,18 +2,15 @@
   type: default
   category: Medical
   options:
-    craft_duration: from_skill(10,4)
+    craft_duration: from_skill(5,1)
   required:
     skills:
       healing: 3
       engineering: 3
     components:
-      - class: WoodenDebris6 
-        count: 3
-        check_type_of: false 
-      - class: WoodenDebris(1-5)
-        count: 1
-        check_type_of: false 
+      - class: WoodenDebris7
+        count: 2
+        check_type_of: false
   result:
     class: Crutch
 
@@ -21,7 +18,7 @@
   type: default
   category: Medical
   options:
-    craft_duration: from_skill(10,4)
+    craft_duration: from_skill(5,1)
   required:
     components:
       - class: Rag
@@ -34,7 +31,7 @@
   type: default
   category: Medical
   options:
-    craft_duration: from_skill(10,4)
+    craft_duration: from_skill(5,1)
   required:
     skills:
       engineering: 3
@@ -61,9 +58,10 @@
       - class: MetalDebris(1-2)
         count: 1
         check_type_of: false
-      - class: SyntDebris1
+      - class: Rag
         count: 1
         check_type_of: false
+        destroy: false
   result:
     class: NeedleWithThreads
-    count: {min: 2, max: 3}
+    count: {min: 1, max: 3}

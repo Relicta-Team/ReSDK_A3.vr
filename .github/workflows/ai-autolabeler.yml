@@ -1,0 +1,36 @@
+name: Auto-label with AI assistance
+on:
+  issues:
+    types: ['opened']
+  issue_comment:
+    types: ['created']
+  # Для комментариев-ревью (если нужны)
+  pull_request_review_comment:
+    types: ['created']
+  pull_request:
+    types: ['opened']
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  label-ai-usage:
+    runs-on: ubuntu-latest
+    if: |
+      github.actor == 'coderabbitai[bot]' ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@coderabbitai')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@coderabbitai')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.body, '@coderabbitai')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@coderabbitai'))
+    steps:
+      - name: Add Using AI label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['Using AI']
+            })

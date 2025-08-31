@@ -385,6 +385,7 @@ class(HatBandanaOpen2) extends(HatBandanaOpen1)
 	var(armaClass,"jessupbandana");
 endclass
 
+//у него меш чуть поломан
 class(BandagedHelmet) extends(HeadgearBase)
 	var(name,"Бинты");
 	var(armaClass,"jgraham_helmet");

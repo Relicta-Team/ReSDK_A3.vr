@@ -595,7 +595,7 @@ File: [client\InputSystem\inputManager.sqf at line 78](../../../Src/client/Input
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> Exists if **EDITOR** defined
 
 Description: };
 
@@ -609,7 +609,7 @@ File: [client\InputSystem\inputManager.sqf at line 154](../../../Src/client/Inpu
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: name

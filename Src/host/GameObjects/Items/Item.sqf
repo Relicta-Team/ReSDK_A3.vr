@@ -42,6 +42,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	var(loc,objNull); //локация объекта. Данное поле по соглашению публично только для чтения. Установка значения ТОЛЬКО через setLoc()
 	editor_attribute("InternalImpl")
 	var(slot,-1); //если loc==mob тогда slot айди слота инвентаря
+	//проверяет находится ли предмет в слотах брони или одежды
+	getter_func(isInSlot,array_exists(INV_LIST_TORSO + INV_LIST_FACE,getSelf(slot)));
 
 	getterconst_func(isRadio,false);
 

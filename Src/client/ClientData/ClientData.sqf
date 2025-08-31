@@ -227,7 +227,10 @@ cd_onPrepareClient = {
 				stopThisUpdate();
 
 				#ifdef SP_MODE
-				[call sp_getActor] call sp_gc_onPlayerAssigned;
+				if (!sp_gc_isPlayerInitialized) then {
+					sp_gc_isPlayerInitialized = true;
+					[call sp_getActor] call sp_gc_onPlayerAssigned;
+				};
 				#endif
 			} else {
 				if (_atlPos distance (getPosATL player) > 1) then {

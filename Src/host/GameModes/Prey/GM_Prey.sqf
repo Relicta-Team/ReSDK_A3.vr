@@ -153,6 +153,13 @@ class(GMPreyMobEater) extends(Mob)
 	var(__listactions,[]);
 	var(voiceType,"eater");
 	getter_func(isFailCombat,false);
+
+	getter_func(getRetchSounds,generate_list(1,5,{"monster\eater\scream" + (str _this)})); //подавиться
+	getter_func(getPainSounds,generate_list(1,5,{"monster\eater\attack" + (str _this)})); //боль
+	getter_func(getMoanSounds,generate_list(1,5,{"monster\eater\idle" + (str _this)})); //слабая боль
+	getter_func(getScreamSounds,generate_list(1,5,{"monster\eater\scream" + (str _this)})); //крикушки
+	getter_func(getTortureScreamSounds,generate_list(1,5,{"monster\eater\scream" + (str _this)}));
+
 	
 	["eater","roar","onEaterRoar"] call ie_actions_regNew;
 	["eater","sniff","onEaterSniff"] call ie_actions_regNew;
