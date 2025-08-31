@@ -38,6 +38,16 @@
           "systemname":"Smert_nadzirateley",
           "reprType":"bool (Булево)",
           "reprDataType":"value (Значение)"
+        },
+        "0x1ccd38d8ed0_2025817154258997425":{
+          "name":"Смерть заключенных",
+          "type":"bool",
+          "value":false,
+          "category":"classvar",
+          "group":"",
+          "systemname":"Smert_zaklyuchennykh",
+          "reprType":"bool (Булево)",
+          "reprDataType":"value (Значение)"
         }
       }
     },
@@ -53,32 +63,33 @@
           "desc":"Песочница: Игроки самостоятельно решают, как провести раунд.",
           "name":"Каторга",
           "descExtended":"Очередная смена на тюремном объекте Новой Армии.",
-          "duration":7000
+          "duration":5400
         },
         "methods":{
           "getMapName":"NewArmyMiniJailV3",
-          "getLobbySoundName":"lobby\\Regime.ogg",
           "_getRolesWrapper":[
             "RWarden",
             "RDoctor",
             "RCorrectionofficer",
             "RPrisoner"
-          ]
+          ],
+          "getLobbyBackground":"lobby\\newarmyprison.paa",
+          "getLobbySoundName":"lobby\\Regime.ogg"
         }
       },
       "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      2802.478336631639,
-      -918.0349474332377,
-      1005.6180138913564,
-      946.4640130742197
+      55.8329138350058,
+      -154.47765153537244,
+      1188.3124450954165,
+      1118.4117130309814
     ],
-    "mzoom":-0.31
+    "mzoom":-0.42
   },
   "nodes":{
-    "0x1e24c362030":{
+    "0x23ee6803110":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Условие запуска раунда",
@@ -113,7 +124,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode._conditionToStartWrapper_0"
     },
-    "0x1e24c363560":{
+    "0x23ee68030b0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_ForEach_16x",
       "name":"Цикл по списку",
@@ -244,7 +255,7 @@
       },
       "class_":"operators.foreach_loop"
     },
-    "0x1e24c363050":{
+    "0x23ee6803530":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Node_16x",
       "name":"Вернуть значение",
@@ -324,7 +335,7 @@
       },
       "class_":"control.return"
     },
-    "0x1e24c362ed0":{
+    "0x23ee6802d50":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Кандидаты на роль",
@@ -363,7 +374,7 @@
       },
       "class_":"methods.ScriptedGamemode.getCandidatesCount_0"
     },
-    "0x1e24c363470":{
+    "0x23ee68026c0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_MakeArray_16x.png",
       "name":"Создать массив",
@@ -456,7 +467,7 @@
       },
       "class_":"array.makeArray"
     },
-    "0x1e24c363410":{
+    "0x23ee6802600":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальное имя класса",
@@ -495,7 +506,7 @@
       },
       "class_":"objects.makeLiteralClassName"
     },
-    "0x1e24c363530":{
+    "0x23ee6801730":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\ArrayPin.png",
@@ -591,7 +602,7 @@
       },
       "class_":"array.get"
     },
-    "0x1e24c4b63f0":{
+    "0x23ee68025d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&gt;=",
@@ -685,7 +696,7 @@
       },
       "class_":"math.greaterthanorequalnum"
     },
-    "0x1e24c542ff0":{
+    "0x23ee6800560":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -724,7 +735,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x1e24c542db0":{
+    "0x23ee6800740":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\ArrayPin.png",
@@ -833,7 +844,7 @@
       },
       "class_":"array.pushBack"
     },
-    "0x1e24c542780":{
+    "0x23ee6802420":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_MakeArray_16x.png",
       "name":"Создать массив",
@@ -926,7 +937,7 @@
       },
       "class_":"array.makeArray"
     },
-    "0x1e24c543cb0":{
+    "0x23ee6801df0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальную строку",
@@ -965,7 +976,7 @@
       },
       "class_":"string.makeLiteralString"
     },
-    "0x1e24c5c43b0":{
+    "0x23ee68001d0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\ArrayPin.png",
@@ -1048,7 +1059,7 @@
       },
       "class_":"array.count"
     },
-    "0x1e24c5c47a0":{
+    "0x23ee6800fe0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_MakeStruct_16x",
       "name":"Создать Условие запуска",
@@ -1088,7 +1099,7 @@
       },
       "class_":"structHelper.struct.ConditionToStartGamemode_make"
     },
-    "0x1e24c5c4500":{
+    "0x23ee6802f30":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\pill_16x.png",
       "name":"Создать строку",
@@ -1169,7 +1180,7 @@
       },
       "class_":"string.stringMake"
     },
-    "0x1e24c542b10":{
+    "0x23ee6803e30":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Объединить строки",
@@ -1208,7 +1219,7 @@
       },
       "class_":"string.joinString"
     },
-    "0x1e24c5c4c80":{
+    "0x23ee6801790":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\ArrayPin.png",
@@ -1265,7 +1276,7 @@
       },
       "class_":"variable.get"
     },
-    "0x1e24c5c4bc0":{
+    "0x23ee6803a10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\ArrayPin.png",
@@ -1322,7 +1333,7 @@
       },
       "class_":"variable.get"
     },
-    "0x1e24c5c4e60":{
+    "0x23ee6800d70":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"==",
@@ -1416,7 +1427,7 @@
       },
       "class_":"math.equalnum"
     },
-    "0x1e24c5c5760":{
+    "0x23ee68016a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка",
@@ -1455,7 +1466,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c5400":{
+    "0x23ee6802330":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 1",
@@ -1494,7 +1505,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c56a0":{
+    "0x23ee6803e90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 1",
@@ -1533,7 +1544,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c5640":{
+    "0x23ee6801dc0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 1",
@@ -1572,7 +1583,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c54f0":{
+    "0x23ee6801190":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальное имя класса",
@@ -1611,7 +1622,7 @@
       },
       "class_":"objects.makeLiteralClassName"
     },
-    "0x1e24c5c5100":{
+    "0x23ee6801fd0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Создать буквальную строку",
@@ -1650,7 +1661,7 @@
       },
       "class_":"string.makeLiteralString"
     },
-    "0x1e24c5c4d40":{
+    "0x23ee6801a60":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"Проверка конца раунда",
@@ -1685,7 +1696,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGamemode._checkFinishWrapper_0"
     },
-    "0x1e24c5c4f20":{
+    "0x23ee6801c10":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 2",
@@ -1724,7 +1735,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c5c10":{
+    "0x23ee68019a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -1763,7 +1774,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x1e24c5c5d00":{
+    "0x23ee67a9010":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"&gt;=",
@@ -1857,7 +1868,7 @@
       },
       "class_":"math.greaterthanorequalnum"
     },
-    "0x1e24c5c59d0":{
+    "0x23ee67c93a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\FIB_VarGet",
       "name":"Время игры",
@@ -1895,7 +1906,7 @@
       },
       "class_":"methods.ScriptedGamemode._getDurationWrapper_0"
     },
-    "0x1e24c5c6870":{
+    "0x23ee6745e20":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Завершить раунд",
@@ -1920,7 +1931,7 @@
       "selected":false,
       "visible":true,
       "width":325.0,
-      "height":291.25,
+      "height":311.2,
       "pos":[
         4034.326851649178,
         -860.7763025149887
@@ -1931,11 +1942,11 @@
       "custom":{
         "Цель":"Этот PrisonWorkShift",
         "Исход":1,
-        "Описание":"ЗАВЕРШЕНИЕ СМЕНЫ. ВСЕМ ЗАКЛЮЧЕННЫМ ПРОЙТИ ПО СВОИМ КАМЕРАМ. НЕПОДЧИНЕНИЕ КАРАЕТСЯ КАРЦЕРОМ И ГОЛОДОВКОЙ."
+        "Описание":"<t color='#ff0000' align='center' size='2'>ЗАВЕРШЕНИЕ СМЕНЫ. ВСЕМ ЗАКЛЮЧЕННЫМ ПРОЙТИ ПО СВОИМ КАМЕРАМ. НЕПОДЧИНЕНИЕ КАРАЕТСЯ КАРЦЕРОМ И ГОЛОДОВКОЙ.</t>"
       },
       "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
     },
-    "0x1e24c5c6780":{
+    "0x23ee6ac31a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"Заметка 3",
@@ -1974,7 +1985,7 @@
       },
       "class_":"internal.sticker"
     },
-    "0x1e24c5c6600":{
+    "0x23ee6ac2ae0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Branch_16x",
       "name":"Ветка",
@@ -2013,7 +2024,7 @@
       },
       "class_":"operators.if_branch"
     },
-    "0x1e24c5c62d0":{
+    "0x23ee6ac2ed0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Завершить раунд",
@@ -2038,7 +2049,7 @@
       "selected":false,
       "visible":true,
       "width":325.0,
-      "height":311.2,
+      "height":331.15000000000003,
       "pos":[
         4212.998211768139,
         -508.0433147510716
@@ -2049,11 +2060,11 @@
       "custom":{
         "Цель":"Этот PrisonWorkShift",
         "Исход":2,
-        "Описание":"ОТСУТСТВИЕ ВЫХОДА НА СВЯЗЬ. ОБЪЯВЛЯЕТСЯ КОНСЕРВАЦИЯ ТЕРРИТОРИИ. ВЫСЛАН ОТРЯД ЗАЧИСТКИ. ВСЕ СЛУЖАЩИЕ НА ТЕРРИТОРИИ ОБЪЯВЛЯЮТСЯ ДЕЗЕРТИРАМИ."
+        "Описание":"<t color='#ff0000' align='center' size='2'>ОТСУТСТВИЕ ВЫХОДА НА СВЯЗЬ. ОБЪЯВЛЯЕТСЯ КОНСЕРВАЦИЯ ТЕРРИТОРИИ. ВЫСЛАН ОТРЯД ЗАЧИСТКИ. ВСЕ СЛУЖАЩИЕ НА ТЕРРИТОРИИ ОБЪЯВЛЯЮТСЯ ДЕЗЕРТИРАМИ.</t>"
       },
       "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
     },
-    "0x1e24c5c6f60":{
+    "0x23ee6a3d160":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"И",
@@ -2093,7 +2104,49 @@
       },
       "class_":"math.logical.boolAnd"
     },
-    "0x1e24c5c6db0":{
+    "0x23ee6a3e780":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#800000"
+      ],
+      "name":"Смерть надзирателей",
+      "color":[
+        128,
+        0,
+        0,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":338.0,
+      "height":86.1,
+      "pos":[
+        3053.768325697097,
+        -333.9603374329681
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот PrisonWorkShift"
+      },
+      "class_":"fields.GMPrisonworkshift.Smert_nadzirateley_0.get"
+    },
+    "0x23ee6a3e450":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
@@ -2135,13 +2188,92 @@
       },
       "class_":"fields.GMPrisonworkshift.Smert_Nachalnika_tyurmy_0.get"
     },
-    "0x1e24c5a6ab0":{
+    "0x23ee6a3e3c0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Branch_16x",
+      "name":"Ветка",
+      "color":[
+        119,
+        119,
+        119,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":160,
+      "height":87.80000000000001,
+      "pos":[
+        4036.9109364603364,
+        -98.85710261068812
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Условие":true
+      },
+      "class_":"operators.if_branch"
+    },
+    "0x23ee6b8a3f0":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Завершить раунд",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":325.0,
+      "height":291.25,
+      "pos":[
+        4270.036641124348,
+        -76.72491545904148
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Этот PrisonWorkShift",
+        "Исход":3,
+        "Описание":"<t color='#ff0000' align='center' size='2'>ОТСУТСТВИЕ РАБОЧЕЙ СИЛЫ НА ОБЪЕКТЕ. ВЫСЛАН ОТРЯД ДЛЯ ДАЛЬНЕЙШЕГО РАССЛЕДОВАНИЯ.</t>"
+      },
+      "class_":"methods.ScriptedGamemode.setEndgameScriptedMode_0"
+    },
+    "0x23ee6b8a330":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":[
         "data\\icons\\pill_16x.png",
         "#800000"
       ],
-      "name":"Смерть надзирателей",
+      "name":"Смерть заключенных",
       "color":[
         128,
         0,
@@ -2166,8 +2298,8 @@
       "width":338.0,
       "height":86.1,
       "pos":[
-        3053.768325697097,
-        -333.9603374329681
+        3456.983370688286,
+        -35.44667244634509
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
@@ -2175,328 +2307,358 @@
       "custom":{
         "Цель":"Этот PrisonWorkShift"
       },
-      "class_":"fields.GMPrisonworkshift.Smert_nadzirateley_0.get"
+      "class_":"fields.GMPrisonworkshift.Smert_zaklyuchennykh_0.get"
     }
   },
   "connections":[
     {
       "out":[
-        "0x1e24c362030",
+        "0x23ee6803110",
         "Выход"
       ],
       "in":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "Массив"
       ],
       "out":[
-        "0x1e24c363470",
+        "0x23ee68026c0",
         "Массив"
       ]
     },
     {
       "out":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "Тело цикла"
       ],
       "in":[
-        "0x1e24c542ff0",
+        "0x23ee6800560",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "Элемент"
       ],
       "in":[
-        "0x1e24c362ed0",
+        "0x23ee6802d50",
         "Роль"
       ]
     },
     {
       "out":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "Индекс"
       ],
       "in":[
-        "0x1e24c363530",
+        "0x23ee6801730",
         "Индекс"
       ]
     },
     {
       "out":[
-        "0x1e24c363560",
+        "0x23ee68030b0",
         "При завершении"
       ],
       "in":[
-        "0x1e24c363050",
+        "0x23ee6803530",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c363050",
+        "0x23ee6803530",
         "Возвращаемое значение"
       ],
       "out":[
-        "0x1e24c5c47a0",
+        "0x23ee6800fe0",
         "Условие запуска"
       ]
     },
     {
       "out":[
-        "0x1e24c362ed0",
+        "0x23ee6802d50",
         "Результат"
       ],
       "in":[
-        "0x1e24c4b63f0",
+        "0x23ee68025d0",
         "Число 1"
       ]
     },
     {
       "in":[
-        "0x1e24c363470",
+        "0x23ee68026c0",
         "[0]"
       ],
       "out":[
-        "0x1e24c363410",
+        "0x23ee6802600",
         "Имя класса"
       ]
     },
     {
       "in":[
-        "0x1e24c363470",
+        "0x23ee68026c0",
         "[1]"
       ],
       "out":[
-        "0x1e24c5c54f0",
+        "0x23ee6801190",
         "Имя класса"
       ]
     },
     {
       "in":[
-        "0x1e24c363530",
+        "0x23ee6801730",
         "Массив"
       ],
       "out":[
-        "0x1e24c542780",
+        "0x23ee6802420",
         "Массив"
       ]
     },
     {
       "out":[
-        "0x1e24c363530",
+        "0x23ee6801730",
         "Элемент"
       ],
       "in":[
-        "0x1e24c542db0",
+        "0x23ee6800740",
         "Элемент"
       ]
     },
     {
       "out":[
-        "0x1e24c4b63f0",
+        "0x23ee68025d0",
         "Результат"
       ],
       "in":[
-        "0x1e24c542ff0",
+        "0x23ee6800560",
         "Условие"
       ]
     },
     {
       "out":[
-        "0x1e24c542ff0",
+        "0x23ee6800560",
         "Ложь"
       ],
       "in":[
-        "0x1e24c542db0",
+        "0x23ee6800740",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c542db0",
+        "0x23ee6800740",
         "Массив"
       ],
       "out":[
-        "0x1e24c5c4bc0",
+        "0x23ee6803a10",
         "Значение"
       ]
     },
     {
       "in":[
-        "0x1e24c542780",
+        "0x23ee6802420",
         "[0]"
       ],
       "out":[
-        "0x1e24c543cb0",
+        "0x23ee6801df0",
         "Строка"
       ]
     },
     {
       "in":[
-        "0x1e24c542780",
+        "0x23ee6802420",
         "[1]"
       ],
       "out":[
-        "0x1e24c5c5100",
+        "0x23ee6801fd0",
         "Строка"
       ]
     },
     {
       "in":[
-        "0x1e24c5c43b0",
+        "0x23ee68001d0",
         "Массив"
       ],
       "out":[
-        "0x1e24c5c4bc0",
+        "0x23ee6803a10",
         "Значение"
       ]
     },
     {
       "out":[
-        "0x1e24c5c43b0",
+        "0x23ee68001d0",
         "Количество элементов"
       ],
       "in":[
-        "0x1e24c5c4e60",
+        "0x23ee6800d70",
         "Число 1"
       ]
     },
     {
       "in":[
-        "0x1e24c5c47a0",
+        "0x23ee6800fe0",
         "Запуск"
       ],
       "out":[
-        "0x1e24c5c4e60",
+        "0x23ee6800d70",
         "Результат"
       ]
     },
     {
       "in":[
-        "0x1e24c5c47a0",
+        "0x23ee6800fe0",
         "Причина задержки"
       ],
       "out":[
-        "0x1e24c5c4500",
+        "0x23ee6802f30",
         "Строка"
       ]
     },
     {
       "in":[
-        "0x1e24c5c4500",
+        "0x23ee6802f30",
         "Строка 2"
       ],
       "out":[
-        "0x1e24c542b10",
+        "0x23ee6803e30",
         "Строка"
       ]
     },
     {
       "in":[
-        "0x1e24c542b10",
+        "0x23ee6803e30",
         "Массив строк"
       ],
       "out":[
-        "0x1e24c5c4c80",
+        "0x23ee6801790",
         "Значение"
       ]
     },
     {
       "out":[
-        "0x1e24c5c4d40",
+        "0x23ee6801a60",
         "Выход"
       ],
       "in":[
-        "0x1e24c5c5c10",
+        "0x23ee68019a0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c5c5c10",
+        "0x23ee68019a0",
         "Условие"
       ],
       "out":[
-        "0x1e24c5c5d00",
+        "0x23ee67a9010",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x1e24c5c5c10",
+        "0x23ee68019a0",
         "Истина"
       ],
       "in":[
-        "0x1e24c5c6870",
+        "0x23ee6745e20",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x1e24c5c5c10",
+        "0x23ee68019a0",
         "Ложь"
       ],
       "in":[
-        "0x1e24c5c6600",
+        "0x23ee6ac2ae0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c5c5d00",
+        "0x23ee67a9010",
         "Число 1"
       ],
       "out":[
-        "0x1e24c5c59d0",
+        "0x23ee67c93a0",
         "Результат"
       ]
     },
     {
       "in":[
-        "0x1e24c5c6600",
+        "0x23ee6ac2ae0",
         "Условие"
       ],
       "out":[
-        "0x1e24c5c6f60",
+        "0x23ee6a3d160",
         "Результат"
       ]
     },
     {
       "out":[
-        "0x1e24c5c6600",
+        "0x23ee6ac2ae0",
         "Истина"
       ],
       "in":[
-        "0x1e24c5c62d0",
+        "0x23ee6ac2ed0",
+        "Вход"
+      ]
+    },
+    {
+      "out":[
+        "0x23ee6ac2ae0",
+        "Ложь"
+      ],
+      "in":[
+        "0x23ee6a3e3c0",
         "Вход"
       ]
     },
     {
       "in":[
-        "0x1e24c5c6f60",
+        "0x23ee6a3d160",
         "Значение 1"
       ],
       "out":[
-        "0x1e24c5c6db0",
+        "0x23ee6a3e450",
         "Значение"
       ]
     },
     {
       "in":[
-        "0x1e24c5c6f60",
+        "0x23ee6a3d160",
         "Значение 2"
       ],
       "out":[
-        "0x1e24c5a6ab0",
+        "0x23ee6a3e780",
         "Значение"
+      ]
+    },
+    {
+      "in":[
+        "0x23ee6a3e3c0",
+        "Условие"
+      ],
+      "out":[
+        "0x23ee6b8a330",
+        "Значение"
+      ]
+    },
+    {
+      "out":[
+        "0x23ee6a3e3c0",
+        "Истина"
+      ],
+      "in":[
+        "0x23ee6b8a3f0",
+        "Вход"
       ]
     }
   ]

@@ -1501,17 +1501,28 @@ _3997_412605333_2739353_51994 = ['PosterLive',[3997.41,5333.27,53.5199],90.0001,
 ['SquareWoodenBox',[3920.38,5387.25,52.5],0,[0,0,1]] call InitStruct; 
 ['OldBrickWallMedium',[3955.88,5363.88,52.5],90,[0,0,1]] call InitStruct; 
 ['GMOkopovoItemInfoRock',[3912.1,5365.73,52.5],330,[0,0,1]] call InitItem; 
-['DoubleCitizenBed1',[3987.13,5330.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3990.88,5330.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3992.63,5330.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3996.38,5330.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3998.13,5330.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[4001.88,5349.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3998.13,5349.75,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3995.88,5350.38,52.5],90,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3990.88,5347.38,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3990.88,5349.88,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleCitizenBed1',[3995.88,5349,52.5],90,[0,0,1]] call InitStruct; 
+['DoubleCitizenBed1',[3987.13,5330.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed15",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3990.88,5330.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed14",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3992.63,5330.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed13",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3996.38,5330.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed12",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3998.13,5330.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed11",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[4001.88,5349.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed5",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3998.13,5349.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed4",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3995.88,5350.38,52.5],90,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed2",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3990.88,5347.38,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed1",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3990.88,5349.88,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed0",_thisObj];
+}] call InitStruct; 
+['DoubleCitizenBed1',[3995.88,5349,52.5],90,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed3",_thisObj];
+}] call InitStruct; 
 ['PaperHolder',[3931.6,5332.43,53.4504],60,[0,0,1]] call InitItem; 
 ['Paper',[3935,5335.75,53.5],330,[0,0,1]] call InitItem; 
 ['Paper',[3934.9,5336.07,53.5057],30,[0,0,1]] call InitItem; 
@@ -1649,10 +1660,14 @@ _3977_625005336_1909252_50000 = ['SteelGreenDoor',[3977.63,5336.19,52.5],90,[0,0
 ['BigFileCabinet',[3934.5,5332.38,52.5],90,[0,0,1]] call InitStruct; 
 ['BigFileCabinet',[3994.98,5301.21,52.5],90,[0,0,1]] call InitStruct; 
 ['SleepingMatras1',[4001.75,5331.25,52.5],0,[0,0,1]] call InitStruct; 
-['SleepingMatras',[4006.63,5330.38,52.75],0,[0,0,1]] call InitStruct; 
-['SleepingMatras',[4006.63,5331.5,52.625],0,[0,0,1]] call InitStruct; 
-['SleepingMatras',[4003.75,5330.75,52.625],75,[0,0,1]] call InitStruct; 
-['SleepingMatras',[4004.25,5333.5,52.625],0,[0,0,1]] call InitStruct; 
+['SleepingMatras',[4006.63,5330.38,52.75],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed10",_thisObj];
+}] call InitStruct; 
+['SleepingMatras',[4006.63,5331.5,52.625],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed9",_thisObj];
+}] call InitStruct; 
+['SleepingMatras',[4003.75,5330.75,52.625],75,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed8",_thisObj];
+}] call InitStruct; 
+['SleepingMatras',[4004.25,5333.5,52.625],0,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed7",_thisObj];
+}] call InitStruct; 
 ['SleepingMatras',[3999.88,5330.75,52.625],90,[0,0,1]] call InitStruct; 
 ['SteelBlueCase',[3899.5,5419.25,52.5],270,[0,0,1]] call InitStruct; 
 ['SteelBlueCase',[3899.5,5418.88,52.5],270,[0,0,1]] call InitStruct; 
@@ -1701,7 +1716,8 @@ _3923_500005357_0000051_75000 = ['SmallRadiator',[3923.5,5357,51.75],180,[0,0,1]
 ['ShortPipeBlueMetal',[4009.13,5350.25,59.5742,true],0,[-1,0,-4.37114e-08]] call InitStruct; 
 ['ShortPipeBlueMetal',[4010.38,5329.75,59.5742,true],1.17427e-13,[1,0,1.19249e-08]] call InitStruct; 
 ['ShortPipeBlueMetal',[3961,5391,59.5742,true],[-1.19554e-15,1,2.73507e-08],[-1,0,-4.37114e-08]] call InitStruct; 
-['Wheelchair1',[4005.13,5348.75,52.5],240,[0,0,1]] call InitStruct; 
+['Wheelchair1',[4005.13,5348.75,52.5],240,[0,0,1], {go_editor_globalRefs set ["SpawnZecBed6",_thisObj];
+}] call InitStruct; 
 ['SmallChair',[3932.49,5333.32,52.5],0,[0,0,1]] call InitItem; 
 ['SheetMetalTinFence',[3904.5,5420.13,51.75],180,[0,0,1]] call InitStruct; 
 ['SheetMetalTinFence',[3904.5,5420.25,53.875],180,[0,0,1]] call InitStruct; 
@@ -2348,14 +2364,22 @@ _3983_000005407_0000052_50000 = ['SteelBlueCase',[3983,5407,52.5],0,[0,0,1]] cal
 _3992_250005403_1250052_50000 = ['OldWoodenBox',[3992.25,5403.13,52.5],90.0003,[0,0,1]] call InitStruct; 
 _3992_625005404_5000052_50000 = ['WoodenMedicalBox',[3992.63,5404.5,52.5],90.0001,[0,0,1]] call InitStruct; 
 _3992_625005406_1250052_50000 = ['SteelGreenCabinet',[3992.63,5406.13,52.5],180,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3976.25,5411,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3976.25,5414.88,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3967.5,5411,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3971.63,5411,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3967.5,5414.88,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3971.75,5414.88,52.5],0,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3974.25,5408.63,52.5],90,[0,0,1]] call InitStruct; 
-['DoubleArmyBed',[3969.63,5408.63,52.5],90,[0,0,1]] call InitStruct; 
+['DoubleArmyBed',[3976.25,5411,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed2",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3976.25,5414.88,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed0",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3967.5,5411,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed6",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3971.63,5411,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed3",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3967.5,5414.88,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed5",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3971.75,5414.88,52.5],0,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed1",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3974.25,5408.63,52.5],90,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed4 (1)",_thisObj];
+}] call InitStruct; 
+['DoubleArmyBed',[3969.63,5408.63,52.5],90,[0,0,1], {go_editor_globalRefs set ["SpawnSecBed7",_thisObj];
+}] call InitStruct; 
 ['RedCarpet',[3973.88,5413.25,52],180,[0,0,1]] call InitStruct; 
 ['OrangeCarpet1',[3969.63,5413.83,52.5],75,[0,0,1]] call InitStruct; 
 ['OrangeCarpet1',[3969.5,5410.75,52.5],300,[0,0,1]] call InitStruct; 
@@ -2590,7 +2614,8 @@ _3991_034425439_4975653_58889 = ['PictureFoliesBergere',[3991.03,5439.5,53.5889]
 ['LuxuryWoodenTable1',[3986.5,5440.75,52.375],180,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[3986.75,5441.5,52.2693],0,[0,0,1]] call InitStruct; 
 ['LuxuryWoodenTable1',[3989.75,5440.75,52.3725],0.000124651,[0,0,1]] call InitStruct; 
-['RedLuxuryChair',[3988.13,5441.25,52.5],90,[0,0,1]] call InitStruct; 
+['RedLuxuryChair',[3988.13,5441.25,52.5],90,[0,0,1], {go_editor_globalRefs set ["spawnwarden",_thisObj];
+}] call InitStruct; 
 ['LuxuryWoodenTable1',[3988.13,5439.97,52.3773],90.0001,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[3990.5,5438,52.2693],0,[0,0,1]] call InitStruct; 
 ['WoodenSmallFloor',[3986.75,5434.5,52.2693],0,[0,0,1]] call InitStruct; 
@@ -3344,6 +3369,32 @@ _2517_695805759_756840_65961 = ['BigStoneWall',[2517.7,5759.76,0.659605],0,[0,0,
 ['HatArmyCap1',[3944.46,5794.94,0],0,[0,0,1]] call InitItem; 
 ['HatArmyCap',[3944.97,5794.93,0],0,[0,0,1]] call InitItem; 
 _3979_500005410_6250052_50000 = ['BigClothCabinetGreen',[3979.5,5410.63,52.5],270,[0,0,1]] call InitStruct; 
+_3910_375005329_0000052_37500 = ['SpawnPoint',[3910.38,5329,52.375],0,[0,0,1]] call InitStruct; 
+_3988_750005441_0000052_50000 = ['SpawnPoint',[3988.75,5441,52.5],0,[0,0,1]] call InitStruct; 
+_3990_000005349_8750052_50000 = ['SpawnPoint',[3990,5349.88,52.5],0,[0,0,1]] call InitStruct; 
+_3975_375005414_2500052_50000 = ['SpawnPoint',[3975.38,5414.25,52.5],0,[0,0,1]] call InitStruct; 
+_3990_000005347_3750052_50000 = ['SpawnPoint',[3990,5347.38,52.5],0,[0,0,1]] call InitStruct; 
+_4005_829105348_3603552_50941 = ['SpawnPoint',[4005.83,5348.36,52.5094],0,[0,0,1]] call InitStruct; 
+_3994_125005350_5000052_50500 = ['SpawnPoint',[3994.13,5350.5,52.505],0,[0,0,1]] call InitStruct; 
+_3994_250005349_0000052_50500 = ['SpawnPoint',[3994.25,5349,52.505],0,[0,0,1]] call InitStruct; 
+_3999_125005350_1250052_50500 = ['SpawnPoint',[3999.13,5350.13,52.505],0,[0,0,1]] call InitStruct; 
+_4000_959725350_0820352_50500 = ['SpawnPoint',[4000.96,5350.08,52.505],0,[0,0,1]] call InitStruct; 
+_4004_155525333_4858452_50941 = ['SpawnPoint',[4004.16,5333.49,52.5094],0,[0,0,1]] call InitStruct; 
+_4003_701425330_6284252_51765 = ['SpawnPoint',[4003.7,5330.63,52.5177],0,[0,0,1]] call InitStruct; 
+_4006_651375330_2607452_51765 = ['SpawnPoint',[4006.65,5330.26,52.5177],0,[0,0,1]] call InitStruct; 
+_4006_606455331_4677752_51765 = ['SpawnPoint',[4006.61,5331.47,52.5177],0,[0,0,1]] call InitStruct; 
+_3998_869635330_7124052_51765 = ['SpawnPoint',[3998.87,5330.71,52.5177],0,[0,0,1]] call InitStruct; 
+_3993_517825330_9140652_49992 = ['SpawnPoint',[3993.52,5330.91,52.4999],0,[0,0,1]] call InitStruct; 
+_3995_593995330_7431652_49992 = ['SpawnPoint',[3995.59,5330.74,52.4999],0,[0,0,1]] call InitStruct; 
+_3987_959965330_6943452_49992 = ['SpawnPoint',[3987.96,5330.69,52.4999],0,[0,0,1]] call InitStruct; 
+_3990_147225330_6591852_49992 = ['SpawnPoint',[3990.15,5330.66,52.4999],0,[0,0,1]] call InitStruct; 
+_3972_625005414_6250052_50500 = ['SpawnPoint',[3972.63,5414.63,52.505],0,[0,0,1]] call InitStruct; 
+_3972_500005411_2500052_50500 = ['SpawnPoint',[3972.5,5411.25,52.505],0,[0,0,1]] call InitStruct; 
+_3975_224125411_1220752_50499 = ['SpawnPoint',[3975.22,5411.12,52.505],0,[0,0,1]] call InitStruct; 
+_3973_956545409_3813552_50500 = ['SpawnPoint',[3973.96,5409.38,52.505],0,[0,0,1]] call InitStruct; 
+_3968_274175414_6098652_50500 = ['SpawnPoint',[3968.27,5414.61,52.505],0,[0,0,1]] call InitStruct; 
+_3968_331055410_7045952_50500 = ['SpawnPoint',[3968.33,5410.7,52.505],0,[0,0,1]] call InitStruct; 
+_3969_362065409_3686552_50500 = ['SpawnPoint',[3969.36,5409.37,52.505],0,[0,0,1]] call InitStruct; 
 ['HospitalBed',[3916,5328.13,52.5],0,[0,0,1]] call InitStruct; 
 ['HospitalBed',[3917.75,5328.13,52.5],0,[0,0,1]] call InitStruct; 
 ['HospitalBed',[3919.63,5328.13,52.5],0,[0,0,1]] call InitStruct; 
@@ -3359,7 +3410,8 @@ _3979_500005410_6250052_50000 = ['BigClothCabinetGreen',[3979.5,5410.63,52.5],27
 ['SmallSteelTable1',[3914.5,5331.75,52.5],0,[0,0,1]] call InitStruct; 
 ['LuxuryWoodenTable1',[3911.25,5330,52.5],270,[0,0,1]] call InitStruct; 
 ['Bookcase',[3911,5327.13,52.5],180,[0,0,1]] call InitStruct; 
-['ChairBigCasual',[3911.25,5328.75,52.5],0,[0,0,1]] call InitItem; 
+['ChairBigCasual',[3911.25,5328.75,52.5],0,[0,0,1], {go_editor_globalRefs set ["spawndoc",_thisObj];
+}] call InitItem; 
 ['SteelGridDoorElectronic',[3908.75,5331.38,52.375],90.0001,[0,0,1], {go_editor_globalRefs set ["SteelGridDoorElectronic G:yuhds89ngfE",_thisObj];
 }] call InitStruct; 
 _3912_428715328_8750053_65885 = ['RedButton_Activator',[3912.43,5328.88,58.659,true],[-1.05518e-14,1,2.41397e-07],[-1,0,-4.37114e-08], {go_editor_globalRefs set ["RedButton_Activator G:2n2vui/mYAQ",_thisObj];
@@ -3427,7 +3479,7 @@ _3906_125005343_6250053_37500 = ['ElectricalShieldSmall',[3906.13,5343.63,53.375
 ['PosterManSuite',[3923.96,5326.8,59.0405,true],[0,-4.37114e-08,-1],[0,1,-4.37114e-08]] call InitStruct; 
 ['PosterLive',[3925.71,5329.53,53.3086],90.0001,[0,0,1]] call InitStruct; 
 ['PosterLive',[3925.67,5328.09,59.163,true],[1,-3.78552e-08,2.18557e-08],[0,0.5,0.866025]] call InitStruct; 
-['PosterLive',[3921.3,5327.97,59.1772,true],[-1,3.06266e-07,-3.06266e-07],[0,0.707107,0.707107]] call InitStruct; 
+['PosterLive',[3921.3,5327.97,59.1772,true],[-1,3.45607e-07,-3.45607e-07],[0,0.707107,0.707107]] call InitStruct; 
 ['PosterLive',[3921.29,5329.87,52.5218],270,[0,0,1]] call InitStruct; 
 
 
@@ -5491,6 +5543,84 @@ if (!isNil'_3979_500005410_6250052_50000') then {
 	[_3979_500005410_6250052_50000,'BalaclavaMask',6,100] call (_3979_500005410_6250052_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3979_500005410_6250052_50000,'GasmaskOld',1,100] call (_3979_500005410_6250052_50000 getvariable 'proto' getvariable 'createItemInContainer');
 	[_3979_500005410_6250052_50000,'Gasmask',1,100] call (_3979_500005410_6250052_50000 getvariable 'proto' getvariable 'createItemInContainer');
+};
+if (!isNil'_3910_375005329_0000052_37500') then {
+	_3910_375005329_0000052_37500 setvariable ['spawnpointname',"spawndoc"];
+};
+if (!isNil'_3988_750005441_0000052_50000') then {
+	_3988_750005441_0000052_50000 setvariable ['spawnpointname',"spawnwarden"];
+};
+if (!isNil'_3990_000005349_8750052_50000') then {
+	_3990_000005349_8750052_50000 setvariable ['spawnpointname',"SpawnZecPoint0"];
+};
+if (!isNil'_3975_375005414_2500052_50000') then {
+	_3975_375005414_2500052_50000 setvariable ['spawnpointname',"SpawnSecPoint0"];
+};
+if (!isNil'_3990_000005347_3750052_50000') then {
+	_3990_000005347_3750052_50000 setvariable ['spawnpointname',"SpawnZecPoint1"];
+};
+if (!isNil'_4005_829105348_3603552_50941') then {
+	_4005_829105348_3603552_50941 setvariable ['spawnpointname',"SpawnZecPoint6"];
+};
+if (!isNil'_3994_125005350_5000052_50500') then {
+	_3994_125005350_5000052_50500 setvariable ['spawnpointname',"SpawnZecPoint2"];
+};
+if (!isNil'_3994_250005349_0000052_50500') then {
+	_3994_250005349_0000052_50500 setvariable ['spawnpointname',"SpawnZecPoint3"];
+};
+if (!isNil'_3999_125005350_1250052_50500') then {
+	_3999_125005350_1250052_50500 setvariable ['spawnpointname',"SpawnZecPoint4"];
+};
+if (!isNil'_4000_959725350_0820352_50500') then {
+	_4000_959725350_0820352_50500 setvariable ['spawnpointname',"SpawnZecPoint5"];
+};
+if (!isNil'_4004_155525333_4858452_50941') then {
+	_4004_155525333_4858452_50941 setvariable ['spawnpointname',"SpawnZecPoint7"];
+};
+if (!isNil'_4003_701425330_6284252_51765') then {
+	_4003_701425330_6284252_51765 setvariable ['spawnpointname',"SpawnZecPoint8"];
+};
+if (!isNil'_4006_651375330_2607452_51765') then {
+	_4006_651375330_2607452_51765 setvariable ['spawnpointname',"SpawnZecPoint10"];
+};
+if (!isNil'_4006_606455331_4677752_51765') then {
+	_4006_606455331_4677752_51765 setvariable ['spawnpointname',"SpawnZecPoint9"];
+};
+if (!isNil'_3998_869635330_7124052_51765') then {
+	_3998_869635330_7124052_51765 setvariable ['spawnpointname',"SpawnZecPoint11"];
+};
+if (!isNil'_3993_517825330_9140652_49992') then {
+	_3993_517825330_9140652_49992 setvariable ['spawnpointname',"SpawnZecPoint13"];
+};
+if (!isNil'_3995_593995330_7431652_49992') then {
+	_3995_593995330_7431652_49992 setvariable ['spawnpointname',"SpawnZecPoint12"];
+};
+if (!isNil'_3987_959965330_6943452_49992') then {
+	_3987_959965330_6943452_49992 setvariable ['spawnpointname',"SpawnZecPoint15"];
+};
+if (!isNil'_3990_147225330_6591852_49992') then {
+	_3990_147225330_6591852_49992 setvariable ['spawnpointname',"SpawnZecPoint14"];
+};
+if (!isNil'_3972_625005414_6250052_50500') then {
+	_3972_625005414_6250052_50500 setvariable ['spawnpointname',"SpawnSecPoint1"];
+};
+if (!isNil'_3972_500005411_2500052_50500') then {
+	_3972_500005411_2500052_50500 setvariable ['spawnpointname',"SpawnSecPoint3"];
+};
+if (!isNil'_3975_224125411_1220752_50499') then {
+	_3975_224125411_1220752_50499 setvariable ['spawnpointname',"SpawnSecPoint2"];
+};
+if (!isNil'_3973_956545409_3813552_50500') then {
+	_3973_956545409_3813552_50500 setvariable ['spawnpointname',"SpawnSecPoint4"];
+};
+if (!isNil'_3968_274175414_6098652_50500') then {
+	_3968_274175414_6098652_50500 setvariable ['spawnpointname',"SpawnSecPoint5"];
+};
+if (!isNil'_3968_331055410_7045952_50500') then {
+	_3968_331055410_7045952_50500 setvariable ['spawnpointname',"SpawnSecPoint6"];
+};
+if (!isNil'_3969_362065409_3686552_50500') then {
+	_3969_362065409_3686552_50500 setvariable ['spawnpointname',"SpawnSecPoint7"];
 };
 if (!isNil'_3912_428715328_8750053_65885') then {
 	[_3912_428715328_8750053_65885,go_editor_globalRefs get "SteelGridDoorElectronic G:yuhds89ngfE"] call (_3912_428715328_8750053_65885 getvariable 'proto' getvariable 'addConnection');
