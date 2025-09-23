@@ -119,9 +119,34 @@ vs_voiceVolumeOnUpdate = {
 	};
 };
 
+vs_internal_statusWidgets = [];
+
 decl(void())
 vs_initChangeVoiceCtrl = {
 	_gui = getGUI;
+
+	//init debug info
+	_wgi = [_gui,WIDGETGROUP,[95,98,5,2]] call createWidget;
+	_speak = [_gui,BACKGROUND,[0,0,50,100],_wgi] call createWidget;
+	[_speak,"<t align='center' size='0.4'>mic</t>"] call widgetSetText;
+	_online = [_gui,BACKGROUND,[50,0,50,100],_wgi] call createWidget;
+	[_online,"<t align='center' size='0.4'>on</t>"] call widgetSetText;
+	vs_internal_statusWidgets = [_wgi,_speak,_online];
+	_upd = {
+		_speak = vs_internal_statusWidgets select 1;
+		_online = vs_internal_statusWidgets select 2;
+		if (call vs_isSpeaking) then {
+			_speak setBackgroundColor [1,0,0,1];
+		} else {
+			_speak setBackgroundColor [0.3,0,0,0.5];
+		};
+		if (call vs_isConnectedVoice) then {
+			_online setBackgroundColor [0,1,0,1];
+		} else {
+			_online setBackgroundColor [0,0.3,0,0.5];
+		};
+		
+	}; startUpdate(_upd,0);
 	
 	_wg = [_gui,WIDGETGROUP,[
 		100 - voice_changer_size_w - voice_changer_bias_x,
@@ -176,9 +201,20 @@ vs_initChangeVoiceCtrl = {
 	}];
 	
 	// tranmith in game display
-	(findDisplay 46) displayAddEventHandler ["KeyDown",{doPrepareKeyData(_this); if isPressed(input_act_radio) then {[true] call vs_handleTransmith}}];
-	(findDisplay 46) displayAddEventHandler ["KeyUp",{doPrepareKeyData(_this); if isPressed(input_act_radio) then {[false] call vs_handleTransmith}}];
+	(findDisplay 46) displayAddEventHandler ["KeyDown",{
+		doPrepareKeyData(_this); 
+		if isPressed(input_act_radio) then {[true] call vs_handleTransmith; null};
+		if isPressed(input_act_voice) then {[true] call vs_handleSpeak; null};
+		null
+	}];
+	(findDisplay 46) displayAddEventHandler ["KeyUp",{
+		doPrepareKeyData(_this); 
+		if isPressed(input_act_radio) then {[false] call vs_handleTransmith; null};
+		if isPressed(input_act_voice) then {[false] call vs_handleSpeak; null};
+		null
+	}];
 };
 
-
-call vs_initChangeVoiceCtrl;
+#ifndef REDITOR_VOICE_DEBUG
+	call vs_initChangeVoiceCtrl;
+#endif

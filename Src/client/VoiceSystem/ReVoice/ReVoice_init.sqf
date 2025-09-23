@@ -11,10 +11,18 @@
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
-vs_canProcess = true;
+vs_localName = ""; //sended from server on player connected
+vs_canProcess = false;
 vs_max_voice_volume = 60;
 vs_horizontal_tab = toString [9]; //для запросов
 vs_isEnabledText = false;
+
+#ifdef REDITOR_VOICE_DEBUG
+    //список процессируемых объектов
+	if isNull(vs_reditor_procObjList) then {
+		vs_reditor_procObjList = [];
+	};
+#endif
 
 //инициализация и управление системы
 #include "API.sqf"
@@ -22,3 +30,6 @@ vs_isEnabledText = false;
 #include "Input.sqf"
 //система динамиков (и радио)
 #include "Speaker.sqf"
+
+
+call vs_init;

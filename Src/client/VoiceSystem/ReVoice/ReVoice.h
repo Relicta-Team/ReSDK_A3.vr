@@ -22,5 +22,10 @@
 #define CMD_GET_PLAYBACK_DEVICES "getPlaybackDevices"
 #define CMD_SET_PLAYBACK_DEVICE "setPlaybackDevice"
 
+#define CMD_GET_ALL_CLIENTS "getAllClients"
+
 #define CMD_SYNC_LOCAL_PLAYER "syncLocalPlayer"
 #define CMD_SYNC_REMOTE_PLAYER "syncRemotePlayer"
+
+#define CMD_SETLOWPASS "setLowpass"
+#define CMD_SETREVERB "setReverb"
