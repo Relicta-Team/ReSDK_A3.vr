@@ -45,7 +45,8 @@ init_function(systools_internal_clientLibInfo_init)
 		"task_force_radio_pipe",
 		//currently not used but signed also
 		"url_fetch",
-		"real_date"
+		"real_date",
+		"revoicer"
 	];
 }
 
@@ -89,4 +90,12 @@ function(systools_generateLibInfo)
 	["===== Copyied to clipboard ====="] call printLog;
 	["Place it in 'src\client\ClientInit\_allowed_extensions.h'"] call printLog;
 	["Pasted in clipboard"] call showInfo;
+}
+
+
+
+function(revoicer_rebuild)
+{
+	call compile preprocessFileLineNumbers "src\Editor\SystemTools\revoicer_loader.sqf";
+	["revoice rebuild done"] call printLog;
 }

@@ -38,4 +38,5 @@ init_function(print_init_redirects)
 {
 	cprintErr = printError;
 	cprintWarn = printWarning;
+	cprint = printLog;
 }
