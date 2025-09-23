@@ -123,6 +123,7 @@ cd_processConnection = {
 				call os_stop;
 
 				call vs_disconnectVoice;
+				vs_canProcess = false;
 
 				//остановка пакетирования атмоса
 				[false] call noe_client_nat_setEnabled;
