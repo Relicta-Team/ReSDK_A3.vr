@@ -393,26 +393,67 @@ vs_calcReverbEffect = {
         
     } foreach _result;
 
-    private _avgWall = if (_distancesCount > 0) then {_sumDistances / _distancesCount} else {_rayDistance};
+    //private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
-    // Добавляем метрику для определения открытой/закрытой местности
-    private _upHits = 0;
-    {
-        if (_foreachIndex >= 8 && _foreachIndex <= 16 && count _x > 0) then {
-            INC(_upHits);
-        };
-    } foreach _result;
+    // // === FMOD-параметры ===
+    // private _edel = (_nearWall / 343) * 1000;         // ранние отражения (мс)
+    // private _ldel = _edel + 20 + random 10;           // поздние отражения
+    // private _decay = 0.3 + ((_avgWall + _ceiling + _floor) / 3) / 10; // затухание
+    // private _hcut = 8000 max (22000 - _nearWall * 300);
+    // private _wet = -20 + (_avgWall min 30) * 0.5;
+    // private _dry = 0;
 
-    private _isOpen = if (_distancesCount == 0) then {true} else {(_upHits < 3) || (_ceiling >= 50)};
+    // [
+    //     _mob,
+    //     _decay * 1000,
+    //     _edel,
+    //     _ldel,
+    //     _hcut,
+    //     _wet,
+    //     _dry
+    // ]
 
-    // Вычисляем параметры с учетом _isOpen
-    private _roomSizeApprox = (_avgWall + _ceiling + _floor) / 3;
-    private _edel = if (_isOpen) then {0} else {((2 * _nearWall) / 343) * 1000 min 200};
-    private _ldel = if (_isOpen) then {0} else {_edel + 40 + random 20};
-    private _decay = if (_isOpen) then {0.1} else {0.1 + (_roomSizeApprox / 5) min 10};
-    private _hcut = if (_isOpen) then {20000} else {4000 max (20000 - _nearWall * 200)};
-    private _wetCalc = -20 + (30 - (_avgWall min 30)) * 1.2;
-    private _wet = if (_isOpen) then {-80} else {(_wetCalc max -20) min 0};
+    //new algo v2(works fine)
+    private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
+
+    private _distSpeaker = _mob getvariable ["rv_distance",4]; 
+    private _volumeFactor = linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+    
+    private _avgDim = (_avgWall + _ceiling + _floor) / 3;
+
+
+    //wetupdate
+    // параметры для подстройки
+    private _minWet = -20;      // wet в самой маленькой коробке (dB)
+    private _maxWet = -2;       // wet в очень большой пещере (dB)
+    private _wetScale = 8;      // "скала" в метрах — как быстро wet поднимается с размером
+    private _wetBoostPerVol = 6; // сколько dB добавить при полном "крике" (volumeFactor>1)
+
+    // экспоненциальная петля: 1 - exp(-avgDim / scale) — даёт S-образный рост
+    private _wetBase = _minWet + (_maxWet - _minWet) * (1 - (exp (- (_avgDim / _wetScale))));
+
+    // усиление от громкости говорящего: volumeFactor в твоём коде ~ [0.8..1.5]
+    // делаем так: если volumeFactor > 1 => прибавляем (volumeFactor-1) * wetBoostPerVol
+    private _wetFromVol = (_volumeFactor - 1) * _wetBoostPerVol;
+    //wetupdate end
+
+    private _edel  = (_nearWall / 343) * 1000;
+    private _ldel  = _edel + (_avgDim / 2) + random 15;
+    private _decay = (0.5 + (sqrt _avgDim) * 0.15) * _volumeFactor;
+    _decay = _decay min 7;
+
+    private _hcut = 18000 - (_nearWall * 200);
+    _hcut = _hcut max 4000;
+
+    // private _wet = (-8 + (_avgDim * 0.4)) * _volumeFactor;
+    // _wet = _wet max -60 min 0;
+
+    //new wet
+    // итоговый wet (dB), с зажимом в допустимом диапазоне
+    private _wet = _wetBase + _wetFromVol;
+    _wet = _wet max _minWet;   // не ниже минимального
+    _wet = _wet min 0;         // не выше 0 dB (FMOD ожидает отрицательные/нулевые значения)
+
     private _dry = 0;
 
     [
