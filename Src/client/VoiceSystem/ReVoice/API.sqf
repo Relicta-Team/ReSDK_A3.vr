@@ -39,7 +39,7 @@ vs_init = {
         {
             // code here gets executed on the client at end of mission, whether due to player abort, loss of connection, or mission ended by server
             // might not work on headless clients
-            
+            logformat("vs::init() - unload attempt (empty %1)",!isNull(vs_disconnectVoice));
             //force disconnect voice
             call vs_releaseAllTangents;
             call vs_disconnectVoice;
@@ -68,10 +68,17 @@ vs_connectToVoiceSystem = {
     [_addr,_port,vs_localName,_pass] call vs_connectVoice;
 
     [player,vs_localName] call vs_initMob;
+
+    vs_canProcess = true;
 };
 
 vs_disconnectVoice = {
     apiRequest(REQ_DISCONNECT_VOICE) == "true";  
+};
+
+vs_disconnectVoiceSystem = {
+    vs_canProcess = false;
+    call vs_disconnectVoice;
 };
 
 //разговаривает ли
@@ -210,7 +217,10 @@ vs_syncRemotePlayers = {
             //speaking distance
             _proc pushback (_x getvariable ["rv_distance",0]); 
             
-            apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
+            private _state = apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
+            if ((_state select 1) == 0) then {
+                [_x,_state select 0] call vs_handleUserSpeakInternal;
+            };
 
             //процессируем эффекты: вычисляем реверб, лоупасс
             private _lp = [_x] call vs_calcLowpassEffect;
@@ -225,6 +235,32 @@ vs_syncRemotePlayers = {
         //todo refactoring
         apiCmd [CMD_SYNC_REMOTE_PLAYER,[_x getvariable "rv_name",[0,0,0],[0,1,0],1]];
     } foreach _mutedPlayers;
+};
+
+vs_handleUserSpeakInternal = {
+    params ["_mob","_state"];
+    if (_state == "speak") exitWith {
+        if (!(_mob getvariable ["rv_isSpeaking",false])) then {
+            _mob setvariable ["rv_isSpeaking",true];
+            [_mob,true] call vs_handleSpeak;
+        };
+    };
+    if (_state == "nospeak") exitWith {
+        if ((_mob getvariable ["rv_isSpeaking",false])) then {
+            _mob setvariable ["rv_isSpeaking",false];
+            [_mob,false] call vs_handleSpeak;
+        };
+    };
+};
+
+//событие когда другой клиент говорит или перестает говорить
+vs_onUserSpeak = {
+    params ["_mob","_isSpeaking"];
+    if (_isSpeaking) then {
+        _mob setRandomLip true;
+    } else {
+        _mob setRandomLip false;
+    };
 };
 
 vs_handleSpeak = {

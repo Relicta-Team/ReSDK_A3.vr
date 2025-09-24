@@ -225,7 +225,6 @@ cd_onPrepareClient = {
 				rpcCall("onChangeEyeState",[_vision arg "load"]);
 
 				call vs_connectToVoiceSystem;
-				vs_canProcess = true;
 
 				stopThisUpdate();
 
