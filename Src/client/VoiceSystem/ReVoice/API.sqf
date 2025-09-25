@@ -271,7 +271,7 @@ vs_handleSpeak = {
     if equals(call vs_isSpeaking,_mode) exitWith {};
     if (_mode) then {
         //unconscious/dead skip mic capture
-        if (![] call interact_isActive) exitWith {};
+        if !([] call interact_isActive) exitWith {};
         apiRequest(REQ_SPEAK_START);
     } else {
         apiRequest(REQ_SPEAK_STOP);
