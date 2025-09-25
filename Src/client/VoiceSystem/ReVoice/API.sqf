@@ -215,7 +215,10 @@ vs_syncRemotePlayers = {
             #endif
             
             //speaking distance
-            _proc pushback (_x getvariable ["rv_distance",0]); 
+            _proc pushback (_x getvariable ["rv_distance",0]);
+            _vol = _x getvariable ["rv_volume",1];
+            _vol = [_x,_vol] call vs_processSpeakingLangs;
+            //todo add volume to packet
             
             private _state = apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
             if ((_state select 1) == 0) then {
@@ -267,6 +270,8 @@ vs_handleSpeak = {
     params ["_mode"];
     if equals(call vs_isSpeaking,_mode) exitWith {};
     if (_mode) then {
+        //unconscious/dead skip mic capture
+        if (![] call interact_isActive) exitWith {};
         apiRequest(REQ_SPEAK_START);
     } else {
         apiRequest(REQ_SPEAK_STOP);
@@ -530,4 +535,32 @@ vs_calcLowpassEffect = {
     private _q = 1.2 / (1 + (_thickness / 1.0));
 
     [_mob,_cutoff,_q]
+};
+
+//Калькулирует понимание речи персонажа
+vs_processSpeakingLangs = {
+	params ["_unit","_curVol"];
+	/*
+		vs_vt - переменная на персонаже
+		
+		vs_list_langs = [
+			"human","eater"
+		];
+		//список кого слышат эти персонажи
+		vs_map_whohear = createHashMapFromArray [
+			["human",["human"]],
+			["eater",["eater","human"]]
+		];
+		
+	*/
+	
+	if equals(_unit,player) exitWith {_curVol}; //локальный игрок без изменений
+	_lang_ = _unit getVariable ["vs_vt","human"];
+	_playerlang_ = player getVariable ["vs_vt","human"];
+	_curlang = vs_map_whohear getOrDefault [_playerlang_,"human"];
+	if !array_exists(_curlang,_lang_) then {
+		_curVol = 0;
+	};
+	
+	_curVol
 };
