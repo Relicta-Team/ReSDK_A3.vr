@@ -40,7 +40,7 @@ vs_init = {
         findDisplay 46 displayAddEventHandler ["Unload",compile _nativeCode];
     };
 
-    logformat("vs::init() - voip system: %1",apiRequest(REQ_GET_VERSION));
+    logformat("vs::init() - voip system: %1; api version: %2",apiRequest(REQ_GET_VERSION) arg vs_apiversion);
 
     vs_processPlayerPosHandler = "";
     call vs_startHandleProcessPlayerPos;
@@ -53,17 +53,18 @@ vs_isConnectedVoice = {
 
 vs_connectVoice = {
     params ["_addr","_port","_user","_pass"];
-    apiCmd [CMD_CONNECT_VOICE,[_addr,_port,_user,_pass]];
+    (apiCmd [CMD_CONNECT_VOICE,[_addr,_port,_user,_pass]]) == "True";
 };
 
 //вызывается когда клиент джоинится в игру
 vs_connectToVoiceSystem = {
     vs_serverAddrPortPass params ["_addr","_port","_pass"];
-    [_addr,_port,vs_localName,_pass] call vs_connectVoice;
+    private _r = [_addr,_port,vs_localName,_pass] call vs_connectVoice;
 
     [player,vs_localName] call vs_initMob;
 
     vs_canProcess = true;
+    _r
 };
 
 vs_disconnectVoice = {

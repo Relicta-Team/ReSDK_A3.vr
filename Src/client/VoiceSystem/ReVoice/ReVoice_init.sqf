@@ -11,6 +11,8 @@
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
+vs_apiversion = "alpha_v1";
+
 vs_localName = ""; //sended from server on player connected
 vs_canProcess = false;
 vs_max_voice_volume = 60;
