@@ -35,15 +35,9 @@ vs_init = {
         #endif
 
         waitUntil { !isNullReference(findDisplay 46) };
-        findDisplay 46 displayAddEventHandler ["Unload",
-        {
-            // code here gets executed on the client at end of mission, whether due to player abort, loss of connection, or mission ended by server
-            // might not work on headless clients
-            logformat("vs::init() - unload attempt (empty %1)",!isNull(vs_disconnectVoice));
-            //force disconnect voice
-            call vs_releaseAllTangents;
-            call vs_disconnectVoice;
-        }];
+        //внутри только нативный код. все функции клиента на этом этапе выгружены
+        private _nativeCode = (toString vs_speakReleaseAll)+";"+(toString vs_disconnectVoice)+";diag_log 'vs_init() - internal voice disconnect on unload game display';";
+        findDisplay 46 displayAddEventHandler ["Unload",compile _nativeCode];
     };
 
     logformat("vs::init() - voip system: %1",apiRequest(REQ_GET_VERSION));
@@ -183,6 +177,10 @@ vs_syncLocalPlayer = {
         set3DConeSettings
 */
 vs_syncRemotePlayers = {
+    if (!isGameFocused) then {
+        [false] call vs_handleSpeak;
+    };
+
     private _nearPlayers = (player nearEntities ["Man", vs_max_voice_volume])-[player];
     private _mutedPlayers = (allPlayers-[player]) - _nearPlayers;
     
@@ -216,9 +214,10 @@ vs_syncRemotePlayers = {
             
             //speaking distance
             _proc pushback (_x getvariable ["rv_distance",0]);
+            //speaking volume
             _vol = _x getvariable ["rv_volume",1];
             _vol = [_x,_vol] call vs_processSpeakingLangs;
-            //todo add volume to packet
+            _proc pushback _vol;
             
             private _state = apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
             if ((_state select 1) == 0) then {
@@ -245,13 +244,13 @@ vs_handleUserSpeakInternal = {
     if (_state == "speak") exitWith {
         if (!(_mob getvariable ["rv_isSpeaking",false])) then {
             _mob setvariable ["rv_isSpeaking",true];
-            [_mob,true] call vs_handleSpeak;
+            [_mob,true] call vs_onUserSpeak;
         };
     };
     if (_state == "nospeak") exitWith {
         if ((_mob getvariable ["rv_isSpeaking",false])) then {
             _mob setvariable ["rv_isSpeaking",false];
-            [_mob,false] call vs_handleSpeak;
+            [_mob,false] call vs_onUserSpeak;
         };
     };
 };
@@ -503,6 +502,24 @@ vs_calcLowpassEffect = {
     if (count _itsRev == 0) exitWith {[_mob,22000,10]};
     reverse _itsRev;
     private _thickness = 0;
+
+    //срезаем ненужные элементы (юниты и малые объекты (объем меньше 0.3))
+    private _remlist = [];
+    private _xCur = objNull;
+    //todo мы вероятно можем оптимизировать добавив пропуск во втором итераторе
+    {
+        _xCur = _x select 2;
+        if (typeof _xCur == BASIC_MOB_TYPE) then {
+            _remlist pushBack _foreachIndex;
+            continue;
+        };
+        if (((0 boundingBoxReal _xCur) select 2) <= 0.3) then {
+            _remlist pushBack _foreachIndex;
+            continue;
+        };
+    } foreach _its;
+    _its deleteAt _remlist;
+    
     {
         _x params ["_pos","_norm","_cur"];
         #ifdef REDITOR_VOICE_DEBUG
