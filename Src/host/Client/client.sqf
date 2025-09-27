@@ -352,6 +352,7 @@ class(ServerClient) /*extends(NetObject)*/
 		[format["Connected and ready - %1 (netid: %2; disid: %3)",getSelf(name),getSelf(id),getSelf(discordId)]] call discLog;
 
 		netSendVar("cd_clientName",getSelf(name),getSelf(id)); //быстренько отсылаем клиенту его имя
+		netSendVar("vs_localName",getSelf(name),getSelf(id)); //и дублим в войс систему временно
 
 		//Отправляем клиенту его настройки
 		callSelf(sendClientSettings);

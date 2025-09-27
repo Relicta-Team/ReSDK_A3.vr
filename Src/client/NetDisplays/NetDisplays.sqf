@@ -194,6 +194,8 @@ nd_loadDisplay = {
 
 
 	private _d = call dynamicDisplayOpen;
+
+	[_d] call vs_addDisplayInputHandlers;
 	
 	//adding common inputs
 	_d displayAddEventHandler ["KeyUp",{
