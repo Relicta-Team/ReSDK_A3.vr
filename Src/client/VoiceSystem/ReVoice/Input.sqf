@@ -128,9 +128,9 @@ vs_initChangeVoiceCtrl = {
 	//init debug info
 	_wgi = [_gui,WIDGETGROUP,[95,98,5,2]] call createWidget;
 	_speak = [_gui,BACKGROUND,[0,0,50,100],_wgi] call createWidget;
-	[_speak,"<t align='center' size='0.4'>mic</t>"] call widgetSetText;
+	[_speak,"<t align='center' size='0.6'>MIC</t>"] call widgetSetText;
 	_online = [_gui,BACKGROUND,[50,0,50,100],_wgi] call createWidget;
-	[_online,"<t align='center' size='0.4'>on</t>"] call widgetSetText;
+	[_online,"<t align='center' size='0.6'>ONL</t>"] call widgetSetText;
 	vs_internal_statusWidgets = [_wgi,_speak,_online];
 	_upd = {
 		_speak = vs_internal_statusWidgets select 1;

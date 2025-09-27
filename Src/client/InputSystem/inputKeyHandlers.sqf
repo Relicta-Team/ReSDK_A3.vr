@@ -37,7 +37,7 @@ cd_settingsKeyboard = [
 	kb("Указать","Указать на какой-то объект в мире",std_key("Y"),"input_act_pointTo"),
 	kb("Изучить","Позволяет изучить предмет в инвентаре или осмотреть объект в мире",std_key("F1"),"input_act_examine"),
 	kb("Крафт","Открывает меню крафта",std_key("K"),"input_act_craft"),
-	kb("Голос","Активирует общение голосом",std_keyArgs("LCONTROL",false,true,false,false),"input_act_voice"),
+	kb("Голос","Активирует общение голосом",std_keyArgs("GRAVE",false,false,false,false),"input_act_voice"),
 	kb("Радиосвязь","Активирует разговор по радиосвязи (при наличии радио)",std_key("CAPSLOCK"),"input_act_radio"),
 	kb("Эмоции","Открывает меню эмоций и описания действий персонажа",std_key("F2"),"input_act_emoteMenu"),
 	kb("История сообщений","Открывает список последних сообщений из чата",std_key("F8"),"input_act_chatHistory"),
