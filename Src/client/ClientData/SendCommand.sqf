@@ -387,17 +387,36 @@ localCommand("grafon")
 
 localCommand("reloadvoice")
 {
-	
-	if !isNull(vs_internal_reloadTimer) then {
-		if (vs_internal_reloadTimer) exitWith {
-			warning("localCommand::mapCmd<GameFunction>['reloadvoice'] - too fast calling command. Wait some time...");
-		};	
-		vs_canProcess = false;
-		vs_internal_reloadTimer = true;
-		invokeAfterDelay({vs_internal_reloadTimer = false; vs_canProcess = true},5);
+	if (vs_useReVoice) then {
+		if isNull(vs_internal_reloadVoiceNew) then {
+			vs_internal_reloadVoiceNew = true;
+			if (call vs_isConnectedVoice) then {
+				["Остановка войса...","system"] call chatPrint;
+				call vs_disconnectVoiceSystem;
+			};
+			private _code = {
+				["Подключение войса...","system"] call chatPrint;
+				if (call vs_connectToVoiceSystem) then {
+					["Войс подключен!...","system"] call chatPrint;
+				} else {
+					["Ошибка подключения войса. Попробуйте снова или перезапустите игру","system"] call chatPrint;
+				};
+				vs_internal_reloadVoiceNew = null;
+			}; invokeAfterDelay(_code,2);
+		};
 	} else {
-		vs_canProcess = false;
-		vs_internal_reloadTimer = true;
-		invokeAfterDelay({vs_internal_reloadTimer = false; vs_canProcess = true},5);
+		if !isNull(vs_internal_reloadTimer) then {
+			if (vs_internal_reloadTimer) exitWith {
+				warning("localCommand::mapCmd<GameFunction>['reloadvoice'] - too fast calling command. Wait some time...");
+			};	
+			vs_canProcess = false;
+			vs_internal_reloadTimer = true;
+			invokeAfterDelay({vs_internal_reloadTimer = false; vs_canProcess = true},5);
+		} else {
+			vs_canProcess = false;
+			vs_internal_reloadTimer = true;
+			invokeAfterDelay({vs_internal_reloadTimer = false; vs_canProcess = true},5);
+		};
 	};
+	
 };
