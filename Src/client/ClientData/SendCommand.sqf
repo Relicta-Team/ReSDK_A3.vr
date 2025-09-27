@@ -424,3 +424,9 @@ localCommand("reloadvoice")
 	};
 	
 };
+
+localCommand("setvoipvol") 
+{
+	_new = parseNumber arguments;
+	[_new] call vs_setMasterVoiceVolume;
+};

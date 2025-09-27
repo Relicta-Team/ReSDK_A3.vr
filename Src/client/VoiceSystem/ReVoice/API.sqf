@@ -53,7 +53,7 @@ vs_isConnectedVoice = {
 
 vs_connectVoice = {
     params ["_addr","_port","_user","_pass"];
-    (apiCmd [CMD_CONNECT_VOICE,[_addr,_port,_user,_pass]]) == "True";
+    ((apiCmd [CMD_CONNECT_VOICE,[_addr,_port,_user,_pass]]) select 0) == "True";
 };
 
 //вызывается когда клиент джоинится в игру
@@ -107,6 +107,12 @@ vs_getAllClients = {
     } else {
         [];
     };
+};
+
+vs_setMasterVoiceVolume = {
+    params ["_vol"];
+    _vol = clamp(_vol,0,10);
+    ((apiCmd [CMD_SET_MASTER_VOICE_VOLUME,[_vol]])select 0)=="True";
 };
 
 vs_startHandleProcessPlayerPos = {
@@ -165,8 +171,9 @@ vs_syncLocalPlayer = {
     #else
         _args append (ASLToATL eyepos player);
         _args append (velocity player);
-        _args append (vectordir player);
-        _args append (vectorup player);
+        //используется cam_fixedObject из-за вектора камеры, синхронизированной с рендером
+        _args append (vectordir cam_fixedObject);
+        _args append (vectorup cam_fixedObject);
     #endif
     
     apiCmd [CMD_SYNC_LOCAL_PLAYER,_args];
@@ -236,7 +243,9 @@ vs_syncRemotePlayers = {
 
     {
         //todo refactoring
-        apiCmd [CMD_SYNC_REMOTE_PLAYER,[_x getvariable "rv_name",[0,0,0],[0,1,0],1]];
+        if (isPlayer _x) then {
+            apiCmd [CMD_SYNC_REMOTE_PLAYER,[_x getvariable "rv_name",0,0,0,0,1,0,1,0]];
+        };
     } foreach _mutedPlayers;
 };
 
@@ -292,10 +301,13 @@ vs_initMob = {
     params ["_mob","_nick"];
     
     if (local _mob) then {
-        _mob setvariable ["rv_name",_nick,true];
+        //! это теперь ставится на сервере
+        //_mob setvariable ["rv_name",_nick,true];
+        
         //дистанция речи
         _mob setvariable ["rv_distance",4,true];
-        //фильтры (маски, кляпы, гостинг)
+        
+        //todo фильтры (маски, кляпы, гостинг)
         _mob setvariable ["rv_filter",[],true];
 
     };
@@ -362,12 +374,13 @@ vs_calcReverbEffect = {
         [_endPos,_endPos vectorAdd [-_rayDistance,_rayDistance,-_rayDistance], __postargs],
         [_endPos,_endPos vectorAdd [-_rayDistance,-_rayDistance,-_rayDistance], __postargs]
     ];
-    private _t = tickTime;
+
+    //private _t = tickTime;
     private _result = lineIntersectsSurfaces [_pointsQuery];
     
-    #ifdef REDITOR_VOICE_DEBUG
-    ["timecall:%1ms",((tickTime - _t)*1000)toFixed 6] call printTrace;
-    #endif
+    // #ifdef REDITOR_VOICE_DEBUG
+    // ["timecall:%1ms",((tickTime - _t)*1000)toFixed 6] call printTrace;
+    // #endif
     
     private _nearWall = _rayDistance;
     private _floor = _rayDistance;
@@ -491,16 +504,35 @@ vs_calcLowpassEffect = {
     
     //! СЕЙЧАС УПРОЩЁННЫЙ АЛГОРИТМ
     #ifdef REDITOR_VOICE_DEBUG
+    private _t = tickTime;
     if !isNull(vs_reditor_queryListLowpass) then {
         deletevehicle vs_reditor_queryListLowpass;
     };
     vs_reditor_queryListLowpass = [];
     #endif
 
+    //постпроцессоры эффекта
+    private _checkFilters = {
+        #ifdef REDITOR_VOICE_DEBUG
+        if(true) exitWith {};
+        #endif
+
+        if !([] call interact_isActive) then {
+            _cutoff = _cutoff min 600;
+	        _q = _q min 1;
+        };
+    };
+    private _defRet = {
+        private _cutoff = 22000;
+        private _q = 10;
+        call _checkFilters;
+        [_mob,_cutoff,_q]
+    };
+
     private _its = lineIntersectsSurfaces [_startPos,_endPos,_ignore1,_ignore2,true,100,"VIEW","GEOM",false];
-    if (count _its == 0) exitWith {[_mob,22000,10]};
+    if (count _its == 0) exitWith _defRet;
     private _itsRev = lineIntersectsSurfaces [_endPos,_startPos,_ignore1,_ignore2,true,100,"VIEW","GEOM",false];
-    if (count _itsRev == 0) exitWith {[_mob,22000,10]};
+    if (count _itsRev == 0) exitWith _defRet;
     reverse _itsRev;
     private _thickness = 0;
 
@@ -514,7 +546,7 @@ vs_calcLowpassEffect = {
             _remlist pushBack _foreachIndex;
             continue;
         };
-        if (((0 boundingBoxReal _xCur) select 2) <= 0.3) then {
+        if (((0 boundingBoxReal _xCur) select 2) <= 0.8) then {
             _remlist pushBack _foreachIndex;
             continue;
         };
@@ -542,6 +574,13 @@ vs_calcLowpassEffect = {
                 #endif
                 _thickness = _thickness + (_pos distance _posInv);
             };
+
+            #ifdef REDITOR_VOICE_DEBUG
+            private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
+            _o setObjectTexture [0,"#(rgb,8,8,3)color(0,0,1,1)"];
+            vs_reditor_queryListLowpass pushBack _o;
+            _o setposasl _posInv;
+            #endif
         };
 
     } foreach _its;
@@ -551,6 +590,12 @@ vs_calcLowpassEffect = {
 
     private _cutoff =  6000 / (1 + _thickness / 0.5) / _distFactor;
     private _q = 1.2 / (1 + (_thickness / 1.0));
+    
+    call _checkFilters;
+
+    #ifdef REDITOR_VOICE_DEBUG
+    ["lowpass timecall:%1ms; Thickness:%2",((tickTime - _t)*1000)toFixed 6,_thickness] call printTrace;
+    #endif
 
     [_mob,_cutoff,_q]
 };

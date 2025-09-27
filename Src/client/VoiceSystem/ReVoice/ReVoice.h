@@ -22,6 +22,8 @@
 #define CMD_GET_PLAYBACK_DEVICES "getPlaybackDevices"
 #define CMD_SET_PLAYBACK_DEVICE "setPlaybackDevice"
 
+#define CMD_SET_MASTER_VOICE_VOLUME "setMasterVoiceVolume"
+
 #define CMD_GET_ALL_CLIENTS "getAllClients"
 
 #define CMD_SYNC_LOCAL_PLAYER "syncLocalPlayer"
