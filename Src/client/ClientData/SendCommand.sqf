@@ -388,6 +388,10 @@ localCommand("grafon")
 localCommand("reloadvoice")
 {
 	if (vs_useReVoice) then {
+		if (isLobbyOpen) exitWith {
+			["Перезапуск войса в лобби невозможен","system"] call chatPrint;
+		};
+		
 		if isNull(vs_internal_reloadVoiceNew) then {
 			vs_internal_reloadVoiceNew = true;
 			if (call vs_isConnectedVoice) then {
