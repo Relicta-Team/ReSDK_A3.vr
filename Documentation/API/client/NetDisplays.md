@@ -143,7 +143,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [client\NetDisplays\NetDisplays.sqf at line 372](../../../Src/client/NetDisplays/NetDisplays.sqf#L372)
+File: [client\NetDisplays\NetDisplays.sqf at line 374](../../../Src/client/NetDisplays/NetDisplays.sqf#L374)
 ## nd_createTestDisplay
 
 Type: function
@@ -182,7 +182,7 @@ Description:
 - Param: _type
 - Param: _data (optional, default [])
 
-File: [client\NetDisplays\NetDisplays.sqf at line 231](../../../Src/client/NetDisplays/NetDisplays.sqf#L231)
+File: [client\NetDisplays\NetDisplays.sqf at line 233](../../../Src/client/NetDisplays/NetDisplays.sqf#L233)
 ## nd_closeND_lobby
 
 Type: function
@@ -190,7 +190,7 @@ Type: function
 Description: 
 - Param: _isRpc (optional, default false)
 
-File: [client\NetDisplays\NetDisplays.sqf at line 267](../../../Src/client/NetDisplays/NetDisplays.sqf#L267)
+File: [client\NetDisplays\NetDisplays.sqf at line 269](../../../Src/client/NetDisplays/NetDisplays.sqf#L269)
 ## nd_closeND_lobbyImpl
 
 Type: function
@@ -198,7 +198,7 @@ Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 280](../../../Src/client/NetDisplays/NetDisplays.sqf#L280)
+File: [client\NetDisplays\NetDisplays.sqf at line 282](../../../Src/client/NetDisplays/NetDisplays.sqf#L282)
 ## nd_onPressButton
 
 Type: function
@@ -206,7 +206,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [client\NetDisplays\NetDisplays.sqf at line 290](../../../Src/client/NetDisplays/NetDisplays.sqf#L290)
+File: [client\NetDisplays\NetDisplays.sqf at line 292](../../../Src/client/NetDisplays/NetDisplays.sqf#L292)
 ## nd_cleanupData
 
 Type: function
@@ -214,7 +214,7 @@ Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 304](../../../Src/client/NetDisplays/NetDisplays.sqf#L304)
+File: [client\NetDisplays\NetDisplays.sqf at line 306](../../../Src/client/NetDisplays/NetDisplays.sqf#L306)
 ## nd_regWidget
 
 Type: function
@@ -225,7 +225,7 @@ Description:
 - Param: _probCtg
 - Param: _dataType
 
-File: [client\NetDisplays\NetDisplays.sqf at line 313](../../../Src/client/NetDisplays/NetDisplays.sqf#L313)
+File: [client\NetDisplays\NetDisplays.sqf at line 315](../../../Src/client/NetDisplays/NetDisplays.sqf#L315)
 ## nd_addClosingButton
 
 Type: function
@@ -236,7 +236,7 @@ Description:
 - Param: _ctg (optional, default widgetNull)
 - Param: _registerAsReloaded (optional, default false)
 
-File: [client\NetDisplays\NetDisplays.sqf at line 320](../../../Src/client/NetDisplays/NetDisplays.sqf#L320)
+File: [client\NetDisplays\NetDisplays.sqf at line 322](../../../Src/client/NetDisplays/NetDisplays.sqf#L322)
 ## nd_onUpdate
 
 Type: function
@@ -244,7 +244,7 @@ Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 337](../../../Src/client/NetDisplays/NetDisplays.sqf#L337)
+File: [client\NetDisplays\NetDisplays.sqf at line 339](../../../Src/client/NetDisplays/NetDisplays.sqf#L339)
 ## nd_onClose
 
 Type: function
@@ -252,7 +252,7 @@ Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 344](../../../Src/client/NetDisplays/NetDisplays.sqf#L344)
+File: [client\NetDisplays\NetDisplays.sqf at line 346](../../../Src/client/NetDisplays/NetDisplays.sqf#L346)
 ## nd_unloadDisplay
 
 Type: function
@@ -260,7 +260,7 @@ Type: function
 Description: 
 
 
-File: [client\NetDisplays\NetDisplays.sqf at line 354](../../../Src/client/NetDisplays/NetDisplays.sqf#L354)
+File: [client\NetDisplays\NetDisplays.sqf at line 356](../../../Src/client/NetDisplays/NetDisplays.sqf#L356)
 ## nd_stdLoad
 
 Type: function
@@ -271,7 +271,7 @@ Description:
 - Param: _sy (optional, default 50)
 - Param: _btName (optional, default "Закрыть")
 
-File: [client\NetDisplays\NetDisplays.sqf at line 376](../../../Src/client/NetDisplays/NetDisplays.sqf#L376)
+File: [client\NetDisplays\NetDisplays.sqf at line 378](../../../Src/client/NetDisplays/NetDisplays.sqf#L378)
 # MessageBoxes.sqf
 
 ## __ND_MB_INPUT_MAX_CHARS

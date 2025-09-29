@@ -122,6 +122,8 @@ cd_processConnection = {
 				//остановить onesync services
 				call os_stop;
 
+				call vs_disconnectVoiceSystem;
+
 				//остановка пакетирования атмоса
 				[false] call noe_client_nat_setEnabled;
 				

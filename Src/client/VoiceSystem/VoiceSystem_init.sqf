@@ -3,6 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
+#define USE_REVOICE_BACKEND
+
 //#include <engine.h>
 #include <..\..\host\engine.hpp>
 #include <..\..\host\lang.hpp>
@@ -13,7 +15,17 @@ namespace(VoiceSystem,vs_)
 macro_def(vs_use_new_algoritm_voice_intersection)
 #define VOICE_USE_NEW_ALGORITM_VOICE_INTERSECTION
 
-#include "VoiceSystem_uncategorized.sqf"
+#ifdef USE_REVOICE_BACKEND
+    vs_useReVoice = true;
+#else
+    vs_useReVoice = false;
+#endif
 
-//Публичный интерфейс управления
-#include "VoiceSystem_publicInterface.sqf"
+#ifdef USE_REVOICE_BACKEND
+    #include "ReVoice\ReVoice_init.sqf"
+#else
+    #include "VoiceSystem_uncategorized.sqf"
+
+    //Публичный интерфейс управления
+    #include "VoiceSystem_publicInterface.sqf"
+#endif

@@ -656,6 +656,10 @@ region(Connect control events)
 	func(onConnected)
 	{
 		objParams();
+		
+		//установка имени для войса
+		netSyncObjVar(getSelf(owner),"rv_name",getVar(getSelf(client),name));
+
 		//загрузка действий (левое меню)
 		callSelfParams(loadActions,null);
 		//хандлер подключения
@@ -668,6 +672,9 @@ region(Connect control events)
 	func(onDisconnected)
 	{
 		objParams();
+		
+		//reset voip name
+		netSyncObjVar(getSelf(owner),"rv_name",null);
 		
 		//removing all localEffects
 		callSelf(localEffectClearAll);
