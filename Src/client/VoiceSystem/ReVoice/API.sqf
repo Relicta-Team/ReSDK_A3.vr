@@ -7,6 +7,15 @@
 #define apiCmd "revoicer" callExtension 
 #define apiRequest(p) ("revoicer" callExtension (p))
 
+#ifdef REDITOR_VOICE_DEBUG
+    #define revoice_debug_only(debug_expr) debug_expr;
+    #define REDITOR_VOICE_DEBUG_RENDER
+#else
+    #define revoice_debug_only(debug_expr) 
+#endif
+
+#undef REDITOR_VOICE_DEBUG_RENDER
+
 vs_init = {
     #ifndef REDITOR_VOICE_DEBUG
         #ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE
@@ -135,8 +144,17 @@ vs_onProcessPlayerPosition = {
     if (!vs_canProcess) exitWith {};
 
     if (call vs_checkConnection) then {
+        revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=_this max vs_debug_maxvalue;vs_debug_maxvalue})
+        /*
+            max 1.098633ms for local or remotes without effects
+            ~max 17 ms for 100 players (only remotes,noeffects)
+            mid 3-4 ms for 100 players (only remotes,noeffects)
+        */
         call vs_syncLocalPlayer;
+        //revoice_debug_only(["sync local %1ms" arg (((tickTime - _t)*1000)call _mv)tofixed 6]call printTrace;_t=tickTime;)
+        revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
+        revoice_debug_only(["sync remote %1ms" arg (((tickTime - _t)*1000) call _mv)tofixed 6]call printTrace;_t=tickTime;)
     };
 };
 
@@ -177,6 +195,17 @@ vs_syncLocalPlayer = {
     #endif
     
     apiCmd [CMD_SYNC_LOCAL_PLAYER,_args];
+};
+
+gcli = {
+    _r = [];
+    for "_i" from 1 to _this do {
+        _o = create3DENEntity["object", "Land_Orange_01_F",[0,0,0]];
+        _o setvariable ["rv_name","rem"];
+        _o setvariable ["rv_distance",4];
+        _r pushback _o;
+    };
+    _r
 };
 
 /* синхронизация удаленных людей
@@ -228,18 +257,27 @@ vs_syncRemotePlayers = {
             _proc pushback _vol;
             
             private _state = apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
+            
             if ((_state select 1) == 0) then {
                 [_x,_state select 0] call vs_handleUserSpeakInternal;
+                //для оптимизации эффекты процессятся только при разговоре
+                if (_state select 0=="speak") then {
+
+                    //процессируем эффекты: вычисляем реверб, лоупасс
+                    private _lp = [_x] call vs_calcLowpassEffect;
+                    _lp call vs_setLowpassEffect;
+
+                    if (tickTime>=(_x getvariable ["rv_nextrevtime",0])) then {
+                        _x setvariable ["rv_nextrevtime",tickTime+1];
+                        private _reverb = [_x] call vs_calcReverbEffect;
+                        _reverb call vs_setReverbEffect;
+                    };
+                }
+
             };
-
-            //процессируем эффекты: вычисляем реверб, лоупасс
-            private _lp = [_x] call vs_calcLowpassEffect;
-            _lp call vs_setLowpassEffect;
-
-            private _reverb = [_x] call vs_calcReverbEffect;
-            _reverb call vs_setReverbEffect;
         };
     } foreach _nearPlayers;
+    
 
     {
         //todo refactoring
@@ -337,7 +375,8 @@ vs_calcReverbEffect = {
         private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
     #endif
 
-    #define __postargs _ignore1,_mob,true,vs_max_voice_volume+1,"VIEW","GEOM",true,1
+    #define __postargs _ignore1,_mob,true,1,"VIEW","GEOM",true
+    
     private _pointsQuery = [
         //cross check
         [_endPos,_endPos vectorAdd [_rayDistance,0,0], __postargs],
@@ -391,7 +430,7 @@ vs_calcReverbEffect = {
     {
         if (count _x > 0) then {
             private _cur = _x select 0;
-            #ifdef REDITOR_VOICE_DEBUG
+            #ifdef REDITOR_VOICE_DEBUG_RENDER
             
             drawLine3d [asltoatl _endPos,asltoatl (_cur select 0),call {
                 if (_foreachindex <= 7) exitWith {[1,0,0,1]};
@@ -503,7 +542,7 @@ vs_calcLowpassEffect = {
     // [begPosASL, endPosASL, ignoreObj1, ignoreObj2, sortMode, maxResults, LOD1, LOD2, returnUnique]
     
     //! СЕЙЧАС УПРОЩЁННЫЙ АЛГОРИТМ
-    #ifdef REDITOR_VOICE_DEBUG
+    #ifdef REDITOR_VOICE_DEBUG_RENDER
     private _t = tickTime;
     if !isNull(vs_reditor_queryListLowpass) then {
         deletevehicle vs_reditor_queryListLowpass;
@@ -555,7 +594,7 @@ vs_calcLowpassEffect = {
     
     {
         _x params ["_pos","_norm","_cur"];
-        #ifdef REDITOR_VOICE_DEBUG
+        #ifdef REDITOR_VOICE_DEBUG_RENDER
         private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
         vs_reditor_queryListLowpass pushBack _o;
         _o setposasl _pos;
@@ -566,7 +605,7 @@ vs_calcLowpassEffect = {
             _itsRev deleteAt 0;
             //["check %1",[_cur,_curInv]] call printTrace;
             if equals(_cur,_curInv) exitWith {
-                #ifdef REDITOR_VOICE_DEBUG
+                #ifdef REDITOR_VOICE_DEBUG_RENDER
                 private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
                 _o setObjectTexture [0,"#(rgb,8,8,3)color(0,1,0,1)"];
                 vs_reditor_queryListLowpass pushBack _o;
@@ -575,7 +614,7 @@ vs_calcLowpassEffect = {
                 _thickness = _thickness + (_pos distance _posInv);
             };
 
-            #ifdef REDITOR_VOICE_DEBUG
+            #ifdef REDITOR_VOICE_DEBUG_RENDER
             private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
             _o setObjectTexture [0,"#(rgb,8,8,3)color(0,0,1,1)"];
             vs_reditor_queryListLowpass pushBack _o;
@@ -593,7 +632,7 @@ vs_calcLowpassEffect = {
     
     call _checkFilters;
 
-    #ifdef REDITOR_VOICE_DEBUG
+    #ifdef REDITOR_VOICE_DEBUG_RENDER
     ["lowpass timecall:%1ms; Thickness:%2",((tickTime - _t)*1000)toFixed 6,_thickness] call printTrace;
     #endif
 
