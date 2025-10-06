@@ -152,9 +152,9 @@ vs_onProcessPlayerPosition = {
         */
         call vs_syncLocalPlayer;
         //revoice_debug_only(["sync local %1ms" arg (((tickTime - _t)*1000)call _mv)tofixed 6]call printTrace;_t=tickTime;)
-        revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
+        //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
-        revoice_debug_only(["sync remote %1ms" arg (((tickTime - _t)*1000) call _mv)tofixed 6]call printTrace;_t=tickTime;)
+        //revoice_debug_only(["sync remote %1ms" arg (((tickTime - _t)*1000) call _mv)tofixed 6]call printTrace;_t=tickTime;)
     };
 };
 
@@ -260,6 +260,21 @@ vs_syncRemotePlayers = {
             
             if ((_state select 1) == 0) then {
                 [_x,_state select 0] call vs_handleUserSpeakInternal;
+
+                //мы не слышим игрока - выход
+                if (_vol <= 0) exitWith {};
+
+                //мы находимся дальше дистанции слышимости
+                if (
+                    (_proc select 1) distance (
+                        #ifdef REDITOR_VOICE_DEBUG
+                        getposatl cameraon
+                        #else
+                        ASLToATL eyepos player
+                        #endif
+                    ) >= (_x getvariable ["rv_distance",0])
+                ) exitWith {};
+
                 //для оптимизации эффекты процессятся только при разговоре
                 if (_state select 0=="speak") then {
 
@@ -267,6 +282,8 @@ vs_syncRemotePlayers = {
                     private _lp = [_x] call vs_calcLowpassEffect;
                     _lp call vs_setLowpassEffect;
 
+                    //todo проверить на отладке действительно это дает прирост
+                    //todo добавить интерполяцию значений для более плавного изменения
                     if (tickTime>=(_x getvariable ["rv_nextrevtime",0])) then {
                         _x setvariable ["rv_nextrevtime",tickTime+1];
                         private _reverb = [_x] call vs_calcReverbEffect;
