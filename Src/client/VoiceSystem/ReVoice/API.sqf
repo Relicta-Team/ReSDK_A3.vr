@@ -266,7 +266,7 @@ vs_syncRemotePlayers = {
 
                 //мы находимся дальше дистанции слышимости
                 if (
-                    (_proc select 1) distance (
+                    (_proc select [1,3]) distance (
                         #ifdef REDITOR_VOICE_DEBUG
                         getposatl cameraon
                         #else
