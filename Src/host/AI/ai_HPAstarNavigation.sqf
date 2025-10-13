@@ -469,7 +469,7 @@ ai_nav_buildEntrancePoints = {
 	_totalEntrances
 };
 
-// Найти переходные точки для конкретного региона
+// Найти переходные точки для конкретного региона (ОПТИМИЗИРОВАНО)
 ai_nav_findEntrancePoints = {
 	params ["_regionKey"];
 	
@@ -480,14 +480,40 @@ ai_nav_findEntrancePoints = {
 	};
 	
 	private _nodeIds = _regionData get "nodes";
-	private _entrances = createHashMap; // neighborRegionKey -> [nodeIds]
+	private _entrances = createHashMap;
 	
-	// Получаем ключи соседних регионов
 	_regionKey splitString "_" params ["_rx", "_ry"];
 	_rx = parseNumber _rx;
 	_ry = parseNumber _ry;
 	
-	// 8 направлений соседних регионов (N, S, E, W, NE, NW, SE, SW)
+	// Границы текущего региона
+	private _regionMinX = _rx * ai_nav_regionSize;
+	private _regionMaxX = _regionMinX + ai_nav_regionSize;
+	private _regionMinY = _ry * ai_nav_regionSize;
+	private _regionMaxY = _regionMinY + ai_nav_regionSize;
+	private _borderThreshold = ai_nav_gridStep * 1.5; // Толщина границы
+	
+	// ОПТИМИЗАЦИЯ: Фильтруем только граничные узлы
+	private _borderNodes = [];
+	{
+		private _nodeData = ai_nav_nodes get _x;
+		private _pos = _nodeData get "pos";
+		_pos params ["_px", "_py"];
+		
+		// Узел на границе, если близок к краю региона
+		if (
+			abs(_px - _regionMinX) < _borderThreshold ||
+			abs(_px - _regionMaxX) < _borderThreshold ||
+			abs(_py - _regionMinY) < _borderThreshold ||
+			abs(_py - _regionMaxY) < _borderThreshold
+		) then {
+			_borderNodes pushBack [_forEachIndex, _pos];
+		};
+	} forEach _nodeIds;
+	
+	ai_debug_decl(["Region %1: %2 border nodes of %3 total" arg _regionKey arg count _borderNodes arg count _nodeIds] call ai_debugLog);
+	
+	// 8 направлений соседних регионов
 	private _neighborOffsets = [
 		[0, 1],   // North
 		[0, -1],  // South
@@ -498,53 +524,81 @@ ai_nav_findEntrancePoints = {
 		[1, -1],  // SouthEast
 		[-1, -1]  // SouthWest
 	];
-
-	// Для каждого узла в регионе проверяем, является ли он граничным
+	
+	// Для каждого соседнего региона
 	{
-		private _nodeId = _x;
-		private _nodeData = ai_nav_nodes get _nodeId;
-		private _nodePos = _nodeData get "pos";
+		_x params ["_dx", "_dy"];
+		private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
 		
-		// Проверяем каждое соседнее направление
-		{
-			_x params ["_dx", "_dy"];
-			private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+		if (_neighborKey in ai_nav_regions) then {
+			private _neighborData = ai_nav_regions get _neighborKey;
+			private _neighborNodeIds = _neighborData get "nodes";
 			
-			// Если соседний регион существует
-			if (_neighborKey in ai_nav_regions) then {
-				private _neighborData = ai_nav_regions get _neighborKey;
-				private _neighborNodeIds = _neighborData get "nodes";
+			// Границы соседнего региона
+			private _nMinX = (_rx + _dx) * ai_nav_regionSize;
+			private _nMaxX = _nMinX + ai_nav_regionSize;
+			private _nMinY = (_ry + _dy) * ai_nav_regionSize;
+			private _nMaxY = _nMinY + ai_nav_regionSize;
+			
+			// ОПТИМИЗАЦИЯ: Фильтруем граничные узлы соседа на стороне текущего региона
+			private _neighborBorderNodes = [];
+			{
+				private _nData = ai_nav_nodes get _x;
+				private _nPos = _nData get "pos";
+				_nPos params ["_nx", "_ny"];
 				
-				// Проверяем, есть ли связь с узлами соседнего региона
+				// Проверяем только узлы на стороне, обращенной к текущему региону
+				private _isRelevantBorder = false;
+				
+				if (_dx == 1) then {
+					// East neighbor - проверяем западную границу соседа
+					_isRelevantBorder = abs(_nx - _nMinX) < _borderThreshold;
+				};
+				if (_dx == -1) then {
+					// West neighbor - проверяем восточную границу соседа
+					_isRelevantBorder = abs(_nx - _nMaxX) < _borderThreshold;
+				};
+				if (_dy == 1) then {
+					// North neighbor - проверяем южную границу соседа
+					_isRelevantBorder = _isRelevantBorder || abs(_ny - _nMinY) < _borderThreshold;
+				};
+				if (_dy == -1) then {
+					// South neighbor - проверяем северную границу соседа
+					_isRelevantBorder = _isRelevantBorder || abs(_ny - _nMaxY) < _borderThreshold;
+				};
+				
+				if (_isRelevantBorder) then {
+					_neighborBorderNodes pushBack [_x, _nPos];
+				};
+			} forEach _neighborNodeIds;
+			
+			// Проверяем связи только между граничными узлами
+			{
+				_x params ["_idx", "_nodePos"];
+				private _nodeId = _nodeIds select _idx;
+				
 				{
-					private _neighborNodeId = _x;
-					private _neighborNodeData = ai_nav_nodes get _neighborNodeId;
-					private _neighborPos = _neighborNodeData get "pos";
-					
-					// Если узлы достаточно близко (в пределах расстояния связи)
+					_x params ["_neighborNodeId", "_neighborPos"];
 					private _dist = _nodePos distance _neighborPos;
+					
 					if (_dist <= (ai_nav_gridStep * 2)) then {
-						// Проверяем препятствия						
-						private _intersections = lineIntersectsSurfaces [
-							_nodePos vectoradd vec3(0,0,0.4),
-							_neighborPos vectoradd vec3(0,0,0.4),
-							objNull,
-							objNull,
-							true,
-							1,
-							"VIEW",
-							"GEOM"
-						];
+						private _needRaycast = true;
+						private _canConnect = true;
+						if (_needRaycast) then {
+							private _intersections = lineIntersectsSurfaces [
+								_nodePos vectoradd vec3(0,0,0.4),
+								_neighborPos vectoradd vec3(0,0,0.4),
+								objNull, objNull, true, 1, "VIEW", "GEOM"
+							];
+							_canConnect = count _intersections == 0;
+						};
 						
-						if (count _intersections == 0) then {
-							// Это переходная точка!
+						if (_canConnect) then {
 							if (!(_neighborKey in _entrances)) then {
 								_entrances set [_neighborKey, []];
 							};
 							
 							private _entranceList = _entrances get _neighborKey;
-							
-							// Добавляем только если еще нет
 							if (!(_nodeId in _entranceList)) then {
 								_entranceList pushBack _nodeId;
 								
@@ -552,11 +606,10 @@ ai_nav_findEntrancePoints = {
 								if (!(_nodeId in ai_nav_adjacency)) then {
 									ai_nav_adjacency set [_nodeId, []];
 								};
-								private _adjList = ai_nav_adjacency get _nodeId;
-								_adjList pushBackUnique [_neighborNodeId, _dist];
+								(ai_nav_adjacency get _nodeId) pushBackUnique [_neighborNodeId, _dist];
 								
 								#ifdef AI_NAV_DEBUG_DRAW
-								// Визуализация переходной точки (красная линия между регионами)
+								// Визуализация переходной точки
 								private _loopEntrance = struct_newp(LoopedObjectFunction,
 									ai_nav_debug_drawNode arg [
 										asltoatl _nodePos vectoradd vec3(0,0,0.2) arg 
@@ -571,12 +624,11 @@ ai_nav_findEntrancePoints = {
 								#endif
 							};
 						};
-						
 					};
-				} forEach _neighborNodeIds;
-			};
-		} forEach _neighborOffsets;
-	} forEach _nodeIds;
+				} forEach _neighborBorderNodes;
+			} forEach _borderNodes;
+		};
+	} forEach _neighborOffsets;
 	
 	// Сохраняем переходные точки в регион
 	_regionData set ["entrances", _entrances];
