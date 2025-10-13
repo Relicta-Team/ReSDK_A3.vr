@@ -6,6 +6,7 @@
 #include <..\engine.hpp>
 #include <..\oop.hpp>
 #include <..\text.hpp>
+#include <..\struct.hpp>
 #include <..\GameObjects\GameConstants.hpp>
 #include <..\Gender\Gender.hpp>
 
