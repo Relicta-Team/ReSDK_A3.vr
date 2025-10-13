@@ -312,7 +312,7 @@ ai_nav_saveRegion = {
 	private _regionData = createHashMap;
 	_regionData set ["nodes", []];      // Массив ID узлов
 	_regionData set ["edges", _edges];  // Связи остаются как есть
-	_regionData set ["entrances", []];  // Переходные точки (пока пустые)
+	_regionData set ["entrances", createHashMap];  // Переходные точки (пока пустые)
 	
 	private _nodeIds = [];
 	private _posToIdMap = createHashMap; // Временная карта для связывания позиций с ID
@@ -958,6 +958,267 @@ ai_nav_testPath = {
 	
 	_path
 };
+
+// ============================================================================
+// Обновление региона
+// ============================================================================
+ai_nav_updateRegion = {
+    params ["_pos"];
+    
+    private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
+    
+    ai_debug_decl(["Updating region %1" arg _regionKey] call ai_debugLog; private _tupd = tickTime;)
+    
+    // 1. Удаляем старые данные
+    [_regionKey] call ai_nav_invalidateRegion;
+    
+    // 2. Генерируем узлы и внутренние связи заново
+    [_pos] call ai_nav_generateRegionNodes;
+    
+    // 3. Обновляем entrance points (текущего региона + соседей)
+	//! на обновлении это самая жирная часть (400-500мс)
+    [_regionKey] call ai_nav_updateRegionEntrances_fast;
+    
+    ai_debug_decl(["Region %1 updated at %2ms" arg _regionKey arg ((tickTime - _tupd)*1000)toFixed 2] call ai_debugLog;)
+};
+
+ai_nav_invalidateRegion = {
+    params ["_regionKey"];
+    
+    private _regionData = ai_nav_regions get _regionKey;
+    if (isNil "_regionData") exitWith {};
+    
+    private _oldNodeIds = _regionData get "nodes";
+    
+    // Удаляем старые узлы из глобального справочника
+    {
+        ai_nav_nodes deleteAt _x;
+        
+        // Удаляем связи этого узла
+        ai_nav_adjacency deleteAt _x;
+    } forEach _oldNodeIds;
+    
+    // Удаляем регион
+    ai_nav_regions deleteAt _regionKey;
+};
+
+ai_nav_updateRegionEntrances = {
+    params ["_regionKey"];
+    
+    // Пересоздаем entrance points текущего региона
+    [_regionKey] call ai_nav_findEntrancePoints;
+    
+    // Обновляем entrance points 8 соседних регионов!
+    _regionKey splitString "_" params ["_rx", "_ry"];
+    _rx = parseNumber _rx;
+    _ry = parseNumber _ry;
+    
+    private _neighborOffsets = [
+        [0, 1], [0, -1], [1, 0], [-1, 0],
+        [1, 1], [-1, 1], [1, -1], [-1, -1]
+    ];
+    
+    {
+        _x params ["_dx", "_dy"];
+        private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+        
+        if (_neighborKey in ai_nav_regions) then {
+            // Очищаем старые entrance points соседа
+            private _neighborData = ai_nav_regions get _neighborKey;
+            _neighborData set ["entrances", createHashMap];
+            
+            // Пересоздаем entrance points соседа
+            [_neighborKey] call ai_nav_findEntrancePoints;
+        };
+    } forEach _neighborOffsets;
+};
+
+ai_nav_updateRegionEntrances_fast = {
+    params ["_regionKey"];
+    
+    _regionKey splitString "_" params ["_rx", "_ry"];
+    _rx = parseNumber _rx; _ry = parseNumber _ry;
+    
+    private _neighborOffsets = [
+        [0, 1], [0, -1], [1, 0], [-1, 0],
+        [1, 1], [-1, 1], [1, -1], [-1, -1]
+    ];
+    
+    // Обновляем только связи с каждым соседом (16 операций вместо 72!)
+    {
+        _x params ["_dx", "_dy"];
+        private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+        
+        if (_neighborKey in ai_nav_regions) then {
+            [_regionKey, _neighborKey] call ai_nav_updateEntrancesBetween;
+        };
+    } forEach _neighborOffsets;
+};
+
+// Обновить entrance points между двумя конкретными регионами
+ai_nav_updateEntrancesBetween = {
+    params ["_regionKey1", "_regionKey2"];
+    
+    // Удаляем старые связи между этими регионами
+    private _region1Data = ai_nav_regions get _regionKey1;
+    private _region2Data = ai_nav_regions get _regionKey2;
+    
+    if (isNil "_region1Data" || isNil "_region2Data") exitWith {};
+    
+    private _entrances1 = _region1Data get "entrances";
+    private _entrances2 = _region2Data get "entrances";
+    
+    // Удаляем старые entrance points друг на друга
+    private _oldEntrances1 = _entrances1 getOrDefault [_regionKey2, []];
+    private _oldEntrances2 = _entrances2 getOrDefault [_regionKey1, []];
+    
+    // Удаляем старые связи из adjacency
+    {
+        private _nodeId = _x;
+        if (_nodeId in ai_nav_adjacency) then {
+            private _adjList = ai_nav_adjacency get _nodeId;
+            // Удаляем связи с узлами второго региона
+            private _node2Ids = _region2Data get "nodes";
+            {
+                private _targetId = _x;
+                _adjList = _adjList select {(_x select 0) != _targetId};
+            } forEach _node2Ids;
+            ai_nav_adjacency set [_nodeId, _adjList];
+        };
+    } forEach _oldEntrances1;
+    
+    // То же для второго региона
+    {
+        private _nodeId = _x;
+        if (_nodeId in ai_nav_adjacency) then {
+            private _adjList = ai_nav_adjacency get _nodeId;
+            private _node1Ids = _region1Data get "nodes";
+            {
+                private _targetId = _x;
+                _adjList = _adjList select {(_x select 0) != _targetId};
+            } forEach _node1Ids;
+            ai_nav_adjacency set [_nodeId, _adjList];
+        };
+    } forEach _oldEntrances2;
+    
+    // Очищаем старые entrances
+    _entrances1 deleteAt _regionKey2;
+    _entrances2 deleteAt _regionKey1;
+    
+    // Пересоздаем связи между ТОЛЬКО этими двумя регионами
+    [_regionKey1, _regionKey2] call ai_nav_buildEntrancesBetween;
+};
+
+// Построить entrance points между двумя конкретными регионами
+ai_nav_buildEntrancesBetween = {
+    params ["_regionKey1", "_regionKey2"];
+    
+    private _region1Data = ai_nav_regions get _regionKey1;
+    private _region2Data = ai_nav_regions get _regionKey2;
+    
+    if (isNil "_region1Data" || isNil "_region2Data") exitWith {};
+    
+    _regionKey1 splitString "_" params ["_rx1", "_ry1"];
+    _regionKey2 splitString "_" params ["_rx2", "_ry2"];
+    _rx1 = parseNumber _rx1; _ry1 = parseNumber _ry1;
+    _rx2 = parseNumber _rx2; _ry2 = parseNumber _ry2;
+    
+    // Вычисляем направление (_dx, _dy)
+    private _dx = _rx2 - _rx1;
+    private _dy = _ry2 - _ry1;
+    
+    // Строим граничные узлы только для этой конкретной границы
+    private _border1 = [_regionKey1, _dx, _dy] call ai_nav_getBorderNodes;
+    private _border2 = [_regionKey2, -_dx, -_dy] call ai_nav_getBorderNodes;
+    
+    private _entrances1 = _region1Data get "entrances";
+    private _entrances2 = _region2Data get "entrances";
+    
+    // Проверяем связи только между этими границами
+    {
+        _x params ["_idx1", "_pos1"];
+        private _nodeId1 = (_region1Data get "nodes") select _idx1;
+        
+        {
+            _x params ["_idx2", "_pos2"];
+            private _nodeId2 = (_region2Data get "nodes") select _idx2;
+            
+            private _dist = _pos1 distance _pos2;
+            if (_dist <= (ai_nav_gridStep * 2)) then {
+                private _intersections = lineIntersectsSurfaces [
+                    _pos1 vectoradd vec3(0,0,0.4),
+                    _pos2 vectoradd vec3(0,0,0.4),
+                    objNull, objNull, true, 1, "VIEW", "GEOM"
+                ];
+                
+                if (count _intersections == 0) then {
+                    // Создаем связь
+                    if (!(_regionKey2 in _entrances1)) then {
+                        _entrances1 set [_regionKey2, []];
+                    };
+                    (_entrances1 get _regionKey2) pushBackUnique _nodeId1;
+                    
+                    if (!(_regionKey1 in _entrances2)) then {
+                        _entrances2 set [_regionKey1, []];
+                    };
+                    (_entrances2 get _regionKey1) pushBackUnique _nodeId2;
+                    
+                    // Adjacency
+                    if (!(_nodeId1 in ai_nav_adjacency)) then {
+                        ai_nav_adjacency set [_nodeId1, []];
+                    };
+                    (ai_nav_adjacency get _nodeId1) pushBackUnique [_nodeId2, _dist];
+                    
+                    if (!(_nodeId2 in ai_nav_adjacency)) then {
+                        ai_nav_adjacency set [_nodeId2, []];
+                    };
+                    (ai_nav_adjacency get _nodeId2) pushBackUnique [_nodeId1, _dist];
+                };
+            };
+        } forEach _border2;
+    } forEach _border1;
+};
+
+// Получить граничные узлы региона в конкретном направлении
+ai_nav_getBorderNodes = {
+    params ["_regionKey", "_dx", "_dy"];
+    
+    private _regionData = ai_nav_regions get _regionKey;
+    if (isNil "_regionData") exitWith {[]};
+    
+    _regionKey splitString "_" params ["_rx", "_ry"];
+    _rx = parseNumber _rx; _ry = parseNumber _ry;
+    
+    private _regionMinX = _rx * ai_nav_regionSize;
+    private _regionMaxX = _regionMinX + ai_nav_regionSize;
+    private _regionMinY = _ry * ai_nav_regionSize;
+    private _regionMaxY = _regionMinY + ai_nav_regionSize;
+    private _threshold = ai_nav_gridStep * 1.5;
+    
+    private _borderNodes = [];
+    private _nodeIds = _regionData get "nodes";
+    
+    {
+        private _nodeData = ai_nav_nodes get _x;
+        private _pos = _nodeData get "pos";
+        _pos params ["_px", "_py"];
+        
+        private _isBorder = false;
+        
+        // Проверяем только нужную границу по направлению
+        if (_dx == 1 && abs(_px - _regionMaxX) < _threshold) then {_isBorder = true};  // East
+        if (_dx == -1 && abs(_px - _regionMinX) < _threshold) then {_isBorder = true}; // West
+        if (_dy == 1 && abs(_py - _regionMaxY) < _threshold) then {_isBorder = true};  // North
+        if (_dy == -1 && abs(_py - _regionMinY) < _threshold) then {_isBorder = true}; // South
+        
+        if (_isBorder) then {
+            _borderNodes pushBack [_forEachIndex, _pos];
+        };
+    } forEach _nodeIds;
+    
+    _borderNodes
+};
+
 
 // ============================================================================
 // DEBUG ФУНКЦИИ
