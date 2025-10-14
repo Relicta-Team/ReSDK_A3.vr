@@ -170,7 +170,7 @@ ai_nav_generateRegionNodes = {
 			_prevpos = _pos;
 		} foreach _x;
 	} foreach _hits;
-	//ai_debug_decl(["generateRegionNodes time %1ms" arg ((tickTime - _t)*1000)toFixed 6] call ai_debugLog);
+	ai_debug_decl(["    generateRegionNodes time %1ms" arg ((tickTime - _t)*1000)toFixed 6] call ai_debugLog);
 
 	#ifdef AI_NAV_DEBUG_DRAW
 		ai_debug_loopDrawObjs = [];
@@ -218,15 +218,13 @@ ai_nav_generateRegionNodes = {
 			private _dist = _currentNode distance _neighborNode;
 			
 			// Если узел в пределах дистанции связи
-			if (
-				_dist <= _maxConnectionDist
-				//&& {([_currentNode, _neighborNode] call ai_nav_getSlopeAngleVec) <= ai_nav_maxSlope}
-			) then {
-				//Вроде здесь быстрее работает проверка
-				if (([_currentNode, _neighborNode] call ai_nav_getSlopeAngleVec) > ai_nav_maxSlope) exitWith {};
-
-				//по z расстояние не может быть больше 1м
-				if (abs((_currentNode select 2) - (_neighborNode select 2)) > 1) exitWith {};
+			if (_dist <= _maxConnectionDist) then {
+				//по z расстояние не может быть больше 1м (быстрая проверка первой)
+				private _deltaZ = abs((_currentNode select 2) - (_neighborNode select 2));
+				if (_deltaZ > 1) exitWith {};
+				
+				// БЫСТРАЯ проверка наклона (вместо getSlopeAngleVec)
+				if !([_currentNode, _neighborNode, _dist, ai_nav_maxSlope] call ai_nav_checkSlopeFast) exitWith {};
 
 				// Проверяем, нет ли препятствий между узлами
 				_queryPos pushBack [
@@ -266,7 +264,7 @@ ai_nav_generateRegionNodes = {
 		};
 	} foreach _hits;
 	
-	//ai_debug_decl(["generateRegionEdges time %1ms, edges count: %2" arg ((tickTime - _tEdges)*1000)toFixed 6 arg count _edgesList] call ai_debugLog);
+	ai_debug_decl(["    generateRegionEdges time %1ms, edges count: %2" arg ((tickTime - _tEdges)*1000)toFixed 6 arg count _edgesList] call ai_debugLog);
 	
 	// Автоматически сохраняем регион, если включено
 	if (_autoSave) then {
@@ -290,6 +288,24 @@ ai_nav_getSlopeAngleVec = {
 	private _dotProduct = _dirNorm vectorDotProduct _horDirNorm;
 	private _slopeAngle = acos _dotProduct; // В градусах
 	_slopeAngle
+};
+
+// БЫСТРАЯ проверка наклона (без векторных операций)
+ai_nav_checkSlopeFast = {
+	params ["_pos1", "_pos2", "_dist", "_maxSlope"];
+	
+	// Вычисляем deltaZ
+	private _deltaZ = abs((_pos2 select 2) - (_pos1 select 2));
+	
+	// Простая проверка: если Z больше определенного процента от distance
+	// tan(45°) = 1.0, tan(60°) = 1.732, tan(75°) = 3.732
+	private _slopeTan = tan _maxSlope;
+	
+	// Горизонтальное расстояние (приближенно)
+	// Для малых углов можно использовать _dist как приближение
+	if (_deltaZ / _dist > _slopeTan) exitWith {false};
+	
+	true
 };
 
 // ============================================================================
