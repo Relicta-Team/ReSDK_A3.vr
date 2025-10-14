@@ -718,8 +718,8 @@ ai_nav_heuristic = {
 	
 	private _pos1 = (ai_nav_nodes get _nodeId1) get "pos";
 	private _pos2 = (ai_nav_nodes get _nodeId2) get "pos";
-	
-	_pos1 distance _pos2
+	//?можно потом сделать что чем дальше идти до цели тем выше коэф (быстрее посчитается)
+	(_pos1 distance _pos2) * 1.3 //с агрессивным коэффициентом вычисляется в ~10 раз быстрее
 };
 
 // Получить соседей узла
@@ -730,7 +730,7 @@ ai_nav_getNeighbors = {
 	_neighbors
 };
 
-// A* алгоритм поиска пути между двумя узлами
+// A* алгоритм поиска пути между двумя узлами (ОПТИМИЗИРОВАННЫЙ)
 ai_nav_findPathNodes = {
 	params ["_startNodeId", "_goalNodeId"];
 	FHEADER;
@@ -744,6 +744,7 @@ ai_nav_findPathNodes = {
 	
 	// Инициализация
 	private _openSet = [_startNodeId];
+	private _closedSet = createHashMap; // ← КРИТИЧНО: множество посещенных узлов
 	private _cameFrom = createHashMap;
 	
 	private _gScore = createHashMap;
@@ -755,43 +756,69 @@ ai_nav_findPathNodes = {
 	private _iterations = 0;
 	private _maxIterations = 10000;
 	
+	ai_debug_decl(private _minSearchTime = 0;)
+	ai_debug_decl(private _neighborsTime = 0;)
+	ai_debug_decl(private _maxOpenSetSize = 0;)
+	ai_debug_decl(private _totalNeighborsChecked = 0;)
+	
 	while {count _openSet > 0 && _iterations < _maxIterations} do {
 		_iterations = _iterations + 1;
 		
-		// Найти узел с минимальным fScore
+		ai_debug_decl(if (count _openSet > _maxOpenSetSize) then {_maxOpenSetSize = count _openSet};)
+		
+		// Найти узел с минимальным fScore (ОПТИМИЗИРОВАНО)
+		ai_debug_decl(private _tMin = tickTime;)
+		
+		// Быстрый поиск минимума без повторных HashMap запросов
+		private _minIdx = 0;
 		private _current = _openSet select 0;
 		private _minF = _fScore getOrDefault [_current, 999999];
 		
-		{
-			private _f = _fScore getOrDefault [_x, 999999];
+		for "_i" from 1 to (count _openSet - 1) do {
+			private _nodeId = _openSet select _i;
+			private _f = _fScore getOrDefault [_nodeId, 999999];
 			if (_f < _minF) then {
 				_minF = _f;
-				_current = _x;
+				_current = _nodeId;
+				_minIdx = _i;
 			};
-		} forEach _openSet;
+		};
+		
+		ai_debug_decl(_minSearchTime = _minSearchTime + (tickTime - _tMin);)
 		
 		// Достигли цели
 		if (_current == _goalNodeId) exitWith {
 			private _path = [_cameFrom, _current] call ai_nav_reconstructPath;
 			
 			ai_debug_decl([
-				"Path found: %1 nodes, %2 iterations, %3ms" arg 
+				"Path found: %1 nodes, %2 iterations, maxOpenSet=%3, minSearch=%4ms, neighbors=%5ms (%6 checked) | TOTAL=%7ms" arg 
 				count _path arg 
 				_iterations arg 
+				_maxOpenSetSize arg
+				(_minSearchTime*1000)toFixed 2 arg
+				(_neighborsTime*1000)toFixed 2 arg
+				_totalNeighborsChecked arg
 				((tickTime - _tStart)*1000)toFixed 2
 			] call ai_debugLog);
 			
 			RETURN(_path);
 		};
 		
-		// Удаляем текущий из openSet
-		_openSet deleteAt (_openSet find _current);
+		// Удаляем текущий из openSet и добавляем в closedSet
+		_openSet deleteAt _minIdx; // ← Используем сохраненный индекс вместо поиска!
+		_closedSet set [_current, true]; // ← Помечаем как посещенный
 		
 		// Проверяем соседей
+		ai_debug_decl(private _tNeighbors = tickTime;)
 		private _neighbors = [_current] call ai_nav_getNeighbors;
 		
 		{
 			_x params ["_neighborId", "_cost"];
+			
+			// ← ПРОПУСКАЕМ УЖЕ ПОСЕЩЕННЫЕ УЗЛЫ!
+			if (_neighborId in _closedSet) then {continue};
+			
+			ai_debug_decl(_totalNeighborsChecked = _totalNeighborsChecked + 1;)
 			
 			private _tentativeGScore = (_gScore getOrDefault [_current, 999999]) + _cost;
 			
@@ -805,12 +832,14 @@ ai_nav_findPathNodes = {
 				};
 			};
 		} forEach _neighbors;
+		ai_debug_decl(_neighborsTime = _neighborsTime + (tickTime - _tNeighbors);)
 	};
 	
 	ai_debug_decl([
-		"Path not found after %1 iterations (max: %2)" arg 
+		"Path not found after %1 iterations (max: %2), maxOpenSet=%3" arg 
 		_iterations arg 
-		_maxIterations
+		_maxIterations arg
+		_maxOpenSetSize
 	] call ai_debugLog);
 	
 	[]
