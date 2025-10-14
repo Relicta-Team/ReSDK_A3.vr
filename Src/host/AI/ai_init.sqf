@@ -10,7 +10,11 @@
 #include <..\GameObjects\GameConstants.hpp>
 #include <..\Gender\Gender.hpp>
 
-#include "ai_HPAstarNavigation.sqf"
+#include "HPAstar\core.sqf"
+#include "HPAstar\debug.sqf"
+#include "HPAstar\region.sqf"
+#include "HPAstar\update.sqf"
+#include "HPAstar\entrance.sqf"
 
 ai_reloadThis = {
 	call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
