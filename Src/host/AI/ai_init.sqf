@@ -48,6 +48,8 @@ ai_createMob = {
 	_gMob enableAI "MOVE";
 	_gMob enableAI "ANIM";
 
+	[_mob,SPEED_MODE_WALK] call ai_setSpeed;
+
 	//создаем регион для существа
 	[_pos] call ai_nav_updateOrCreateRegion;
 	

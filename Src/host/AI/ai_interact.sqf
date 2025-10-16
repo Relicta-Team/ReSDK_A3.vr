@@ -42,12 +42,30 @@ ai_handleMove = {
 	private _mapdata = getVar(_mob,__aiagent);
 	private _curidx = _mapdata get "targetidx";
 	private _targetPos = (_mapdata get "curpath") select _curidx;
-	private _nextPos = (_mapdata get "curpath") select ((_curidx + 1)min(count (_mapdata get "curpath") - 1));
+	private _prevPos = (_mapdata get "curpath") select ((_curidx - 1)max 0);
 	[_mob,_targetPos] call ai_moveTo;
 
 	//коррекция пути если персонаж сбился
 	private _curpos = getposasl _body;
+	// КОРРЕКЦИЯ ПУТИ: проверяем отклонение от отрезка
+	private _maxDeviation = 0.8; // Максимальное отклонение в метрах
 	
+	// Находим ближайшую точку на отрезке prevPos -> targetPos
+	private _closestPoint = [_prevPos, _targetPos, _curPos] call ai_getClosestPointOnSegment;
+	
+	// Расстояние от текущей позиции до ближайшей точки на отрезке
+	private _deviation = _curPos distance _closestPoint;
+	
+	// Если отклонение слишком большое - телепортируем обратно на путь
+	if (_deviation > _maxDeviation) then {
+		// Небольшое смещение вверх чтобы не застрять в геометрии
+		_closestPoint set [2, (_closestPoint select 2) + 0.01];
+		_body setPosASL _closestPoint;
+		
+		[format["PATH CORRECTION: deviation %1m, teleported to segment" arg (_deviation toFixed 2)], "system"] call chatPrint;
+	};
+
+	//todo если сущность залезла в замкнутую ноду - откатить её на предыдущую нормальную
 
 	if (((getposasl _body) distance _targetPos) < 0.6) then {
 		INC(_curidx);
@@ -60,6 +78,42 @@ ai_handleMove = {
 		};
 	};
 };
+
+// Вспомогательная функция: найти ближайшую точку на отрезке AB к точке P
+ai_getClosestPointOnSegment = {
+	params ["_pointA", "_pointB", "_pointP"];
+	
+	// Вектор от A к B
+	private _AB = _pointB vectorDiff _pointA;
+	
+	// Вектор от A к P
+	private _AP = _pointP vectorDiff _pointA;
+	
+	// Скалярное произведение AP · AB
+	private _dotAP_AB = (_AP select 0) * (_AB select 0) + 
+	                    (_AP select 1) * (_AB select 1) + 
+	                    (_AP select 2) * (_AB select 2);
+	
+	// Скалярное произведение AB · AB (длина AB в квадрате)
+	private _dotAB_AB = (_AB select 0) * (_AB select 0) + 
+	                    (_AB select 1) * (_AB select 1) + 
+	                    (_AB select 2) * (_AB select 2);
+	
+	// Избегаем деления на ноль (A и B совпадают)
+	if (_dotAB_AB < 0.0001) exitWith {_pointA};
+	
+	// Параметр проекции t = (AP · AB) / (AB · AB)
+	private _t = _dotAP_AB / _dotAB_AB;
+	
+	// Ограничиваем t в диапазоне [0, 1] чтобы остаться на отрезке
+	_t = (_t max 0) min 1;
+	
+	// Ближайшая точка на отрезке: C = A + t * AB
+	private _closestPoint = _pointA vectorAdd (_AB vectorMultiply _t);
+	
+	_closestPoint
+};
+
 
 ai_setStop = {
 	params ["_mob","_stop"];
@@ -83,7 +137,7 @@ ai_setSpeed = {
 //todo 
 /*
 	rotateTo
-	setStance
+	setStance (see setUnitPos desk as playAction)
 
 	pickupItem
 	dropItem
