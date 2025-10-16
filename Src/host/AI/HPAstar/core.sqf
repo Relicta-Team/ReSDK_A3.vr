@@ -104,6 +104,24 @@ ai_nav_checkSlopeFast = {
 	true
 };
 
+ai_nav_sortBy = {
+	params ["_list","_algorithm",["_modeIsAscend",true]];
+
+	private _cnt = 0;
+	private _inputArray = _list apply 
+	{
+		_cnt = _cnt + 1; 
+		[_x call _algorithm, _cnt, _x]
+	};
+
+	_inputArray sort _modeIsAscend;
+	_inputArray apply {_x select 2}
+	
+};
+
+//дополнительные лучи для поиска незахваченных поверхностей
+//#define AI_EXPERIMENTAL_NODE_HOLE_FIX
+
 ai_nav_generateRegionNodes = {
 	params ["_pos", ["_autoSave", true]];
 	
@@ -123,11 +141,11 @@ ai_nav_generateRegionNodes = {
 	private _queryPos = [];
 	
 	ai_debug_decl(private _t = tickTime;)
-	for "_x" from _regionStartX to _regionEndX step ai_nav_gridStep do {
-		for "_y" from _regionStartY to _regionEndY step ai_nav_gridStep do {
+	for "_xp" from _regionStartX to _regionEndX step ai_nav_gridStep do {
+		for "_yp" from _regionStartY to _regionEndY step ai_nav_gridStep do {
 			_queryPos pushBack [
-				[_x,_y,ai_nav_raycastHeight],
-				[_x,_y,0],
+				[_xp,_yp,ai_nav_raycastHeight],
+				[_xp,_yp,0],
 				objNull,
 				objNull,
 				true,
@@ -136,13 +154,94 @@ ai_nav_generateRegionNodes = {
 				"ROADWAY",
 				false //ret unique
 			];
+
+			#ifdef AI_EXPERIMENTAL_NODE_HOLE_FIX
+			private _offsetPoints = [
+				[0.2,0,0],    // Смещения на 20см
+				[-0.2,0,0],
+				[0,0.2,0],
+				[0,-0.2,0]
+			];
+			
+			{
+				_queryPos pushBack [
+					[_xp,_yp,ai_nav_raycastHeight] vectoradd _x,
+					[_xp,_yp,0] vectoradd _x,
+					objNull,
+					objNull,
+					true,
+					-1,
+					"ROADWAY",
+					"ROADWAY",
+					false
+				];
+			} foreach _offsetPoints;
+			#endif
 		};
 	};
 
 	private _nodes = [];
-
+	
 	//постройка сетки
 	private _hits = lineIntersectsSurfaces [_queryPos];
+	
+	#ifdef AI_EXPERIMENTAL_NODE_HOLE_FIX
+	private _filteredHits = []; private _otherside = [];
+	{
+		if (_foreachindex %5 == 0) then {
+			//_otherside append (_hits select [_foreachindex + 1,4]);
+			private _cur = _x;
+			private _others = (_hits select [_foreachindex + 1,4]);
+			private _otherflat = []; {_otherflat append _x} foreach _others;
+			
+			[_otherflat,{_x select 0 select 2},false] call ai_nav_sortBy;
+			// {_cur append _x} foreach _others;
+			//_cur = [_cur,{_x select 0 select 2},false] call ai_nav_sortBy;
+			//_filteredHits pushBack _cur;
+
+			// УМНОЕ ЗАПОЛНЕНИЕ ДЫР в _cur с оптимизацией
+			private _patchedCur = [];
+			private _prevZ = 999999;
+			private _sizecheck = 0.7;
+			
+			{
+				private _curPos = _x select 0;
+				private _curZ = _curPos select 2;
+				
+				// Если есть дыра между предыдущей и текущей точкой
+				if ((_prevZ-_curZ) > _sizecheck) then {
+					
+					// Ищем дополнительные точки, которые попадают в эту дыру
+					private _foundInGap = [];
+					private _remIndexLast = -1;
+					private _curZOffset = _curZ + _sizecheck;
+					{
+						private _otherPos = _x select 0;
+						private _otherZ = _otherPos select 2;
+						//! Работает криво. надо долго и упорно тестить и искать подходы
+						if ( _otherZ < _curZOffset) exitWith {
+							
+							_foundInGap = _otherflat select (_forEachIndex-1);
+                			_remIndexLast = _forEachIndex-1;
+						};
+					} foreach _otherflat;
+					// Добавляем найденные точки в дыру
+					if (_remIndexLast != -1) then {
+            		_patchedCur insert [(count _patchedCur)-1-1,[_foundInGap]];
+					_otherflat deleteRange [0,_remIndexLast+1];
+					};
+				};
+				
+				_patchedCur pushBack _x; // Добавляем основную точку
+				_prevZ = _curZ;
+			} foreach _cur;
+			
+			_filteredHits pushBack _patchedCur; // Используем пропатченный _cur
+		};
+	} foreach _hits; //выбор элемента с пропуском 4 тест точек
+	_hits = _filteredHits;
+	#endif
+
 	{
 		private _prevpos = [0,0,99999];
 		{
