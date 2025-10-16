@@ -157,3 +157,54 @@ class(CollectionSpawnPoint) extends(SpawnPoint)
 	};
 
 endclass
+
+class(EntitySpawner) extends(IStructNonReplicated)
+	var(name,"Спавнер АИ-сущности");
+	
+	editor_attribute("InternalImpl")
+	;if (!is3DEN) then {
+		var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
+	}  else {
+		var(model,"vr_3dselector_01_exit_f");
+	};
+
+	editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:64")
+	editor_attribute("alias" arg "Entity type")
+	var(entityType,"");
+
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:100")
+	editor_attribute("alias" arg "stat Strength")
+	var(st,10);
+
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:100")
+	editor_attribute("alias" arg "stat Intelligence")
+	var(iq,10);
+
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:100")
+	editor_attribute("alias" arg "stat Dexterity")
+	var(dx,10);
+
+	editor_attribute("EditorVisible" arg "type:int" arg "range:1:100")
+	editor_attribute("alias" arg "stat Health")
+	var(ht,10);
+
+	editor_attribute("EditorVisible" arg "type:string" arg "stringmaxsize:64")
+	editor_attribute("alias" arg "Behaviour type")
+	var(behaviourName,"");
+
+	func(constructor)
+	{
+		objParams();
+
+		private _cls = getSelf(entityType);
+		if !isImplementClass(_cls) exitWith {
+			errorformat("EntitySpawner.ctor: cant find entity class '%1'",_cls);
+			setLastError("Cant find entity class '" + _cls + "'");
+		};
+		private _behaviour = getSelf(behaviourName);
+		//todo use behaviour
+
+		[callSelf(getPos),[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]] call ai_createMob;
+	};
+
+endclass

@@ -122,10 +122,15 @@ ai_nav_debugDrawPath = {
 
 // Тест: найти и визуализировать путь между двумя позициями
 ai_nav_testPath = {
-	params ["_startPos", "_endPos",["_optimize",true]];
+	params ["_startPos", "_endPos",["_optimize",true],["_fnc","autogen"],["_args",[]]];
 	
 	// Находим путь
-	private _path = [_startPos, _endPos, _optimize] call ai_nav_findPath;
+	private _argv = [_startPos, _endPos, _optimize]+_args;
+	private _path = call {
+		if (_fnc == "autogen") exitWith {_argv call ai_nav_findPath_autoGenerate};
+		if (_fnc == "part") exitWith {_argv call ai_nav_findPartialPath};
+		[]
+	};
 	
 	if (count _path == 0) exitWith {
 		["No path found between positions!"] call ai_debugLog;

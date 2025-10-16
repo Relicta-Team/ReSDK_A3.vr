@@ -720,3 +720,425 @@ ai_nav_smoothPath_fast = {
     ] call ai_debugLog);
     _result
 };
+
+//автогенерация через писк пути
+// Добавить после ai_nav_findPath (после строки 625)
+// Добавить новую функцию после ai_nav_findPath (после строки 625)
+
+// Найти путь с автогенерацией регионов
+ai_nav_findPath_autoGenerate = {
+	params ["_startPos", "_endPos", ["_optimize", true], ["_maxRegionsToGenerate", 5], ["_pathWidth", 1]];
+	
+	ai_debug_decl(["Finding path (auto-generate) from %1 to %2 (width=%3)" arg _startPos arg _endPos arg _pathWidth] call ai_debugLog);
+	ai_debug_decl(private _tTotal = tickTime;)
+	
+	// Находим стартовый узел
+	private _startNode = [_startPos] call ai_nav_findNearestNode;
+	
+	if (_startNode == -1) then {
+		// Генерируем новый регион со связями
+		[_startPos] call ai_nav_updateRegion;
+		_startNode = [_startPos] call ai_nav_findNearestNode;
+	};
+	
+	// Проверяем конечный узел
+	private _endNode = [_endPos] call ai_nav_findNearestNode;
+	
+	// Если конечный узел не найден - генерируем регионы на пути
+	if (_endNode == -1) then {
+		ai_debug_decl(["End node not found, generating regions on path..." ] call ai_debugLog);
+		
+		// Получаем ключи регионов от старта к концу
+		private _startRegionKey = [_startPos select 0, _startPos select 1] call ai_nav_getRegionKey;
+		private _endRegionKey = [_endPos select 0, _endPos select 1] call ai_nav_getRegionKey;
+		
+		// Если регионы совпадают - генерируем только конечный
+		if (_startRegionKey == _endRegionKey) then {
+			[_endPos] call ai_nav_updateRegion;
+			ai_debug_decl(["Updated end region %1" arg _endRegionKey] call ai_debugLog);
+		} else {
+			// Генерируем регионы по линии от старта к концу с заданной шириной
+			[_startPos, _endPos, _maxRegionsToGenerate, _pathWidth] call ai_nav_generateRegionsOnLine_withInit;
+		};
+		
+		// Повторно ищем конечный узел
+		_endNode = [_endPos] call ai_nav_findNearestNode;
+		
+		if (_endNode == -1) exitWith {
+			ai_debug_decl(["Still no end node after generation" ] call ai_debugLog);
+			[]
+		};
+	};
+	
+	// Запускаем A*
+	private _pathNodes = [_startNode, _endNode] call ai_nav_findPathNodes;
+	
+	if (count _pathNodes == 0) exitWith {[]};
+	
+	// Конвертируем узлы в позиции
+	private _pathPositions = [];
+	{
+		private _nodeData = ai_nav_nodes get _x;
+		private _pos = _nodeData get "pos";
+		_pathPositions pushBack _pos;
+	} forEach _pathNodes;
+	
+	// Оптимизируем путь
+	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_fast} else {_pathPositions};
+	
+	ai_debug_decl(["Path found with auto-generation in %1ms" arg ((tickTime - _tTotal)*1000)toFixed 2] call ai_debugLog);
+	
+	_optimizedPath
+};
+
+// Генерация регионов вдоль линии С ИНИЦИАЛИЗАЦИЕЙ (включая entrance points)
+// _pathWidth - количество регионов в стороны от центральной линии (по умолчанию 1)
+ai_nav_generateRegionsOnLine_withInit = {
+	params ["_startPos", "_endPos", "_maxRegions", ["_pathWidth", 1]];
+	
+	ai_debug_decl(private _tTotal = tickTime;)
+	
+	private _direction = _endPos vectorDiff _startPos;
+	private _distance = vectorMagnitude _direction;
+	private _dirNorm = vectorNormalized _direction;
+	
+	// Вычисляем перпендикулярное направление для ширины пути
+	private _perpDir = [
+		-(_dirNorm select 1),
+		_dirNorm select 0,
+		0
+	];
+	
+	private _generatedCount = 0;
+	
+	// Шагаем вдоль линии с шагом размера региона
+	private _stepSize = ai_nav_regionSize;
+	private _steps = ceil(_distance / _stepSize) min _maxRegions;
+	
+	ai_debug_decl(["Generating regions with init: steps=%1, pathWidth=%2" arg _steps arg _pathWidth] call ai_debugLog);
+	
+	for "_i" from 0 to _steps do {
+		private _centerPos = _startPos vectorAdd (_dirNorm vectorMultiply (_i * _stepSize));
+		
+		// Генерируем регионы в "коридоре" вокруг центральной линии
+		// Если _pathWidth = 1, генерируем только центральный регион
+		// Если _pathWidth = 2, генерируем центр + 1 регион в каждую сторону
+		for "_w" from (-(_pathWidth - 1)) to (_pathWidth - 1) do {
+			private _offsetPos = _centerPos vectorAdd (_perpDir vectorMultiply (_w * ai_nav_regionSize));
+			
+			// Обновляем регион (работает и для новых, и для существующих)
+			[_offsetPos] call ai_nav_updateRegion;
+			_generatedCount = _generatedCount + 1;
+		};
+	};
+	
+	ai_debug_decl(["Generated %1 regions in corridor in %2ms" arg _generatedCount arg ((tickTime - _tTotal)*1000)toFixed 2] call ai_debugLog);
+	
+	_generatedCount
+};
+
+// ============================================================================
+// ЧАСТИЧНЫЙ ПУТЬ (Partial Path) - для динамической навигации AI
+// ============================================================================
+
+// Найти частичный путь к ближайшей доступной точке к целевой позиции
+// Использует модифицированный A* с ранним выходом для оптимизации
+ai_nav_findPartialPath = {
+	params ["_startPos", "_endPos", ["_optimize", true]];
+	
+	ai_debug_decl(["Finding partial path from %1 to %2" arg _startPos arg _endPos] call ai_debugLog);
+	ai_debug_decl(private _tTotal = tickTime;)
+	
+	// Находим стартовый узел
+	private _startNode = [_startPos] call ai_nav_findNearestNode;
+	
+	if (_startNode == -1) exitWith {
+		ai_debug_decl(["No start node found near %1" arg _startPos] call ai_debugLog);
+		[]
+	};
+	
+	// Всегда используем модифицированный A* с ранним выходом
+	// Он быстро находит прямой путь (если цель достижима)
+	// Или находит ближайший узел (если цель недостижима)
+	private _pathNodes = [_startNode, _endPos, 2] call ai_nav_findPathToClosestNode;
+	
+	if (count _pathNodes == 0) exitWith {
+		ai_debug_decl(["No path found"] call ai_debugLog);
+		[]
+	};
+	
+	// Конвертируем узлы в позиции
+	private _pathPositions = [];
+	{
+		private _nodeData = ai_nav_nodes get _x;
+		private _pos = _nodeData get "pos";
+		_pathPositions pushBack _pos;
+	} forEach _pathNodes;
+	
+	// Оптимизируем путь
+	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_fast} else {_pathPositions};
+	
+	// Проверяем, достигли ли мы реальной цели
+	private _actualEnd = _pathPositions select (count _pathPositions - 1);
+	private _distToTarget = _actualEnd distance _endPos;
+	private _isPartial = _distToTarget > 5;
+	
+	ai_debug_decl([
+		"Path found in %1ms: %2 waypoints, distance to target=%3m (partial=%4)" arg 
+		((tickTime - _tTotal)*1000)toFixed 2 arg
+		count _optimizedPath arg
+		_distToTarget toFixed 2 arg
+		_isPartial
+	] call ai_debugLog);
+	
+	_optimizedPath
+};
+
+// Модифицированный A* - находит путь к ближайшему достижимому узлу к целевой позиции
+// Вместо поиска конкретного узла, ищет среди всех достижимых узлов ближайший к позиции
+// С оптимизацией раннего выхода для достижимых целей
+ai_nav_findPathToClosestNode = {
+	params ["_startNodeId", "_targetPos", ["_earlyExitDistance", 2]];
+	FHEADER;
+	
+	ai_debug_decl(private _tStart = tickTime;)
+	
+	// Инициализация стандартного A*
+	private _openSet = [_startNodeId];
+	private _closedSet = createHashMap;
+	private _cameFrom = createHashMap;
+	
+	private _gScore = createHashMap;
+	_gScore set [_startNodeId, 0];
+	
+	private _fScore = createHashMap;
+	private _startPos = (ai_nav_nodes get _startNodeId) get "pos";
+	_fScore set [_startNodeId, (_startPos distance _targetPos) * 1.3];
+	
+	private _iterations = 0;
+	private _maxIterations = 10000;
+	
+	// Отслеживание ближайшего узла к целевой позиции
+	private _closestNode = _startNodeId;
+	private _closestDist = _startPos distance _targetPos;
+	
+	ai_debug_decl(private _maxOpenSetSize = 0;)
+	ai_debug_decl(private _earlyExit = false;)
+	
+	while {count _openSet > 0 && _iterations < _maxIterations} do {
+		_iterations = _iterations + 1;
+		
+		ai_debug_decl(if (count _openSet > _maxOpenSetSize) then {_maxOpenSetSize = count _openSet};)
+		
+		// Найти узел с минимальным fScore
+		private _minIdx = 0;
+		private _current = _openSet select 0;
+		private _minF = _fScore getOrDefault [_current, 999999];
+		
+		for "_i" from 1 to (count _openSet - 1) do {
+			private _nodeId = _openSet select _i;
+			private _f = _fScore getOrDefault [_nodeId, 999999];
+			if (_f < _minF) then {
+				_minF = _f;
+				_current = _nodeId;
+				_minIdx = _i;
+			};
+		};
+		
+		// Обновляем ближайший узел к цели
+		private _currentPos = (ai_nav_nodes get _current) get "pos";
+		private _distToTarget = _currentPos distance _targetPos;
+		
+		if (_distToTarget < _closestDist) then {
+			_closestDist = _distToTarget;
+			_closestNode = _current;
+			
+			// ОПТИМИЗАЦИЯ: Ранний выход если нашли узел очень близко к цели
+			if (_distToTarget <= _earlyExitDistance) then {
+				ai_debug_decl(_earlyExit = true;)
+				break;
+			};
+		};
+		
+		// Удаляем из openSet и добавляем в closedSet
+		_openSet deleteAt _minIdx;
+		_closedSet set [_current, true];
+		
+		// Проверяем соседей
+		private _neighbors = [_current] call ai_nav_getNeighbors;
+		
+		{
+			_x params ["_neighborId", "_cost"];
+			
+			if (_neighborId in _closedSet) then {continue};
+			
+			private _tentativeGScore = (_gScore getOrDefault [_current, 999999]) + _cost;
+			
+			if (_tentativeGScore < (_gScore getOrDefault [_neighborId, 999999])) then {
+				_cameFrom set [_neighborId, _current];
+				_gScore set [_neighborId, _tentativeGScore];
+				
+				// Эвристика = расстояние до целевой позиции
+				private _neighborPos = (ai_nav_nodes get _neighborId) get "pos";
+				private _h = _neighborPos distance _targetPos;
+				_fScore set [_neighborId, _tentativeGScore + _h];
+				
+				if (!(_neighborId in _openSet)) then {
+					_openSet pushBack _neighborId;
+				};
+			};
+		} forEach _neighbors;
+	};
+	
+	// Восстанавливаем путь к ближайшему узлу
+	private _path = [_cameFrom, _closestNode] call ai_nav_reconstructPath;
+	
+	ai_debug_decl([
+		"Partial path to closest node: %1 nodes, %2 iterations, closest distance=%3m, maxOpenSet=%4, earlyExit=%5 | TOTAL=%6ms" arg 
+		count _path arg 
+		_iterations arg
+		_closestDist toFixed 2 arg
+		_maxOpenSetSize arg
+		_earlyExit arg
+		((tickTime - _tStart)*1000)toFixed 2
+	] call ai_debugLog);
+	
+	RETURN(_path);
+};
+
+// Найти ближайший узел в направлении целевой позиции
+// ОПТИМИЗИРОВАНО: ищет только в регионах в направлении цели
+ai_nav_findNearestNodeTowards = {
+	params ["_startPos", "_targetPos", ["_maxSearchDistance", 100]];
+	
+	ai_debug_decl(private _tStart = tickTime;)
+	
+	private _direction = _targetPos vectorDiff _startPos;
+	private _dirNorm = vectorNormalized _direction;
+	private _targetDistance = (vectorMagnitude _direction) min _maxSearchDistance;
+	
+	// Собираем регионы в направлении цели (вдоль луча)
+	private _regionsToCheck = [];
+	private _stepSize = ai_nav_regionSize;
+	private _steps = ceil(_targetDistance / _stepSize);
+	
+	ai_debug_decl(private _totalRegions = 0;)
+	
+	// Идем вдоль линии к цели и собираем регионы
+	for "_i" from 0 to _steps do {
+		private _checkPos = _startPos vectorAdd (_dirNorm vectorMultiply (_i * _stepSize));
+		private _regionKey = [_checkPos select 0, _checkPos select 1] call ai_nav_getRegionKey;
+		
+		// Добавляем регион и его соседей (для расширения зоны поиска)
+		if (_regionKey in ai_nav_regions) then {
+			_regionsToCheck pushBackUnique _regionKey;
+			ai_debug_decl(_totalRegions = _totalRegions + 1;)
+			
+			// Добавляем 4 прямых соседа для расширения зоны
+			_regionKey splitString "_" params ["_rx", "_ry"];
+			_rx = parseNumber _rx; _ry = parseNumber _ry;
+			
+			{
+				_x params ["_dx", "_dy"];
+				private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+				if (_neighborKey in ai_nav_regions) then {
+					_regionsToCheck pushBackUnique _neighborKey;
+				};
+			} forEach [[0,1], [0,-1], [1,0], [-1,0]]; // Только прямые соседи
+		};
+	};
+	
+	ai_debug_decl(["Searching in %1 regions towards target" arg count _regionsToCheck] call ai_debugLog);
+	
+	// Если нет регионов в направлении - ищем в ближайших от старта
+	if (count _regionsToCheck == 0) then {
+		private _startRegionKey = [_startPos select 0, _startPos select 1] call ai_nav_getRegionKey;
+		if (_startRegionKey in ai_nav_regions) then {
+			_regionsToCheck pushBack _startRegionKey;
+			
+			// Добавляем всех 8 соседей
+			_startRegionKey splitString "_" params ["_rx", "_ry"];
+			_rx = parseNumber _rx; _ry = parseNumber _ry;
+			{
+				_x params ["_dx", "_dy"];
+				private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+				if (_neighborKey in ai_nav_regions) then {
+					_regionsToCheck pushBackUnique _neighborKey;
+				};
+			} forEach [[0,1], [0,-1], [1,0], [-1,0], [1,1], [-1,1], [1,-1], [-1,-1]];
+		};
+		ai_debug_decl(["No regions in direction, using %1 regions around start" arg count _regionsToCheck] call ai_debugLog);
+	};
+	
+	private _bestNode = -1;
+	private _bestScore = -999999;
+	
+	ai_debug_decl(private _checkedNodes = 0;)
+	
+	// Ищем только среди узлов выбранных регионов
+	{
+		private _regionKey = _x;
+		private _regionData = ai_nav_regions get _regionKey;
+		private _nodeIds = _regionData get "nodes";
+		
+		{
+			private _nodeId = _x;
+			private _nodeData = ai_nav_nodes get _nodeId;
+			private _nodePos = _nodeData get "pos";
+			
+			ai_debug_decl(_checkedNodes = _checkedNodes + 1;)
+			
+			// Вектор от старта к узлу
+			private _toNode = _nodePos vectorDiff _startPos;
+			private _distToNode = vectorMagnitude _toNode;
+			
+			if (_distToNode > 0.1) then {
+				private _toNodeNorm = vectorNormalized _toNode;
+				
+				// Скалярное произведение - насколько узел в направлении цели
+				private _dotProduct = _dirNorm vectorDotProduct _toNodeNorm;
+				
+				// Только узлы в направлении цели (dot > 0.3 = угол < 72°)
+				if (_dotProduct > 0.3) then {
+					private _distanceToTarget = _nodePos distance _targetPos;
+					
+					// Формула оценки:
+					// - Высокий приоритет узлам в направлении (+100 * dot)
+					// - Штраф за расстояние от старта (-0.5 * dist)
+					// - Бонус за близость к цели (-0.3 * distToTarget)
+					private _score = (_dotProduct * 100) - (_distToNode * 0.5) - (_distanceToTarget * 0.3);
+					
+					if (_score > _bestScore) then {
+						_bestScore = _score;
+						_bestNode = _nodeId;
+					};
+				};
+			};
+		} forEach _nodeIds;
+	} forEach _regionsToCheck;
+	
+	ai_debug_decl(private _tEnd = tickTime;)
+	
+	if (_bestNode != -1) then {
+		private _bestNodeData = ai_nav_nodes get _bestNode;
+		private _bestNodePos = _bestNodeData get "pos";
+		ai_debug_decl([
+			"Found best node: nodeId=%1, pos=%2, score=%3 | Checked %4 nodes in %5 regions in %6ms" arg 
+			_bestNode arg 
+			_bestNodePos arg 
+			(_bestScore toFixed 2) arg
+			_checkedNodes arg
+			count _regionsToCheck arg
+			((_tEnd - _tStart)*1000)toFixed 2
+		] call ai_debugLog);
+	} else {
+		ai_debug_decl([
+			"No suitable node found | Checked %1 nodes in %2 regions in %3ms" arg 
+			_checkedNodes arg 
+			count _regionsToCheck arg
+			((_tEnd - _tStart)*1000)toFixed 2
+		] call ai_debugLog);
+	};
+	
+	_bestNode
+};

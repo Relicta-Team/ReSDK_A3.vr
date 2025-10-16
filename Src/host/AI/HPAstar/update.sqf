@@ -13,7 +13,7 @@ ai_nav_updateRegion = {
     
     ai_debug_decl(["Updating region %1" arg _regionKey] call ai_debugLog; private _tupd = tickTime;)
     
-    // 1. Удаляем старые данные
+    // 1. Удаляем старые данные (если регион существует)
     [_regionKey] call ai_nav_invalidateRegion;
     
     // 2. Генерируем узлы и внутренние связи заново
@@ -24,6 +24,8 @@ ai_nav_updateRegion = {
     [_regionKey] call ai_nav_updateRegionEntrances_fast;
     
     ai_debug_decl(["Region %1 updated at %2ms" arg _regionKey arg ((tickTime - _tupd)*1000)toFixed 2] call ai_debugLog;)
+    
+    _regionKey
 };
 
 ai_nav_invalidateRegion = {
@@ -287,6 +289,21 @@ ai_nav_buildEntrancesBetween = {
                             _pos2 vectoradd vec3(0,0,0.4),
                             objNull, objNull, true, 1, "VIEW", "GEOM"
                         ];
+                        
+                        #ifdef AI_NAV_DEBUG_DRAW
+                        // Визуализация переходной точки
+                        private _loopEntrance = struct_newp(LoopedObjectFunction,
+                            ai_nav_debug_drawNode arg [
+                                asltoatl _pos1 vectoradd vec3(0,0,0.2) arg 
+                                asltoatl _pos2 vectoradd vec3(0,0,0.2) arg 
+                                [1 arg 0 arg 0 arg 1] arg 
+                                25
+                            ] arg 
+                            null arg 
+                            ai_debug_objs select 0
+                        );
+                        ai_debug_loopDrawObjs pushback _loopEntrance;
+                        #endif
                         ai_debug_decl(_raycastCount = _raycastCount + 1;)
                         ai_debug_decl(_raycastTime = _raycastTime + (tickTime - _tRaycast);)
                         
