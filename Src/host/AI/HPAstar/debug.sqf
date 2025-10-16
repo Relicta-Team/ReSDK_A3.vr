@@ -53,7 +53,7 @@ ai_nav_quickInit = {
 	
 	// Очищаем предыдущие данные
 	call ai_nav_clearAllRegions;
-	
+	private _t = tickTime;
 	// Генерируем регионы
 	private _regions = [_pos, _radius] call ai_nav_generateRegions;
 	
@@ -63,6 +63,7 @@ ai_nav_quickInit = {
 	private _entrances = call ai_nav_buildEntrancePoints;
 	
 	["Built %1 entrance connections between regions" arg _entrances] call ai_debugLog;
+	["TOTAL TIME: %1ms" arg ((tickTime - _t)*1000)toFixed 2] call ai_debugLog;
 	
 	_regions
 };
