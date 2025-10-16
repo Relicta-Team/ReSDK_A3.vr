@@ -121,10 +121,10 @@ ai_nav_debugDrawPath = {
 
 // Тест: найти и визуализировать путь между двумя позициями
 ai_nav_testPath = {
-	params ["_startPos", "_endPos"];
+	params ["_startPos", "_endPos",["_optimize",true]];
 	
 	// Находим путь
-	private _path = [_startPos, _endPos] call ai_nav_findPath;
+	private _path = [_startPos, _endPos, _optimize] call ai_nav_findPath;
 	
 	if (count _path == 0) exitWith {
 		["No path found between positions!"] call ai_debugLog;
@@ -140,6 +140,9 @@ ai_nav_testPath = {
 	[_endPos, [1,0,0], 5, true,ai_debug_objsPath] call ai_nav_debug_createObj;   // Красный конец
 	
 	private _loops = [_path, [1,0,1,1], 30] call ai_nav_debugDrawPath;
+	{
+		[_x, [1,0,0,1],2,false,ai_debug_objsPath] call ai_nav_debug_createObj;
+	} foreach _path;
 	
 	["Path found: %1 waypoints, distance: %2m" arg count _path arg (_startPos distance _endPos)toFixed 2] call ai_debugLog;
 	

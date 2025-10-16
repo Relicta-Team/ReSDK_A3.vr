@@ -148,8 +148,22 @@ ai_nav_generateRegionNodes = {
 		{
 			_x params ["_pos","_norm","_obj"];
 			//пропускаем самый верхний слой (это крыша потолка) 
-			//! не всегда. пока отключено
-			//if (_forEachIndex == 0) then {_prevpos = _pos;continue};
+			//проверка дает перф буст на 49% меньше точек, и общий перф выше на 30% при условии что потолок ходибельный
+			if (_forEachIndex == 0) then {
+				private _hitUp = lineIntersectsSurfaces [
+					_pos,
+					_pos vectoradd vec3(0,0,ai_nav_raycastHeight),
+					objNull,
+					objNull,
+					true,
+					1,
+					"VIEW",
+					"GEOM"
+				];
+				if (count _hitUp == 0) then {
+					continue;
+				};
+			};
 			
 			//поверхность карты пропускаем
 			if (isNullReference(_obj)) then {continue};
@@ -475,7 +489,7 @@ ai_nav_findPathNodes = {
 
 // Найти путь между двумя позициями
 ai_nav_findPath = {
-	params ["_startPos", "_endPos"];
+	params ["_startPos", "_endPos",["_optimize",true]];
 	
 	ai_debug_decl(["Finding path from %1 to %2" arg _startPos arg _endPos] call ai_debugLog);
 	
@@ -506,5 +520,104 @@ ai_nav_findPath = {
 		_pathPositions pushBack _pos;
 	} forEach _pathNodes;
 	
-	_pathPositions
+	// Оптимизируем путь (убираем лишние промежуточные точки)
+	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_fast} else {_pathPositions};
+	
+	_optimizedPath
+};
+
+// ============================================================================
+// PATH SMOOTHING - Оптимизация пути
+// ============================================================================
+
+// Упрощение пути методом Line-of-Sight
+// Убирает промежуточные точки, если можно пройти напрямую
+ai_nav_smoothPath = {
+	params ["_path"];
+	
+	if (count _path < 3) exitWith {_path}; // Нечего оптимизировать
+	
+	ai_debug_decl(private _tStart = tickTime;)
+	
+	private _smoothPath = [_path select 0]; // Начинаем со стартовой точки
+	private _currentIdx = 0;
+	
+	while {_currentIdx < (count _path - 1)} do {
+		private _fromPos = _path select _currentIdx;
+		private _farthestIdx = _currentIdx + 1;
+		
+		// Ищем самую дальнюю точку, до которой можно дойти по прямой
+		for "_i" from (_currentIdx + 2) to (count _path - 1) do {
+			private _toPos = _path select _i;
+			
+			// Проверяем line-of-sight (нет ли препятствий)
+			if ([_fromPos, _toPos] call ai_nav_hasLineOfSight) then {
+				_farthestIdx = _i; // Можем дойти до этой точки напрямую
+			} else {
+				break; // Препятствие - дальше не проверяем
+			};
+		};
+		
+		// Добавляем самую дальнюю доступную точку
+		_smoothPath pushBack (_path select _farthestIdx);
+		_currentIdx = _farthestIdx;
+	};
+	
+	ai_debug_decl([
+		"Path smoothing: %1 → %2 waypoints in %3ms" arg 
+		count _path arg 
+		count _smoothPath arg 
+		((tickTime - _tStart)*1000)toFixed 2
+	] call ai_debugLog);
+	
+	_smoothPath
+};
+
+// Проверка line-of-sight между двумя точками
+ai_nav_hasLineOfSight = {
+	params ["_pos1", "_pos2"];
+	
+	// Проверяем, нет ли препятствий между точками
+	private _intersections = lineIntersectsSurfaces [
+		_pos1 vectoradd vec3(0,0,0.4),
+		_pos2 vectoradd vec3(0,0,0.4),
+		objNull,
+		objNull,
+		true,
+		1,
+		"VIEW",
+		"GEOM"
+	];
+	
+	// Если нет пересечений - есть line of sight
+	count _intersections == 0
+};
+
+ai_nav_smoothPath_fast = {
+    params ["_path"];
+    
+    if (count _path < 3) exitWith {_path};
+    
+	ai_debug_decl(private _tStart = tickTime;)
+
+    private _result = [_path select 0];
+    
+    for "_i" from 1 to (count _path - 2) do {
+        private _v1 = (_path select _i) vectorDiff (_path select (_i - 1));
+        private _v2 = (_path select (_i + 1)) vectorDiff (_path select _i);
+        
+        // Если векторы не сонаправлены - это поворот
+        if (vectorMagnitude (_v1 vectorCrossProduct _v2) > 0.1) then {
+            _result pushBack (_path select _i);
+        };
+    };
+    
+    _result pushBack (_path select (count _path - 1));
+    ai_debug_decl([
+        "Path smoothing: %1 → %2 waypoints in %3ms" arg 
+        count _path arg 
+        count _result arg 
+        ((tickTime - _tStart)*1000)toFixed 2
+    ] call ai_debugLog);
+    _result
 };
