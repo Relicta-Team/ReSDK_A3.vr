@@ -17,6 +17,7 @@ ai_nav_saveRegion = {
 	
 	// Создаем структуру данных региона
 	private _regionData = createHashMap;
+	_regionData set ["lastUpdate", tickTime];
 	_regionData set ["nodes", []];      // Массив ID узлов
 	_regionData set ["edges", _edges];  // Связи остаются как есть
 	_regionData set ["entrances", createHashMap];  // Переходные точки (пока пустые)

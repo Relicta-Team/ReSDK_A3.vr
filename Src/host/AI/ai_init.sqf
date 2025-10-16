@@ -10,16 +10,25 @@
 #include <..\GameObjects\GameConstants.hpp>
 #include <..\Gender\Gender.hpp>
 
+#include "ai.h"
+
 #include "HPAstar\core.sqf"
 #include "HPAstar\debug.sqf"
 #include "HPAstar\region.sqf"
 #include "HPAstar\update.sqf"
 #include "HPAstar\entrance.sqf"
 
+#include "ai_interact.sqf"
+
+ai_handleUpdate = -1;
+
+ai_allMobs = [];
+
+#ifdef EDITOR
 ai_reloadThis = {
 	call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
 };
-
+#endif
 
 ai_createMob = {
 	params ["_pos",["_stats",[10,10,10,10]]];
@@ -35,55 +44,104 @@ ai_createMob = {
 	smd_allInGameMobs pushBackUnique _gMob;
 	callFuncParams(_mob,setMobFace,pick faces_list_man);
 	setVar(_mob,curTargZone,TARGET_ZONE_RANDOM);
+	
+	_gMob enableAI "MOVE";
+	_gMob enableAI "ANIM";
 
-	[_gMob,_mob] call ai_startSM;
+	//создаем регион для существа
+	[_pos] call ai_nav_updateOrCreateRegion;
+	
+	ai_allMobs pushBack _mob;
+	private _mapdata = createHashMap;
+	_mapdata set ["curpath",[]];
+	_mapdata set ["targetidx",0];
+	_mapdata set ["ismoving",false];
+	setVar(_mob,__aiagent,_mapdata);
+
+	_mob
 };
 
-ai_startSM = {
-	params ["_visual","_virtual"];
-
-	_visual setVariable ["ai_mode","stop"];
-	_visual setVariable ["ai_lastact",tickTime];
-	_visual setVariable ["ai_state","idle"];
-	_visual setVariable ["ai_target",nullPtr];
-
-	private _h = startUpdateParams(ai_mob_onUpdate,0.01,vec2(_visual,_virtual));
-	_visual setVariable ["ai_handle",_h];
+ai_init = {
+	if (is3den) exitWith {};
+	ai_handleUpdate = startUpdate(ai_onUpdate,0.1);
 };
 
-ai_mob_onUpdate = {
-	(_this select 0) params ["_vis","_virt"];
-	if (tickTime < (_vis getVariable "ai_lastact")) exitWith {};
-	_state = _vis getVariable "ai_state";
-	#define checkState(name) if equals(_state,name) exitWith
-	#define gv(name) (_vis getVariable 'ai_##name')
-	#define sv(name,val) _vis setVariable ['ai_##name',val]
-
-	checkState(idle) {
-		//find target
-		_l = callFuncParams(_virt,getNearMobs,5 arg false);
-		if (count _l > 0) exitWith {
-			//set target
-			_visual setVariable ["ai_target",_l select 0];
-			_visual setVariable ["ai_state","moveto"];
+//цикл обновления AI
+ai_onUpdate = {
+	//синхронизируем регионы
+	{
+		_r = [getposasl _x] call ai_nav_updateOrCreateRegion;
+		if (_r != "") then {
+			["New region: " + _r,"system"] call chatprint;
+		};
+	} foreach smd_allInGameMobs;
+	//процессим моба
+	{
+		private _mob = _x;
+		private _body = toActor(_mob);
+		private _pos = getposasl _body;
+		private _mapdata = getVar(_mob,__aiagent);
+		if !(_mapdata get "ismoving") then {
+			if (tickTime < (_mapdata getOrDefault ["nextPlanTime",tickTime])) exitWith {};
+			
+			[_mob,getposasl player] call ai_planMove;
 		};
 
-	};
-	checkState(moveto) {
-		__canmoveto = {
-			private _its = lineIntersectsSurfaces [(getPosASL _vis)vectorAdd[0,0,0.5],_vis modelToWorld [0,0.9,0.5],_vis,objNull,true,1,"GEOM","VIEW"];
-			(count _its == 0)
+		if (_mapdata get "ismoving") then {
+			[_mob] call ai_handleMove;
 		};
-		if (call __canmoveto) then {
-			if (gv(mode) != "stop") then {
-				_vis playAction "WalkF";
-				sv(mode,"move");
+	} foreach ai_allMobs;
+};
+
+ai_debugStart = {
+	private _o = [getposatl player] call ai_createMob;
+	private _map = createHashMap;
+	_map set ["curpath",[]];
+	_map set ["targetidx",0];
+	_map set ["ismoving",false];
+	setVar(_o,__aidata,_map);
+	ai_debug_procMobs = [_o];
+	private _upd = {
+		{
+			_act = getVar(_x,owner);
+			_pos = getposasl _act;
+			_map = getVar(_x,__aidata);
+			if (!([_pos] call ai_nav_hasRegion)) then {
+				["update region at pos: " + (str _pos)] call chatprint;
+				[_pos] call ai_nav_updateRegion;
 			};
-		} else {
-			if (gv(mode)=="move") then {
-				_vis playAction "stop";
-				sv(mode,"stop");
+			if !(_map get "ismoving") then {
+				_path = [_pos,getposasl player] call ai_nav_findPath;
+				if (count _path > 0) then {
+					_map set ["curpath",_path];
+					_map set ["targetidx",0];
+					_map set ["ismoving",true];
+					["start moving to target"] call chatprint;
+				};
 			};
-		};
+			if (_map get "ismoving") then {
+				_curidx = _map get "targetidx";
+				_targetPos = (_map get "curpath") select _curidx;
+				_act stop false;
+				_act forcespeed 2;
+				_act setDestination [_targetPos,"LEADER DIRECT",true];
+				if (((getposasl _act) distance _targetPos) < 0.8) then {
+					["increment target idx to " + (str _curidx)] call chatprint;
+					INC(_curidx);
+					_map set ["targetidx",_curidx];
+					if (_curidx >= count (_map get "curpath")) then {
+						_map set ["ismoving",false];
+						_act stop true;
+						["final target reached"] call chatprint;
+					};
+				};
+			};
+		} foreach ai_debug_procMobs;
 	};
+	startUpdate(_upd,0.1);
 };
+
+ai_updateNav = {
+
+};
+

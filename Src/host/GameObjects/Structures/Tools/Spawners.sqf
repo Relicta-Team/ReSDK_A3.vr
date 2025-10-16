@@ -160,7 +160,7 @@ endclass
 
 class(EntitySpawner) extends(IStructNonReplicated)
 	var(name,"Спавнер АИ-сущности");
-	
+
 	editor_attribute("InternalImpl")
 	;if (!is3DEN) then {
 		var(model,"a3\structures_f\system\cluttercutter_small_f.p3d");
@@ -192,19 +192,19 @@ class(EntitySpawner) extends(IStructNonReplicated)
 	editor_attribute("alias" arg "Behaviour type")
 	var(behaviourName,"");
 
-	func(constructor)
+	func(initModel)
 	{
-		objParams();
-
+		objParams_3(_pos,_dir,_vec);
+		super();
 		private _cls = getSelf(entityType);
-		if !isImplementClass(_cls) exitWith {
-			errorformat("EntitySpawner.ctor: cant find entity class '%1'",_cls);
-			setLastError("Cant find entity class '" + _cls + "'");
-		};
+		// if !isImplementClass(_cls) exitWith {
+		// 	errorformat("EntitySpawner.ctor: cant find entity class '%1'",_cls);
+		// 	setLastError("Cant find entity class '" + _cls + "'");
+		// };
 		private _behaviour = getSelf(behaviourName);
 		//todo use behaviour
 
-		[callSelf(getPos),[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]] call ai_createMob;
+		[_pos,[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]] call ai_createMob;
 	};
 
 endclass

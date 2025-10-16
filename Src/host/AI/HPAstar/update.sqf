@@ -28,6 +28,17 @@ ai_nav_updateRegion = {
     _regionKey
 };
 
+ai_nav_updateOrCreateRegion = {
+    params ["_pos"];
+    private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
+    private _regionData = ai_nav_regions get _regionKey;
+    if (isNullVar(_regionData)) then {
+        [_pos] call ai_nav_updateRegion;
+    } else {
+        ""
+    };
+};
+
 ai_nav_invalidateRegion = {
     params ["_regionKey"];
     
@@ -289,7 +300,7 @@ ai_nav_buildEntrancesBetween = {
                             _pos2 vectoradd vec3(0,0,0.4),
                             objNull, objNull, true, 1, "VIEW", "GEOM"
                         ];
-                        
+
                         #ifdef AI_NAV_DEBUG_DRAW
                         // Визуализация переходной точки
                         private _loopEntrance = struct_newp(LoopedObjectFunction,

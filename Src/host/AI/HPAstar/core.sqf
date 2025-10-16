@@ -393,7 +393,7 @@ ai_nav_findNearestNode = {
 	private _regionData = ai_nav_regions get _regionKey;
 	
 	// Если регион не существует, ищем в ближайших регионах
-	if (isNil "_regionData") then {
+	if (isNil "_regionData") exitWith {
 		private _bestNode = -1;
 		private _bestDist = 999999;
 		
