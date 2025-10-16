@@ -40,9 +40,11 @@
 // ============================================================================
 // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И КОНФИГУРАЦИЯ
 // ============================================================================
-#define AI_NAV_DEBUG true
+//#define AI_NAV_DEBUG true
 //#define AI_NAV_DEBUG_DRAW true
 
+//дополнительные лучи для поиска незахваченных поверхностей
+//#define AI_EXPERIMENTAL_NODE_HOLE_FIX
 
 // Навигационные данные
 ai_nav_regions = createHashMap;      // regionKey -> region data
@@ -118,9 +120,6 @@ ai_nav_sortBy = {
 	_inputArray apply {_x select 2}
 	
 };
-
-//дополнительные лучи для поиска незахваченных поверхностей
-//#define AI_EXPERIMENTAL_NODE_HOLE_FIX
 
 ai_nav_generateRegionNodes = {
 	params ["_pos", ["_autoSave", true]];
@@ -461,6 +460,14 @@ ai_nav_heuristic = {
 	private _pos2 = (ai_nav_nodes get _nodeId2) get "pos";
 	//?можно потом сделать что чем дальше идти до цели тем выше коэф (быстрее посчитается)
 	(_pos1 distance _pos2) * 1.3 //с агрессивным коэффициентом вычисляется в ~10 раз быстрее
+};
+
+// Эвристическая функция с позицией вместо ID узла
+ai_nav_heuristicPos = {
+	params ["_nodeId", "_targetPos"];
+	
+	private _nodePos = (ai_nav_nodes get _nodeId) get "pos";
+	(_nodePos distance _targetPos) * 1.3 //с агрессивным коэффициентом
 };
 
 // Получить соседей узла
@@ -913,7 +920,7 @@ ai_nav_findPathToClosestNode = {
 	
 	private _fScore = createHashMap;
 	private _startPos = (ai_nav_nodes get _startNodeId) get "pos";
-	_fScore set [_startNodeId, (_startPos distance _targetPos) * 1.3];
+	_fScore set [_startNodeId, [_startNodeId, _targetPos] call ai_nav_heuristicPos];
 	
 	private _iterations = 0;
 	private _maxIterations = 10000;
@@ -978,9 +985,8 @@ ai_nav_findPathToClosestNode = {
 				_cameFrom set [_neighborId, _current];
 				_gScore set [_neighborId, _tentativeGScore];
 				
-				// Эвристика = расстояние до целевой позиции
-				private _neighborPos = (ai_nav_nodes get _neighborId) get "pos";
-				private _h = _neighborPos distance _targetPos;
+				// Эвристика = расстояние до целевой позиции (с агрессивным коэффициентом)
+				private _h = [_neighborId, _targetPos] call ai_nav_heuristicPos;
 				_fScore set [_neighborId, _tentativeGScore + _h];
 				
 				if (!(_neighborId in _openSet)) then {
