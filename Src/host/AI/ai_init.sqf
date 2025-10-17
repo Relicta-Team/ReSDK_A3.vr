@@ -19,7 +19,7 @@
 #include "HPAstar\update.sqf"
 #include "HPAstar\entrance.sqf"
 
-#include "GOAP\goap_init.sqf"
+#include "Brain\brain_init.sqf"
 
 #include "ai_interact.sqf"
 

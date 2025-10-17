@@ -4,12 +4,13 @@
 // ======================================================
 
 //загружает поведение из yaml файла
-goap_loadYaml = {
+brain_loadYaml = {
 	params ["_yamlName","_refData"];
 	
-	private _path = "src\host\AI\GOAP\AIConfigs\" + _yamlName;
+	private _path = "src\host\AI\Brain\AIConfigs\" + _yamlName;
 	private _yaml = [_yamlName] call yaml_loadFile;
 	if !isNullVar(_yaml) then {
+		[_yaml] call brain_yamlPrepare;
 		refset(_refData,_yaml);
 	};
 
@@ -17,25 +18,11 @@ goap_loadYaml = {
 };
 
 /*
-	example:
-
-	name: monster
-	world_state:
-		- enemyVisible: !isnull(agent.target)
-		- hasStamina: mob:stamina > 0
-	goals:
-		- AttackEnemy:
-			world_state:
-				- enemyVisible: true
-			actions:
-				- Action_AttackEnemy
-				- Action_MoveToEnemy
-	actions:
-		- Action_AttackEnemy:
-			world_state:
+	
 */
-goap_yaml_prepare = {
+brain_yamlPrepare = {
 	params ["_yaml"];
+	//todo прогнать загруженный yaml через goap_yaml_parseExpr отсюда
 	
 };
 
@@ -57,6 +44,12 @@ goap_yaml_prepare = {
 		action(arg1,arg2(arg3,arg4)) -> [arg1,[arg3,arg4] call arg2] call action - приведет к ошибке
 		внутри параметров метода нельзя использовать другие методы
 
+	!ВНИМАНИЕ! цепочки вызовов
+		вызов в одну строку не поддерживается: a.b.c()
+		используйте разделение на переменные:
+		var t = a.b; t.c();
+
+
 	example:
 	action: |
 		if (mob:stamina > 0 && isNull(agent.target) && isNullRef(mob:getItemInActiveHandRedirect())) then {
@@ -77,11 +70,11 @@ goap_yaml_prepare = {
 	[] call globalfunc,[1+2,2+3,3+4] call globalfunc,
 	(isnil{_test})
 */
-goap_yaml_parseExpr = {
+brain_yamlParseExpr = {
 	params ["_expr"];
 
 	private _lines = _expr splitString endl;
-	private _stack = ["scopename 'GOAP_YAML_EXPR'; "];
+	private _stack = ["scopename 'AI_EXPR_SCOPE'; "];
 	private _pat_metcall = "(\w+):(\w+)\s*\(([^)]+)\)";
 	private _pat_met = "(\w+):(\w+)\s*\(\s*\)";
 	private _pat_field = "(\w+):(\w+)";
@@ -114,7 +107,7 @@ goap_yaml_parseExpr = {
 		_curLine = ([_curLine,_pat_structcall,'($1 callv($2))'] call regex_replace);
 		_curLine = ([_curLine,_pat_structfield,'($1 getv($2))'] call regex_replace);
 
-		_curLine = ([_curLine,_pat_return,"(0) breakout 'GOAP_YAML_EXPR'"] call regex_replace);
+		_curLine = ([_curLine,_pat_return,"(0) breakout 'AI_EXPR_SCOPE'"] call regex_replace);
 		_curLine = ([_curLine,_pat_vardef,"private"] call regex_replace);
 		_curLine = ([_curLine,_pat_istypeof,'isTypeOf($1,$2)'] call regex_replace);
 
