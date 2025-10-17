@@ -72,14 +72,21 @@ ai_createMob = {
 	ai_allMobs pushBack _mob;
 
 	
+	private _mapdata = [_pos,_mob] call ai_createAgent;
+	setVar(_mob,__aiagent,_mapdata);
+
+	_mob
+};
+
+ai_createAgent = {
+	params ["_pos","_mob","_gMob"];
 	private _mapdata = createHashMap;
+	_mapdata set ["actor",toActor(_mob)];
 	_mapdata set ["lastvalidpos",_pos];
 	_mapdata set ["curpath",[]];
 	_mapdata set ["targetidx",0];
 	_mapdata set ["ismoving",false];
-	setVar(_mob,__aiagent,_mapdata);
-
-	_mob
+	_mapdata
 };
 
 ai_init = {
