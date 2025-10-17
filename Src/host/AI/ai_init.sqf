@@ -26,9 +26,9 @@ ai_handleUpdate = -1;
 
 ai_allMobs = [];
 
-#define AI_DEBUG_TRACEPATH
-#define AI_ENABLE_DEBUG_LOG
-#define AI_DEBUG_MOVETOPLAYER
+// #define AI_DEBUG_TRACEPATH
+// #define AI_ENABLE_DEBUG_LOG
+// #define AI_DEBUG_MOVETOPLAYER
 
 #ifdef EDITOR
 	ai_reloadThis = {
