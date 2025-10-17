@@ -9,6 +9,7 @@
 #include <..\struct.hpp>
 #include <..\GameObjects\GameConstants.hpp>
 #include <..\Gender\Gender.hpp>
+#include <..\..\client\WidgetSystem\widgets.hpp>
 
 #include "ai.h"
 
@@ -27,7 +28,7 @@ ai_handleUpdate = -1;
 ai_allMobs = [];
 
 // #define AI_DEBUG_TRACEPATH
-// #define AI_ENABLE_DEBUG_LOG
+// #define AI_DEBUG_GOAPIINFO
 // #define AI_DEBUG_MOVETOPLAYER
 
 #ifdef EDITOR
@@ -36,6 +37,7 @@ ai_allMobs = [];
 	};
 #else
 	#undef AI_DEBUG_TRACEPATH
+	#undef AI_DEBUG_GOAPIINFO
 	#undef AI_ENABLE_DEBUG_LOG
 	#undef AI_DEBUG_MOVETOPLAYER
 #endif
@@ -84,9 +86,22 @@ ai_init = {
 	if (is3den) exitWith {};
 	ai_handleUpdate = startUpdate(ai_onUpdate,0.1);
 	#ifdef AI_DEBUG_TRACEPATH
-	private _upd = {
-		call ai_debug_internal_drawPath;
-	}; startUpdate(_upd,0);
+		if !isNull(ai_internal_debug_drawPathHandle) then {
+			stopUpdate(ai_internal_debug_drawPathHandle);
+		};
+		private _upd = {
+			call ai_debug_internal_drawPath;
+		}; 
+		ai_internal_debug_drawPathHandle = startUpdate(_upd,0);
+	#endif
+	#ifdef AI_DEBUG_GOAPIINFO
+		if !isNull(ai_internal_debug_goapiInfoHandle) then {
+			stopUpdate(ai_internal_debug_goapiInfoHandle);
+		};
+		private _upd = {
+			call ai_debug_internal_goapiInfo;
+		}; 
+		ai_internal_debug_goapiInfoHandle = startUpdate(_upd,0);
 	#endif
 };
 
@@ -206,7 +221,33 @@ ai_debug_internal_drawPath = {
 	};
 };
 
-ai_updateNav = {
+#ifdef EDITOR
+ai_debug_internal_needLoadGoapWidget = true;
+#endif
 
+ai_debug_internal_goapiInfo = {
+	if (ai_debug_internal_needLoadGoapWidget) then {
+		if !isNull(ai_debug_internal_goapInfoWidget) then {
+			[ai_debug_internal_goapInfoWidget select 0] call deleteWidget;
+			ai_debug_internal_goapInfoWidget = null;
+		};
+
+		ai_debug_internal_needLoadGoapWidget = false;
+		private _gui = getGUI;
+		_w = [_gui,TEXT,[60,0,100-60,70]] call createWidget;
+		ai_debug_internal_goapInfoWidget = [_w];
+		_w setBackgroundColor [0,0,0,0.5];
+	};
+	private _t = [];
+
+	_t pushBack "GOAP INFO:";
+	_t pushback format["agents: %1, mobs: %2",count ai_allMobs,count smd_allInGameMobs];
+
+	[ai_debug_internal_goapInfoWidget select 0,_t joinString sbr] call widgetSetText;
+};
+
+ai_debug_showGoapInfo = {
+	params ["_mode"];
+	(ai_debug_internal_goapInfoWidget select 0) ctrlShow _mode;
 };
 
