@@ -89,6 +89,40 @@ ai_nav_hasRegion = {
 	_key in ai_nav_regions
 };
 
+// Получить узлы в текущем и соседних регионах
+// Используется для оптимизированного поиска ближайших узлов
+ai_nav_getNodesInRegionArea = {
+	params ["_pos", ["_includeNeighbors", true]];
+	
+	private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
+	private _regionsToCheck = [_regionKey];
+	
+	// Добавляем соседние регионы (8 направлений)
+	if (_includeNeighbors) then {
+		_regionKey splitString "_" params ["_rx", "_ry"];
+		_rx = parseNumber _rx; _ry = parseNumber _ry;
+		{
+			_x params ["_dx", "_dy"];
+			private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+			if (_neighborKey in ai_nav_regions) then {
+				_regionsToCheck pushBack _neighborKey;
+			};
+		} forEach [[0,1], [0,-1], [1,0], [-1,0], [1,1], [-1,1], [1,-1], [-1,-1]];
+	};
+	
+	// Собираем все узлы из выбранных регионов
+	private _allNodes = [];
+	{
+		private _regionData = ai_nav_regions get _x;
+		if (!isNil "_regionData") then {
+			private _nodeIds = _regionData get "nodes";
+			_allNodes append _nodeIds;
+		};
+	} forEach _regionsToCheck;
+	
+	_allNodes
+};
+
 // Генерация сетки регионов в радиусе от центральной точки
 ai_nav_generateRegions = {
 	params ["_centerPos", "_radius"];

@@ -5,6 +5,11 @@
 
 /*
 	Здесь описаны все функции взаимодействия AI с другими объектами, в том числе движение
+
+	Текущие ограничения:
+	1. комбат с бегом приведет к незамедлительному провалу под текстуры
+	2. в комбате при ходьбе персонаж не может быть уложен или посажен
+	3. вращение и таргетирование не работает
 */
 
 //=========================================================
@@ -20,12 +25,73 @@ ai_moveTo = {
 
 ai_planMove = {
 	params ["_mob","_destPos"];
+	FHEADER;
 	private _body = toActor(_mob);
 	private _srcPos = getposasl _body;
 	private _mapdata = getVar(_mob,__aiagent);
-	private _path = [_srcPos,_destPos] call ai_nav_findPartialPath;
+	private _refp = refcreate([]);
+	private _path = [_srcPos,_destPos,true,_refp] call ai_nav_findPartialPath;
 	if (count _path == 0) exitWith {false};
 
+	// ПРОВЕРКА ИЗОЛИРОВАННОГО УЗЛА
+	// Если путь состоит из 1 точки, проверяем, изолирован ли стартовый узел
+	if (count _path == 1) then {
+		private _pathNodes = refget(_refp);
+		if (count _pathNodes > 0) then {
+			private _startNodeId = _pathNodes select 0;
+			private _neighbors = ai_nav_adjacency getOrDefault [_startNodeId, []];
+			
+			// Если у узла нет соседей - он изолирован
+			if (count _neighbors == 0) then {
+				["ISOLATED NODE DETECTED! Teleporting to nearest connected node..."] call ai_log;
+				
+				// Ищем ближайший узел с соседями (только в текущем и соседних регионах)
+				private _bestNode = -1;
+				private _bestDist = 999999;
+				
+				private _nearbyNodes = [_srcPos, true] call ai_nav_getNodesInRegionArea;
+				
+				{
+					private _nodeId = _x;
+					private _nodeNeighbors = ai_nav_adjacency getOrDefault [_nodeId, []];
+					
+					// Пропускаем изолированные узлы
+					if (count _nodeNeighbors > 0) then {
+						private _nodeData = ai_nav_nodes get _nodeId;
+						private _nodePos = _nodeData get "pos";
+						private _dist = _srcPos distance _nodePos;
+						
+						if (_dist < _bestDist) then {
+							_bestDist = _dist;
+							_bestNode = _nodeId;
+						};
+					};
+				} forEach _nearbyNodes;
+				
+				// Телепортируем к ближайшему подключенному узлу
+				if (_bestNode != -1) then {
+					private _targetNodeData = ai_nav_nodes get _bestNode;
+					private _targetPos = _targetNodeData get "pos";
+					
+					// Телепортация с небольшим смещением вверх
+					_targetPos set [2, (_targetPos select 2) + 0.05];
+					_body setPosASL _targetPos;
+					
+					["Teleported from isolated node to nearest connected node (dist: %1m)", (_bestDist toFixed 2)] call ai_log;
+					
+					// Пересчитываем путь с новой позиции
+					_srcPos = getposasl _body;
+					_path = [_srcPos,_destPos,true,_refp] call ai_nav_findPartialPath;
+					if (count _path == 0) exitWith {RETURN(false)};
+				} else {
+					["ERROR: No connected nodes found in navigation mesh!"] call ai_log;
+					RETURN(false);
+				};
+			};
+		};
+	};
+
+	_mapdata set ["lastvalidpos",_path select 0];
 	_mapdata set ["curpath",_path];
 	_mapdata set ["targetidx",0];
 	_mapdata set ["ismoving",true];
@@ -62,7 +128,7 @@ ai_handleMove = {
 		_closestPoint set [2, (_closestPoint select 2) + 0.01];
 		_body setPosASL _closestPoint;
 		
-		[format["PATH CORRECTION: deviation %1m, teleported to segment" arg (_deviation toFixed 2)], "system"] call chatPrint;
+		["PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
 	};
 
 	//todo если сущность залезла в замкнутую ноду - откатить её на предыдущую нормальную
@@ -70,11 +136,14 @@ ai_handleMove = {
 	if (((getposasl _body) distance _targetPos) < 0.6) then {
 		INC(_curidx);
 		_mapdata set ["targetidx",_curidx];
+		//конец пути или переход к следующей точке
 		if (_curidx >= count (_mapdata get "curpath")) then {
 			_mapdata set ["ismoving",false];
 			[_mob,true] call ai_setStop;
 			_mapdata set ["nextPlanTime",tickTime + 3];
-			["TARGET REACHED","system"] call chatprint;
+			["TARGET REACHED"] call ai_log;
+		} else {
+			_mapdata set ["lastvalidpos",_targetPos];
 		};
 	};
 };

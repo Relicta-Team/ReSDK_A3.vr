@@ -851,7 +851,7 @@ ai_nav_generateRegionsOnLine_withInit = {
 // Найти частичный путь к ближайшей доступной точке к целевой позиции
 // Использует модифицированный A* с ранним выходом для оптимизации
 ai_nav_findPartialPath = {
-	params ["_startPos", "_endPos", ["_optimize", true]];
+	params ["_startPos", "_endPos", ["_optimize", true],["_refPathNodes",null]];
 	
 	ai_debug_decl(["Finding partial path from %1 to %2" arg _startPos arg _endPos] call ai_debugLog);
 	ai_debug_decl(private _tTotal = tickTime;)
@@ -873,6 +873,11 @@ ai_nav_findPartialPath = {
 		ai_debug_decl(["No path found"] call ai_debugLog);
 		[]
 	};
+	
+	if !isNullVar(_refPathNodes) then {
+		refset(_refPathNodes,_pathNodes);
+	};
+	
 	
 	// Конвертируем узлы в позиции
 	private _pathPositions = [];

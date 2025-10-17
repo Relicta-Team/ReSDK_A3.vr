@@ -204,7 +204,30 @@ class(EntitySpawner) extends(IStructNonReplicated)
 		private _behaviour = getSelf(behaviourName);
 		//todo use behaviour
 
-		[_pos,[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]] call ai_createMob;
+		private _args = [_pos,[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]];
+		#ifdef EDITOR
+			startAsyncInvoke
+			{
+				params ["_args"];
+				private _ppos = _args select 0;
+				_ready = true;
+				{
+					if !([[[_ppos,_x] call noe_posToChunk,_x] call noe_client_getPosChunkToData] call noe_client_isObjectsLoadingDone) exitWith {
+						_ready = false;
+					};
+				} foreach noe_client_allChunkTypes;
+				
+				_ready
+			},
+			{
+				params ["_args"];
+				_args call ai_createMob;
+			},
+			[_args]
+			endAsyncInvoke
+		#else
+			_args call ai_createMob;
+		#endif
 	};
 
 endclass

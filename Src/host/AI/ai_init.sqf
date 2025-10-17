@@ -24,11 +24,19 @@ ai_handleUpdate = -1;
 
 ai_allMobs = [];
 
+//#define AI_DEBUG_TRACEPATH
+
 #ifdef EDITOR
-ai_reloadThis = {
-	call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
-};
+	ai_reloadThis = {
+		call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
+	};
+#else
+	#undef AI_DEBUG_TRACEPATH
 #endif
+
+ai_log = {
+	log("[AI]: "+(_this call formatLazy));
+};
 
 ai_createMob = {
 	params ["_pos",["_stats",[10,10,10,10]]];
@@ -55,6 +63,7 @@ ai_createMob = {
 	
 	ai_allMobs pushBack _mob;
 	private _mapdata = createHashMap;
+	_mapdata set ["lastvalidpos",_pos];
 	_mapdata set ["curpath",[]];
 	_mapdata set ["targetidx",0];
 	_mapdata set ["ismoving",false];
@@ -66,6 +75,11 @@ ai_createMob = {
 ai_init = {
 	if (is3den) exitWith {};
 	ai_handleUpdate = startUpdate(ai_onUpdate,0.1);
+	#ifdef AI_DEBUG_TRACEPATH
+	private _upd = {
+		call ai_debug_internal_drawPath;
+	}; startUpdate(_upd,0);
+	#endif
 };
 
 //цикл обновления AI
@@ -85,8 +99,28 @@ ai_onUpdate = {
 		private _mapdata = getVar(_mob,__aiagent);
 		if !(_mapdata get "ismoving") then {
 			if (tickTime < (_mapdata getOrDefault ["nextPlanTime",tickTime])) exitWith {};
-			
-			[_mob,getposasl player] call ai_planMove;
+			if (_pos distance (getposasl player) < 1) exitWith {};
+			if ([_mob,getposasl player] call ai_planMove) then {
+				#ifdef AI_DEBUG_TRACEPATH
+				if !isNull(ai_debug_internal_drawPathObjects) then {
+					deleteVehicle ai_debug_internal_drawPathObjects;
+				};
+				ai_debug_internal_drawPathObjects = [];
+				private _path = _mapdata get "curpath";
+				{
+					private _obj = "Sign_Arrow_F" createVehicle [0,0,0];
+					_obj setPosASL _x;
+					ai_debug_internal_drawPathObjects pushBack _obj;
+				} foreach _path;
+				ai_debug_internal_drawLines = [];
+				for "_i" from 0 to (count _path - 2) do {
+					private _p1 = _path select _i;
+					private _p2 = _path select (_i + 1);
+					ai_debug_internal_drawLines pushBack [asltoatl _p1, asltoatl _p2];
+				};
+				
+				#endif
+			};
 		};
 
 		if (_mapdata get "ismoving") then {
@@ -141,6 +175,19 @@ ai_debugStart = {
 		} foreach ai_debug_procMobs;
 	};
 	startUpdate(_upd,0.1);
+};
+
+ai_debug_internal_drawPath = {
+	if (!isNull(ai_debug_internal_drawLines)) then {
+		{
+			drawLine3d [
+				_x select 0,
+				_x select 1,
+				[0,1,0,1],
+				30
+			]
+		} foreach ai_debug_internal_drawLines;
+	};
 };
 
 ai_updateNav = {
