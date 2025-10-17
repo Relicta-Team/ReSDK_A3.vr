@@ -6,11 +6,13 @@
 // Функция логирования для отладки
 // Работает как в редакторе (3DEN), так и в игре
 ai_debugLog = {
+	#ifdef AI_ENABLE_DEBUG_LOG
 	if (is3den) then {
 		_this call printTrace; // Внутренняя функция редактора
 	} else {
 		trace(format _this); // Макрос из engine.hpp
 	};
+	#endif
 };
 
 // Очистка отладочных объектов

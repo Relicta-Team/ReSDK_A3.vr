@@ -26,8 +26,8 @@ ai_handleUpdate = -1;
 
 ai_allMobs = [];
 
-//#define AI_DEBUG_TRACEPATH
 #define AI_DEBUG_TRACEPATH
+#define AI_ENABLE_DEBUG_LOG
 #define AI_DEBUG_MOVETOPLAYER
 
 #ifdef EDITOR
@@ -36,6 +36,8 @@ ai_allMobs = [];
 	};
 #else
 	#undef AI_DEBUG_TRACEPATH
+	#undef AI_ENABLE_DEBUG_LOG
+	#undef AI_DEBUG_MOVETOPLAYER
 #endif
 
 ai_log = {
@@ -66,6 +68,8 @@ ai_createMob = {
 	[_pos] call ai_nav_updateOrCreateRegion;
 	
 	ai_allMobs pushBack _mob;
+
+	
 	private _mapdata = createHashMap;
 	_mapdata set ["lastvalidpos",_pos];
 	_mapdata set ["curpath",[]];
