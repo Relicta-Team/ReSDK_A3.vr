@@ -126,7 +126,9 @@ ai_handleMove = {
 	if (_deviation > _maxDeviation) then {
 		// Небольшое смещение вверх чтобы не застрять в геометрии
 		_closestPoint set [2, (_closestPoint select 2) + 0.01];
+		[_mob,true] call ai_setStop;
 		_body setPosASL _closestPoint;
+		[_mob,false] call ai_setStop;
 		
 		["PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
 	};
@@ -310,9 +312,7 @@ ai_setCombatMode = {
 
 //todo 
 /*
-	rotateTo
-	setStance (see setUnitPos desk as playAction)
-	putdownItem
-	setStealth
-	throwItem
+	putdownItem - is really needed?
+	setStealth - ? maybee later
+	throwItem - not now
 */
