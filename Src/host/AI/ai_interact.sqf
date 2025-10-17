@@ -131,8 +131,6 @@ ai_handleMove = {
 		["PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
 	};
 
-	//todo если сущность залезла в замкнутую ноду - откатить её на предыдущую нормальную
-
 	if (((getposasl _body) distance _targetPos) < 0.6) then {
 		INC(_curidx);
 		_mapdata set ["targetidx",_curidx];
@@ -140,7 +138,9 @@ ai_handleMove = {
 		if (_curidx >= count (_mapdata get "curpath")) then {
 			_mapdata set ["ismoving",false];
 			[_mob,true] call ai_setStop;
+			#ifdef AI_DEBUG_TRACEPATH
 			_mapdata set ["nextPlanTime",tickTime + 3];
+			#endif
 			["TARGET REACHED"] call ai_log;
 		} else {
 			_mapdata set ["lastvalidpos",_targetPos];
@@ -203,19 +203,116 @@ ai_setSpeed = {
 	_actor forceSpeed (_actor getSpeed (ai_internal_speedModes_names get _speedMode));
 };
 
+ai_rotateTo = {
+	params ["_mob","_posOrTarget"];
+	private _actor = toActor(_mob);
+	private _targetPos = if equalTypes(_posOrTarget,nullPtr) then {
+		callFunc(_posOrTarget,getPos);
+	} else {
+		_posOrTarget;
+	};
+	// Вычисляем угол к цели
+	private _dir = (getPosAtl _actor) getDir _targetPos;
+	
+	// Мгновенно поворачиваем
+	_actor setDir _dir;
+};
+
+ai_internal_stances_names = createHashMapFromArray [
+	[STANCE_DOWN,"PlayerProne"], //dosent work
+	[STANCE_MIDDLE,"PlayerCrouch"],
+	[STANCE_UP,"PlayerStand"]
+];
+
+ai_setStance = {
+	params ["_mob","_stance"];
+	if not_equals(_stance,STANCE_DOWN) exitWith {}; //найти способ заставить моба лежать не вставая
+	private _actor = toActor(_mob);
+	_actor playActionNow (ai_internal_stances_names get _stance);
+};
+
+//=========================================================
+// GOAP Low-level action functions
+//=========================================================
+
+// Атака цели
+ai_attackTarget = {
+	params ["_mob","_target"];
+	
+	if (isNullReference(_target)) exitWith {};
+	
+	// Включаем боевой режим если не включен
+	if (!getVar(_mob,isCombatModeEnable)) then {
+		callFuncParams(_mob,setCombatMode,true);
+	};
+	
+	// Атакуем цель
+	if (callFunc(_target,isMob)) then {
+		callFuncParams(_mob,attackOtherMob,_target);
+	} else {
+		callFuncParams(_mob,attackOtherObj,_target);
+	};
+};
+
+// Подобрать предмет
+ai_pickupItem = {
+	params ["_mob","_item"];
+	
+	if (isNullReference(_item)) exitWith {false};
+	if (!callFunc(_item,canPickup)) exitWith {false};
+	callFunc(_mob,generateLastInteractOnServer);
+	callFuncParams(_mob,__setLastInteractDistance,0); //bypass check distance inside pickupitem()
+	callFuncParams(_mob,pickupItem,_item);
+
+	equals(_mob,getVar(_item,loc));
+};
+
+// Выбросить предмет
+ai_dropItem = {
+	params ["_mob","_item"];
+	
+	if (isNullReference(_item)) exitWith {false};
+	//сначала проверим что предмет в активной руке
+	if not_equals(callFunc(_mob,getItemInActiveHandRedirect),_item) exitWith {false};
+	// Удаляем предмет из инвентаря
+	callFuncParams(_mob,dropItem,getVar(_mob,activeHand));
+
+	callFunc(_item,isInWorld)
+};
+
+// Использовать предмет 
+//! пока не решено как будет использоваться
+ai_useItem = {
+	params ["_mob","_item"];
+	
+	if (isNullReference(_item)) exitWith {};
+	
+	// Вызываем onItemSelfClick
+	callFuncParams(_item,onItemSelfClick,_mob);
+};
+
+// Занять укрытие (пока простая реализация - лечь)
+ai_takeCover = {
+	params ["_mob", ["_coverPos", []]];
+	
+	private _actor = toActor(_mob);
+	
+	// TODO: принять позу "лёжа" через setUnitPos или playAction
+	// _actor setUnitPos "DOWN";
+};
+
+// Установить боевой режим
+ai_setCombatMode = {
+	params ["_mob","_enabled"];
+	
+	callFuncParams(_mob,setCombatMode,_enabled);
+};
+
 //todo 
 /*
 	rotateTo
 	setStance (see setUnitPos desk as playAction)
-
-	pickupItem
-	dropItem
 	putdownItem
-	
-	setCombatMode
 	setStealth
-
-	attackTarget
 	throwItem
-
 */
