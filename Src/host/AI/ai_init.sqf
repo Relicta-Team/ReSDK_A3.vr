@@ -18,6 +18,8 @@
 #include "HPAstar\update.sqf"
 #include "HPAstar\entrance.sqf"
 
+#include "GOAP\goap_init.sqf"
+
 #include "ai_interact.sqf"
 
 ai_handleUpdate = -1;
@@ -25,6 +27,8 @@ ai_handleUpdate = -1;
 ai_allMobs = [];
 
 //#define AI_DEBUG_TRACEPATH
+#define AI_DEBUG_TRACEPATH
+#define AI_DEBUG_MOVETOPLAYER
 
 #ifdef EDITOR
 	ai_reloadThis = {
@@ -97,32 +101,40 @@ ai_onUpdate = {
 		private _body = toActor(_mob);
 		private _pos = getposasl _body;
 		private _mapdata = getVar(_mob,__aiagent);
+		
 		if !(_mapdata get "ismoving") then {
 			if (tickTime < (_mapdata getOrDefault ["nextPlanTime",tickTime])) exitWith {};
-			if (_pos distance (getposasl player) < 1) exitWith {};
-			if ([_mob,getposasl player] call ai_planMove) then {
-				#ifdef AI_DEBUG_TRACEPATH
-				if !isNull(ai_debug_internal_drawPathObjects) then {
-					deleteVehicle ai_debug_internal_drawPathObjects;
-				};
-				ai_debug_internal_drawPathObjects = [];
-				private _path = _mapdata get "curpath";
-				{
-					private _obj = "Sign_Arrow_F" createVehicle [0,0,0];
-					_obj setPosASL _x;
-					ai_debug_internal_drawPathObjects pushBack _obj;
-				} foreach _path;
-				ai_debug_internal_drawLines = [];
-				for "_i" from 0 to (count _path - 2) do {
-					private _p1 = _path select _i;
-					private _p2 = _path select (_i + 1);
-					ai_debug_internal_drawLines pushBack [asltoatl _p1, asltoatl _p2];
-				};
+			_target = 
+			#ifdef AI_DEBUG_MOVETOPLAYER
+				getposasl player;
+			#else
+				getposasl player; //todo change to gettarget
+			#endif
+
+			if (_pos distance _target < 1.2) exitWith {};
+			if ([_mob,_target] call ai_planMove) then {
 				
+				#ifdef AI_DEBUG_TRACEPATH
+					if !isNull(ai_debug_internal_drawPathObjects) then {
+						deleteVehicle ai_debug_internal_drawPathObjects;
+					};
+					ai_debug_internal_drawPathObjects = [];
+					private _path = _mapdata get "curpath";
+					{
+						private _obj = "Sign_Arrow_F" createVehicle [0,0,0];
+						_obj setPosASL _x;
+						ai_debug_internal_drawPathObjects pushBack _obj;
+					} foreach _path;
+					ai_debug_internal_drawLines = [];
+					for "_i" from 0 to (count _path - 2) do {
+						private _p1 = _path select _i;
+						private _p2 = _path select (_i + 1);
+						ai_debug_internal_drawLines pushBack [asltoatl _p1, asltoatl _p2];
+					};
 				#endif
 			};
 		};
-
+		
 		if (_mapdata get "ismoving") then {
 			[_mob] call ai_handleMove;
 		};
