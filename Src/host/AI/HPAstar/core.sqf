@@ -43,6 +43,8 @@
 //#define AI_NAV_DEBUG true
 //#define AI_NAV_DEBUG_DRAW true
 
+#define AI_ENABLE_DEBUG_LOG
+
 //дополнительные лучи для поиска незахваченных поверхностей
 //#define AI_EXPERIMENTAL_NODE_HOLE_FIX
 
