@@ -86,6 +86,18 @@ ai_createAgent = {
 	_mapdata set ["curpath",[]];
 	_mapdata set ["targetidx",0];
 	_mapdata set ["ismoving",false];
+	
+	// Utility AI - создание поведения
+	_mapdata set ["behavior",struct_new(BHVZombie)];
+	_mapdata set ["currentAction",null];
+	_mapdata set ["nextSensorUpdate",0];
+	_mapdata set ["nextActionUpdate",0];
+	
+	// инициализировать действия
+	private _bhv = _mapdata get "behavior";
+	_bhv callp(generateActions,_mapdata);
+	_mapdata set ["possibleActions",_bhv getv(_possibleActions)];
+	
 	_mapdata
 };
 
@@ -164,6 +176,9 @@ ai_onUpdate = {
 		if (_mapdata get "ismoving") then {
 			[_mob] call ai_handleMove;
 		};
+		
+		// Обновление Utility AI
+		[_mob,_mapdata] call ai_brain_update;
 	} foreach ai_allMobs;
 };
 
@@ -247,8 +262,73 @@ ai_debug_internal_brainiInfo = {
 	};
 	private _t = [];
 
-	_t pushBack "BRAIN INFO:";
-	_t pushback format["agents: %1, mobs: %2",count ai_allMobs,count smd_allInGameMobs];
+	_t pushBack "=== BRAIN INFO ===";
+	_t pushback format["Agents: %1 | Mobs: %2",count ai_allMobs,count smd_allInGameMobs];
+	_t pushBack "";
+
+	// Находим ближайшего моба к игроку для детальной информации
+	if (count ai_allMobs > 0) then {
+		private _nearestMob = nullPtr;
+		private _nearestDist = 999999;
+		{
+			private _mob = _x;
+			private _actor = toActor(_mob);
+			private _dist = player distance _actor;
+			if (_dist < _nearestDist) then {
+				_nearestDist = _dist;
+				_nearestMob = _mob;
+			};
+		} foreach ai_allMobs;
+
+		if (!isNullReference(_nearestMob)) then {
+			private _agent = getVar(_nearestMob,__aiagent);
+			private _behavior = _agent getOrDefault ["behavior",null];
+			
+			_t pushBack format["Nearest: %1 (%2m)",getVar(_nearestMob,name),(_nearestDist toFixed 1)];
+			
+			if (!isNullVar(_behavior)) then {
+				_t pushBack format["Behavior: %1",_behavior getv(name)];
+				
+				// Текущее действие
+				private _currentAction = _agent getOrDefault ["currentAction",null];
+				if (!isNullVar(_currentAction)) then {
+					_t pushBack format["Current: %1",str _currentAction];
+				} else {
+					_t pushBack "Current: none";
+				};
+				
+				_t pushBack "";
+				_t pushBack "--- Actions ---";
+				
+				// Все возможные действия и их стоимости
+				private _possibleActions = _agent getOrDefault ["possibleActions",[]];
+				{
+					private _action = _x;
+					private _name = _action getv(name);
+					private _score = _action getv(_lastScore);
+					private _state = _action getv(state);
+					private _marker = "";
+					
+					if (!isNullVar(_currentAction) && {equals(_action,_currentAction)}) then {
+						_marker = " [*]";
+					};
+					
+					_t pushBack format["%1: %2 (%3)%4",_name,_score,_state,_marker];
+				} foreach _possibleActions;
+				
+				// Информация о сенсорах
+				_t pushBack "";
+				private _target = _agent getOrDefault ["visibleTarget",nullPtr];
+				if (!isNullReference(_target)) then {
+					_t pushBack format["Target: detected (%1m)",((toActor(_nearestMob)) distance _target) toFixed 1];
+				} else {
+					_t pushBack "Target: none";
+				};
+			};
+		};
+	} else {
+		_t pushBack "No mobs active";
+	};
 
 	[ai_debug_internal_brainInfoWidget select 0,_t joinString sbr] call widgetSetText;
 };

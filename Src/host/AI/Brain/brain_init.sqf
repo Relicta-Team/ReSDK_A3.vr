@@ -20,3 +20,136 @@
 ai_brain_getAllActionTypes = {
 	["BABase"] call struct_getAllTypesOf;
 };
+
+// ============================================================================
+// UTILITY AI - УПРАВЛЕНИЕ ПОВЕДЕНИЕМ
+// ============================================================================
+
+/*
+	Главная функция обновления Utility AI
+	Вызывается каждый кадр для каждого агента
+*/
+ai_brain_update = {
+	params ["_mob","_agent"];
+
+	private _behavior = _agent getOrDefault ["behavior",null];
+	if (isNullVar(_behavior)) exitWith {}; // нет поведения
+
+	// Обновление сенсоров
+	if (tickTime >= (_agent getOrDefault ["nextSensorUpdate",0])) then {
+		_behavior callp(updateSensors,_agent arg _mob);
+		private _sensorDelay = _behavior getv(sensorUpdateDelay);
+		_agent set ["nextSensorUpdate",tickTime + _sensorDelay];
+	};
+
+	// Обновление действий
+	if (tickTime >= (_agent getOrDefault ["nextActionUpdate",0])) then {
+		private _updateDelay = _behavior getv(updateDelay);
+		_agent set ["nextActionUpdate",tickTime + _updateDelay];
+
+		// Выбираем лучшее действие
+		private _bestAction = [_agent,_mob] call ai_brain_selectBestAction;
+
+		// Проверяем нужно ли переключиться
+		private _currentAction = _agent getOrDefault ["currentAction",null];
+		private _needSwitch = false;
+
+		if (isNullVar(_currentAction)) then {
+			_needSwitch = true;
+		} else {
+			// проверяем что текущее действие не завершено/провалено
+			private _state = _currentAction getv(state);
+			if (_state in ["completed","failed"]) then {
+				_needSwitch = true;
+			} else {
+				// если текущее действие running - проверяем нужно ли переключиться на лучшее
+				if (!isNullVar(_bestAction) && {not_equals(_bestAction,_currentAction)}) then {
+					private _currentScore = _currentAction getv(_lastScore);
+					private _bestScore = _bestAction getv(_lastScore);
+					// переключаемся только если новое действие значительно лучше
+					if (_bestScore > (_currentScore + 10)) then {
+						_needSwitch = true;
+					};
+				};
+			};
+		};
+
+		// Переключение действия
+		if (_needSwitch && !isNullVar(_bestAction)) then {
+			[_agent,_mob,_currentAction,_bestAction] call ai_brain_switchAction;
+			_agent set ["currentAction",_bestAction];
+			_currentAction = _bestAction;
+		};
+
+		// Обновляем текущее действие
+		if (!isNullVar(_currentAction)) then {
+			private _state = _currentAction getv(state);
+			if (_state == "running") then {
+				private _result = _currentAction callp(onUpdate,_agent arg _mob);
+				// если вернуло true - действие завершено
+				if (_result) then {
+					_currentAction setv(state,"completed");
+					_currentAction callp(onCompleted,_agent arg _mob);
+				};
+			};
+		};
+	};
+};
+
+/*
+	Выбирает лучшее действие на основе score
+	Возвращает действие с максимальным score или null
+*/
+ai_brain_selectBestAction = {
+	params ["_agent","_mob"];
+
+	private _possibleActions = _agent getOrDefault ["possibleActions",[]];
+	if (count _possibleActions == 0) exitWith {null};
+
+	private _bestAction = null;
+	private _bestScore = -999999;
+
+	{
+		private _action = _x;
+		private _baseScore = _action getv(baseScore);
+		private _modifier = _action callp(getScore,_agent arg _mob);
+		private _totalScore = _baseScore + _modifier;
+
+		_action setv(_lastScore,_totalScore);
+
+		if (_totalScore > _bestScore) then {
+			_bestScore = _totalScore;
+			_bestAction = _action;
+		};
+	} foreach _possibleActions;
+
+	_bestAction
+};
+
+/*
+	Переключает действие со старого на новое
+	Вызывает соответствующие события
+*/
+ai_brain_switchAction = {
+	params ["_agent","_mob","_oldAction","_newAction"];
+
+	// Завершаем старое действие
+	if (!isNullVar(_oldAction)) then {
+		private _state = _oldAction getv(state);
+		if (_state == "running") then {
+			_oldAction setv(state,"completed");
+			_oldAction callp(onCompleted,_agent arg _mob);
+		} else {
+			if (_state == "failed") then {
+				_oldAction callp(onFailed,_agent arg _mob);
+			};
+		};
+		_oldAction setv(state,"idle");
+	};
+
+	// Запускаем новое действие
+	if (!isNullVar(_newAction)) then {
+		_newAction setv(state,"running");
+		_newAction callp(onStart,_agent arg _mob);
+	};
+};
