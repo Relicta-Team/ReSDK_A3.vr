@@ -86,11 +86,22 @@ ai_brain_update = {
 			private _state = _currentAction getv(state);
 			if (_state == "running") then {
 				private _result = _currentAction callp(onUpdate,_agent arg _mob);
-				// если вернуло true - действие завершено
-				if (_result) then {
+				
+				// UPDATE_STATE_COMPLETED (1) - действие успешно завершено
+				if (_result == UPDATE_STATE_COMPLETED) then {
 					_currentAction setv(state,"completed");
 					_currentAction callp(onCompleted,_agent arg _mob);
 				};
+				
+				// UPDATE_STATE_FAILED (-1) - действие провалено
+				if (_result == UPDATE_STATE_FAILED) then {
+					_currentAction setv(state,"failed");
+					_currentAction callp(onFailed,_agent arg _mob);
+					// Сбрасываем текущее действие для автоматического переключения
+					//_agent set ["currentAction",null];
+				};
+				
+				// UPDATE_STATE_CONTINUE (0) - продолжаем выполнение (ничего не делаем)
 			};
 		};
 	};
@@ -135,15 +146,15 @@ ai_brain_switchAction = {
 
 	// Завершаем старое действие
 	if (!isNullVar(_oldAction)) then {
-		private _state = _oldAction getv(state);
-		if (_state == "running") then {
-			_oldAction setv(state,"completed");
-			_oldAction callp(onCompleted,_agent arg _mob);
-		} else {
-			if (_state == "failed") then {
-				_oldAction callp(onFailed,_agent arg _mob);
-			};
-		};
+		// private _state = _oldAction getv(state);
+		// if (_state == "running") then {
+		// 	_oldAction setv(state,"completed");
+		// 	_oldAction callp(onCompleted,_agent arg _mob);
+		// } else {
+		// 	if (_state == "failed") then {
+		// 		_oldAction callp(onFailed,_agent arg _mob);
+		// 	};
+		// };
 		_oldAction setv(state,"idle");
 	};
 

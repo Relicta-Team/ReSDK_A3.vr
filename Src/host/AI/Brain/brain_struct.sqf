@@ -9,6 +9,8 @@
 #include "..\..\text.hpp"
 #include "..\..\GameObjects\GameConstants.hpp"
 
+#include "..\ai.h"
+
 /*
 	BA - Brain Action - обязательный префикс для всех действий
 	Базовое действие для ИИ-системы
@@ -41,10 +43,10 @@ struct(BABase)
 		params ["_agent","_mob"];
 	}
 
-	//вызывается каждый кадр обновления. Возвращает true если завершено, false если продолжается
+	//вызывается каждый кадр обновления. Возвращает UPDATE_STATE_COMPLETED если завершено, UPDATE_STATE_FAILED если провалено, UPDATE_STATE_CONTINUE если продолжается
 	def_ret(onUpdate) {
 		params ["_agent","_mob"];
-		false
+		UPDATE_STATE_COMPLETED //в базовом методе по умолчанию действие успешно завершено
 	}
 
 	//вызывается при успешном завершении действия
@@ -211,17 +213,18 @@ struct(BAWander) base(BABase)
 		params ["_agent","_mob"];
 		private _actor = _agent get "actor";
 		private _targetPos = _agent getOrDefault ["wanderTarget",[]];
-		if (_targetPos isEqualTo []) exitWith {false}; // failed
+		if (_targetPos isEqualTo []) exitWith {UPDATE_STATE_FAILED};
 
 		// планируем движение если еще не движемся
 		if !(_agent get "ismoving") then {
-			[_mob,_targetPos] call ai_planMove;
+			private _success = [_mob,_targetPos] call ai_planMove;
+			if (!_success) exitWith {UPDATE_STATE_FAILED};
 		};
 
 		// проверяем достигли ли цели
-		if (_actor distance2D _targetPos < 2) exitWith {true}; // completed
+		if (_actor distance2D _targetPos < 2) exitWith {UPDATE_STATE_COMPLETED};
 
-		false // продолжаем
+		UPDATE_STATE_CONTINUE
 	}
 
 	def(onCompleted) {
@@ -247,8 +250,7 @@ struct(BAChasePlayer) base(BABase)
 		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
 		if (isNullReference(_target)) exitWith {0};
 
-		private _actor = _agent get "actor";
-		private _dist = _actor distance _target;
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
 		if (_dist > 20) exitWith {0}; // слишком далеко
 		if (_dist < 3) exitWith {0}; // слишком близко - атаковать
 
@@ -264,28 +266,69 @@ struct(BAChasePlayer) base(BABase)
 	def_ret(onUpdate) {
 		params ["_agent","_mob"];
 		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
-		if (isNullReference(_target)) exitWith {false}; // цель пропала - failed
+		if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
 
-		private _actor = _agent get "actor";
-		private _dist = _actor distance _target;
-		if (_dist < 3) exitWith {true}; // достигли - completed
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
+		if (_dist < 3) exitWith {UPDATE_STATE_COMPLETED};
 
-		// планируем движение к цели
-		private _targetPos = getPosASL _target;
+		private _success = true;
 		if !(_agent get "ismoving") then {
-			[_mob,_targetPos] call ai_planMove;
+			_success = [_mob,_target] call ai_planMove;
 		};
+		if (!_success) exitWith {UPDATE_STATE_FAILED};
+		//если цель далеко от точки конца пути
+		if ((atltoasl callFunc(_target,getPos)) distance (array_selectlast(_agent get "curpath")) > 1.8) exitWith {UPDATE_STATE_FAILED};
 
-		false // продолжаем
+		UPDATE_STATE_CONTINUE
 	}
 
 	def(onCompleted) {
 		params ["_agent","_mob"];
+		[_mob] call ai_stopMove; //игрок сам на нас мог добежать
 	}
 
 	def(onFailed) {
 		params ["_agent","_mob"];
+		[_mob] call ai_stopMove;
 	}
+endstruct
+
+// Отступать от цели
+struct(BARetreat) base(BABase)
+	def_ret(getScore) {
+		params ["_agent","_mob"];
+		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
+		if (isNullReference(_target)) exitWith {0};
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
+		if (_dist > 3 || getVar(_mob,stamina) > 30) exitWith {0}; // слишком близко - атаковать
+
+		(30 - getVar(_mob,stamina)) * 4
+	}
+
+	def(onStart) {
+		params ["_agent","_mob"];
+		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
+		if (isNullReference(_target)) exitWith {};
+
+		//обтаное движение от цели
+		private _targetPos = atltoasl callFunc(_target,getPos);
+		private _myPos = atltoasl callFunc(_mob,getPos);
+		private _direction = _targetPos vectorDiff _myPos;
+		private _newPos = _myPos vectorAdd (_direction vectorMultiply 10);
+		_m = [_mob,_newPos] call ai_planMove;
+	}
+
+	def_ret(onUpdate) {
+		params ["_agent","_mob"];
+		if (!(_agent get "ismoving")) exitWith {UPDATE_STATE_COMPLETED};
+		UPDATE_STATE_CONTINUE
+	}
+
+	def(onCompleted) {
+		params ["_agent","_mob"];
+		[_mob] call ai_stopMove;
+	};
+
 endstruct
 
 /*
@@ -299,9 +342,9 @@ struct(BAAttackPlayer) base(BABase)
 		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
 		if (isNullReference(_target)) exitWith {0};
 
-		private _actor = _agent get "actor";
-		private _dist = _actor distance _target;
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
 		if (_dist > 3) exitWith {0}; // слишком далеко
+		if (getVar(_mob,stamina) < 10) exitWith {2}; //нет стамины - приоритет низок
 
 		60 // близко - можем атаковать
 	}
@@ -316,18 +359,15 @@ struct(BAAttackPlayer) base(BABase)
 	def_ret(onUpdate) {
 		params ["_agent","_mob"];
 		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
-		if (isNullReference(_target)) exitWith {false}; // цель пропала
+		if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
 
 		private _startTime = _agent getOrDefault ["attackStartTime",0];
-		if (tickTime - _startTime < 2) exitWith {false}; // анимация атаки
+		if (tickTime - _startTime < 2) exitWith {UPDATE_STATE_CONTINUE};
 
 		// атакуем через ai_attackTarget
-		private _targetMob = _target getVariable "link";
-		if (!isNullVar(_targetMob)) then {
-			[_mob,_targetMob] call ai_attackTarget;
-		};
+		[_mob,_target] call ai_attackTarget;
 
-		true // completed, можем повторить
+		UPDATE_STATE_COMPLETED
 	}
 
 	def(onCompleted) {
@@ -346,7 +386,7 @@ endstruct
 	Простое поведение с тремя действиями
 */
 struct(BHVZombie) base(BHVBase)
-	def(actions) ["BAWander","BAChasePlayer","BAAttackPlayer"];
+	def(actions) ["BAWander","BAChasePlayer","BAAttackPlayer","BARetreat"];
 
 	def(sensorUpdateDelay) 1.0; // обновляем сенсоры раз в секунду
 	def(updateDelay) 0.3; // обновляем действия чаще
@@ -366,8 +406,7 @@ struct(BHVZombie) base(BHVBase)
 
 		if (count _nearMobs > 0) then {
 			private _closestMob = _nearMobs select 0;
-			private _closestActor = callFunc(_closestMob,getBasicLoc);
-			_agent set ["visibleTarget",_closestActor];
+			_agent set ["visibleTarget",_closestMob];
 		} else {
 			_agent set ["visibleTarget",nullPtr];
 		};

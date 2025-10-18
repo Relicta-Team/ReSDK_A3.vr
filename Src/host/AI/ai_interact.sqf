@@ -28,6 +28,9 @@ ai_planMove = {
 	FHEADER;
 	private _body = toActor(_mob);
 	private _srcPos = getposasl _body;
+	if equalTypes(_destPos,nullPtr) then {
+		_destPos = atltoasl callFunc(_destPos,getPos);
+	};
 	private _mapdata = getVar(_mob,__aiagent);
 	private _refp = refcreate([]);
 	private _path = [_srcPos,_destPos,true,_refp] call ai_nav_findPartialPath;
@@ -209,6 +212,15 @@ ai_setStop = {
 	params ["_mob","_stop"];
 	private _actor = toActor(_mob);
 	_actor stop _stop;
+};
+
+//высокоуровневая функция остановки сущности
+ai_stopMove = {
+	params ["_mob"];
+	private _actor = toActor(_mob);
+	_actor stop true;
+	private _agent = getVar(_mob,__aiagent);
+	_agent set ["ismoving",false];
 };
 
 // константа режимов движения сущности

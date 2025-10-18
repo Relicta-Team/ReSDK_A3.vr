@@ -9,7 +9,6 @@
 #include <..\struct.hpp>
 #include <..\GameObjects\GameConstants.hpp>
 #include <..\Gender\Gender.hpp>
-#include <..\..\client\WidgetSystem\widgets.hpp>
 
 #include "ai.h"
 
@@ -27,16 +26,7 @@ ai_handleUpdate = -1;
 
 ai_allMobs = [];
 
-#ifdef EDITOR
-	ai_reloadThis = {
-		call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
-	};
-#else
-	#undef AI_DEBUG_TRACEPATH
-	#undef AI_DEBUG_BRAINIINFO
-	#undef AI_ENABLE_DEBUG_LOG
-	#undef AI_DEBUG_MOVETOPLAYER
-#endif
+
 
 ai_log = {
 	log("[AI]: "+(_this call formatLazy));
@@ -221,8 +211,11 @@ ai_debug_internal_drawPath = {
 };
 
 #ifdef EDITOR
+
+#include <..\..\client\WidgetSystem\widgets.hpp>
+
 ai_debug_internal_needLoadBrainWidget = true;
-#endif
+
 
 ai_debug_internal_brainiInfo = {
 	if (ai_debug_internal_needLoadBrainWidget) then {
@@ -297,7 +290,7 @@ ai_debug_internal_brainiInfo = {
 				_t pushBack "";
 				private _target = _agent getOrDefault ["visibleTarget",nullPtr];
 				if (!isNullReference(_target)) then {
-					_t pushBack format["Target: detected (%1m)",((toActor(_nearestMob)) distance _target) toFixed 1];
+					_t pushBack format["Target: detected (%1m)",((toActor(_nearestMob)) distance callFunc(_target,getBasicLoc)) toFixed 1];
 				} else {
 					_t pushBack "Target: none";
 				};
@@ -322,3 +315,4 @@ ai_debug_showBrainInfo = {
 	(ai_debug_internal_brainInfoWidget select 0) ctrlShow _mode;
 };
 
+#endif
