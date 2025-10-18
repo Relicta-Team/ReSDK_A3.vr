@@ -28,7 +28,7 @@ ai_handleUpdate = -1;
 ai_allMobs = [];
 
 // #define AI_DEBUG_TRACEPATH
-// #define AI_DEBUG_GOAPIINFO
+// #define AI_DEBUG_BRAINIINFO
 // #define AI_DEBUG_MOVETOPLAYER
 
 #ifdef EDITOR
@@ -37,7 +37,7 @@ ai_allMobs = [];
 	};
 #else
 	#undef AI_DEBUG_TRACEPATH
-	#undef AI_DEBUG_GOAPIINFO
+	#undef AI_DEBUG_BRAINIINFO
 	#undef AI_ENABLE_DEBUG_LOG
 	#undef AI_DEBUG_MOVETOPLAYER
 #endif
@@ -101,14 +101,14 @@ ai_init = {
 		}; 
 		ai_internal_debug_drawPathHandle = startUpdate(_upd,0);
 	#endif
-	#ifdef AI_DEBUG_GOAPIINFO
-		if !isNull(ai_internal_debug_goapiInfoHandle) then {
-			stopUpdate(ai_internal_debug_goapiInfoHandle);
+	#ifdef AI_DEBUG_BRAINIINFO
+		if !isNull(ai_internal_debug_brainiInfoHandle) then {
+			stopUpdate(ai_internal_debug_brainiInfoHandle);
 		};
 		private _upd = {
-			call ai_debug_internal_goapiInfo;
+			call ai_debug_internal_brainiInfo;
 		}; 
-		ai_internal_debug_goapiInfoHandle = startUpdate(_upd,0);
+		ai_internal_debug_brainiInfoHandle = startUpdate(_upd,0);
 	#endif
 };
 
@@ -229,32 +229,32 @@ ai_debug_internal_drawPath = {
 };
 
 #ifdef EDITOR
-ai_debug_internal_needLoadGoapWidget = true;
+ai_debug_internal_needLoadBrainWidget = true;
 #endif
 
-ai_debug_internal_goapiInfo = {
-	if (ai_debug_internal_needLoadGoapWidget) then {
-		if !isNull(ai_debug_internal_goapInfoWidget) then {
-			[ai_debug_internal_goapInfoWidget select 0] call deleteWidget;
-			ai_debug_internal_goapInfoWidget = null;
+ai_debug_internal_brainiInfo = {
+	if (ai_debug_internal_needLoadBrainWidget) then {
+		if !isNull(ai_debug_internal_brainInfoWidget) then {
+			[ai_debug_internal_brainInfoWidget select 0] call deleteWidget;
+			ai_debug_internal_brainInfoWidget = null;
 		};
 
-		ai_debug_internal_needLoadGoapWidget = false;
+		ai_debug_internal_needLoadBrainWidget = false;
 		private _gui = getGUI;
 		_w = [_gui,TEXT,[60,0,100-60,70]] call createWidget;
-		ai_debug_internal_goapInfoWidget = [_w];
+		ai_debug_internal_brainInfoWidget = [_w];
 		_w setBackgroundColor [0,0,0,0.5];
 	};
 	private _t = [];
 
-	_t pushBack "GOAP INFO:";
+	_t pushBack "BRAIN INFO:";
 	_t pushback format["agents: %1, mobs: %2",count ai_allMobs,count smd_allInGameMobs];
 
-	[ai_debug_internal_goapInfoWidget select 0,_t joinString sbr] call widgetSetText;
+	[ai_debug_internal_brainInfoWidget select 0,_t joinString sbr] call widgetSetText;
 };
 
-ai_debug_showGoapInfo = {
+ai_debug_showBrainInfo = {
 	params ["_mode"];
-	(ai_debug_internal_goapInfoWidget select 0) ctrlShow _mode;
+	(ai_debug_internal_brainInfoWidget select 0) ctrlShow _mode;
 };
 

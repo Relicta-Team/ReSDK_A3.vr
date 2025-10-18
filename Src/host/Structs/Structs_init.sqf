@@ -21,3 +21,4 @@ loadFile("src\host\CraftSystem\ObjectSystems\OrganicGrinderSystem_struct.sqf");
 loadFile("src\host\CraftSystem\ObjectSystems\FryingPanSystem_struct.sqf");
 loadFile("src\host\CraftSystem\ObjectSystems\BakingOvenSystem_struct.sqf");
 loadFile("src\host\ClientManager\PreAwaitStruct.sqf");
+loadFile("src\host\AI\Brain\Brain_struct.sqf");
