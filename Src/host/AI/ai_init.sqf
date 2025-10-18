@@ -27,10 +27,6 @@ ai_handleUpdate = -1;
 
 ai_allMobs = [];
 
-// #define AI_DEBUG_TRACEPATH
-// #define AI_DEBUG_BRAINIINFO
-// #define AI_DEBUG_MOVETOPLAYER
-
 #ifdef EDITOR
 	ai_reloadThis = {
 		call compile preprocessfilelinenumbers "src\host\AI\ai_init.sqf";
@@ -140,38 +136,19 @@ ai_onUpdate = {
 		private _pos = getposasl _body;
 		private _mapdata = getVar(_mob,__aiagent);
 		
+		#ifdef AI_DEBUG_MOVETOPLAYER
 		if !(_mapdata get "ismoving") then {
 			if (tickTime < (_mapdata getOrDefault ["nextPlanTime",tickTime])) exitWith {};
-			_target = 
-			#ifdef AI_DEBUG_MOVETOPLAYER
-				getposasl player;
-			#else
-				getposasl player; //todo change to gettarget
-			#endif
+			_target = getposasl player;
+			
 
 			if (_pos distance _target < 1.2) exitWith {};
 			if ([_mob,_target] call ai_planMove) then {
 				
-				#ifdef AI_DEBUG_TRACEPATH
-					if !isNull(ai_debug_internal_drawPathObjects) then {
-						deleteVehicle ai_debug_internal_drawPathObjects;
-					};
-					ai_debug_internal_drawPathObjects = [];
-					private _path = _mapdata get "curpath";
-					{
-						private _obj = "Sign_Arrow_F" createVehicle [0,0,0];
-						_obj setPosASL _x;
-						ai_debug_internal_drawPathObjects pushBack _obj;
-					} foreach _path;
-					ai_debug_internal_drawLines = [];
-					for "_i" from 0 to (count _path - 2) do {
-						private _p1 = _path select _i;
-						private _p2 = _path select (_i + 1);
-						ai_debug_internal_drawLines pushBack [asltoatl _p1, asltoatl _p2];
-					};
-				#endif
+				
 			};
 		};
+		#endif
 		
 		if (_mapdata get "ismoving") then {
 			[_mob] call ai_handleMove;
@@ -324,6 +301,13 @@ ai_debug_internal_brainiInfo = {
 				} else {
 					_t pushBack "Target: none";
 				};
+
+				_t pushBack "Agent vargs:";
+				{
+					if ((_agent get _x) isEqualTypeAny [0,false,nullPtr,objNull]) then {
+						_t pushBack format["%1: %2",_x,(_agent get _x)];
+					};
+				} foreach (keys _agent);
 			};
 		};
 	} else {

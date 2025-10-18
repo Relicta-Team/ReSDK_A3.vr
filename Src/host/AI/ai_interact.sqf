@@ -91,6 +91,25 @@ ai_planMove = {
 		};
 	};
 
+	#ifdef AI_DEBUG_TRACEPATH
+		if !isNull(ai_debug_internal_drawPathObjects) then {
+			deleteVehicle ai_debug_internal_drawPathObjects;
+		};
+		ai_debug_internal_drawPathObjects = [];
+		
+		{
+			private _obj = "Sign_Arrow_F" createVehicle [0,0,0];
+			_obj setPosASL _x;
+			ai_debug_internal_drawPathObjects pushBack _obj;
+		} foreach _path;
+		ai_debug_internal_drawLines = [];
+		for "_i" from 0 to (count _path - 2) do {
+			private _p1 = _path select _i;
+			private _p2 = _path select (_i + 1);
+			ai_debug_internal_drawLines pushBack [asltoatl _p1, asltoatl _p2];
+		};
+	#endif
+
 	_mapdata set ["lastvalidpos",_path select 0];
 	_mapdata set ["curpath",_path];
 	_mapdata set ["targetidx",0];

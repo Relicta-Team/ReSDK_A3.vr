@@ -14,11 +14,19 @@
 	Базовое действие для ИИ-системы
 
 	Этот файл загружается из загрузчика структур
+
+	Для верного распределения приоритетов следуйте правило балансировки:
+	Балансировка приоритетов:
+		90-100: критические действия (выживание)
+		60-90: важные тактические (бой, преследование)
+		30-60: утилитарные (поиск ресурсов, лечение)
+		10-30: комфорт (отдых, исследование)
+		0-10: фоновые (бродить, ничего)
 */
 struct(BABase)
 	def(name) ""; //базовое имя действия
 
-	def(baseScore) 0; //базовая стоимость действия
+	def(baseScore) 0; //базовая стоимость действия. может быть не определена для полной динамики
 
 	def(state) "idle"; //состояние: idle, running, completed, failed
 
@@ -131,16 +139,73 @@ struct(BAWander) base(BABase)
 	}
 
 	def(onStart) {
-		params ["_agent","_mob"];
-		private _actor = _agent get "actor";
-		private _pos = getPosATL _actor;
-		private _randomPos = [
-			(_pos select 0) + (random 20 - 10),
-			(_pos select 1) + (random 20 - 10),
-			0
-		];
-		_agent set ["wanderTarget",_randomPos];
-	}
+        params ["_agent","_mob"];
+        private _actor = _agent get "actor";
+        private _currentPos = getPosASL _actor;
+        
+        // 1. Получаем текущий регион
+        private _currentRegionKey = [_currentPos select 0, _currentPos select 1] call ai_nav_getRegionKey;
+        
+        // 2. Собираем текущий регион + 8 соседей (3x3 сетка)
+        private _availableRegions = [];
+        _currentRegionKey splitString "_" params ["_rx", "_ry"];
+        _rx = parseNumber _rx; 
+        _ry = parseNumber _ry;
+        
+        // Проверяем 9 регионов (3x3)
+        for "_dx" from -1 to 1 do {
+            for "_dy" from -1 to 1 do {
+                private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+                if (_neighborKey in ai_nav_regions) then {
+                    _availableRegions pushBack _neighborKey;
+                };
+            };
+        };
+        
+        if (count _availableRegions == 0) exitWith {
+            // Fallback на старую систему если нет регионов
+            private _pos = getPosATL _actor;
+            private _randomPos = [
+                (_pos select 0) + (random 20 - 10),
+                (_pos select 1) + (random 20 - 10),
+                0
+            ];
+            _agent set ["wanderTarget",_randomPos];
+        };
+        
+        // 3. Выбираем случайный регион
+        private _selectedRegionKey = pick _availableRegions;
+        private _regionData = ai_nav_regions get _selectedRegionKey;
+        private _nodeIds = _regionData get "nodes";
+        
+        // 4. Фильтруем только узлы с соседями (связанные)
+        private _connectedNodes = [];
+        {
+            private _nodeId = _x;
+            private _neighbors = ai_nav_adjacency getOrDefault [_nodeId, []];
+            if (count _neighbors > 0) then {
+                _connectedNodes pushBack _nodeId;
+            };
+        } forEach _nodeIds;
+        
+        if (count _connectedNodes == 0) exitWith {
+            // Нет связанных узлов - fallback
+            private _pos = getPosATL _actor;
+            private _randomPos = [
+                (_pos select 0) + (random 20 - 10),
+                (_pos select 1) + (random 20 - 10),
+                0
+            ];
+            _agent set ["wanderTarget",_randomPos];
+        };
+        
+        // 5. Выбираем случайный связанный узел
+        private _selectedNodeId = pick _connectedNodes;
+        private _nodeData = ai_nav_nodes get _selectedNodeId;
+        private _targetPos = _nodeData get "pos";
+        
+        _agent set ["wanderTarget",_targetPos];
+    }
 
 	def_ret(onUpdate) {
 		params ["_agent","_mob"];
@@ -228,7 +293,6 @@ endstruct
 	Активируется когда игрок очень близко
 */
 struct(BAAttackPlayer) base(BABase)
-	def(baseScore) 100;
 
 	def_ret(getScore) {
 		params ["_agent","_mob"];
@@ -239,15 +303,14 @@ struct(BAAttackPlayer) base(BABase)
 		private _dist = _actor distance _target;
 		if (_dist > 3) exitWith {0}; // слишком далеко
 
-		50 // близко - можем атаковать
+		60 // близко - можем атаковать
 	}
 
 	def(onStart) {
 		params ["_agent","_mob"];
 		private _target = _agent getOrDefault ["visibleTarget",nullPtr];
 		_agent set ["attackStartTime",tickTime];
-		private _actor = _agent get "actor";
-		[_actor,_target] call ai_rotateTo;
+		[_mob,_target] call ai_rotateTo;
 	}
 
 	def_ret(onUpdate) {
@@ -294,7 +357,12 @@ struct(BHVZombie) base(BHVBase)
 
 		// ищем ближайших мобов (включая игроков)
 		private _nearMobs = callFuncParams(_mob,getNearMobs,20);
-		_nearMobs = _nearMobs select {callFunc(_x,isPlayer)};
+		private _refview = refcreate(VISIBILITY_MODE_NONE);
+		_nearMobs = _nearMobs select {
+			callFunc(_x,isPlayer)
+			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
+			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
+		};
 
 		if (count _nearMobs > 0) then {
 			private _closestMob = _nearMobs select 0;
