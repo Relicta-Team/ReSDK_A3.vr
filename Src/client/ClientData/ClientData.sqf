@@ -224,6 +224,8 @@ cd_onPrepareClient = {
 
 				rpcCall("onChangeEyeState",[_vision arg "load"]);
 
+				call vs_connectToVoiceSystem;
+
 				stopThisUpdate();
 
 				#ifdef SP_MODE

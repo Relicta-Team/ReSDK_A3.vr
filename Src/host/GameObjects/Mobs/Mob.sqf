@@ -317,6 +317,8 @@ region(Connect control events)
 		callSelf(onSyncPain);
 		callSelf(recalcBloodLoss);
 
+		netSyncObjVar(getSelf(owner),"rv_name",getVar(getSelf(client),name));
+		
 		callSelfParams(loadActions,null);
 
 		//хандлер звуков шагов
