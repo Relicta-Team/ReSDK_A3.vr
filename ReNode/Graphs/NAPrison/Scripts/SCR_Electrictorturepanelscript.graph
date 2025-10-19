@@ -17,54 +17,19 @@
         "fields":{},
         "methods":{}
       },
-      "compileStatus":"Warnings",
+      "compileStatus":"Compiled",
       "graphVersion":2
     },
     "mpos":[
-      482.84009061760116,
-      28.55128899485959,
-      847.7142310357181,
-      797.8486880336169
+      165.58398775141387,
+      -217.59292264093165,
+      1242.3144613609188,
+      1169.2371401043933
     ],
-    "mzoom":-0.19
+    "mzoom":-0.44
   },
   "nodes":{
-    "0x204d71e7770":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"Скрипт присвоен",
-      "color":[
-        255,
-        0,
-        0
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":290.0,
-      "height":108.55000000000001,
-      "pos":[
-        296.2735497936852,
-        178.89033160777637
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "class_":"methods.ScriptedGameObject.onScriptAssigned_0"
-    },
-    "0x204d71e74a0":{
+    "0x1a122d1d310":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Event_16x",
       "name":"При основном действии",
@@ -99,7 +64,7 @@
       "subgraph_session":{},
       "class_":"methods.ScriptedGameObject._onMainActionWrapper_0"
     },
-    "0x204d0727740":{
+    "0x1a122d1dd90":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Локальное сообщение мобу",
@@ -143,21 +108,21 @@
   "connections":[
     {
       "out":[
-        "0x204d71e74a0",
+        "0x1a122d1d310",
         "Выход"
       ],
       "in":[
-        "0x204d0727740",
+        "0x1a122d1dd90",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x204d71e74a0",
+        "0x1a122d1d310",
         "Персонаж"
       ],
       "in":[
-        "0x204d0727740",
+        "0x1a122d1dd90",
         "Цель"
       ]
     }
