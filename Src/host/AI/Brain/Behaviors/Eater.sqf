@@ -261,26 +261,26 @@ struct(BAEater_Retreat) base(BABase)
     def(onStart) {
         params ["_agent","_mob"];
         
-        // Ищем точку отступления (от цели или случайная)
-        private _actor = _agent getv(actor);
-        private _currentPos = getPosASL _actor;
-        
+        // Ищем точку отступления
         private _target = _agent getv(visibleTarget);
         private _retreatPos = [];
         
         if (!isNullReference(_target)) then {
-            // Отступаем от цели
-            private _targetPos = getPosASL _target;
-            private _dirAway = _currentPos vectorDiff _targetPos;
-            private _dirNorm = vectorNormalized _dirAway;
-            _retreatPos = _currentPos vectorAdd (_dirNorm vectorMultiply 15);
+            // Отступаем от цели на 15 метров
+            _retreatPos = [_mob, _target, 15] call ai_retreatFrom;
         } else {
-            // Случайное направление
-            _retreatPos = [
-                (_currentPos select 0) + (random 20 - 10),
-                (_currentPos select 1) + (random 20 - 10),
-                (_currentPos select 2)
-            ];
+            // Случайная валидная позиция рядом
+            _retreatPos = [_mob, [], 20] call ai_findNearestValidPosition;
+            if (_retreatPos isEqualTo []) then {
+                // Fallback - случайное направление
+                private _actor = _agent getv(actor);
+                private _currentPos = getPosASL _actor;
+                _retreatPos = [
+                    (_currentPos select 0) + (random 20 - 10),
+                    (_currentPos select 1) + (random 20 - 10),
+                    (_currentPos select 2)
+                ];
+            };
         };
         
         self setv(retreatTarget,_retreatPos);
@@ -342,71 +342,22 @@ struct(BAEater_Patrol) base(BABase)
     
     def(onStart) {
         params ["_agent","_mob"];
-        private _actor = _agent getv(actor);
-        private _currentPos = getPosASL _actor;
         
-        // Получаем текущий регион
-        private _currentRegionKey = [_currentPos select 0, _currentPos select 1] call ai_nav_getRegionKey;
+        // Ищем ближайшую валидную точку в радиусе 40 метров для патрулирования
+        private _patrolPos = [_mob, [], 40] call ai_findNearestValidPosition;
         
-        // Собираем текущий регион + 8 соседей (3x3 сетка)
-        private _availableRegions = [];
-        _currentRegionKey splitString "_" params ["_rx", "_ry"];
-        _rx = parseNumber _rx; 
-        _ry = parseNumber _ry;
-        
-        // Проверяем 9 регионов (3x3)
-        for "_dx" from -1 to 1 do {
-            for "_dy" from -1 to 1 do {
-                private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
-                if (_neighborKey in ai_nav_regions) then {
-                    _availableRegions pushBack _neighborKey;
-                };
-            };
-        };
-        
-        if (count _availableRegions == 0) exitWith {
-            // Fallback - случайная точка
+        if (_patrolPos isEqualTo []) then {
+            // Fallback - случайная точка рядом
+            private _actor = _agent getv(actor);
             private _pos = getPosATL _actor;
-            private _randomPos = [
+            _patrolPos = [
                 (_pos select 0) + (random 20 - 10),
                 (_pos select 1) + (random 20 - 10),
                 0
             ];
-            self setv(patrolTarget,_randomPos);
         };
         
-        // Выбираем случайный регион
-        private _selectedRegionKey = selectRandom _availableRegions;
-        private _regionData = ai_nav_regions get _selectedRegionKey;
-        private _nodeIds = _regionData get "nodes";
-        
-        // Фильтруем только узлы с соседями (связанные)
-        private _connectedNodes = [];
-        {
-            private _nodeId = _x;
-            private _neighbors = ai_nav_adjacency getOrDefault [_nodeId, []];
-            if (count _neighbors > 0) then {
-                _connectedNodes pushBack _nodeId;
-            };
-        } forEach _nodeIds;
-        
-        if (count _connectedNodes == 0) exitWith {
-            // Нет связанных узлов - fallback
-            private _pos = getPosATL _actor;
-            private _randomPos = [
-                (_pos select 0) + (random 20 - 10),
-                (_pos select 1) + (random 20 - 10),
-                0
-            ];
-            self setv(patrolTarget,_randomPos);
-        };
-        
-        // Выбираем случайный связанный узел
-        private _selectedNodeId = selectRandom _connectedNodes;
-        private _nodeData = ai_nav_nodes get _selectedNodeId;
-        private _targetPos = _nodeData get "pos";
-        
-        self setv(patrolTarget,_targetPos);
+        self setv(patrolTarget, _patrolPos);
     }
     
     def_ret(onUpdate) {

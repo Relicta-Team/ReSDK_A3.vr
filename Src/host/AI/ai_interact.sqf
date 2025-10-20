@@ -223,6 +223,183 @@ ai_stopMove = {
 	_agent setv(ismoving,false);
 };
 
+// ============================================================================
+// AI HIGH-LEVEL MOVEMENT FUNCTIONS
+// ============================================================================
+
+/*
+	Отступить от цели на указанную дистанцию
+	
+	Параметры:
+		_mob - моб который отступает
+		_fromTarget - цель от которой отступаем (объект или позиция [x,y,z])
+		_distance - дистанция отступления в метрах (по умолчанию 10)
+	
+	Возвращает:
+		Позицию отступления [x,y,z]
+	
+	Пример:
+		private _retreatPos = [_mob, _enemy, 15] call ai_retreatFrom;
+		if !(_retreatPos isEqualTo []) then {
+			[_mob, _retreatPos] call ai_planMove;
+		};
+*/
+ai_retreatFrom = {
+	params ["_mob","_fromTarget",["_distance",10]];
+	FHEADER;
+	
+	private _myPos = getPosASL toActor(_mob);
+	
+	// Определяем позицию цели
+	private _targetPos = if (typeName _fromTarget == "ARRAY") then {
+		_fromTarget
+	} else {
+		if (equalTypes(_fromTarget,objNull)) then {
+			getPosASL _fromTarget
+		} else {
+			// Это наш GameObject
+			atltoasl callFunc(_fromTarget,getPos)
+		};
+	};
+	
+	// Вектор от цели к мобу (направление отступления)
+	private _direction = _myPos vectorDiff _targetPos;
+	
+	// Если моб стоит прямо на цели - выбираем случайное направление
+	if (vectorMagnitude _direction < 0.1) then {
+		private _angle = random 360;
+		_direction = [sin _angle, cos _angle, 0];
+	} else {
+		_direction = vectorNormalized _direction;
+	};
+	
+	// Позиция отступления
+	private _retreatPos = _myPos vectorAdd (_direction vectorMultiply _distance);
+	
+	RETURN(_retreatPos);
+};
+
+/*
+	Найти ближайшую валидную позицию для движения
+	
+	Валидная позиция - это узел навигационного графа, который имеет соседей (связан с другими узлами)
+	
+	Параметры:
+		_mob - моб для которого ищем позицию (используется только для логирования)
+		_centerPos - центральная позиция поиска [x,y,z] (опционально, по умолчанию позиция моба)
+		_maxDistance - максимальная дистанция поиска в метрах (по умолчанию 30)
+		_minDistance - минимальная дистанция от центра (по умолчанию 3, чтобы не выбирать точку на которой стоит моб)
+	
+	Возвращает:
+		Позицию [x,y,z] или [] если не найдено
+	
+	Примеры:
+		// Найти валидную точку рядом с мобом (не ближе 3м)
+		private _pos = [_mob] call ai_findNearestValidPosition;
+		if !(_pos isEqualTo []) then {
+			[_mob, _pos] call ai_planMove;
+		};
+		
+		// Найти валидную точку в радиусе 50м, не ближе 5м
+		private _pos = [_mob, [], 50, 5] call ai_findNearestValidPosition;
+*/
+ai_findNearestValidPosition = {
+	params [
+		"_mob",
+		["_centerPos",[]],
+		["_maxDistance",30],
+		["_minDistance",3]
+	];
+	FHEADER;
+	
+	private _actor = toActor(_mob);
+	
+	// Если не указана центральная позиция - берём текущую позицию моба
+	if (_centerPos isEqualTo []) then {
+		_centerPos = getPosASL _actor;
+	};
+	
+	// 1. Получаем текущий регион
+	private _currentRegionKey = [_centerPos select 0, _centerPos select 1] call ai_nav_getRegionKey;
+	
+	// 2. Вычисляем сколько регионов проверять (в зависимости от maxDistance)
+	// Размер региона обычно 50м, расширяем поиск
+	private _regionRadius = ceil(_maxDistance / 50); // сколько регионов в каждую сторону
+	
+	// 3. Собираем доступные регионы в радиусе
+	private _availableRegions = [];
+	_currentRegionKey splitString "_" params ["_rx", "_ry"];
+	_rx = parseNumber _rx; 
+	_ry = parseNumber _ry;
+	
+	for "_dx" from -_regionRadius to _regionRadius do {
+		for "_dy" from -_regionRadius to _regionRadius do {
+			private _neighborKey = format ["%1_%2", _rx + _dx, _ry + _dy];
+			if (_neighborKey in ai_nav_regions) then {
+				_availableRegions pushBack _neighborKey;
+			};
+		};
+	};
+	
+	// Fallback если нет регионов
+	if (count _availableRegions == 0) exitWith {
+		["No navigation regions found near position %1", _centerPos] call ai_log;
+		RETURN([]);
+	};
+	
+	// 4. Собираем все связанные узлы из всех регионов
+	private _connectedNodes = [];
+	{
+		private _regionKey = _x;
+		private _regionData = ai_nav_regions get _regionKey;
+		private _nodeIds = _regionData get "nodes";
+		
+		// Фильтруем только узлы с соседями (связанные)
+		{
+			private _nodeId = _x;
+			private _neighbors = ai_nav_adjacency getOrDefault [_nodeId, []];
+			if (count _neighbors > 0) then {
+				_connectedNodes pushBack _nodeId;
+			};
+		} forEach _nodeIds;
+	} forEach _availableRegions;
+	
+	// Нет связанных узлов
+	if (count _connectedNodes == 0) exitWith {
+		["No connected nodes found in navigation mesh (radius: %1m)", _maxDistance] call ai_log;
+		RETURN([]);
+	};
+	
+	// 5. Ищем ближайший связанный узел в пределах maxDistance, но не ближе minDistance
+	private _bestNode = -1;
+	private _bestDist = _maxDistance + 1; // начинаем с дистанции больше максимальной
+	
+	{
+		private _nodeId = _x;
+		private _nodeData = ai_nav_nodes get _nodeId;
+		private _nodePos = _nodeData get "pos";
+		private _dist = _centerPos distance _nodePos;
+		
+		// Проверяем что узел в пределах [minDistance, maxDistance] и ближе предыдущих
+		if (_dist >= _minDistance && _dist <= _maxDistance && _dist < _bestDist) then {
+			_bestDist = _dist;
+			_bestNode = _nodeId;
+		};
+	} forEach _connectedNodes;
+	
+	// Не найден узел в пределах дистанции
+	if (_bestNode == -1) exitWith {
+		["No connected nodes found within %1-%2m", _minDistance, _maxDistance] call ai_log;
+		RETURN([]);
+	};
+	
+	// 6. Получаем и возвращаем позицию лучшего узла
+	private _targetNodeData = ai_nav_nodes get _bestNode;
+	private _targetPos = _targetNodeData get "pos";
+	
+	RETURN(_targetPos);
+};
+
 // константа режимов движения сущности
 ai_internal_speedModes_names = createHashMapFromArray [
 	[SPEED_MODE_WALK,"SLOW"],
