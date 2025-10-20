@@ -31,7 +31,7 @@ ai_planMove = {
 	if equalTypes(_destPos,nullPtr) then {
 		_destPos = atltoasl callFunc(_destPos,getPos);
 	};
-	private _mapdata = getVar(_mob,__aiagent);
+	private _agent = getVar(_mob,__aiagent);
 	private _refp = refcreate([]);
 	private _path = [_srcPos,_destPos,true,_refp] call ai_nav_findPartialPath;
 	if (count _path == 0) exitWith {false};
@@ -113,10 +113,10 @@ ai_planMove = {
 		};
 	#endif
 
-	_mapdata set ["lastvalidpos",_path select 0];
-	_mapdata set ["curpath",_path];
-	_mapdata set ["targetidx",0];
-	_mapdata set ["ismoving",true];
+	_agent setv(lastvalidpos,_path select 0);
+	_agent setv(curpath,_path);
+	_agent setv(targetidx,0);
+	_agent setv(ismoving,true);
 
 	[_mob,false] call ai_setStop;
 
@@ -127,10 +127,10 @@ ai_planMove = {
 ai_handleMove = {
 	params ["_mob"];
 	private _body = toActor(_mob);
-	private _mapdata = getVar(_mob,__aiagent);
-	private _curidx = _mapdata get "targetidx";
-	private _targetPos = (_mapdata get "curpath") select _curidx;
-	private _prevPos = (_mapdata get "curpath") select ((_curidx - 1)max 0);
+	private _agent = getVar(_mob,__aiagent);
+	private _curidx = _agent getv(targetidx);
+	private _targetPos = (_agent getv(curpath)) select _curidx;
+	private _prevPos = (_agent getv(curpath)) select ((_curidx - 1)max 0);
 	[_mob,_targetPos] call ai_moveTo;
 
 	//коррекция пути если персонаж сбился
@@ -157,17 +157,17 @@ ai_handleMove = {
 
 	if (((getposasl _body) distance _targetPos) < 0.6) then {
 		INC(_curidx);
-		_mapdata set ["targetidx",_curidx];
+		_agent setv(targetidx,_curidx);
 		//конец пути или переход к следующей точке
-		if (_curidx >= count (_mapdata get "curpath")) then {
-			_mapdata set ["ismoving",false];
+		if (_curidx >= count (_agent getv(curpath))) then {
+			_agent setv(ismoving,false);
 			[_mob,true] call ai_setStop;
 			#ifdef AI_DEBUG_TRACEPATH
-			_mapdata set ["nextPlanTime",tickTime + 3];
+			_agent set ["nextPlanTime",tickTime + 3];
 			#endif
 			["TARGET REACHED"] call ai_log;
 		} else {
-			_mapdata set ["lastvalidpos",_targetPos];
+			_agent setv(lastvalidpos,_targetPos);
 		};
 	};
 };
@@ -220,7 +220,7 @@ ai_stopMove = {
 	private _actor = toActor(_mob);
 	_actor stop true;
 	private _agent = getVar(_mob,__aiagent);
-	_agent set ["ismoving",false];
+	_agent setv(ismoving,false);
 };
 
 // константа режимов движения сущности

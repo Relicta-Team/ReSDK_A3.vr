@@ -32,26 +32,23 @@ ai_brain_getAllActionTypes = {
 ai_brain_update = {
 	params ["_mob","_agent"];
 
-	private _behavior = _agent getOrDefault ["behavior",null];
-	if (isNullVar(_behavior)) exitWith {}; // нет поведения
-
 	// Обновление сенсоров
-	if (tickTime >= (_agent getOrDefault ["nextSensorUpdate",0])) then {
-		_behavior callp(updateSensors,_agent arg _mob);
-		private _sensorDelay = _behavior getv(sensorUpdateDelay);
-		_agent set ["nextSensorUpdate",tickTime + _sensorDelay];
+	if (tickTime >= (_agent getv(nextSensorUpdate))) then {
+		_agent callp(updateSensors,_mob);
+		private _sensorDelay = _agent getv(sensorUpdateDelay);
+		_agent setv(nextSensorUpdate,tickTime + _sensorDelay);
 	};
 
 	// Обновление действий
-	if (tickTime >= (_agent getOrDefault ["nextActionUpdate",0])) then {
-		private _updateDelay = _behavior getv(updateDelay);
-		_agent set ["nextActionUpdate",tickTime + _updateDelay];
+	if (tickTime >= (_agent getv(nextActionUpdate))) then {
+		private _updateDelay = _agent getv(updateDelay);
+		_agent setv(nextActionUpdate,tickTime + _updateDelay);
 
 		// Выбираем лучшее действие
 		private _bestAction = [_agent,_mob] call ai_brain_selectBestAction;
 
 		// Проверяем нужно ли переключиться
-		private _currentAction = _agent getOrDefault ["currentAction",null];
+		private _currentAction = _agent getv(currentAction);
 		private _needSwitch = false;
 
 		if (isNullVar(_currentAction)) then {
@@ -77,7 +74,7 @@ ai_brain_update = {
 		// Переключение действия
 		if (_needSwitch && !isNullVar(_bestAction)) then {
 			[_agent,_mob,_currentAction,_bestAction] call ai_brain_switchAction;
-			_agent set ["currentAction",_bestAction];
+			_agent setv(currentAction,_bestAction);
 			_currentAction = _bestAction;
 		};
 
@@ -97,8 +94,6 @@ ai_brain_update = {
 				if (_result == UPDATE_STATE_FAILED) then {
 					_currentAction setv(state,"failed");
 					_currentAction callp(onFailed,_agent arg _mob);
-					// Сбрасываем текущее действие для автоматического переключения
-					//_agent set ["currentAction",null];
 				};
 				
 				// UPDATE_STATE_CONTINUE (0) - продолжаем выполнение (ничего не делаем)
@@ -114,7 +109,7 @@ ai_brain_update = {
 ai_brain_selectBestAction = {
 	params ["_agent","_mob"];
 
-	private _possibleActions = _agent getOrDefault ["possibleActions",[]];
+	private _possibleActions = _agent getv(possibleActions);
 	if (count _possibleActions == 0) exitWith {null};
 
 	private _bestAction = null;

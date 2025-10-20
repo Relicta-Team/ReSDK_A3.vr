@@ -65,26 +65,27 @@ ai_createMob = {
 };
 
 ai_createAgent = {
-	params ["_pos","_mob","_gMob"];
-	private _mapdata = createHashMap;
-	_mapdata set ["actor",toActor(_mob)];
-	_mapdata set ["lastvalidpos",_pos];
-	_mapdata set ["curpath",[]];
-	_mapdata set ["targetidx",0];
-	_mapdata set ["ismoving",false];
+	params ["_pos","_mob",["_agentType","AgentZombie"]];
 	
-	// Utility AI - создание поведения
-	_mapdata set ["behavior",struct_new(BHVZombie)];
-	_mapdata set ["currentAction",null];
-	_mapdata set ["nextSensorUpdate",0];
-	_mapdata set ["nextActionUpdate",0];
+	// Создаем агента как структуру
+	private _agent = [_agentType] call struct_alloc;
 	
-	// инициализировать действия
-	private _bhv = _mapdata get "behavior";
-	_bhv callp(generateActions,_mapdata);
-	_mapdata set ["possibleActions",_bhv getv(_possibleActions)];
+	// Инициализация системных данных
+	_agent setv(actor,toActor(_mob));
+	_agent setv(lastvalidpos,_pos);
+	_agent setv(curpath,[]);
+	_agent setv(targetidx,0);
+	_agent setv(ismoving,false);
 	
-	_mapdata
+	// Инициализация Utility AI
+	_agent setv(currentAction,null);
+	_agent setv(nextSensorUpdate,0);
+	_agent setv(nextActionUpdate,0);
+	
+	// Генерируем действия
+	_agent callv(generateActions);
+	
+	_agent
 };
 
 ai_init = {
@@ -122,13 +123,13 @@ ai_onUpdate = {
 	//процессим моба
 	{
 		private _mob = _x;
-		private _body = toActor(_mob);
-		private _pos = getposasl _body;
-		private _mapdata = getVar(_mob,__aiagent);
+		private _agent = getVar(_mob,__aiagent);
 		
 		#ifdef AI_DEBUG_MOVETOPLAYER
-		if !(_mapdata get "ismoving") then {
-			if (tickTime < (_mapdata getOrDefault ["nextPlanTime",tickTime])) exitWith {};
+		private _body = toActor(_mob);
+		private _pos = getposasl _body;
+		if !(_agent getv(ismoving)) then {
+			if (tickTime < (_agent getOrDefault ["nextPlanTime",tickTime])) exitWith {};
 			_target = getposasl player;
 			
 
@@ -140,12 +141,12 @@ ai_onUpdate = {
 		};
 		#endif
 		
-		if (_mapdata get "ismoving") then {
+		if (_agent getv(ismoving)) then {
 			[_mob] call ai_handleMove;
 		};
 		
 		// Обновление Utility AI
-		[_mob,_mapdata] call ai_brain_update;
+		[_mob,_agent] call ai_brain_update;
 	} foreach ai_allMobs;
 };
 
@@ -252,55 +253,44 @@ ai_debug_internal_brainiInfo = {
 
 		if (!isNullReference(_nearestMob)) then {
 			private _agent = getVar(_nearestMob,__aiagent);
-			private _behavior = _agent getOrDefault ["behavior",null];
 			
 			_t pushBack format["Nearest: %1 (%2m)",getVar(_nearestMob,name),(_nearestDist toFixed 1)];
+			_t pushBack format["Agent: %1",_agent getv(name)];
 			
-			if (!isNullVar(_behavior)) then {
-				_t pushBack format["Behavior: %1",_behavior getv(name)];
+			// Текущее действие
+			private _currentAction = _agent getv(currentAction);
+			if (!isNullVar(_currentAction)) then {
+				_t pushBack format["Current: %1",str _currentAction];
+			} else {
+				_t pushBack "Current: none";
+			};
+			
+			_t pushBack "";
+			_t pushBack "--- Actions ---";
+			
+			// Все возможные действия и их стоимости
+			private _possibleActions = _agent getv(possibleActions);
+			{
+				private _action = _x;
+				private _name = _action getv(name);
+				private _score = _action getv(_lastScore);
+				private _state = _action getv(state);
+				private _marker = "";
 				
-				// Текущее действие
-				private _currentAction = _agent getOrDefault ["currentAction",null];
-				if (!isNullVar(_currentAction)) then {
-					_t pushBack format["Current: %1",str _currentAction];
-				} else {
-					_t pushBack "Current: none";
+				if (!isNullVar(_currentAction) && {equals(_action,_currentAction)}) then {
+					_marker = " [*]";
 				};
 				
-				_t pushBack "";
-				_t pushBack "--- Actions ---";
-				
-				// Все возможные действия и их стоимости
-				private _possibleActions = _agent getOrDefault ["possibleActions",[]];
-				{
-					private _action = _x;
-					private _name = _action getv(name);
-					private _score = _action getv(_lastScore);
-					private _state = _action getv(state);
-					private _marker = "";
-					
-					if (!isNullVar(_currentAction) && {equals(_action,_currentAction)}) then {
-						_marker = " [*]";
-					};
-					
-					_t pushBack format["%1: %2 (%3)%4",_name,_score,_state,_marker];
-				} foreach _possibleActions;
-				
-				// Информация о сенсорах
-				_t pushBack "";
-				private _target = _agent getOrDefault ["visibleTarget",nullPtr];
-				if (!isNullReference(_target)) then {
-					_t pushBack format["Target: detected (%1m)",((toActor(_nearestMob)) distance callFunc(_target,getBasicLoc)) toFixed 1];
-				} else {
-					_t pushBack "Target: none";
-				};
-
-				_t pushBack "Agent vargs:";
-				{
-					if ((_agent get _x) isEqualTypeAny [0,false,nullPtr,objNull]) then {
-						_t pushBack format["%1: %2",_x,(_agent get _x)];
-					};
-				} foreach (keys _agent);
+				_t pushBack format["%1: %2 (%3)%4",_name,_score,_state,_marker];
+			} foreach _possibleActions;
+			
+			// Информация о сенсорах
+			_t pushBack "";
+			private _target = _agent getv(visibleTarget);
+			if (!isNullReference(_target)) then {
+				_t pushBack format["Target: detected (%1m)",((toActor(_nearestMob)) distance callFunc(_target,getBasicLoc)) toFixed 1];
+			} else {
+				_t pushBack "Target: none";
 			};
 		};
 	} else {
