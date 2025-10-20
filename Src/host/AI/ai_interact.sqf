@@ -308,7 +308,7 @@ ai_findNearestValidPosition = {
 		"_mob",
 		["_centerPos",[]],
 		["_maxDistance",30],
-		["_minDistance",3]
+		["_minDistance",5]
 	];
 	FHEADER;
 	

@@ -211,7 +211,7 @@ struct(BAEater_Search) base(BABase)
         };
         
         // Достигли точки - провал (не нашли)
-        if (_actor distance _searchPos < 2) exitWith {UPDATE_STATE_FAILED};
+        if ((_searchPos distance _actor) < 2) exitWith {UPDATE_STATE_FAILED};
         
         UPDATE_STATE_CONTINUE
     }
@@ -344,7 +344,7 @@ struct(BAEater_Patrol) base(BABase)
         params ["_agent","_mob"];
         
         // Ищем ближайшую валидную точку в радиусе 40 метров для патрулирования
-        private _patrolPos = [_mob, [], 40] call ai_findNearestValidPosition;
+        private _patrolPos = [_mob, [], 40,10] call ai_findNearestValidPosition;
         
         if (_patrolPos isEqualTo []) then {
             // Fallback - случайная точка рядом

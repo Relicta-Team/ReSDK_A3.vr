@@ -256,21 +256,9 @@ struct(AgentEater) base(AgentBase)
 		
 		// Ищем ближайших врагов
 		private _nearMobs = callFuncParams(_mob,getNearMobs,50);
-		
+		private _refview = refcreate(VISIBILITY_MODE_NONE);
 		// Фильтруем: игроки или враждебная команда
-		_nearMobs = /*_nearMobs select {
-			private _isPlayer = callFunc(_x,isPlayer);
-			private _isHostile = false;
-			
-			if (!_isPlayer) then {
-				private _myTeam = getVar(_mob,team);
-				private _theirTeam = getVar(_x,team);
-				_isHostile = !isNullVar(_myTeam) && !isNullVar(_theirTeam) && {_myTeam != _theirTeam};
-			};
-			
-			_isPlayer || _isHostile
-		};*/
-		_nearMobs select {
+		_nearMobs = _nearMobs select {
 			callFunc(_x,isPlayer)
 			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
@@ -279,11 +267,9 @@ struct(AgentEater) base(AgentBase)
 		if (count _nearMobs > 0) then {
 			// Нашли врага
 			private _closestMob = _nearMobs select 0;
-			private _closestActor = callFunc(_closestMob,getBasicLoc);
-			
-			self setv(visibleTarget,_closestActor);
+			self setv(visibleTarget,_closestMob);
 			self setv(lastSeenTargetTime,tickTime);
-			self setv(lastSeenTargetPos,getPosASL _closestActor);
+			self setv(lastSeenTargetPos,atltoasl callFunc(_closestMob,getPos));
 		} else {
 			// Враг не виден
 			self setv(visibleTarget,nullPtr);
