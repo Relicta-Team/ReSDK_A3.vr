@@ -29,7 +29,8 @@ struct(BAEater_Attack) base(BABase)
     def(baseScore) 70;
     
     // Локальные данные действия
-    def(attackStartTime) 0;
+    def(lastAttackTime) 0;
+    def(attackCooldown) 1.5; // Кулдаун между атаками в секундах
     
     // КОНТЕКСТ: можем атаковать?
     def_ret(isAvailable) {
@@ -69,11 +70,8 @@ struct(BAEater_Attack) base(BABase)
     def(onStart) {
         params ["_agent"];
         
-        private _mob = _agent getv(mob);
-        private _target = _agent getv(visibleTarget);
-        
-        self setv(attackStartTime,tickTime);
-        [_mob,_target] call ai_rotateTo;
+        // Устанавливаем время в прошлое чтобы первая атака была сразу
+        self setv(lastAttackTime,0);
     }
     
     def_ret(onUpdate) {
@@ -85,23 +83,32 @@ struct(BAEater_Attack) base(BABase)
         // Проверяем стамину
         if (_agent callv(getStaminaPercent) < 10) exitWith {UPDATE_STATE_FAILED};
         
-        private _startTime = self getv(attackStartTime);
-        if (tickTime - _startTime < 0.3) exitWith {UPDATE_STATE_CONTINUE};
-        
         private _mob = _agent getv(mob);
-        [_mob,_target] call ai_attackTarget;
         
-        UPDATE_STATE_COMPLETED
+        // Проверяем кулдаун
+        private _lastAttack = self getv(lastAttackTime);
+        private _cooldown = self getv(attackCooldown);
+        private _timeSinceLastAttack = tickTime - _lastAttack;
+        
+        if (_timeSinceLastAttack >= _cooldown) then {
+            // Можем атаковать!
+            [_mob,_target] call ai_rotateTo;
+            [_mob,_target] call ai_attackTarget;
+            self setv(lastAttackTime,tickTime);
+        };
+        
+        // Продолжаем действие (не завершаем)
+        UPDATE_STATE_CONTINUE
     }
     
     def(onCompleted) {
         params ["_agent"];
-        self setv(attackStartTime,0);
+        self setv(lastAttackTime,0);
     }
     
     def(onFailed) {
         params ["_agent"];
-        self setv(attackStartTime,0);
+        self setv(lastAttackTime,0);
     }
 endstruct
 
@@ -111,6 +118,10 @@ endstruct
 struct(BAEater_Chase) base(BABase)
     def(requiredAgentFields) ["visibleTarget","attackDistance"];
     def(baseScore) 40;
+    
+    // Локальные данные для отслеживания перепланировки
+    def(lastReplanTime) 0;
+    def(replanInterval) 0.5; // Перепланировка каждые 0.5 секунды
     
     // КОНТЕКСТ: можем преследовать?
     def_ret(isAvailable) {
@@ -147,6 +158,7 @@ struct(BAEater_Chase) base(BABase)
     
     def(onStart) {
         params ["_agent"];
+        self setv(lastReplanTime,0);
     }
     
     def_ret(onUpdate) {
@@ -160,35 +172,47 @@ struct(BAEater_Chase) base(BABase)
         if (_dist < (_agent getv(attackDistance))) exitWith {UPDATE_STATE_COMPLETED};
         
         private _isMoving = _agent getv(ismoving);
+        private _needReplan = false;
         
         if (_isMoving) then {
-            // Проверяем не сместилась ли цель от конца пути
-            private _curPath = _agent getv(curpath);
-            if (count _curPath > 0) then {
-                private _pathEnd = _curPath select (count _curPath - 1);
-                private _targetPos = atltoasl callFunc(_target,getPos);
-                private _targetDeviation = _pathEnd distance _targetPos;
-                
-                // Если цель сместилась - перепланируем путь
-                if (_targetDeviation > 2) then {
-                    [_mob] call ai_stopMove;
-                    // Вычисляем позицию подхода
-                    private _mobPos = getposasl toActor(_mob);
+            // Проверяем нужно ли перепланировать путь
+            private _lastReplan = self getv(lastReplanTime);
+            private _timeSinceReplan = tickTime - _lastReplan;
+            
+            if (_timeSinceReplan >= self getv(replanInterval)) then {
+                // Время для перепланировки
+                _needReplan = true;
+            } else {
+                // Дополнительная проверка - сильное отклонение цели
+                private _curPath = _agent getv(curpath);
+                if (count _curPath > 0) then {
+                    private _pathEnd = _curPath select (count _curPath - 1);
                     private _targetPos = atltoasl callFunc(_target,getPos);
-                    private _approachPos = [_mobPos, _targetPos, (_agent getv(attackDistance)) - ai_nav_gridStep] call ai_getApproachPosition;
-
-                    private _success = [_mob,_approachPos] call ai_planMove;
-                    if (!_success) exitWith {UPDATE_STATE_FAILED};
+                    private _targetDeviation = _pathEnd distance _targetPos;
+                    
+                    // Если цель сместилась больше 3м - экстренная перепланировка
+                    if (_targetDeviation > 3) then {
+                        _needReplan = true;
+                    };
                 };
             };
+            
+            if (_needReplan) then {
+                [_mob] call ai_stopMove;
+            };
         } else {
-            // Не движемся - планируем путь
-            private _mobPos = getposasl toActor(_mob);
-            private _targetPos = atltoasl callFunc(_target,getPos);
-            private _approachPos = [_mobPos, _targetPos, (_agent getv(attackDistance)) - ai_nav_gridStep] call ai_getApproachPosition;
+            // Не движемся - нужно планировать
+            _needReplan = true;
+        };
         
-            private _success = [_mob,_approachPos] call ai_planMove;
+        if (_needReplan) then {
+            // ПРЕДСКАЗАНИЕ: куда цель побежит через 1 секунду
+            private _predictedPos = [_target, 1.0] call ai_predictTargetPosition;
+            
+            private _success = [_mob, _predictedPos] call ai_planMove;
             if (!_success) exitWith {UPDATE_STATE_FAILED};
+            
+            self setv(lastReplanTime, tickTime);
         };
         
         UPDATE_STATE_CONTINUE
@@ -197,10 +221,12 @@ struct(BAEater_Chase) base(BABase)
     def(onCompleted) {
         params ["_agent"];
         [_agent getv(mob)] call ai_stopMove;
+        self setv(lastReplanTime,0);
     }
     
     def(onFailed) {
         params ["_agent"];
+        self setv(lastReplanTime,0);
     }
 endstruct
 

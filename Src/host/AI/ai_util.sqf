@@ -97,8 +97,6 @@ ai_softmaxSelect = {
     _ret
 };
 
-
-
 /**
  * Вычисляет позицию подхода к цели на заданном расстоянии
  * Параметры:
@@ -123,4 +121,27 @@ ai_getApproachPosition = {
     
     // Позиция на расстоянии подхода от цели
     _targetPos vectorAdd (_dirVectorNorm vectorMultiply _approachDist)
+};
+
+/**
+ * Предсказывает будущую позицию движущейся цели
+ * Параметры:
+ *   _target - GameObject или unit (цель для предсказания)
+ *   _predictionTime - число секунд для предсказания (по умолчанию 1.0)
+ * Возвращает:
+ *   [x,y,z] предсказанная позиция ASL
+ */
+ai_predictTargetPosition = {
+    params ["_target",["_predictionTime",1.0]];
+    
+    private _actor = toActor(_target);
+    private _currentPos = getposasl _actor;
+    private _velocity = velocity _actor;
+    
+    // Если цель стоит на месте - возвращаем текущую позицию
+    private _speed = vectorMagnitude _velocity;
+    if (_speed < 0.1) exitWith {_currentPos};
+    
+    // Предсказываем позицию: текущая + (скорость × время)
+    _currentPos vectorAdd (_velocity vectorMultiply _predictionTime)
 };
