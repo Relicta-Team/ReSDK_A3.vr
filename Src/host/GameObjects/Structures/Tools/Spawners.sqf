@@ -204,7 +204,8 @@ class(EntitySpawner) extends(IStructNonReplicated)
 		private _behaviour = getSelf(behaviourName);
 		//todo use behaviour
 
-		private _args = [_pos,[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]];
+		//todo use builder type
+		private _args = [_pos,null];//[_pos,[getSelf(st) arg getSelf(iq) arg getSelf(dx) arg getSelf(ht)]];
 		#ifdef EDITOR
 			startAsyncInvoke
 			{

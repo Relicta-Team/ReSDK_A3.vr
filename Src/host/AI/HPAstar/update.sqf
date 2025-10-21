@@ -39,6 +39,13 @@ ai_nav_updateOrCreateRegion = {
     };
 };
 
+//todo request pool for update region
+ai_nav_requestUpdateRegion = {
+    params ["_pos"];
+    
+    [_pos] call ai_nav_updateRegion;
+};
+
 ai_nav_invalidateRegion = {
     params ["_regionKey"];
     

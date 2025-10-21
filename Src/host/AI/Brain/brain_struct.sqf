@@ -11,6 +11,8 @@
 
 #include "..\ai.h"
 
+#include "Builders\builders.sqf"
+
 #include "Behaviors\test.sqf"
 #include "Behaviors\Eater.sqf"
 
@@ -47,29 +49,35 @@ struct(BABase)
 
 	//модификатор, добавляемый к базовой стоимости действия
 	def(getScore) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		0
+	}
+
+	//проверяет будет ли действие доступно в текущий момент
+	def(isAvailable) {
+		params ["_agent"];
+		true
 	}
 
 	//вызывается при старте действия
 	def(onStart) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 	}
 
 	//вызывается каждый кадр обновления. Возвращает UPDATE_STATE_COMPLETED если завершено, UPDATE_STATE_FAILED если провалено, UPDATE_STATE_CONTINUE если продолжается
 	def_ret(onUpdate) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		UPDATE_STATE_COMPLETED //в базовом методе по умолчанию действие успешно завершено
 	}
 
 	//вызывается при успешном завершении действия
 	def(onCompleted) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 	}
 
 	//вызывается при провале действия
 	def(onFailed) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 	}
 
 	def(_lastScore) 0; //последняя оценка пишется сюда
@@ -108,10 +116,24 @@ struct(AgentBase)
 	// СИСТЕМНЫЕ ДАННЫЕ
 	// ============================================================================
 	def(actor) objNull; // игровой объект (Arma actor)
+	def(mob) nullPtr; // ссылка на моба
 	def(lastvalidpos) [0,0,0]; // последняя валидная позиция
+	def(lastPointSetup) 0; // время установки последней точки пути
 	def(curpath) []; // текущий путь (массив позиций)
 	def(targetidx) 0; // индекс текущей точки на пути
 	def(ismoving) false; // флаг движения
+	def(pathTask) null //задача движения
+	def(_lastPathTask) refcreate(false);
+	
+	//путь назначен
+	def(hasPath) {
+		!isNull(self getv(pathTask))
+	}
+
+	//последний путь был достигнут
+	def(isPathReached) {
+		refget(self getv(_lastPathTask))
+	}
 
 	// ============================================================================
 	// UTILITY AI - УПРАВЛЕНИЕ ДЕЙСТВИЯМИ
@@ -188,12 +210,45 @@ struct(AgentBase)
 		self setv(possibleActions,_actsList);
 	}
 
+	// обновляет контекстные данные
+	def(updateContext) {
+		params ["_mob"];
+		// базовая реализация пустая
+	}
+
+	// ============================================================================
+	// HELPER-МЕТОДЫ ДЛЯ УДОБНОГО ДОСТУПА К ДАННЫМ
+	// ============================================================================
+	
+	// Получить моба агента
+	def(getMob) {
+		self getv(mob)
+	}
+	
+	// Получить процент стамины (0-100)
+	def(getStaminaPercent) {
+		private _mob = self getv(mob);
+		private _stamina = getVar(_mob,stamina);
+		private _staminaMax = getVar(_mob,staminaMax);
+		(_stamina / _staminaMax) * 100
+	}
+	
+	// Получить процент здоровья (0-100)
+	def(getHealthPercent) {
+		100 //TODO: реализовать
+	}
+	
+	// В бою ли агент
+	def(isInCombat) {
+		private _mob = self getv(mob);
+		getVar(_mob,isCombatModeEnable) || !isNullReference(self getv(visibleTarget))
+	}
+
 	// ============================================================================
 	// ОБНОВЛЕНИЕ СЕНСОРОВ
 	// ============================================================================
 	// Переопределяется в дочерних классах для реализации конкретного поведения
 	def(updateSensors) {
-		params ["_mob"];
 		// базовая реализация пустая
 	}
 endstruct
@@ -216,7 +271,7 @@ struct(AgentZombie) base(AgentBase)
 	def(updateDelay) 0.3;
 	
 	def(updateSensors) {
-		params ["_mob"];
+		private _mob = self getv(mob);
 		
 		// Ищем ближайших мобов (включая игроков)
 		private _nearMobs = callFuncParams(_mob,getNearMobs,20);
@@ -248,12 +303,32 @@ struct(AgentEater) base(AgentBase)
 	def(lastSeenTargetTime) 0; // время последнего обнаружения
 	def(lastSeenTargetPos) [0,0,0]; // последняя известная позиция цели
 	
+	def(interactDistance) 1.3;
+	def(attackDistance) 1.3;
+
 	def(sensorUpdateDelay) 0.5;
 	def(updateDelay) 0.3;
 	
-	def(updateSensors) {
-		params ["_mob"];
+	//сенсорные контекстные данные
+	def(staminaPrecent) 100;
+	def(inCombat) false;
+	def(isHunger) false;
+	def(angryLevel) 0;
+
+	def(updateContext) {
+		private _mob = self getv(mob);
 		
+		self setv(staminaPrecent,getVar(_mob,stamina) / getVar(_mob,staminaMax) * 100);
+		self setv(inCombat,getVar(_mob,isCombatModeEnable) || !isNullReference(self getv(visibleTarget)));
+		self setv(isHunger,getVar(_mob,hunger) < 40);
+		self setv(angryLevel,ifcheck(self getv(inCombat),10,0));
+	}
+
+	def(updateSensors) {
+		private _mob = self getv(mob);
+		
+		private _hadTarget = !isNullReference(self getv(visibleTarget));
+
 		// Ищем ближайших врагов
 		private _nearMobs = callFuncParams(_mob,getNearMobs,50);
 		private _refview = refcreate(VISIBILITY_MODE_NONE);
@@ -270,10 +345,38 @@ struct(AgentEater) base(AgentBase)
 			self setv(visibleTarget,_closestMob);
 			self setv(lastSeenTargetTime,tickTime);
 			self setv(lastSeenTargetPos,atltoasl callFunc(_closestMob,getPos));
+			
+			// Переключаемся в боевой режим если только обнаружили цель
+			if (!_hadTarget) then {
+				// Включаем комбат-режим
+				if (!getVar(_mob,isCombatModeEnable)) then {
+					callFuncParams(_mob,setCombatMode,true);
+				};
+				// Переключаемся на бег
+				[_mob,SPEED_MODE_RUN] call ai_setSpeed;
+			};
 		} else {
 			// Враг не виден
 			self setv(visibleTarget,nullPtr);
 			// lastSeenTargetTime НЕ сбрасываем - используется для поиска
+			
+			// Проверяем давность следа
+			private _lastSeenTime = self getv(lastSeenTargetTime);
+			private _timeSinceLost = if (_lastSeenTime > 0) then {
+				tickTime - _lastSeenTime
+			} else {
+				999 // никогда не видели
+			};
+			
+			// Выходим из боевого режима только если след давно потерян (30+ секунд)
+			if (_hadTarget && _timeSinceLost > 30) then {
+				// Выключаем комбат-режим
+				if (getVar(_mob,isCombatModeEnable)) then {
+					callFuncParams(_mob,setCombatMode,false);
+				};
+				// Переключаемся на ходьбу
+				[_mob,SPEED_MODE_WALK] call ai_setSpeed;
+			};
 		};
 	}
 endstruct

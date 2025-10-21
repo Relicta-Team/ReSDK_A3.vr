@@ -76,6 +76,9 @@ func(setDoorOpen)
 	setSelf(isOpen,_mode);
 	callSelf(animateSource);
 
+	//request update region
+	[getposasl callSelf(getBasicLoc)] call ai_nav_requestUpdateRegion;
+
 	private _snd = if (_mode) then {
 		callSelf(getOpenSoundParams);
 	} else {

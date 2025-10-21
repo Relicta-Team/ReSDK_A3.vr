@@ -25,65 +25,82 @@
 // ДЕЙСТВИЕ 1: АТАКА ВРАГА
 // ============================================================================
 struct(BAEater_Attack) base(BABase)
-    def(requiredAgentFields) ["visibleTarget"]; // требуется для атаки цели
+    def(requiredAgentFields) ["visibleTarget","attackDistance"];
+    def(baseScore) 70;
     
     // Локальные данные действия
     def(attackStartTime) 0;
     
-    def_ret(getScore) {
-        params ["_agent","_mob"];
+    // КОНТЕКСТ: можем атаковать?
+    def_ret(isAvailable) {
+        params ["_agent"];
+        
         private _target = _agent getv(visibleTarget);
-        if (isNullReference(_target)) exitWith {0};
+        if (isNullReference(_target)) exitWith {false};
         
+        private _mob = _agent getv(mob);
         private _dist = callFuncParams(_mob,getDistanceTo,_target);
-        if (_dist > 3) exitWith {0}; // слишком далеко
+        if (_dist > (_agent getv(attackDistance))) exitWith {false};
         
-        // БАЗА: важное действие (70)
-        private _baseValue = 70;
+        // Есть стамина для атаки?
+        private _staminaPercent = _agent callv(getStaminaPercent);
+        (_staminaPercent >= 15)
+    }
+    
+    // ПОЛЕЗНОСТЬ: насколько выгодно атаковать?
+    def_ret(getScore) {
+        params ["_agent"];
         
-        // МОДИФИКАТОР 1: Стамина (критично!)
-        private _stamina = getVar(_mob,stamina);
-        if (_stamina < 15) exitWith {0}; // нет стамины - не атакуем
+        private _mob = _agent getv(mob);
+        private _target = _agent getv(visibleTarget);
+        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _staminaPercent = _agent callv(getStaminaPercent);
         
-        // Бонус за высокую стамину: 15%→0, 100%→10
-        private _staminaBonus = (_stamina - 15) / 85 * 10; // 0-10
+        // Бонус за стамину: 15%→0, 100%→10
+        private _staminaBonus = (_staminaPercent - 15) / 85 * 10;
         
-        // МОДИФИКАТОР 2: Близость к цели
-        private _distBonus = (3 - _dist) * 3; // 0-9
+        // Бонус за близость
+        private _distBonus = ((_agent getv(attackDistance)) - _dist) * 3;
         
-        // ИТОГО: 70 + 0-10 + 0-9 = 70-89
-        _baseValue + _staminaBonus + _distBonus
+        // ИТОГО: 0-19 (добавится к baseScore 70)
+        _staminaBonus + _distBonus
     }
     
     def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
         private _target = _agent getv(visibleTarget);
+        
         self setv(attackStartTime,tickTime);
         [_mob,_target] call ai_rotateTo;
     }
     
     def_ret(onUpdate) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
         private _target = _agent getv(visibleTarget);
         if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
         
         // Проверяем стамину
-        if (getVar(_mob,stamina) < 10) exitWith {UPDATE_STATE_FAILED};
+        if (_agent callv(getStaminaPercent) < 10) exitWith {UPDATE_STATE_FAILED};
         
         private _startTime = self getv(attackStartTime);
-        if (tickTime - _startTime < 2) exitWith {UPDATE_STATE_CONTINUE};
+        if (tickTime - _startTime < 0.3) exitWith {UPDATE_STATE_CONTINUE};
         
+        private _mob = _agent getv(mob);
         [_mob,_target] call ai_attackTarget;
+        
         UPDATE_STATE_COMPLETED
     }
     
     def(onCompleted) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         self setv(attackStartTime,0);
     }
     
     def(onFailed) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         self setv(attackStartTime,0);
     }
 endstruct
@@ -92,46 +109,85 @@ endstruct
 // ДЕЙСТВИЕ 2: ПРЕСЛЕДОВАНИЕ ВРАГА
 // ============================================================================
 struct(BAEater_Chase) base(BABase)
-    def(requiredAgentFields) ["visibleTarget"]; // требуется для преследования цели
+    def(requiredAgentFields) ["visibleTarget","attackDistance"];
+    def(baseScore) 40;
     
-    def_ret(getScore) {
-        params ["_agent","_mob"];
+    // КОНТЕКСТ: можем преследовать?
+    def_ret(isAvailable) {
+        params ["_agent"];
+        
         private _target = _agent getv(visibleTarget);
-        if (isNullReference(_target)) exitWith {0};
+        if (isNullReference(_target)) exitWith {false};
         
+        private _mob = _agent getv(mob);
         private _dist = callFuncParams(_mob,getDistanceTo,_target);
-        if (_dist < 3) exitWith {0};   // слишком близко - атаковать
-        if (_dist > 30) exitWith {0};  // слишком далеко
         
-        // БАЗА: среднее действие (40)
-        private _baseValue = 40;
+        // Только на средней дистанции
+        (_dist >= (_agent getv(attackDistance))) && (_dist <= 30)
+    }
+    
+    // ПОЛЕЗНОСТЬ: насколько выгодно преследовать?
+    def_ret(getScore) {
+        params ["_agent"];
         
-        // МОДИФИКАТОР 1: Расстояние (ближе = выше приоритет)
-        // 30м→40, 3м→70
-        private _distBonus = (30 - _dist) / 27 * 30; // 0-30
+        private _mob = _agent getv(mob);
+        private _target = _agent getv(visibleTarget);
+        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _staminaPercent = _agent callv(getStaminaPercent);
         
-        // МОДИФИКАТОР 2: Стамина (усталость снижает желание преследовать)
-        private _stamina = getVar(_mob,stamina);
-        private _staminaPenalty = if (_stamina < 30) then {-10} else {0};
+        // Бонус за близость: 30м→0, 3м→30
+        private _distBonus = (30 - _dist) / 27 * 30;
         
-        // ИТОГО: 40 + 0-30 - 10 = 30-70
-        _baseValue + _distBonus + _staminaPenalty
+        // Штраф за усталость
+        private _staminaPenalty = if (_staminaPercent < 30) then {-10} else {0};
+        
+        // ИТОГО: 0-30 - 10 = -10 до 30
+        _distBonus + _staminaPenalty
     }
     
     def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
     }
     
     def_ret(onUpdate) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
         private _target = _agent getv(visibleTarget);
         if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
         
         private _dist = callFuncParams(_mob,getDistanceTo,_target);
-        if (_dist < 3) exitWith {UPDATE_STATE_COMPLETED}; // достигли
+        if (_dist < (_agent getv(attackDistance))) exitWith {UPDATE_STATE_COMPLETED};
         
-        if !(_agent getv(ismoving)) then {
-            private _success = [_mob,_target] call ai_planMove;
+        private _isMoving = _agent getv(ismoving);
+        
+        if (_isMoving) then {
+            // Проверяем не сместилась ли цель от конца пути
+            private _curPath = _agent getv(curpath);
+            if (count _curPath > 0) then {
+                private _pathEnd = _curPath select (count _curPath - 1);
+                private _targetPos = atltoasl callFunc(_target,getPos);
+                private _targetDeviation = _pathEnd distance _targetPos;
+                
+                // Если цель сместилась - перепланируем путь
+                if (_targetDeviation > 2) then {
+                    [_mob] call ai_stopMove;
+                    // Вычисляем позицию подхода
+                    private _mobPos = getposasl toActor(_mob);
+                    private _targetPos = atltoasl callFunc(_target,getPos);
+                    private _approachPos = [_mobPos, _targetPos, (_agent getv(attackDistance)) - ai_nav_gridStep] call ai_getApproachPosition;
+
+                    private _success = [_mob,_approachPos] call ai_planMove;
+                    if (!_success) exitWith {UPDATE_STATE_FAILED};
+                };
+            };
+        } else {
+            // Не движемся - планируем путь
+            private _mobPos = getposasl toActor(_mob);
+            private _targetPos = atltoasl callFunc(_target,getPos);
+            private _approachPos = [_mobPos, _targetPos, (_agent getv(attackDistance)) - ai_nav_gridStep] call ai_getApproachPosition;
+        
+            private _success = [_mob,_approachPos] call ai_planMove;
             if (!_success) exitWith {UPDATE_STATE_FAILED};
         };
         
@@ -139,11 +195,12 @@ struct(BAEater_Chase) base(BABase)
     }
     
     def(onCompleted) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        [_agent getv(mob)] call ai_stopMove;
     }
     
     def(onFailed) {
-        params ["_agent","_mob"];
+        params ["_agent"];
     }
 endstruct
 
@@ -151,81 +208,163 @@ endstruct
 // ДЕЙСТВИЕ 3: ПОИСК ПОТЕРЯННОЙ ЦЕЛИ
 // ============================================================================
 struct(BAEater_Search) base(BABase)
-    def(requiredAgentFields) ["visibleTarget","lastSeenTargetTime","lastSeenTargetPos"]; // требуется память о цели
+    def(requiredAgentFields) ["visibleTarget","lastSeenTargetTime","lastSeenTargetPos"];
+    def(baseScore) 50;
     
     // Локальные данные действия
     def(searchTarget) [0,0,0];
     def(searchStartTime) 0;
+    def(searchCenterReached) false;
+    def(searchAttempts) 0;
+    def(searchWaitStart) 0;
+    def(isSearchWaiting) false;
     
-    def_ret(getScore) {
-        params ["_agent","_mob"];
+    // КОНТЕКСТ: можем искать?
+    def_ret(isAvailable) {
+        params ["_agent"];
         
-        // Проверяем что цель потеряна НЕДАВНО
+        // Цель потеряна недавно?
         private _lastSeenTime = _agent getv(lastSeenTargetTime);
-        if (_lastSeenTime == 0) exitWith {0}; // никогда не видели
+        if (_lastSeenTime == 0) exitWith {false};
         
         private _timeSinceLost = tickTime - _lastSeenTime;
-        if (_timeSinceLost > 30) exitWith {0}; // слишком давно (30 сек)
+        if (_timeSinceLost > 30) exitWith {false};
         
-        // Текущая цель не видна
+        // Цель не видна сейчас?
         private _target = _agent getv(visibleTarget);
-        if (!isNullReference(_target)) exitWith {0}; // цель видна - не ищем
+        isNullReference(_target)
+    }
+    
+    // ПОЛЕЗНОСТЬ: насколько важен поиск?
+    def_ret(getScore) {
+        params ["_agent"];
         
-        // БАЗА: среднее действие (50)
-        private _baseValue = 50;
+        private _lastSeenTime = _agent getv(lastSeenTargetTime);
+        private _timeSinceLost = tickTime - _lastSeenTime;
         
-        // МОДИФИКАТОР: Свежесть следа (чем недавнее, тем важнее)
-        // 0сек→+10, 30сек→0
-        private _freshnessBonus = (30 - _timeSinceLost) / 30 * 10; // 0-10
-        
-        // ИТОГО: 50 + 0-10 = 50-60
-        _baseValue + _freshnessBonus
+        // Свежесть следа: 0сек→10, 30сек→0
+        (30 - _timeSinceLost) / 30 * 10
     }
     
     def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        
+        // Переключаемся на ходьбу для сканирования
+        [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+        
         // Идем к последней известной позиции
         private _lastPos = _agent getv(lastSeenTargetPos);
         self setv(searchTarget,_lastPos);
         self setv(searchStartTime,tickTime);
+        self setv(searchCenterReached,false);
+        self setv(searchAttempts,0);
+        self setv(isSearchWaiting,false);
     }
     
     def_ret(onUpdate) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        FHEADER;
+        
+        private _mob = _agent getv(mob);
         
         // Если нашли цель - успех
         private _target = _agent getv(visibleTarget);
         if (!isNullReference(_target)) exitWith {UPDATE_STATE_COMPLETED};
         
-        // Проверяем таймаут поиска (10 секунд)
+        // Проверяем таймаут поиска (20 секунд)
         private _searchTime = tickTime - (self getv(searchStartTime));
-        if (_searchTime > 10) exitWith {UPDATE_STATE_FAILED};
+        if (_searchTime > 20) exitWith {UPDATE_STATE_FAILED};
         
         private _searchPos = self getv(searchTarget);
         private _actor = _agent getv(actor);
+        private _lastSeenPos = _agent getv(lastSeenTargetPos);
         
-        // Двигаемся к точке
-        if !(_agent getv(ismoving)) then {
-            private _success = [_mob,_searchPos] call ai_planMove;
-            if (!_success) exitWith {UPDATE_STATE_FAILED};
+        // Если еще не достигли центра поиска
+        if !(self getv(searchCenterReached)) then {
+            // Двигаемся к последней известной точке
+            if !(_agent callv(hasPath)) then {
+                private _success = [_mob,_searchPos] call ai_planMove;
+                if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+            };
+            
+            // Достигли центра - начинаем патрулирование
+            if (_agent callv(isPathReached)) then {
+                self setv(searchCenterReached,true);
+            };
+        } else {
+            // Патрулируем в области последнего обнаружения
+            
+            // Проверяем в режиме паузы ли мы
+            if (self getv(isSearchWaiting)) then {
+                private _elapsed = tickTime - (self getv(searchWaitStart));
+                
+                // Пауза 2-3 секунды для "осмотра"
+                if (_elapsed >= rand(2,3)) then {
+                    self setv(isSearchWaiting,false);
+                };
+            } else {
+                // Режим движения к точке
+                if !(_agent callv(hasPath)) then {
+                    private _attempts = self getv(searchAttempts);
+                    
+                    // Ограничиваем количество попыток (3-4 точки)
+                    if (_attempts >= 3) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                    
+                    // Ищем случайную точку вокруг центра поиска (радиус 5-15м)
+                    private _newSearchPos = [_mob, _lastSeenPos, 15, 5, true] call ai_findNearestValidPosition;
+                    
+                    if (_newSearchPos isEqualTo []) then {
+                        // Нет валидных точек - fallback
+                        _newSearchPos = [
+                            (_lastSeenPos select 0) + (rand(-10,10)),
+                            (_lastSeenPos select 1) + (rand(-10,10)),
+                            (_lastSeenPos select 2)
+                        ];
+                    };
+                    
+                    self setv(searchTarget,_newSearchPos);
+                    self setv(searchAttempts,_attempts + 1);
+                    
+                    private _success = [_mob,_newSearchPos] call ai_planMove;
+                    if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                };
+                
+                // Проверяем достигли ли точки поиска
+                if (_agent callv(isPathReached)) then {
+                    self setv(searchWaitStart,tickTime);
+                    self setv(isSearchWaiting,true);
+                };
+            };
         };
-        
-        // Достигли точки - провал (не нашли)
-        if ((_searchPos distance _actor) < 2) exitWith {UPDATE_STATE_FAILED};
         
         UPDATE_STATE_CONTINUE
     }
     
     def(onCompleted) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        
         self setv(searchTarget,vec3(0,0,0));
+        self setv(searchCenterReached,false);
+        self setv(searchAttempts,0);
+        self setv(isSearchWaiting,false);
+        // Возвращаем бег если цель найдена
+        [_mob,SPEED_MODE_RUN] call ai_setSpeed;
     }
     
     def(onFailed) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
         self setv(searchTarget,vec3(0,0,0));
+        self setv(searchCenterReached,false);
+        self setv(searchAttempts,0);
+        self setv(isSearchWaiting,false);
         // Сбрасываем след в агенте
         _agent setv(lastSeenTargetTime,0);
+        // Скорость вернётся к ходьбе через updateSensors когда след остынет
     }
 endstruct
 
@@ -233,33 +372,49 @@ endstruct
 // ДЕЙСТВИЕ 4: ОТСТУПЛЕНИЕ ДЛЯ ВОССТАНОВЛЕНИЯ СТАМИНЫ
 // ============================================================================
 struct(BAEater_Retreat) base(BABase)
-    def(requiredAgentFields) ["visibleTarget"]; // требуется для определения направления отступления
+    def(requiredAgentFields) ["visibleTarget"];
+    def(baseScore) 90;
     
     // Локальные данные действия
     def(retreatTarget) [0,0,0];
     def(retreatStartTime) 0;
+    def(isResting) false;
     
+    // КОНТЕКСТ: нужно отступать?
+    def_ret(isAvailable) {
+        params ["_agent"];
+        
+        // Если уже отдыхаем - продолжаем
+        if (self getv(isResting)) exitWith {true};
+        
+        // Критически низкая стамина?
+        private _staminaPercent = _agent callv(getStaminaPercent);
+        (_staminaPercent < 15)
+    }
+    
+    // ПОЛЕЗНОСТЬ: насколько срочно отступать?
     def_ret(getScore) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         
-        private _stamina = getVar(_mob,stamina);
-        
-        // Активируется только при низкой стамине
-        if (_stamina > 25) exitWith {0};
-        
-        // БАЗА: критическое действие (90)
-        private _baseValue = 90;
-        
-        // МОДИФИКАТОР: Чем ниже стамина, тем важнее
-        // 25%→90, 0%→115
-        private _urgencyBonus = (25 - _stamina) / 25 * 25; // 0-25
-        
-        // ИТОГО: 90 + 0-25 = 90-115
-        _baseValue + _urgencyBonus
+        // Если отдыхаем - держим высокий приоритет
+        if (self getv(isResting)) then {
+            private _staminaPercent = _agent callv(getStaminaPercent);
+            if (_staminaPercent >= 80) exitWith {0}; // восстановились
+            10 // высокий приоритет
+        } else {
+            // Чем ниже стамина, тем важнее: 15%→0, 0%→25
+            private _staminaPercent = _agent callv(getStaminaPercent);
+            (15 - _staminaPercent) / 15 * 25
+        };
     }
     
     def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        
+        // Переключаемся на медленную ходьбу для экономии стамины
+        [_mob,SPEED_MODE_WALK] call ai_setSpeed;
         
         // Ищем точку отступления
         private _target = _agent getv(visibleTarget);
@@ -285,44 +440,74 @@ struct(BAEater_Retreat) base(BABase)
         
         self setv(retreatTarget,_retreatPos);
         self setv(retreatStartTime,tickTime);
+        self setv(isResting,false);
     }
     
     def_ret(onUpdate) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
         
         // Проверяем восстановилась ли стамина
-        private _stamina = getVar(_mob,stamina);
-        if (_stamina > 50) exitWith {UPDATE_STATE_COMPLETED}; // восстановились
-        
-        // Таймаут (15 секунд)
-        private _retreatTime = tickTime - (self getv(retreatStartTime));
-        if (_retreatTime > 15) exitWith {UPDATE_STATE_COMPLETED};
+        if (_agent callv(getStaminaPercent) >= 80) exitWith {UPDATE_STATE_COMPLETED};
         
         private _retreatPos = self getv(retreatTarget);
         private _actor = _agent getv(actor);
         
-        // Двигаемся к точке отступления
-        if !(_agent getv(ismoving)) then {
-            private _success = [_mob,_retreatPos] call ai_planMove;
-            if (!_success) exitWith {UPDATE_STATE_FAILED};
+        // Проверяем в режиме отдыха ли мы
+        if (self getv(isResting)) then {
+            // Сидим и ждём восстановления стамины
+            UPDATE_STATE_CONTINUE
+        } else {
+            // Режим движения к точке отступления
+            
+            // Двигаемся к точке отступления
+            if !(_agent callv(hasPath)) then {
+                private _success = [_mob,_retreatPos] call ai_planMove;
+                if (!_success) exitWith {UPDATE_STATE_FAILED};
+            };
+            
+            // Достигли точки - присаживаемся для отдыха
+            if (_agent callv(isPathReached)) then {
+                // Выключаем комбат чтобы можно было присесть
+                if (getVar(_mob,isCombatModeEnable)) then {
+                    callFuncParams(_mob,setCombatMode,false);
+                };
+                [_mob,STANCE_MIDDLE] call ai_setStance; // присаживаемся
+                self setv(isResting,true);
+            };
+            
+            UPDATE_STATE_CONTINUE
         };
-        
-        // Достигли точки - просто ждем восстановления
-        if (_actor distance _retreatPos < 3) then {
-            [_mob,true] call ai_setStop;
-        };
-        
-        UPDATE_STATE_CONTINUE
     }
     
     def(onCompleted) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        
         self setv(retreatTarget,vec3(0,0,0));
+        self setv(isResting,false);
+        // Встаём
+        [_mob,STANCE_UP] call ai_setStance;
+        // Включаем комбат обратно
+        if (!getVar(_mob,isCombatModeEnable)) then {
+            callFuncParams(_mob,setCombatMode,true);
+        };
+        // Возвращаем бег если восстановились
+        [_mob,SPEED_MODE_RUN] call ai_setSpeed;
     }
     
     def(onFailed) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        
         self setv(retreatTarget,vec3(0,0,0));
+        self setv(isResting,false);
+        // Встаём
+        [_mob,STANCE_UP] call ai_setStance;
+        // Скорость вернётся через updateSensors в зависимости от наличия цели
     }
 endstruct
 
@@ -330,62 +515,119 @@ endstruct
 // ДЕЙСТВИЕ 5: ПАТРУЛИРОВАНИЕ (HPA* граф)
 // ============================================================================
 struct(BAEater_Patrol) base(BABase)
-    def(requiredAgentFields) []; // не требует дополнительных полей
+    def(requiredAgentFields) [];
+    def(baseScore) 10;
     
     // Локальные данные действия
     def(patrolTarget) [];
+    def(waitStartTime) 0;
+    def(waitDuration) 0;
+    def(isWaiting) false;
+    def(movePlanned) false;
     
+    // Параметры патрулирования
+	def(_minWaitTime) 4;
+	def(_maxWaitTime) 8;
+	def(_minPatrolDist) 5;
+	def(_maxPatrolDist) 20;
+
+    // КОНТЕКСТ: можем патрулировать?
+    def_ret(isAvailable) {
+        params ["_agent"];
+        true // всегда доступно (фоновое действие)
+    }
+    
+    // ПОЛЕЗНОСТЬ: низкий приоритет
     def_ret(getScore) {
-        params ["_agent","_mob"];
-        10 // фоновое действие
+        params ["_agent"];
+        0 // просто baseScore
     }
     
     def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         
-        // Ищем ближайшую валидную точку в радиусе 40 метров для патрулирования
-        private _patrolPos = [_mob, [], 40,10] call ai_findNearestValidPosition;
+        private _mob = _agent getv(mob);
         
-        if (_patrolPos isEqualTo []) then {
+        // Ищем СЛУЧАЙНУЮ валидную точку для патрулирования  
+        private _patrolPos = [_mob, [], self getv(_maxPatrolDist), self getv(_minPatrolDist), true] call ai_findNearestValidPosition;
+        
+        if equals(_patrolPos,[]) then {
             // Fallback - случайная точка рядом
             private _actor = _agent getv(actor);
-            private _pos = getPosATL _actor;
+            private _pos = getPosASL _actor;
             _patrolPos = [
-                (_pos select 0) + (random 20 - 10),
-                (_pos select 1) + (random 20 - 10),
-                0
+                (_pos select 0) + (rand(-10,10)),
+                (_pos select 1) + (rand(-10,10)),
+                (_pos select 2)
             ];
         };
         
         self setv(patrolTarget, _patrolPos);
+        self setv(isWaiting, false);
     }
     
     def_ret(onUpdate) {
-        params ["_agent","_mob"];
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
         private _actor = _agent getv(actor);
         private _targetPos = self getv(patrolTarget);
-        if (_targetPos isEqualTo []) exitWith {UPDATE_STATE_FAILED};
+        if equals(_targetPos,[]) exitWith {UPDATE_STATE_FAILED};
         
-        // планируем движение если еще не движемся
-        if !(_agent getv(ismoving)) then {
-            private _success = [_mob,_targetPos] call ai_planMove;
-            if (!_success) exitWith {UPDATE_STATE_FAILED};
+        // Проверяем в режиме ожидания ли мы
+        if (self getv(isWaiting)) exitWith {
+            // Ждем на месте
+			private _return = UPDATE_STATE_CONTINUE;
+            private _elapsed = tickTime - (self getv(waitStartTime));
+            if (_elapsed >= (self getv(waitDuration))) then {
+                // Закончили ждать - ищем новую точку
+                private _newPos = [_mob, [], self getv(_maxPatrolDist), self getv(_minPatrolDist),true] call ai_findNearestValidPosition;
+                if equals(_newPos,[]) exitWith {_return = UPDATE_STATE_FAILED};
+                
+                self setv(patrolTarget, _newPos);
+                self setv(isWaiting, false);
+            };
+            
+            _return
         };
-        
-        // проверяем достигли ли цели
-        if (_actor distance2D _targetPos < 2) exitWith {UPDATE_STATE_COMPLETED};
-        
-        UPDATE_STATE_CONTINUE
+
+        // Режим движения
+		private _return = UPDATE_STATE_CONTINUE;
+		// планируем движение если еще не движемся
+		if !(self getv(movePlanned)) then {
+			private _success = [_mob,_targetPos,_agent getv(lastvalidpos)] call ai_planMove;
+			if (!_success) exitWith {_return = UPDATE_STATE_FAILED};
+			self setv(movePlanned,true);
+		};
+		if (_return == UPDATE_STATE_FAILED) exitWith {_return};
+		
+		// проверяем достигли ли цели
+		if (_agent callv(isPathReached)) then {
+			// Достигли точки - останавливаемся и начинаем ждать			
+			// Случайная пауза от 3 до 8 секунд
+			private _waitTime = rand(self getv(_minWaitTime),self getv(_maxWaitTime));
+			self setv(waitStartTime, tickTime);
+			self setv(waitDuration, _waitTime);
+			self setv(isWaiting, true);
+			self setv(movePlanned,false);
+			
+		};
+		
+		UPDATE_STATE_CONTINUE
     }
     
     def(onCompleted) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         self setv(patrolTarget,[]);
+        self setv(isWaiting, false);
+        self setv(movePlanned, false);
     }
     
     def(onFailed) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         self setv(patrolTarget,[]);
+        self setv(isWaiting, false);
+        self setv(movePlanned, false);
     }
 endstruct
 

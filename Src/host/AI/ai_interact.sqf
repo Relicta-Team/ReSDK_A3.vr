@@ -19,15 +19,15 @@
 ai_moveTo = {
 	params ["_mob","_pos"];
 	private _actor = toActor(_mob);
-	[_mob,false] call ai_setStop;
+	[_mob,false] call ai_internal_setStop;
 	_actor setDestination [_pos,"LEADER DIRECT",true];
 };
 
 ai_planMove = {
-	params ["_mob","_destPos"];
+	params ["_mob","_destPos",["_srcPosIn",null]];
 	FHEADER;
 	private _body = toActor(_mob);
-	private _srcPos = getposasl _body;
+	private _srcPos = ifcheck(isNullVar(_srcPosIn),getposasl _body,_srcPosIn);
 	if equalTypes(_destPos,nullPtr) then {
 		_destPos = atltoasl callFunc(_destPos,getPos);
 	};
@@ -117,8 +117,13 @@ ai_planMove = {
 	_agent setv(curpath,_path);
 	_agent setv(targetidx,0);
 	_agent setv(ismoving,true);
+	private _pathTask = refcreate(false);
+	_agent setv(pathTask,_pathTask);
+	_agent setv(lastPathTask,_pathTask);
 
-	[_mob,false] call ai_setStop;
+	_agent setv(lastPointSetup,tickTime);
+
+	[_mob,false] call ai_internal_setStop;
 
 	true
 };
@@ -148,20 +153,30 @@ ai_handleMove = {
 	if (_deviation > _maxDeviation) then {
 		// Небольшое смещение вверх чтобы не застрять в геометрии
 		_closestPoint set [2, (_closestPoint select 2) + 0.01];
-		[_mob,true] call ai_setStop;
+		[_mob,true] call ai_internal_setStop;
 		_body setPosASL _closestPoint;
-		[_mob,false] call ai_setStop;
+		[_mob,false] call ai_internal_setStop;
 		
 		["PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
 	};
 
-	if (((getposasl _body) distance _targetPos) < 0.6) then {
+	//fix nonmoving bug
+	if (
+		(speed _body == 0)
+		&& {((_agent getv(lastPointSetup)) + 1) < tickTime}
+	) then {
+		["nonmoving bug detected, teleporting to targetpos"] call ai_log;
+		_body setPosASL _targetPos;
+	};
+
+	if (((getposasl _body) distance _targetPos) <= 0.6) then {
 		INC(_curidx);
+		_agent setv(lastPointSetup,tickTime);
 		_agent setv(targetidx,_curidx);
 		//конец пути или переход к следующей точке
 		if (_curidx >= count (_agent getv(curpath))) then {
-			_agent setv(ismoving,false);
-			[_mob,true] call ai_setStop;
+			[_mob] call ai_stopMove;
+			refset(_agent getv(_lastPathTask),true); //последний путь был достигнут
 			#ifdef AI_DEBUG_TRACEPATH
 			_agent set ["nextPlanTime",tickTime + 3];
 			#endif
@@ -207,8 +222,8 @@ ai_getClosestPointOnSegment = {
 	_closestPoint
 };
 
-
-ai_setStop = {
+//внутренняя функция установки остановки сущности
+ai_internal_setStop = {
 	params ["_mob","_stop"];
 	private _actor = toActor(_mob);
 	_actor stop _stop;
@@ -217,10 +232,24 @@ ai_setStop = {
 //высокоуровневая функция остановки сущности
 ai_stopMove = {
 	params ["_mob"];
+	private _restoreSpeed = false;
+	private _speedMode = callFunc(_mob,getSpeedMode);
 	private _actor = toActor(_mob);
+	if (_speedMode >= SPEED_MODE_RUN) then {
+		private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
+		private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
+		private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);
+		private _stances = ["PRONE","CROUCH","STAND"];
+		private _idxStance = _stances find (stance _actor);
+		if (_idxStance == -1) then {_idxStance = 0};
+		_actor switchmove (_curAnims select _idxStance);
+	};
 	_actor stop true;
 	private _agent = getVar(_mob,__aiagent);
 	_agent setv(ismoving,false);
+	_agent setv(pathTask,null);
+
+	_agent setv(lastvalidpos,getposasl _actor);
 };
 
 // ============================================================================
@@ -280,35 +309,34 @@ ai_retreatFrom = {
 };
 
 /*
-	Найти ближайшую валидную позицию для движения
+	Найти валидную позицию для движения (ближайшую или случайную)
 	
 	Валидная позиция - это узел навигационного графа, который имеет соседей (связан с другими узлами)
 	
 	Параметры:
-		_mob - моб для которого ищем позицию (используется только для логирования)
+		_mob - моб для которого ищем позицию
 		_centerPos - центральная позиция поиска [x,y,z] (опционально, по умолчанию позиция моба)
 		_maxDistance - максимальная дистанция поиска в метрах (по умолчанию 30)
-		_minDistance - минимальная дистанция от центра (по умолчанию 3, чтобы не выбирать точку на которой стоит моб)
+		_minDistance - минимальная дистанция от центра (по умолчанию 5)
+		_selectRandom - выбрать случайную точку вместо ближайшей (по умолчанию false)
 	
 	Возвращает:
 		Позицию [x,y,z] или [] если не найдено
 	
 	Примеры:
-		// Найти валидную точку рядом с мобом (не ближе 3м)
+		// Найти ближайшую валидную точку
 		private _pos = [_mob] call ai_findNearestValidPosition;
-		if !(_pos isEqualTo []) then {
-			[_mob, _pos] call ai_planMove;
-		};
 		
-		// Найти валидную точку в радиусе 50м, не ближе 5м
-		private _pos = [_mob, [], 50, 5] call ai_findNearestValidPosition;
+		// Найти СЛУЧАЙНУЮ точку в радиусе 10-50м (для патрулирования)
+		private _pos = [_mob, [], 50, 10, true] call ai_findNearestValidPosition;
 */
 ai_findNearestValidPosition = {
 	params [
 		"_mob",
 		["_centerPos",[]],
 		["_maxDistance",30],
-		["_minDistance",5]
+		["_minDistance",5],
+		["_selectRandom",false]
 	];
 	FHEADER;
 	
@@ -370,34 +398,49 @@ ai_findNearestValidPosition = {
 		RETURN([]);
 	};
 	
-	// 5. Ищем ближайший связанный узел в пределах maxDistance, но не ближе minDistance
-	private _bestNode = -1;
-	private _bestDist = _maxDistance + 1; // начинаем с дистанции больше максимальной
-	
-	{
-		private _nodeId = _x;
-		private _nodeData = ai_nav_nodes get _nodeId;
-		private _nodePos = _nodeData get "pos";
-		private _dist = _centerPos distance _nodePos;
+	// 5. Выбираем узел (случайный или ближайший)
+	if (_selectRandom) then {
+		// СЛУЧАЙНЫЙ выбор из всех валидных узлов
+		private _validNodes = [];
 		
-		// Проверяем что узел в пределах [minDistance, maxDistance] и ближе предыдущих
-		if (_dist >= _minDistance && _dist <= _maxDistance && _dist < _bestDist) then {
-			_bestDist = _dist;
-			_bestNode = _nodeId;
-		};
-	} forEach _connectedNodes;
-	
-	// Не найден узел в пределах дистанции
-	if (_bestNode == -1) exitWith {
-		["No connected nodes found within %1-%2m", _minDistance, _maxDistance] call ai_log;
-		RETURN([]);
+		{
+			private _nodeId = _x;
+			private _nodeData = ai_nav_nodes get _nodeId;
+			private _nodePos = _nodeData get "pos";
+			private _dist = _centerPos distance _nodePos;
+			
+			if (_dist >= _minDistance && _dist <= _maxDistance) then {
+				_validNodes pushBack _nodePos;
+			};
+		} forEach _connectedNodes;
+		
+		if (count _validNodes == 0) exitWith {RETURN([])};
+		
+		RETURN(selectRandom _validNodes);
+	} else {
+		// БЛИЖАЙШИЙ выбор
+		private _bestNode = -1;
+		private _bestDist = _maxDistance + 1;
+		
+		{
+			private _nodeId = _x;
+			private _nodeData = ai_nav_nodes get _nodeId;
+			private _nodePos = _nodeData get "pos";
+			private _dist = _centerPos distance _nodePos;
+			
+			if (_dist >= _minDistance && _dist <= _maxDistance && _dist < _bestDist) then {
+				_bestDist = _dist;
+				_bestNode = _nodeId;
+			};
+		} forEach _connectedNodes;
+		
+		if (_bestNode == -1) exitWith {RETURN([])};
+		
+		private _targetNodeData = ai_nav_nodes get _bestNode;
+		private _targetPos = _targetNodeData get "pos";
+		
+		RETURN(_targetPos);
 	};
-	
-	// 6. Получаем и возвращаем позицию лучшего узла
-	private _targetNodeData = ai_nav_nodes get _bestNode;
-	private _targetPos = _targetNodeData get "pos";
-	
-	RETURN(_targetPos);
 };
 
 // константа режимов движения сущности
@@ -436,7 +479,7 @@ ai_internal_stances_names = createHashMapFromArray [
 
 ai_setStance = {
 	params ["_mob","_stance"];
-	if not_equals(_stance,STANCE_DOWN) exitWith {}; //найти способ заставить моба лежать не вставая
+	if equals(_stance,STANCE_DOWN) exitWith {}; //найти способ заставить моба лежать не вставая
 	private _actor = toActor(_mob);
 	_actor playActionNow (ai_internal_stances_names get _stance);
 };

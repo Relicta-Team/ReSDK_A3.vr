@@ -57,6 +57,9 @@ noe_registerObject = {
 			callFunc(_refObj,onUpdatePosition);
 		};
 	};
+
+	//request update region
+	[getposasl _vis] call ai_nav_requestUpdateRegion;
 };
 
 //выводим регистрацию объекта
@@ -86,6 +89,9 @@ noe_unregisterObject = {
 	if (_deleteVisual) then {
 		
 		if isNullVar(_vis) exitWith {}; //already removed
+
+		//request update region
+		[getposasl _vis] call ai_nav_requestUpdateRegion;
 
 		if !isNullObject(_vis getVariable vec2("srv_ngo_geom",objNull)) then {
 			deleteVehicle (_vis getVariable "srv_ngo_geom"); //dispose ngo obj
@@ -355,6 +361,9 @@ noe_replicateObject = {
 			{
 				rpcSendToClient(getVar(_x,id),"onupdob",_packet);
 			} foreach chunk_getOwners(_chunkObject);
+
+			//request update region
+			[getposasl _obj] call ai_nav_requestUpdateRegion;
 		};
 
 	};
@@ -420,6 +429,9 @@ noe_replicateTransform = {
 			{
 				rpcSendToClient(getVar(_x,id),"onupdtr",_packet);
 			} foreach chunk_getOwners(_chunkObject);
+
+			//request update region
+			[getposasl _obj] call ai_nav_requestUpdateRegion;
 		};
 
 	};

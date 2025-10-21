@@ -34,13 +34,16 @@ ai_brain_update = {
 
 	// Обновление сенсоров
 	if (tickTime >= (_agent getv(nextSensorUpdate))) then {
-		_agent callp(updateSensors,_mob);
+		_agent callv(updateSensors);
 		private _sensorDelay = _agent getv(sensorUpdateDelay);
 		_agent setv(nextSensorUpdate,tickTime + _sensorDelay);
 	};
 
 	// Обновление действий
 	if (tickTime >= (_agent getv(nextActionUpdate))) then {
+		// обновляем контекстные данные
+		_agent callv(updateContext);
+
 		private _updateDelay = _agent getv(updateDelay);
 		_agent setv(nextActionUpdate,tickTime + _updateDelay);
 
@@ -82,18 +85,18 @@ ai_brain_update = {
 		if (!isNullVar(_currentAction)) then {
 			private _state = _currentAction getv(state);
 			if (_state == "running") then {
-				private _result = _currentAction callp(onUpdate,_agent arg _mob);
+				private _result = _currentAction callp(onUpdate,_agent);
 				
 				// UPDATE_STATE_COMPLETED (1) - действие успешно завершено
 				if (_result == UPDATE_STATE_COMPLETED) then {
 					_currentAction setv(state,"completed");
-					_currentAction callp(onCompleted,_agent arg _mob);
+					_currentAction callp(onCompleted,_agent);
 				};
 				
 				// UPDATE_STATE_FAILED (-1) - действие провалено
 				if (_result == UPDATE_STATE_FAILED) then {
 					_currentAction setv(state,"failed");
-					_currentAction callp(onFailed,_agent arg _mob);
+					_currentAction callp(onFailed,_agent);
 				};
 				
 				// UPDATE_STATE_CONTINUE (0) - продолжаем выполнение (ничего не делаем)
@@ -117,8 +120,11 @@ ai_brain_selectBestAction = {
 
 	{
 		private _action = _x;
+		
+		if !(_action callp(isAvailable,_agent)) then {continue};
+
 		private _baseScore = _action getv(baseScore);
-		private _modifier = _action callp(getScore,_agent arg _mob);
+		private _modifier = _action callp(getScore,_agent);
 		private _totalScore = _baseScore + _modifier;
 
 		_action setv(_lastScore,_totalScore);
@@ -156,6 +162,6 @@ ai_brain_switchAction = {
 	// Запускаем новое действие
 	if (!isNullVar(_newAction)) then {
 		_newAction setv(state,"running");
-		_newAction callp(onStart,_agent arg _mob);
+		_newAction callp(onStart,_agent);
 	};
 };

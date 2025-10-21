@@ -13,25 +13,33 @@
 */
 struct(BAWander_test) base(BABase)
 	def(baseScore) 10;
-	def(requiredAgentFields) ["visibleTarget"]; // требуется для проверки наличия цели
+	def(requiredAgentFields) ["visibleTarget"];
 	
 	// Локальные данные действия
-	def(wanderTarget) []; // целевая точка для блуждания
+	def(wanderTarget) [];
 
+	// КОНТЕКСТ: можем бродить?
+	def_ret(isAvailable) {
+		params ["_agent"];
+		isNullReference(_agent getv(visibleTarget)) // нет цели
+	}
+
+	// ПОЛЕЗНОСТЬ: высокий приоритет если нет цели
 	def_ret(getScore) {
-		params ["_agent","_mob"];
-		if isNullReference(_agent getv(visibleTarget)) exitWith {150};
-		0 // просто базовый score
+		params ["_agent"];
+		140 // высокий бонус к baseScore (итого 150)
 	}
 
 	def(onStart) {
-        params ["_agent","_mob"];
+        params ["_agent"];
         
-        // Ищем ближайшую валидную точку в радиусе 30 метров
+        private _mob = _agent getv(mob);
+        
+        // Ищем ближайшую валидную точку
         private _wanderPos = [_mob, [], 30] call ai_findNearestValidPosition;
         
         if (_wanderPos isEqualTo []) then {
-            // Fallback - случайная точка рядом
+            // Fallback - случайная точка
             private _actor = _agent getv(actor);
             private _pos = getPosATL _actor;
             _wanderPos = [
@@ -45,7 +53,9 @@ struct(BAWander_test) base(BABase)
     }
 
 	def_ret(onUpdate) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		private _actor = _agent getv(actor);
 		private _targetPos = self getv(wanderTarget);
 		if (_targetPos isEqualTo []) exitWith {UPDATE_STATE_FAILED};
@@ -63,12 +73,12 @@ struct(BAWander_test) base(BABase)
 	}
 
 	def(onCompleted) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		self setv(wanderTarget,[]);
 	}
 
 	def(onFailed) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		self setv(wanderTarget,[]);
 	}
 endstruct
@@ -79,28 +89,42 @@ endstruct
 */
 struct(BAChasePlayer_test) base(BABase)
 	def(baseScore) 50;
-	def(requiredAgentFields) ["visibleTarget"]; // требуется для преследования цели
+	def(requiredAgentFields) ["visibleTarget"];
 
-	def_ret(getScore) {
-		params ["_agent","_mob"];
+	// КОНТЕКСТ: можем преследовать?
+	def_ret(isAvailable) {
+		params ["_agent"];
+		
 		private _target = _agent getv(visibleTarget);
-		if (isNullReference(_target)) exitWith {0};
-
+		if (isNullReference(_target)) exitWith {false};
+		
+		private _mob = _agent getv(mob);
 		private _dist = callFuncParams(_mob,getDistanceTo,_target);
-		if (_dist > 20) exitWith {0}; // слишком далеко
-		if (_dist < 3) exitWith {0}; // слишком близко - атаковать
+		
+		// Только на средней дистанции
+		(_dist >= 3) && (_dist <= 20)
+	}
 
-		// чем ближе цель, тем выше score
+	// ПОЛЕЗНОСТЬ: чем ближе цель, тем выше приоритет
+	def_ret(getScore) {
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
+		private _target = _agent getv(visibleTarget);
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
+		
+		// 20м→0, 3м→17
 		(20 - _dist)
 	}
 
 	def(onStart) {
-		params ["_agent","_mob"];
-		// цель уже в agent через sensors
+		params ["_agent"];
 	}
 
 	def_ret(onUpdate) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		private _target = _agent getv(visibleTarget);
 		if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
 
@@ -119,32 +143,53 @@ struct(BAChasePlayer_test) base(BABase)
 	}
 
 	def(onCompleted) {
-		params ["_agent","_mob"];
-		[_mob] call ai_stopMove; //игрок сам на нас мог добежать
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
+		[_mob] call ai_stopMove;
 	}
 
 	def(onFailed) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		[_mob] call ai_stopMove;
 	}
 endstruct
 
 // Отступать от цели
 struct(BARetreat_test) base(BABase)
-	def(requiredAgentFields) ["visibleTarget"]; // требуется для проверки наличия цели
+	def(requiredAgentFields) ["visibleTarget"];
+	def(baseScore) 80;
 	
-	def_ret(getScore) {
-		params ["_agent","_mob"];
+	// КОНТЕКСТ: нужно отступать?
+	def_ret(isAvailable) {
+		params ["_agent"];
+		
 		private _target = _agent getv(visibleTarget);
-		if (isNullReference(_target)) exitWith {0};
+		if (isNullReference(_target)) exitWith {false};
+		
+		private _mob = _agent getv(mob);
 		private _dist = callFuncParams(_mob,getDistanceTo,_target);
-		if (_dist > 3 || getVar(_mob,stamina) > 30) exitWith {0}; // слишком далеко или стамина восстановлена
-
-		(30 - getVar(_mob,stamina)) * 4
+		if (_dist > 3) exitWith {false};
+		
+		// Низкая стамина?
+		private _staminaPercent = _agent callv(getStaminaPercent);
+		(_staminaPercent <= 30)
+	}
+	
+	// ПОЛЕЗНОСТЬ: чем ниже стамина, тем важнее
+	def_ret(getScore) {
+		params ["_agent"];
+		
+		private _staminaPercent = _agent callv(getStaminaPercent);
+		(30 - _staminaPercent) * 4
 	}
 
 	def(onStart) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		private _target = _agent getv(visibleTarget);
 		if (isNullReference(_target)) exitWith {};
 
@@ -158,13 +203,15 @@ struct(BARetreat_test) base(BABase)
 	}
 
 	def_ret(onUpdate) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		if (!(_agent getv(ismoving))) exitWith {UPDATE_STATE_COMPLETED};
 		UPDATE_STATE_CONTINUE
 	}
 
 	def(onCompleted) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		[_mob] call ai_stopMove;
 	};
 
@@ -175,32 +222,48 @@ endstruct
 	Активируется когда игрок очень близко
 */
 struct(BAAttackPlayer_test) base(BABase)
-	def(requiredAgentFields) ["visibleTarget"]; // требуется для атаки цели
+	def(baseScore) 60;
+	def(requiredAgentFields) ["visibleTarget"];
 	
 	// Локальные данные действия
 	def(attackStartTime) 0;
 
-	def_ret(getScore) {
-		params ["_agent","_mob"];
+	// КОНТЕКСТ: можем атаковать?
+	def_ret(isAvailable) {
+		params ["_agent"];
+		
 		private _target = _agent getv(visibleTarget);
-		if (isNullReference(_target)) exitWith {0};
-
+		if (isNullReference(_target)) exitWith {false};
+		
+		private _mob = _agent getv(mob);
 		private _dist = callFuncParams(_mob,getDistanceTo,_target);
-		if (_dist > 3) exitWith {0}; // слишком далеко
-		if (getVar(_mob,stamina) < 10) exitWith {2}; //нет стамины - приоритет низок
+		if (_dist > 3) exitWith {false};
+		
+		// Есть стамина?
+		private _staminaPercent = _agent callv(getStaminaPercent);
+		(_staminaPercent >= 10)
+	}
 
-		60 // близко - можем атаковать
+	// ПОЛЕЗНОСТЬ: всегда высокая если доступно
+	def_ret(getScore) {
+		params ["_agent"];
+		0 // просто baseScore
 	}
 
 	def(onStart) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		private _target = _agent getv(visibleTarget);
+		
 		self setv(attackStartTime,tickTime);
 		[_mob,_target] call ai_rotateTo;
 	}
 
 	def_ret(onUpdate) {
-		params ["_agent","_mob"];
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
 		private _target = _agent getv(visibleTarget);
 		if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
 
@@ -214,12 +277,104 @@ struct(BAAttackPlayer_test) base(BABase)
 	}
 
 	def(onCompleted) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		self setv(attackStartTime,0);
 	}
 
 	def(onFailed) {
-		params ["_agent","_mob"];
+		params ["_agent"];
 		self setv(attackStartTime,0);
+	}
+endstruct
+
+/*
+	Действие: Фланговая атака
+	Моб заходит с фланга для атаки цели (тактическое преимущество)
+*/
+struct(BAFlankAttack_test) base(BABase)
+	def(baseScore) 55;
+	def(requiredAgentFields) ["visibleTarget"];
+	
+	// Локальные данные действия
+	def(flankPos) [];
+	
+	// КОНТЕКСТ: можем фланговать?
+	def_ret(isAvailable) {
+		params ["_agent"];
+		
+		private _target = _agent getv(visibleTarget);
+		if (isNullReference(_target)) exitWith {false};
+		
+		private _mob = _agent getv(mob);
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
+		if (_dist < 5 || _dist > 20) exitWith {false};
+		
+		// Высокая стамина для маневра
+		private _staminaPercent = _agent callv(getStaminaPercent);
+		(_staminaPercent >= 40)
+	}
+	
+	// ПОЛЕЗНОСТЬ: чем дальше цель, тем выгоднее фланг
+	def_ret(getScore) {
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
+		private _target = _agent getv(visibleTarget);
+		private _dist = callFuncParams(_mob,getDistanceTo,_target);
+		
+		// 5м→0, 20м→20
+		((_dist - 5) / 15) * 20
+	}
+	
+	def(onStart) {
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
+		private _target = _agent getv(visibleTarget);
+		
+		// Ищем оптимальный фланг
+		private _flankPos = [_mob, _target, 6, 60, "optimal"] call ai_findFlankPosition;
+		
+		if (_flankPos isEqualTo []) exitWith {
+			// Fallback - прямой подход
+			_flankPos = atltoasl callFunc(_target,getPos);
+		};
+		
+		self setv(flankPos, _flankPos);
+		[_mob, _flankPos] call ai_planMove;
+	}
+	
+	def_ret(onUpdate) {
+		params ["_agent"];
+		
+		private _mob = _agent getv(mob);
+		private _target = _agent getv(visibleTarget);
+		if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
+		
+		private _flankPos = self getv(flankPos);
+		if (_flankPos isEqualTo []) exitWith {UPDATE_STATE_FAILED};
+		
+		private _actor = _agent getv(actor);
+		
+		// Достигли фланговой позиции
+		if (_actor distance _flankPos < 3) exitWith {UPDATE_STATE_COMPLETED};
+		
+		// Продолжаем движение
+		if !(_agent getv(ismoving)) then {
+			private _success = [_mob, _flankPos] call ai_planMove;
+			if (!_success) exitWith {UPDATE_STATE_FAILED};
+		};
+		
+		UPDATE_STATE_CONTINUE
+	}
+	
+	def(onCompleted) {
+		params ["_agent"];
+		self setv(flankPos, []);
+	}
+	
+	def(onFailed) {
+		params ["_agent"];
+		self setv(flankPos, []);
 	}
 endstruct

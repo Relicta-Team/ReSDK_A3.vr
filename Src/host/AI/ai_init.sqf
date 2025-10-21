@@ -21,6 +21,7 @@
 #include "Brain\brain_init.sqf"
 
 #include "ai_interact.sqf"
+#include "ai_util.sqf"
 
 ai_handleUpdate = -1;
 
@@ -33,18 +34,41 @@ ai_log = {
 };
 
 ai_createMob = {
-	params ["_pos",["_stats",[10,10,10,10]]];
+	params ["_pos",["_builderType","AgentBuilderEater"]];
+
+	if !struct_existType_str(_builderType) exitWith {nullPtr};
+
+	private _builder = [_builderType] call struct_alloc;
+	private _instanceType = _builder getv(instanceType);
+	private _agentType = _builder getv(agentType);
+
+	if !isImplementClass(_instanceType) exitWith {nullPtr};
+	if !struct_existType_str(_agentType) exitWith {nullPtr};
 
 	private _gMob = _pos call gm_createMob;
-	private _mob = new(Mob);
+	private _mob = instantiate(_instanceType);
 	callFuncParams(_mob,initAsActor,_gMob);
-	[_mob,8,10,8,12] call gurps_initSkills;
-	setVar(_mob,name,"Существо");
-	([GENDER_MALE] call naming_getRandomName) params ["_f_","_s_"];
-	[_mob,_f_,_s_] call naming_generateName;
 
-	smd_allInGameMobs pushBackUnique _gMob;
-	callFuncParams(_mob,setMobFace,pick faces_list_man);
+	(_builder callv(getSkills)) params [["_st",10],["_iq",10],["_dx",10],["_ht",10]];
+	[_mob,_st,_iq,_dx,_ht] call gurps_initSkills;
+	
+	private _firstName = _builder callp(getFirstName,_mob);
+	if (_firstName != "") then {
+		setVar(_mob,name,"Существо");
+		([GENDER_MALE] call naming_getRandomName) params ["_f_","_s_"];
+		[_mob,_f_,_s_] call naming_generateName;
+	} else {
+		private _secondName = _builder callp(getSecondName,_mob);
+		[_mob,_firstName,_secondName] call naming_generateName;
+	};
+
+	[_gMob,null,_mob] call cm_registerMobInGame;
+	
+	private _face = _builder callp(getFace,_mob);
+	callFuncParams(_mob,setMobFace,_face);
+
+	_builder callp(onApply,_mob);
+
 	setVar(_mob,curTargZone,TARGET_ZONE_RANDOM);
 	
 	_gMob enableAI "MOVE";
@@ -57,21 +81,22 @@ ai_createMob = {
 	
 	ai_allMobs pushBack _mob;
 
-	
-	private _mapdata = [_pos,_mob] call ai_createAgent;
-	setVar(_mob,__aiagent,_mapdata);
+	private _agent = [_pos,_mob,_agentType] call ai_createAgent;
 
 	_mob
 };
 
 ai_createAgent = {
-	params ["_pos","_mob",["_agentType","AgentZombie"]];
+	params ["_pos","_mob",["_agentType","AgentEater"]];
 	
 	// Создаем агента как структуру
 	private _agent = [_agentType] call struct_alloc;
 	
+	setVar(_mob,__aiagent,_agent);
+
 	// Инициализация системных данных
 	_agent setv(actor,toActor(_mob));
+	_agent setv(mob,_mob);
 	_agent setv(lastvalidpos,_pos);
 	_agent setv(curpath,[]);
 	_agent setv(targetidx,0);
@@ -117,7 +142,9 @@ ai_onUpdate = {
 	{
 		_r = [getposasl _x] call ai_nav_updateOrCreateRegion;
 		if (_r != "") then {
+			#ifdef EDITOR
 			["New region: " + _r,"system"] call chatprint;
+			#endif
 		};
 	} foreach smd_allInGameMobs;
 	//процессим моба
@@ -256,16 +283,33 @@ ai_debug_internal_brainiInfo = {
 			
 			_t pushBack format["Nearest: %1 (%2m)",getVar(_nearestMob,name),(_nearestDist toFixed 1)];
 			_t pushBack format["Agent: %1",_agent getv(name)];
+			_t pushback format["stopped: %1",stopped(_agent getv(actor))];
+			_t pushback format["moving: %1",(_agent getv(ismoving))];
 			
 			// Текущее действие
 			private _currentAction = _agent getv(currentAction);
 			if (!isNullVar(_currentAction)) then {
 				_t pushBack format["Current: %1",str _currentAction];
+				{
+					[_x,_y] params ["_name","_value"];
+					if not_equalTypes(_value,{}) then {
+						if (_name select [0,1] == "#") exitWith {};
+						if (_name in [
+							"__dflg__",
+							"name",
+							"state",
+							"requiredAgentFields",
+							"_lastScore",
+							"baseScore"
+						]) exitWith {};
+						_t pushback format["%1: %2",_name,_value];
+					};
+				} foreach (_currentAction);
 			} else {
 				_t pushBack "Current: none";
 			};
-			
-			_t pushBack "";
+
+			_t pushback "";
 			_t pushBack "--- Actions ---";
 			
 			// Все возможные действия и их стоимости
@@ -303,6 +347,19 @@ ai_debug_internal_brainiInfo = {
 ai_debug_showBrainInfo = {
 	params ["_mode"];
 	(ai_debug_internal_brainInfoWidget select 0) ctrlShow _mode;
+};
+
+
+//! fix score on recompile behaviors
+ai_reloadBehaviors = {
+	["src\host\AI\Brain\brain_struct.sqf"] call struct_reinitialize;
+	{
+		private _mob = _x;
+		[_mob,SPEED_MODE_WALK] call ai_setSpeed;
+		private _mapdata = [callFunc(_mob,getPos),_mob] call ai_createAgent;
+		setVar(_mob,__aiagent,_mapdata);
+	} foreach ai_allMobs;
+	
 };
 
 #endif

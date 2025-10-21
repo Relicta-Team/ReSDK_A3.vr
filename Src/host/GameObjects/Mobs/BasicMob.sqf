@@ -2249,4 +2249,9 @@ region(previef functionality)
 
 		[this,false] call csys_onCraftEndPreview;
 	};
+
+region(ai system)
+	var(__aiagent,null);
+	getter_func(isAIAgent,!isNull(getSelf(__aiagent)));
+
 endclass
