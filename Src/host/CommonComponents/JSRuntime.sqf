@@ -66,6 +66,21 @@ function jsr_test() {
 
 // get display object for runtime
 jsr_getRuntimeDisplay = {
+	if (isServer && isMultiplayer) exitWith {
+		if (jsr_isRuntimeFirstRun) then {
+			private _display = uinamespace getvariable ["gui",DisplayNull];
+			if !isNullReference(_display) then {
+				//cleanup display
+				{
+					ctrlDelete _x;
+				} foreach (allControls _display);
+			} else {
+				//create display
+				("GUI" call bis_fnc_rsclayer) cutrsc ["GUI", "PLAIN"];
+			};
+		};
+		uinamespace getvariable ["gui",DisplayNull];
+	};
 	findDisplay ifcheck(is3DEN,JSR_DISPLAY_ID_EDITOR,JSR_DISPLAY_ID_SIMULATION);
 };
 
