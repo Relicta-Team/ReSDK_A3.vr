@@ -90,6 +90,7 @@ jsr_initRuntime = {
 
 	private _d = call jsr_getRuntimeDisplay;
 	if (isNullReference(_d)) exitWith {
+		warningformat("Game environment not found (null display): %1; current displays: %2",_runtime_name arg allDisplays);
 		setLastError("Game environment not found (null display)");
 		false
 	};
