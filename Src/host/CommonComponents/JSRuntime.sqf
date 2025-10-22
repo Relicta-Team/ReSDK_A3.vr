@@ -68,18 +68,18 @@ function jsr_test() {
 jsr_getRuntimeDisplay = {
 	if (isServer && isMultiplayer) exitWith {
 		if (jsr_isRuntimeFirstRun) then {
-			private _display = uinamespace getvariable ["gui",DisplayNull];
+			if (count allDisplays == 0) then {
+				createDialog "rscdisplayempty";
+			};
+			private _display = allDisplays select 0;
 			if !isNullReference(_display) then {
 				//cleanup display
 				{
 					ctrlDelete _x;
 				} foreach (allControls _display);
-			} else {
-				//create display
-				("GUI" call bis_fnc_rsclayer) cutrsc ["GUI", "PLAIN"];
 			};
 		};
-		uinamespace getvariable ["gui",DisplayNull];
+		allDisplays select 0;
 	};
 	findDisplay ifcheck(is3DEN,JSR_DISPLAY_ID_EDITOR,JSR_DISPLAY_ID_SIMULATION);
 };
@@ -105,7 +105,7 @@ jsr_initRuntime = {
 
 	private _d = call jsr_getRuntimeDisplay;
 	if (isNullReference(_d)) exitWith {
-		warningformat("Game environment not found (null display): %1; current displays: %2",_runtime_name arg allDisplays);
+		warningformat("Game environment not found (null display): %1",_runtime_name);
 		setLastError("Game environment not found (null display)");
 		false
 	};
