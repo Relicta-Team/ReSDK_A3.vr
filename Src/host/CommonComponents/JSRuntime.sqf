@@ -243,7 +243,7 @@ jsr_handleRuntimeSignal = {
 jsr_internal_allocateWebBrowser = {
 	params ["_d"];
 	logformat("jsr browser allocation: %1",_d);
-	private _r = _d ctrlCreate ["RscWebBrowser",-1];
+	private _r = _d ctrlCreate [missionConfigFile >> "RscWebBrowser",-1];
 	logformat("jsr browser allocated: %1",_r);
 	_r
 };
