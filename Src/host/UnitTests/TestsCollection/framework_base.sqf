@@ -74,6 +74,8 @@ TEST_F(JSRuntimeTests,FullLifecycle)
 	private _initialized = ["test_runtime"] call jsr_initRuntime;
 	ASSERT(_initialized);
 
+	logformat("JSRuntime: displays: %1; runtimes: %2",allDisplays arg jsr_runtimes);
+
 	log("JSRuntimeTests: Registering signal handler");
 	private _handle = ["test_runtime",{
 		params ["_message"];
