@@ -129,6 +129,11 @@ ms_internal_printInfo = {
 
 ms_internal_loadExtension = {
 	FHEADER;
+	
+	#ifdef SP_MODE
+	if(true) exitWith {};
+	#endif
+
 	/*
 		struct Reagent {
 			string name -> 0
@@ -232,6 +237,10 @@ ms_internal_loadExtension = {
 
 ms_canReact = {
 	params ["_ms","_reactType"];
+	
+	#ifdef SP_MODE
+	if(true) exitWith {[false,"noreaction"]};
+	#endif
 	// canReact,reaction name,temperature convert reagents
 	parseSimpleArray ((__nativecall ["canreact",[_reactType,ms_getMatterList(_ms),26 /*temperature*/,[]]]) select 0);
 };

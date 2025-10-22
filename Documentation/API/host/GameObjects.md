@@ -3241,7 +3241,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 868](../../../Src/host/GameObjects/Items/Item.sqf#L868)
+File: [host\GameObjects\Items\Item.sqf at line 870](../../../Src/host/GameObjects/Items/Item.sqf#L870)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3255,7 +3255,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1305](../../../Src/host/GameObjects/Items/Item.sqf#L1305)
+File: [host\GameObjects\Items\Item.sqf at line 1307](../../../Src/host/GameObjects/Items/Item.sqf#L1307)
 ## generateItemSize
 
 Type: function
@@ -3265,7 +3265,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 183](../../../Src/host/GameObjects/Items/Item.sqf#L183)
+File: [host\GameObjects\Items\Item.sqf at line 185](../../../Src/host/GameObjects/Items/Item.sqf#L185)
 ## generateItemInfoList
 
 Type: function
@@ -3276,7 +3276,7 @@ Description:
 - Param: _file (optional, default "unknown_file")
 - Param: _line (optional, default 0)
 
-File: [host\GameObjects\Items\Item.sqf at line 209](../../../Src/host/GameObjects/Items/Item.sqf#L209)
+File: [host\GameObjects\Items\Item.sqf at line 211](../../../Src/host/GameObjects/Items/Item.sqf#L211)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
@@ -3974,7 +3974,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 872](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L872)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 879](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L879)
 ## __data_light_slot__
 
 Type: constant
@@ -3986,7 +3986,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 982](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L982)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 989](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L989)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -4012,7 +4012,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1922](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1922)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1929](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1929)
 ## mob_static_assign_signatures
 
 Type: Variable
@@ -4024,7 +4024,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1923](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1923)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1930](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1930)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -4140,7 +4140,7 @@ Replaced value:
 ```sqf
 <img size='0.8' image='%2'/>
 ```
-File: [host\GameObjects\Mobs\Mob.sqf at line 370](../../../Src/host/GameObjects/Mobs/Mob.sqf#L370)
+File: [host\GameObjects\Mobs\Mob.sqf at line 372](../../../Src/host/GameObjects/Mobs/Mob.sqf#L372)
 # MobGhost.sqf
 
 ## hasBP(idx)

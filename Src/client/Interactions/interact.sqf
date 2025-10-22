@@ -523,6 +523,7 @@ interact_openMouseMode = {
 	call interactCombat_load;
 	call interactEmote_load;
 
+	
 };
 
 decl(void())

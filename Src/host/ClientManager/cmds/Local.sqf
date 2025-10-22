@@ -15,6 +15,8 @@ addCommandWithDescription("camswitch",ACCESS_ADMIN,"Переключает ре�
 
 addCommandWithDescription("reloadvoice",PUBLIC_COMMAND,"Перезапускает модуль голосового чата") {IS_LOCAL_COMMAND()};
 
+addCommandWithDescription("setvoipvol",PUBLIC_COMMAND,"Устанавливает громкость голосового чата") {IS_LOCAL_COMMAND()};
+
 addCommandWithDescription("grafon",ACCESS_ADMIN,"Переключает режим отображения эффектов в LightEngine") {IS_LOCAL_COMMAND()};
 
 addCommandWithDescription("ping",PUBLIC_COMMAND,"Узнать реальный пинг") {IS_LOCAL_COMMAND()};

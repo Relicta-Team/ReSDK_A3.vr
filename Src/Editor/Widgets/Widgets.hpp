@@ -52,9 +52,9 @@ wid setFade 0; \
 wid commit time \
 
 #define widgetFadeout(wid,time) __widgetFadeReset(wid,time,1)
-#define widgetFadein(wid,time) wid setFade 1; wid commit time
-#define widgetFadeNow(wid,value) wid setFade value; wid commit 0
-#define widgetSetFade(wid,val,com) wid setFade val; wid commit com
+#define widgetFadein(wid,time) (wid) setFade 1; (wid) commit time
+#define widgetFadeNow(wid,value) (wid) setFade value; (wid) commit 0
+#define widgetSetFade(wid,val,com) (wid) setFade val; (wid) commit com
 
 //other
 #define WIDGET_FULLSIZE [0,0,100,100]

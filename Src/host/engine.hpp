@@ -428,6 +428,8 @@ bool TestRange (int numberToCheck, int bottom, int top)
 #define any_of(values) ([values] call anyOf)
 #define none_of(values) ([values] call noneOf)
 
+#define generate_list(begin,end,fn_) ([begin,end,fn_] call generateList)
+
 //random helpers
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
@@ -505,6 +507,26 @@ cba_common_perFrameHandlerArray select (handle) set [1,newTime]; true})
 #define startAsyncInvoke [
 #define endAsyncInvoke ] call CBA_fnc_waitUntilAndExecute;
 
+/*
+	susspend supported fast thread
+	example:
+
+	sftBegin //[{
+		sftWait(tickTime>5); //},[...],{
+		log("after 5 sec");
+
+		sftSleep(10); //},[...],{
+		log("after 10 sec");
+	sftEnd // }]
+*/
+
+#define sftBegin [sft_processQueue__,{},[{
+
+#define sftEnd },0,tickTime]] call sft_createThread__;
+
+#define sftWait(condition_) },{_canJump = condition_},{
+
+#define sftSleep(await_) },{_canJump = tickTime >= ((await_)+_tstrt)},{
 
 //lang helpers
 

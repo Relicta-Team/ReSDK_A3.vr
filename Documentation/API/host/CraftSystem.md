@@ -407,7 +407,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 89](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L89)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 93](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L93)
 ## csys_internal_editor_lastRecipe
 
 Type: Variable
@@ -421,7 +421,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 117](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L117)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 121](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L121)
 ## csys_internal_editor_lastIngredients
 
 Type: Variable
@@ -433,7 +433,7 @@ Initial value:
 ```sqf
 null
 ```
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 118](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L118)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 122](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L122)
 ## csys_requestOpenMenu
 
 Type: function
@@ -454,7 +454,7 @@ Description: возвращает массив данных: vec2(recipeId,name 
 - Param: _src
 - Param: _onlyPreview (optional, default false)
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 45](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L45)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 49](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L49)
 ## csys_requestLoadCateg
 
 Type: function
@@ -465,7 +465,7 @@ Description: запрос загрузки новой категории
 - Param: _cat
 - Param: _isPreview (optional, default false)
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 59](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L59)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 63](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L63)
 ## csys_tryCraft
 
 Type: function
@@ -475,7 +475,7 @@ Description:
 - Param: _srcptr
 - Param: _recipeID
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 72](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L72)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 76](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L76)
 ## csys_onCraftEndPreview
 
 Type: function
@@ -485,7 +485,7 @@ Description:
 - Param: _isApply
 - Param: _tfmOpt
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 100](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L100)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 104](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L104)
 ## csys_processCraftMain
 
 Type: function
@@ -495,7 +495,7 @@ Description:
 - Param: _objectColleciton
 - Param: _recipeIdOrSystem
 
-File: [host\CraftSystem\CraftSystemProcess.sqf at line 125](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L125)
+File: [host\CraftSystem\CraftSystemProcess.sqf at line 129](../../../Src/host/CraftSystem/CraftSystemProcess.sqf#L129)
 # CraftSystem_init.sqf
 
 ## csys_map_allCraftRefs
@@ -509,7 +509,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 36](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L36)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 37](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L37)
 ## csys_map_allInteractiveCrafts
 
 Type: Variable
@@ -521,7 +521,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 38](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L38)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 39](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L39)
 ## csys_map_allSystemCrafts
 
 Type: Variable
@@ -533,7 +533,7 @@ Initial value:
 ```sqf
 createHashMap //! В будущем можно перенести хранение буферов крафтов на типы классов
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 40](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L40)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 41](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L41)
 ## csys_map_storage
 
 Type: Variable
@@ -545,7 +545,7 @@ Initial value:
 ```sqf
 createhashMap 
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 43](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L43)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 44](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L44)
 ## csys_map_systems_storage
 
 Type: Variable
@@ -557,7 +557,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 46](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L46)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 47](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L47)
 ## csys_global_counter
 
 Type: Variable
@@ -569,7 +569,7 @@ Initial value:
 ```sqf
 1
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 48](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L48)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 49](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L49)
 ## csys_cat_map_sysnames
 
 Type: Variable
@@ -581,7 +581,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 50](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L50)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 51](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L51)
 ## csys_cat_debug_allCrafts
 
 Type: Variable
@@ -595,7 +595,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 54](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L54)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 55](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L55)
 ## csys_const_map_mappingTypes
 
 Type: Variable
@@ -607,7 +607,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 126](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L126)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 127](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L127)
 ## csys_internal_lastLoadedFile
 
 Type: Variable
@@ -619,7 +619,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 133](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L133)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 134](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L134)
 ## csys_internal_configNumber
 
 Type: Variable
@@ -631,7 +631,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 134](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L134)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 135](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L135)
 ## csys_map_tokenMap
 
 Type: Variable
@@ -643,7 +643,7 @@ Initial value:
 ```sqf
 createHashMapFromArray [...
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 375](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L375)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 376](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L376)
 ## debug_compiler_csys_lastInstructions
 
 Type: Variable
@@ -657,7 +657,7 @@ Initial value:
 ```sqf
 [_code,_stack]
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 441](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L441)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 445](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L445)
 ## csys_const_regexFunc
 
 Type: Variable
@@ -669,7 +669,7 @@ Initial value:
 ```sqf
 "(\w+)\s*\(\)"
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 503](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L503)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 510](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L510)
 ## csys_const_regexField
 
 Type: Variable
@@ -681,7 +681,7 @@ Initial value:
 ```sqf
 "\w+"
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 504](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L504)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 511](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L511)
 ## csys_const_regexOP
 
 Type: Variable
@@ -693,7 +693,7 @@ Initial value:
 ```sqf
 "==|!=|<=|>=|\|\||&&|>|<"
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 505](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L505)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 512](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L512)
 ## csys_const_alllowRegex
 
 Type: Variable
@@ -705,7 +705,7 @@ Initial value:
 ```sqf
 (csys_const_regexFunc+"|"+csys_const_regexField+"|"+csys_const_regexOP)
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 506](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L506)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 513](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L513)
 ## csys_list_systemControllers
 
 Type: Variable
@@ -717,7 +717,7 @@ Initial value:
 ```sqf
 [] //SystemControllerCrafts  системы зарегистрированы здесь
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 510](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L510)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 517](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L517)
 ## csys_map_systemControllersIndexes
 
 Type: Variable
@@ -729,7 +729,7 @@ Initial value:
 ```sqf
 createhashMap //k<int>, v<SystemControllerCrafts>
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 511](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L511)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 518](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L518)
 ## csys_systemController_handleUpdate
 
 Type: Variable
@@ -741,7 +741,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [host\CraftSystem\CraftSystem_init.sqf at line 527](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L527)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 534](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L534)
 ## csys_cat_getSystemNameById
 
 Type: function
@@ -749,7 +749,7 @@ Type: function
 Description: 
 
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 51](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L51)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 52](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L52)
 ## csys_init
 
 Type: function
@@ -757,7 +757,7 @@ Type: function
 Description: 
 
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 57](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L57)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 58](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L58)
 ## csys_loadConfig
 
 Type: function
@@ -765,7 +765,7 @@ Type: function
 Description: загрузчик рецептов
 - Param: _cfgContent
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 108](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L108)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 109](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L109)
 ## csys_errorMessage
 
 Type: function
@@ -773,7 +773,7 @@ Type: function
 Description: 
 - Param: _fmt
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 136](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L136)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 137](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L137)
 ## csys_validateType
 
 Type: function
@@ -783,7 +783,7 @@ Description: TODO optimize
 - Param: _key
 - Param: _tarr
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 150](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L150)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 151](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L151)
 ## csys_internal_loadCfgSegment
 
 Type: function
@@ -791,7 +791,7 @@ Type: function
 Description: 
 - Param: _data
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 206](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L206)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 207](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L207)
 ## csys_format
 
 Type: function
@@ -800,7 +800,7 @@ Description:
 - Param: _str
 - Param: _argsmap
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 331](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L331)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 332](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L332)
 ## csys_formatSelector
 
 Type: function
@@ -808,7 +808,7 @@ Type: function
 Description: 
 - Param: _val
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 359](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L359)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 360](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L360)
 ## csys_defaultTokenCode
 
 Type: function
@@ -816,7 +816,7 @@ Type: function
 Description: 
 
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 380](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L380)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 381](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L381)
 ## csys_prepareRangedString
 
 Type: function
@@ -825,7 +825,7 @@ Description: генериурет ранжированный список на �
 - Param: _input
 - Param: _intoArray (optional, default false)
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 383](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L383)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 384](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L384)
 ## csys_internal_generateYamlExpr
 
 Type: function
@@ -833,7 +833,7 @@ Type: function
 Description: 
 - Param: _instr
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 404](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L404)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 405](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L405)
 ## csys_generateInsturctions
 
 Type: function
@@ -841,7 +841,7 @@ Type: function
 Description: 
 - Param: _condition
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 453](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L453)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 457](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L457)
 ## csys_getSystemController
 
 Type: function
@@ -849,7 +849,7 @@ Type: function
 Description: get or register craft system controller (SystemControllerCrafts)
 - Param: _sysname
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 514](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L514)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 521](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L521)
 ## csys_systemController_onUpdate
 
 Type: function
@@ -857,7 +857,7 @@ Type: function
 Description: 
 
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 528](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L528)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 535](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L535)
 ## csys_internal_generateSchema
 
 Type: function
@@ -867,7 +867,7 @@ Type: function
 Description: 
 
 
-File: [host\CraftSystem\CraftSystem_init.sqf at line 536](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L536)
+File: [host\CraftSystem\CraftSystem_init.sqf at line 543](../../../Src/host/CraftSystem/CraftSystem_init.sqf#L543)
 # Modifier_base_struct.sqf
 
 ## mmap

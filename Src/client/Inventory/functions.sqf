@@ -257,6 +257,8 @@ openInventory = {
 	if (isDisplayOpen) exitWith {};
 
 	private _d = call dynamicDisplayOpen;
+	
+	[_d] call vs_addDisplayInputHandlers;
 
 	//отладочная консоль в инвентаре
 	/*
@@ -404,6 +406,9 @@ openInventory = {
 	logformat("[EXTENDED_INVENTORY_UPDATE]: Inventory loaded at %1 sec (%2 ms)",_deltaTime arg (_deltaTime*1000)toFixed 8);
 	#endif
 
+	#ifdef SP_MODE
+	nextFrame({call sp_gui_syncInventoryVisible});
+	#endif
 };
 
 decl(void(bool))

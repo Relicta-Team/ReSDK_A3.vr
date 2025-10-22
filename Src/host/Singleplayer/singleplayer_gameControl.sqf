@@ -94,6 +94,8 @@ sp_clearPlayerHandlers = {
 	sp_gc_internal_map_playerInputHandlers = createHashMap;
 };
 
+sp_gc_isPlayerInitialized = false;
+
 //used for on assigned handler
 sp_gc_onPlayerAssigned = {
 	params ["_mob"];
@@ -108,9 +110,24 @@ sp_gc_onPlayerAssigned = {
 	["Chapter4"] call sp_loadScenario;
 	["Chapter5"] call sp_loadScenario;
 
-	["begin_prestart"] call sp_startScene;
-	//["cpt3_begin"] call sp_startScene;
+	#ifdef SP_PROD
+	private _chidx = uiNameSpace getVariable ["rel_sp_selchapter",0];
+	if not_equalTypes(_chidx,0) then {
+		_chidx = 0;
+	};
+
+	private _sceneList = ["begin_playerSetup","cpt1_begin","cpt2_begin","cpt3_begin","cpt4_begin","cpt5_begin"];
+	if (_chidx < 0 || _chidx >= count _sceneList) then {
+		_chidx = 0;
+	};
+
+	[_sceneList select _chidx] call sp_startScene;
+
+	#else
+	//["begin_prestart"] call sp_startScene;
+	["begin_playerSetup"] call sp_startScene;
 	//["cpt4_begin",true] call sp_startScene;
+	#endif
 };
 
 //устанавливает позицию игрока
@@ -181,6 +198,7 @@ _wsim = [
 	,"damage" //applydamage for mob
 	,"hunger" //hunger loss
 	,"blood" //bloodloss 
+	,"burn" //burn loss
 	,"pain"
 ];
 
@@ -237,7 +255,7 @@ sp_internal_handleTargetThrowingContact = {
 sp_applyPlayerDamage = {
 	params ["_val",["_isSet",false]];
 	if (_isSet) then {
-		sp_playerHp = clamp(_val,0,100);
+		sp_playerHp = clamp(100-_val,0,100);
 	} else {
 		sp_playerHp = (sp_playerHp - _val) max 0;
 	};
@@ -281,6 +299,9 @@ sp_allowebVerbs = []; //managed
 sp_defaultAllowedVerbs = ["description","mainact","pickup"]; //readonly
 
 sp_canRemoveCloth = false;
+
+sp_canResist = true;
+sp_canExamine = true;
 
 sp_defaultHandlers = createHashMapFromArray [
 	["resist",true],
@@ -342,8 +363,15 @@ sp_internal_torchHandler = {
 
 sp_initializeDefaultPlayerHandlers = {
 
+	private _actor = call sp_getActor;
+	setVar(_actor,specialAction,SPECIAL_ACTION_NO);
+	setVar(_actor,otherSpecialAction,SPECIAL_ACTION_NO);
+	callFuncParams(_actor,onChangeAttackType,"sync");
+
+	callFuncParams(_actor,setCombatMode,false);
+
 	//bypass first unsleep message
-	setVar(call sp_getActor,__isFirstUnsleep,false);
+	setVar(_actor,__isFirstUnsleep,false);
 
 	sp_defaultHandlers = array_copy(sp_const_defaultHandlersCopy);
 
@@ -365,8 +393,10 @@ sp_initializeDefaultPlayerHandlers = {
 
 	["chat_show_history",{false}] call sp_addPlayerHandler;
 
+	sp_canResist = true;
 	["resist",{!sp_canResist}] call sp_addPlayerHandler;
 
+	sp_canExamine = true;
 	["examine",{!sp_canExamine}] call sp_addPlayerHandler;
 
 	["main_action",{
@@ -381,16 +411,18 @@ sp_initializeDefaultPlayerHandlers = {
 	["click_target",{
 		params ["_t"];
 		if (sp_defaultHandlers get "item_action") exitWith {true};
-
+		private __printErr = {
+			[pick[
+				"Не стоит трогать это...",
+				"Не то, что стоит трогать",
+				"Лучше не трогать.",
+				"Мне это не нужно"
+			],"mind"] call chatPrint;			
+		};
 		if array_exists(sp_whitelistClickItems,_t) exitWith {false};
-		if array_exists(sp_blacklistClickItems,_t) exitWith {true};
+		if array_exists(sp_blacklistClickItems,_t) exitWith {call __printErr; true};
 		if (_t call sp_delegateCanClickItem) exitWith {false};
-		[pick[
-			"Не стоит трогать это...",
-			"Не то, что стоит трогать",
-			"Лушче не трогать.",
-			"Мне это не нужно"
-		],"mind"] call chatPrint;
+		call __printErr;
 
 		true
 	}] call sp_addPlayerHandler;
@@ -453,20 +485,28 @@ sp_initializeDefaultPlayerHandlers = {
 		if (_name == "description") exitWith {
 			sp_defaultHandlers get "examine"
 		};
+		//duplicate or typo?
+		// if (_name == "pickup") exitWith {
+		// 	sp_defaultHandlers get "item_action"
+		// };
 		if (_name == "pickup") exitWith {
-			sp_defaultHandlers get "item_action"
-		};
-		if (_name == "pickup") exitWith {
+			if (sp_defaultHandlers get "item_action") exitWith {true};
+			private __printErr = {
+				[pick[
+					"Не стоит трогать это...",
+					"Не то, что стоит трогать",
+					"Лучше не трогать.",
+					"Мне это не нужно"
+				],"mind"] call chatPrint;
+			};
 			if array_exists(sp_whitelistClickItems,_t) exitWith {false};
-			if array_exists(sp_blacklistClickItems,_t) exitWith {true};
+			if array_exists(sp_blacklistClickItems,_t) exitWith {call __printErr; true};
 			if (_t call sp_delegateCanClickItem) exitWith {false};
-			[pick[
-				"Не стоит трогать это...",
-				"Не то, что стоит трогать",
-				"Лушче не трогать.",
-				"Мне это не нужно"
-			],"mind"] call chatPrint;
+			call __printErr;
 			true
+		};
+		if (_name == "standupfromchair") exitWith {
+			!sp_canResist
 		};
 		false
 	}] call sp_addPlayerHandler;
@@ -484,6 +524,8 @@ sp_copyPlayerInventoryTo = {
 			};
 		};
 	} foreach INV_LIST_ALL;
+
+	callFuncParams(_target,setMobFace,callFunc(_player,getMobFace));
 };
 
 //sprint control

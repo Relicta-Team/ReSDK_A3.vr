@@ -31,7 +31,7 @@ Count modules: 33
  - [SyncMobData](client//SyncMobData.md) - 2 files
  - [Traps](client//Traps.md) - 1 files
  - [VisualState](client//VisualState.md) - 10 files
- - [VoiceSystem](client//VoiceSystem.md) - 6 files
+ - [VoiceSystem](client//VoiceSystem.md) - 11 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
 Count modules: 57
@@ -83,7 +83,7 @@ Count modules: 57
  - [ServerRpc](host//ServerRpc.md) - 2 files
  - [ServerSceneTest](host//ServerSceneTest.md) - 2 files
  - [ServerVoice](host//ServerVoice.md) - 1 files
- - [Singleplayer](host//Singleplayer.md) - 14 files
+ - [Singleplayer](host//Singleplayer.md) - 15 files
  - [SpecialActions](host//SpecialActions.md) - 3 files
  - [StatusEffects](host//StatusEffects.md) - 6 files
  - [Structs](host//Structs.md) - 2 files

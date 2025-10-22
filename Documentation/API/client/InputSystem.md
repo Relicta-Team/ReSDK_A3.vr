@@ -481,7 +481,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 53](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L53)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 54](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L54)
 ## input_map_spamProtect
 
 Type: Variable
@@ -493,7 +493,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [client\InputSystem\inputKeyHandlers.sqf at line 137](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L137)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 138](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L138)
 ## input_updateAllKeyBinds
 
 Type: function
@@ -501,7 +501,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 59](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L59)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 60](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L60)
 ## input_internal_onLoadKeyBinds
 
 Type: function
@@ -509,7 +509,7 @@ Type: function
 Description: 
 - Param: _kbList
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 79](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L79)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 80](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L80)
 ## input_checkKeyState
 
 Type: function
@@ -519,7 +519,7 @@ Description:
 - Param: _state
 - Param: _doRemKeyState (optional, default false)
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 120](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L120)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 121](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L121)
 ## input_spamProtect
 
 Type: function
@@ -528,7 +528,7 @@ Description:
 - Param: _strname
 - Param: _timeout (optional, default 0.3)
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 140](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L140)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 141](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L141)
 ## input_passThroughWallsProtect
 
 Type: function
@@ -536,7 +536,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 158](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L158)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 159](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L159)
 ## input_movementCheck
 
 Type: function
@@ -544,7 +544,7 @@ Type: function
 Description: 
 - Param: _key
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 175](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L175)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 176](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L176)
 ## input_internal_isChangeStance
 
 Type: function
@@ -552,7 +552,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 247](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L247)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 248](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L248)
 ## input_internal_isMovingButton
 
 Type: function
@@ -560,7 +560,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 249](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L249)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 250](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L250)
 ## input_internal_isMovingForward
 
 Type: function
@@ -568,7 +568,7 @@ Type: function
 Description: 
 
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 251](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L251)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 252](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L252)
 ## input_getKeyNameByInputName
 
 Type: function
@@ -576,7 +576,7 @@ Type: function
 Description: 
 - Param: _inp
 
-File: [client\InputSystem\inputKeyHandlers.sqf at line 254](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L254)
+File: [client\InputSystem\inputKeyHandlers.sqf at line 255](../../../Src/client/InputSystem/inputKeyHandlers.sqf#L255)
 # inputManager.sqf
 
 ## isPressed(var)
@@ -595,7 +595,7 @@ File: [client\InputSystem\inputManager.sqf at line 78](../../../Src/client/Input
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> Exists if **EDITOR** defined
 
 Description: };
 
@@ -609,7 +609,7 @@ File: [client\InputSystem\inputManager.sqf at line 154](../../../Src/client/Inpu
 
 Type: constant
 
-> Exists if **DEBUG** defined
+> Exists if **EDITOR** defined
 
 Description: 
 - Param: name

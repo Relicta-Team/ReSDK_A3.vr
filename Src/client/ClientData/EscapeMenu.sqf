@@ -157,7 +157,11 @@ esc_confirmExit = {
 	private _back = [_d,BACKGROUND,WIDGET_FULLSIZE,_ctgIn] call createWidget;
 	_back setBackgroundColor [ESC_MENU_BACKGROUND_COLOR_T3,ESC_MENU_BACKGROUND_COLOR_T3,ESC_MENU_BACKGROUND_COLOR_T3,0.85];
 	_txt = [_d,TEXT,[0,0,100,30],_ctgIn] call createWidget;
+	#ifdef SP_MODE
+	[_txt,"<t align='center' size='0.8'>Вы уверены? Вы сможете начать заново с любой из пройденных вами глав.</t>"] call widgetSetText;
+	#else
 	[_txt,"<t align='center' size='0.8'>Вы уверены? Ваш персонаж останется в мире и с ним может произойти всё что угодно.</t>"] call widgetSetText;
+	#endif
 
 	_accept = [_d,BUTTON,[5,35,40,60],_ctgIn] call createWidget;
 	_back = [_d,BUTTON,[55,35,40,60],_ctgIn] call createWidget;

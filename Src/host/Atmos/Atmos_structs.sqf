@@ -689,7 +689,7 @@ struct(AtmosAreaGas) base(AtmosAreaBase)
 	def(canSpreadTo)
 	{
 		params ["_side"];
-		if (self getv(volume)<=0.2) exitWith {false};
+		if (self getv(volume)<=0.2) exitWith {false}; //! может вызывать ошибку из-за отсутсвия ret_def()
 		callbase(canSpreadTo)
 	}
 

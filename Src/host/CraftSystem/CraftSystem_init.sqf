@@ -16,6 +16,7 @@
 
 */
 #include <..\engine.hpp>
+#include <..\oop.hpp>
 #include <..\struct.hpp>
 #include <..\text.hpp>
 #include "..\ServerRpc\serverRpc.hpp"
@@ -413,6 +414,7 @@ csys_internal_generateYamlExpr = {
 	private _pat_tags = "\b(tags)\b";
 	private _pat_vardef = "\b(var)\b";
 	private _pat_endl = "[)}\w]\s*$";
+	private _pat_istypeof = "isTypeOf\(([^,]+)\,([^)]+)\)";
 	{
 		private _curLine = _x;
 		_curLine = ([_curLine,_pat_metcall,'callFuncParams(_tags get "$1",$2,$3)'] call regex_replace);
@@ -427,6 +429,8 @@ csys_internal_generateYamlExpr = {
 		
 		_curLine = ([_curLine,_pat_tags,"_tags"] call regex_replace);
 		_curLine = ([_curLine,_pat_vardef,"private"] call regex_replace);
+
+		_curLine = ([_curLine,_pat_istypeof,'isTypeOf($1,$2)'] call regex_replace);
 
 		_stack pushBack _curLine;
 		
@@ -456,11 +460,14 @@ csys_generateInsturctions = {
 	private _pat_methodArgs = ":(\w+)\s*\(([^)]+)\)";
 	private _pat_method = ":(\w+)\s*\(\s*\)";
 	private _pat_field = ":(\w+)\b";
+	private _pat_istypeof = "isTypeOf\(([^,]+)\,([^)]+)\)";
 
 	//replace parametrize methods
+	_condition = [_condition,_pat_istypeof,'isTypeOf($1,$2)'] call regex_replace;
 	_condition = [_condition,_pat_methodArgs,'callFuncParams(this,$1,$2)'] call regex_replace;
 	_condition = [_condition,_pat_method,'callFunc(this,$1)'] call regex_replace;
 	_condition = [_condition,_pat_field,'getVar(this,$1)'] call regex_replace;
+
 	private _CODE_INSTR_ = null;
 	_condition = ["_CODE_INSTR_ = {params["""+'this'+"""];",_condition,"}; true"] joinString " ";
 	isNIL (compile _condition);

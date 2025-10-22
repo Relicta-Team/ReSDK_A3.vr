@@ -60,7 +60,7 @@ interactCombat_hud_map_Styles = createHashMap;
 } foreach interactCombat_styleMap;
 
 decl(widget[])
-interactCombat_curWidgets = [widgetNull,widgetNull,widgetNull];
+interactCombat_curWidgets = [widgetNull,widgetNull,widgetNull]; //CM_CUR_IND_CS,CM_CUR_IND_ATT,CM_CUR_IND_DEF
 //сюда вносятся типы атак
 decl(any[])
 interactCombat_at_list_types = [];
@@ -69,6 +69,9 @@ interactCombat_at_assocEnum = ATTACK_TYPE_ASSOC_HAND;
 //карта ассоциаций виджетов типов атаки. ключ тип
 decl(map)
 interactCombat_map_attTypeWidgets = createHashMap;
+//карта виджетов типов защиты. ключ тип
+decl(map)
+interactCombat_map_defTypeWidgets = createHashMap;
 //cd_curAttackType - текущий тип атаки
 
 //виджеты комбата в порядке объявления

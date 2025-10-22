@@ -10,6 +10,10 @@ on:
   pull_request:
     types: ['opened']
 
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   label-ai-usage:
     runs-on: ubuntu-latest

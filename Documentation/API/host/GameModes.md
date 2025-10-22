@@ -434,7 +434,7 @@ Replaced value:
 	}; \
 	
 ```
-File: [host\GameModes\Prey\GM_Prey.sqf at line 368](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L368)
+File: [host\GameModes\Prey\GM_Prey.sqf at line 375](../../../Src/host/GameModes/Prey/GM_Prey.sqf#L375)
 # SaloonRoles.sqf
 
 ## __isOldGM

@@ -399,7 +399,10 @@ struct(CraftModifier::transfer_reagents) base(CraftModifierAbstract)
 							};
 							_mapRemove set [_reag,(_mapRemove get _reag) + _val];
 						} foreach _delReagents;
+						
 						if (callFunc(_itm,getFilledSpace)==0) then {
+							//жидкостные контейнеры больше не будут удаляться
+							if isTypeOf(_itm,IReagentNDItem) exitWith {};
 							_canDeleteListCheck pushBack _itm;
 						};
 

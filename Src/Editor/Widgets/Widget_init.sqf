@@ -127,6 +127,7 @@ menu_structureLayout = [
 		]
 	],
 	["text:Инструменты",
+		"text:Пересборка ReVoicer;act: call revoicer_rebuild",
 		["text:Системные инструменты;path:menu_path_platformSysTools",
 			"text:Консоль отладки;data:DebugConsole;act:(ctrlparent (_this select 0)) createdisplay 'RscDisplayDebugPublic';;short:544;",
 			"text:Просмотрщик конфигурации;data:ConfigViewer;act:[ctrlparent (_this select 0)] call (uinamespace getvariable 'bis_fnc_configviewer');short:2082;pic:a3\3den\data\displays\display3den\entitymenu\findconfig_ca.paa;",

@@ -123,7 +123,17 @@ struct(FryingPanSystem) base(BaseWorldProcessorCraftSystem)
 		debug_system("frypan: found campfire %1" arg _near)
 	}
 
-	def(collectDistance) 0.25;
+	def(collectDistance) 0.25; //todo decrease to 0.15
+	def(modelToWorldOffset) [0,0.1,0];
+
+	def(getObjects_getCollectPos)
+	{
+		if (self callv(isInWorld)) then {
+			getVar(self getv(src),loc) modelToWorld (self getv(modelToWorldOffset))
+		} else {
+			callbase(getObjects_getCollectPos)
+		};
+	}
 
 	def(findRecipe)
 	{
