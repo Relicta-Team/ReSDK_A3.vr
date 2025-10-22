@@ -1,3 +1,4 @@
+//this file is for test js runtime component
 
 import { a_value, a_func } from "./a.js";
 
