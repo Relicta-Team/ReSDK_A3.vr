@@ -51,3 +51,68 @@ TEST_F(BaseFixture,check_variable_value)
 {
 	ASSERT_EQ(globalVar,1);
 }
+
+//------------------------------------------------------------
+// JSRuntime tests
+//------------------------------------------------------------
+
+FIXTURE_SETUP(JSRuntimeTests)
+{
+	test_jsruntime_testvar = 0;
+}
+
+FIXTURE_TEARDOWN(JSRuntimeTests)
+{
+	test_jsruntime_testvar = null;
+}
+
+TEST_F(JSRuntimeTests,FullLifecycle)
+{
+	log("JSRuntimeTests: FullLifecycle started");
+
+	log("JSRuntimeTests: Initializing runtime");
+	private _initialized = ["test_runtime"] call jsr_initRuntime;
+	ASSERT(_initialized);
+
+	log("JSRuntimeTests: Registering signal handler");
+	private _handle = ["test_runtime",{
+		params ["_message"];
+		test_jsruntime_testvar = parseNumber _message;
+	}] call jsr_registerRuntimeSignal;
+	ASSERT_EQ(_handle,0); //first handle is 0
+
+	log("JSRuntimeTests: Adding invalid signal to runtime");
+	private _invalid = ["not_test_runtime",{}] call jsr_registerRuntimeSignal;
+	ASSERT(!_invalid);
+
+	log("JSRuntimeTests: Sending signal to runtime");
+	["test_runtime","JSRuntimeCallback(321123);"] call jsr_sendToRuntime;
+	
+	//wait 5 seconds for signal
+	for "_i" from 1 to 5 do {
+		["RBuilder","wait",[1000]] call rescript_callCommandVoid;
+	};
+
+	log("JSRuntimeTests: Checking value from signal");
+	ASSERT_EQ(test_jsruntime_testvar,321123);
+
+	log("JSRuntimeTests: Delete invalid handle");
+	private _deleted = ["test_runtime",1] call jsr_unregisterRuntimeSignal;
+	ASSERT(!_deleted);
+
+	log("JSRuntimeTests: Unregistering signal handler");
+	private _unregistered = ["test_runtime",_handle] call jsr_unregisterRuntimeSignal;
+	ASSERT(_unregistered);
+
+	log("JSRuntimeTests: Delete invalid runtime");
+	private _deleted = ["not_test_runtime"] call jsr_deleteRuntime;
+	ASSERT(!_deleted);
+
+	log("JSRuntimeTests: Shutting down runtime");
+	private _shutdown = ["test_runtime"] call jsr_deleteRuntime;
+	ASSERT(_shutdown);
+
+	
+	log("JSRuntimeTests: FullLifecycle finished");
+}
+
