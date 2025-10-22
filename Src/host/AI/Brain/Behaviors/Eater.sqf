@@ -121,7 +121,7 @@ struct(BAEater_Chase) base(BABase)
     
     // Локальные данные для отслеживания перепланировки
     def(lastReplanTime) 0;
-    def(replanInterval) 0.5; // Перепланировка каждые 0.5 секунды
+    def(replanInterval) 1.0; // Перепланировка каждую секунду
     
     // КОНТЕКСТ: можем преследовать?
     def_ret(isAvailable) {
@@ -174,35 +174,44 @@ struct(BAEater_Chase) base(BABase)
         private _isMoving = _agent getv(ismoving);
         private _needReplan = false;
         
+        private _emergencyReplan = false; // Флаг экстренной перепланировки
+        
         if (_isMoving) then {
             // Проверяем нужно ли перепланировать путь
             private _lastReplan = self getv(lastReplanTime);
             private _timeSinceReplan = tickTime - _lastReplan;
             
-            if (_timeSinceReplan >= self getv(replanInterval)) then {
-                // Время для перепланировки
-                _needReplan = true;
-            } else {
-                // Дополнительная проверка - сильное отклонение цели
-                private _curPath = _agent getv(curpath);
-                if (count _curPath > 0) then {
-                    private _pathEnd = _curPath select (count _curPath - 1);
-                    private _targetPos = atltoasl callFunc(_target,getPos);
-                    private _targetDeviation = _pathEnd distance _targetPos;
-                    
-                    // Если цель сместилась больше 3м - экстренная перепланировка
-                    if (_targetDeviation > 3) then {
+            // Проверяем отклонение цели от конца пути
+            private _curPath = _agent getv(curpath);
+            if (count _curPath > 0) then {
+                private _pathEnd = _curPath select (count _curPath - 1);
+                private _targetPos = atltoasl callFunc(_target,getPos);
+                private _targetDeviation = _pathEnd distance _targetPos;
+                
+                // Экстренная перепланировка при большом отклонении
+                if (_targetDeviation > 5) then {
+                    _needReplan = true;
+                    _emergencyReplan = true; // Останавливаемся только при экстренной
+                } else {
+                    // Обычная периодическая перепланировка
+                    if (_timeSinceReplan >= self getv(replanInterval)) then {
                         _needReplan = true;
                     };
                 };
-            };
-            
-            if (_needReplan) then {
-                [_mob] call ai_stopMove;
+            } else {
+                // Пути нет - обычная перепланировка
+                if (_timeSinceReplan >= self getv(replanInterval)) then {
+                    _needReplan = true;
+                };
             };
         } else {
             // Не движемся - нужно планировать
             _needReplan = true;
+        };
+        
+        // Останавливаем ТОЛЬКО при экстренной перепланировке
+        if (_emergencyReplan) then {
+            [_mob] call ai_stopMove;
         };
         
         if (_needReplan) then {
@@ -278,7 +287,7 @@ struct(BAEater_Search) base(BABase)
         private _mob = _agent getv(mob);
         
         // Переключаемся на ходьбу для сканирования
-        [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+        [_mob] call ai_stopMove;
         
         // Идем к последней известной позиции
         private _lastPos = _agent getv(lastSeenTargetPos);
@@ -355,6 +364,7 @@ struct(BAEater_Search) base(BABase)
                     
                     private _success = [_mob,_newSearchPos] call ai_planMove;
                     if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                    [_mob,SPEED_MODE_WALK] call ai_setSpeed;
                 };
                 
                 // Проверяем достигли ли точки поиска

@@ -42,7 +42,14 @@ ai_nav_updateOrCreateRegion = {
 //todo request pool for update region
 ai_nav_requestUpdateRegion = {
     params ["_pos"];
-    
+    /* 
+        !известная проблема на данный момент
+        !при обновлении дверей регион не патчится, возможно серверная модель не актуализируется
+
+        !я думаю что визуал обновляется только в следующем фрейме
+    */
+
+    ["request update region at %1",_pos] call ai_log;
     [_pos] call ai_nav_updateRegion;
 };
 

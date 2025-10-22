@@ -3,6 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+if isNull(ai_debug_objs) then {
+	ai_debug_objs = [];
+};
+
 // Функция логирования для отладки
 // Работает как в редакторе (3DEN), так и в игре
 ai_debugLog = {
@@ -34,7 +38,7 @@ ai_nav_debug_createObj = {
 	};
 	private _arrow = _cls createVehicle [0,0,0];
 	_arrow setPosASL _pos;
-	_arrow setObjectTexture [0, format["#(rgb,8,8,3)color(%1,%2,%3,1)",_color select 0,_color select 1,_color select 2]];
+	_arrow setObjectTextureGlobal [0, format["#(rgb,8,8,3)color(%1,%2,%3,1)",_color select 0,_color select 1,_color select 2]];
 	_arrow setObjectScale _size;
 	_list pushBack _arrow;
 	_arrow
@@ -155,4 +159,24 @@ ai_nav_testPath = {
 	["Path found: %1 waypoints, distance: %2m" arg count _path arg (_startPos distance _endPos)toFixed 2] call ai_debugLog;
 	
 	_path
+};
+
+
+
+ai_nav_debug_testPathOnline = {
+	params ["_startPos", "_endPos"];
+
+	if isNull(ai_nav_debug_internal_obsOnline) then {
+		ai_nav_debug_internal_obsOnline = [];
+	};
+
+	deleteVehicle ai_nav_debug_internal_obsOnline;
+	ai_nav_debug_internal_obsOnline = [];
+
+	private _p = [_startPos,_endPos,false] call ai_nav_findPartialPath;
+	{
+		[_x, [0,1,0], 5, true,ai_nav_debug_internal_obsOnline] call ai_nav_debug_createObj
+	} foreach _p;
+
+	_p
 };

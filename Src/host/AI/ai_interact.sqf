@@ -124,6 +124,7 @@ ai_planMove = {
 	_agent setv(lastPointSetup,tickTime);
 
 	[_mob,false] call ai_internal_setStop;
+	["Move planned from %1 to %2",_srcPos,_destPos] call ai_log;
 
 	true
 };

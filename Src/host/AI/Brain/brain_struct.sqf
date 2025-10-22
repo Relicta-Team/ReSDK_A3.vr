@@ -278,8 +278,10 @@ struct(AgentZombie) base(AgentBase)
 		private _refview = refcreate(VISIBILITY_MODE_NONE);
 		_nearMobs = _nearMobs select {
 			callFunc(_x,isPlayer)
+			&& {!getVar(_x,isDead)}
 			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
+			&& isTypeOf(_x,Mob)
 		};
 		
 		if (count _nearMobs > 0) then {
