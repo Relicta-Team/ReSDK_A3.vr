@@ -7,6 +7,18 @@
 #define apiCmd "revoicer" callExtension 
 #define apiRequest(p) ("revoicer" callExtension (p))
 
+#ifdef REDITOR_VOICE_DEBUG
+    #define revoice_debug_only(debug_expr) debug_expr;
+    #define REDITOR_VOICE_DEBUG_RENDER
+#else
+    #define revoice_debug_only(debug_expr) 
+#endif
+
+#undef REDITOR_VOICE_DEBUG_RENDER
+
+//частота вычисления позиционных эффектов. для лучшего импакта рекомендую в будущем снизить до 0.2
+#define VOICE_UPDATE_EFFECTS_DELAY 0.5
+
 vs_init = {
     #ifndef REDITOR_VOICE_DEBUG
         #ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE
@@ -67,12 +79,17 @@ vs_connectToVoiceSystem = {
     _r
 };
 
+//низкоуровневая функция остановки войса. Вызывается при кике или отключении от сервера
 vs_disconnectVoice = {
     apiRequest(REQ_DISCONNECT_VOICE) == "true";  
 };
 
+//функция "правильного" завершения системы. Вызывается при выходе в лобби или перезагрузке войса
 vs_disconnectVoiceSystem = {
     vs_canProcess = false;
+    {
+        [_x,true] call vs_internal_clearEffectValues;
+    } foreach (smd_allInGameMobs);
     call vs_disconnectVoice;
 };
 
@@ -135,8 +152,17 @@ vs_onProcessPlayerPosition = {
     if (!vs_canProcess) exitWith {};
 
     if (call vs_checkConnection) then {
+        //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=_this max vs_debug_maxvalue;vs_debug_maxvalue})
+        /*
+            max 1.098633ms for local or remotes without effects
+            ~max 17 ms for 100 players (only remotes,noeffects)
+            mid 3-4 ms for 100 players (only remotes,noeffects)
+        */
         call vs_syncLocalPlayer;
+        //revoice_debug_only(["sync local %1ms" arg (((tickTime - _t)*1000)call _mv)tofixed 6]call printTrace;_t=tickTime;)
+        //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
+        //revoice_debug_only(if (((tickTime - _t)*1000) > 10) then {["LOWPERF: sync remote %1ms" arg (((tickTime - _t)*1000) )tofixed 0]call printTrace;_t=tickTime;})
     };
 };
 
@@ -162,6 +188,10 @@ vs_checkConnection = {
 
 //синхронизация позиции локального юзера
 vs_syncLocalPlayer = {
+    if (!isGameFocused) then {
+        [false] call vs_handleSpeak;
+    };
+
     private _args = [];
     #ifdef REDITOR_VOICE_DEBUG
         _args append (getposatl cameraon);
@@ -179,15 +209,25 @@ vs_syncLocalPlayer = {
     apiCmd [CMD_SYNC_LOCAL_PLAYER,_args];
 };
 
+#ifdef EDITOR
+vs_debug_generateClients = {
+    _r = [];
+    for "_i" from 1 to _this do {
+        _o = create3DENEntity["object", "Land_Orange_01_F",getposatl cameraon];
+        _o setvariable ["rv_name","rem"];
+        _o setvariable ["rv_distance",4];
+        _r pushback _o;
+    };
+    _r
+};
+#endif
+
 /* синхронизация удаленных людей
     uses:
         set3DConeOrientation
         set3DConeSettings
 */
 vs_syncRemotePlayers = {
-    if (!isGameFocused) then {
-        [false] call vs_handleSpeak;
-    };
 
     private _nearPlayers = (player nearEntities ["Man", vs_max_voice_volume])-[player];
     private _mutedPlayers = (allPlayers-[player]) - _nearPlayers;
@@ -196,8 +236,6 @@ vs_syncRemotePlayers = {
     _nearPlayers = vs_reditor_procObjList;
     _mutedPlayers = [];
     #endif
-
-    
 
     private _proc = [];
     {
@@ -228,22 +266,53 @@ vs_syncRemotePlayers = {
             _proc pushback _vol;
             
             private _state = apiCmd [CMD_SYNC_REMOTE_PLAYER,_proc];
+            
             if ((_state select 1) == 0) then {
                 [_x,_state select 0] call vs_handleUserSpeakInternal;
+
+                //мы не слышим игрока - выход
+                if (_vol <= 0) exitWith {};
+
+                //мы находимся дальше дистанции слышимости
+                if (
+                    (_proc select [1,3]) distance (
+                        #ifdef REDITOR_VOICE_DEBUG
+                        getposatl cameraon
+                        #else
+                        ASLToATL eyepos player
+                        #endif
+                    ) >= (_x getvariable ["rv_distance",0])
+                ) exitWith {};
+
+                //для оптимизации эффекты процессятся только при разговоре
+                if (_state select 0=="speak") then {
+
+                    //процессируем эффекты: вычисляем реверб, лоупасс
+                    _nextUpd = _x getvariable ["__rv_nexteffupd",0];
+                    if (tickTime>=(_nextUpd)) then {
+                        private _newTime = tickTime+VOICE_UPDATE_EFFECTS_DELAY;
+                        //при первой инициализации добавляем случайное смещение
+                        //! пробуем этот подход распределения нагрузки с 1.5+, если не поможет - убрать
+                        if (_nextUpd == 0) then {
+                            _newTime = _newTime + (random 1)+(_foreachindex/32);
+                        };
+                        _x setvariable ["__rv_nexteffupd",_newTime];
+                        private _lp = [_x] call vs_calcLowpassEffect;
+                        private _reverb = [_x] call vs_calcReverbEffect;
+                        [_x,_lp,_reverb] call vs_internal_setTargetEffectValues;
+                    };
+                    
+                    [_x] call vs_internal_applyEffects;
+                }
+
             };
-
-            //процессируем эффекты: вычисляем реверб, лоупасс
-            private _lp = [_x] call vs_calcLowpassEffect;
-            _lp call vs_setLowpassEffect;
-
-            private _reverb = [_x] call vs_calcReverbEffect;
-            _reverb call vs_setReverbEffect;
         };
     } foreach _nearPlayers;
+    
 
     {
-        //todo refactoring
         if (isPlayer _x) then {
+            _x setvariable ["__rv_nexteffupd",null];
             apiCmd [CMD_SYNC_REMOTE_PLAYER,[_x getvariable "rv_name",0,0,0,0,1,0,1,0]];
         };
     } foreach _mutedPlayers;
@@ -325,6 +394,63 @@ vs_setReverbEffect = {
     apiCmd [CMD_SETREVERB,[_mob getvariable ["rv_name",""],_dec,_edel,_ldel,_hcut,_wet,_dry]];
 };
 
+vs_internal_setTargetEffectValues = {
+    params ["_mob","_lowpass","_reverb"];
+    //save previous values
+    _mob setvariable ["__rv_lowpass_prev",_mob getvariable "__rv_lowpass"];
+    _mob setvariable ["__rv_reverb_prev",_mob getvariable "__rv_reverb"];
+
+    //then update current
+    _mob setvariable ["__rv_lowpass",_lowpass];
+    _mob setvariable ["__rv_reverb",_reverb];
+    _mob setvariable ["__rv_effLastUpdateTime",tickTime];
+};
+
+//сбрасывает все значения эффектов
+vs_internal_clearEffectValues = {
+    params ["_mob",["_clearUpdateMark",false]];
+    _mob setvariable ["__rv_lowpass",null];
+    _mob setvariable ["__rv_reverb",null];
+    _mob setvariable ["__rv_lowpass_prev",null];
+    _mob setvariable ["__rv_reverb_prev",null];
+    _mob setvariable ["__rv_effLastUpdateTime",null];
+    if (_clearUpdateMark) then {
+        _mob setvariable ["__rv_nexteffupd",null];
+    };
+};
+
+vs_internal_applyEffects = {
+    params ["_mob"];
+    private _lp = _mob getvariable "__rv_lowpass";
+    private _lpPrev = _mob getvariable "__rv_lowpass_prev";
+    private _rv = _mob getvariable "__rv_reverb";
+    private _rvPrev = _mob getvariable "__rv_reverb_prev";
+    private _lastSet = _mob getvariable ["__rv_effLastUpdateTime",tickTime];
+
+    if (!isNullVar(_lp) && !isNullVar(_lpPrev)) then {
+        private _lpReal = [];
+        {
+            if equalTypes(_x,0) then {
+                _lpReal pushback (linearConversion [_lastSet,_lastSet + VOICE_UPDATE_EFFECTS_DELAY,tickTime,_lpPrev select _foreachIndex,_x,true])
+            } else {
+                _lpReal pushback _x
+            }
+        } foreach _lp;
+        _lpReal call vs_setLowpassEffect;
+    };
+    if (!isNullVar(_rv) && !isNullVar(_rvPrev)) then {
+        private _rvReal = [];
+        {
+            if equalTypes(_x,0) then {
+                _rvReal pushback (linearConversion [_lastSet,_lastSet + VOICE_UPDATE_EFFECTS_DELAY,tickTime,_rvPrev select _foreachIndex,_x,true])
+            } else {
+                _rvReal pushback _x
+            }
+        } foreach _rv;
+        _rvReal call vs_setReverbEffect;
+    };
+};
+
 //получает настройки реверба для текущего моба (~0.976563ms per call)
 vs_calcReverbEffect = {
     params ["_mob"];
@@ -337,7 +463,8 @@ vs_calcReverbEffect = {
         private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
     #endif
 
-    #define __postargs _ignore1,_mob,true,vs_max_voice_volume+1,"VIEW","GEOM",true,1
+    #define __postargs _ignore1,_mob,true,1,"VIEW","GEOM",true
+    
     private _pointsQuery = [
         //cross check
         [_endPos,_endPos vectorAdd [_rayDistance,0,0], __postargs],
@@ -391,7 +518,7 @@ vs_calcReverbEffect = {
     {
         if (count _x > 0) then {
             private _cur = _x select 0;
-            #ifdef REDITOR_VOICE_DEBUG
+            #ifdef REDITOR_VOICE_DEBUG_RENDER
             
             drawLine3d [asltoatl _endPos,asltoatl (_cur select 0),call {
                 if (_foreachindex <= 7) exitWith {[1,0,0,1]};
@@ -503,7 +630,7 @@ vs_calcLowpassEffect = {
     // [begPosASL, endPosASL, ignoreObj1, ignoreObj2, sortMode, maxResults, LOD1, LOD2, returnUnique]
     
     //! СЕЙЧАС УПРОЩЁННЫЙ АЛГОРИТМ
-    #ifdef REDITOR_VOICE_DEBUG
+    #ifdef REDITOR_VOICE_DEBUG_RENDER
     private _t = tickTime;
     if !isNull(vs_reditor_queryListLowpass) then {
         deletevehicle vs_reditor_queryListLowpass;
@@ -513,6 +640,11 @@ vs_calcLowpassEffect = {
 
     //постпроцессоры эффекта
     private _checkFilters = {
+        //TODO мы можем настроить срез частот при отдалении от игрока
+        // private _distance = _endPos distance _startPos;
+        // private _distFactor = 1 + (_distance / 10);
+        // _cutoff =  _cutoff / (1 / 0.3) / _distFactor;
+
         #ifdef REDITOR_VOICE_DEBUG
         if(true) exitWith {};
         #endif
@@ -524,7 +656,7 @@ vs_calcLowpassEffect = {
     };
     private _defRet = {
         private _cutoff = 22000;
-        private _q = 10;
+        private _q = 2; //снижено для более плавного перехода между есть\нет препятствий
         call _checkFilters;
         [_mob,_cutoff,_q]
     };
@@ -539,23 +671,25 @@ vs_calcLowpassEffect = {
     //срезаем ненужные элементы (юниты и малые объекты (объем меньше 0.3))
     private _remlist = [];
     private _xCur = objNull;
-    //todo мы вероятно можем оптимизировать добавив пропуск во втором итераторе
     {
         _xCur = _x select 2;
         if (typeof _xCur == BASIC_MOB_TYPE) then {
             _remlist pushBack _foreachIndex;
             continue;
         };
+        //TODO после нормального расчета убрать. тонкие мелкие предметы не должны влиять на слышимость
         if (((0 boundingBoxReal _xCur) select 2) <= 0.8) then {
             _remlist pushBack _foreachIndex;
             continue;
         };
     } foreach _its;
     _its deleteAt _remlist;
+    //нет элементов после отрбаковки - возвращаем дефолт
+    if (count _its == 0) exitWith _defRet;
     
     {
         _x params ["_pos","_norm","_cur"];
-        #ifdef REDITOR_VOICE_DEBUG
+        #ifdef REDITOR_VOICE_DEBUG_RENDER
         private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
         vs_reditor_queryListLowpass pushBack _o;
         _o setposasl _pos;
@@ -566,7 +700,7 @@ vs_calcLowpassEffect = {
             _itsRev deleteAt 0;
             //["check %1",[_cur,_curInv]] call printTrace;
             if equals(_cur,_curInv) exitWith {
-                #ifdef REDITOR_VOICE_DEBUG
+                #ifdef REDITOR_VOICE_DEBUG_RENDER
                 private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
                 _o setObjectTexture [0,"#(rgb,8,8,3)color(0,1,0,1)"];
                 vs_reditor_queryListLowpass pushBack _o;
@@ -575,7 +709,7 @@ vs_calcLowpassEffect = {
                 _thickness = _thickness + (_pos distance _posInv);
             };
 
-            #ifdef REDITOR_VOICE_DEBUG
+            #ifdef REDITOR_VOICE_DEBUG_RENDER
             private _o = "Sign_Arrow_F" createVehicleLocal [0,0,0];
             _o setObjectTexture [0,"#(rgb,8,8,3)color(0,0,1,1)"];
             vs_reditor_queryListLowpass pushBack _o;
@@ -593,7 +727,7 @@ vs_calcLowpassEffect = {
     
     call _checkFilters;
 
-    #ifdef REDITOR_VOICE_DEBUG
+    #ifdef REDITOR_VOICE_DEBUG_RENDER
     ["lowpass timecall:%1ms; Thickness:%2",((tickTime - _t)*1000)toFixed 6,_thickness] call printTrace;
     #endif
 
