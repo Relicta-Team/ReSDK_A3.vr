@@ -182,9 +182,24 @@ ai_nav_generateRegionNodes = {
 	};
 
 	private _nodes = [];
+
+	// === SPATIAL GRID OPTIMIZATION ===
+	// Делим пространство на ячейки 2×2м
+	private _maxConnectionDist = ai_nav_gridStep * 2; // Максимальное расстояние связи (по диагонали)
+	private _gridSize = _maxConnectionDist; // 2m
+	private _spatialGrid = createHashMap;
+
+	private _cellOffsets = [
+		[-1,-1],[-1,0],[-1,1],
+		[0,-1], [0,0], [0,1],
+		[1,-1], [1,0], [1,1]
+	];
 	
 	//постройка сетки
 	private _hits = lineIntersectsSurfaces [_queryPos];
+
+	private _connectionData = [];
+	_queryPos = [];
 	
 	#ifdef AI_EXPERIMENTAL_NODE_HOLE_FIX
 	private _filteredHits = []; private _otherside = [];
@@ -273,13 +288,66 @@ ai_nav_generateRegionNodes = {
 				continue
 			};
 
+			// === ОПТИМИЗАЦИЯ: Строим связи СРАЗУ при добавлении узла ===
+			private _currentIdx = count _nodes;
+			_pos params ["_px", "_py", "_pz"];
+			private _gridX = floor(_px / _gridSize);
+			private _gridY = floor(_py / _gridSize);
+			
+			// Проверяем связи с УЖЕ ДОБАВЛЕННЫМИ узлами в соседних ячейках
+			private _neighborsToCheck = []; // кеш узлов для проверки
+
+			{
+				private _checkKey = str [_gridX + (_x select 0), _gridY + (_x select 1)];
+				private _cellNodes = _spatialGrid getOrDefault [_checkKey, []];
+				_neighborsToCheck append _cellNodes; // собираем все узлы в один массив
+			} forEach _cellOffsets;
+
+			// Теперь ОДИН forEach вместо вложенных
+			_doExit = false;
+			{
+				//private _checkKey = str [_gridX + (_x select 0), _gridY + (_x select 1)];
+				//private _cellNodes = _spatialGrid getOrDefault [_checkKey, []];
+				
+				//{
+					_x params ["_neighborIdx", "_neighborNode"];
+					
+					private _dist = _pos distance _neighborNode;
+					
+					if (_dist <= _maxConnectionDist) then {
+						private _deltaZ = abs((_pz) - (_neighborNode select 2));
+						if (_deltaZ > 1) then {_doExit = true; continue};
+						
+						if !([_pos, _neighborNode, _dist, ai_nav_maxSlope] call ai_nav_checkSlopeFast) then {_doExit = true; continue};
+						
+						_queryPos pushBack [
+							_pos vectoradd vec3(0,0,0.4),
+							_neighborNode vectoradd vec3(0,0,0.4),
+							objNull, objNull, true, 1, "VIEW", "GEOM"
+						];
+						
+						_connectionData pushBack [_pos, _neighborNode, _dist];
+					};
+				//} forEach _cellNodes;
+			} forEach _neighborsToCheck;
+			//if (_doExit) then {continue};
+			
+			// Теперь добавляем узел в массив и spatial grid
 			_nodes pushBack _pos;
-
+			
 			#ifdef AI_NAV_DEBUG_DRAW
-			[_pos,[0,1,0],3,true] call ai_nav_debug_createObj;
+				[_pos,[0,1,0],3,true] call ai_nav_debug_createObj;
 			#endif
-
+			
+			// Добавляем узел в spatial grid для будущих проверок
+			private _gridKey = str [_gridX, _gridY];
+			if (!(_gridKey in _spatialGrid)) then {
+				_spatialGrid set [_gridKey, []];
+			};
+			(_spatialGrid get _gridKey) pushBack [_currentIdx, _pos];
+			
 			_prevpos = _pos;
+
 		} foreach _x;
 	} foreach _hits;
 	ai_debug_decl(["    generateRegionNodes time %1ms" arg ((tickTime - _t)*1000)toFixed 6] call ai_debugLog);
@@ -313,56 +381,28 @@ ai_nav_generateRegionNodes = {
 
 	//постройка связей
 	ai_debug_decl(private _tEdges = tickTime;)
-	private _maxConnectionDist = ai_nav_gridStep * 2; // Максимальное расстояние связи (по диагонали)
+
 	private _edgesList = [];
-	_queryPos = [];
+	//_queryPos = [];	
 
+	ai_debug_decl([
+		"    Spatial grid: %1 cells, %2 nodes" arg 
+		count _spatialGrid arg 
+		count _nodes
+	] call ai_debugLog;)
 	
-	private _connectionData = [];
-	
-	{
-		private _currentNode = _x;
-		private _currentIdx = _forEachIndex;
-		
-		// Ищем соседние узлы для связи
-		for "_i" from (_currentIdx + 1) to (count _nodes - 1) do {
-			private _neighborNode = _nodes select _i;
-			private _dist = _currentNode distance _neighborNode;
-			
-			// Если узел в пределах дистанции связи
-			if (_dist <= _maxConnectionDist) then {
-				//по z расстояние не может быть больше 1м (быстрая проверка первой)
-				private _deltaZ = abs((_currentNode select 2) - (_neighborNode select 2));
-				if (_deltaZ > 1) exitWith {};
-				
-				// БЫСТРАЯ проверка наклона (вместо getSlopeAngleVec)
-				if !([_currentNode, _neighborNode, _dist, ai_nav_maxSlope] call ai_nav_checkSlopeFast) exitWith {};
-
-				// Проверяем, нет ли препятствий между узлами
-				_queryPos pushBack [
-					_currentNode vectoradd vec3(0,0,0.4),
-					_neighborNode vectoradd vec3(0,0,0.4),
-					objNull,
-					objNull,
-					true,
-					1,
-					"VIEW",
-					"GEOM"
-				];
-				
-				_connectionData pushBack [_currentNode, _neighborNode, _dist];
-				
-			};
-		};
-	} forEach _nodes;
-	
-	
+	ai_debug_decl([
+		"    Checked pairs: %1 (total candidates: %2)" arg 
+		count _connectionData arg
+		(count _nodes * (count _nodes - 1) / 2)
+	] call ai_debugLog;)
 	_hits = lineIntersectsSurfaces [_queryPos];
 	
 	{
 		if (count _x == 0) then {
 			(_connectionData select _forEachIndex) params ["_currentNode","_neighborNode","_dist"];
 			_edgesList pushBack ([_currentNode, _neighborNode, _dist]);
+
 			#ifdef AI_NAV_DEBUG_DRAW
 				
 				private _loopEdge = struct_newp(LoopedObjectFunction,ai_nav_debug_drawNode arg [

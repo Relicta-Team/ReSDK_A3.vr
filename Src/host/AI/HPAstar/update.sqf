@@ -74,7 +74,8 @@ ai_nav_invalidateRegion = {
         
         // Удаляем связи этого узла
         ai_nav_adjacency deleteAt _x;
-    } forEach _oldNodeIds;
+        true;
+    } count _oldNodeIds;
     
     // Удаляем регион
     ai_nav_regions deleteAt _regionKey;
@@ -291,6 +292,8 @@ ai_nav_buildEntrancesBetween = {
     
     ai_debug_decl(private _tGridEnd = tickTime;)
     
+    private _query = [];
+    private _queryData = [];
     // Проверяем связи только между близкими узлами (spatial partitioning)
     {
         _x params ["_idx1", "_pos1"];
@@ -316,64 +319,79 @@ ai_nav_buildEntrancesBetween = {
                     
                     if (_dist <= _maxDist) then {
                         ai_debug_decl(private _tRaycast = tickTime;)
-                        private _intersections = lineIntersectsSurfaces [
+                        // private _intersections = lineIntersectsSurfaces [
+                        //     _pos1 vectoradd vec3(0,0,0.4),
+                        //     _pos2 vectoradd vec3(0,0,0.4),
+                        //     objNull, objNull, true, 1, "VIEW", "GEOM"
+                        // ];
+                        _query pushback [
                             _pos1 vectoradd vec3(0,0,0.4),
                             _pos2 vectoradd vec3(0,0,0.4),
                             objNull, objNull, true, 1, "VIEW", "GEOM"
                         ];
+                        _queryData pushback [
+                            _nodeId1,_nodeId2,_dist
+                        ];
 
                         #ifdef AI_NAV_DEBUG_DRAW
-                        // Визуализация переходной точки
-                        private _loopEntrance = struct_newp(LoopedObjectFunction,
-                            ai_nav_debug_drawNode arg [
-                                asltoatl _pos1 vectoradd vec3(0,0,0.2) arg 
-                                asltoatl _pos2 vectoradd vec3(0,0,0.2) arg 
-                                [1 arg 0 arg 0 arg 1] arg 
-                                25
-                            ] arg 
-                            null arg 
-                            ai_debug_objs select 0
-                        );
-                        ai_debug_loopDrawObjs pushback _loopEntrance;
+                            // Визуализация переходной точки
+                            private _loopEntrance = struct_newp(LoopedObjectFunction,
+                                ai_nav_debug_drawNode arg [
+                                    asltoatl _pos1 vectoradd vec3(0,0,0) arg 
+                                    asltoatl _pos2 vectoradd vec3(0,0,0) arg 
+                                    [1 arg 0 arg 0 arg 1] arg 
+                                    25*2
+                                ] arg 
+                                null arg 
+                                ai_debug_objs select 0
+                            );
+                            ai_debug_loopDrawObjs pushback _loopEntrance;
                         #endif
+
                         ai_debug_decl(_raycastCount = _raycastCount + 1;)
                         ai_debug_decl(_raycastTime = _raycastTime + (tickTime - _tRaycast);)
-                        
-                        if (count _intersections == 0) then {
-                            ai_debug_decl(_connectionsMade = _connectionsMade + 1;)
-                            
-                            // Создаем связь
-                            if (!(_regionKey2 in _entrances1)) then {
-                                _entrances1 set [_regionKey2, []];
-                            };
-                            (_entrances1 get _regionKey2) pushBackUnique _nodeId1;
-                            
-                            if (!(_regionKey1 in _entrances2)) then {
-                                _entrances2 set [_regionKey1, []];
-                            };
-                            (_entrances2 get _regionKey1) pushBackUnique _nodeId2;
-                            
-                            // Adjacency
-                            if (!(_nodeId1 in ai_nav_adjacency)) then {
-                                ai_nav_adjacency set [_nodeId1, []];
-                            };
-                            (ai_nav_adjacency get _nodeId1) pushBackUnique [_nodeId2, _dist];
-                            
-                            if (!(_nodeId2 in ai_nav_adjacency)) then {
-                                ai_nav_adjacency set [_nodeId2, []];
-                            };
-                            (ai_nav_adjacency get _nodeId2) pushBackUnique [_nodeId1, _dist];
-                        };
                     };
                 } forEach _nearbyNodes;
             };
         };
     } forEach _border1;
+    private _r = lineIntersectsSurfaces [_query];
+    {
+        if (count _x == 0) then {
+
+            (_queryData select _forEachIndex) params ["_nodeId1","_nodeId2","_dist"];
+           
+            ai_debug_decl(_connectionsMade = _connectionsMade + 1;)
+
+            // Создаем связь
+            if (!(_regionKey2 in _entrances1)) then {
+                _entrances1 set [_regionKey2, []];
+            };
+            (_entrances1 get _regionKey2) pushBackUnique _nodeId1;
+
+            if (!(_regionKey1 in _entrances2)) then {
+                _entrances2 set [_regionKey1, []];
+            };
+            (_entrances2 get _regionKey1) pushBackUnique _nodeId2;
+
+            // Adjacency
+            if (!(_nodeId1 in ai_nav_adjacency)) then {
+                ai_nav_adjacency set [_nodeId1, []];
+            };
+            (ai_nav_adjacency get _nodeId1) pushBackUnique [_nodeId2, _dist];
+
+            if (!(_nodeId2 in ai_nav_adjacency)) then {
+                ai_nav_adjacency set [_nodeId2, []];
+            };
+            (ai_nav_adjacency get _nodeId2) pushBackUnique [_nodeId1, _dist];
+
+        };
+    } foreach _r;
     
     ai_debug_decl(private _t3 = tickTime;)
     
     ai_debug_decl([
-        "  buildEntrancesBetween: init=%1ms, borders=%2ms (b1=%3 b2=%4), grid=%5ms, checks=%6ms [distChecks=%7 vs naive=%8, raycasts=%9 avgRaycast=%10ms] connections=%11 | TOTAL=%12ms" arg 
+        "  buildEntrancesBetween: init=%1ms, borders=%2ms (b1=%3 b2=%4), grid=%5ms, checks=%6ms [distChecks=%7 vs naive=%8, raycasts=%9 avgRaycastAddtask=%10ms] connections=%11 | TOTAL=%12ms" arg 
         ((_t1-_tStart)*1000)toFixed 2 arg 
         ((_t2-_t1)*1000)toFixed 2 arg 
         count _border1 arg count _border2 arg
