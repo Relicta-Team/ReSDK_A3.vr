@@ -23,11 +23,46 @@
 #include "ai_interact.sqf"
 #include "ai_util.sqf"
 
-ai_handleUpdate = -1;
 
-ai_allMobs = [];
+ai_nextUpdateReg = 0;
+ai_updateRegInterval = 0.2; //200ms - интервал обновления регионов
+ai_maxRegUpdateTime = 0.5; //сколько времени можно потратить на обновление регионов за один цикл
 
+ai_regionsUpdateQueue = []; //очередь регионов на обновление
+ai_regionsUpdateMap = createHashMap; //маппинг региона на его индекс в очереди
 
+ai_handleUpdate = -1; //хэндл обновления AI
+
+ai_allMobs = []; //список всех мобов
+
+//активатор регионов для симуляции
+
+ai_activeRegions = createHashMap; // регионы, в которых должен работать AI
+ai_activeRegionsRadius = 4; // радиус в регионах
+ai_playerLastRegions = createHashMap; // последний регион каждого игрока (clientOwner -> regionKey)
+
+// Увеличивает/уменьшает счётчик активности региона
+ai_modifyRegionRefCount = {
+    params ["_regionKey", "_delta"]; // _delta: +1 или -1
+    
+    _regionKey splitString "_" params ["_rx", "_ry"];
+    _rx = parseNumber _rx; 
+    _ry = parseNumber _ry;
+    
+    for "_dx" from (-ai_activeRegionsRadius) to ai_activeRegionsRadius do {
+        for "_dy" from (-ai_activeRegionsRadius) to ai_activeRegionsRadius do {
+            private _key = format ["%1_%2", _rx + _dx, _ry + _dy];
+            private _currentCount = ai_activeRegions getOrDefault [_key, 0];
+            private _newCount = _currentCount + _delta;
+            
+            if (_newCount > 0) then {
+                ai_activeRegions set [_key, _newCount];
+            } else {
+                ai_activeRegions deleteAt _key;
+            };
+        };
+    };
+};
 
 ai_log = {
 	log("[AI]: "+(_this call formatLazy));
@@ -77,7 +112,7 @@ ai_createMob = {
 	[_mob,SPEED_MODE_WALK] call ai_setSpeed;
 
 	//создаем регион для существа
-	[_pos] call ai_nav_updateOrCreateRegion;
+	[_pos] call ai_nav_createRegionIfNeed;
 	
 	ai_allMobs pushBack _mob;
 
@@ -115,7 +150,8 @@ ai_createAgent = {
 
 ai_init = {
 	if (is3den) exitWith {};
-	ai_handleUpdate = startUpdate(ai_onUpdate,0.1);
+	ai_handleUpdate = startUpdate(ai_onUpdate,0);
+
 	#ifdef AI_DEBUG_TRACEPATH
 		if !isNull(ai_internal_debug_drawPathHandle) then {
 			stopUpdate(ai_internal_debug_drawPathHandle);
@@ -139,42 +175,105 @@ ai_init = {
 //цикл обновления AI
 ai_onUpdate = {
 	//синхронизируем регионы
-	{
-		_r = [getposasl _x] call ai_nav_updateOrCreateRegion;
-		if (_r != "") then {
-			#ifdef EDITOR
-			["New region: " + _r,"system"] call chatprint;
-			#endif
+	private _pos = [];
+	if (tickTime > ai_nextUpdateReg) then {
+		ai_nextUpdateReg = tickTime + ai_updateRegInterval;
+		private _updated = [];
+		private _tStart = tickTime;
+		private _tDelta = 0;
+		{
+			_pos = [_x] call ai_nav_regionToPos;
+			[_pos] call ai_nav_updateRegion;
+			ai_regionsUpdateMap deleteAt _x;
+			_updated pushBack _forEachIndex;
+			_tDelta = tickTime - _tStart;
+			if (_tDelta > ai_maxRegUpdateTime) exitWith {
+				["region update took too long: %1 ms, count updated: %2",(_tDelta*1000)toFixed 2,count _updated] call ai_log;
+			};
+		} foreach ai_regionsUpdateQueue;
+		if (count _updated > 0) then {
+			ai_regionsUpdateQueue deleteAt _updated;
 		};
-	} foreach smd_allInGameMobs;
-	//процессим моба
+	};
+	
+	//процессим мобов
+	private _agent = null;
+	private _mob = null;
+	private _curRegion = "";
+	private _curRegionObj = null;
 	{
-		private _mob = _x;
-		private _agent = getVar(_mob,__aiagent);
-		
-		#ifdef AI_DEBUG_MOVETOPLAYER
-		private _body = toActor(_mob);
-		private _pos = getposasl _body;
-		if !(_agent getv(ismoving)) then {
-			if (tickTime < (_agent getOrDefault ["nextPlanTime",tickTime])) exitWith {};
-			_target = getposasl player;
-			
+		_mob = _x;
+		_agent = getVar(_mob,__aiagent);
 
-			if (_pos distance _target < 1.2) exitWith {};
-			if ([_mob,_target] call ai_planMove) then {
+		_curRegion = getVar(_mob,__curRegion);
+		_curRegionObj = ai_nav_regions get _curRegion;
+		_pos = getposasl getVar(_mob,owner);
+		_changedPos = false;
+		_curRegionBackup = _curRegion;
+
+		//обновляем информацию о мобах в регионе
+		if isNullVar(_curRegionObj) then {
+			//региона не существует - создаем его
+			[_pos] call ai_nav_updateRegion;
+			_curRegionObj = ai_nav_regions get _curRegion;
+			(_curRegionObj get "mobs") pushBack _mob;
+			setVar(_mob,__curRegion,_curRegion);
+
+			_changedPos = true;
+		} else {
+			//региона существует - проверяем находится ли моб в нем
+			_actualRegionObj = [_pos] call ai_nav_getRegion;
+			if not_equals(_curRegionObj,_actualRegionObj) then {
+				private _oldRegionMobs = (_curRegionObj get "mobs");
+				_oldRegionMobs deleteAt (_oldRegionMobs find _mob);
+				(_actualRegionObj get "mobs") pushBack _mob;
+				setVar(_mob,__curRegion,_actualRegionObj);
 				
-				
+				_changedPos = true;
+				_curRegion = _pos call ai_nav_getRegionKey;
 			};
 		};
-		#endif
-		
-		if (_agent getv(ismoving)) then {
-			[_mob] call ai_handleMove;
+
+		//обновляем счетчик активности региона
+		if callFunc(_mob,isPlayer) then {
+			if not_equals(_curRegionBackup,_curRegion) then {
+				[_curRegionBackup,-1] call ai_modifyRegionRefCount;
+			};
+			if (_changedPos) then {
+				[_curRegion,+1] call ai_modifyRegionRefCount;
+			};
 		};
-		
-		// Обновление Utility AI
-		[_mob,_agent] call ai_brain_update;
-	} foreach ai_allMobs;
+
+		//обновляем агента
+		if !isNullVar(_agent) then {
+			
+			//todo упрощенная симуляция AI в инактивных регионах
+			if !(_curRegion in ai_activeRegions) exitWith {};
+
+			#ifdef AI_DEBUG_MOVETOPLAYER
+				private _body = toActor(_mob);
+				private _pos = getposasl _body;
+				if !(_agent getv(ismoving)) then {
+					if (tickTime < (_agent getOrDefault ["nextPlanTime",tickTime])) exitWith {};
+					_target = getposasl player;
+					
+
+					if (_pos distance _target < 1.2) exitWith {};
+					if ([_mob,_target] call ai_planMove) then {
+						
+						
+					};
+				};
+			#endif
+			
+			if (_agent getv(ismoving)) then {
+				[_mob] call ai_handleMove;
+			};
+			
+			// Обновление Utility AI
+			[_mob,_agent] call ai_brain_update;
+		};
+	} foreach cm_allInGameMobs;
 };
 
 ai_debugStart = {

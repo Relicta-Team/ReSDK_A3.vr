@@ -21,6 +21,7 @@ ai_nav_saveRegion = {
 	_regionData set ["nodes", []];      // Массив ID узлов
 	_regionData set ["edges", _edges];  // Связи остаются как есть
 	_regionData set ["entrances", createHashMap];  // Переходные точки (пока пустые)
+	_regionData set ["mobs",[]]; // список мобов в регионе
 	
 	private _nodeIds = [];
 	private _posToIdMap = createHashMap; // Временная карта для связывания позиций с ID
@@ -87,6 +88,17 @@ ai_nav_hasRegion = {
 	params ["_pos"];
 	private _key = _pos call ai_nav_getRegionKey;
 	_key in ai_nav_regions
+};
+
+ai_nav_regionToPos = {
+	params ["_regionKey"];
+	_regionKey splitString "_" params ["_rx", "_ry"];
+	_rx = parseNumber _rx; _ry = parseNumber _ry;
+	[
+		_rx * ai_nav_regionSize + ai_nav_regionSize/2, 
+		_ry * ai_nav_regionSize + ai_nav_regionSize/2, 
+		0
+	]
 };
 
 // Получить узлы в текущем и соседних регионах

@@ -2253,5 +2253,6 @@ region(previef functionality)
 region(ai system)
 	var(__aiagent,null);
 	getter_func(isAIAgent,!isNull(getSelf(__aiagent)));
+	var(__curRegion,""); // текущий регион в котором находится сущность
 
 endclass

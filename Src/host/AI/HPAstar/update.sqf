@@ -28,7 +28,7 @@ ai_nav_updateRegion = {
     _regionKey
 };
 
-ai_nav_updateOrCreateRegion = {
+ai_nav_createRegionIfNeed = {
     params ["_pos"];
     private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
     private _regionData = ai_nav_regions get _regionKey;
@@ -39,18 +39,25 @@ ai_nav_updateOrCreateRegion = {
     };
 };
 
-//todo request pool for update region
+
 ai_nav_requestUpdateRegion = {
     params ["_pos"];
-    /* 
-        !известная проблема на данный момент
-        !при обновлении дверей регион не патчится, возможно серверная модель не актуализируется
+    private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
+    ["request update region at %1",_regionKey] call ai_log;
+    if (_regionKey in ai_regionsUpdateMap) then {
+        private _iOld = ai_regionsUpdateMap get _regionKey;
+        
+        //регион уже в конце очереди
+        if (_iOld == (count ai_regionsUpdateQueue - 1)) exitWith {};
 
-        !я думаю что визуал обновляется только в следующем фрейме
-    */
-
-    ["request update region at %1",_pos] call ai_log;
-    [_pos] call ai_nav_updateRegion;
+        //здесь муваем регион в конец очереди во избежании задержек обновлений
+        ai_regionsUpdateQueue deleteAt _iOld;
+        private _iNew = ai_regionsUpdateQueue pushBack _regionKey;
+        ai_regionsUpdateMap set [_regionKey, _iNew];
+    } else {
+        private _i = ai_regionsUpdateQueue pushBack _regionKey;
+        ai_regionsUpdateMap set [_regionKey, _i];
+    };
 };
 
 ai_nav_invalidateRegion = {
