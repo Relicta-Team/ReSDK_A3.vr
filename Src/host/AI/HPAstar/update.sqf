@@ -270,30 +270,82 @@ ai_nav_buildEntrancesBetween = {
     // ОПТИМИЗАЦИЯ: Spatial partitioning для избежания O(n²) перебора
     private _maxDist = ai_nav_gridStep * 2;
     private _gridSize = _maxDist;
-    private _spatialGrid = createHashMap;
     
+    #ifndef AI_USE_CACHE_SPATIAL_GRID
+        private _spatialGrid = createHashMap;
+    #else
+        // Пытаемся использовать готовый spatial grid из региона 2
+        private _spatialGrid = _region2Data getOrDefault ["spatialGrid", createHashMap];
+        private _gridWasReused = (count _spatialGrid > 0);
+    #endif
+
     ai_debug_decl(private _tGrid = tickTime;)
-    
-    // Строим пространственную сетку для border2
-    {
-        _x params ["_idx2", "_pos2"];
-        _pos2 params ["_px", "_py"];
-        
-        // Вычисляем ключ ячейки сетки
-        private _gridX = floor(_px / _gridSize);
-        private _gridY = floor(_py / _gridSize);
-        private _gridKey = format ["%1_%2", _gridX, _gridY];
-        
-        if (!(_gridKey in _spatialGrid)) then {
-            _spatialGrid set [_gridKey, []];
+
+    #ifndef AI_USE_CACHE_SPATIAL_GRID
+        // Строим пространственную сетку для border2
+        {
+            _x params ["_idx2", "_pos2"];
+            _pos2 params ["_px", "_py"];
+            
+            // Вычисляем ключ ячейки сетки
+            private _gridX = floor(_px / _gridSize);
+            private _gridY = floor(_py / _gridSize);
+            private _gridKey = str [_gridX, _gridY];
+            
+            if (!(_gridKey in _spatialGrid)) then {
+                _spatialGrid set [_gridKey, []];
+            };
+            (_spatialGrid get _gridKey) pushBack [_idx2, _pos2];
+        } forEach _border2;
+    #else
+        // Если grid пустой или его нет - строим заново (только для border2!)
+        if !(_gridWasReused) then {
+            // Строим ПОЛНЫЙ spatial grid для региона 2
+            private _allNodes2 = _region2Data get "nodes";
+            {
+                private _nodeId = _x;
+                private _nodeData = ai_nav_nodes get _nodeId;
+                private _pos2 = _nodeData get "pos";
+                _pos2 params ["_px", "_py"];
+                
+                private _gridX = floor(_px / _gridSize);
+                private _gridY = floor(_py / _gridSize);
+                private _gridKey = str [_gridX, _gridY];
+                
+                if (!(_gridKey in _spatialGrid)) then {
+                    _spatialGrid set [_gridKey, []];
+                };
+                (_spatialGrid get _gridKey) pushBack [_forEachIndex, _pos2];
+            } forEach _allNodes2;
+        } else {
+            // Grid переиспользован - нужно пересчитать индексы для border2
+            // (т.к. в сохранённом grid индексы относятся ко всем узлам региона)
         };
-        (_spatialGrid get _gridKey) pushBack [_idx2, _pos2];
-    } forEach _border2;
+    #endif
     
     ai_debug_decl(private _tGridEnd = tickTime;)
     
     private _query = [];
     private _queryData = [];
+
+    #ifdef AI_USE_CACHE_SPATIAL_GRID
+        // Если grid переиспользован - фильтруем только border узлы из полного grid
+        private _border2Map = createHashMap;
+        if (_gridWasReused) then {
+            // Создаём быстрый lookup для border узлов
+            {
+                _x params ["_idx2", "_pos2"];
+                _border2Map set [_idx2, _pos2];
+            } forEach _border2;
+        };
+    #endif
+
+    private _cellOffsets = [
+        [-1,-1],[-1,0],[-1,1],
+		[0,-1], [0,0], [0,1],
+		[1,-1], [1,0], [1,1]
+    ];
+
     // Проверяем связи только между близкими узлами (spatial partitioning)
     {
         _x params ["_idx1", "_pos1"];
@@ -304,14 +356,22 @@ ai_nav_buildEntrancesBetween = {
         private _gridY = floor(_py / _gridSize);
         
         // Проверяем только 9 соседних ячеек (3×3 grid)
-        for "_dgx" from -1 to 1 do {
-            for "_dgy" from -1 to 1 do {
-                private _checkKey = format ["%1_%2", _gridX + _dgx, _gridY + _dgy];
+        {
+        //for "_dgx" from -1 to 1 do {
+            //for "_dgy" from -1 to 1 do {
+                _x params ["_dgx", "_dgy"];
+                private _checkKey = str [_gridX + _dgx, _gridY + _dgy];
                 private _nearbyNodes = _spatialGrid getOrDefault [_checkKey, []];
                 
                 // Проверяем только узлы в этой ячейке
                 {
                     _x params ["_idx2", "_pos2"];
+                    
+                    #ifdef AI_USE_CACHE_SPATIAL_GRID
+                        // Если grid переиспользован - проверяем что узел в border2
+                        if (_gridWasReused && {!(_idx2 in _border2Map)}) then {continue};
+                    #endif
+
                     private _nodeId2 = (_region2Data get "nodes") select _idx2;
                     
                     ai_debug_decl(_distChecks = _distChecks + 1;)
@@ -352,8 +412,9 @@ ai_nav_buildEntrancesBetween = {
                         ai_debug_decl(_raycastTime = _raycastTime + (tickTime - _tRaycast);)
                     };
                 } forEach _nearbyNodes;
-            };
-        };
+            //};
+        //};
+        } forEach _cellOffsets;
     } forEach _border1;
     private _r = lineIntersectsSurfaces [_query];
     {

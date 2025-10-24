@@ -48,6 +48,9 @@
 //дополнительные лучи для поиска незахваченных поверхностей
 //#define AI_EXPERIMENTAL_NODE_HOLE_FIX
 
+//использовать кеш spatial grid для переиспользования (на тестах не давало прироста)
+//#define AI_USE_CACHE_SPATIAL_GRID
+
 // Навигационные данные
 ai_nav_regions = createHashMap;      // regionKey -> region data
 ai_nav_nodes = createHashMap;        // nodeId -> node data  
@@ -421,6 +424,12 @@ ai_nav_generateRegionNodes = {
 	// Автоматически сохраняем регион, если включено
 	if (_autoSave) then {
 		[_regionKey, _nodes, _edgesList] call ai_nav_saveRegion;
+	
+		#ifdef AI_USE_CACHE_SPATIAL_GRID
+			// Сохраняем spatial grid для переиспользования
+			private _regionData = ai_nav_regions get _regionKey;
+			_regionData set ["spatialGrid", _spatialGrid];
+		#endif
 	};
 	
 	// Возвращаем ключ региона
