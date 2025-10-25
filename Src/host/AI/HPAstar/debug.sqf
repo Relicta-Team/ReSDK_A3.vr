@@ -28,6 +28,20 @@ _pd = [format["%1_%2",_xd,_yd]] call ai_nav_regionToPos; _ctrupd=_ctrupd+1;
 _t2 = diag_tickTime-_t;
 [_t2/_cnt * 1000/_ctrupd,_ctrupd];
 
+
+//test in MP
+_nodes= ai_nav_regions get([3787.83,3789.09,24.3677] call ai_nav_getregionkey) get "nodes";
+objs = [];
+{
+_pos = ai_nav_nodes get _x get "pos";
+{
+_p2 = ai_nav_nodes get (_x select 0) get "pos";
+objs pushback [asltoatl _pos,asltoatl _p2,[1,0,0,1],20];
+} foreach (ai_nav_adjacency get _x);
+
+} foreach _nodes;
+publicVariable "objs"
+
 */
 
 if isNull(ai_debug_objs) then {

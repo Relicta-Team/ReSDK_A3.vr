@@ -68,8 +68,18 @@ ai_log = {
 	log("[AI]: "+(_this call formatLazy));
 };
 
+//todo remove when ai will be stable
+#ifndef EDITOR
+ai_countCreatedAI = 0;
+#endif
+
 ai_createMob = {
 	params ["_pos",["_builderType","AgentBuilderEater"]];
+
+	#ifndef EDITOR
+	if (ai_countCreatedAI >= 10) exitWith {nullPtr};
+	ai_countCreatedAI = ai_countCreatedAI + 1;
+	#endif
 
 	if !struct_existType_str(_builderType) exitWith {nullPtr};
 
@@ -253,7 +263,10 @@ ai_onUpdate = {
 		};
 
 		//обновляем счетчик активности региона
-		if callFunc(_mob,isPlayer) then {
+		if 
+			//callFunc(_mob,isPlayer) //! по непонятной причине флаг игрока может иметь неактуальные значения
+			!isNullReference(getVar(_mob,client))
+		then {
 			if not_equals(_curRegionBackup,_curRegion) then {
 				[_curRegionBackup,-1] call ai_modifyRegionRefCount;
 			};

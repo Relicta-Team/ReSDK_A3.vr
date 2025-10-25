@@ -39,8 +39,8 @@ ai_nav_createRegionIfNeed = {
     };
 };
 
-
-ai_nav_requestUpdateRegion = {
+ai_nav_requestUpdateRegion = {nextFrameParams(ai_nav_requestUpdateRegion_internal,_this)};
+ai_nav_requestUpdateRegion_internal = {
     params ["_pos"];
     private _regionKey = [_pos select 0, _pos select 1] call ai_nav_getRegionKey;
     ["request update region at %1",_regionKey] call ai_log;
@@ -67,6 +67,37 @@ ai_nav_invalidateRegion = {
     if (isNil "_regionData") exitWith {};
     
     private _oldNodeIds = _regionData get "nodes";
+    private _entrances = _regionData get "entrances";
+    
+    // ИСПРАВЛЕНИЕ: Удаляем межрегиональные связи ПЕРЕД удалением региона
+    // Проходим по всем соседним регионам, с которыми были entrance points
+    //TODO remove this block
+    {
+        private _neighborKey = _x;
+        private _neighborData = ai_nav_regions get _neighborKey;
+        
+        if (!isNil "_neighborData") then {
+            private _neighborEntrances = _neighborData get "entrances";
+            private _neighborEntrancesToUs = _neighborEntrances getOrDefault [_regionKey, []];
+            
+            // Удаляем связи из adjacency соседних узлов, которые ведут к нашим узлам
+            private _ourNodeSet = createHashMapFromArray (_oldNodeIds apply {[_x, true]});
+            
+            {
+                private _neighborNodeId = _x;
+                if (_neighborNodeId in ai_nav_adjacency) then {
+                    private _adjList = ai_nav_adjacency get _neighborNodeId;
+                    // Удаляем связи с нашими узлами
+                    _adjList = _adjList select {!((_x select 0) in _ourNodeSet)};
+                    ai_nav_adjacency set [_neighborNodeId, _adjList];
+                };
+            } forEach _neighborEntrancesToUs;
+            
+            // Удаляем entrance points соседа на нас
+            _neighborEntrances deleteAt _regionKey;
+        };
+    } forEach (keys _entrances);
+    //endremove this block
     
     // Удаляем старые узлы из глобального справочника
     {
@@ -385,28 +416,13 @@ ai_nav_buildEntrancesBetween = {
                         //     objNull, objNull, true, 1, "VIEW", "GEOM"
                         // ];
                         _query pushback [
-                            _pos1 vectoradd vec3(0,0,0.4),
-                            _pos2 vectoradd vec3(0,0,0.4),
+                            (_pos1 vectoradd vec3(0,0,0.4)),
+                            (_pos2 vectoradd vec3(0,0,0.4)),
                             objNull, objNull, true, 1, "VIEW", "GEOM"
                         ];
                         _queryData pushback [
                             _nodeId1,_nodeId2,_dist
                         ];
-
-                        #ifdef AI_NAV_DEBUG_DRAW
-                            // Визуализация переходной точки
-                            private _loopEntrance = struct_newp(LoopedObjectFunction,
-                                ai_nav_debug_drawNode arg [
-                                    asltoatl _pos1 vectoradd vec3(0,0,0) arg 
-                                    asltoatl _pos2 vectoradd vec3(0,0,0) arg 
-                                    [1 arg 0 arg 0 arg 1] arg 
-                                    25*2
-                                ] arg 
-                                null arg 
-                                ai_debug_objs select 0
-                            );
-                            ai_debug_loopDrawObjs pushback _loopEntrance;
-                        #endif
 
                         ai_debug_decl(_raycastCount = _raycastCount + 1;)
                         ai_debug_decl(_raycastTime = _raycastTime + (tickTime - _tRaycast);)
@@ -445,6 +461,23 @@ ai_nav_buildEntrancesBetween = {
                 ai_nav_adjacency set [_nodeId2, []];
             };
             (ai_nav_adjacency get _nodeId2) pushBackUnique [_nodeId1, _dist];
+
+            #ifdef AI_NAV_DEBUG_DRAW
+                private _pos1 = ai_nav_nodes get _nodeId1 get "pos";
+                private _pos2 = ai_nav_nodes get _nodeId2 get "pos";
+                // Визуализация переходной точки
+                private _loopEntrance = struct_newp(LoopedObjectFunction,
+                    ai_nav_debug_drawNode arg [
+                        asltoatl _pos1 vectoradd vec3(0,0,0) arg 
+                        asltoatl _pos2 vectoradd vec3(0,0,0) arg 
+                        [1 arg 0 arg 0 arg 1] arg 
+                        25*2
+                    ] arg 
+                    null arg 
+                    ai_debug_objs select 0
+                );
+                ai_debug_loopDrawObjs pushback _loopEntrance;
+            #endif
 
         };
     } foreach _r;

@@ -143,8 +143,8 @@ ai_nav_findEntrancePoints = {
 						private _canConnect = true;
 						if (_needRaycast) then {
 							private _intersections = lineIntersectsSurfaces [
-								_nodePos vectoradd vec3(0,0,0.4),
-								_neighborPos vectoradd vec3(0,0,0.4),
+								asltoatl (_nodePos vectoradd vec3(0,0,0.4)),
+								asltoatl (_neighborPos vectoradd vec3(0,0,0.4)),
 								objNull, objNull, true, 1, "VIEW", "GEOM"
 							];
 							_canConnect = count _intersections == 0;
