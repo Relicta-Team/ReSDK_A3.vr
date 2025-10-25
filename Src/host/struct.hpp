@@ -3,7 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define STRUCT_API_VERSION 1.7
+#define STRUCT_API_VERSION 2.0
 // enable fileinfo for structs. do not enable in release build
 //#define STRUCT_USE_ALLOC_INFO
 
@@ -423,6 +423,103 @@
 			} foreach (_tList select [1]);
 			strt_inh set [_x,_tList];
 		} foreach _weakDeclMap;
+	};
+
+
+	#define STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+	//!ОБНОВЛЕННЫЕ ТИПЫ ЗАРАБОТАЮТ ТОЛЬКО ДЛЯ НОВЫХ ИНСТАНСОВ
+	struct_reinitialize = {
+		params ["_path"];
+		spi_lst = [];
+		call compile preprocessFileLineNumbers _path;
+		{
+			private _undefFields = _x select {count _x==1};
+			{
+				_x append [nil];
+				;false
+			} count _undefFields;
+
+			private _decl = createHashMapFromArray _x;
+			private _class = _decl get STRUCT_MEM_TYPE;
+			private _baseClass = _decl get STRUCT_MEM_BASE;
+			private _vtableCur = vtable_s get _class;
+			private _currentMethods = createhashmap;
+
+			#ifdef STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+				["Reinitialize struct %1",_class] call cprint;
+			#endif
+
+			{
+				if equalTypes(_y,{}) then {
+					#ifdef STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+						["  found method %1",_x] call cprint;
+					#endif
+					_currentMethods set [_x,_y];
+				};
+			} foreach _vtableCur;
+
+			//rename system methods
+			private _t = _decl deleteAt "init";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_CONSTRUCTOR,_t];
+			};
+			_t = _decl deleteAt "del";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_DESTRUCTOR,_t];
+			};
+			_t = _decl deleteat "copy";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_COPY,_t];
+			};
+			_t = _decl deleteat "str";
+			if !isNullVar(_t) then {
+				_decl set [STRUCT_MEM_TOSTRING,_t];
+			};
+
+			//path methods
+			{
+				[_x,_y] params ["_memname","_code"];
+				if equalTypes(_code,{}) then {
+					_currentMethods deleteAt _memname;
+					
+					private _code__ = toString _code;
+					if !(__STRUCT_CALLBASE_TOKEN__ in _code__) exitWith {
+						#ifdef STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+							["  valid method %1",_memname] call cprint;
+						#endif
+						_vtableCur set [_memname,_code];
+					};
+
+					//match
+					private _signatures = [_code__,__STRUCT_CALLBASE_REGEX__] call regex_getMatches;
+					private _mname = null;
+					//replace tokens
+					{
+						_mname = [_x,"'(\w+)'",1] call regex_getFirstMatch;
+						_code__ = [_code__,
+							format[__STRUCT_CALLBASE_REGEX_REPLACE_FORMAT__,_mname],
+							format["(_this call (pts_%1 get '%2'))",_baseClass,_mname]
+						] call regex_replace
+					} foreach _signatures;
+
+					//update code
+					_vtableCur set [_memname,compile _code__];
+					#ifdef STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+						["  path method %1",_memname] call cprint;
+					#endif
+				};
+						
+			} foreach _decl;
+
+			if (count _currentMethods > 0) then {
+				{
+					#ifdef STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+						["  delete method %1",_x] call cprint;
+					#endif
+					_vtableCur deleteAt _x;
+				} foreach _currentMethods;
+			};
+		} foreach spi_lst;
 	};
 
 	struct_alloc = {

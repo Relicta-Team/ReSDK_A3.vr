@@ -687,6 +687,11 @@ region(Connect control events)
 		callSelf(releaseBuildingPreview);
 
 		callSelf(dropAllItemsInHands);
+
+		if not_equals(getSelf(__curRegion),"") then {
+			[getSelf(__curRegion),-1] call ai_modifyRegionRefCount;
+			setSelf(__curRegion,"");
+		};
 	};
 
 region(Mob location info: position; direction; speed)
@@ -2249,4 +2254,10 @@ region(previef functionality)
 
 		[this,false] call csys_onCraftEndPreview;
 	};
+
+region(ai system)
+	var(__aiagent,null);
+	getter_func(isAIAgent,!isNull(getSelf(__aiagent)));
+	var(__curRegion,""); // текущий регион в котором находится сущность
+
 endclass

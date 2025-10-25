@@ -328,7 +328,9 @@ cm_getAllClientsInGame = {
 cm_registerMobInGame = {
 	params ["_mobObj","_client","_vMob"];
 	
-	setVar(_client,actor,_mobObj);
+	if !isNullVar(_client) then {
+		setVar(_client,actor,_mobObj);
+	};
 	
 	cm_allInGameMobs pushBackUnique _mobObj;
 	netSetGlobal(smd_allInGameMobs,cm_allInGameMobs); //региструруем сетевую переменную
