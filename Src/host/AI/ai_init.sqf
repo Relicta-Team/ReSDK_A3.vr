@@ -65,7 +65,9 @@ ai_modifyRegionRefCount = {
 };
 
 ai_log = {
-	log("[AI]: "+(_this call formatLazy));
+	#ifdef EDITOR
+		log("[AI]: "+(_this call formatLazy));
+	#endif
 };
 
 //todo remove when ai will be stable
