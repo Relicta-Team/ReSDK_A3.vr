@@ -3974,7 +3974,7 @@ Replaced value:
 ```sqf
 (getSelf(owner) call anim_getUnitAnim)
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 879](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L879)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 884](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L884)
 ## __data_light_slot__
 
 Type: constant
@@ -3986,7 +3986,7 @@ Replaced value:
 ```sqf
 [[INV_BACKPACK,null], [INV_ARMOR,null], [INV_HEAD,null], [INV_BACK,null],[INV_CLOTH,null],[INV_FACE,null],[INV_HAND_R,null],[INV_HAND_L,null],[INV_BELT,null]]
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 989](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L989)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 994](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L994)
 ## debug_internal_getinteractiontarget_spheres
 
 Type: Variable
@@ -4012,7 +4012,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1929](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1929)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1934](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1934)
 ## mob_static_assign_signatures
 
 Type: Variable
@@ -4024,7 +4024,7 @@ Initial value:
 ```sqf
 createhashMap
 ```
-File: [host\GameObjects\Mobs\BasicMob.sqf at line 1930](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1930)
+File: [host\GameObjects\Mobs\BasicMob.sqf at line 1935](../../../Src/host/GameObjects/Mobs/BasicMob.sqf#L1935)
 # Mob.sqf
 
 ## __performace_attacklog
@@ -4348,7 +4348,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1464](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1464)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1476](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1476)
 ## go_static_internal_map_redirzones
 
 Type: Variable

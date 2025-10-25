@@ -36,7 +36,7 @@ Count modules: 33
 # Side: host
 Count modules: 57
  - [host](host//host.md) - 12 files
- - [AI](host//AI.md) - 1 files
+ - [AI](host//AI.md) - 14 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
  - [Atmos](host//Atmos.md) - 9 files
  - [CaveSystem](host//CaveSystem.md) - 4 files
