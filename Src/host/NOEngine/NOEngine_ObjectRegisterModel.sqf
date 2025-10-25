@@ -361,9 +361,7 @@ noe_replicateObject = {
 			{
 				rpcSendToClient(getVar(_x,id),"onupdob",_packet);
 			} foreach chunk_getOwners(_chunkObject);
-
-			//request update region
-			[getposasl _obj] call ai_nav_requestUpdateRegion;
+			
 		};
 
 	};

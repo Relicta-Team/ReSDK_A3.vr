@@ -306,7 +306,7 @@ struct(AgentEater) base(AgentBase)
 	def(lastSeenTargetPos) [0,0,0]; // последняя известная позиция цели
 	
 	def(interactDistance) 1.3;
-	def(attackDistance) 1.3;
+	def(attackDistance) 1.9;
 
 	def(sensorUpdateDelay) 0.5;
 	def(updateDelay) 0.3;
@@ -339,6 +339,8 @@ struct(AgentEater) base(AgentBase)
 			callFunc(_x,isPlayer)
 			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
+			&& !getVar(_x,isDead)
+			&& isTypeOf(_x,Mob)
 		};
 		
 		if (count _nearMobs > 0) then {

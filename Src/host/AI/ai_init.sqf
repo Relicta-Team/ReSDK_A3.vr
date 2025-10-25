@@ -88,13 +88,13 @@ ai_createMob = {
 	[_mob,_st,_iq,_dx,_ht] call gurps_initSkills;
 	
 	private _firstName = _builder callp(getFirstName,_mob);
-	if (_firstName != "") then {
+	if (_firstName == "") then {
 		setVar(_mob,name,"Существо");
 		([GENDER_MALE] call naming_getRandomName) params ["_f_","_s_"];
-		[_mob,_f_,_s_] call naming_generateName;
+		callFuncParams(_mob,generateNaming,_f_ arg _s_);
 	} else {
 		private _secondName = _builder callp(getSecondName,_mob);
-		[_mob,_firstName,_secondName] call naming_generateName;
+		callFuncParams(_mob,generateNaming,_firstName arg _secondName);
 	};
 
 	[_gMob,null,_mob] call cm_registerMobInGame;
@@ -105,9 +105,14 @@ ai_createMob = {
 	_builder callp(onApply,_mob);
 
 	setVar(_mob,curTargZone,TARGET_ZONE_RANDOM);
+
+	//forced unsleep
+	setVar(_mob,sleepStrength,0);
 	
 	_gMob enableAI "MOVE";
 	_gMob enableAI "ANIM";
+
+	_gMob switchmove "amovpercmstpsnonwnondnon"; //for standup anim
 
 	[_mob,SPEED_MODE_WALK] call ai_setSpeed;
 
@@ -201,13 +206,15 @@ ai_onUpdate = {
 	private _mob = null;
 	private _curRegion = "";
 	private _curRegionObj = null;
+	private _deadMobs = [];
 	{
-		_mob = _x;
+		_body = _x;
+		_mob = _x getvariable "link";
 		_agent = getVar(_mob,__aiagent);
 
 		_curRegion = getVar(_mob,__curRegion);
 		_curRegionObj = ai_nav_regions get _curRegion;
-		_pos = getposasl getVar(_mob,owner);
+		_pos = getposasl _body;
 		_changedPos = false;
 		_curRegionBackup = _curRegion;
 
@@ -215,6 +222,9 @@ ai_onUpdate = {
 		if isNullVar(_curRegionObj) then {
 			//региона не существует - создаем его
 			[_pos] call ai_nav_updateRegion;
+			_curRegion = _pos call ai_nav_getRegionKey;
+			_curRegionBackup = _curRegion;
+			
 			_curRegionObj = ai_nav_regions get _curRegion;
 			(_curRegionObj get "mobs") pushBack _mob;
 			setVar(_mob,__curRegion,_curRegion);
@@ -222,12 +232,20 @@ ai_onUpdate = {
 			_changedPos = true;
 		} else {
 			//региона существует - проверяем находится ли моб в нем
-			_actualRegionObj = [_pos] call ai_nav_getRegion;
+			_actualRegion = _pos call ai_nav_getRegionKey;
+			_actualRegionObj = ai_nav_regions get _actualRegion;
+			
+			//если регион не существует - создаем его
+			if isNullVar(_actualRegionObj) then {
+				[_pos] call ai_nav_updateRegion;
+				_actualRegionObj = ai_nav_regions get _actualRegion;
+			};
+
 			if not_equals(_curRegionObj,_actualRegionObj) then {
 				private _oldRegionMobs = (_curRegionObj get "mobs");
 				_oldRegionMobs deleteAt (_oldRegionMobs find _mob);
 				(_actualRegionObj get "mobs") pushBack _mob;
-				setVar(_mob,__curRegion,_actualRegionObj);
+				setVar(_mob,__curRegion,_actualRegion);
 				
 				_changedPos = true;
 				_curRegion = _pos call ai_nav_getRegionKey;
@@ -248,7 +266,12 @@ ai_onUpdate = {
 		if !isNullVar(_agent) then {
 			
 			//todo упрощенная симуляция AI в инактивных регионах
-			if !(_curRegion in ai_activeRegions) exitWith {};
+			if !(_curRegion in ai_activeRegions) exitWith {
+				//временно стопаем сущность
+				private _valpos = _agent getv(lastvalidpos);
+				[_mob] call ai_stopMove;
+				_agent setv(lastvalidpos,_valpos); //на всякий случай откатываем валидную позицию
+			};
 
 			#ifdef AI_DEBUG_MOVETOPLAYER
 				private _body = toActor(_mob);
@@ -269,11 +292,26 @@ ai_onUpdate = {
 			if (_agent getv(ismoving)) then {
 				[_mob] call ai_handleMove;
 			};
+
+			//если моб инактивен - так же стопаем его
+			//TODO возможно есть какой-то более лучший способ сделать это
+			if !callFunc(_mob,isActive) then {
+				[_mob] call ai_stopMove;
+				if (getVar(_mob,isDead)) then {
+					_deadMobs pushBack _mob;
+				};
+				continue;
+			};
 			
 			// Обновление Utility AI
 			[_mob,_agent] call ai_brain_update;
 		};
 	} foreach cm_allInGameMobs;
+
+	{
+		setVar(_x,__aiagent,null);
+		array_remove(ai_allMobs,_x);
+	} foreach _deadMobs;
 };
 
 ai_debugStart = {
@@ -361,6 +399,7 @@ ai_debug_internal_brainiInfo = {
 
 	_t pushBack "=== BRAIN INFO ===";
 	_t pushback format["Agents: %1 | Mobs: %2",count ai_allMobs,count smd_allInGameMobs];
+	_t pushback format["AR: %1; updQ: %2",count ai_activeRegions,count ai_regionsUpdateQueue,(getposasl player) call ai_nav_getRegionKey];
 	_t pushBack "";
 
 	// Находим ближайшего моба к игроку для детальной информации

@@ -2,6 +2,33 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
+/*
+for debugging regions use:
+
+call compile preprocessFileLineNumbers "src\host\AI\ai_init.sqf";
+call ai_nav_clearDebugObjects;
+_t = diag_tickTime;
+_p = getposasl cameraon;
+_key = _p call ai_nav_getregionkey;
+_key splitString "_" apply {parsenumber _x} params ["_xp","_yp"];
+_ctrupd = 0; 
+
+_cnt = 1;
+_icnt=2;
+
+for "_i" from 1 to _cnt do {
+for "_xd" from _xp-_icnt to _xp+_icnt do {
+for "_yd" from _yp-_icnt to _yp+_icnt do {
+_pd = [format["%1_%2",_xd,_yd]] call ai_nav_regionToPos; _ctrupd=_ctrupd+1;
+[_pd] call ai_nav_updateregion;
+}
+}
+
+};
+_t2 = diag_tickTime-_t;
+[_t2/_cnt * 1000/_ctrupd,_ctrupd];
+
+*/
 
 if isNull(ai_debug_objs) then {
 	ai_debug_objs = [];

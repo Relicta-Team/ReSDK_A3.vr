@@ -27,7 +27,7 @@ ai_planMove = {
 	params ["_mob","_destPos",["_srcPosIn",null]];
 	FHEADER;
 	private _body = toActor(_mob);
-	private _srcPos = ifcheck(isNullVar(_srcPosIn),getposasl _body,_srcPosIn);
+	private _srcPos = ifcheck(isNullVar(_srcPosIn),getVar(_mob,__aiagent) getv(lastvalidpos),_srcPosIn);
 	if equalTypes(_destPos,nullPtr) then {
 		_destPos = atltoasl callFunc(_destPos,getPos);
 	};
@@ -143,6 +143,7 @@ ai_handleMove = {
 	private _curpos = getposasl _body;
 	// КОРРЕКЦИЯ ПУТИ: проверяем отклонение от отрезка
 	private _maxDeviation = 0.8; // Максимальное отклонение в метрах
+	private _maxDeviationFailed = 2; //Максимальное отклонение в метрах для failed коррекции
 	
 	// Находим ближайшую точку на отрезке prevPos -> targetPos
 	private _closestPoint = [_prevPos, _targetPos, _curPos] call ai_getClosestPointOnSegment;
@@ -152,25 +153,35 @@ ai_handleMove = {
 	
 	// Если отклонение слишком большое - телепортируем обратно на путь
 	if (_deviation > _maxDeviation) then {
+		[_mob,true] call ai_internal_setStop;
+		[_mob,_targetPos] call ai_moveTo;
+		[_mob,false] call ai_internal_setStop;
+		
+		["(SMALL) PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
+	};
+	if (_deviation > _maxDeviationFailed) then {
+		["PATH CORRECTION FAILED: deviation %1m, teleported to targetpos", (_deviation toFixed 2)] call ai_log;
 		// Небольшое смещение вверх чтобы не застрять в геометрии
 		_closestPoint set [2, (_closestPoint select 2) + 0.01];
 		[_mob,true] call ai_internal_setStop;
 		_body setPosASL _closestPoint;
-		[_mob,false] call ai_internal_setStop;
-		
-		["PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
+		[_mob,_targetPos] call ai_moveTo;
 	};
+	
 
 	//fix nonmoving bug
 	if (
 		(speed _body == 0)
-		&& {((_agent getv(lastPointSetup)) + 1) < tickTime}
+		&& {((_agent getv(lastPointSetup)) + 4) < tickTime}
 	) then {
 		["nonmoving bug detected, teleporting to targetpos"] call ai_log;
 		_body setPosASL _targetPos;
 	};
 
 	if (((getposasl _body) distance _targetPos) <= 0.6) then {
+		#ifdef AI_DEBUG_TRACEPATH
+			(ai_debug_internal_drawPathObjects select _curidx) setObjectTextureGlobal [0,"#(rgb,8,8,3)color(0,1,0,1)"];
+		#endif
 		INC(_curidx);
 		_agent setv(lastPointSetup,tickTime);
 		_agent setv(targetidx,_curidx);
@@ -237,6 +248,10 @@ ai_stopMove = {
 	private _speedMode = callFunc(_mob,getSpeedMode);
 	private _actor = toActor(_mob);
 	if (_speedMode >= SPEED_MODE_RUN) then {
+		
+		//инактивные мобы не могут двигаться 
+		if !callFunc(_mob,isActive) exitWith {};
+
 		private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
 		private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
 		private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);

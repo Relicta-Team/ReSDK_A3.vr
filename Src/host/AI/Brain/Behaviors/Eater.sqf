@@ -31,6 +31,7 @@ struct(BAEater_Attack) base(BABase)
     // Локальные данные действия
     def(lastAttackTime) 0;
     def(attackCooldown) 1.5; // Кулдаун между атаками в секундах
+    def(attackCooldownRand) 1.5; //доп кулдаун в секундах
     
     // КОНТЕКСТ: можем атаковать?
     def_ret(isAvailable) {
@@ -42,6 +43,9 @@ struct(BAEater_Attack) base(BABase)
         private _mob = _agent getv(mob);
         private _dist = callFuncParams(_mob,getDistanceTo,_target);
         if (_dist > (_agent getv(attackDistance))) exitWith {false};
+
+        //цель жива
+        if getVar(_target,isDead) exitWith {false};
         
         // Есть стамина для атаки?
         private _staminaPercent = _agent callv(getStaminaPercent);
@@ -84,6 +88,7 @@ struct(BAEater_Attack) base(BABase)
         if (_agent callv(getStaminaPercent) < 10) exitWith {UPDATE_STATE_FAILED};
         
         private _mob = _agent getv(mob);
+        if (callFuncParams(_mob,getDistanceTo,_target) > (_agent getv(attackDistance))) exitWith {UPDATE_STATE_FAILED};
         
         // Проверяем кулдаун
         private _lastAttack = self getv(lastAttackTime);
@@ -94,7 +99,7 @@ struct(BAEater_Attack) base(BABase)
             // Можем атаковать!
             [_mob,_target] call ai_rotateTo;
             [_mob,_target] call ai_attackTarget;
-            self setv(lastAttackTime,tickTime);
+            self setv(lastAttackTime,tickTime + rand(0,self getv(attackCooldownRand)));
         };
         
         // Продолжаем действие (не завершаем)

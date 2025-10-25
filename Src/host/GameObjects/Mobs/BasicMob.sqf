@@ -687,6 +687,11 @@ region(Connect control events)
 		callSelf(releaseBuildingPreview);
 
 		callSelf(dropAllItemsInHands);
+
+		if not_equals(getSelf(__curRegion),"") then {
+			[getSelf(__curRegion),-1] call ai_modifyRegionRefCount;
+			setSelf(__curRegion,"");
+		};
 	};
 
 region(Mob location info: position; direction; speed)
