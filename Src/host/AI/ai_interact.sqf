@@ -119,7 +119,7 @@ ai_planMove = {
 	_agent setv(ismoving,true);
 	private _pathTask = refcreate(false);
 	_agent setv(pathTask,_pathTask);
-	_agent setv(lastPathTask,_pathTask);
+	_agent setv(_lastPathTask,_pathTask);
 
 	_agent setv(lastPointSetup,tickTime);
 
@@ -133,39 +133,79 @@ ai_handleMove = {
 	params ["_mob"];
 	private _body = toActor(_mob);
 	private _agent = getVar(_mob,__aiagent);
+	
+	// ПРОВЕРКА ПАУЗЫ НА РЕЗКОМ ПОВОРОТЕ
+	private _pauseUntil = _agent getOrDefault ["pauseUntil", -1];
+	if (tickTime < _pauseUntil) exitWith {};
+	
 	private _curidx = _agent getv(targetidx);
 	private _targetPos = (_agent getv(curpath)) select _curidx;
-	private _prevPos = (_agent getv(curpath)) select ((_curidx - 1)max 0);
-	[_mob,_targetPos] call ai_moveTo;
-
-	//коррекция пути если персонаж сбился
+	private _prevPos = if (_curidx > 0) then {
+		(_agent getv(curpath)) select (_curidx - 1)
+	} else {
+		getposasl _body // Для первого сегмента используем текущую позицию
+	};
+	
 	private _curpos = getposasl _body;
-	// КОРРЕКЦИЯ ПУТИ: проверяем отклонение от отрезка
-	private _maxDeviation = 0.8; // Максимальное отклонение в метрах
-	private _maxDeviationFailed = 2; //Максимальное отклонение в метрах для failed коррекции
 	
-	// Находим ближайшую точку на отрезке prevPos -> targetPos
-	private _closestPoint = [_prevPos, _targetPos, _curPos] call ai_getClosestPointOnSegment;
+	// ЖЕСТКИЙ КОНТРОЛЬ ДВИЖЕНИЯ: AI должен строго следовать по пути
+	private _adaptiveTarget = _targetPos;
 	
-	// Расстояние от текущей позиции до ближайшей точки на отрезке
-	private _deviation = _curPos distance _closestPoint;
-	
-	// Если отклонение слишком большое - телепортируем обратно на путь
-	if (_deviation > _maxDeviation) then {
-		[_mob] call ai_internal_setStop;
-		[_mob,_targetPos] call ai_moveTo;
+	// Коррекция применяется только если есть валидный сегмент (prevPos != targetPos)
+	if (_prevPos distance _targetPos > 0.1) then {
+		// Находим ближайшую точку на отрезке prevPos -> targetPos
+		private _closestPoint = [_prevPos, _targetPos, _curpos] call ai_getClosestPointOnSegment;
 		
-		["(SMALL) PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
-	};
-	if (_deviation > _maxDeviationFailed) then {
-		["PATH CORRECTION FAILED: deviation %1m, teleported to targetpos", (_deviation toFixed 2)] call ai_log;
-		// Небольшое смещение вверх чтобы не застрять в геометрии
-		_closestPoint set [2, (_closestPoint select 2) + 0.01];
-		[_mob] call ai_internal_setStop;
-		_body setPosASL _closestPoint;
-		[_mob,_targetPos] call ai_moveTo;
+		// Расстояние от текущей позиции до ближайшей точки на отрезке
+		private _deviation = _curpos distance _closestPoint;
+		
+		// ОБНОВЛЯЕМ lastvalidpos на основе прогресса по пути
+		// Если отклонение разумное - используем проекцию на путь как валидную позицию
+		if (_deviation < 2.0) then {
+			_agent setv(lastvalidpos,_closestPoint);
+		};
+		
+		// Пороги отклонения
+		private _maxSoftDeviation = 0.4; // Начало коррекции направления
+		private _maxCriticalDeviation = 2.5; // Критическое отклонение - переустановка пути
+		
+		if (_deviation > _maxSoftDeviation && _deviation <= _maxCriticalDeviation) then {
+			// Мягкая коррекция: направляем AI к точке НА ЛИНИИ пути
+			// Находим точку впереди по пути для плавного возврата на траекторию
+			private _pathVector = _targetPos vectorDiff _prevPos;
+			private _pathLength = vectorMagnitude _pathVector;
+			
+			if (_pathLength > 0.1) then {
+				// Вычисляем прогресс вдоль пути (от 0 до 1)
+				private _progressVector = _curpos vectorDiff _prevPos;
+				private _progress = ((_progressVector select 0) * (_pathVector select 0) + 
+				                     (_progressVector select 1) * (_pathVector select 1) + 
+				                     (_progressVector select 2) * (_pathVector select 2)) / (_pathLength * _pathLength);
+				
+				// Ограничиваем прогресс в диапазоне [0, 1]
+				_progress = (_progress max 0) min 1;
+				
+				// Целимся немного вперёд по пути (на 30% дальше от текущего прогресса к цели)
+				private _targetProgress = (_progress + 0.3) min 1;
+				private _correctionTarget = _prevPos vectorAdd (_pathVector vectorMultiply _targetProgress);
+				_correctionTarget set [2, (_correctionTarget select 2) + 0.01];
+				
+				_adaptiveTarget = _correctionTarget;
+				["Deviation %1m, correcting to path (progress: %2)", (_deviation toFixed 2), (_targetProgress toFixed 2)] call ai_log;
+			};
+		};
+		
+		// Критическое отклонение - полная переустановка движения
+		if (_deviation > _maxCriticalDeviation) then {
+			["Critical deviation %1m! Resetting movement to target", (_deviation toFixed 2)] call ai_log;
+			[_mob] call ai_internal_setStop;
+			// Не телепортируем, просто сбрасываем команду движения и даём новую
+			_adaptiveTarget = _targetPos;
+		};
 	};
 	
+	// Применяем движение к адаптивной цели
+	[_mob,_adaptiveTarget] call ai_moveTo;
 
 	//fix nonmoving bug
 	if (
@@ -176,7 +216,10 @@ ai_handleMove = {
 		_body setPosASL _targetPos;
 	};
 
-	if (((getposasl _body) distance _targetPos) <= 0.6) then {
+	// Увеличенный радиус достижения точки для предотвращения кружения
+	private _reachRadius = 1.2; // было 0.6
+	
+	if (((getposasl _body) distance _targetPos) <= _reachRadius) then {
 		#ifdef AI_DEBUG_TRACEPATH
 			(ai_debug_internal_drawPathObjects select _curidx) setObjectTextureGlobal [0,"#(rgb,8,8,3)color(0,1,0,1)"];
 		#endif
@@ -193,6 +236,39 @@ ai_handleMove = {
 			["TARGET REACHED"] call ai_log;
 		} else {
 			_agent setv(lastvalidpos,_targetPos);
+			
+			// ПРОВЕРКА РЕЗКОГО ПОВОРОТА: если следующая точка под большим углом - стопим
+			private _path = _agent getv(curpath);
+			
+			if (_curidx < (count _path)) then {
+				// После INC: _curidx указывает на следующую цель
+				private _reachedPoint = _targetPos; // Только что достигнутая точка
+				private _nextPoint = _path select _curidx; // Следующая цель
+				
+				// Вектор подхода к достигнутой точке (от предыдущей к достигнутой)
+				private _vec1 = _reachedPoint vectorDiff _prevPos;
+				// Вектор ухода от достигнутой точки (от достигнутой к следующей)
+				private _vec2 = _nextPoint vectorDiff _reachedPoint;
+				
+				private _len1 = vectorMagnitude _vec1;
+				private _len2 = vectorMagnitude _vec2;
+				
+				// Вычисляем угол между векторами
+				if (_len1 > 0.1 && _len2 > 0.1) then {
+					private _dot = (_vec1 select 0) * (_vec2 select 0) + 
+					               (_vec1 select 1) * (_vec2 select 1) + 
+					               (_vec1 select 2) * (_vec2 select 2);
+					private _cosAngle = (_dot / (_len1 * _len2)) max -1 min 1;
+					private _angle = acos _cosAngle;
+					
+					// Если угол больше 40 градусов - останавливаем и ставим на паузу
+					if (_angle >= 90) then {
+						["Sharp turn detected (%1°), stopping for 0.3s", (_angle toFixed 1)] call ai_log;
+						[_mob] call ai_internal_setStop;
+						_agent set ["pauseUntil", tickTime + 0.4]; // Пауза 300ms
+					};
+				};
+			};
 		};
 	};
 };
@@ -245,19 +321,19 @@ ai_stopMove = {
 	private _restoreSpeed = false;
 	private _speedMode = callFunc(_mob,getSpeedMode);
 	private _actor = toActor(_mob);
-	if (_speedMode >= SPEED_MODE_RUN) then {
+	// if (_speedMode >= SPEED_MODE_RUN) then {
 		
-		//инактивные мобы не могут двигаться 
-		if !callFunc(_mob,isActive) exitWith {};
+	// 	//инактивные мобы не могут двигаться 
+	// 	if !callFunc(_mob,isActive) exitWith {};
 
-		private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
-		private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
-		private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);
-		private _stances = ["PRONE","CROUCH","STAND"];
-		private _idxStance = _stances find (stance _actor);
-		if (_idxStance == -1) then {_idxStance = 0};
-		_actor switchmove (_curAnims select _idxStance);
-	};
+	// 	private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
+	// 	private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
+	// 	private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);
+	// 	private _stances = ["PRONE","CROUCH","STAND"];
+	// 	private _idxStance = _stances find (stance _actor);
+	// 	if (_idxStance == -1) then {_idxStance = 0};
+	// 	_actor switchmove (_curAnims select _idxStance);
+	// };
 	[_mob] call ai_internal_setStop;
 	private _agent = getVar(_mob,__aiagent);
 	_agent setv(ismoving,false);
@@ -483,6 +559,9 @@ ai_setSpeed = {
 ai_rotateTo = {
 	params ["_mob","_posOrTarget"];
 	private _actor = toActor(_mob);
+	if equals(_posOrTarget,nullPtr) exitWith { //!может вызывать баги анимации при сбросе
+		_actor lookat objnull;
+	};
 	private _targetPos = if equalTypes(_posOrTarget,nullPtr) then {
 		callFunc(_posOrTarget,getPos);
 	} else {

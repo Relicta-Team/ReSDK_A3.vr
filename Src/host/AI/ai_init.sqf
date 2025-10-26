@@ -70,6 +70,11 @@ ai_log = {
 	#endif
 };
 
+ai_stats_maxProcUpdate = 0;
+ai_stats_maxProcUpdateAgent = 0;
+ai_stats_nextRefreshTime = 0;
+#define AI_STATS_REFRESH_INTERVAL 5
+
 //todo remove when ai will be stable
 #ifndef EDITOR
 ai_countCreatedAI = 0;
@@ -191,8 +196,16 @@ ai_init = {
 
 //цикл обновления AI
 ai_onUpdate = {
+	if (tickTime > ai_stats_nextRefreshTime) then {
+		ai_stats_nextRefreshTime = tickTime + AI_STATS_REFRESH_INTERVAL;
+		ai_stats_maxProcUpdate = 0;
+		ai_stats_maxProcUpdateAgent = 0;
+	};
 	//синхронизируем регионы
 	private _pos = [];
+	private _tUpd = tickTime;
+	private _tAgent = tickTime;
+
 	if (tickTime > ai_nextUpdateReg) then {
 		ai_nextUpdateReg = tickTime + ai_updateRegInterval;
 		private _updated = [];
@@ -280,6 +293,8 @@ ai_onUpdate = {
 		//обновляем агента
 		if !isNullVar(_agent) then {
 			
+			_tAgent = tickTime;
+
 			//todo упрощенная симуляция AI в инактивных регионах
 			if !(_curRegion in ai_activeRegions) exitWith {
 				//временно стопаем сущность
@@ -320,6 +335,8 @@ ai_onUpdate = {
 			
 			// Обновление Utility AI
 			[_mob,_agent] call ai_brain_update;
+
+			ai_stats_maxProcUpdateAgent = (tickTime - _tAgent) max ai_stats_maxProcUpdateAgent;
 		};
 	} foreach cm_allInGameMobs;
 
@@ -327,6 +344,8 @@ ai_onUpdate = {
 		setVar(_x,__aiagent,null);
 		array_remove(ai_allMobs,_x);
 	} foreach _deadMobs;
+
+	ai_stats_maxProcUpdate = (tickTime - _tUpd) max ai_stats_maxProcUpdate;
 };
 
 ai_debug_internal_drawPath = {
@@ -367,6 +386,7 @@ ai_debug_internal_brainiInfo = {
 	_t pushBack "=== BRAIN INFO ===";
 	_t pushback format["Agents: %1 | Mobs: %2",count ai_allMobs,count smd_allInGameMobs];
 	_t pushback format["AR: %1; updQ: %2",count ai_activeRegions,count ai_regionsUpdateQueue,(getposasl player) call ai_nav_getRegionKey];
+	_t pushback format["stat: upd: %1 ms, agent: %2 ms",ai_stats_maxProcUpdate*1000,ai_stat_maxProcUpdateAgent*1000];
 	_t pushBack "";
 
 	// Находим ближайшего моба к игроку для детальной информации
@@ -388,8 +408,8 @@ ai_debug_internal_brainiInfo = {
 			
 			_t pushBack format["Nearest: %1 (%2m)",getVar(_nearestMob,name),(_nearestDist toFixed 1)];
 			_t pushBack format["Agent: %1",_agent getv(name)];
-			_t pushback format["stopped: %1",expectedDestination(_agent getv(actor)) select 1 == "DoNotPlan"];
-			_t pushback format["moving: %1",(_agent getv(ismoving))];
+			_t pushback format["moving: %1; stopped: %2",(_agent getv(ismoving)),expectedDestination(_agent getv(actor)) select 1 == "DoNotPlan"];
+			_t pushback format["pathreach: %1; lastPT: %2; curPT: %3",_agent callv(isPathReached),_agent getv(_lastPathTask),_agent getv(pathTask)];
 			
 			// Текущее действие
 			private _currentAction = _agent getv(currentAction);

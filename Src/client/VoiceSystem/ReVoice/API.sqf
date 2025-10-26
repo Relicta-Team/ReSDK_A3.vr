@@ -70,6 +70,9 @@ vs_connectVoice = {
 
 //вызывается когда клиент джоинится в игру
 vs_connectToVoiceSystem = {
+    #ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE
+        if (!isMultiplayer) exitWith {};
+    #endif
     vs_serverAddrPortPass params ["_addr","_port","_pass"];
     private _r = [_addr,_port,vs_localName,_pass] call vs_connectVoice;
 
