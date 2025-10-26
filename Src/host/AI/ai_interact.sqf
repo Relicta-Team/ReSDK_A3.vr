@@ -490,8 +490,8 @@ ai_rotateTo = {
 	} else {
 		_posOrTarget;
 	};
-	// Мгновенно поворачиваем
 	//только если стоп не включается это будет работать
+	_actor lookat _targetPos; //этой команды хватает для поворота
 	// _actor glanceAt _targetPos;
 	// _actor dowatch _targetPos;
 };
