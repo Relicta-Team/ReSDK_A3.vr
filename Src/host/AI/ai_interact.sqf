@@ -490,11 +490,10 @@ ai_rotateTo = {
 	} else {
 		_posOrTarget;
 	};
-	// Вычисляем угол к цели
-	private _dir = (getPosAtl _actor) getDir _targetPos;
-	
 	// Мгновенно поворачиваем
-	_actor setDir _dir;
+	//только если стоп не включается это будет работать
+	// _actor glanceAt _targetPos;
+	// _actor dowatch _targetPos;
 };
 
 ai_internal_stances_names = createHashMapFromArray [
