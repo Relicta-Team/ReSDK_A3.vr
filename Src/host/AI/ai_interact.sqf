@@ -268,6 +268,16 @@ ai_stopMove = {
 	_agent setv(lastvalidpos,getposasl _actor);
 };
 
+ai_isMovedByEngine = {
+	params ["_mob"];
+	private _actor = toActor(_mob);
+	private _anm = animationstate _actor;
+	if ("wlks" in _s)exitWith{true};
+	if ("tacs" in _anm || "runs" in _anm)exitWith{true};
+	if ("evas" in _anm || "sprs" in _anm)exitWith{true};
+	false
+};
+
 // ============================================================================
 // AI HIGH-LEVEL MOVEMENT FUNCTIONS
 // ============================================================================
