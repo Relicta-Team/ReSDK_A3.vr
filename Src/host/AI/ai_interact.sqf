@@ -123,7 +123,6 @@ ai_planMove = {
 
 	_agent setv(lastPointSetup,tickTime);
 
-	[_mob,false] call ai_internal_setStop;
 	["Move planned from %1 to %2",_srcPos,_destPos] call ai_log;
 
 	true
@@ -153,9 +152,8 @@ ai_handleMove = {
 	
 	// Если отклонение слишком большое - телепортируем обратно на путь
 	if (_deviation > _maxDeviation) then {
-		[_mob,true] call ai_internal_setStop;
+		[_mob] call ai_internal_setStop;
 		[_mob,_targetPos] call ai_moveTo;
-		[_mob,false] call ai_internal_setStop;
 		
 		["(SMALL) PATH CORRECTION: deviation %1m, teleported to segment", (_deviation toFixed 2)] call ai_log;
 	};
@@ -163,7 +161,7 @@ ai_handleMove = {
 		["PATH CORRECTION FAILED: deviation %1m, teleported to targetpos", (_deviation toFixed 2)] call ai_log;
 		// Небольшое смещение вверх чтобы не застрять в геометрии
 		_closestPoint set [2, (_closestPoint select 2) + 0.01];
-		[_mob,true] call ai_internal_setStop;
+		[_mob] call ai_internal_setStop;
 		_body setPosASL _closestPoint;
 		[_mob,_targetPos] call ai_moveTo;
 	};
@@ -236,9 +234,9 @@ ai_getClosestPointOnSegment = {
 
 //внутренняя функция установки остановки сущности
 ai_internal_setStop = {
-	params ["_mob","_stop"];
+	params ["_mob"];
 	private _actor = toActor(_mob);
-	_actor stop _stop;
+	_actor setDestination [[0,0,0],"DoNotPlan",true];
 };
 
 //высокоуровневая функция остановки сущности
@@ -260,7 +258,7 @@ ai_stopMove = {
 		if (_idxStance == -1) then {_idxStance = 0};
 		_actor switchmove (_curAnims select _idxStance);
 	};
-	_actor stop true;
+	[_mob] call ai_internal_setStop;
 	private _agent = getVar(_mob,__aiagent);
 	_agent setv(ismoving,false);
 	_agent setv(pathTask,null);

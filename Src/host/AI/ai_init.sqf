@@ -329,54 +329,6 @@ ai_onUpdate = {
 	} foreach _deadMobs;
 };
 
-ai_debugStart = {
-	private _o = [getposatl player] call ai_createMob;
-	private _map = createHashMap;
-	_map set ["curpath",[]];
-	_map set ["targetidx",0];
-	_map set ["ismoving",false];
-	setVar(_o,__aidata,_map);
-	ai_debug_procMobs = [_o];
-	private _upd = {
-		{
-			_act = getVar(_x,owner);
-			_pos = getposasl _act;
-			_map = getVar(_x,__aidata);
-			if (!([_pos] call ai_nav_hasRegion)) then {
-				["update region at pos: " + (str _pos)] call chatprint;
-				[_pos] call ai_nav_updateRegion;
-			};
-			if !(_map get "ismoving") then {
-				_path = [_pos,getposasl player] call ai_nav_findPath;
-				if (count _path > 0) then {
-					_map set ["curpath",_path];
-					_map set ["targetidx",0];
-					_map set ["ismoving",true];
-					["start moving to target"] call chatprint;
-				};
-			};
-			if (_map get "ismoving") then {
-				_curidx = _map get "targetidx";
-				_targetPos = (_map get "curpath") select _curidx;
-				_act stop false;
-				_act forcespeed 2;
-				_act setDestination [_targetPos,"LEADER DIRECT",true];
-				if (((getposasl _act) distance _targetPos) < 0.8) then {
-					["increment target idx to " + (str _curidx)] call chatprint;
-					INC(_curidx);
-					_map set ["targetidx",_curidx];
-					if (_curidx >= count (_map get "curpath")) then {
-						_map set ["ismoving",false];
-						_act stop true;
-						["final target reached"] call chatprint;
-					};
-				};
-			};
-		} foreach ai_debug_procMobs;
-	};
-	startUpdate(_upd,0.1);
-};
-
 ai_debug_internal_drawPath = {
 	if (!isNull(ai_debug_internal_drawLines)) then {
 		{
@@ -436,7 +388,7 @@ ai_debug_internal_brainiInfo = {
 			
 			_t pushBack format["Nearest: %1 (%2m)",getVar(_nearestMob,name),(_nearestDist toFixed 1)];
 			_t pushBack format["Agent: %1",_agent getv(name)];
-			_t pushback format["stopped: %1",stopped(_agent getv(actor))];
+			_t pushback format["stopped: %1",expectedDestination(_agent getv(actor)) select 1 == "DoNotPlan"];
 			_t pushback format["moving: %1",(_agent getv(ismoving))];
 			
 			// Текущее действие
