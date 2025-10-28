@@ -386,7 +386,7 @@ ai_debug_internal_brainiInfo = {
 	_t pushBack "=== BRAIN INFO ===";
 	_t pushback format["Agents: %1 | Mobs: %2",count ai_allMobs,count smd_allInGameMobs];
 	_t pushback format["AR: %1; updQ: %2",count ai_activeRegions,count ai_regionsUpdateQueue,(getposasl player) call ai_nav_getRegionKey];
-	_t pushback format["stat: upd: %1 ms, agent: %2 ms",ai_stats_maxProcUpdate*1000,ai_stat_maxProcUpdateAgent*1000];
+	_t pushback format["stat: upd: %1 ms, agent: %2 ms",ai_stats_maxProcUpdate*1000,ai_stats_maxProcUpdateAgent*1000];
 	_t pushBack "";
 
 	// Находим ближайшего моба к игроку для детальной информации
