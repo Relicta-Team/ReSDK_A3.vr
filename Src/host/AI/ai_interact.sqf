@@ -221,7 +221,9 @@ ai_handleMove = {
 	
 	if (((getposasl _body) distance _targetPos) <= _reachRadius) then {
 		#ifdef AI_DEBUG_TRACEPATH
-			(ai_debug_internal_drawPathObjects select _curidx) setObjectTextureGlobal [0,"#(rgb,8,8,3)color(0,1,0,1)"];
+			if (_curidx < (count ai_debug_internal_drawPathObjects)) then {
+				((ai_debug_internal_drawPathObjects select _curidx) setObjectTextureGlobal [0,"#(rgb,8,8,3)color(0,1,0,1)"]);
+			};
 		#endif
 		INC(_curidx);
 		_agent setv(lastPointSetup,tickTime);
