@@ -195,6 +195,8 @@
 #define struct_existType(o) (#o in vtable_s)
 #define struct_existType_str(o) ((o) in vtable_s)
 
+#define struct_isstruct(o) (STRUCT_MEM_TYPE in (o))
+
 // * * * * * * * * * * * * Object management * * * * * * * * * * * *
 
 //instansing
