@@ -1181,7 +1181,7 @@ ai_nav_findPathToClosestNode = {
 	_inOpenSet set [_startNodeId, true];
 	
 	private _iterations = 0;
-	private _maxIterations = 200; // Жесткий лимит
+	private _maxIterations = 500; // Жесткий лимит
 	
 	// Отслеживание ближайшего узла к целевой позиции
 	private _closestNode = _startNodeId;
@@ -1197,6 +1197,15 @@ ai_nav_findPathToClosestNode = {
 	
 	while {count _openSet > 0 && {_iterations < _maxIterations}} do { 
 		_iterations = _iterations + 1;
+
+		// Увеличить distance по мере роста итераций
+		if (_iterations > 200 && _earlyExitDistance < 5) then {
+			_earlyExitDistance = 5; // Более грубый путь для сложных случаев
+		};
+
+		if (_iterations > 400 && _earlyExitDistance < 10) then {
+			_earlyExitDistance = 10; // Совсем грубый
+		};
 		
 		ai_debug_decl(if (count _openSet > _maxOpenSetSize) then {_maxOpenSetSize = count _openSet};)
 		

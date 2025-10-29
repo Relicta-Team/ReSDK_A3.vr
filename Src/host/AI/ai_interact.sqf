@@ -19,7 +19,6 @@
 ai_moveTo = {
 	params ["_mob","_pos"];
 	private _actor = toActor(_mob);
-	[_mob,false] call ai_internal_setStop;
 	_actor setDestination [_pos,"LEADER DIRECT",true];
 };
 
@@ -143,7 +142,8 @@ ai_handleMove = {
 	private _prevPos = if (_curidx > 0) then {
 		(_agent getv(curpath)) select (_curidx - 1)
 	} else {
-		getposasl _body // Для первого сегмента используем текущую позицию
+		//getposasl _body // Для первого сегмента используем текущую позицию
+		_agent getv(lastvalidpos)
 	};
 	
 	private _curpos = getposasl _body;
@@ -162,6 +162,12 @@ ai_handleMove = {
 		// ОБНОВЛЯЕМ lastvalidpos на основе прогресса по пути
 		// Если отклонение разумное - используем проекцию на путь как валидную позицию
 		if (_deviation < 2.0) then {
+			#ifdef AI_DEBUG_TRACEPATH
+			if !isNull(ai_debug_internal_pathCorrectionObject) then {
+				deleteVehicle ai_debug_internal_pathCorrectionObject;
+			};
+			ai_debug_internal_pathCorrectionObject = [_closestPoint,[0,1,0,1],3,false] call ai_nav_debug_createObj;
+			#endif
 			_agent setv(lastvalidpos,_closestPoint);
 		};
 		
@@ -191,13 +197,13 @@ ai_handleMove = {
 				_correctionTarget set [2, (_correctionTarget select 2) + 0.01];
 				
 				_adaptiveTarget = _correctionTarget;
-				["Deviation %1m, correcting to path (progress: %2)", (_deviation toFixed 2), (_targetProgress toFixed 2)] call ai_log;
+				//["Deviation %1m, correcting to path (progress: %2)", (_deviation toFixed 2), (_targetProgress toFixed 2)] call ai_log;
 			};
 		};
 		
 		// Критическое отклонение - полная переустановка движения
 		if (_deviation > _maxCriticalDeviation) then {
-			["Critical deviation %1m! Resetting movement to target", (_deviation toFixed 2)] call ai_log;
+			//["Critical deviation %1m! Resetting movement to target", (_deviation toFixed 2)] call ai_log;
 			[_mob] call ai_internal_setStop;
 			// Не телепортируем, просто сбрасываем команду движения и даём новую
 			_adaptiveTarget = _targetPos;
@@ -207,17 +213,71 @@ ai_handleMove = {
 	// Применяем движение к адаптивной цели
 	[_mob,_adaptiveTarget] call ai_moveTo;
 
+	// АВТОМАТИЧЕСКОЕ УПРАВЛЕНИЕ СКОРОСТЬЮ при приближении к точке
+	private _distToTarget = (getposasl _body) distance _targetPos;
+	private _currentSpeedMode = _agent getv(speedMode);
+
+	if (_distToTarget < 1.0 && _currentSpeedMode >= SPEED_MODE_RUN) then {
+		// Близко к цели - принудительно замедляем до шага
+		//["Slowing down near target (dist: %1m)", (_distToTarget toFixed 1)] call ai_log;
+		[_mob, SPEED_MODE_WALK] call ai_internal_setSpeed;
+		_agent set ["autoSlowedDown", true];
+	} else {
+		// Если ранее замедляли автоматически - восстанавливаем скорость
+		if (_agent getOrDefault ["autoSlowedDown", false]) then {
+			_agent set ["autoSlowedDown", false];
+			// Восстанавливаем нормальную скорость (можно хранить в агенте)
+			[_mob, _agent getv(speedMode)] call ai_internal_setSpeed;
+		};
+	};
+
+	// Проверяем направление только если движемся (не в паузе) и не слишком далеко
+	if (_distToTarget > 0.5 && _distToTarget < 5.0) then {
+		// Вычисляем направление к цели
+		private _curPos = getposasl _body;
+		private _dx = (_targetPos select 0) - (_curPos select 0);
+		private _dy = (_targetPos select 1) - (_curPos select 1);
+		private _dirToTarget = (_dx atan2 _dy + 360) mod 360;
+		
+		// Текущее направление AI
+		private _currentDir = getDir _body;
+		
+		// Разница углов
+		private _angleDiff = abs(_dirToTarget - _currentDir);
+		if (_angleDiff > 180) then {_angleDiff = 360 - _angleDiff};
+		
+		// Если AI смотрит НЕ на цель (отклонение > 60°) - останавливаем и разворачиваем
+		if (_angleDiff > 60) then {
+			private _lastReorient = _agent getOrDefault ["lastReorientTime", -999];
+			
+			// Не делаем это слишком часто (не чаще раза в секунду)
+			if ((tickTime - _lastReorient) > 1.0) then {
+				//["Not facing target (angle diff: %1°), stopping to reorient", (_angleDiff toFixed 1)] call ai_log;
+				
+				// Останавливаем AI
+				[_mob] call ai_internal_setStop;
+				
+				// Разворачиваем к цели через lookat
+				[_mob, _targetPos] call ai_rotateTo;
+				
+				// Ставим паузу на 0.5 секунды для разворота
+				_agent set ["pauseUntil", tickTime + 0.5];
+				_agent set ["lastReorientTime", tickTime];
+			};
+		};
+	};
+
 	//fix nonmoving bug
 	if (
 		(speed _body == 0)
 		&& {((_agent getv(lastPointSetup)) + 4) < tickTime}
 	) then {
-		["nonmoving bug detected, teleporting to targetpos"] call ai_log;
+		//["nonmoving bug detected, teleporting to targetpos"] call ai_log;
 		_body setPosASL _targetPos;
 	};
 
 	// Увеличенный радиус достижения точки для предотвращения кружения
-	private _reachRadius = 1.2; // было 0.6
+	private _reachRadius = ifcheck((_curidx+1) < (count (_agent getv(curpath))),1.6,0.6); // было 0.6
 	
 	if (((getposasl _body) distance _targetPos) <= _reachRadius) then {
 		#ifdef AI_DEBUG_TRACEPATH
@@ -235,7 +295,7 @@ ai_handleMove = {
 			#ifdef AI_DEBUG_TRACEPATH
 			_agent set ["nextPlanTime",tickTime + 3];
 			#endif
-			["TARGET REACHED"] call ai_log;
+			//["TARGET REACHED"] call ai_log;
 		} else {
 			_agent setv(lastvalidpos,_targetPos);
 			
@@ -265,7 +325,7 @@ ai_handleMove = {
 					
 					// Если угол больше 40 градусов - останавливаем и ставим на паузу
 					if (_angle >= 90) then {
-						["Sharp turn detected (%1°), stopping for 0.3s", (_angle toFixed 1)] call ai_log;
+						//["Sharp turn detected (%1°), stopping for 0.3s", (_angle toFixed 1)] call ai_log;
 						[_mob] call ai_internal_setStop;
 						_agent set ["pauseUntil", tickTime + 0.4]; // Пауза 300ms
 					};
@@ -314,7 +374,9 @@ ai_getClosestPointOnSegment = {
 ai_internal_setStop = {
 	params ["_mob"];
 	private _actor = toActor(_mob);
+	//_actor disableAI "MOVE"; _actor disableAI "ANIM";
 	_actor setDestination [[0,0,0],"DoNotPlan",true];
+	//_actor enableAI "MOVE"; _actor enableAI "ANIM";
 };
 
 //высокоуровневая функция остановки сущности
@@ -323,25 +385,25 @@ ai_stopMove = {
 	private _restoreSpeed = false;
 	private _speedMode = callFunc(_mob,getSpeedMode);
 	private _actor = toActor(_mob);
-	// if (_speedMode >= SPEED_MODE_RUN) then {
+	if (_speedMode >= SPEED_MODE_RUN) then {
 		
-	// 	//инактивные мобы не могут двигаться 
-	// 	if !callFunc(_mob,isActive) exitWith {};
+		//инактивные мобы не могут двигаться 
+		if !callFunc(_mob,isActive) exitWith {};
 
-	// 	private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
-	// 	private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
-	// 	private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);
-	// 	private _stances = ["PRONE","CROUCH","STAND"];
-	// 	private _idxStance = _stances find (stance _actor);
-	// 	if (_idxStance == -1) then {_idxStance = 0};
-	// 	_actor switchmove (_curAnims select _idxStance);
-	// };
+		private _nowpnAnims = ["amovppnemstpsnonwnondnon","amovpknlmstpsnonwnondnon","amovpercmstpsnonwnondnon"];
+		private _wpnAnims = ["amovppnemstpsraswpstdnon","amovpknlmstpsraswpstdnon","amovpercmstpsraswpstdnon"];
+		private _curAnims = ifcheck(getVar(_mob,isCombatModeEnable),_wpnAnims,_nowpnAnims);
+		private _stances = ["PRONE","CROUCH","STAND"];
+		private _idxStance = _stances find (stance _actor);
+		if (_idxStance == -1) then {_idxStance = 0};
+		_actor switchmove (_curAnims select _idxStance);
+	};
 	[_mob] call ai_internal_setStop;
 	private _agent = getVar(_mob,__aiagent);
 	_agent setv(ismoving,false);
 	_agent setv(pathTask,null);
 
-	_agent setv(lastvalidpos,getposasl _actor);
+	//_agent setv(lastvalidpos,getposasl _actor);
 };
 
 ai_isMovedByEngine = {
@@ -553,6 +615,12 @@ ai_internal_speedModes_names = createHashMapFromArray [
 ];
 
 ai_setSpeed = {
+	params ["_mob","_speedMode"];
+	[_mob,_speedMode] call ai_internal_setSpeed;
+	private _agent = getVar(_mob,__aiagent);
+	_agent setv(speedMode,_speedMode);
+};
+ai_internal_setSpeed = {
 	params ["_mob","_speedMode"];
 	private _actor = toActor(_mob);
 	_actor forceSpeed (_actor getSpeed (ai_internal_speedModes_names get _speedMode));
