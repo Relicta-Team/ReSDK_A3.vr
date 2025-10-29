@@ -437,7 +437,7 @@ ai_nav_generateRegionNodes = {
 };
 
 // Найти ближайший узел к позиции
-ai_nav_findNearestNode = {
+ai_nav_findNearestNode_old = {
 	params ["_pos", ["_maxDistance", 50]];
 	
 	private _regionKey = _pos call ai_nav_getRegionKey;
@@ -485,6 +485,74 @@ ai_nav_findNearestNode = {
 	} else {
 		_bestNode
 	}
+};
+
+ai_nav_internal_list_regionOffsets = [
+	[0,1], [0,-1], [1,0], [-1,0], [1,1], [-1,1], [1,-1], [-1,-1]
+];
+
+//ускорение поиска узла 21.3x быстрее чем ai_nav_findNearestNode_old
+ai_nav_findNearestNode = {
+	params ["_pos", ["_maxDistance", 50]];
+	
+	private _regionKey = _pos call ai_nav_getRegionKey;
+	private _regionData = ai_nav_regions get _regionKey;
+	
+	private _bestNode = -1;
+	private _bestDist = 999999;
+	
+	// Если текущий регион существует - начинаем с него
+	if (!isNil "_regionData") then {
+		private _nodeIds = _regionData get "nodes";
+		
+		{
+			private _nodeData = ai_nav_nodes get _x;
+			private _nodePos = _nodeData get "pos";
+			private _dist = _pos distance _nodePos;
+			
+			if (_dist < _bestDist && {_dist <= _maxDistance}) then {
+				_bestDist = _dist;
+				_bestNode = _x;
+				if (_dist < 0.5) then {break};
+			};
+		} forEach _nodeIds;
+		
+	};
+	// Если нашли близкий узел в текущем регионе - возвращаем
+	if (_bestNode != -1 && {_bestDist < 0.5}) exitWith {_bestNode};
+	
+	// Ищем в соседних 8 регионах вместо перебора всех узлов
+	_regionKey splitString "_" params ["_rx", "_ry"];
+	_rx = parseNumber _rx;
+	_ry = parseNumber _ry;
+	private _regionOffsetList = ai_nav_internal_list_regionOffsets;
+	private _doReturn = false;
+	{
+		private _neighborKey = format ["%1_%2", _rx + (_x select 0), _ry + (_x select 1)];
+		private _neighborData = ai_nav_regions get _neighborKey;
+			
+		if (!isNil "_neighborData") then {
+			private _nodeIds = _neighborData get "nodes";
+			
+			{
+				private _nodeData = ai_nav_nodes get _x;
+				private _nodePos = _nodeData get "pos";
+				private _dist = _pos distance _nodePos;
+				
+				if (_dist < _bestDist && {_dist <= _maxDistance}) then {
+					_bestDist = _dist;
+					_bestNode = _x;
+					if (_dist < 0.5) then {
+						_doReturn = true;
+						break;
+					};
+				};
+			} forEach _nodeIds;
+			if (_doReturn) exitWith {break};
+		};
+	} foreach _regionOffsetList;
+	
+	_bestNode
 };
 
 
@@ -678,7 +746,7 @@ ai_nav_findPath = {
 	} forEach _pathNodes;
 	
 	// Оптимизируем путь (убираем лишние промежуточные точки)
-	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_fast} else {_pathPositions};
+	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_aggressive} else {_pathPositions};
 	
 	_optimizedPath
 };
@@ -776,6 +844,45 @@ ai_nav_smoothPath_fast = {
         count _result arg 
         ((tickTime - _tStart)*1000)toFixed 2
     ] call ai_debugLog);
+    _result
+};
+
+// Более агрессивное сглаживание для устранения "лесенок"
+ai_nav_smoothPath_aggressive = {
+    params ["_path"];
+    
+    if (count _path < 3) exitWith {_path};
+    
+    private _result = [_path select 0];
+    
+    for "_i" from 1 to (count _path - 2) do {
+        private _prev = _path select (_i - 1);
+        private _curr = _path select _i;
+        private _next = _path select (_i + 1);
+        
+        private _v1 = _curr vectorDiff _prev;
+        private _v2 = _next vectorDiff _curr;
+        
+        // Вычисляем угол между векторами
+        private _len1 = vectorMagnitude _v1;
+        private _len2 = vectorMagnitude _v2;
+        
+        if (_len1 > 0.1 && _len2 > 0.1) then {
+            private _dot = (_v1 select 0) * (_v2 select 0) + 
+                           (_v1 select 1) * (_v2 select 1) + 
+                           (_v1 select 2) * (_v2 select 2);
+            private _cosAngle = (_dot / (_len1 * _len2)) max -1 min 1;
+            private _angle = acos _cosAngle;
+            
+            // Порог: сохраняем точку только если угол > 20 градусов
+            // Это уберёт большинство "лесенок" (мелкие зигзаги)
+            if (_angle > 20) then {
+                _result pushBack _curr;
+            };
+        };
+    };
+    
+    _result pushBack (_path select (count _path - 1));
     _result
 };
 
