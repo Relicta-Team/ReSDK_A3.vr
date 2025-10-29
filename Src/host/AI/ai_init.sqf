@@ -151,6 +151,55 @@ ai_createMob = {
 	_mob
 };
 
+// Получить мобов в радиусе от позиции используя региональную систему
+// Намного быстрее чем перебор всех мобов на карте
+ai_getNearMobs_Internal = {
+	params ["_centerPos","_distance",["_excludeMob",nullPtr]];
+	
+	private _regionKey = _centerPos call ai_nav_getRegionKey;
+	private _result = [];
+	
+	// Вычисляем радиус в регионах (округляем вверх)
+	private _regionRadius = ceil(_distance / ai_nav_regionSize);
+	
+	_regionKey splitString "_" params ["_rx","_ry"];
+	_rx = parseNumber _rx;
+	_ry = parseNumber _ry;
+	
+	// Проходим только по регионам в радиусе
+	for "_dx" from (-_regionRadius) to _regionRadius do {
+		for "_dy" from (-_regionRadius) to _regionRadius do {
+			private _key = format ["%1_%2",_rx + _dx,_ry + _dy];
+			private _regionData = ai_nav_regions get _key;
+			
+			if (!isNil "_regionData") then {
+				private _mobsInRegion = _regionData get "mobs";
+				
+				{					
+					// Проверяем реальное расстояние
+					private _mobPos = callFunc(_x,getPos);
+					private _dist = _centerPos distance _mobPos;
+					
+					if (_dist <= _distance) then {
+						//todo мы можем добавить доп проверки по соответствию типа моба
+						_result pushBack _x;
+					};
+				} forEach _mobsInRegion;
+			};
+		};
+	};
+	
+	_result - [_excludeMob]
+};
+
+// Версия для моба (удобная обертка, быстрее в 29 раз чем BasicMob::getNearMobs)
+ai_getNearMobs = {
+	params ["_mob","_distance"];
+	
+	private _pos = callFunc(_mob,getPos);
+	[_pos,_distance,_mob] call ai_getNearMobs_Internal
+};
+
 ai_createAgent = {
 	params ["_pos","_mob",["_agentType","AgentEater"]];
 	
