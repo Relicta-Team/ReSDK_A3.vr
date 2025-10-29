@@ -64,6 +64,11 @@ _prepareClient = {
 	setVar(_mob,client,this);
 	//odata = getSelf(actor);
 	callFunc(_mob,onConnected);
+
+	//обновляем счетчик активности региона
+	if not_equals(getVar(_mob,__curRegion),"") then {
+		[getVar(_mob,__curRegion),+1] call ai_modifyRegionRefCount;
+	};
 	
 }; rpcAdd("prepareClient",_prepareClient);
 

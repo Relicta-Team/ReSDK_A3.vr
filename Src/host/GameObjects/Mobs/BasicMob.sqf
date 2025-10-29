@@ -690,7 +690,6 @@ region(Connect control events)
 
 		if not_equals(getSelf(__curRegion),"") then {
 			[getSelf(__curRegion),-1] call ai_modifyRegionRefCount;
-			setSelf(__curRegion,"");
 		};
 	};
 
