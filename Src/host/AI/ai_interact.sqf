@@ -672,6 +672,10 @@ ai_attackTarget = {
 	};
 	
 	// Атакуем цель
+	callFunc(_mob,generateLastInteractOnServer);
+	callFuncParams(_mob,__setLastInteractDistance,0);
+	callFuncParams(_mob,__setLastInteractTarget,_target);
+	callFuncParams(_mob,__setLastInteractPosStartEnd,callFunc(_target,getPos));//zero reach
 	if (callFunc(_target,isMob)) then {
 		callFuncParams(_mob,attackOtherMob,_target);
 	} else {
