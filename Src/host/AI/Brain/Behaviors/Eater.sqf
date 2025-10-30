@@ -126,7 +126,7 @@ struct(BAEater_Chase) base(BABase)
     
     // Локальные данные для отслеживания перепланировки
     def(lastReplanTime) 0;
-    def(replanInterval) 1.0; // Перепланировка каждую секунду
+    def(replanInterval) 2.0; // Перепланировка каждую секунду
     
     // КОНТЕКСТ: можем преследовать?
     def_ret(isAvailable) {
@@ -194,13 +194,13 @@ struct(BAEater_Chase) base(BABase)
                 private _targetDeviation = _pathEnd distance _targetPos;
                 
                 // Экстренная перепланировка при большом отклонении
-                if (_targetDeviation > 5) then {
+                if (_targetDeviation > 3) then {
                     _needReplan = true;
                     _emergencyReplan = true; // Останавливаемся только при экстренной
                 } else {
                     // Обычная периодическая перепланировка
                     if (_timeSinceReplan >= self getv(replanInterval)) then {
-                        _needReplan = true;
+                        //_needReplan = true;
                     };
                 };
             } else {
@@ -293,6 +293,8 @@ struct(BAEater_Search) base(BABase)
         
         // Переключаемся на ходьбу для сканирования
         [_mob] call ai_stopMove;
+
+        [_mob,nullPtr] call ai_rotateTo;
         
         // Идем к последней известной позиции
         private _lastPos = _agent getv(lastSeenTargetPos);
@@ -311,46 +313,55 @@ struct(BAEater_Search) base(BABase)
         
         // Если нашли цель - успех
         private _target = _agent getv(visibleTarget);
-        if (!isNullReference(_target)) exitWith {UPDATE_STATE_COMPLETED};
+        if (!isNullReference(_target)) exitWith {RETURN(UPDATE_STATE_COMPLETED)};
         
         // Проверяем таймаут поиска (20 секунд)
         private _searchTime = tickTime - (self getv(searchStartTime));
-        if (_searchTime > 20) exitWith {UPDATE_STATE_FAILED};
+        if (_searchTime > 20) exitWith {RETURN(UPDATE_STATE_FAILED)};
         
         private _searchPos = self getv(searchTarget);
         private _actor = _agent getv(actor);
         private _lastSeenPos = _agent getv(lastSeenTargetPos);
+        private _currentPos = getPosASL _actor;
         
-        // Если еще не достигли центра поиска
+        // ФАЗА 1: Движение к центру поиска (последняя известная позиция цели)
         if !(self getv(searchCenterReached)) then {
-            // Двигаемся к последней известной точке
-            if !(_agent callv(hasPath)) then {
-                private _success = [_mob,_searchPos] call ai_planMove;
-                if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
-            };
+            private _distToCenter = _currentPos distance _searchPos;
             
-            // Достигли центра - начинаем патрулирование
-            if (_agent callv(isPathReached)) then {
+            // Проверяем достигли ли центра
+            if (_agent callv(isPathReached) && _distToCenter < 2) then {
+                [_mob] call ai_stopMove;
                 self setv(searchCenterReached,true);
+                self setv(searchWaitStart,tickTime);
+                self setv(isSearchWaiting,true);
+                ["Search: Reached center, starting patrol"] call ai_log;
+            } else {
+                // Планируем путь если его нет или если достигли но далеко
+                if !(_agent callv(hasPath)) then {
+                    private _success = [_mob,_searchPos] call ai_planMove;
+                    if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                    [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+                };
             };
         } else {
-            // Патрулируем в области последнего обнаружения
+            // ФАЗА 2: Патрулирование в области последнего обнаружения
             
-            // Проверяем в режиме паузы ли мы
+            // Состояние: Пауза (осмотр местности)
             if (self getv(isSearchWaiting)) then {
                 private _elapsed = tickTime - (self getv(searchWaitStart));
                 
                 // Пауза 2-3 секунды для "осмотра"
                 if (_elapsed >= rand(2,3)) then {
+                    // Выходим из паузы - планируем новую точку
                     self setv(isSearchWaiting,false);
-                };
-            } else {
-                // Режим движения к точке
-                if !(_agent callv(hasPath)) then {
+                    
                     private _attempts = self getv(searchAttempts);
                     
                     // Ограничиваем количество попыток (3-4 точки)
-                    if (_attempts >= 3) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                    if (_attempts >= 3) exitWith {
+                        ["Search: Max attempts reached, giving up"] call ai_log;
+                        RETURN(UPDATE_STATE_FAILED)
+                    };
                     
                     // Ищем случайную точку вокруг центра поиска (радиус 5-15м)
                     private _newSearchPos = [_mob, _lastSeenPos, 15, 5, true] call ai_findNearestValidPosition;
@@ -370,17 +381,30 @@ struct(BAEater_Search) base(BABase)
                     private _success = [_mob,_newSearchPos] call ai_planMove;
                     if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
                     [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+                    ["Search: Moving to patrol point %1",_attempts + 1] call ai_log;
                 };
+            } else {
+                // Состояние: Движение к очередной точке патруля
+                private _distToTarget = _currentPos distance _searchPos;
                 
                 // Проверяем достигли ли точки поиска
-                if (_agent callv(isPathReached)) then {
+                if (_agent callv(isPathReached) && _distToTarget < 2) then {
+                    [_mob] call ai_stopMove;
                     self setv(searchWaitStart,tickTime);
                     self setv(isSearchWaiting,true);
+                    ["Search: Reached patrol point, observing"] call ai_log;
+                } else {
+                    // Если нет пути - планируем
+                    if !(_agent callv(hasPath)) then {
+                        private _success = [_mob,_searchPos] call ai_planMove;
+                        if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                        [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+                    };
                 };
             };
         };
         
-        UPDATE_STATE_CONTINUE
+        RETURN(UPDATE_STATE_CONTINUE)
     }
     
     def(onCompleted) {
@@ -413,13 +437,15 @@ endstruct
 // ДЕЙСТВИЕ 4: ОТСТУПЛЕНИЕ ДЛЯ ВОССТАНОВЛЕНИЯ СТАМИНЫ
 // ============================================================================
 struct(BAEater_Retreat) base(BABase)
-    def(requiredAgentFields) ["visibleTarget"];
+    def(requiredAgentFields) ["visibleTarget","nearPlayers"];
     def(baseScore) 90;
     
     // Локальные данные действия
     def(retreatTarget) [0,0,0];
     def(retreatStartTime) 0;
     def(isResting) false;
+    def(lastRetreatCheckTime) 0;
+    def(retreatCheckInterval) 2.0; // Проверяем приближение игроков каждые 2 секунды
     
     // КОНТЕКСТ: нужно отступать?
     def_ret(isAvailable) {
@@ -441,7 +467,14 @@ struct(BAEater_Retreat) base(BABase)
         if (self getv(isResting)) then {
             private _staminaPercent = _agent callv(getStaminaPercent);
             if (_staminaPercent >= 80) exitWith {0}; // восстановились
-            10 // высокий приоритет
+            
+            // Проверяем приближение игроков
+            private _nearPlayers = _agent getv(nearPlayers);
+            if (count _nearPlayers > 0) then {
+                25 // Высокий приоритет - нужно снова отходить
+            } else {
+                10 // Продолжаем отдыхать
+            }
         } else {
             // Чем ниже стамина, тем важнее: 15%→0, 0%→25
             private _staminaPercent = _agent callv(getStaminaPercent);
@@ -497,6 +530,48 @@ struct(BAEater_Retreat) base(BABase)
         
         // Проверяем в режиме отдыха ли мы
         if (self getv(isResting)) then {
+            // Проверяем приближение игроков периодически
+            private _lastCheck = self getv(lastRetreatCheckTime);
+            private _checkInterval = self getv(retreatCheckInterval);
+            
+            if (tickTime - _lastCheck >= _checkInterval) then {
+                self setv(lastRetreatCheckTime,tickTime);
+                
+                private _nearPlayers = _agent getv(nearPlayers);
+                if (count _nearPlayers > 0) then {
+                    // Игроки наступают! Нужно отходить снова
+                    ["Eater: Players approaching during rest, retreating again..."] call ai_log;
+                    
+                    // Встаём и ищем новую точку отступления
+                    [_mob,STANCE_UP] call ai_setStance;
+                    self setv(isResting,false);
+                    [_mob] call ai_stopMove;
+                    
+					// Находим ближайшего игрока
+					private _mobPos = callFunc(_mob,getPos);
+					_nearPlayers = [_nearPlayers,{_mobPos distance callFunc(_x,getPos)},true] call sortBy;
+					private _closestPlayer = _nearPlayers select 0;
+                    
+                    // Отступаем от него на 20 метров
+                    private _newRetreatPos = [_mob, _closestPlayer, 20] call ai_retreatFrom;
+                    if (_newRetreatPos isEqualTo []) then {
+                        // Fallback - случайная валидная позиция
+                        _newRetreatPos = [_mob, [], 25] call ai_findNearestValidPosition;
+                        if (_newRetreatPos isEqualTo []) then {
+                            // Критический fallback
+                            private _currentPos = getPosASL _actor;
+                            _newRetreatPos = [
+                                (_currentPos select 0) + (random 30 - 15),
+                                (_currentPos select 1) + (random 30 - 15),
+                                (_currentPos select 2)
+                            ];
+                        };
+                    };
+                    
+                    self setv(retreatTarget,_newRetreatPos);
+                };
+            };
+            
             // Сидим и ждём восстановления стамины
             UPDATE_STATE_CONTINUE
         } else {
@@ -516,6 +591,7 @@ struct(BAEater_Retreat) base(BABase)
                 };
                 [_mob,STANCE_MIDDLE] call ai_setStance; // присаживаемся
                 self setv(isResting,true);
+                self setv(lastRetreatCheckTime,tickTime);
             };
             
             UPDATE_STATE_CONTINUE
@@ -636,7 +712,7 @@ struct(BAEater_Patrol) base(BABase)
 		private _return = UPDATE_STATE_CONTINUE;
 		// планируем движение если еще не движемся
 		if !(self getv(movePlanned)) then {
-			private _success = [_mob,_targetPos,_agent getv(lastvalidpos)] call ai_planMove;
+			private _success = [_mob,_targetPos] call ai_planMove;
 			if (!_success) exitWith {_return = UPDATE_STATE_FAILED};
 			self setv(movePlanned,true);
 		};
@@ -669,6 +745,173 @@ struct(BAEater_Patrol) base(BABase)
         self setv(patrolTarget,[]);
         self setv(isWaiting, false);
         self setv(movePlanned, false);
+    }
+endstruct
+
+// ============================================================================
+// ДЕЙСТВИЕ 6: ПОЕДАНИЕ ЧАСТЕЙ ТЕЛА
+// ============================================================================
+struct(BAEater_EatBodyParts) base(BABase)
+    def(requiredAgentFields) ["visibleTarget"];
+    def(baseScore) 30;
+    
+    // Локальные данные действия
+    def(targetBodyPart) nullPtr;
+    def(isEating) false; // Флаг процесса поедания
+    def(lastBiteTime) 0; // Время последнего укуса
+    def(biteCooldown) 1.5; // Кулдаун между укусами
+    def(biteCooldownRand) 1.0; // Случайная добавка к кулдауну
+    def(biteHungerRestore) 8; // Сколько голода восстанавливает один укус
+    def(targetHungerLevel) 80; // До какого уровня голода есть
+    
+    // КОНТЕКСТ: можем есть?
+    def_ret(isAvailable) {
+        params ["_agent"];
+        
+        // Есть ли части тела рядом?
+        private _nearBodyPart = _agent getv(nearestBodyPart);
+        if (isNullReference(_nearBodyPart)) exitWith {false};
+        
+        // Нет опасности рядом (нет видимых врагов)
+        private _target = _agent getv(visibleTarget);
+        if (!isNullReference(_target)) exitWith {false};
+        
+        // Есть ли голод?
+        private _mob = _agent getv(mob);
+        private _hunger = getVar(_mob,hunger);
+        (_hunger < self getv(targetHungerLevel))
+    }
+    
+    // ПОЛЕЗНОСТЬ: насколько выгодно есть?
+    def_ret(getScore) {
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        private _hunger = getVar(_mob,hunger);
+        private _targetHunger = self getv(targetHungerLevel);
+        
+        // Чем больше голод, тем важнее еда: 80%→0, 0%→30
+        private _hungerBonus = (_targetHunger - _hunger) / _targetHunger * 30;
+        
+        // Близость части тела
+        private _bodyPart = _agent getv(nearestBodyPart);
+        if (!isNullReference(_bodyPart)) then {
+            private _dist = callFuncParams(_mob,getDistanceTo,_bodyPart);
+            // Чем ближе часть, тем выше бонус: 20м→0, 0м→10
+            private _distBonus = (20 - _dist) / 20 * 10;
+            _hungerBonus + _distBonus
+        } else {
+            0
+        }
+    }
+    
+    def(onStart) {
+        params ["_agent"];
+        
+        private _bodyPart = _agent getv(nearestBodyPart);
+        self setv(targetBodyPart,_bodyPart);
+        self setv(isEating,false);
+        self setv(lastBiteTime,0);
+    }
+    
+    def_ret(onUpdate) {
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        private _bodyPart = self getv(targetBodyPart);
+        
+        // Проверяем существует ли ещё часть тела
+        if (isNullReference(_bodyPart)) exitWith {UPDATE_STATE_FAILED};
+        if (!callFunc(_bodyPart,isInWorld)) exitWith {UPDATE_STATE_FAILED};
+        
+        // Если появилась опасность - прерываем
+        private _target = _agent getv(visibleTarget);
+        if (!isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
+        
+        // Проверяем наелись ли
+        private _currentHunger = getVar(_mob,hunger);
+        if (_currentHunger >= self getv(targetHungerLevel)) exitWith {
+            // Наелись! Удаляем часть тела и завершаем
+            callFunc(_bodyPart,deleteObject);
+            UPDATE_STATE_COMPLETED
+        };
+        
+        private _dist = callFuncParams(_mob,getDistanceTo,_bodyPart);
+        private _eatDistance = _agent getv(interactDistance);
+        
+        // Фаза 1: Движение к части тела
+        if (_dist > _eatDistance) exitWith {
+            // Если уже ели - встаём
+            if (self getv(isEating)) then {
+                [_mob,STANCE_UP] call ai_setStance;
+                self setv(isEating,false);
+            };
+            
+            if !(_agent callv(hasPath)) then {
+                private _targetPos = atltoasl callFunc(_bodyPart,getPos);
+                private _success = [_mob,_targetPos] call ai_planMove;
+                if (!_success) exitWith {UPDATE_STATE_FAILED};
+                [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+            };
+            UPDATE_STATE_CONTINUE
+        };
+        
+        // Фаза 2: Поедание (атака еды)
+        if !(self getv(isEating)) then {
+            // Начинаем есть - присаживаемся
+            [_mob] call ai_stopMove;
+            [_mob,_bodyPart] call ai_rotateTo;
+            [_mob,STANCE_MIDDLE] call ai_setStance;
+            
+            self setv(isEating,true);
+            self setv(lastBiteTime,tickTime - (self getv(biteCooldown))); // Первый укус сразу
+        };
+        
+        // Проверяем кулдаун укуса
+        private _lastBite = self getv(lastBiteTime);
+        private _cooldown = self getv(biteCooldown);
+        private _timeSinceLastBite = tickTime - _lastBite;
+        
+        if (_timeSinceLastBite >= _cooldown) then {
+            // Делаем укус!
+            [_mob,_bodyPart] call ai_rotateTo;
+            
+            // Атакуем часть тела (визуально)
+            [_mob,_bodyPart] call ai_attackTarget; // если есть такая функция
+            
+            // Восстанавливаем голод
+            private _newHunger = (_currentHunger + (self getv(biteHungerRestore))) min 100;
+            setVar(_mob,hunger,_newHunger);
+            
+            // Устанавливаем время следующего укуса
+            self setv(lastBiteTime,tickTime + rand(0,self getv(biteCooldownRand)));
+            
+            ["Eating: Bite! Hunger: %1 -> %2",_currentHunger toFixed 1,_newHunger toFixed 1] call ai_log;
+        };
+        
+        UPDATE_STATE_CONTINUE
+    }
+    
+    def(onCompleted) {
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        self setv(targetBodyPart,nullPtr);
+        self setv(isEating,false);
+        self setv(lastBiteTime,0);
+        [_mob,STANCE_UP] call ai_setStance;
+        callFuncParams(_mob,setCombatMode,false);
+    }
+    
+    def(onFailed) {
+        params ["_agent"];
+        
+        private _mob = _agent getv(mob);
+        self setv(targetBodyPart,nullPtr);
+        self setv(isEating,false);
+        self setv(lastBiteTime,0);
+        [_mob,STANCE_UP] call ai_setStance;
+        callFuncParams(_mob,setCombatMode,false);
     }
 endstruct
 

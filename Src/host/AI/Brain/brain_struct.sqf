@@ -300,15 +300,19 @@ endstruct
 	Действия: патрулировать, искать, преследовать, атаковать, отступать
 */
 struct(AgentEater) base(AgentBase)
-	def(actions) ["BAEater_Patrol","BAEater_Search","BAEater_Chase","BAEater_Attack","BAEater_Retreat"];
+	def(actions) ["BAEater_Patrol","BAEater_Search","BAEater_Chase","BAEater_Attack","BAEater_Retreat","BAEater_EatBodyParts"];
 	
 	// Сенсорные данные
 	def(visibleTarget) nullPtr; // видимая цель
 	def(lastSeenTargetTime) 0; // время последнего обнаружения
 	def(lastSeenTargetPos) [0,0,0]; // последняя известная позиция цели
+	def(nearestBodyPart) nullPtr; // ближайшая часть тела для поедания
+	def(nearPlayers) []; // ближайшие игроки (для отступления)
 	
 	def(interactDistance) 1.3;
 	def(attackDistance) 1.9;
+	def(bodyPartScanDistance) 20; // расстояние сканирования частей тела
+	def(retreatScanDistance) 15; // расстояние сканирования игроков для отступления
 
 	def(sensorUpdateDelay) 0.5;
 	def(updateDelay) 0.3;
@@ -334,7 +338,7 @@ struct(AgentEater) base(AgentBase)
 		private _hadTarget = !isNullReference(self getv(visibleTarget));
 
 		// Ищем ближайших врагов
-		private _nearMobs = callFuncParams(_mob,getNearMobs,50);
+		private _nearMobs = [_mob,50] call ai_getNearMobs;
 		private _refview = refcreate(VISIBILITY_MODE_NONE);
 		// Фильтруем: игроки или враждебная команда
 		_nearMobs = _nearMobs select {
@@ -384,6 +388,27 @@ struct(AgentEater) base(AgentBase)
 				[_mob,SPEED_MODE_WALK] call ai_setSpeed;
 			};
 		};
+		
+		// Сканирование частей тела для поедания
+		private _bodyPartScanDist = self getv(bodyPartScanDistance);
+		private _nearItems = [_mob,_bodyPartScanDist,{isTypeOf(_this,BodyPart)}] call ai_getNearItems;
+		
+		if (count _nearItems > 0) then {
+			// Сортируем по близости
+			private _mobPos = callFunc(_mob,getPos);
+			_nearItems = [_nearItems,{_mobPos distance callFunc(_x,getPos)},true] call sortBy;
+			self setv(nearestBodyPart,_nearItems select 0);
+		} else {
+			self setv(nearestBodyPart,nullPtr);
+		};
+		
+		// Сканирование игроков для отступления (даже если не видим напрямую)
+		private _retreatScanDist = self getv(retreatScanDistance);
+		private _nearPlayersForRetreat = [_mob,_retreatScanDist] call ai_getNearMobs;
+		_nearPlayersForRetreat = _nearPlayersForRetreat select {
+			callFunc(_x,isPlayer) && !getVar(_x,isDead) && isTypeOf(_x,Mob)
+		};
+		self setv(nearPlayers,_nearPlayersForRetreat);
 	}
 endstruct
 
