@@ -8,7 +8,11 @@
 #include <..\text.hpp>
 #include <..\struct.hpp>
 #include <..\GameObjects\GameConstants.hpp>
+#include <..\NOEngine\NOEngine.hpp>
 #include <..\Gender\Gender.hpp>
+
+//низкоуровневые функции для работы с NOEngine (нужны для ai_getNearObjects_Internal)
+#include <..\NOEngine\NOEngine.h>
 
 #include "ai.h"
 
@@ -198,6 +202,76 @@ ai_getNearMobs = {
 	
 	private _pos = callFunc(_mob,getPos);
 	[_pos,_distance,_mob] call ai_getNearMobs_Internal
+};
+
+/*
+	Упрощенный поиск объектов в радиусе
+	Оптимизация достигается засчет получения кешированных объектов из NOEngine,
+	а так же простой проверки дистанции с помощью rvengine
+	
+	old: items 3.88955ms (10k iter)
+	cur: items 0.946484ms (10k iter)
+	x~4.2 раза быстрее
+
+	with func: items ~1.1ms (10k iter)
+*/
+ai_getNearObjects_Internal = {
+	params ["_centerPos","_distance","_type",["_funcCanAdd",{true}]];
+	
+	private _result = [];
+	private _chunkSize = getChunkSizeByType(_type);
+	
+	// Вычисляем радиус в чанках
+	private _chunkRadius = ceil(_distance / _chunkSize);
+	
+	// Получаем центральный чанк
+	private _centerChunk = [_centerPos,_type] call noe_posToChunk;
+	_centerChunk params ["_cx","_cy"];
+	
+	// Проходим по чанкам в радиусе
+	for "_dx" from (-_chunkRadius) to _chunkRadius do {
+		for "_dy" from (-_chunkRadius) to _chunkRadius do {
+			private _chunkPos = [_cx + _dx,_cy + _dy];
+			private _chunkObj = [_chunkPos,_type] call noe_getChunkObject;
+			
+			if (!isNullVar(_chunkObj)) then {
+				private _objectsData = chunk_getObjectsData(_chunkObj);
+				
+				// Проходим по всем объектам в чанке
+				{
+					// Проверяем реальное расстояние
+					private _dist = _centerPos distance _y;//simple check by mesh
+					
+					if (_dist <= _distance) then {
+						private _gobj = pointerList get _x;
+						if (_gobj call _funcCanAdd) then {
+							_result pushBack _gobj;
+						};
+					};
+				} forEach _objectsData;
+			};
+		};
+	};
+	
+	_result
+};
+
+ai_getNearItems = {
+	params ["_mob","_distance",["_predicate",{true}]];
+	private _pos = callFunc(_mob,getPos);
+	[_pos,_distance,CHUNK_TYPE_ITEM,_predicate] call ai_getNearObjects_Internal
+};
+
+ai_getNearStructs = {
+	params ["_mob","_distance",["_predicate",{true}]];
+	private _pos = callFunc(_mob,getPos);
+	[_pos,_distance,CHUNK_TYPE_STRUCTURE,_predicate] call ai_getNearObjects_Internal
+};
+
+ai_getNearDecors = {
+	params ["_mob","_distance",["_predicate",{true}]];
+	private _pos = callFunc(_mob,getPos);
+	[_pos,_distance,CHUNK_TYPE_DECOR,_predicate] call ai_getNearObjects_Internal
 };
 
 ai_createAgent = {
