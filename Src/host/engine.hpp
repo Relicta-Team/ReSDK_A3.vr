@@ -430,6 +430,9 @@ bool TestRange (int numberToCheck, int bottom, int top)
 
 #define generate_list(begin,end,fn_) ([begin,end,fn_] call generateList)
 
+//Возвращает индекс (с нуля) первого элемента массива A, который также существует в массиве B. Если общих элементов нет, возвращается -1. 
+#define find_any(_searchin,_tofind) ((_searchin)findAny(_tofind))
+
 //random helpers
 #define pick selectRandom
 //выбор рандомного числа включительно Bis_fnc_randomNum
