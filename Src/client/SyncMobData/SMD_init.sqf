@@ -40,6 +40,7 @@ smd_list_variables = [
 	["smd_visibility","onVisiblility"],
 	["smd_interp","onInterpolate"], //поднятие и положение предметов
 	["smd_animSpeed","onAnimSpeed"], //изменение скорости анимации персонажа
+	["smd_decals","onDecals"], //изменение декалей
 	["smd_chatMessage","onChatMessage"], //text chat system chatMessage
 	["smd_voiceBlob","onVoiceBlobInit"],
 	["smd_isPrintingSay","onIsPrintingSay"]
@@ -1046,6 +1047,14 @@ decl(void(actor;float))
 smd_onAnimSpeed = {
 	params ["_mob","_val"];
 	_mob setAnimSpeedCoef _val;
+};
+
+decl(void(actor;any[]))
+smd_onDecals = {
+	params ["_mob","_ctx"];
+	_ctx params ["_body","_arms","_legs"];
+	//_decals - array of decals
+	//todo
 };
 
 decl(mesh(actor;int))

@@ -52,15 +52,34 @@ region(Low level inventory api)
 	{
 		objParams();
 		private _stack = [];//key lh,rh,ts,hd
+		private _dval = [0,0,0];
+		private _dvalCount = [0,0,0];
+		private _idx = -1;
 		private _ret = null;
 		{
 			_ret = callFunc(_x,getGermOpacityData);
 			if !isNullVar(_ret) then {
 				_stack pushBack _ret;
 			};
+			
+			if !isNullReference(_x) then {
+				_idx = callFunc(_x,getGermDecalIndex);
+				_dval set [_idx,callFunc(_x,getGermDecalOpacity)];
+				_dvalCount set [_idx,(_dvalCount get _idx) + 1];
+
+			};
 		} foreach (values getSelf(bodyParts));
 
+		{
+			//даже если будет одна рука или нога - грязь равномерно распространится. 2 части (например руки) делают более плавное расппределенеие
+			if (_x > 0) then {
+				_dval set [_foreachindex,(_dval get _foreachindex)/_x];
+			};
+		} foreach _dvalCount;
+
 		callSelfParams(sendInfo,"updateGermsInv" arg _stack);
+
+		callSelfParams(syncSmdVar,"decals" arg _dval);
 	};
 
 region(Getters and checkers)

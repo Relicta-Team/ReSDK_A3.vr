@@ -611,6 +611,9 @@ class(BodyPart) extends(Item)
 		]
 	};
 
+	getter_func(getGermDecalIndex,0); //0 - body, 1 - arms, 2 - legs
+	getter_func(getGermDecalOpacity,GERM_CONV_VALUE_TO_OPACITY_DECAL(getSelf(germs)));
+
 	func(updateGermsAt)
 	{
 		objParams_1(_p);
@@ -635,6 +638,7 @@ class(Body) extends(BodyPart)
 	
 	var(bodyPartIndex,BP_INDEX_TORSO);
 	var(partGermKey,"bd");
+	getter_func(getGermDecalIndex,0);
 	
 	var(organs,null);
 	
@@ -1086,6 +1090,8 @@ class(Arm) extends(ITwoSidedBodyPart)
 		private _hkey = ["lh","rh"] select sideToIndex(getSelf(side));
 		setSelf(partGermKey,_hkey);
 	};
+
+	getter_func(getGermDecalIndex,1);
 	
 endclass
 
@@ -1103,7 +1109,8 @@ class(Leg) extends(ITwoSidedBodyPart)
 		setSelf(bodyPartIndex,_idx);
 	};
 	
-	
+	getter_func(getGermDecalIndex,2);
+
 	func(onBodyPartPostUnlinked)
 	{
 		objParams_1(_usr);
