@@ -6,13 +6,7 @@
 #include <..\..\..\host\engine.hpp>
 #include <..\..\WidgetSystem\widgets.hpp>
 
-#define DECAL_SPHERE_CONFIG "Sign_Sphere25cm_F"
-
-dec_makeSphere = {
-	private _o = createSimpleObject [DECAL_SPHERE_CONFIG,[0,0,0],true];
-
-	_o
-};
+#include "Decals_debug.sqf"
 
 dec_setRenderTarget = {
 	params ["_o","_rtName"];
@@ -35,7 +29,6 @@ dec_applyContext = {
 	params ["_rctx"];
 	displayUpdate _rctx
 };
-
 
 dec_setRenderUniform = {
 	{
@@ -97,30 +90,42 @@ dec_attachmentList = createHashMapFromArray[
 	]]
 ];
 
-dec_reloadThis = {
-	call compile preprocessfilelinenumbers "src\client\Rendering\Decals\Decals_init.sqf";
-};
-dec_genattachments = {
-	if !isNull(dec_attdata) then {
-		_d = "test" call dec_getRenderContext;
-		(allcontrols _d) apply {ctrldelete _x};
-		deletevehicle dec_attdata;
+#ifdef DEBUG
+
+	dec_reloadThis = {
+		call compile preprocessfilelinenumbers "src\client\Rendering\Decals\Decals_init.sqf";
 	};
-	dec_attdata = [];
-	{
+	dec_genattachments = {
+		if !isNull(dec_attdata) then {
+			_d = "test" call dec_getRenderContext;
+			(allcontrols _d) apply {ctrldelete _x};
+			deletevehicle dec_attdata;
+		};
+		dec_attdata = [];
 		{
-			_x params ["_pos","_slot","_size"];
-			_o = call dec_makeSphere;
-			dec_attdata pushBack _o;
-			[_o,"test"] call dec_setRenderTarget;
-			_o attachto [player,_pos,_slot,true];
-			_o setobjectscale _size;
-		} foreach _y;
-	} foreach dec_attachmentList;
-};
+			{
+				_x params ["_pos","_slot","_size"];
+				_o = call dec_makeSphere;
+				dec_attdata pushBack _o;
+				[_o,"test"] call dec_setRenderTarget;
+				_o attachto [player,_pos,_slot,true];
+				_o setobjectscale _size;
+			} foreach _y;
+		} foreach dec_attachmentList;
+	};
 
-dec_makePlane = {
-	private _o = createSimpleObject ["BloodSplatter_01_Small_New_F",[0,0,0],true];
+	dec_makePlane = {
+		private _o = createSimpleObject ["BloodSplatter_01_Small_New_F",[0,0,0],true];
 
-	_o
-};
+		_o
+	};
+
+	#define DECAL_SPHERE_CONFIG "Sign_Sphere25cm_F"
+
+	dec_makeSphere = {
+		private _o = createSimpleObject [DECAL_SPHERE_CONFIG,[0,0,0],true];
+
+		_o
+	};
+
+#endif
