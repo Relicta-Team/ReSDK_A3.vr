@@ -65,7 +65,7 @@ region(Low level inventory api)
 			if !isNullReference(_x) then {
 				_idx = callFunc(_x,getGermDecalIndex);
 				_dval set [_idx,callFunc(_x,getGermDecalOpacity)];
-				_dvalCount set [_idx,(_dvalCount get _idx) + 1];
+				_dvalCount set [_idx,(_dvalCount select _idx) + 1];
 
 			};
 		} foreach (values getSelf(bodyParts));
@@ -73,7 +73,7 @@ region(Low level inventory api)
 		{
 			//даже если будет одна рука или нога - грязь равномерно распространится. 2 части (например руки) делают более плавное расппределенеие
 			if (_x > 0) then {
-				_dval set [_foreachindex,(_dval get _foreachindex)/_x];
+				_dval set [_foreachindex,(_dval select _foreachindex)/_x];
 			};
 		} foreach _dvalCount;
 
