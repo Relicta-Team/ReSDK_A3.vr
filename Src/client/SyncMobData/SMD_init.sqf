@@ -1052,9 +1052,8 @@ smd_onAnimSpeed = {
 decl(void(actor;any[]))
 smd_onDecals = {
 	params ["_mob","_ctx"];
-	_ctx params ["_body","_arms","_legs"];
-	//_decals - array of decals
-	//todo
+	//_ctx params ["_body","_arms","_legs"];
+	[_mob,_ctx] call dec_updateUniformRender
 };
 
 decl(mesh(actor;int))

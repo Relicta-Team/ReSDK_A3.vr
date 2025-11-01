@@ -612,7 +612,7 @@ class(BodyPart) extends(Item)
 	};
 
 	getter_func(getGermDecalIndex,0); //0 - body, 1 - arms, 2 - legs
-	getter_func(getGermDecalOpacity,GERM_CONV_VALUE_TO_OPACITY_DECAL(getSelf(germs)));
+	getter_func(getGermDecalVisibility,GERM_CONV_VALUE_TO_VISIBILITY_DECAL(getSelf(germs)));
 
 	func(updateGermsAt)
 	{

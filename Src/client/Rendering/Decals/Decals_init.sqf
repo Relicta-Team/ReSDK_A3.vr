@@ -6,7 +6,9 @@
 #include <..\..\..\host\engine.hpp>
 #include <..\..\WidgetSystem\widgets.hpp>
 
-#include "Decals_debug.sqf"
+#ifdef EDITOR
+	#include "Decals_debug.sqf"
+#endif
 
 dec_setRenderTarget = {
 	params ["_o","_rtName"];
@@ -37,7 +39,7 @@ dec_setRenderUniform = {
 	//if(true) exitWith {};
 
 	{
-		if (_foreachIndex> 0)exitWith{};
+		//if (_foreachIndex> 0)exitWith{};
 		[player,_foreachIndex,"uni_"+(str _foreachIndex)] call dec_setRenderTarget2;
 	} foreach (getobjecttextures player);
 };
@@ -45,17 +47,76 @@ dec_setRenderUniform = {
 dec_setRenderTarget2 = {
 	params ["_o","_ind","_rtName"];
 	private _orig = _o getobjecttextures [_ind] select 0;
-	_o setObjectTexture [_ind,format ['#(argb,2048,2048,1)uiEx(display:RscDisplayEmpty,uniqueName:%1)', _rtName]];
+	_o setObjectTexture [_ind,format ['#(argb,2048,2048,1)uiEx(texType:ca,display:RscDisplayEmpty,uniqueName:%1)', _rtName]];
 	//_o setObjectMaterial [_ind,"a3\structures_f_bootcamp\vr\coverobjects\data\vr_coverobject_basic.rvmat"];
+	//_o setobjectmaterial [_ind,getobjectmaterials _o select _ind];
 	//debug
 	private _rc = [_rtName] call dec_getRenderContext;
 	(allcontrols _rc) apply {ctrldelete _x};
 	private _p = [_rc,PICTURE,[28,23,44,54]] call createWidget;
+	_p ctrlsetposition [0,0,1,1];
+	_p ctrlcommit 0;
 	[_p,_orig] call widgetSetPicture;
-	_p = [_rc,PICTURE,pdat] call createWidget;
+	_p = [_rc,PICTURE,WIDGET_FULLSIZE] call createWidget;
+	_p ctrlsetposition [0,0,1,1];
+	_p ctrlcommit 0;
 	_p ctrlsettext inventory_const_dirtOverlayIcon;
-	_p ctrlsettextcolor [1,0,0,0.9];
+	_p ctrlsettextcolor [1,0.4,0,1];
 	[_rc] call dec_applyContext;
+};
+
+dec_updateUniformRender = {
+	params ["_mob","_value"];
+	[_mob] call dec_resetUniformRender;
+
+	{
+		[_mob,_foreachIndex,_value * 2] call dec_setRenderGerms;
+	} foreach (getobjecttextures _mob);
+};
+
+dec_resetUniformRender = {
+	params ["_mob"];
+	{
+		_mob setObjectTexture [_foreachIndex,"#reset"];
+	} foreach (getobjecttextures _mob);
+};
+
+dec_internal_index = 0;
+
+dec_setRenderGerms = {
+	params ["_mob","_index","_value"];
+	private _indUni = _mob getvariable "__dec_internal_index";
+	if isNullVar(_indUni) then {
+		INC(dec_internal_index);
+		_indUni = dec_internal_index;
+		_mob setvariable ["__dec_internal_index",_indUni];
+	};
+	private _rtName = format["dec_entity_%1_layer_%2",_indUni,_index];
+	private _origTex = getobjecttextures _mob select _index;
+	if (_origTex != "") then {
+
+		(getTextureInfo _origTex) params ["_texW","_texH"];
+
+		_mob setObjectTexture [_index,
+			format['#(argb,%2,%3,1)uiEx(texType:ca,display:RscDisplayEmpty,uniqueName:%1)', _rtName,_texW,_texH]
+		];
+		private _rc = [_rtName] call dec_getRenderContext;
+
+		(allcontrols _rc) apply {ctrldelete _x};
+
+		private _p = [_rc,PICTURE,WIDGET_FULLSIZE] call createWidget;
+		_p ctrlsetposition [0,0,1,1];
+		_p ctrlcommit 0;
+		[_p,_origTex] call widgetSetPicture;
+		_p = [_rc,PICTURE,WIDGET_FULLSIZE] call createWidget;
+		_p ctrlsetposition [0,0,1,1];
+		_p ctrlcommit 0;
+		_p ctrlsettext inventory_const_dirtOverlayIcon;
+		private _aval = ["423c13"] call color_HTMLtoRGB;
+		_aval pushback clamp(_value,0,1);
+		_p ctrlsettextcolor _aval;
+		[_rc] call dec_applyContext;
+	};
 };
 
 
