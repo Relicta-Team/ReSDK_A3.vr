@@ -135,6 +135,10 @@ struct(AgentBase)
 		refget(self getv(_lastPathTask))
 	}
 
+	def(getPathTask) {
+		self getv(pathTask)
+	}
+
 	// ============================================================================
 	// UTILITY AI - УПРАВЛЕНИЕ ДЕЙСТВИЯМИ
 	// ============================================================================
@@ -318,6 +322,8 @@ struct(AgentEater) base(AgentBase)
 	def(updateDelay) 0.3;
 	
 	//сенсорные контекстные данные
+	def(distanceToTarget) 0; // расстояние до цели
+	def(hasTarget) false;
 	def(staminaPrecent) 100;
 	def(inCombat) false;
 	def(isHunger) false;
@@ -326,10 +332,17 @@ struct(AgentEater) base(AgentBase)
 	def(updateContext) {
 		private _mob = self getv(mob);
 		
+		private _target = self getv(visibleTarget);
+		self setv(hasTarget,!isNullReference(_target));
 		self setv(staminaPrecent,getVar(_mob,stamina) / getVar(_mob,staminaMax) * 100);
-		self setv(inCombat,getVar(_mob,isCombatModeEnable) || !isNullReference(self getv(visibleTarget)));
+		self setv(inCombat,getVar(_mob,isCombatModeEnable) || self getv(hasTarget));
 		self setv(isHunger,getVar(_mob,hunger) < 40);
 		self setv(angryLevel,ifcheck(self getv(inCombat),10,0));
+
+		if (self getv(hasTarget)) then {
+			self setv(distanceToTarget,callFuncParams(_mob,getDistanceTo,_target));
+		};
+
 	}
 
 	def(updateSensors) {
@@ -343,8 +356,10 @@ struct(AgentEater) base(AgentBase)
 		// Фильтруем: игроки или враждебная команда
 		_nearMobs = _nearMobs select {
 			callFunc(_x,isPlayer)
+			//#ifndef EDITOR
 			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
+			//#endif
 			&& !getVar(_x,isDead)
 			&& isTypeOf(_x,Mob)
 		};
@@ -352,6 +367,7 @@ struct(AgentEater) base(AgentBase)
 		if (count _nearMobs > 0) then {
 			// Нашли врага
 			private _closestMob = _nearMobs select 0;
+			//todo onEaterRoar
 			self setv(visibleTarget,_closestMob);
 			self setv(lastSeenTargetTime,tickTime);
 			self setv(lastSeenTargetPos,atltoasl callFunc(_closestMob,getPos));
@@ -367,6 +383,7 @@ struct(AgentEater) base(AgentBase)
 			};
 		} else {
 			// Враг не виден
+			self setv(distanceToTarget,0);
 			self setv(visibleTarget,nullPtr);
 			// lastSeenTargetTime НЕ сбрасываем - используется для поиска
 			

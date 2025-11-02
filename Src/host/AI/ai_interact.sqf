@@ -439,7 +439,6 @@ ai_isMovedByEngine = {
 */
 ai_retreatFrom = {
 	params ["_mob","_fromTarget",["_distance",10]];
-	FHEADER;
 	
 	private _myPos = getPosASL toActor(_mob);
 	
@@ -469,7 +468,42 @@ ai_retreatFrom = {
 	// Позиция отступления
 	private _retreatPos = _myPos vectorAdd (_direction vectorMultiply _distance);
 	
-	RETURN(_retreatPos);
+	private _retreatPos = [_mob,_retreatPos,_distance,(_distance/2) max 5] call ai_findNearestValidPosition;
+	if not_equals(_retreatPos,[]) exitWith {_retreatPos};
+
+	// НОВАЯ ЛОГИКА: пробуем несколько направлений если основное не работает
+	private _retreatPos = [];
+	private _angles = [0, 45, -45, 90, -90, 135, -135]; // углы отклонения в градусах
+	
+	{
+		private _angleOffset = _x;
+		private _testDirection = _direction;
+		
+		// Поворачиваем направление на угол
+		if (_angleOffset != 0) then {
+			private _rad = _angleOffset * (pi / 180);
+			private _cos = cos _rad;
+			private _sin = sin _rad;
+			_testDirection = [
+				(_direction select 0) * _cos - (_direction select 1) * _sin,
+				(_direction select 0) * _sin + (_direction select 1) * _cos,
+				0
+			];
+		};
+		
+		// Позиция отступления в этом направлении
+		private _testPos = _myPos vectorAdd (_testDirection vectorMultiply _distance);
+		
+		// Пробуем найти валидную позицию
+		private _validPos = [_mob, _testPos, _distance, (_distance/2) max 5] call ai_findNearestValidPosition;
+		
+		if !(_validPos isEqualTo []) exitWith {
+			_retreatPos = _validPos;
+		};
+	} forEach _angles;
+	
+	// Если не нашли ни одну валидную точку - возвращаем пустой массив
+	_retreatPos
 };
 
 /*
@@ -641,6 +675,12 @@ ai_rotateTo = {
 	_actor lookat _targetPos; //этой команды хватает для поворота
 	// _actor glanceAt _targetPos;
 	// _actor dowatch _targetPos;
+};
+
+ai_rotateReset = {
+	params ["_mob"];
+	private _actor = toActor(_mob);
+	_actor lookat objnull;
 };
 
 ai_internal_stances_names = createHashMapFromArray [

@@ -24,3 +24,7 @@
 	#undef AI_ENABLE_DEBUG_LOG
 	#undef AI_DEBUG_MOVETOPLAYER
 #endif
+
+
+#define pathTask_reached(pt) refget(pt)
+#define pathTask_null refcreate(false)

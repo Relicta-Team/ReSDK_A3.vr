@@ -41,7 +41,7 @@ struct(BAEater_Attack) base(BABase)
         if (isNullReference(_target)) exitWith {false};
         
         private _mob = _agent getv(mob);
-        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _dist = _agent getv(distanceToTarget);
         if (_dist > (_agent getv(attackDistance))) exitWith {false};
 
         //цель жива
@@ -58,7 +58,7 @@ struct(BAEater_Attack) base(BABase)
         
         private _mob = _agent getv(mob);
         private _target = _agent getv(visibleTarget);
-        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _dist = _agent getv(distanceToTarget);
         private _staminaPercent = _agent callv(getStaminaPercent);
         
         // Бонус за стамину: 15%→0, 100%→10
@@ -88,7 +88,7 @@ struct(BAEater_Attack) base(BABase)
         if (_agent callv(getStaminaPercent) < 10) exitWith {UPDATE_STATE_FAILED};
         
         private _mob = _agent getv(mob);
-        if (callFuncParams(_mob,getDistanceTo,_target) > (_agent getv(attackDistance))) exitWith {UPDATE_STATE_FAILED};
+        if ((_agent getv(distanceToTarget)) > (_agent getv(attackDistance))) exitWith {UPDATE_STATE_FAILED};
         
         // Проверяем кулдаун
         private _lastAttack = self getv(lastAttackTime);
@@ -98,7 +98,8 @@ struct(BAEater_Attack) base(BABase)
         if (_timeSinceLastAttack >= _cooldown) then {
             // Можем атаковать!
             [_mob,_target] call ai_rotateTo;
-            [_mob,_target] call ai_attackTarget;
+            //[_mob,_target] call ai_attackTarget;
+            [format['lastattack: %1',_timeSinceLastAttack]] call ai_log;
             self setv(lastAttackTime,tickTime + rand(0,self getv(attackCooldownRand)));
         };
         
@@ -136,7 +137,7 @@ struct(BAEater_Chase) base(BABase)
         if (isNullReference(_target)) exitWith {false};
         
         private _mob = _agent getv(mob);
-        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _dist = _agent getv(distanceToTarget);
         
         // Только на средней дистанции
         (_dist >= (_agent getv(attackDistance))) && (_dist <= 30)
@@ -148,7 +149,7 @@ struct(BAEater_Chase) base(BABase)
         
         private _mob = _agent getv(mob);
         private _target = _agent getv(visibleTarget);
-        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _dist = _agent getv(distanceToTarget);
         private _staminaPercent = _agent callv(getStaminaPercent);
         
         // Бонус за близость: 30м→0, 3м→30
@@ -173,15 +174,14 @@ struct(BAEater_Chase) base(BABase)
         private _target = _agent getv(visibleTarget);
         if (isNullReference(_target)) exitWith {UPDATE_STATE_FAILED};
         
-        private _dist = callFuncParams(_mob,getDistanceTo,_target);
+        private _dist = _agent getv(distanceToTarget);
         if (_dist < (_agent getv(attackDistance))) exitWith {UPDATE_STATE_COMPLETED};
         
-        private _isMoving = _agent getv(ismoving);
         private _needReplan = false;
         
         private _emergencyReplan = false; // Флаг экстренной перепланировки
         
-        if (_isMoving) then {
+        if (_agent callv(hasPath)) then {
             // Проверяем нужно ли перепланировать путь
             private _lastReplan = self getv(lastReplanTime);
             private _timeSinceReplan = tickTime - _lastReplan;
@@ -219,17 +219,18 @@ struct(BAEater_Chase) base(BABase)
             [_mob] call ai_stopMove;
         };
         
+        private _ret = UPDATE_STATE_CONTINUE;
         if (_needReplan) then {
             // ПРЕДСКАЗАНИЕ: куда цель побежит через 1 секунду
             private _predictedPos = [_target, 1.0] call ai_predictTargetPosition;
             
             private _success = [_mob, _predictedPos] call ai_planMove;
-            if (!_success) exitWith {UPDATE_STATE_FAILED};
+            if (!_success) exitWith {_ret = UPDATE_STATE_FAILED};
             
             self setv(lastReplanTime, tickTime);
         };
         
-        UPDATE_STATE_CONTINUE
+        _ret;
     }
     
     def(onCompleted) {
@@ -240,6 +241,7 @@ struct(BAEater_Chase) base(BABase)
     
     def(onFailed) {
         params ["_agent"];
+        [_agent getv(mob)] call ai_stopMove;
         self setv(lastReplanTime,0);
     }
 endstruct
@@ -294,7 +296,7 @@ struct(BAEater_Search) base(BABase)
         // Переключаемся на ходьбу для сканирования
         [_mob] call ai_stopMove;
 
-        [_mob,nullPtr] call ai_rotateTo;
+        [_mob] call ai_rotateReset;
         
         // Идем к последней известной позиции
         private _lastPos = _agent getv(lastSeenTargetPos);
@@ -313,11 +315,11 @@ struct(BAEater_Search) base(BABase)
         
         // Если нашли цель - успех
         private _target = _agent getv(visibleTarget);
-        if (!isNullReference(_target)) exitWith {RETURN(UPDATE_STATE_COMPLETED)};
+        if (!isNullReference(_target)) exitWith {UPDATE_STATE_COMPLETED};
         
         // Проверяем таймаут поиска (20 секунд)
         private _searchTime = tickTime - (self getv(searchStartTime));
-        if (_searchTime > 20) exitWith {RETURN(UPDATE_STATE_FAILED)};
+        if (_searchTime > 20) exitWith {UPDATE_STATE_FAILED};
         
         private _searchPos = self getv(searchTarget);
         private _actor = _agent getv(actor);
@@ -326,23 +328,20 @@ struct(BAEater_Search) base(BABase)
         
         // ФАЗА 1: Движение к центру поиска (последняя известная позиция цели)
         if !(self getv(searchCenterReached)) then {
-            private _distToCenter = _currentPos distance _searchPos;
-            
             // Проверяем достигли ли центра
-            if (_agent callv(isPathReached) && _distToCenter < 2) then {
-                [_mob] call ai_stopMove;
+            if (_agent callv(isPathReached)) exitWith {
                 self setv(searchCenterReached,true);
                 self setv(searchWaitStart,tickTime);
                 self setv(isSearchWaiting,true);
-                ["Search: Reached center, starting patrol"] call ai_log;
-            } else {
-                // Планируем путь если его нет или если достигли но далеко
-                if !(_agent callv(hasPath)) then {
-                    private _success = [_mob,_searchPos] call ai_planMove;
-                    if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
-                    [_mob,SPEED_MODE_WALK] call ai_setSpeed;
-                };
             };
+
+            if !(_agent callv(hasPath)) then {
+                // Планируем путь если его нет или если достигли но далеко
+                private _success = [_mob,_searchPos] call ai_planMove;
+                if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                [_mob,SPEED_MODE_WALK] call ai_setSpeed;                
+            };
+            
         } else {
             // ФАЗА 2: Патрулирование в области последнего обнаружения
             
@@ -359,7 +358,7 @@ struct(BAEater_Search) base(BABase)
                     
                     // Ограничиваем количество попыток (3-4 точки)
                     if (_attempts >= 3) exitWith {
-                        ["Search: Max attempts reached, giving up"] call ai_log;
+                        //["Search: Max attempts reached, giving up"] call ai_log;
                         RETURN(UPDATE_STATE_FAILED)
                     };
                     
@@ -381,18 +380,15 @@ struct(BAEater_Search) base(BABase)
                     private _success = [_mob,_newSearchPos] call ai_planMove;
                     if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
                     [_mob,SPEED_MODE_WALK] call ai_setSpeed;
-                    ["Search: Moving to patrol point %1",_attempts + 1] call ai_log;
+                    //["Search: Moving to patrol point %1",_attempts + 1] call ai_log;
                 };
             } else {
                 // Состояние: Движение к очередной точке патруля
-                private _distToTarget = _currentPos distance _searchPos;
                 
                 // Проверяем достигли ли точки поиска
-                if (_agent callv(isPathReached) && _distToTarget < 2) then {
-                    [_mob] call ai_stopMove;
+                if (_agent callv(isPathReached)) then {
                     self setv(searchWaitStart,tickTime);
                     self setv(isSearchWaiting,true);
-                    ["Search: Reached patrol point, observing"] call ai_log;
                 } else {
                     // Если нет пути - планируем
                     if !(_agent callv(hasPath)) then {
@@ -446,6 +442,7 @@ struct(BAEater_Retreat) base(BABase)
     def(isResting) false;
     def(lastRetreatCheckTime) 0;
     def(retreatCheckInterval) 2.0; // Проверяем приближение игроков каждые 2 секунды
+    def(retreatPathTask) pathTask_null;
     
     // КОНТЕКСТ: нужно отступать?
     def_ret(isAvailable) {
@@ -484,11 +481,14 @@ struct(BAEater_Retreat) base(BABase)
     
     def(onStart) {
         params ["_agent"];
+
+        _agent setv(retreatPathTask,pathTask_null);
         
         private _mob = _agent getv(mob);
         
         // Переключаемся на медленную ходьбу для экономии стамины
         [_mob,SPEED_MODE_WALK] call ai_setSpeed;
+        [_mob] call ai_stopMove; //выключаем движение для логики отступления
         
         // Ищем точку отступления
         private _target = _agent getv(visibleTarget);
@@ -519,6 +519,7 @@ struct(BAEater_Retreat) base(BABase)
     
     def_ret(onUpdate) {
         params ["_agent"];
+        FHEADER;
         
         private _mob = _agent getv(mob);
         
@@ -537,8 +538,8 @@ struct(BAEater_Retreat) base(BABase)
             if (tickTime - _lastCheck >= _checkInterval) then {
                 self setv(lastRetreatCheckTime,tickTime);
                 
-                private _nearPlayers = _agent getv(nearPlayers);
-                if (count _nearPlayers > 0) then {
+                private _nearPlayers = [_mob,10,{callFunc(_x,isPlayer) && isTypeOf(_x,Mob)}] call ai_getNearMobs;
+                if (count _nearPlayers > 0 && _agent getv(hasTarget)) then {
                     // Игроки наступают! Нужно отходить снова
                     ["Eater: Players approaching during rest, retreating again..."] call ai_log;
                     
@@ -569,33 +570,32 @@ struct(BAEater_Retreat) base(BABase)
                     };
                     
                     self setv(retreatTarget,_newRetreatPos);
+                    self setv(retreatPathTask,pathTask_null);
                 };
             };
             
-            // Сидим и ждём восстановления стамины
-            UPDATE_STATE_CONTINUE
         } else {
             // Режим движения к точке отступления
             
-            // Двигаемся к точке отступления
-            if !(_agent callv(hasPath)) then {
-                private _success = [_mob,_retreatPos] call ai_planMove;
-                if (!_success) exitWith {UPDATE_STATE_FAILED};
-            };
-            
             // Достигли точки - присаживаемся для отдыха
-            if (_agent callv(isPathReached)) then {
+            if pathTask_reached(self getv(retreatPathTask)) exitWith {
                 // Выключаем комбат чтобы можно было присесть
-                if (getVar(_mob,isCombatModeEnable)) then {
-                    callFuncParams(_mob,setCombatMode,false);
-                };
+                [_mob,false] call ai_setCombatMode;
                 [_mob,STANCE_MIDDLE] call ai_setStance; // присаживаемся
                 self setv(isResting,true);
                 self setv(lastRetreatCheckTime,tickTime);
             };
+
+            // Двигаемся к точке отступления
+            if !(_agent callv(hasPath)) then {
+                private _success = [_mob,_retreatPos] call ai_planMove;
+                if (!_success) exitWith {RETURN(UPDATE_STATE_FAILED)};
+                self setv(retreatPathTask,_agent callv(getPathTask));
+            };
             
-            UPDATE_STATE_CONTINUE
         };
+
+        UPDATE_STATE_CONTINUE
     }
     
     def(onCompleted) {
@@ -608,9 +608,7 @@ struct(BAEater_Retreat) base(BABase)
         // Встаём
         [_mob,STANCE_UP] call ai_setStance;
         // Включаем комбат обратно
-        if (!getVar(_mob,isCombatModeEnable)) then {
-            callFuncParams(_mob,setCombatMode,true);
-        };
+        [_mob,true] call ai_setCombatMode;
         // Возвращаем бег если восстановились
         [_mob,SPEED_MODE_RUN] call ai_setSpeed;
     }
@@ -900,7 +898,7 @@ struct(BAEater_EatBodyParts) base(BABase)
         self setv(isEating,false);
         self setv(lastBiteTime,0);
         [_mob,STANCE_UP] call ai_setStance;
-        callFuncParams(_mob,setCombatMode,false);
+        [_mob,false] call ai_setCombatMode;
     }
     
     def(onFailed) {
@@ -911,8 +909,6 @@ struct(BAEater_EatBodyParts) base(BABase)
         self setv(isEating,false);
         self setv(lastBiteTime,0);
         [_mob,STANCE_UP] call ai_setStance;
-        callFuncParams(_mob,setCombatMode,false);
+        [_mob,false] call ai_setCombatMode;
     }
 endstruct
-
-// BHVEater удалено - поведение перенесено в AgentEater (Brain_struct.sqf)

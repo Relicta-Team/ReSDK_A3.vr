@@ -158,7 +158,7 @@ ai_createMob = {
 // Получить мобов в радиусе от позиции используя региональную систему
 // Намного быстрее чем перебор всех мобов на карте
 ai_getNearMobs_Internal = {
-	params ["_centerPos","_distance",["_excludeMob",nullPtr]];
+	params ["_centerPos","_distance",["_excludeMob",nullPtr],"_predicate"];
 	
 	private _regionKey = _centerPos call ai_nav_getRegionKey;
 	private _result = [];
@@ -185,8 +185,9 @@ ai_getNearMobs_Internal = {
 					private _dist = _centerPos distance _mobPos;
 					
 					if (_dist <= _distance) then {
-						//todo мы можем добавить доп проверки по соответствию типа моба
-						_result pushBack _x;
+						if (_x call _predicate) then {
+							_result pushBack _x;
+						};
 					};
 				} forEach _mobsInRegion;
 			};
@@ -198,10 +199,10 @@ ai_getNearMobs_Internal = {
 
 // Версия для моба (удобная обертка, быстрее в 29 раз чем BasicMob::getNearMobs)
 ai_getNearMobs = {
-	params ["_mob","_distance"];
+	params ["_mob","_distance",["_predicate",{true}]];
 	
 	private _pos = callFunc(_mob,getPos);
-	[_pos,_distance,_mob] call ai_getNearMobs_Internal
+	[_pos,_distance,_mob,_predicate] call ai_getNearMobs_Internal
 };
 
 /*
@@ -479,7 +480,7 @@ ai_onUpdate = {
 			//TODO возможно есть какой-то более лучший способ сделать это
 			if !callFunc(_mob,isActive) then {
 				[_mob] call ai_stopMove;
-				[_mob,nullPtr] call ai_rotateTo;
+				[_mob] call ai_rotateReset;
 				if (getVar(_mob,isDead)) then {
 					_deadMobs pushBack _mob;
 				};
