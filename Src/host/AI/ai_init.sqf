@@ -89,7 +89,7 @@ ai_stats_nextRefreshTime = 0;
 //todo remove when ai will be stable
 #ifndef EDITOR
 ai_countCreatedAI = 0;
-ai_maxAICount = 10;
+ai_maxAICount = 100;
 #endif
 
 ai_createMob = {

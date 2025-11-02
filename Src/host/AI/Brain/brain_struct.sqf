@@ -346,23 +346,20 @@ struct(AgentEater) base(AgentBase)
 	}
 
 	def(updateSensors) {
+		
 		private _mob = self getv(mob);
 		
 		private _hadTarget = !isNullReference(self getv(visibleTarget));
 
 		// Ищем ближайших врагов
-		private _nearMobs = [_mob,50] call ai_getNearMobs;
 		private _refview = refcreate(VISIBILITY_MODE_NONE);
-		// Фильтруем: игроки или враждебная команда
-		_nearMobs = _nearMobs select {
-			callFunc(_x,isPlayer)
-			//#ifndef EDITOR
-			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
+		private _nearMobs = [_mob,40,{
+			callFunc(_this,isPlayer)
+			&& isTypeOf(_this,Mob)
+			&& {!getVar(_this,isDead)}
+			&& {callFuncParams(_mob,canSeeObject,_this arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
-			//#endif
-			&& !getVar(_x,isDead)
-			&& isTypeOf(_x,Mob)
-		};
+		}] call ai_getNearMobs;
 		
 		if (count _nearMobs > 0) then {
 			// Нашли врага

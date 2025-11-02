@@ -98,8 +98,11 @@ struct(BAEater_Attack) base(BABase)
         if (_timeSinceLastAttack >= _cooldown) then {
             // Можем атаковать!
             [_mob,_target] call ai_rotateTo;
-            //[_mob,_target] call ai_attackTarget;
+            #ifndef EDITOR
+            [_mob,_target] call ai_attackTarget;
+            #else
             [format['lastattack: %1',_timeSinceLastAttack]] call ai_log;
+            #endif
             self setv(lastAttackTime,tickTime + rand(0,self getv(attackCooldownRand)));
         };
         
