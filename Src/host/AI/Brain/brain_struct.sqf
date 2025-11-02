@@ -15,6 +15,7 @@
 
 #include "Behaviors\test.sqf"
 #include "Behaviors\Eater.sqf"
+#include "Behaviors\SmallRat.sqf"
 
 /*
 	BA - Brain Action - обязательный префикс для всех действий
