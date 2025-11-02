@@ -4015,14 +4015,14 @@ File: [host\engine.hpp at line 861](../../../Src/host/engine.hpp#L861)
 
 Type: Variable
 
-Description: craft table init
+Description: ai system init
 
 
 Initial value:
 ```sqf
 1
 ```
-File: [host\init.sqf at line 109](../../../Src/host/init.sqf#L109)
+File: [host\init.sqf at line 110](../../../Src/host/init.sqf#L110)
 # keyboard.hpp
 
 ## KEY_ESCAPE
@@ -8389,7 +8389,7 @@ Description:
 
 Replaced value:
 ```sqf
-1.7
+2.0
 ```
 File: [host\struct.hpp at line 6](../../../Src/host/struct.hpp#L6)
 ## STRUCT_MEM_TYPE
@@ -8996,6 +8996,20 @@ Replaced value:
 
 ```
 File: [host\struct.hpp at line 279](../../../Src/host/struct.hpp#L279)
+## STRUCT_INIT_ENABLE_REINITIALIZE_LOGGING
+
+Type: constant
+
+> Exists if **STRUCT_INIT_FUNCTIONS** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+
+```
+File: [host\struct.hpp at line 429](../../../Src/host/struct.hpp#L429)
 ## spi_lst
 
 Type: Variable
@@ -9080,17 +9094,25 @@ Description: struct inheritance table of all childrens
 
 
 File: [host\struct.hpp at line 292](../../../Src/host/struct.hpp#L292)
-## struct_alloc
+## struct_reinitialize
 
 Type: function
 
 > Exists if **STRUCT_INIT_FUNCTIONS** defined
 
+Description: !ОБНОВЛЕННЫЕ ТИПЫ ЗАРАБОТАЮТ ТОЛЬКО ДЛЯ НОВЫХ ИНСТАНСОВ
+- Param: _path
+
+File: [host\struct.hpp at line 431](../../../Src/host/struct.hpp#L431)
+## struct_alloc
+
+Type: function
+
 Description: 
 - Param: _s
 - Param: _params
 
-File: [host\struct.hpp at line 428](../../../Src/host/struct.hpp#L428)
+File: [host\struct.hpp at line 525](../../../Src/host/struct.hpp#L525)
 ## struct_eraseFull
 
 Type: function
@@ -9098,7 +9120,7 @@ Type: function
 Description: 
 - Param: _o
 
-File: [host\struct.hpp at line 447](../../../Src/host/struct.hpp#L447)
+File: [host\struct.hpp at line 544](../../../Src/host/struct.hpp#L544)
 ## struct_reflect_getTypeValue
 
 Type: function
@@ -9107,7 +9129,7 @@ Description:
 - Param: _typename
 - Param: _varname
 
-File: [host\struct.hpp at line 452](../../../Src/host/struct.hpp#L452)
+File: [host\struct.hpp at line 549](../../../Src/host/struct.hpp#L549)
 ## struct_getAllTypesOf
 
 Type: function
@@ -9115,7 +9137,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 471](../../../Src/host/struct.hpp#L471)
+File: [host\struct.hpp at line 568](../../../Src/host/struct.hpp#L568)
 ## struct_getBaseTypesOf
 
 Type: function
@@ -9123,7 +9145,7 @@ Type: function
 Description: 
 - Param: _typename
 
-File: [host\struct.hpp at line 476](../../../Src/host/struct.hpp#L476)
+File: [host\struct.hpp at line 573](../../../Src/host/struct.hpp#L573)
 # text.hpp
 
 ## lt
