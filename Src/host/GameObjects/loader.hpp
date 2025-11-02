@@ -117,6 +117,7 @@ loadFile("src\host\GameObjects\Structures\Containers\Container.sqf");
 loadFile("src\host\GameObjects\Structures\Effects\AtmEffects.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Teleport.sqf");
 	loadFile("src\host\GameObjects\Structures\Effects\Zones.sqf");
+	loadFile("src\host\GameObjects\Structures\Effects\AreaEffects.sqf");
 loadFile("src\host\GameObjects\Structures\ReagentContainers\ReagentContainer.sqf");
 loadFile("src\host\GameObjects\Structures\Tools\Farming.sqf");
 	loadFile("src\host\GameObjects\Structures\Tools\SewingMachine.sqf");
