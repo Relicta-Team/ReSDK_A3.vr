@@ -45,3 +45,4 @@ RBuilder/platform_path.cache
 RBuilder/bin/**
 Third-party/SPBuilder/voice_gen.txt
 **/node_modules/**
+/Src/client/dist
