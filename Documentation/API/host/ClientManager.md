@@ -709,7 +709,7 @@ Description: снимаем регистрацию моба с игры
 - Param: _mobObj
 - Param: _removeObj (optional, default true)
 
-File: [host\ClientManager\functions.sqf at line 338](../../../Src/host/ClientManager/functions.sqf#L338)
+File: [host\ClientManager\functions.sqf at line 340](../../../Src/host/ClientManager/functions.sqf#L340)
 ## cm_checkClientInJIPMemory
 
 Type: function
@@ -718,7 +718,7 @@ Description: Проверяет наличие ранее подключенно
 - Param: _disId
 - Param: _owner
 
-File: [host\ClientManager\functions.sqf at line 349](../../../Src/host/ClientManager/functions.sqf#L349)
+File: [host\ClientManager\functions.sqf at line 351](../../../Src/host/ClientManager/functions.sqf#L351)
 ## cm_sendOOSMessage
 
 Type: function
@@ -728,7 +728,7 @@ Description: Отправляет всем клиентам сообщение �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 380](../../../Src/host/ClientManager/functions.sqf#L380)
+File: [host\ClientManager\functions.sqf at line 382](../../../Src/host/ClientManager/functions.sqf#L382)
 ## cm_sendLobbyMessage
 
 Type: function
@@ -738,7 +738,7 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 395](../../../Src/host/ClientManager/functions.sqf#L395)
+File: [host\ClientManager\functions.sqf at line 397](../../../Src/host/ClientManager/functions.sqf#L397)
 # OnConnected.sqf
 
 ## cm_maxClients
@@ -835,3 +835,17 @@ Replaced value:
 errorformat("[Command::spawnitem]: " + cause + " - (%1 = %2)",_varName arg _varValue)
 ```
 File: [host\ClientManager\cmds\Reflect.sqf at line 29](../../../Src/host/ClientManager/cmds/Reflect.sqf#L29)
+# ServerControl.sqf
+
+## cmd_ai_internal_nextSpawnPos
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\ClientManager\cmds\ServerControl.sqf at line 273](../../../Src/host/ClientManager/cmds/ServerControl.sqf#L273)

@@ -1217,13 +1217,21 @@ func(applyDodgeVisualEffects)
 	objParams_1(_sideAttacker);
 	private _data = [COMBAT_ATTDAM_DODGE,netTickTime,_sideAttacker];
 	callSelfParams(syncSmdVar,"attdam" arg _data);
+
+	if callSelf(isAIAgent) then {
+		[getSelf(owner),_sideAttacker] call anim_doDodge;
+	};
 };
 
 func(applyParryVisualEffects)
 {
 	objParams_2(_idxHand,_enum);
 	private _data = [COMBAT_ATTDAM_PARRY,netTickTime,_idxHand,_enum];
-	callSelfParams(syncSmdVar,"attdam" arg _data)
+	callSelfParams(syncSmdVar,"attdam" arg _data);
+
+	if callSelf(isAIAgent) then {
+		[getSelf(owner),_idxHand,_enum] call anim_doParry;
+	};
 };
 
 func(applyPointVisualEffects)
@@ -1274,6 +1282,10 @@ func(applyAttackVisualEffects)
 	};
 
 	callSelfParams(syncSmdVar,"attdam" arg _data);
+
+	if callSelf(isAIAgent) then {
+		[getSelf(owner),getSelf(activeHand),_enum] call anim_doAttack;
+	};
 };
 
 

@@ -29,6 +29,8 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v3.1.4
+        with:
+          python-version: '3.13'
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.TOKEN }} # for forcepush working
