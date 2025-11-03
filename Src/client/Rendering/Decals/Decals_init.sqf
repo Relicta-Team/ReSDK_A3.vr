@@ -82,6 +82,7 @@ dec_resetUniformRender = {
 };
 
 dec_internal_index = 0;
+dec_internal_const_pathPicture = PATH_PICTURE("textures\cloth_dirt.paa");
 
 dec_setRenderGerms = {
 	params ["_mob","_index","_value"];
@@ -111,7 +112,7 @@ dec_setRenderGerms = {
 		_p = [_rc,PICTURE,WIDGET_FULLSIZE] call createWidget;
 		_p ctrlsetposition [0,0,1,1];
 		_p ctrlcommit 0;
-		_p ctrlsettext inventory_const_dirtOverlayIcon;
+		_p ctrlsettext dec_internal_const_pathPicture;
 		private _aval = ["423c13"] call color_HTMLtoRGB;
 		_aval pushback clamp(_value,0,1);
 		_p ctrlsettextcolor _aval;
