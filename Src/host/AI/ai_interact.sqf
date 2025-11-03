@@ -472,7 +472,7 @@ ai_retreatFrom = {
 	if not_equals(_retreatPos,[]) exitWith {_retreatPos};
 
 	// НОВАЯ ЛОГИКА: пробуем несколько направлений если основное не работает
-	private _retreatPos = [];
+	_retreatPos = [];
 	private _angles = [0, 45, -45, 90, -90, 135, -135]; // углы отклонения в градусах
 	
 	{
