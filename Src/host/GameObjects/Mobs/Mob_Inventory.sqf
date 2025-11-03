@@ -76,7 +76,9 @@ region(Low level inventory api)
 
 		callSelfParams(sendInfo,"updateGermsInv" arg _stack);
 
-		callSelfParams(syncSmdVar,"decals" arg _accVal);
+		//! когда персонажи без одежды будут иметь свою модель (ретекстур голого персонажа) - можно вернуть это с правками
+		//! Сейчас грязь хранится на самой одежде
+		//callSelfParams(syncSmdVar,"decals" arg _accVal);
 	};
 
 region(Getters and checkers)

@@ -165,7 +165,7 @@ class(Bath) extends(IChair)
 		{
 			_pt = callFuncParams(_usr,getPart,_x);
 			if !isNullReference(_pt) then {
-				setVar(_pt,germs,(getVar(_pt,germs) - randInt(40,60)) max 0);
+				callFuncParams(_pt,setGerms,(getVar(_pt,germs) - randInt(40,60)) max 0);
 			};
 		} foreach BP_INDEX_ALL;
 

@@ -70,7 +70,7 @@ dec_updateUniformRender = {
 	[_mob] call dec_resetUniformRender;
 
 	{
-		[_mob,_foreachIndex,_value * 2] call dec_setRenderGerms;
+		[_mob,_foreachIndex,_value] call dec_setRenderGerms;
 	} foreach (getobjecttextures _mob);
 };
 
