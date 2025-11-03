@@ -48,7 +48,7 @@ class(BrushCleaner) extends(Item)
 			callFuncParams(_usr,localSay,"Не достать." arg "error");
 		};
 
-		setVar(_part,germs,(getVar(_part,germs) - randInt(20,40)) max 0);
+		callFuncParams(_part,setGerms,(getVar(_part,germs) - randInt(20,40)) max 0);
 		callFuncParams(_usr,meSay,"чистит "+ifcheck(equals(_targ,_usr),"себе",callFuncParams(_targ,getNameEx,"кому"))+" "+callFunc(_part,getName));
 		callFuncParams(_usr,playSound,"UNCATEGORIZED\clean" arg getRandomPitchInRange(0.9,1.3));
 		

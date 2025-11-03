@@ -323,7 +323,7 @@ ai_handleMove = {
 					private _cosAngle = (_dot / (_len1 * _len2)) max -1 min 1;
 					private _angle = acos _cosAngle;
 					
-					// Если угол больше 40 градусов - останавливаем и ставим на паузу
+					// Если угол больше 90 градусов - останавливаем и ставим на паузу
 					if (_angle >= 90) then {
 						//["Sharp turn detected (%1°), stopping for 0.3s", (_angle toFixed 1)] call ai_log;
 						[_mob] call ai_internal_setStop;
