@@ -3,8 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
-#define AI_DEBUG_TRACEPATH
-#define AI_DEBUG_BRAINIINFO
+//#define AI_DEBUG_TRACEPATH
+//#define AI_DEBUG_BRAINIINFO
 // #define AI_DEBUG_MOVETOPLAYER
 
 #define toActor(mob) getVar(mob,owner)
