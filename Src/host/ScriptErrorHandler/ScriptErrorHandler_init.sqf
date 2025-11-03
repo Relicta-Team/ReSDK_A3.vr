@@ -25,7 +25,7 @@ scriptError_internal_handleStack = {
 			if (struct_isstruct(_valInfo)) then {
 				_valInfo = format["struct(%1)",struct_typename(_valInfo)];
 			} else {
-				_valInfo = format["map(%1 keys)",count _varmap];
+				_valInfo = format["map(%1 keys)",count _valInfo];
 			};
 			_cleanString = false;
 		};
