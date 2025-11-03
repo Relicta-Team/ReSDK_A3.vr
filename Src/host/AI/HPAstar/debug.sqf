@@ -169,7 +169,7 @@ ai_nav_debugDrawPath = {
 
 // Тест: найти и визуализировать путь между двумя позициями
 ai_nav_testPath = {
-	params ["_startPos", "_endPos",["_optimize",true],["_fnc","autogen"],["_args",[]]];
+	params ["_startPos", "_endPos",["_optimize",true],["_fnc","part"],["_args",[]]];
 	
 	// Находим путь
 	private _argv = [_startPos, _endPos, _optimize]+_args;
@@ -220,4 +220,28 @@ ai_nav_debug_testPathOnline = {
 	} foreach _p;
 
 	_p
+};
+
+
+ai_nav_debug_clientDrawRegionInfo = {
+	private _pos = getposasl player;
+	private _key = _pos call ai_nav_getRegionKey;
+	private _region = ai_nav_regions get _key;
+	if (isNullVar(_region)) exitWith {};
+	private _nodes = _region get "nodes";
+	private _drawInfo = [];
+	{
+		private _node = ai_nav_nodes get _x;
+		_pos1 = _node get "pos";
+		_connections = _node get "neighbors";
+		{
+			_pos2 = ai_nav_nodes get (_x select 0) get "pos";
+			_drawInfo pushback [(asltoatl _pos1)vectoradd vec3(0,0,0.1),(asltoatl _pos2)vectoradd vec3(0,0,0.1), [0,1,0,1], 50];
+		} foreach (ai_nav_adjacency get _x);
+	} foreach _nodes;
+	
+	{
+		struct_newp(LoopedObjectFunction,ai_nav_debug_drawNode arg _x arg null arg player);
+	} foreach _drawInfo;
+	_drawInfo
 };

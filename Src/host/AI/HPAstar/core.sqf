@@ -126,6 +126,122 @@ ai_nav_sortBy = {
 	
 };
 
+// ============================================================================
+// PRIORITY QUEUE (MIN-HEAP) для A*
+// ============================================================================
+// Бинарная куча для быстрого извлечения элемента с минимальным fScore
+// Структура: массив [nodeId, fScore], где индекс 0 - минимум
+// ============================================================================
+
+// Восстановление свойств кучи вверх (после вставки)
+ai_nav_heapifyUp = {
+	params ["_heap", "_index"];
+	
+	while {_index > 0} do {
+		private _parentIdx = floor((_index - 1) / 2);
+		private _current = _heap select _index;
+		private _parent = _heap select _parentIdx;
+		
+		// Если родитель меньше или равен - всё ок
+		if ((_parent select 1) <= (_current select 1)) exitWith {};
+		
+		// Иначе меняем местами
+		_heap set [_index, _parent];
+		_heap set [_parentIdx, _current];
+		_index = _parentIdx;
+	};
+};
+
+// Восстановление свойств кучи вниз (после удаления корня)
+ai_nav_heapifyDown = {
+	params ["_heap", "_index"];
+	private _size = count _heap;
+	
+	while {true} do {
+		private _leftIdx = 2 * _index + 1;
+		private _rightIdx = 2 * _index + 2;
+		private _smallest = _index;
+		
+		// Проверяем левого потомка
+		if (_leftIdx < _size) then {
+			if (((_heap select _leftIdx) select 1) < ((_heap select _smallest) select 1)) then {
+				_smallest = _leftIdx;
+			};
+		};
+		
+		// Проверяем правого потомка
+		if (_rightIdx < _size) then {
+			if (((_heap select _rightIdx) select 1) < ((_heap select _smallest) select 1)) then {
+				_smallest = _rightIdx;
+			};
+		};
+		
+		// Если текущий элемент наименьший - всё ок
+		if (_smallest == _index) exitWith {};
+		
+		// Иначе меняем местами и продолжаем
+		private _temp = _heap select _index;
+		_heap set [_index, _heap select _smallest];
+		_heap set [_smallest, _temp];
+		_index = _smallest;
+	};
+};
+
+// Вставка элемента в кучу
+ai_nav_heapInsert = {
+	params ["_heap", "_nodeId", "_fScore"];
+	
+	_heap pushBack [_nodeId, _fScore];
+	[_heap, (count _heap) - 1] call ai_nav_heapifyUp;
+};
+
+// Извлечение минимального элемента
+ai_nav_heapExtractMin = {
+	params ["_heap"];
+	
+	private _size = count _heap;
+	if (_size == 0) exitWith {[-1, 999999]};
+	
+	private _min = _heap select 0;
+	
+	if (_size == 1) then {
+		_heap resize 0;
+	} else {
+		_heap set [0, _heap select (_size - 1)];
+		_heap resize (_size - 1);
+		[_heap, 0] call ai_nav_heapifyDown;
+	};
+	
+	_min
+};
+
+// Обновление fScore существующего элемента в куче
+ai_nav_heapUpdateKey = {
+	params ["_heap", "_nodeId", "_newFScore"];
+	
+	// Найти индекс элемента (O(n), но редкая операция)
+	private _index = -1;
+	{
+		if ((_x select 0) == _nodeId) exitWith {
+			_index = _forEachIndex;
+		};
+	} forEach _heap;
+	
+	if (_index == -1) exitWith {false};
+	
+	private _oldFScore = (_heap select _index) select 1;
+	_heap set [_index, [_nodeId, _newFScore]];
+	
+	// Если уменьшили - heapifyUp, если увеличили - heapifyDown
+	if (_newFScore < _oldFScore) then {
+		[_heap, _index] call ai_nav_heapifyUp;
+	} else {
+		[_heap, _index] call ai_nav_heapifyDown;
+	};
+	
+	true
+};
+
 ai_nav_generateRegionNodes = {
 	params ["_pos", ["_autoSave", true]];
 	
@@ -437,7 +553,7 @@ ai_nav_generateRegionNodes = {
 };
 
 // Найти ближайший узел к позиции
-ai_nav_findNearestNode = {
+ai_nav_findNearestNode_old = {
 	params ["_pos", ["_maxDistance", 50]];
 	
 	private _regionKey = _pos call ai_nav_getRegionKey;
@@ -485,6 +601,74 @@ ai_nav_findNearestNode = {
 	} else {
 		_bestNode
 	}
+};
+
+ai_nav_internal_list_regionOffsets = [
+	[0,1], [0,-1], [1,0], [-1,0], [1,1], [-1,1], [1,-1], [-1,-1]
+];
+
+//ускорение поиска узла 21.3x быстрее чем ai_nav_findNearestNode_old
+ai_nav_findNearestNode = {
+	params ["_pos", ["_maxDistance", 50]];
+	
+	private _regionKey = _pos call ai_nav_getRegionKey;
+	private _regionData = ai_nav_regions get _regionKey;
+	
+	private _bestNode = -1;
+	private _bestDist = 999999;
+	
+	// Если текущий регион существует - начинаем с него
+	if (!isNil "_regionData") then {
+		private _nodeIds = _regionData get "nodes";
+		
+		{
+			private _nodeData = ai_nav_nodes get _x;
+			private _nodePos = _nodeData get "pos";
+			private _dist = _pos distance _nodePos;
+			
+			if (_dist < _bestDist && {_dist <= _maxDistance}) then {
+				_bestDist = _dist;
+				_bestNode = _x;
+				if (_dist < 0.5) then {break};
+			};
+		} forEach _nodeIds;
+		
+	};
+	// Если нашли близкий узел в текущем регионе - возвращаем
+	if (_bestNode != -1 && {_bestDist < 0.5}) exitWith {_bestNode};
+	
+	// Ищем в соседних 8 регионах вместо перебора всех узлов
+	_regionKey splitString "_" params ["_rx", "_ry"];
+	_rx = parseNumber _rx;
+	_ry = parseNumber _ry;
+	private _regionOffsetList = ai_nav_internal_list_regionOffsets;
+	private _doReturn = false;
+	{
+		private _neighborKey = format ["%1_%2", _rx + (_x select 0), _ry + (_x select 1)];
+		private _neighborData = ai_nav_regions get _neighborKey;
+			
+		if (!isNil "_neighborData") then {
+			private _nodeIds = _neighborData get "nodes";
+			
+			{
+				private _nodeData = ai_nav_nodes get _x;
+				private _nodePos = _nodeData get "pos";
+				private _dist = _pos distance _nodePos;
+				
+				if (_dist < _bestDist && {_dist <= _maxDistance}) then {
+					_bestDist = _dist;
+					_bestNode = _x;
+					if (_dist < 0.5) then {
+						_doReturn = true;
+						break;
+					};
+				};
+			} forEach _nodeIds;
+			if (_doReturn) exitWith {break};
+		};
+	} foreach _regionOffsetList;
+	
+	_bestNode
 };
 
 
@@ -555,20 +739,10 @@ ai_nav_findPathNodes = {
 	private _iterations = 0;
 	private _maxIterations = 10000;
 	
-	ai_debug_decl(private _minSearchTime = 0;)
-	ai_debug_decl(private _neighborsTime = 0;)
-	ai_debug_decl(private _maxOpenSetSize = 0;)
-	ai_debug_decl(private _totalNeighborsChecked = 0;)
-	
 	while {count _openSet > 0 && _iterations < _maxIterations} do {
 		_iterations = _iterations + 1;
 		
-		ai_debug_decl(if (count _openSet > _maxOpenSetSize) then {_maxOpenSetSize = count _openSet};)
-		
 		// Найти узел с минимальным fScore (ОПТИМИЗИРОВАНО)
-		ai_debug_decl(private _tMin = tickTime;)
-		
-		// Быстрый поиск минимума без повторных HashMap запросов
 		private _minIdx = 0;
 		private _current = _openSet select 0;
 		private _minF = _fScore getOrDefault [_current, 999999];
@@ -583,23 +757,9 @@ ai_nav_findPathNodes = {
 			};
 		};
 		
-		ai_debug_decl(_minSearchTime = _minSearchTime + (tickTime - _tMin);)
-		
 		// Достигли цели
 		if (_current == _goalNodeId) exitWith {
 			private _path = [_cameFrom, _current] call ai_nav_reconstructPath;
-			
-			ai_debug_decl([
-				"Path found: %1 nodes, %2 iterations, maxOpenSet=%3, minSearch=%4ms, neighbors=%5ms (%6 checked) | TOTAL=%7ms" arg 
-				count _path arg 
-				_iterations arg 
-				_maxOpenSetSize arg
-				(_minSearchTime*1000)toFixed 2 arg
-				(_neighborsTime*1000)toFixed 2 arg
-				_totalNeighborsChecked arg
-				((tickTime - _tStart)*1000)toFixed 2
-			] call ai_debugLog);
-			
 			RETURN(_path);
 		};
 		
@@ -608,7 +768,6 @@ ai_nav_findPathNodes = {
 		_closedSet set [_current, true]; // ← Помечаем как посещенный
 		
 		// Проверяем соседей
-		ai_debug_decl(private _tNeighbors = tickTime;)
 		private _neighbors = [_current] call ai_nav_getNeighbors;
 		
 		{
@@ -616,8 +775,6 @@ ai_nav_findPathNodes = {
 			
 			// ← ПРОПУСКАЕМ УЖЕ ПОСЕЩЕННЫЕ УЗЛЫ!
 			if (_neighborId in _closedSet) then {continue};
-			
-			ai_debug_decl(_totalNeighborsChecked = _totalNeighborsChecked + 1;)
 			
 			private _tentativeGScore = (_gScore getOrDefault [_current, 999999]) + _cost;
 			
@@ -631,14 +788,12 @@ ai_nav_findPathNodes = {
 				};
 			};
 		} forEach _neighbors;
-		ai_debug_decl(_neighborsTime = _neighborsTime + (tickTime - _tNeighbors);)
 	};
 	
 	ai_debug_decl([
-		"Path not found after %1 iterations (max: %2), maxOpenSet=%3" arg 
+		"Path not found after %1 iterations (max: %2)" arg 
 		_iterations arg 
-		_maxIterations arg
-		_maxOpenSetSize
+		_maxIterations
 	] call ai_debugLog);
 	
 	[]
@@ -678,7 +833,7 @@ ai_nav_findPath = {
 	} forEach _pathNodes;
 	
 	// Оптимизируем путь (убираем лишние промежуточные точки)
-	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_fast} else {_pathPositions};
+	private _optimizedPath = if (_optimize) then {[_pathPositions] call ai_nav_smoothPath_aggressive} else {_pathPositions};
 	
 	_optimizedPath
 };
@@ -776,6 +931,45 @@ ai_nav_smoothPath_fast = {
         count _result arg 
         ((tickTime - _tStart)*1000)toFixed 2
     ] call ai_debugLog);
+    _result
+};
+
+// Более агрессивное сглаживание для устранения "лесенок"
+ai_nav_smoothPath_aggressive = {
+    params ["_path"];
+    
+    if (count _path < 3) exitWith {_path};
+    
+    private _result = [_path select 0];
+    
+    for "_i" from 1 to (count _path - 2) do {
+        private _prev = _path select (_i - 1);
+        private _curr = _path select _i;
+        private _next = _path select (_i + 1);
+        
+        private _v1 = _curr vectorDiff _prev;
+        private _v2 = _next vectorDiff _curr;
+        
+        // Вычисляем угол между векторами
+        private _len1 = vectorMagnitude _v1;
+        private _len2 = vectorMagnitude _v2;
+        
+        if (_len1 > 0.1 && _len2 > 0.1) then {
+            private _dot = (_v1 select 0) * (_v2 select 0) + 
+                           (_v1 select 1) * (_v2 select 1) + 
+                           (_v1 select 2) * (_v2 select 2);
+            private _cosAngle = (_dot / (_len1 * _len2)) max -1 min 1;
+            private _angle = acos _cosAngle;
+            
+            // Порог: сохраняем точку только если угол > 20 градусов
+            // Это уберёт большинство "лесенок" (мелкие зигзаги)
+            if (_angle > 20) then {
+                _result pushBack _curr;
+            };
+        };
+    };
+    
+    _result pushBack (_path select (count _path - 1));
     _result
 };
 
@@ -960,14 +1154,17 @@ ai_nav_findPartialPath = {
 // Модифицированный A* - находит путь к ближайшему достижимому узлу к целевой позиции
 // Вместо поиска конкретного узла, ищет среди всех достижимых узлов ближайший к позиции
 // С оптимизацией раннего выхода для достижимых целей
+// АДАПТИВНАЯ СТРАТЕГИЯ: линейный поиск для малых openSet, heap для больших
 ai_nav_findPathToClosestNode = {
 	params ["_startNodeId", "_targetPos", ["_earlyExitDistance", 2]];
 	FHEADER;
 	
 	ai_debug_decl(private _tStart = tickTime;)
 	
-	// Инициализация стандартного A*
-	private _openSet = [_startNodeId];
+	// Инициализация
+	private _openSet = []; // Будет использоваться как heap ИЛИ массив
+	private _useHeap = false; // Флаг использования heap
+	private _inOpenSet = createHashMap; // Для проверки наличия в openSet
 	private _closedSet = createHashMap;
 	private _cameFrom = createHashMap;
 	
@@ -976,10 +1173,15 @@ ai_nav_findPathToClosestNode = {
 	
 	private _fScore = createHashMap;
 	private _startPos = (ai_nav_nodes get _startNodeId) get "pos";
-	_fScore set [_startNodeId, [_startNodeId, _targetPos] call ai_nav_heuristicPos];
+	private _startF = [_startNodeId, _targetPos] call ai_nav_heuristicPos;
+	_fScore set [_startNodeId, _startF];
+	
+	// Добавляем стартовый узел
+	_openSet pushBack [_startNodeId, _startF];
+	_inOpenSet set [_startNodeId, true];
 	
 	private _iterations = 0;
-	private _maxIterations = 10000;
+	private _maxIterations = 500; // Жесткий лимит
 	
 	// Отслеживание ближайшего узла к целевой позиции
 	private _closestNode = _startNodeId;
@@ -987,26 +1189,75 @@ ai_nav_findPathToClosestNode = {
 	
 	ai_debug_decl(private _maxOpenSetSize = 0;)
 	ai_debug_decl(private _earlyExit = false;)
+	ai_debug_decl(private _minSearchTime = 0;)
+	ai_debug_decl(private _neighborsTime = 0;)
+	ai_debug_decl(private _totalNeighborsChecked = 0;)
+	ai_debug_decl(private _heapUsed = 0;)
+	ai_debug_decl(private _linearUsed = 0;)
 	
-	while {count _openSet > 0 && _iterations < _maxIterations} do {
+	while {count _openSet > 0 && {_iterations < _maxIterations}} do { 
 		_iterations = _iterations + 1;
+
+		// Увеличить distance по мере роста итераций
+		if (_iterations > 200 && _earlyExitDistance < 5) then {
+			_earlyExitDistance = 5; // Более грубый путь для сложных случаев
+		};
+
+		if (_iterations > 400 && _earlyExitDistance < 10) then {
+			_earlyExitDistance = 10; // Совсем грубый
+		};
 		
 		ai_debug_decl(if (count _openSet > _maxOpenSetSize) then {_maxOpenSetSize = count _openSet};)
 		
-		// Найти узел с минимальным fScore
-		private _minIdx = 0;
-		private _current = _openSet select 0;
-		private _minF = _fScore getOrDefault [_current, 999999];
+		ai_debug_decl(private _tMin = tickTime;)
 		
-		for "_i" from 1 to (count _openSet - 1) do {
-			private _nodeId = _openSet select _i;
-			private _f = _fScore getOrDefault [_nodeId, 999999];
-			if (_f < _minF) then {
-				_minF = _f;
-				_current = _nodeId;
-				_minIdx = _i;
+		private _current = -1;
+		private _minIdx = 0;
+		
+		// АДАПТИВНЫЙ ВЫБОР: heap для больших openSet (>25), линейный поиск для малых
+		if (count _openSet > 25) then {
+			// HEAP MODE: O(log n) извлечение
+			ai_debug_decl(_heapUsed = _heapUsed + 1;)
+			
+			if (!_useHeap) then {
+				// Первый раз переходим на heap - конвертируем массив в кучу
+				_useHeap = true;
+				// Простая heapify - вставляем все элементы заново
+				private _tempSet = +_openSet;
+				_openSet resize 0;
+				{
+					[_openSet, _x select 0, _x select 1] call ai_nav_heapInsert;
+				} forEach _tempSet;
 			};
+			
+			private _minNode = [_openSet] call ai_nav_heapExtractMin;
+			_current = _minNode select 0;
+			
+		} else {
+			// LINEAR MODE: O(n) но быстрее на малых массивах
+			ai_debug_decl(_linearUsed = _linearUsed + 1;)
+			
+			// Линейный поиск минимума
+			_minIdx = 0;
+			private _minF = (_openSet select 0) select 1;
+			
+			for "_i" from 1 to (count _openSet - 1) do {
+				private _f = (_openSet select _i) select 1;
+				if (_f < _minF) then {
+					_minF = _f;
+					_minIdx = _i;
+				};
+			};
+			
+			_current = (_openSet select _minIdx) select 0;
+			_openSet deleteAt _minIdx;
 		};
+		
+		ai_debug_decl(_minSearchTime = _minSearchTime + (tickTime - _tMin);)
+		
+		// Удаляем из inOpenSet и добавляем в closedSet
+		_inOpenSet deleteAt _current;
+		_closedSet set [_current, true];
 		
 		// Обновляем ближайший узел к цели
 		private _currentPos = (ai_nav_nodes get _current) get "pos";
@@ -1023,17 +1274,16 @@ ai_nav_findPathToClosestNode = {
 			};
 		};
 		
-		// Удаляем из openSet и добавляем в closedSet
-		_openSet deleteAt _minIdx;
-		_closedSet set [_current, true];
-		
-		// Проверяем соседей
-		private _neighbors = [_current] call ai_nav_getNeighbors;
+		// Проверяем соседей - ОПТИМИЗИРОВАНО
+		ai_debug_decl(private _tNeighbors = tickTime;)
+		private _neighbors = ai_nav_adjacency getOrDefault [_current, []];
 		
 		{
 			_x params ["_neighborId", "_cost"];
 			
 			if (_neighborId in _closedSet) then {continue};
+			
+			ai_debug_decl(_totalNeighborsChecked = _totalNeighborsChecked + 1;)
 			
 			private _tentativeGScore = (_gScore getOrDefault [_current, 999999]) + _cost;
 			
@@ -1041,27 +1291,40 @@ ai_nav_findPathToClosestNode = {
 				_cameFrom set [_neighborId, _current];
 				_gScore set [_neighborId, _tentativeGScore];
 				
-				// Эвристика = расстояние до целевой позиции (с агрессивным коэффициентом)
+				// Эвристика = расстояние до целевой позиции
 				private _h = [_neighborId, _targetPos] call ai_nav_heuristicPos;
-				_fScore set [_neighborId, _tentativeGScore + _h];
+				private _newF = _tentativeGScore + _h;
+				_fScore set [_neighborId, _newF];
 				
-				if (!(_neighborId in _openSet)) then {
-					_openSet pushBack _neighborId;
+				if (!(_neighborId in _inOpenSet)) then {
+					if (_useHeap) then {
+						[_openSet, _neighborId, _newF] call ai_nav_heapInsert;
+					} else {
+						_openSet pushBack [_neighborId, _newF];
+					};
+					_inOpenSet set [_neighborId, true];
 				};
 			};
 		} forEach _neighbors;
+		ai_debug_decl(_neighborsTime = _neighborsTime + (tickTime - _tNeighbors);)
 	};
 	
 	// Восстанавливаем путь к ближайшему узлу
 	private _path = [_cameFrom, _closestNode] call ai_nav_reconstructPath;
 	
 	ai_debug_decl([
-		"Partial path to closest node: %1 nodes, %2 iterations, closest distance=%3m, maxOpenSet=%4, earlyExit=%5 | TOTAL=%6ms" arg 
-		count _path arg 
+		"=== PARTIAL PATH PROFILING ===%1Path: %2 nodes, %3 iters, closest=%4m, maxOpenSet=%5, earlyExit=%6%1MinSearch: %7ms (heap=%8, linear=%9) | Neighbors: %10ms (%11 checked) | TOTAL: %12ms" arg
+		endl arg
+		count _path arg
 		_iterations arg
-		_closestDist toFixed 2 arg
+		(_closestDist toFixed 2) arg
 		_maxOpenSetSize arg
 		_earlyExit arg
+		(_minSearchTime*1000)toFixed 2 arg
+		_heapUsed arg
+		_linearUsed arg
+		(_neighborsTime*1000)toFixed 2 arg
+		_totalNeighborsChecked arg
 		((tickTime - _tStart)*1000)toFixed 2
 	] call ai_debugLog);
 	

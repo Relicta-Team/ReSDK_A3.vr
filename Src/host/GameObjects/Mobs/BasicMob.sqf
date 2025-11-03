@@ -305,6 +305,17 @@ region(raycast)
 		objParams_1(_dist);
 		getSelf(__lastinteractdata__) set [2,_dist];
 	};
+	func(__setLastInteractTarget)
+	{
+		objParams_1(_target);
+		getSelf(__lastinteractdata__) set [4,_target];
+	};
+	func(__setLastInteractPosStartEnd)
+	{
+		objParams_1(_pos);
+		getSelf(__lastinteractdata__) set [0,_pos];
+		getSelf(__lastinteractdata__) set [1,_pos];
+	};
 
 	#define __debug_getinteractiontarget_spheres__
 	#ifdef __debug_getinteractiontarget_spheres__
@@ -690,7 +701,6 @@ region(Connect control events)
 
 		if not_equals(getSelf(__curRegion),"") then {
 			[getSelf(__curRegion),-1] call ai_modifyRegionRefCount;
-			setSelf(__curRegion,"");
 		};
 	};
 

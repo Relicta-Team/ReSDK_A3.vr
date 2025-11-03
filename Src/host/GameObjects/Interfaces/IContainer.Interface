@@ -465,6 +465,8 @@ func(createItemInContainer)
 func(onAddItemInContainer)
 {
 	objParams_1(_item);
+
+	callFuncParams(_item,updateGermsAt,this);
 };
 
 

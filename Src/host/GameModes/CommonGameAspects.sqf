@@ -582,7 +582,7 @@ class(DirtpitIsRealAspect) extends(DirtpitGameAspect)
 		if !isTypeOf(getVar(_mob,basicRole),IRStationRole) exitwith {};
 		
 		{
-			setVar(_x,germs,GERM_COUNT_MAX);
+			callFuncParams(_x,setGerms,GERM_COUNT_MAX);
 		} foreach (values getVar(_mob,bodyParts));
 	};
 
