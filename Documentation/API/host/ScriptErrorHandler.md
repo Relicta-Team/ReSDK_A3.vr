@@ -11,7 +11,7 @@ Initial value:
 ```sqf
 ""
 ```
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 45](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L45)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 54](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L54)
 ## scriptErrHndlGlobal
 
 Type: Variable
@@ -23,7 +23,7 @@ Initial value:
 ```sqf
 addMissionEventHandler ["ScriptError",...
 ```
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 46](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L46)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 55](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L55)
 ## scriptError_internal_handleStack
 
 Type: function
@@ -34,7 +34,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 9](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L9)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 10](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L10)
 ## scriptError_internal_handleStack_short
 
 Type: function
@@ -45,7 +45,7 @@ Description:
 - Param: _scope
 - Param: _varmap
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 36](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L36)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 45](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L45)
 ## scriptError_makeError
 
 Type: function
@@ -55,4 +55,4 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 98](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L98)
+File: [host\ScriptErrorHandler\ScriptErrorHandler_init.sqf at line 107](../../../Src/host/ScriptErrorHandler/ScriptErrorHandler_init.sqf#L107)

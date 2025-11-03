@@ -24,7 +24,7 @@ Count modules: 33
  - [OneSync](client//OneSync.md) - 5 files
  - [PersonClient](client//PersonClient.md) - 1 files
  - [ProxyItems](client//ProxyItems.md) - 7 files
- - [Rendering](client//Rendering.md) - 12 files
+ - [Rendering](client//Rendering.md) - 14 files
  - [SoundSystem](client//SoundSystem.md) - 3 files
  - [StaminaControl](client//StaminaControl.md) - 3 files
  - [StrafeLock](client//StrafeLock.md) - 1 files
@@ -36,7 +36,7 @@ Count modules: 33
 # Side: host
 Count modules: 57
  - [host](host//host.md) - 12 files
- - [AI](host//AI.md) - 14 files
+ - [AI](host//AI.md) - 15 files
  - [AmbientControl](host//AmbientControl.md) - 1 files
  - [Atmos](host//Atmos.md) - 9 files
  - [CaveSystem](host//CaveSystem.md) - 4 files
