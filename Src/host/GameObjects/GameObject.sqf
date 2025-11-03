@@ -1985,10 +1985,10 @@ class(IDestructible) extends(GameObject)
 			if (getSelf(germs) == -1) exitWith {};
 			private _prob = ifcheck(equals(getSelf(attachedWeap),weaponModule(WeapHandyItem)),50,5);
 			if prob(_prob) then {
-				setSelf(germs,randInt(1,30));
+				callSelfParams(setGerms,randInt(1,30));
 			};
 		} else {
-			setSelf(germs,randInt(-10,50) max 0);
+			callSelfParams(setGerms,randInt(-10,50) max 0);
 		};
 
 
@@ -2241,7 +2241,19 @@ class(IDestructible) extends(GameObject)
 	func(addGerms)
 	{
 		objParams_1(_val);
-		setSelf(germs,getSelf(germs) + clamp(_val,0,GERM_COUNT_MAX));
+		callSelfParams(setGerms,getSelf(germs) + _val);
+	};
+
+	func(setGerms)
+	{
+		objParams_1(_val);
+		setSelf(germs,clamp(_val,0,GERM_COUNT_MAX));
+		callSelf(onGermsChanged);
+	};
+
+	func(onGermsChanged)
+	{
+		objParams();
 	};
 
 	//функция, получающая с помощью рейкаста объект, на котором лежит этот объект

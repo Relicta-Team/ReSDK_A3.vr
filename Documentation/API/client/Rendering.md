@@ -758,6 +758,210 @@ Description:
 - Param: _fromORX
 
 File: [client\Rendering\Camera\Camera_DEBUG.sqf at line 32](../../../Src/client/Rendering/Camera/Camera_DEBUG.sqf#L32)
+# Decals_debug.sqf
+
+## dec_debug_const_layercolors
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\Rendering\Decals\Decals_debug.sqf at line 220](../../../Src/client/Rendering/Decals/Decals_debug.sqf#L220)
+## dec_debug_layers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[...
+```
+File: [client\Rendering\Decals\Decals_debug.sqf at line 226](../../../Src/client/Rendering/Decals/Decals_debug.sqf#L226)
+## dec_debug_visualizeTexture
+
+Type: function
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_debug.sqf at line 12](../../../Src/client/Rendering/Decals/Decals_debug.sqf#L12)
+## dec_debug_init
+
+Type: function
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_debug.sqf at line 16](../../../Src/client/Rendering/Decals/Decals_debug.sqf#L16)
+# Decals_init.sqf
+
+## DECAL_SPHERE_CONFIG
+
+Type: constant
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+Replaced value:
+```sqf
+"Sign_Sphere25cm_F"
+```
+File: [client\Rendering\Decals\Decals_init.sqf at line 185](../../../Src/client/Rendering/Decals/Decals_init.sqf#L185)
+## dec_internal_index
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\Rendering\Decals\Decals_init.sqf at line 84](../../../Src/client/Rendering/Decals/Decals_init.sqf#L84)
+## dec_internal_const_pathPicture
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+PATH_PICTURE("textures\cloth_dirt.paa")
+```
+File: [client\Rendering\Decals\Decals_init.sqf at line 85](../../../Src/client/Rendering/Decals/Decals_init.sqf#L85)
+## dec_attachmentList
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray[...
+```
+File: [client\Rendering\Decals\Decals_init.sqf at line 124](../../../Src/client/Rendering/Decals/Decals_init.sqf#L124)
+## dec_setRenderTarget
+
+Type: function
+
+Description: 
+- Param: _o
+- Param: _rtName
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 13](../../../Src/client/Rendering/Decals/Decals_init.sqf#L13)
+## dec_getRenderContext
+
+Type: function
+
+Description: 
+- Param: _rtName
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 25](../../../Src/client/Rendering/Decals/Decals_init.sqf#L25)
+## dec_applyContext
+
+Type: function
+
+Description: 
+- Param: _rctx
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 30](../../../Src/client/Rendering/Decals/Decals_init.sqf#L30)
+## dec_setRenderUniform
+
+Type: function
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 35](../../../Src/client/Rendering/Decals/Decals_init.sqf#L35)
+## dec_setRenderTarget2
+
+Type: function
+
+Description: 
+- Param: _o
+- Param: _ind
+- Param: _rtName
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 47](../../../Src/client/Rendering/Decals/Decals_init.sqf#L47)
+## dec_updateUniformRender
+
+Type: function
+
+Description: 
+- Param: _mob
+- Param: _value
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 68](../../../Src/client/Rendering/Decals/Decals_init.sqf#L68)
+## dec_resetUniformRender
+
+Type: function
+
+Description: 
+- Param: _mob
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 77](../../../Src/client/Rendering/Decals/Decals_init.sqf#L77)
+## dec_setRenderGerms
+
+Type: function
+
+Description: 
+- Param: _mob
+- Param: _index
+- Param: _value
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 87](../../../Src/client/Rendering/Decals/Decals_init.sqf#L87)
+## dec_reloadThis
+
+Type: function
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 157](../../../Src/client/Rendering/Decals/Decals_init.sqf#L157)
+## dec_genattachments
+
+Type: function
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 160](../../../Src/client/Rendering/Decals/Decals_init.sqf#L160)
+## dec_makePlane
+
+Type: function
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 179](../../../Src/client/Rendering/Decals/Decals_init.sqf#L179)
+## dec_makeSphere
+
+Type: function
+
+> Exists if **DEBUG** defined
+
+Description: 
+
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 187](../../../Src/client/Rendering/Decals/Decals_init.sqf#L187)
 # Effects_init.sqf
 
 ## RENDER_EFFECTS_UPDATEDELAY

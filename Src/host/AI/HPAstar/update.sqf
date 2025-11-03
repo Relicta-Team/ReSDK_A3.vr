@@ -14,7 +14,20 @@ ai_nav_updateRegion = {
     ai_debug_decl(["Updating region %1" arg _regionKey] call ai_debugLog; private _tupd = tickTime;)
     
     // 1. Удаляем старые данные (если регион существует)
-    [_regionKey] call ai_nav_invalidateRegion;
+    private _mobs = [_regionKey] call ai_nav_invalidateRegion;
+    private _restoreActors = [];
+    if !isNullVar(_mobs) then {
+        private _actor = objNull;
+        {
+            _actor = toActor(_x);
+            if (!(isobjecthidden _actor)) then {
+                _restoreActors pushBack _actor;
+                _actor hideObject true;
+            }
+        } foreach _mobs;
+    } else {
+        _mobs = [];//если регион не существует, то мобов нет
+    };
     
     // 2. Генерируем узлы и внутренние связи заново
     [_pos] call ai_nav_generateRegionNodes;
@@ -22,6 +35,10 @@ ai_nav_updateRegion = {
     // 3. Обновляем entrance points (текущего региона + соседей)
 	//! на обновлении это самая жирная часть (400-500мс)
     [_regionKey] call ai_nav_updateRegionEntrances_fast;
+
+    //4. восстанавливаем мобов в регионе
+    ai_nav_regions get _regionKey set ["mobs",_mobs];
+    {_x hideObject false} foreach _restoreActors;
     
     ai_debug_decl(["Region %1 updated at %2ms" arg _regionKey arg ((tickTime - _tupd)*1000)toFixed 2] call ai_debugLog;)
     
@@ -64,8 +81,9 @@ ai_nav_invalidateRegion = {
     params ["_regionKey"];
     
     private _regionData = ai_nav_regions get _regionKey;
-    if (isNil "_regionData") exitWith {};
+    if (isNil "_regionData") exitWith {null};
     
+    private _oldMobs = _regionData get "mobs";
     private _oldNodeIds = _regionData get "nodes";
     private _entrances = _regionData get "entrances";
     
@@ -110,6 +128,9 @@ ai_nav_invalidateRegion = {
     
     // Удаляем регион
     ai_nav_regions deleteAt _regionKey;
+    
+    //возвращаем мобов в регионе
+    _oldMobs
 };
 
 ai_nav_updateRegionEntrances = {

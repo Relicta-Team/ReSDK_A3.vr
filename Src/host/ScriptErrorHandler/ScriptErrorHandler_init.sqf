@@ -4,6 +4,7 @@
 // ======================================================
 
 #include <..\engine.hpp>
+#include <..\struct.hpp>
 #include <..\text.hpp>
 
 scriptError_internal_handleStack = {
@@ -13,11 +14,19 @@ scriptError_internal_handleStack = {
 		_valInfo = _y;
 		_cleanString = true;
 		if equalTypes(_valInfo,[]) then {
-			_valInfo = str _valInfo;
+			_valInfo = format ["array(%1 elements)",count _valInfo];
 			_cleanString = false;
 		};
 		if equalTypes(_valInfo,{}) then {
 			_valInfo = "<CODE>";
+			_cleanString = false;
+		};
+		if equalTypes(_valInfo,hashMapNull) then {
+			if (struct_isstruct(_valInfo)) then {
+				_valInfo = format["struct(%1)",struct_typename(_valInfo)];
+			} else {
+				_valInfo = format["map(%1 keys)",count _valInfo];
+			};
 			_cleanString = false;
 		};
 		if equalTypes(_valInfo,"") then {

@@ -713,8 +713,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		// отдается только половина от микробов источника
 		private _newMe = clamp(_germsMe + floor(_germHis * 0.25),0,GERM_COUNT_MAX);
 		private _newHim = clamp(_germHis + floor(_germsMe * 0.15),0,GERM_COUNT_MAX);
-		setSelf(germs,_newMe);
-		setVar(_p,germs,_newHim);
+		callSelfParams(setGerms,_newMe);
+		callFuncParams(_p,setGerms,_newHim);
 	};
 
 	//examine3d

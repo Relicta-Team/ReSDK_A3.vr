@@ -15,6 +15,7 @@
 
 #include "Behaviors\test.sqf"
 #include "Behaviors\Eater.sqf"
+#include "Behaviors\SmallRat.sqf"
 
 /*
 	BA - Brain Action - обязательный префикс для всех действий
@@ -135,6 +136,10 @@ struct(AgentBase)
 		refget(self getv(_lastPathTask))
 	}
 
+	def(getPathTask) {
+		self getv(pathTask)
+	}
+
 	// ============================================================================
 	// UTILITY AI - УПРАВЛЕНИЕ ДЕЙСТВИЯМИ
 	// ============================================================================
@@ -147,6 +152,8 @@ struct(AgentBase)
 	def(nextActionUpdate) 0; // время следующего обновления действий
 	def(sensorUpdateDelay) 1.0; // задержка обновления сенсоров
 	def(updateDelay) 0.3; // задержка обновления действий
+
+	def(nextBrainUpdate) 0; // время следующего обновления brain
 
 	// ============================================================================
 	// ИНИЦИАЛИЗАЦИЯ
@@ -298,20 +305,26 @@ endstruct
 	Действия: патрулировать, искать, преследовать, атаковать, отступать
 */
 struct(AgentEater) base(AgentBase)
-	def(actions) ["BAEater_Patrol","BAEater_Search","BAEater_Chase","BAEater_Attack","BAEater_Retreat"];
+	def(actions) ["BAEater_Patrol","BAEater_Search","BAEater_Chase","BAEater_Attack","BAEater_Retreat","BAEater_EatBodyParts"];
 	
 	// Сенсорные данные
 	def(visibleTarget) nullPtr; // видимая цель
 	def(lastSeenTargetTime) 0; // время последнего обнаружения
 	def(lastSeenTargetPos) [0,0,0]; // последняя известная позиция цели
+	def(nearestBodyPart) nullPtr; // ближайшая часть тела для поедания
+	def(nearPlayers) []; // ближайшие игроки (для отступления)
 	
 	def(interactDistance) 1.3;
 	def(attackDistance) 1.9;
+	def(bodyPartScanDistance) 20; // расстояние сканирования частей тела
+	def(retreatScanDistance) 15; // расстояние сканирования игроков для отступления
 
 	def(sensorUpdateDelay) 0.5;
 	def(updateDelay) 0.3;
 	
 	//сенсорные контекстные данные
+	def(distanceToTarget) 0; // расстояние до цели
+	def(hasTarget) false;
 	def(staminaPrecent) 100;
 	def(inCombat) false;
 	def(isHunger) false;
@@ -320,32 +333,39 @@ struct(AgentEater) base(AgentBase)
 	def(updateContext) {
 		private _mob = self getv(mob);
 		
+		private _target = self getv(visibleTarget);
+		self setv(hasTarget,!isNullReference(_target));
 		self setv(staminaPrecent,getVar(_mob,stamina) / getVar(_mob,staminaMax) * 100);
-		self setv(inCombat,getVar(_mob,isCombatModeEnable) || !isNullReference(self getv(visibleTarget)));
+		self setv(inCombat,getVar(_mob,isCombatModeEnable) || self getv(hasTarget));
 		self setv(isHunger,getVar(_mob,hunger) < 40);
 		self setv(angryLevel,ifcheck(self getv(inCombat),10,0));
+
+		if (self getv(hasTarget)) then {
+			self setv(distanceToTarget,callFuncParams(_mob,getDistanceTo,_target));
+		};
+
 	}
 
 	def(updateSensors) {
+		
 		private _mob = self getv(mob);
 		
 		private _hadTarget = !isNullReference(self getv(visibleTarget));
 
 		// Ищем ближайших врагов
-		private _nearMobs = callFuncParams(_mob,getNearMobs,50);
 		private _refview = refcreate(VISIBILITY_MODE_NONE);
-		// Фильтруем: игроки или враждебная команда
-		_nearMobs = _nearMobs select {
-			callFunc(_x,isPlayer)
-			&& {callFuncParams(_mob,canSeeObject,_x arg _refview)}
+		private _nearMobs = [_mob,40,{
+			callFunc(_this,isPlayer)
+			&& isTypeOf(_this,Mob)
+			&& {!getVar(_this,isDead)}
+			&& {callFuncParams(_mob,canSeeObject,_this arg _refview)}
 			&& {refget(_refview) >= VISIBILITY_MODE_LOW}
-			&& !getVar(_x,isDead)
-			&& isTypeOf(_x,Mob)
-		};
+		}] call ai_getNearMobs;
 		
 		if (count _nearMobs > 0) then {
 			// Нашли врага
 			private _closestMob = _nearMobs select 0;
+			//todo onEaterRoar
 			self setv(visibleTarget,_closestMob);
 			self setv(lastSeenTargetTime,tickTime);
 			self setv(lastSeenTargetPos,atltoasl callFunc(_closestMob,getPos));
@@ -361,6 +381,7 @@ struct(AgentEater) base(AgentBase)
 			};
 		} else {
 			// Враг не виден
+			self setv(distanceToTarget,0);
 			self setv(visibleTarget,nullPtr);
 			// lastSeenTargetTime НЕ сбрасываем - используется для поиска
 			
@@ -382,6 +403,27 @@ struct(AgentEater) base(AgentBase)
 				[_mob,SPEED_MODE_WALK] call ai_setSpeed;
 			};
 		};
+		
+		// Сканирование частей тела для поедания
+		private _bodyPartScanDist = self getv(bodyPartScanDistance);
+		private _nearItems = [_mob,_bodyPartScanDist,{isTypeOf(_this,BodyPart)}] call ai_getNearItems;
+		
+		if (count _nearItems > 0) then {
+			// Сортируем по близости
+			private _mobPos = callFunc(_mob,getPos);
+			_nearItems = [_nearItems,{_mobPos distance callFunc(_x,getPos)},true] call sortBy;
+			self setv(nearestBodyPart,_nearItems select 0);
+		} else {
+			self setv(nearestBodyPart,nullPtr);
+		};
+		
+		// Сканирование игроков для отступления (даже если не видим напрямую)
+		private _retreatScanDist = self getv(retreatScanDistance);
+		private _nearPlayersForRetreat = [_mob,_retreatScanDist] call ai_getNearMobs;
+		_nearPlayersForRetreat = _nearPlayersForRetreat select {
+			callFunc(_x,isPlayer) && !getVar(_x,isDead) && isTypeOf(_x,Mob)
+		};
+		self setv(nearPlayers,_nearPlayersForRetreat);
 	}
 endstruct
 

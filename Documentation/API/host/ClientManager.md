@@ -141,7 +141,7 @@ Description:
 - Param: _newMob
 - Param: _destroyOld (optional, default false)
 
-File: [host\ClientManager\ClientController.sqf at line 71](../../../Src/host/ClientManager/ClientController.sqf#L71)
+File: [host\ClientManager\ClientController.sqf at line 76](../../../Src/host/ClientManager/ClientController.sqf#L76)
 # ClientManager.h
 
 ## log_client(mes)
