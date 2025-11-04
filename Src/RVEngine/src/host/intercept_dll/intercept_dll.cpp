@@ -22,7 +22,7 @@ INITIALIZE_EASYLOGGINGPP
 extern "C" DLLEXPORT void __stdcall RVExtension(char *output, int outputSize, const char *function);
 #endif
 
-static char version[] = "1.0";
+static char version[] = "2.0-preview";
 
 std::optional<std::string_view> get_command(std::string_view input) {
     size_t cmd_end = input.find(':');
