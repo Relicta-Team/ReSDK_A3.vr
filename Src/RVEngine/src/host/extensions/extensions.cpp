@@ -352,8 +352,16 @@ namespace intercept {
             }
         }
 
+        // Временно разрешаем выгрузку команд
+        bool oldCanRegister = sqf_functions::get().getCanRegister();
+        sqf_functions::get().setCanRegister(true);
+        //#TODO: remove this
+
         if (module->second.functions.handle_unload_internal) module->second.functions.handle_unload_internal();
         if (module->second.functions.handle_unload) module->second.functions.handle_unload();
+
+        // Восстанавливаем флаг
+        sqf_functions::get().setCanRegister(oldCanRegister);
 
 #ifdef __linux
         if (dlclose(module->second.handle)) {  //returms 0 on success

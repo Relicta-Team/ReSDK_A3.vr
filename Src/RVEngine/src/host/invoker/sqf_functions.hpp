@@ -92,6 +92,9 @@ namespace intercept {
         using WrapperFunctionBinary = intercept::types::binary_function;
         using WrapperFunctionUnary = intercept::types::unary_function;
         using WrapperFunctionNular = intercept::types::nular_function;
+
+        void setCanRegister(bool val) { this->_canRegister = val; }
+        bool getCanRegister() { return this->_canRegister; }
         /**
         * @brief Registers a custom SQF Binary Command
         * @param name

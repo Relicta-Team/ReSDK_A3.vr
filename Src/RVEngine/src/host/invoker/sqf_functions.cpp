@@ -33,67 +33,63 @@ registered_sqf_func_wrapper::registered_sqf_func_wrapper(GameDataType return_typ
 template <types::game_data_type returnType>
 class unusedSQFFunction {
 public:
-    static game_value* CDECL unusedNular(game_value* ret_, uintptr_t gs_) {
+    static game_value unusedNular(game_state& gs_) {
         switch (returnType) {
             case game_data_type::SCALAR:
-                ::new (ret_) game_value("unimplemented"sv);
-                break;
+                return game_value(0.0f);
             case game_data_type::BOOL:
-                ::new (ret_) game_value(false);
-                break;
+                return game_value(false);
             case game_data_type::ARRAY:
-                ::new (ret_) game_value(std::vector<game_value>());
-                break;
+                return game_value(std::vector<game_value>());
             case game_data_type::STRING:
-                ::new (ret_) game_value("unimplemented"sv);
-                break;
+                return game_value("unimplemented"sv);
             default:
-                ::new (ret_) game_value();
-                break;
+                return game_value();
         }
-        return ret_;
     }
-    static game_value* CDECL unusedFunction(game_value* ret_, uintptr_t gs_, uintptr_t larg_) {
-        return unusedNular(ret_, gs_);
+    
+    static game_value unusedFunction(game_state& gs_, game_value_parameter right_arg_) {
+        return unusedNular(gs_);
     }
-    static game_value* CDECL unusedOperator(game_value* ret_, uintptr_t gs_, uintptr_t larg_, uintptr_t rarg_) {
-        return unusedNular(ret_, gs_);
+    
+    static game_value unusedOperator(game_state& gs_, game_value_parameter left_arg_, game_value_parameter right_arg_) {
+        return unusedNular(gs_);
     }
 };
 #define UNUSED_FUNC_SWITCH_FOR_GAMETYPES(ptr,type) \
 switch (_returnType) { \
     case GameDataType::SCALAR: \
-        *ptr->_operator->procedure_addr = unusedSQFFunction<GameDataType::SCALAR>::type; \
+        ptr->_operator->procedure_addr = reinterpret_cast<decltype(ptr->_operator->procedure_addr)>(&unusedSQFFunction<GameDataType::SCALAR>::type); \
     break; \
     case GameDataType::BOOL: \
-        *ptr->_operator->procedure_addr = unusedSQFFunction<GameDataType::BOOL>::type; \
+        ptr->_operator->procedure_addr = reinterpret_cast<decltype(ptr->_operator->procedure_addr)>(&unusedSQFFunction<GameDataType::BOOL>::type); \
         break; \
     case GameDataType::ARRAY: \
-        *ptr->_operator->procedure_addr = unusedSQFFunction<GameDataType::ARRAY>::type; \
+        ptr->_operator->procedure_addr = reinterpret_cast<decltype(ptr->_operator->procedure_addr)>(&unusedSQFFunction<GameDataType::ARRAY>::type); \
         break; \
     case GameDataType::STRING: \
-        *ptr->_operator->procedure_addr = unusedSQFFunction<GameDataType::STRING>::type; \
+        ptr->_operator->procedure_addr = reinterpret_cast<decltype(ptr->_operator->procedure_addr)>(&unusedSQFFunction<GameDataType::STRING>::type); \
         break; \
     case GameDataType::OBJECT: \
-        *ptr->_operator->procedure_addr = unusedSQFFunction<GameDataType::OBJECT>::type; \
+        ptr->_operator->procedure_addr = reinterpret_cast<decltype(ptr->_operator->procedure_addr)>(&unusedSQFFunction<GameDataType::OBJECT>::type); \
         break; \
 }
 
 void registered_sqf_func_wrapper::setUnused() noexcept {
-    //switch (_type) {
-    //    case functionType::sqf_nular:
-    //        if (_nular && _nular->_operator)
-    //            UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_nular, unusedNular);
-    //        break;
-    //    case functionType::sqf_function:
-    //        if (_func && _func->_operator)
-    //            UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_func, unusedFunction);
-    //        break;
-    //    case functionType::sqf_operator:
-    //        if (_op && _op->_operator)
-    //            UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_op, unusedOperator);
-    //        break;
-    //}
+    switch (_type) {
+       case functionType::sqf_nular:
+           if (_nular && _nular->_operator)
+               UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_nular, unusedNular);
+           break;
+       case functionType::sqf_function:
+           if (_func && _func->_operator)
+               UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_func, unusedFunction);
+           break;
+       case functionType::sqf_operator:
+           if (_op && _op->_operator)
+               UNUSED_FUNC_SWITCH_FOR_GAMETYPES(_op, unusedOperator);
+           break;
+    }
 }
 
 intercept::registered_sqf_function_impl::registered_sqf_function_impl(std::shared_ptr<registered_sqf_func_wrapper> func_) noexcept : _func(func_) {
@@ -122,7 +118,7 @@ void intercept::sqf_functions::initialize() noexcept {
 }
 
 void sqf_functions::setDisabled() noexcept {
-    _canRegister = false;
+    //_canRegister = false;
 }
 
 intercept::types::registered_sqf_function intercept::sqf_functions::register_sqf_function(std::string_view name, std::string_view description, WrapperFunctionBinary function_, types::game_data_type return_arg_type, types::game_data_type left_arg_type, types::game_data_type right_arg_type) {
@@ -308,7 +304,7 @@ intercept::types::registered_sqf_function intercept::sqf_functions::register_sqf
 
 intercept::types::registered_sqf_function intercept::sqf_functions::register_sqf_function(std::string_view name, std::string_view description, WrapperFunctionNular function_, types::game_data_type return_arg_type) {
     //Core plugins can overwrite existing functions. Which is "safe". So they can pass along for now.
-    if (!_canRegister && intercept::cert::current_security_class != cert::signing::security_class::core) throw std::logic_error("Can only register SQF Commands on preStart");
+    //if (!_canRegister && intercept::cert::current_security_class != cert::signing::security_class::core) throw std::logic_error("Can only register SQF Commands on preStart");
     if (name.length() > 256) throw std::length_error("intercept::sqf_functions::register_sqf_function name can maximum be 256 chars long");
 
     const auto gs = reinterpret_cast<game_state*>(_registerFuncs._gameState);
@@ -382,7 +378,8 @@ intercept::types::registered_sqf_function intercept::sqf_functions::register_sqf
 
 bool sqf_functions::unregister_sqf_function(const std::shared_ptr<registered_sqf_func_wrapper>& shared) {
     //Undoing a override is "safe"
-    if (!_canRegister && !shared->undo) throw std::runtime_error("Can only unregister SQF Commands on preStart");
+    //#TODO: remove this check
+    //if (!_canRegister && !shared->undo) throw std::runtime_error("Can only unregister SQF Commands on preStart");
 
     //Handle undo's
     if (shared->undo) {
@@ -413,8 +410,8 @@ bool sqf_functions::unregister_sqf_function(const std::shared_ptr<registered_sqf
     switch (shared->_type) {
         case functionType::sqf_nular: {
             const auto table = gs->_scriptNulars.get_table_for_key(shared->_name.c_str());
-            const auto found = std::find_if(table->begin(), table->end(), [name = shared->_name](const gsNular& fnc)
-            {
+            // Удаляем только nular команду с таким именем
+            const auto found = std::find_if(table->begin(), table->end(), [name = shared->_name](const gsNular& fnc) {
                 return fnc.get_name2() == name;
             });
             if (found != table->end()) {
@@ -423,11 +420,14 @@ bool sqf_functions::unregister_sqf_function(const std::shared_ptr<registered_sqf
             }
             return false;
         }break;
+        
         case functionType::sqf_function: {
             auto& table = gs->_scriptFunctions.get(shared->_name.c_str());
-            const auto found = std::find_if(table.begin(), table.end(), [name = shared->_name](const gsFunction& fnc)
-            {
-                return fnc.get_name2() == name;
+            // Удаляем unary команду с конкретным типом аргумента
+            const auto argTypeString = types::__internal::to_string(shared->_rArgType);
+            const auto found = std::find_if(table.begin(), table.end(), [name = shared->_name, argTypeString](const gsFunction& fnc) {
+                return fnc.get_name2() == name && 
+                       fnc.get_operator()->get_arg_type().type().count(argTypeString);
             });
             if (found != table.end()) {
                 table.erase(found);
@@ -435,11 +435,16 @@ bool sqf_functions::unregister_sqf_function(const std::shared_ptr<registered_sqf
             }
             return false;
         }break;
+        
         case functionType::sqf_operator: {
             auto& table = gs->_scriptOperators.get(shared->_name.c_str());
-            const auto found = std::find_if(table.begin(), table.end(), [name = shared->_name](const gsOperator& fnc)
-            {
-                return fnc.get_name2() == name;
+            // Удаляем binary команду с конкретными типами обоих аргументов
+            const auto leftArgTypeString = types::__internal::to_string(shared->_lArgType);
+            const auto rightArgTypeString = types::__internal::to_string(shared->_rArgType);
+            const auto found = std::find_if(table.begin(), table.end(), [name = shared->_name, leftArgTypeString, rightArgTypeString](const gsOperator& fnc) {
+                return fnc.get_name2() == name && 
+                       fnc.get_operator()->get_arg1_type().type().count(leftArgTypeString) &&
+                       fnc.get_operator()->get_arg2_type().type().count(rightArgTypeString);
             });
             if (found != table.end()) {
                 table.erase(found);
