@@ -1467,3 +1467,20 @@ ai_nav_findNearestNodeTowards = {
 	
 	_bestNode
 };
+
+// ============================================================================
+// NATIVE OPTIMIZED VERSIONS (using RVEngine C++ extension)
+// ============================================================================
+
+// Check if RVEngine is available
+ai_nav_useNative = {
+	!isNil "rve_loaded" && {rve_loaded} && {!isNil "rve_signalRet"}
+};
+
+RVENGINE_BEGIN_MODULE("rv_client")
+	RVENGINE_SET_WRAPPER_CONDITION(call ai_nav_useNative)
+	RVENGINE_DECL_NFUNC(ai_nav_findNearestNode)
+	RVENGINE_DECL_NFUNC(ai_nav_findPathToClosestNode)
+	RVENGINE_DECL_NFUNC(ai_nav_findPartialPath)
+RVENGINE_END_MODULE
+
