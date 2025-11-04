@@ -22,6 +22,9 @@ include(${CMAKE_SOURCE_DIR}/CMakeInclude.txt)
 # Plugin sources
 target_sources(${PLUGIN_TARGET} PRIVATE
     main.cpp
+    navigation.cpp
+    navigation.hpp
+    utility.hpp
 )
 
 # Set output directory to build/plugins/
