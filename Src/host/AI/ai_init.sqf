@@ -13,6 +13,8 @@
 
 //низкоуровневые функции для работы с NOEngine (нужны для ai_getNearObjects_Internal)
 #include <..\NOEngine\NOEngine.h>
+//rvengine native function registrations
+#include "..\RVEngine\RVEngine.hpp"
 
 #include "ai.h"
 
@@ -310,6 +312,7 @@ ai_createAgent = {
 
 ai_init = {
 	if (is3den) exitWith {};
+	
 	ai_handleUpdate = startUpdate(ai_onUpdate,0);
 
 	#ifdef AI_DEBUG_TRACEPATH
