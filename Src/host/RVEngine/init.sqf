@@ -12,13 +12,23 @@
 */
 
 #include "libmanager.sqf"
+#include "native_func.sqf"
 
-rve_loaded = false; 
+rve_loaded = false;
 
 rve_log = {
 	params ["_message"];
 	log(_message);
 	diag_log text format["RVEngine: %1", _message];
+};
+
+rve_getVersion = {
+	"intercept" callExtension "version";
+};
+
+rve_hasHostDll = {
+	private _version = call rve_getVersion;
+	not_equals(_version,"")
 };
 
 /*
@@ -38,6 +48,12 @@ rve_event = {};
 	output: bool
 */
 rve_signal = {};
+
+rve_signalRet = {
+	rve_sigret = nil;
+	_this call rve_signal;
+	rve_sigret
+};
 
 rve_invoker_ok = false;
 
@@ -59,7 +75,10 @@ rve_isNilWrapper = {
 };
 
 if (!call (uiNamespace getVariable ["INTERCEPT_BOOT_DONE",{false}])) then {
-	
+	if (!call rve_hasHostDll) exitWith {
+		["RVEngine could not be loaded: host dll not found or cannot be loaded"] call rve_log;
+	};
+
 	#include "boot.sqf"
 	#include "invoker.sqf"
 
@@ -69,7 +88,9 @@ if (!call (uiNamespace getVariable ["INTERCEPT_BOOT_DONE",{false}])) then {
 rve_loaded = (call (uiNamespace getVariable ["INTERCEPT_BOOT_DONE",{false}]));
 
 if (rve_loaded) then {
+	
 	rve_event = uiNamespace getVariable ["intercept_fnc_event",rve_event];
 	rve_signal = uiNamespace getVariable ["intercept_fnc_signal",rve_signal];
+	rve_invoker_ok = true;
 	["RVEngine READY"] call rve_log;
 };
