@@ -35,4 +35,4 @@
 
 #define RVENGINE_SET_WRAPPER_CONDITION(cond__) _rve_condition__ = RVENGINE_INTERNAL_TOSTRING__(cond__);
 
-#define RVENGINE_END_MODULE _rve_regfunc__ foreach _rve_fncnames__; [format["RVEngine: registered %1 functions from %2"],count _rve_fncnames__,_rve_mod__] call rve_log;
+#define RVENGINE_END_MODULE _rve_regfunc__ foreach _rve_fncnames__; [format["RVEngine: registered %1 functions from %2",count _rve_fncnames__,_rve_mod__]] call rve_log;
