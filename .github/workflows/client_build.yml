@@ -49,6 +49,7 @@ jobs:
             Src/RVEngine/vcproj64/build/${{ matrix.build_type }}/*.dll
             Src/RVEngine/vcproj64/build/${{ matrix.build_type }}/*.pdb
             Src/RVEngine/vcproj64/build/${{ matrix.build_type }}/plugins/*.dll
+            Src/RVEngine/vcproj64/build/${{ matrix.build_type }}/plugins/*.pdb
           retention-days: 7
 
   build:
