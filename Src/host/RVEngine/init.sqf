@@ -2,14 +2,16 @@
 // Copyright (c) 2017-2025 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
-
-#include "..\engine.hpp"
-
 /*
 	This is intercept extensionbase initializator
 
 	based on https://github.com/intercept/intercept
 */
+
+#if __has_include("..\engine.hpp")
+	#include "..\engine.hpp"
+#endif
+
 
 #include "libmanager.sqf"
 #include "native_func.sqf"
@@ -18,7 +20,9 @@ rve_loaded = false;
 
 rve_log = {
 	params ["_message"];
+	#ifdef log
 	log(_message);
+	#endif
 	diag_log text format["RVEngine: %1", _message];
 };
 
@@ -28,7 +32,7 @@ rve_getVersion = {
 
 rve_hasHostDll = {
 	private _version = call rve_getVersion;
-	not_equals(_version,"")
+	_version != ""
 };
 
 /*

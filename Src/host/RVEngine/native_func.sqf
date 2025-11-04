@@ -12,7 +12,9 @@ rve_nativeFunc = {
 	
 	private _origFuncImplStr = toString (missionNamespace getvariable [_fname,{nil}]);
 	if (_origFuncImplStr == "{nil}") exitWith {
-		errorformat("RVEngine: function %1 from %2 is not implemented",_fname arg _module);
+		#ifdef errorformat
+			errorformat("RVEngine: function %1 from %2 is not implemented",_fname arg _module);
+		#endif
 		#ifdef setLastError
 			setLastError(format["RVEngine: function %1 from %2 is not implemented" arg _fname arg _module]);
 		#endif
