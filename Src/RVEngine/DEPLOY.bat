@@ -6,6 +6,32 @@ echo RVEngine Deployment Script
 echo ========================================
 echo.
 
+REM Show help if -h flag or no arguments
+if "%1"=="" goto show_help
+if /i "%1"=="-h" goto show_help
+if /i "%1"=="--help" goto show_help
+goto skip_help
+
+:show_help
+echo Usage: deploy.bat [options]
+echo.
+echo Options:
+echo   -h, --help  Show this help message
+echo   -R          Release build (default)
+echo   -D          Debug build
+echo   -P          Deploy with plugins
+echo   -PO         Deploy plugins only (skip Intercept core)
+echo.
+echo Examples:
+echo   deploy.bat              (show this help)
+echo   deploy.bat -R           (deploy Release Intercept only)
+echo   deploy.bat -R -P        (deploy Release Intercept + plugins)
+echo   deploy.bat -D -PO       (deploy Debug plugins only)
+echo.
+exit /b 0
+
+:skip_help
+
 REM Target installation path (can be modified here)
 set "TARGET_PATH=P:\armatools\steamapps\common\Arma 3\@EditorContent"
 set "INTERCEPT_FOLDER=intercept"
@@ -214,17 +240,5 @@ if "%DEPLOY_PLUGINS%"=="1" (
     echo - Plugins: DEPLOYED ^(%TARGET_PATH%\%INTERCEPT_FOLDER%^)
 )
 echo.
-echo Usage: deploy.bat [options]
-echo   -R         Release build (default)
-echo   -D         Debug build
-echo   -P         Deploy with plugins
-echo   -PO        Deploy plugins only (skip Intercept core)
-echo.
-echo Examples:
-echo   deploy.bat              (deploy Release Intercept only)
-echo   deploy.bat -R -P        (deploy Release Intercept + plugins)
-echo   deploy.bat -D -PO       (deploy Debug plugins only)
-echo.
 
-pause
 endlocal
