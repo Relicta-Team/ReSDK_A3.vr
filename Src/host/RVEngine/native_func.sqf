@@ -20,13 +20,14 @@ rve_nativeFunc = {
 		#endif
 		false
 	};
-	private _nativeFuncImplStr = format["['%1','%2',_this] call rve_signalRet",_module,_fname];
-	private _scriptedName = format["%1_sqf", _fname];
 	private _nativeName = format["%1_native", _fname];
-	
+	private _nativeFuncImplStr = format["['%1','%2',_this] call rve_signalRet",_module,_nativeName];
+	private _scriptedName = format["%1_sqf", _fname];
+	missionNamespace setvariable [_scriptedName,compile _origFuncImplStr];
 	private _wrapperImpl = compile format["if (%1) then {%2} else {%3}",_condString,_nativeFuncImplStr,_origFuncImplStr];
 
 	missionNamespace setvariable [_fname,_wrapperImpl];
+	[format["RVEngine: registered function wrapper %1",_fname]] call rve_log;
 
 	true
 };
