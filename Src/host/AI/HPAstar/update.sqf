@@ -561,8 +561,3 @@ ai_nav_getBorderNodes = {
 };
 
 
-RVENGINE_BEGIN_MODULE("rv_client")
-	RVENGINE_SET_WRAPPER_CONDITION(call ai_nav_useNative)
-	RVENGINE_DECL_NFUNC(ai_nav_generateRegionNodes)
-	RVENGINE_DECL_NFUNC(ai_nav_updateRegionEntrances_fast)
-RVENGINE_END_MODULE

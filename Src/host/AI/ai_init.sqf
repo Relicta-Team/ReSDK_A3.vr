@@ -13,8 +13,6 @@
 
 //низкоуровневые функции для работы с NOEngine (нужны для ai_getNearObjects_Internal)
 #include <..\NOEngine\NOEngine.h>
-//rvengine native function registrations
-#include "..\RVEngine\RVEngine.hpp"
 
 #include "ai.h"
 
@@ -29,6 +27,7 @@
 #include "ai_interact.sqf"
 #include "ai_util.sqf"
 
+#include "HPAstar\native.sqf"
 
 ai_nextUpdateReg = 0;
 ai_updateRegInterval = 0.2; //200ms - интервал обновления регионов

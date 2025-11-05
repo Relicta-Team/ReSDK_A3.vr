@@ -12,6 +12,9 @@
 	#include "..\engine.hpp"
 #endif
 
+rve_const_libs = [
+	"rv_client"
+];
 
 #include "libmanager.sqf"
 #include "native_func.sqf"
@@ -97,4 +100,12 @@ if (rve_loaded) then {
 	rve_signal = uiNamespace getVariable ["intercept_fnc_signal",rve_signal];
 	rve_invoker_ok = true;
 	["RVEngine READY"] call rve_log;
+
+	{
+		if ([_x] call rve_loadlib) then {
+			[format["RVEngine: loaded library %1",_x]] call rve_log;
+		} else {
+			[format["RVEngine: failed to load library %1",_x]] call rve_log;
+		};
+	} foreach rve_const_libs;
 };
