@@ -24,15 +24,53 @@ namespace rv_navigation {
     }
 
     std::vector<float> get_node_position(const game_value& node_data) {
-        // Access hashmap data and get "pos" key
-        auto& hashmap_data = node_data.get_as<game_data_hashmap>().getRef()->data;
-        auto pos_array = hashmap_data[game_value("pos")];
-        auto& pos_data = pos_array.get_as<game_data_array>().getRef()->data;
-        return {
-            static_cast<float>(pos_data[0]),
-            static_cast<float>(pos_data[1]),
-            static_cast<float>(pos_data[2])
-        };
+        try {
+            // Check if node_data is valid
+            if (node_data.is_nil()) {
+                return {0, 0, 0};
+            }
+
+            // Access hashmap data and get "pos" key
+            auto* hashmap_ref = node_data.get_as<game_data_hashmap>().getRef();
+            if (!hashmap_ref) {
+                return {0, 0, 0};
+            }
+
+            auto& hashmap_data = hashmap_ref->data;
+            auto* pos_pair = hashmap_data.find(game_value("pos"));
+            if (!pos_pair) {
+                return {0, 0, 0};
+            }
+
+            auto pos_array = pos_pair->value;
+            if (pos_array.is_nil()) {
+                return {0, 0, 0};
+            }
+
+            auto* array_ref = pos_array.get_as<game_data_array>().getRef();
+            if (!array_ref) {
+                return {0, 0, 0};
+            }
+
+            auto& pos_data = array_ref->data;
+            if (pos_data.size() < 3) {
+                return {0, 0, 0};
+            }
+
+            return {
+                static_cast<float>(pos_data[0]),
+                static_cast<float>(pos_data[1]),
+                static_cast<float>(pos_data[2])
+            };
+        }
+        catch (const std::exception& e) {
+            std::cerr << "get_node_position error: " << e.what() << std::endl;
+            return {0, 0, 0};
+        }
+        catch (...) {
+            std::cerr << "get_node_position: unknown error" << std::endl;
+            return {0, 0, 0};
+        }
     }
 
     // ============================================================================

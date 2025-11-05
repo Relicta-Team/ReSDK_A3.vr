@@ -24,6 +24,8 @@ target_sources(${PLUGIN_TARGET} PRIVATE
     main.cpp
     navigation.cpp
     navigation.hpp
+    navigation_region.cpp
+    navigation_region.hpp
     utility.hpp
 )
 

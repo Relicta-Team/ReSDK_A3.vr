@@ -1,5 +1,6 @@
 #include "intercept.hpp"
 #include "navigation.hpp"
+#include "navigation_region.hpp"
 #include "utility.hpp"
 #include <Windows.h>
 #include <string>
@@ -299,6 +300,66 @@ extern "C" {
         catch (const std::exception& e) {
             std::cerr << "ai_nav_findPartialPath_native error: " << e.what() << std::endl;
             rv_utility::setSignalReturn(std::vector<game_value>{});
+        }
+    }
+
+    // ============================================================================
+    // AI NAVIGATION REGION UPDATE FUNCTIONS
+    // ============================================================================
+
+    // ai_nav_generateRegionNodes: Generate navigation nodes for a region
+    // Params: [position[x,y,z], autoSave (default true)]
+    // Returns: regionKey (string)
+    DLLEXPORT void CDECL ai_nav_generateRegionNodes_native(game_value_parameter ctx)
+    {
+        try {
+            auto& args = ctx.get_as<game_data_array>().getRef()->data;
+            if (args.size() < 1) {
+                rv_utility::setSignalReturn("");
+                return;
+            }
+
+            // Parse position
+            auto& pos_data = args[0].get_as<game_data_array>().getRef()->data;
+            std::vector<float> pos = {
+                static_cast<float>(pos_data[0]),
+                static_cast<float>(pos_data[1]),
+                static_cast<float>(pos_data[2])
+            };
+
+            bool auto_save = (args.size() > 1) ? static_cast<bool>(args[1]) : true;
+
+            // Call region module function
+            std::string region_key = rv_navigation_region::generateRegionNodes(pos, auto_save);
+            
+            rv_utility::setSignalReturn(region_key);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "ai_nav_generateRegionNodes_native error: " << e.what() << std::endl;
+            rv_utility::setSignalReturn("");
+        }
+    }
+
+    // ai_nav_updateRegionEntrances_fast: Update entrances for a region (all neighbors)
+    // Params: [regionKey]
+    // Returns: number of neighbors updated
+    DLLEXPORT void CDECL ai_nav_updateRegionEntrances_fast_native(game_value_parameter ctx)
+    {
+        try {
+            auto& args = ctx.get_as<game_data_array>().getRef()->data;
+            if (args.size() < 1) {
+                rv_utility::setSignalReturn(0);
+                return;
+            }
+
+            std::string region_key = static_cast<std::string>(args[0].get_as<game_data_string>()->raw_string);
+
+            int result = rv_navigation_region::updateRegionEntrancesFast(region_key);
+            rv_utility::setSignalReturn(result);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "ai_nav_updateRegionEntrances_fast_native error: " << e.what() << std::endl;
+            rv_utility::setSignalReturn(0);
         }
     }
 
