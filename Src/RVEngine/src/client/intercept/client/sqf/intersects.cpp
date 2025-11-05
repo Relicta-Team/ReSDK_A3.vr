@@ -31,6 +31,16 @@ namespace intercept {
             return __helpers::__convert_to_vector<intersect_surfaces>(host::functions.invoke_raw_unary(__sqf::unary__lineintersectssurfaces__array__ret__array, {begin_pos_asl_, end_pos_asl_, ignore_obj1_, ignore_obj2_, sort_mode_, static_cast<float>(max_results_), lod1_, lod2_, unique_objs_}));
         }
 
+        std::vector<intersect_surfaces_list> line_intersects_surfaces(const std::vector<game_value>& queries_) {
+            auto result = host::functions.invoke_raw_unary(__sqf::unary__lineintersectssurfaces__array__ret__array, queries_);
+            std::vector<intersect_surfaces_list> output;
+            output.reserve(result.size());
+            for (auto& res : __helpers::__convert_to_vector<game_value>(result)) {
+                output.push_back(__helpers::__convert_to_vector<intersect_surfaces>(res));
+            }
+            return output;
+        }
+
         std::vector<object> line_intersects_with(const vector3 &begin_pos_, const vector3 &end_pos_, bool sort_by_distance_) {
             game_value array_input({begin_pos_,
                                     end_pos_,

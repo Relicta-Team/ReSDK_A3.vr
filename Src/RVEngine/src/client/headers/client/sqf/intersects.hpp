@@ -90,6 +90,13 @@ namespace intercept {
         intersect_surfaces_list line_intersects_surfaces(const vector3 &begin_pos_asl_, const vector3 &end_pos_asl_, const object &ignore_obj1_, const object &ignore_obj2_, bool sort_mode_ = true, int max_results_ = 1, sqf_string_const_ref lod1_ = "VIEW", sqf_string_const_ref lod2_ = "FIRE", bool unique_objs_ = true);
 
         /**
+        * Batch version: Returns list of intersections for multiple queries
+        * @param queries_ Array of query arrays [[begPosASL, endPosASL, ...], ...]
+        * @returns Array of intersection results
+        */
+        std::vector<intersect_surfaces_list> line_intersects_surfaces(const std::vector<game_value>& queries_);
+
+        /**
         * Returns objects intersecting with the virtual line from begPos to endPos
         */
         std::vector<object> line_intersects_with(const vector3 &begin_pos_, const vector3 &end_pos_, bool sort_by_distance_ = false);

@@ -66,6 +66,38 @@ extern "C" {
         sqf::set_variable(intercept::sqf::mission_namespace(), "sigret", first);
     }
 
+    DLLEXPORT void CDECL raycastbatch(game_value_parameter ctx)
+    {
+        auto& arr = ctx.get_as<game_data_array>().getRef()->data;
+        std::vector<game_value> queries(arr.begin(), arr.end());
+
+        std::vector<intercept::sqf::intersect_surfaces_list> ret = intercept::sqf::line_intersects_surfaces(queries);
+        
+        std::vector<game_value> gv_results;
+        gv_results.reserve(ret.size());
+        for (const auto& ray_results : ret) {
+            std::vector<game_value> ray_gv;
+            ray_gv.reserve(ray_results.size());
+            
+            for (const auto& intersection : ray_results) {
+                // Создаём game_value из структуры intersect_surfaces
+                ray_gv.push_back(game_value({
+                    game_value(intersection.intersect_pos_asl),
+                    game_value(intersection.surface_normal),
+                    game_value(intersection.intersect_object),
+                    game_value(intersection.parent_object),
+                    game_value(intersection.selection_names),
+                    game_value(intersection.bisurf_path)
+                }));
+            }
+            
+            gv_results.push_back(game_value(ray_gv));
+        }
+        
+        rv_utility::setSignalReturn(gv_results);
+        rv_utility::setSignalReturn(game_value(gv_results));
+    }
+
     DLLEXPORT void CDECL on_interface_unload(r_string name_) {
         // Handle interface unload
     }
