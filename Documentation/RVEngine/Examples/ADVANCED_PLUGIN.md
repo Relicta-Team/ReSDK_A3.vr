@@ -30,6 +30,9 @@ struct MyPluginAPI {
 #include <thread>
 #include <queue>
 #include <mutex>
+#include <chrono>
+#include <functional>
+#include <unordered_map>
 #include "plugin_interface.hpp"
 
 using namespace intercept;

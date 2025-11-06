@@ -13,7 +13,7 @@
     <DisplayString Condition="_n == 1">1 item: [{_data[0]}]</DisplayString>
     <DisplayString Condition="_n == 2">2 items: [{_data[0]},{_data[1]}]</DisplayString>
     <DisplayString Condition="_n == 3">3 items: [{_data[0]},{_data[1]},{_data[2]}]</DisplayString>
-    <DisplayString Condition="_n == 4">4 items: [{_data[0]},{_data[1]},{_data[2]},{_data[3]} </DisplayString>
+    <DisplayString Condition="_n == 4">4 items: [{_data[0]},{_data[1]},{_data[2]},{_data[3]}]</DisplayString>
     <DisplayString Condition="_n == 5">5 items: [{_data[0]},{_data[1]},{_data[2]},{_data[3]},{_data[4]}]</DisplayString>
     <DisplayString Condition="_n == 6">6 items: [{_data[0]},{_data[1]},{_data[2]},{_data[3]},{_data[4]},{_data[5]}]</DisplayString>
     <DisplayString>[ {_n} items]</DisplayString>                                         
