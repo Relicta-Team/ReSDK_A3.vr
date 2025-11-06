@@ -143,7 +143,7 @@ game_value date = sqf::date();
 - `sqf/actions.hpp` - Действия (addAction и т.д.)
 - `sqf/ai.hpp` - Искусственный интеллект
 - `sqf/camera.hpp` - Камера и обзор
-- `sqf/cargo.hpp` - Инвентарь и грузи т.д.)
+- `sqf/cargo.hpp` - Инвентарь и грузы (и т.д.)
 
 Для полного списка см. папку `src/client/headers/client/sqf/` в исходниках RVEngine.
 
