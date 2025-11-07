@@ -14,13 +14,15 @@
 			"**/CVS": true,
 			"**/.DS_Store": true,
 			"**/Thumbs.db": true,
-			"**/Temp/**": true
+			"**/Temp/**": true,
+			"**/vcproj64/**": true,
 		},
 		"search.exclude": {
 			"**/node_modules": true,
 			"**/bower_components": true,
 			"**/*.code-search": true,
-			"**/Temp/**": true
+			"**/Temp/**": true,
+			"**/vcproj64/**": true,
 		},
 		"[yaml]": {
 			"editor.insertSpaces": true,
