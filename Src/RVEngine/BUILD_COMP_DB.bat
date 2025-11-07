@@ -5,8 +5,14 @@ REM Корень проекта = каталог батника
 set "ROOT=%~dp0"
 if "%ROOT:~-1%"=="\" set "ROOT=%ROOT:~0,-1%"
 
-rem Путь к MSBuild
-set MSBUILD="C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe"
+rem Путь к MSBuild (автопоиск через vswhere)
+for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\amd64\MSBuild.exe`) do (
+    set "MSBUILD=%%i"
+)
+if not defined MSBUILD (
+    echo [!] MSBuild not found. Install Visual Studio 2022 with C++ workload.
+    exit /b 1
+)
 
 REM Каталог с CMake/Visual Studio артефактами
 set "VC_DIR=%ROOT%\vcproj64"
@@ -35,8 +41,8 @@ if not exist "%LOGGER_DLL%" (
 )
 
 rem set "MSBUILD=msbuild"
-echo [>] Running %MSBUILD% Intercept.sln (Debug/x64) via logger
-%MSBUILD% "%SOLUTION%" ^
+echo [^>] Running %MSBUILD% Intercept.sln (Debug/x64) via logger
+"%MSBUILD%" "%SOLUTION%" ^
   /t:Rebuild ^
   /p:Configuration=Debug ^
   /p:Platform=x64 ^
