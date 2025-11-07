@@ -52,7 +52,7 @@ defines:
 
 build:
   include: Inventory\inventory.hpp;LightEngine\LightEngine.hpp;Interactions\interact.hpp;LightEngine\ScriptedEffects.hpp;LightEngine\ScriptedEffectConfigs.sqf;LightEngine\ScriptedConfigs\*.*
-  exclude: Editor;Scipts;.vscode
+  exclude: Editor;Scipts;.vscode;RVEngine\vcproj64
 
 # common runtime options
 runtime:
