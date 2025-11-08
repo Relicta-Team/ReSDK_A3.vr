@@ -68,6 +68,14 @@ dec_setRenderTarget2 = {
 dec_updateUniformRender = {
 	params ["_mob","_value"];
 
+	//first initialize for this entity
+	private _indUni = _mob getvariable "__dec_internal_index";
+	if isNullVar(_indUni) then {
+		INC(dec_internal_index);
+		_indUni = dec_internal_index;
+		_mob setvariable ["__dec_internal_index",_indUni];
+	};
+
 	_mob setvariable ["__dec_internal_targetValue",_value];
 	private _curUniform = uniform _mob;
 	if (not_equals(_curUniform,_mob getvariable vec2("__dec_internal_curUniform",""))) then {
@@ -76,8 +84,21 @@ dec_updateUniformRender = {
 		if (_curUniform != "") then {
 			//save original texture
 			{	
+				private _rtName = [_indUni,_foreachIndex] call dec_getRenderLayerName;
+				(getTextureInfo _x) params ["_texW","_texH"];
+				if (_texW > 0 
+					&& {_texH > 0}
+					&& {_texW % 2 == 0}
+					&& {_texH % 2 == 0}
+				) then {
+					//инициализируем процедурную текстуру чтобы в следующем кадре она применилась
+					_mob setObjectTexture [_foreachIndex,
+						format['#(argb,%2,%3,1)uiEx(texType:ca,display:RscDisplayEmpty,uniqueName:%1)', _rtName,_texW,_texH]
+					];
+				};
+
 				_tpack pushBack _x;
-			} foreach (getobjecttextures _mob);
+			} foreach (getObjectTextures _mob);
 		};
 		_mob setvariable ["__dec_internal_origTextures",_tpack];
 	};
@@ -85,7 +106,9 @@ dec_updateUniformRender = {
 
 	//обновляем текстуру с задеркжой (исключаем проблему синхронизации со стороны сервера)
 	private _applyFnc = {
-		params ["_mob","_value","_curUniform"];
+		params ["_mob","_value","_curUniform","_attempt","_thisFnc"];
+		
+		if (isNullReference(_mob)) exitWith {};
 
 		if (_curUniform != uniform _mob) exitWith {};//другая одежда - мы не имеем права ее обновлять
 		//униформа отличается от примененной - а потому мы не имеем права ее обновлять
@@ -93,12 +116,33 @@ dec_updateUniformRender = {
 		
 		private _targetValue = _mob getvariable ["__dec_internal_targetValue",0];
 		if not_equals(_targetValue,_value) exitWith {}; //желаемое отличается от заданного - значит желаемое установится в след.кадре
+
+		private _indUni = _mob getvariable "__dec_internal_index";
+		if isNullVar(_indUni) exitWith {}; //не должно быть, но на всякий случай
+
+		private _failed = false;
 		{
+			private _rtName = [_indUni,_foreachIndex] call dec_getRenderLayerName;
+			private _rc = [_rtName] call dec_getRenderContext;
+			if isNullReference(_rc) exitWith {
+				INC(_attempt);
+				_failed = true;
+			};
 			[_mob,_x,_foreachIndex,_targetValue] call dec_setRenderGerms;
 		} foreach (_mob getvariable ["__dec_internal_origTextures",[]]);
+
+		if (_failed) then {
+			if (_attempt > 10) exitWith {
+				errorformat("Decals: Failed to apply decals to entity %1 after %2 attempts; Mobset index is %3",_mob arg _attempt arg _indUni);
+			};
+			traceformat("Decals: Failed to apply decals to entity %1 (attempt %2); Mobset index is %3",_mob arg _attempt arg _indUni);
+			nextFrameParams(_thisFnc,[_mob arg _value arg _curUniform arg _attempt arg _thisFnc]);
+		};	
 		
 	};
-	nextFrameParams(_applyFnc,[_mob arg _value arg _curUniform]);
+	//nextFrameParams(_applyFnc,[_mob arg _value arg _curUniform arg 1 arg _applyFnc]);
+	[_mob arg _value arg _curUniform arg 1 arg _applyFnc] call _applyFnc;
+
 };
 
 //! Вероятно эта функция вызывает графические артефакты при первом вызове\первой установке для сущности
@@ -120,15 +164,20 @@ if (!fileExists(dec_internal_const_pathPicture)) then {
 	dec_internal_const_pathPicture = inventory_const_dirtOverlayIcon; //backward compatibility
 };
 
+dec_getRenderLayerName = {
+	params ["_indUni","_index"];
+	format["dec_entity_%1_layer_%2",_indUni,_index];
+};
+
 dec_setRenderGerms = {
 	params ["_mob","_tex","_index","_value"];
 	private _indUni = _mob getvariable "__dec_internal_index";
-	if isNullVar(_indUni) then {
-		INC(dec_internal_index);
-		_indUni = dec_internal_index;
-		_mob setvariable ["__dec_internal_index",_indUni];
+	
+	if isNullVar(_indUni) exitWith {
+		error("Decals: Entity index not found");
 	};
-	private _rtName = format["dec_entity_%1_layer_%2",_indUni,_index];
+	
+	private _rtName = [_indUni,_index] call dec_getRenderLayerName;
 	
 	private _setError = {
 		errorformat("Decals: Texture %1 is invalid format",_tex);
@@ -141,12 +190,10 @@ dec_setRenderGerms = {
 		//check invalid format
 		if (_texW <= 0 || _texH <= 0) exitWith {call _setError};
 		if (_texW % 2 != 0 || _texH % 2 != 0) exitWith {call _setError};
-
-		_mob setObjectTexture [_index,
-			format['#(argb,%2,%3,1)uiEx(texType:ca,display:RscDisplayEmpty,uniqueName:%1)', _rtName,_texW,_texH]
-		];
+		
 		private _rc = [_rtName] call dec_getRenderContext;
 
+		//при первой установке новой процедурной текстуры контекст еще не создан (появится в следующем кадре)
 		if isNullReference(_rc) exitWith {
 			errorformat("Decals: Render context %1 not found",_rtName);
 		};
