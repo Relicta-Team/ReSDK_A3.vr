@@ -95,7 +95,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\AI\ai_init.sqf at line 87](../../../Src/host/AI/ai_init.sqf#L87)
+File: [host\AI\ai_init.sqf at line 88](../../../Src/host/AI/ai_init.sqf#L88)
 ## ai_nextUpdateReg
 
 Type: Variable
@@ -107,7 +107,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 31](../../../Src/host/AI/ai_init.sqf#L31)
+File: [host\AI\ai_init.sqf at line 32](../../../Src/host/AI/ai_init.sqf#L32)
 ## ai_updateRegInterval
 
 Type: Variable
@@ -119,7 +119,7 @@ Initial value:
 ```sqf
 0.2 //200ms - интервал обновления регионов
 ```
-File: [host\AI\ai_init.sqf at line 32](../../../Src/host/AI/ai_init.sqf#L32)
+File: [host\AI\ai_init.sqf at line 33](../../../Src/host/AI/ai_init.sqf#L33)
 ## ai_maxRegUpdateTime
 
 Type: Variable
@@ -131,7 +131,7 @@ Initial value:
 ```sqf
 0.5 //сколько времени можно потратить на обновление регионов за один цикл
 ```
-File: [host\AI\ai_init.sqf at line 33](../../../Src/host/AI/ai_init.sqf#L33)
+File: [host\AI\ai_init.sqf at line 34](../../../Src/host/AI/ai_init.sqf#L34)
 ## ai_regionsUpdateQueue
 
 Type: Variable
@@ -143,7 +143,7 @@ Initial value:
 ```sqf
 [] //очередь регионов на обновление
 ```
-File: [host\AI\ai_init.sqf at line 35](../../../Src/host/AI/ai_init.sqf#L35)
+File: [host\AI\ai_init.sqf at line 36](../../../Src/host/AI/ai_init.sqf#L36)
 ## ai_regionsUpdateMap
 
 Type: Variable
@@ -155,7 +155,7 @@ Initial value:
 ```sqf
 createHashMap //маппинг региона на его индекс в очереди
 ```
-File: [host\AI\ai_init.sqf at line 36](../../../Src/host/AI/ai_init.sqf#L36)
+File: [host\AI\ai_init.sqf at line 37](../../../Src/host/AI/ai_init.sqf#L37)
 ## ai_handleUpdate
 
 Type: Variable
@@ -167,7 +167,7 @@ Initial value:
 ```sqf
 -1 //хэндл обновления AI
 ```
-File: [host\AI\ai_init.sqf at line 38](../../../Src/host/AI/ai_init.sqf#L38)
+File: [host\AI\ai_init.sqf at line 39](../../../Src/host/AI/ai_init.sqf#L39)
 ## ai_allMobs
 
 Type: Variable
@@ -179,7 +179,7 @@ Initial value:
 ```sqf
 [] //список всех мобов
 ```
-File: [host\AI\ai_init.sqf at line 40](../../../Src/host/AI/ai_init.sqf#L40)
+File: [host\AI\ai_init.sqf at line 41](../../../Src/host/AI/ai_init.sqf#L41)
 ## ai_activeRegions
 
 Type: Variable
@@ -191,7 +191,7 @@ Initial value:
 ```sqf
 createHashMap // регионы, в которых должен работать AI
 ```
-File: [host\AI\ai_init.sqf at line 44](../../../Src/host/AI/ai_init.sqf#L44)
+File: [host\AI\ai_init.sqf at line 45](../../../Src/host/AI/ai_init.sqf#L45)
 ## ai_activeRegionsRadius
 
 Type: Variable
@@ -203,7 +203,7 @@ Initial value:
 ```sqf
 4 // радиус в регионах
 ```
-File: [host\AI\ai_init.sqf at line 45](../../../Src/host/AI/ai_init.sqf#L45)
+File: [host\AI\ai_init.sqf at line 46](../../../Src/host/AI/ai_init.sqf#L46)
 ## ai_playerLastRegions
 
 Type: Variable
@@ -215,7 +215,7 @@ Initial value:
 ```sqf
 createHashMap // последний регион каждого игрока (clientOwner -> regionKey)
 ```
-File: [host\AI\ai_init.sqf at line 46](../../../Src/host/AI/ai_init.sqf#L46)
+File: [host\AI\ai_init.sqf at line 47](../../../Src/host/AI/ai_init.sqf#L47)
 ## ai_brain_maxTimePerFrame
 
 Type: Variable
@@ -227,7 +227,7 @@ Initial value:
 ```sqf
 0.150 // бюджет на brain updates за кадр
 ```
-File: [host\AI\ai_init.sqf at line 78](../../../Src/host/AI/ai_init.sqf#L78)
+File: [host\AI\ai_init.sqf at line 79](../../../Src/host/AI/ai_init.sqf#L79)
 ## ai_brain_minUpdateInterval
 
 Type: Variable
@@ -239,7 +239,7 @@ Initial value:
 ```sqf
 0.15 // Минимум 150ms между обновлениями
 ```
-File: [host\AI\ai_init.sqf at line 79](../../../Src/host/AI/ai_init.sqf#L79)
+File: [host\AI\ai_init.sqf at line 80](../../../Src/host/AI/ai_init.sqf#L80)
 ## ai_brain_nextUpdateId
 
 Type: Variable
@@ -251,7 +251,7 @@ Initial value:
 ```sqf
 0 // Счетчик для распределения обновлений (staggering)
 ```
-File: [host\AI\ai_init.sqf at line 80](../../../Src/host/AI/ai_init.sqf#L80)
+File: [host\AI\ai_init.sqf at line 81](../../../Src/host/AI/ai_init.sqf#L81)
 ## ai_stats_maxProcUpdate
 
 Type: Variable
@@ -263,7 +263,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 82](../../../Src/host/AI/ai_init.sqf#L82)
+File: [host\AI\ai_init.sqf at line 83](../../../Src/host/AI/ai_init.sqf#L83)
 ## ai_stats_maxProcUpdateAgent
 
 Type: Variable
@@ -275,7 +275,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 83](../../../Src/host/AI/ai_init.sqf#L83)
+File: [host\AI\ai_init.sqf at line 84](../../../Src/host/AI/ai_init.sqf#L84)
 ## ai_stats_brainUpdatesPerFrame
 
 Type: Variable
@@ -287,7 +287,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 84](../../../Src/host/AI/ai_init.sqf#L84)
+File: [host\AI\ai_init.sqf at line 85](../../../Src/host/AI/ai_init.sqf#L85)
 ## ai_stats_brainBudgetUsed
 
 Type: Variable
@@ -299,7 +299,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 85](../../../Src/host/AI/ai_init.sqf#L85)
+File: [host\AI\ai_init.sqf at line 86](../../../Src/host/AI/ai_init.sqf#L86)
 ## ai_stats_nextRefreshTime
 
 Type: Variable
@@ -311,7 +311,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 86](../../../Src/host/AI/ai_init.sqf#L86)
+File: [host\AI\ai_init.sqf at line 87](../../../Src/host/AI/ai_init.sqf#L87)
 ## ai_countCreatedAI
 
 Type: Variable
@@ -325,7 +325,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [host\AI\ai_init.sqf at line 91](../../../Src/host/AI/ai_init.sqf#L91)
+File: [host\AI\ai_init.sqf at line 92](../../../Src/host/AI/ai_init.sqf#L92)
 ## ai_maxAICount
 
 Type: Variable
@@ -337,7 +337,7 @@ Initial value:
 ```sqf
 100
 ```
-File: [host\AI\ai_init.sqf at line 92](../../../Src/host/AI/ai_init.sqf#L92)
+File: [host\AI\ai_init.sqf at line 93](../../../Src/host/AI/ai_init.sqf#L93)
 ## ai_debug_internal_needLoadBrainWidget
 
 Type: Variable
@@ -351,7 +351,7 @@ Initial value:
 ```sqf
 true
 ```
-File: [host\AI\ai_init.sqf at line 548](../../../Src/host/AI/ai_init.sqf#L548)
+File: [host\AI\ai_init.sqf at line 550](../../../Src/host/AI/ai_init.sqf#L550)
 ## ai_modifyRegionRefCount
 
 Type: function
@@ -360,7 +360,7 @@ Description: Увеличивает/уменьшает счётчик актив
 - Param: _regionKey
 - Param: _delta
 
-File: [host\AI\ai_init.sqf at line 49](../../../Src/host/AI/ai_init.sqf#L49)
+File: [host\AI\ai_init.sqf at line 50](../../../Src/host/AI/ai_init.sqf#L50)
 ## ai_log
 
 Type: function
@@ -368,7 +368,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 71](../../../Src/host/AI/ai_init.sqf#L71)
+File: [host\AI\ai_init.sqf at line 72](../../../Src/host/AI/ai_init.sqf#L72)
 ## ai_createMob
 
 Type: function
@@ -377,7 +377,7 @@ Description:
 - Param: _pos
 - Param: _builderType (optional, default "AgentBuilderEater")
 
-File: [host\AI\ai_init.sqf at line 95](../../../Src/host/AI/ai_init.sqf#L95)
+File: [host\AI\ai_init.sqf at line 96](../../../Src/host/AI/ai_init.sqf#L96)
 ## ai_getNearMobs_Internal
 
 Type: function
@@ -388,7 +388,7 @@ Description: Намного быстрее чем перебор всех моб
 - Param: _excludeMob (optional, default nullPtr)
 - Param: _predicate
 
-File: [host\AI\ai_init.sqf at line 160](../../../Src/host/AI/ai_init.sqf#L160)
+File: [host\AI\ai_init.sqf at line 161](../../../Src/host/AI/ai_init.sqf#L161)
 ## ai_getNearMobs
 
 Type: function
@@ -396,7 +396,7 @@ Type: function
 Description: Версия для моба (удобная обертка, быстрее в 29 раз чем BasicMob::getNearMobs)
 
 
-File: [host\AI\ai_init.sqf at line 201](../../../Src/host/AI/ai_init.sqf#L201)
+File: [host\AI\ai_init.sqf at line 202](../../../Src/host/AI/ai_init.sqf#L202)
 ## ai_getNearObjects_Internal
 
 Type: function
@@ -404,7 +404,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 219](../../../Src/host/AI/ai_init.sqf#L219)
+File: [host\AI\ai_init.sqf at line 220](../../../Src/host/AI/ai_init.sqf#L220)
 ## ai_getNearItems
 
 Type: function
@@ -412,7 +412,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 260](../../../Src/host/AI/ai_init.sqf#L260)
+File: [host\AI\ai_init.sqf at line 261](../../../Src/host/AI/ai_init.sqf#L261)
 ## ai_getNearStructs
 
 Type: function
@@ -420,7 +420,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 266](../../../Src/host/AI/ai_init.sqf#L266)
+File: [host\AI\ai_init.sqf at line 267](../../../Src/host/AI/ai_init.sqf#L267)
 ## ai_getNearDecors
 
 Type: function
@@ -428,7 +428,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 272](../../../Src/host/AI/ai_init.sqf#L272)
+File: [host\AI\ai_init.sqf at line 273](../../../Src/host/AI/ai_init.sqf#L273)
 ## ai_createAgent
 
 Type: function
@@ -438,7 +438,7 @@ Description:
 - Param: _mob
 - Param: _agentType (optional, default "AgentEater")
 
-File: [host\AI\ai_init.sqf at line 278](../../../Src/host/AI/ai_init.sqf#L278)
+File: [host\AI\ai_init.sqf at line 279](../../../Src/host/AI/ai_init.sqf#L279)
 ## ai_init
 
 Type: function
@@ -446,7 +446,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 311](../../../Src/host/AI/ai_init.sqf#L311)
+File: [host\AI\ai_init.sqf at line 312](../../../Src/host/AI/ai_init.sqf#L312)
 ## ai_onUpdate
 
 Type: function
@@ -454,7 +454,7 @@ Type: function
 Description: цикл обновления AI
 
 
-File: [host\AI\ai_init.sqf at line 336](../../../Src/host/AI/ai_init.sqf#L336)
+File: [host\AI\ai_init.sqf at line 338](../../../Src/host/AI/ai_init.sqf#L338)
 ## ai_debug_internal_drawPath
 
 Type: function
@@ -462,7 +462,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 531](../../../Src/host/AI/ai_init.sqf#L531)
+File: [host\AI\ai_init.sqf at line 533](../../../Src/host/AI/ai_init.sqf#L533)
 ## ai_debug_internal_brainiInfo
 
 Type: function
@@ -472,7 +472,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\ai_init.sqf at line 551](../../../Src/host/AI/ai_init.sqf#L551)
+File: [host\AI\ai_init.sqf at line 553](../../../Src/host/AI/ai_init.sqf#L553)
 ## ai_debug_showBrainInfo
 
 Type: function
@@ -482,7 +482,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [host\AI\ai_init.sqf at line 657](../../../Src/host/AI/ai_init.sqf#L657)
+File: [host\AI\ai_init.sqf at line 659](../../../Src/host/AI/ai_init.sqf#L659)
 ## ai_reloadBehaviors
 
 Type: function
@@ -492,7 +492,7 @@ Type: function
 Description: ! fix score on recompile behaviors
 
 
-File: [host\AI\ai_init.sqf at line 664](../../../Src/host/AI/ai_init.sqf#L664)
+File: [host\AI\ai_init.sqf at line 666](../../../Src/host/AI/ai_init.sqf#L666)
 # ai_interact.sqf
 
 ## ai_internal_speedModes_names
@@ -1349,6 +1349,22 @@ Description:
 
 
 File: [host\AI\HPAstar\debug.sqf at line 226](../../../Src/host/AI/HPAstar/debug.sqf#L226)
+## ai_nav_debug_nativeTest
+
+Type: function
+
+Description: 
+- Param: _native (optional, default true)
+
+File: [host\AI\HPAstar\debug.sqf at line 249](../../../Src/host/AI/HPAstar/debug.sqf#L249)
+## ai_nav_useNative
+
+Type: function
+
+Description: 
+
+
+File: [host\AI\HPAstar\debug.sqf at line 329](../../../Src/host/AI/HPAstar/debug.sqf#L329)
 # entrance.sqf
 
 ## ai_nav_buildEntrancePoints
@@ -1367,6 +1383,16 @@ Description: Найти переходные точки для конкретн�
 - Param: _regionKey
 
 File: [host\AI\HPAstar\entrance.sqf at line 30](../../../Src/host/AI/HPAstar/entrance.sqf#L30)
+# native.sqf
+
+## ai_nav_useNative
+
+Type: function
+
+Description: Check if RVEngine is available
+
+
+File: [host\AI\HPAstar\native.sqf at line 14](../../../Src/host/AI/HPAstar/native.sqf#L14)
 # region.sqf
 
 ## ai_nav_getRegionKey
@@ -1455,7 +1481,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [host\AI\HPAstar\update.sqf at line 48](../../../Src/host/AI/HPAstar/update.sqf#L48)
+File: [host\AI\HPAstar\update.sqf at line 47](../../../Src/host/AI/HPAstar/update.sqf#L47)
 ## ai_nav_requestUpdateRegion
 
 Type: function
@@ -1463,7 +1489,7 @@ Type: function
 Description: 
 
 
-File: [host\AI\HPAstar\update.sqf at line 59](../../../Src/host/AI/HPAstar/update.sqf#L59)
+File: [host\AI\HPAstar\update.sqf at line 58](../../../Src/host/AI/HPAstar/update.sqf#L58)
 ## ai_nav_requestUpdateRegion_internal
 
 Type: function
@@ -1471,7 +1497,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [host\AI\HPAstar\update.sqf at line 60](../../../Src/host/AI/HPAstar/update.sqf#L60)
+File: [host\AI\HPAstar\update.sqf at line 59](../../../Src/host/AI/HPAstar/update.sqf#L59)
 ## ai_nav_invalidateRegion
 
 Type: function
@@ -1479,7 +1505,7 @@ Type: function
 Description: 
 - Param: _regionKey
 
-File: [host\AI\HPAstar\update.sqf at line 80](../../../Src/host/AI/HPAstar/update.sqf#L80)
+File: [host\AI\HPAstar\update.sqf at line 79](../../../Src/host/AI/HPAstar/update.sqf#L79)
 ## ai_nav_updateRegionEntrances
 
 Type: function
@@ -1487,7 +1513,7 @@ Type: function
 Description: 
 - Param: _regionKey
 
-File: [host\AI\HPAstar\update.sqf at line 136](../../../Src/host/AI/HPAstar/update.sqf#L136)
+File: [host\AI\HPAstar\update.sqf at line 135](../../../Src/host/AI/HPAstar/update.sqf#L135)
 ## ai_nav_updateRegionEntrances_fast
 
 Type: function
@@ -1495,7 +1521,7 @@ Type: function
 Description: 
 - Param: _regionKey
 
-File: [host\AI\HPAstar\update.sqf at line 167](../../../Src/host/AI/HPAstar/update.sqf#L167)
+File: [host\AI\HPAstar\update.sqf at line 166](../../../Src/host/AI/HPAstar/update.sqf#L166)
 ## ai_nav_updateEntrancesBetween
 
 Type: function
@@ -1504,7 +1530,7 @@ Description: Обновить entrance points между двумя конкре
 - Param: _regionKey1
 - Param: _regionKey2
 
-File: [host\AI\HPAstar\update.sqf at line 204](../../../Src/host/AI/HPAstar/update.sqf#L204)
+File: [host\AI\HPAstar\update.sqf at line 203](../../../Src/host/AI/HPAstar/update.sqf#L203)
 ## ai_nav_buildEntrancesBetween
 
 Type: function
@@ -1513,7 +1539,7 @@ Description: Построить entrance points между двумя конкр
 - Param: _regionKey1
 - Param: _regionKey2
 
-File: [host\AI\HPAstar\update.sqf at line 287](../../../Src/host/AI/HPAstar/update.sqf#L287)
+File: [host\AI\HPAstar\update.sqf at line 286](../../../Src/host/AI/HPAstar/update.sqf#L286)
 ## ai_nav_getBorderNodes
 
 Type: function
@@ -1523,4 +1549,4 @@ Description: Получить граничные узлы региона в ко
 - Param: _dx
 - Param: _dy
 
-File: [host\AI\HPAstar\update.sqf at line 525](../../../Src/host/AI/HPAstar/update.sqf#L525)
+File: [host\AI\HPAstar\update.sqf at line 524](../../../Src/host/AI/HPAstar/update.sqf#L524)
