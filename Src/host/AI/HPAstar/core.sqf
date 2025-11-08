@@ -1467,3 +1467,4 @@ ai_nav_findNearestNodeTowards = {
 	
 	_bestNode
 };
+

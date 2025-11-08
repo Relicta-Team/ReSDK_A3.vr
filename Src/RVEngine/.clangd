@@ -1,0 +1,20 @@
+CompileFlags:
+  Add:
+    - "-std=c++17"
+    - "-I../../../src/client/headers"
+    - "-I../../../src/client/headers/shared"
+    - "-I../../../src/client/headers/client"
+    - "-I../../../src/client/headers/client/sqf"
+    - "-I../../../src/plugins/rv_client"
+    - "-DINTERCEPT_NO_THREAD_SAFETY"
+    - "-DWIN32"
+    - "-D_WIN32"
+    - "-DUNICODE"
+    - "-D_UNICODE"
+    - "--target=x86_64-pc-windows-msvc" 
+  CompilationDatabase: vcproj64
+Diagnostics:
+  UnusedIncludes: None
+
+Index:
+  Background: Build

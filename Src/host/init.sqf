@@ -6,6 +6,7 @@
 #include "engine.hpp"
 
 server_loadingState = 0;
+loadFile("src\host\RVEngine\init.sqf"); //RVEngine extension (for c++ plugins, always load first)
 
 loadFile("src\host\ScriptErrorHandler\ScriptErrorHandler_init.sqf");
 loadFile("src\host\Curl\Curl.sqf");
