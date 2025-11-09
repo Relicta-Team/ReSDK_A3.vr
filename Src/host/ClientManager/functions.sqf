@@ -291,10 +291,10 @@ cm_serverKickById = {
 		[_owner,format["Системная ошибка. Сообщите администрации в дискорде айди: %1",_id]] call cm_serverKickById;
 	};
 
-	pre_notifClientStatic = {
+	pre_notifClientStatistic = {
 		params ["_message","_owner","_nick"];
 		_message = format["%1 (Owner: %2, Nick: %3)",_message,_owner,_nick];
-		[_message] call discError;
+		[_message] call discLog;
 		[_message] call logInfo;
 	};
 

@@ -30,7 +30,7 @@ if (isMultiplayer)then{
 
 		client_sendStatisticToServer = {
 			params ["_mes"];
-			[[_mes,cd_clientName],{[_this select 0,remoteExecutedOwner,_this select 1] call pre_notifClientStatic}] remoteExecCall ["call",2];
+			[[_mes,cd_clientName],{[_this select 0,remoteExecutedOwner,_this select 1] call pre_notifClientStatistic}] remoteExecCall ["call",2];
 		};
 	};
 };
