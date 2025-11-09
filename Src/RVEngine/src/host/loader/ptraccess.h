@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2025 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include <stddef.h>
 #pragma once
 #if defined(_WIN32) || defined(_WIN64)

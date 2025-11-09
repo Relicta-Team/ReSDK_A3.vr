@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2025 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #pragma once
 
 // This is a warning normally for returning references to local/stack allocated variables

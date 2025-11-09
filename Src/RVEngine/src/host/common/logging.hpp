@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2025 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #pragma once
 #define ELPP_THREAD_SAFE
 #define ELPP_FORCE_USE_STD_THREAD

@@ -1,3 +1,8 @@
+// ======================================================
+// Copyright (c) 2017-2025 the ReSDK_A3 project
+// sdk.relicta.ru
+// ======================================================
+
 #include "sqf_functions.hpp"
 #include "signing.hpp"
 #include "CommandTypes.hpp"
