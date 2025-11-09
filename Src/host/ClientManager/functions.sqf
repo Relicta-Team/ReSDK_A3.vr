@@ -285,7 +285,7 @@ cm_serverKickById = {
 	pre_notifClientAssert = {
 		params ["_message","_owner"];
 		private _id = (str randInt(1,1000)) + "-" + (toUpper generatePtr);
-		_message = format["%1 (ID: %2, UID: %3)",_message,_id,_uid];
+		_message = format["%1 (ID: %2, Owner: %3)",_message,_id,_owner];
 		[__ASSERT_WEBHOOK_PREFIX__ + _message] call discError;
 		[_message] call logCritical;
 		[_owner,format["Системная ошибка. Сообщите администрации в дискорде айди: %1",_id]] call cm_serverKickById;
@@ -293,7 +293,7 @@ cm_serverKickById = {
 
 	pre_notifClientStatic = {
 		params ["_message","_owner","_nick"];
-		_message = format["%1 (ID: %2, Nick: %3)",_message,_id,_nick];
+		_message = format["%1 (ID: %2, Nick: %3)",_message,_owner,_nick];
 		[_message] call discError;
 		[_message] call logInfo;
 	};
