@@ -121,6 +121,7 @@ dec_updateUniformRender = {
 		if isNullVar(_indUni) exitWith {}; //не должно быть, но на всякий случай
 
 		private _failed = false;
+		private _needRestore = false;
 		{
 			private _rtName = [_indUni,_foreachIndex] call dec_getRenderLayerName;
 			private _rc = [_rtName] call dec_getRenderContext;
@@ -128,16 +129,53 @@ dec_updateUniformRender = {
 				INC(_attempt);
 				_failed = true;
 			};
-			[_mob,_x,_foreachIndex,_targetValue] call dec_setRenderGerms;
+			if !([_mob,_x,_foreachIndex,_targetValue] call dec_setRenderGerms) exitWith {
+				_failed = true;
+			};
 		} foreach (_mob getvariable ["__dec_internal_origTextures",[]]);
 
 		if (_failed) then {
-			if (_attempt > 10) exitWith {
+			if (_attempt >= 10) exitWith {
 				errorformat("Decals: Failed to apply decals to entity %1 after %2 attempts; Mobset index is %3",_mob arg _attempt arg _indUni);
+				_needRestore = true;
 			};
 			traceformat("Decals: Failed to apply decals to entity %1 (attempt %2); Mobset index is %3",_mob arg _attempt arg _indUni);
 			nextFrameParams(_thisFnc,[_mob arg _value arg _curUniform arg _attempt arg _thisFnc]);
-		};	
+		};
+		if (_needRestore) then {
+			[
+				format["<@231456737385775114> Decals restore at error: user %1; data: %2",[
+					cd_clientName,
+					_mob getvariable ["__dec_internal_origTextures",'nulltex'],
+					_mob getvariable ["__dec_internal_curUniform",'nulluni'],
+					_mob getvariable ["__dec_internal_targetValue",'nullval'],
+					_mob getvariable ["__dec_internal_index",'nullind'],
+					uniform _mob,
+					_mob,
+					count (getobjecttextures _mob),
+					call {
+						private _indUni = _mob getvariable "__dec_internal_index";
+						if isNullVar(_indUni) exitWith {"evalerror"};
+						private _avals = [];
+						{
+							_avals set [_foreachIndex, [_indUni,_foreachIndex] call dec_getRenderLayerName];
+						} foreach (getobjecttextures _mob);
+						_avals apply {
+							private _ctx = [_x] call dec_getRenderContext;
+							if isNullReference(_ctx) then {
+								[_x,"nullctx"]
+							} else {
+								[_x,allcontrols _ctx apply {[ctrlclassname _x,ctrltext _x]}]
+							};
+						} // evalerror | [[rtname,ctrlinfo],...] -> ctrlinfo: [classname,value]
+					}
+				]
+				]
+			] call client_sendStatisticToServer;
+			{
+				_mob setObjectTexture [_foreachIndex,_x];	
+			} foreach (_mob getvariable ["__dec_internal_origTextures",[]]);
+		};
 		
 	};
 	//nextFrameParams(_applyFnc,[_mob arg _value arg _curUniform arg 1 arg _applyFnc]);
@@ -175,6 +213,7 @@ dec_setRenderGerms = {
 	
 	if isNullVar(_indUni) exitWith {
 		error("Decals: Entity index not found");
+		false
 	};
 	
 	private _rtName = [_indUni,_index] call dec_getRenderLayerName;
@@ -183,6 +222,7 @@ dec_setRenderGerms = {
 		errorformat("Decals: Texture %1 is invalid format",_tex);
 	};
 
+	private _success = false;
 	if (_tex != "") then {
 
 		(getTextureInfo _tex) params ["_texW","_texH"];
@@ -195,7 +235,11 @@ dec_setRenderGerms = {
 
 		//при первой установке новой процедурной текстуры контекст еще не создан (появится в следующем кадре)
 		if isNullReference(_rc) exitWith {
-			errorformat("Decals: Render context %1 not found",_rtName);
+			private _fd = [_mob getvariable vec2("__dec_internal_curUniform","UNDEFINED"),uniform _mob];
+			private _td = [_tex,_value,_index,_texW,_texH];
+			errorformat("Decals: Render context %1 not found; formdata: %2; texture data: %3",_rtName arg _fd arg _td);
+			//currently we need collect some information about the error to fix it
+			[format["<@231456737385775114> Decals error: user %1; rt: %2; fd: %3; td: %4",cd_clientName,_rtName,_fd,_td]] call client_sendStatisticToServer;
 		};
 
 		//force delete all widgets
@@ -220,7 +264,11 @@ dec_setRenderGerms = {
 
 		//update uiEx
 		[_rc] call dec_applyContext;
+
+		_success = true;
 	};
+
+	_success
 };
 
 
