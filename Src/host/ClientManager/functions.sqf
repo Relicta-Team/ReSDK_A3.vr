@@ -289,6 +289,13 @@ cm_serverKickById = {
 		[_owner,format["Системная ошибка. Сообщите администрации в дискорде айди: %1",_id]] call cm_serverKickById;
 	};
 
+	pre_notifClientStatic = {
+		params ["_message","_owner","_nick"];
+		_message = format["%1 (ID: %2, Nick: %3)",_message,_id,_nick];
+		[_message] call discError;
+		[_message] call logInfo;
+	};
+
 _kickself_ = {
 	params ["_owner",["_reason",""]];
 	if equals(_reason,"") then {
