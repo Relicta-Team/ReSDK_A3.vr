@@ -11,7 +11,7 @@ Replaced value:
 ```sqf
 DLLEXPORT void CDECL x
 ```
-File: [RVEngine\src\client\headers\intercept.hpp at line 29](../../../Src/RVEngine/src/client/headers/intercept.hpp#L29)
+File: [RVEngine\src\client\headers\intercept.hpp at line 34](../../../Src/RVEngine/src/client/headers/intercept.hpp#L34)
 # shared.hpp
 
 ## ZERO_OUTPUT()
@@ -27,7 +27,7 @@ Replaced value:
 ```sqf
 { memset(output, 0x00, outputSize); }
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 24](../../../Src/RVEngine/src/client/headers/shared.hpp#L24)
+File: [RVEngine\src\client\headers\shared.hpp at line 29](../../../Src/RVEngine/src/client/headers/shared.hpp#L29)
 ## EXTENSION_RETURN()
 
 Type: constant
@@ -41,7 +41,7 @@ Replaced value:
 ```sqf
 {output[outputSize-1] = 0x00; } return;
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 25](../../../Src/RVEngine/src/client/headers/shared.hpp#L25)
+File: [RVEngine\src\client\headers\shared.hpp at line 30](../../../Src/RVEngine/src/client/headers/shared.hpp#L30)
 ## ZERO_OUTPUT()
 
 Type: constant
@@ -55,7 +55,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 27](../../../Src/RVEngine/src/client/headers/shared.hpp#L27)
+File: [RVEngine\src\client\headers\shared.hpp at line 32](../../../Src/RVEngine/src/client/headers/shared.hpp#L32)
 ## EXTENSION_RETURN()
 
 Type: constant
@@ -69,7 +69,7 @@ Replaced value:
 ```sqf
 return;
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 28](../../../Src/RVEngine/src/client/headers/shared.hpp#L28)
+File: [RVEngine\src\client\headers\shared.hpp at line 33](../../../Src/RVEngine/src/client/headers/shared.hpp#L33)
 ## INTERCEPT_ASSERT
 
 Type: constant
@@ -83,7 +83,7 @@ Replaced value:
 ```sqf
 assert()
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 32](../../../Src/RVEngine/src/client/headers/shared.hpp#L32)
+File: [RVEngine\src\client\headers\shared.hpp at line 37](../../../Src/RVEngine/src/client/headers/shared.hpp#L37)
 ## INTERCEPT_ASSERT
 
 Type: constant
@@ -97,7 +97,7 @@ Replaced value:
 ```sqf
 intercept::runtime_assert()
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 34](../../../Src/RVEngine/src/client/headers/shared.hpp#L34)
+File: [RVEngine\src\client\headers\shared.hpp at line 39](../../../Src/RVEngine/src/client/headers/shared.hpp#L39)
 ## CDECL
 
 Type: constant
@@ -111,7 +111,7 @@ Replaced value:
 ```sqf
 __attribute__ ((__cdecl__))
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 38](../../../Src/RVEngine/src/client/headers/shared.hpp#L38)
+File: [RVEngine\src\client\headers\shared.hpp at line 43](../../../Src/RVEngine/src/client/headers/shared.hpp#L43)
 ## CDECL
 
 Type: constant
@@ -125,7 +125,7 @@ Replaced value:
 ```sqf
 __cdecl
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 41](../../../Src/RVEngine/src/client/headers/shared.hpp#L41)
+File: [RVEngine\src\client\headers\shared.hpp at line 46](../../../Src/RVEngine/src/client/headers/shared.hpp#L46)
 ## DLLEXPORT
 
 Type: constant
@@ -139,7 +139,7 @@ Replaced value:
 ```sqf
 __attribute__((visibility("default")))
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 45](../../../Src/RVEngine/src/client/headers/shared.hpp#L45)
+File: [RVEngine\src\client\headers\shared.hpp at line 50](../../../Src/RVEngine/src/client/headers/shared.hpp#L50)
 ## DLLEXPORT
 
 Type: constant
@@ -153,7 +153,7 @@ Replaced value:
 ```sqf
 __declspec(dllexport)
 ```
-File: [RVEngine\src\client\headers\shared.hpp at line 47](../../../Src/RVEngine/src/client/headers/shared.hpp#L47)
+File: [RVEngine\src\client\headers\shared.hpp at line 52](../../../Src/RVEngine/src/client/headers/shared.hpp#L52)
 # eventhandlers.hpp
 
 ## EH_Func_Args_Mission_Draw3D
@@ -169,7 +169,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 106](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L106)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 111](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L111)
 ## EH_Func_Args_Mission_Ended
 
 Type: constant
@@ -183,7 +183,7 @@ Replaced value:
 ```sqf
 types::r_string end_type
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 107](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L107)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 112](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L112)
 ## EH_Func_Args_Mission_MPEnded
 
 Type: constant
@@ -197,7 +197,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 108](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L108)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 113](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L113)
 ## EH_Func_Args_Mission_Loaded
 
 Type: constant
@@ -211,7 +211,7 @@ Replaced value:
 ```sqf
 loaded_saveType save_type
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 109](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L109)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 114](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L114)
 ## EH_Func_Args_Mission_Map
 
 Type: constant
@@ -225,7 +225,7 @@ Replaced value:
 ```sqf
 bool mapIsOpened, bool mapIsForced
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 110](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L110)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 115](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L115)
 ## EH_Func_Args_Mission_HandleDisconnect
 
 Type: constant
@@ -239,7 +239,7 @@ Replaced value:
 ```sqf
 types::object unit, int id, types::r_string uid, types::r_string name
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 111](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L111)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 116](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L116)
 ## EH_Func_Args_Mission_EntityRespawned
 
 Type: constant
@@ -253,7 +253,7 @@ Replaced value:
 ```sqf
 types::object newEntity, types::object oldEntity
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 112](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L112)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 117](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L117)
 ## EH_Func_Args_Mission_EntityKilled
 
 Type: constant
@@ -267,7 +267,7 @@ Replaced value:
 ```sqf
 types::object killed, types::object killer, types::object instigator, bool useEffects
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 113](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L113)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 118](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L118)
 ## EH_Func_Args_Mission_EachFrame
 
 Type: constant
@@ -281,7 +281,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 114](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L114)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 119](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L119)
 ## EH_Func_Args_Mission_MapSingleClick
 
 Type: constant
@@ -295,7 +295,7 @@ Replaced value:
 ```sqf
 types::auto_array<types::object> units, types::vector3 pos, bool alt, bool shift
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 115](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L115)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 120](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L120)
 ## EH_Func_Args_Mission_HCGroupSelectionChanged
 
 Type: constant
@@ -309,7 +309,7 @@ Replaced value:
 ```sqf
 types::group group, bool isSelected
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 116](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L116)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 121](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L121)
 ## EH_Func_Args_Mission_CommandModeChanged
 
 Type: constant
@@ -323,7 +323,7 @@ Replaced value:
 ```sqf
 bool isHighCommand, bool IsForced
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 117](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L117)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 122](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L122)
 ## EH_Func_Args_Mission_GroupIconClick
 
 Type: constant
@@ -337,7 +337,7 @@ Replaced value:
 ```sqf
 bool is3D, types::group group, int wpID, int mb, types::vector2 mousePos, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 118](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L118)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 123](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L123)
 ## EH_Func_Args_Mission_GroupIconOverEnter
 
 Type: constant
@@ -351,7 +351,7 @@ Replaced value:
 ```sqf
 bool is3D, types::group group, int wpID, int mb, types::vector2 mousePos, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 119](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L119)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 124](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L124)
 ## EH_Func_Args_Mission_GroupIconOverLeave
 
 Type: constant
@@ -365,7 +365,7 @@ Replaced value:
 ```sqf
 bool is3D, types::group group, int wpID, int mb, types::vector2 mousePos, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 120](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L120)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 125](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L125)
 ## EH_Func_Args_Mission_PlayerConnected
 
 Type: constant
@@ -379,7 +379,7 @@ Replaced value:
 ```sqf
 int id, types::r_string uid, types::r_string name, bool jip, int owner
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 121](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L121)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 126](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L126)
 ## EH_Func_Args_Mission_PlayerDisconnected
 
 Type: constant
@@ -393,7 +393,7 @@ Replaced value:
 ```sqf
 int id, types::r_string uid, types::r_string name, bool jip, int owner
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 122](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L122)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 127](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L127)
 ## EH_Func_Args_Mission_TeamSwitch
 
 Type: constant
@@ -407,7 +407,7 @@ Replaced value:
 ```sqf
 types::object from, types::object to
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 123](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L123)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 128](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L128)
 ## EH_Func_Args_Mission_PreloadStarted
 
 Type: constant
@@ -421,7 +421,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 124](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L124)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 129](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L129)
 ## EH_Func_Args_Mission_PreloadFinished
 
 Type: constant
@@ -435,7 +435,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 125](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L125)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 130](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L130)
 ## EH_Func_Args_Mission_PlayerViewChanged
 
 Type: constant
@@ -449,7 +449,7 @@ Replaced value:
 ```sqf
 types::object oldBody, types::object newBody, types::object vehicleIn, types::object oldCameraOn, types::object newCameraOn, types::object UAV
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 126](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L126)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 131](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L131)
 ## EH_Func_Args_Mission_BuildingChanged
 
 Type: constant
@@ -463,7 +463,7 @@ Replaced value:
 ```sqf
 types::object from, types::object to, bool isRuin
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 127](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L127)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 132](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L132)
 ## EH_Func_Args_Mission_ControlsShifted
 
 Type: constant
@@ -477,7 +477,7 @@ Replaced value:
 ```sqf
 types::object newController, types::object oldController, types::object vehicle, bool copilotEnabled, bool controlsUnlocked
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 128](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L128)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 133](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L133)
 ## EH_Func_Args_Mission_ExtensionCallback
 
 Type: constant
@@ -491,7 +491,7 @@ Replaced value:
 ```sqf
 types::r_string name, types::r_string function, types::r_string data
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 129](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L129)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 134](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L134)
 ## EH_Func_Args_Mission_HandleAccTime
 
 Type: constant
@@ -505,7 +505,7 @@ Replaced value:
 ```sqf
 float currentTimeAcc, float prevTimeAcc, bool messageSuppressed
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 130](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L130)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 135](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L135)
 ## EH_Func_Args_Mission_HandleChatMessage
 
 Type: constant
@@ -519,7 +519,7 @@ Replaced value:
 ```sqf
 int channel, int owner, types::r_string from, types::r_string text, types::object person, types::r_string name, types::r_string strID, bool forcedDisplay, bool isPlayerMessage, int sentenceType, int chatMessageType
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 131](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L131)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 136](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L136)
 ## EH_Func_Args_Mission_MarkerCreated
 
 Type: constant
@@ -533,7 +533,7 @@ Replaced value:
 ```sqf
 types::r_string marker, int channelNumber, types::object owner, bool local
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 132](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L132)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 137](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L137)
 ## EH_Func_Args_Mission_MarkerDeleted
 
 Type: constant
@@ -547,7 +547,7 @@ Replaced value:
 ```sqf
 types::r_string marker, bool local
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 133](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L133)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 138](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L138)
 ## EH_Func_Args_Mission_MarkerUpdated
 
 Type: constant
@@ -561,7 +561,7 @@ Replaced value:
 ```sqf
 types::r_string marker, bool local
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 134](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L134)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 139](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L139)
 ## EH_Func_Ret_Mission_HandleChatMessage
 
 Type: constant
@@ -575,7 +575,7 @@ Replaced value:
 ```sqf
 std::optional<std::variant<bool, types::sqf_string, types::auto_array<types::sqf_string>>>
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 135](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L135)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 140](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L140)
 ## EHDEF_MISSION(XX)
 
 Type: constant
@@ -618,7 +618,7 @@ Replaced value:
     XX(PreloadFinished, void, EH_Func_Args_Mission_PreloadFinished)                                      \
     XX(TeamSwitch, void, EH_Func_Args_Mission_TeamSwitch)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 138](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L138)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 143](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L143)
 ## COMPILETIME_CHECK_ENUM_MISSION(name, retVal, funcArg)
 
 Type: constant
@@ -634,7 +634,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_mission::name >= eventhandlers_mission::BuildingChanged);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 169](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L169)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 174](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L174)
 ## EH_Add_Mission_definition(name, retVal, fncArg)
 
 Type: constant
@@ -659,7 +659,7 @@ Replaced value:
         }                                                                                                                                                           \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 225](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L225)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 230](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L230)
 ## EH_Func_Args_Object_AnimChanged
 
 Type: constant
@@ -673,7 +673,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string anim
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 254](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L254)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 259](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L259)
 ## EH_Func_Args_Object_AnimDone
 
 Type: constant
@@ -687,7 +687,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string anim
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 255](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L255)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 260](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L260)
 ## EH_Func_Args_Object_AnimStateChanged
 
 Type: constant
@@ -701,7 +701,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string anim
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 256](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L256)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 261](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L261)
 ## EH_Func_Args_Object_ContainerClosed
 
 Type: constant
@@ -715,7 +715,7 @@ Replaced value:
 ```sqf
 types::object container, types::object player
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 257](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L257)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 262](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L262)
 ## EH_Func_Args_Object_ContainerOpened
 
 Type: constant
@@ -729,7 +729,7 @@ Replaced value:
 ```sqf
 types::object container, types::object player
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 258](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L258)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 263](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L263)
 ## EH_Func_Args_Object_ControlsShifted
 
 Type: constant
@@ -743,7 +743,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::object newController, types::object oldController
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 259](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L259)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 264](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L264)
 ## EH_Func_Args_Object_Dammaged
 
 Type: constant
@@ -757,7 +757,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string, float damage, float hitPartIndex, types::r_string hitPoint, types::object shooter, types::object projectile
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 260](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L260)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 265](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L265)
 ## EH_Func_Args_Object_Deleted
 
 Type: constant
@@ -771,7 +771,7 @@ Replaced value:
 ```sqf
 types::object entity
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 261](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L261)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 266](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L266)
 ## EH_Func_Args_Object_Engine
 
 Type: constant
@@ -785,7 +785,7 @@ Replaced value:
 ```sqf
 types::object vehicle, bool engineState
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 262](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L262)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 267](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L267)
 ## EH_Func_Args_Object_EpeContact
 
 Type: constant
@@ -799,7 +799,7 @@ Replaced value:
 ```sqf
 types::object object1, types::object object2, types::object select1, types::object select2, float force
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 263](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L263)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 268](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L268)
 ## EH_Func_Args_Object_EpeContactEnd
 
 Type: constant
@@ -813,7 +813,7 @@ Replaced value:
 ```sqf
 types::object object1, types::object object2, types::object select1, types::object select2, float force
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 264](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L264)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 269](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L269)
 ## EH_Func_Args_Object_EpeContactStart
 
 Type: constant
@@ -827,7 +827,7 @@ Replaced value:
 ```sqf
 types::object object1, types::object object2, types::object select1, types::object select2, float force
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 265](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L265)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 270](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L270)
 ## EH_Func_Args_Object_Explosion
 
 Type: constant
@@ -841,7 +841,7 @@ Replaced value:
 ```sqf
 types::object vehicle, float damage
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 266](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L266)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 271](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L271)
 ## EH_Func_Args_Object_Fired
 
 Type: constant
@@ -855,7 +855,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string weapon, types::r_string muzzle, types::r_string mode, types::r_string ammo, types::r_string magazine, types::object projectile, types::object gunner
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 267](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L267)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 272](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L272)
 ## EH_Func_Args_Object_FiredMan
 
 Type: constant
@@ -869,7 +869,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string weapon, types::r_string muzzle, types::r_string mode, types::r_string ammo, types::r_string magazine, types::object projectile, types::object vehicle
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 268](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L268)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 273](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L273)
 ## EH_Func_Args_Object_FiredNear
 
 Type: constant
@@ -883,7 +883,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object vehicle, float distance, types::r_string weapon, types::r_string muzzle, types::r_string mode, types::r_string ammo, types::object gunner
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 269](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L269)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 274](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L274)
 ## EH_Func_Args_Object_Fuel
 
 Type: constant
@@ -897,7 +897,7 @@ Replaced value:
 ```sqf
 types::object vehicle, bool fuelState
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 270](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L270)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 275](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L275)
 ## EH_Func_Args_Object_Gear
 
 Type: constant
@@ -911,7 +911,7 @@ Replaced value:
 ```sqf
 types::object vehicle, bool gearState
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 271](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L271)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 276](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L276)
 ## EH_Func_Args_Object_GetIn
 
 Type: constant
@@ -925,7 +925,7 @@ Replaced value:
 ```sqf
 types::object vehicle, get_in_position position, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 277](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L277)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 282](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L282)
 ## EH_Func_Args_Object_GetInMan
 
 Type: constant
@@ -939,7 +939,7 @@ Replaced value:
 ```sqf
 types::object vehicle, get_in_position position, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 278](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L278)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 283](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L283)
 ## EH_Func_Args_Object_GetOut
 
 Type: constant
@@ -953,7 +953,7 @@ Replaced value:
 ```sqf
 types::object vehicle, get_in_position position, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 279](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L279)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 284](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L284)
 ## EH_Func_Args_Object_GetOutMan
 
 Type: constant
@@ -967,7 +967,7 @@ Replaced value:
 ```sqf
 types::object vehicle, get_in_position position, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 280](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L280)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 285](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L285)
 ## EH_Func_Args_Object_HandleDamage
 
 Type: constant
@@ -981,7 +981,7 @@ Replaced value:
 ```sqf
 types::object unit, types::r_string hitSelection, float dmage, types::object source, types::r_string projectile, float hitPartIndex, types::object instigator, types::r_string hitPoint
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 281](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L281)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 286](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L286)
 ## EH_Func_Args_Object_HandleHeal
 
 Type: constant
@@ -995,7 +995,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object healer, bool healerCanHeal
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 282](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L282)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 287](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L287)
 ## EH_Func_Args_Object_HandleRating
 
 Type: constant
@@ -1009,7 +1009,7 @@ Replaced value:
 ```sqf
 types::object unit, float rating
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 283](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L283)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 288](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L288)
 ## EH_Func_Args_Object_HandleScore
 
 Type: constant
@@ -1023,7 +1023,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object object_, float score
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 284](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L284)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 289](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L289)
 ## EH_Func_Args_Object_Hit
 
 Type: constant
@@ -1037,7 +1037,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object causedBy, float damage, types::object instigator
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 285](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L285)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 290](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L290)
 ## EH_Func_Args_Object_HitPart
 
 Type: constant
@@ -1051,7 +1051,7 @@ Replaced value:
 ```sqf
 std::vector<eventhandler_hit_part_type>;
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 315](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L315)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 320](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L320)
 ## EH_Func_Args_Object_Init
 
 Type: constant
@@ -1065,7 +1065,7 @@ Replaced value:
 ```sqf
 types::object unit
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 316](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L316)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 321](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L321)
 ## EH_Func_Args_Object_HandleIdentity
 
 Type: constant
@@ -1079,7 +1079,7 @@ Replaced value:
 ```sqf
 types::object unit
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 317](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L317)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 322](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L322)
 ## EH_Func_Args_Object_IncomingMissile
 
 Type: constant
@@ -1093,7 +1093,7 @@ Replaced value:
 ```sqf
 types::object target, types::r_string ammo, types::object vehicle, types::object instigator
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 318](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L318)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 323](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L323)
 ## EH_Func_Args_Object_InventoryClosed
 
 Type: constant
@@ -1107,7 +1107,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object targetContainer
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 319](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L319)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 324](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L324)
 ## EH_Func_Args_Object_InventoryOpened
 
 Type: constant
@@ -1121,7 +1121,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object targetContainer, types::object secondaryContainer
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 320](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L320)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 325](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L325)
 ## EH_Func_Args_Object_Killed
 
 Type: constant
@@ -1135,7 +1135,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object killer, types::object instigator, bool useEffects
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 321](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L321)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 326](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L326)
 ## EH_Func_Args_Object_LandedTouchDown
 
 Type: constant
@@ -1149,7 +1149,7 @@ Replaced value:
 ```sqf
 types::object plane, float airportID
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 322](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L322)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 327](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L327)
 ## EH_Func_Args_Object_LandedStopped
 
 Type: constant
@@ -1163,7 +1163,7 @@ Replaced value:
 ```sqf
 types::object plane, float airportID
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 323](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L323)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 328](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L328)
 ## EH_Func_Args_Object_Landing
 
 Type: constant
@@ -1177,7 +1177,7 @@ Replaced value:
 ```sqf
 types::object plane, float airportID, bool isCarrier
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 324](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L324)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 329](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L329)
 ## EH_Func_Args_Object_LandingCanceled
 
 Type: constant
@@ -1191,7 +1191,7 @@ Replaced value:
 ```sqf
 types::object plane, float airportID, bool isCarrier
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 325](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L325)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 330](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L330)
 ## EH_Func_Args_Object_Local
 
 Type: constant
@@ -1205,7 +1205,7 @@ Replaced value:
 ```sqf
 types::object object_, bool local
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 326](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L326)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 331](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L331)
 ## EH_Func_Args_Object_PostReset
 
 Type: constant
@@ -1219,7 +1219,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 327](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L327)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 332](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L332)
 ## EH_Func_Args_Object_Put
 
 Type: constant
@@ -1233,7 +1233,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object container, types::r_string item
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 328](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L328)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 333](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L333)
 ## EH_Func_Args_Object_Reloaded
 
 Type: constant
@@ -1247,7 +1247,7 @@ Replaced value:
 ```sqf
 types::object entity, types::r_string weapon, types::r_string muzzle, types::r_string, types::auto_array<types::game_value> newMagazine, types::auto_array<types::game_value> oldMagazine
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 330](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L330)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 335](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L335)
 ## EH_Func_Args_Object_Respawn
 
 Type: constant
@@ -1261,7 +1261,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object corpse
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 331](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L331)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 336](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L336)
 ## EH_Func_Args_Object_RopeAttach
 
 Type: constant
@@ -1275,7 +1275,7 @@ Replaced value:
 ```sqf
 types::object object1, types::object rope, types::object object2
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 332](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L332)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 337](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L337)
 ## EH_Func_Args_Object_RopeBreak
 
 Type: constant
@@ -1289,7 +1289,7 @@ Replaced value:
 ```sqf
 types::object object1, types::object rope, types::object object2
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 333](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L333)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 338](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L338)
 ## EH_Func_Args_Object_SeatSwitched
 
 Type: constant
@@ -1303,7 +1303,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::object unit1, types::object unit2
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 334](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L334)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 339](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L339)
 ## EH_Func_Args_Object_SeatSwitchedMan
 
 Type: constant
@@ -1317,7 +1317,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::object unit1, types::object unit2
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 335](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L335)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 340](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L340)
 ## EH_Func_Args_Object_SoundPlayed
 
 Type: constant
@@ -1331,7 +1331,7 @@ Replaced value:
 ```sqf
 types::object unit, sound_played_origin soundCode
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 352](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L352)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 357](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L357)
 ## EH_Func_Args_Object_Take
 
 Type: constant
@@ -1345,7 +1345,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object container, types::r_string item
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 353](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L353)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 358](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L358)
 ## EH_Func_Args_Object_TaskSetAsCurrent
 
 Type: constant
@@ -1359,7 +1359,7 @@ Replaced value:
 ```sqf
 types::object unit, types::task task_
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 354](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L354)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 359](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L359)
 ## EH_Func_Args_Object_TurnIn
 
 Type: constant
@@ -1373,7 +1373,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 355](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L355)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 360](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L360)
 ## EH_Func_Args_Object_TurnOut
 
 Type: constant
@@ -1387,7 +1387,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::object unit, types::rv_turret_path turret_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 356](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L356)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 361](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L361)
 ## EH_Func_Args_Object_WeaponAssembled
 
 Type: constant
@@ -1401,7 +1401,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object weapon
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 357](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L357)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 362](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L362)
 ## EH_Func_Args_Object_WeaponDisassembled
 
 Type: constant
@@ -1415,7 +1415,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object primaryBag, types::object secondarybag
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 358](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L358)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 363](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L363)
 ## EH_Func_Args_Object_WeaponDeployed
 
 Type: constant
@@ -1429,7 +1429,7 @@ Replaced value:
 ```sqf
 types::object unit, bool isDeployed
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 359](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L359)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 364](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L364)
 ## EH_Func_Args_Object_WeaponRested
 
 Type: constant
@@ -1443,7 +1443,7 @@ Replaced value:
 ```sqf
 types::object unit, bool isRested
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 360](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L360)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 365](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L365)
 ## EH_Func_Args_Object_Disassembled
 
 Type: constant
@@ -1457,7 +1457,7 @@ Replaced value:
 ```sqf
 types::object entity, types::object primaryBag, types::object secondaryBag
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 361](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L361)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 366](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L366)
 ## EH_Func_Args_Object_PathCalculated
 
 Type: constant
@@ -1471,7 +1471,7 @@ Replaced value:
 ```sqf
 types::object agent, types::auto_array<types::vector3> path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 362](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L362)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 367](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L367)
 ## EH_Func_Args_Object_PeriscopeElevationChanged
 
 Type: constant
@@ -1485,7 +1485,7 @@ Replaced value:
 ```sqf
 types::object vehicle, types::rv_turret_path turret, float elevation, float direction, bool userIsBlocked
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 363](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L363)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 368](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L368)
 ## EH_Func_Args_Object_Suppressed
 
 Type: constant
@@ -1499,7 +1499,7 @@ Replaced value:
 ```sqf
 types::object unit, float distance, types::object shooter, types::object instigator, types::object ammoObject, types::r_string ammoClassName, types::config ammoConfig
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 364](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L364)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 369](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L369)
 ## EHDEF_OBJECT(XX)
 
 Type: constant
@@ -1572,7 +1572,7 @@ Replaced value:
     XX(WeaponDeployed, void, EH_Func_Args_Object_WeaponDeployed)                       \
     XX(WeaponRested, void, EH_Func_Args_Object_WeaponRested)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 368](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L368)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 373](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L373)
 ## COMPILETIME_CHECK_ENUM_OBJECT(name, retVal, funcArg)
 
 Type: constant
@@ -1588,7 +1588,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_object::name >= eventhandlers_object::AnimChanged);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 431](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L431)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 436](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L436)
 ## EH_Add_Object_definition(name, retVal, fncArg)
 
 Type: constant
@@ -1613,7 +1613,7 @@ Replaced value:
         }                                                                                                                                                         \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 513](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L513)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 518](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L518)
 ## EH_Func_Args_Ctrl_Draw
 
 Type: constant
@@ -1627,7 +1627,7 @@ Replaced value:
 ```sqf
 types::control map
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 556](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L556)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 561](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L561)
 ## EH_Func_Args_Ctrl_MouseButtonDown
 
 Type: constant
@@ -1641,7 +1641,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int button, float x_pos, float y_pos, bool Shift, bool Ctrl, bool Alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 557](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L557)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 562](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L562)
 ## EH_Func_Args_Ctrl_MouseButtonUp
 
 Type: constant
@@ -1655,7 +1655,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int button, float x_pos, float y_pos, bool Shift, bool Ctrl, bool Alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 558](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L558)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 563](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L563)
 ## EH_Func_Args_Ctrl_MouseButtonClick
 
 Type: constant
@@ -1669,7 +1669,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int button, float x_pos, float y_pos, bool Shift, bool Ctrl, bool Alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 559](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L559)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 564](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L564)
 ## EH_Func_Args_Ctrl_MouseButtonDblClick
 
 Type: constant
@@ -1683,7 +1683,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int button, float x_pos, float y_pos, bool Shift, bool Ctrl, bool Alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 560](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L560)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 565](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L565)
 ## EH_Func_Args_Ctrl_MouseMoving
 
 Type: constant
@@ -1697,7 +1697,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float x_pos, float y_pos, bool mouse_over
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 561](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L561)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 566](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L566)
 ## EH_Func_Args_Ctrl_MouseHolding
 
 Type: constant
@@ -1711,7 +1711,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float x_pos, float y_pos, bool mouse_over
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 562](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L562)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 567](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L567)
 ## EH_Func_Args_Ctrl_ButtonClick
 
 Type: constant
@@ -1725,7 +1725,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 563](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L563)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 568](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L568)
 ## EH_Func_Args_Ctrl_ButtonDblClick
 
 Type: constant
@@ -1739,7 +1739,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 564](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L564)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 569](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L569)
 ## EH_Func_Args_Ctrl_ButtonDown
 
 Type: constant
@@ -1753,7 +1753,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 565](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L565)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 570](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L570)
 ## EH_Func_Args_Ctrl_ButtonUp
 
 Type: constant
@@ -1767,7 +1767,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 566](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L566)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 571](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L571)
 ## EH_Func_Args_Ctrl_CanDestroy
 
 Type: constant
@@ -1781,7 +1781,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float exitCode
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 567](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L567)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 572](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L572)
 ## EH_Func_Args_Ctrl_Char
 
 Type: constant
@@ -1795,7 +1795,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int charCode 
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 568](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L568)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 573](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L573)
 ## EH_Func_Args_Ctrl_CheckBoxesSelChanged
 
 Type: constant
@@ -1809,7 +1809,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int selectedIndex, int currentIndex
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 569](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L569)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 574](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L574)
 ## EH_Func_Args_Ctrl_CheckedChanged
 
 Type: constant
@@ -1823,7 +1823,7 @@ Replaced value:
 ```sqf
 types::control checkBox, bool checked
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 570](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L570)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 575](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L575)
 ## EH_Func_Args_Ctrl_Destroy
 
 Type: constant
@@ -1837,7 +1837,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float exitCode
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 571](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L571)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 576](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L576)
 ## EH_Func_Args_Ctrl_HTMLLink
 
 Type: constant
@@ -1851,7 +1851,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::r_string url
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 572](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L572)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 577](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L577)
 ## EH_Func_Args_Ctrl_IMEChar
 
 Type: constant
@@ -1865,7 +1865,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int char_code
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 573](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L573)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 578](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L578)
 ## EH_Func_Args_Ctrl_IMEComposition
 
 Type: constant
@@ -1879,7 +1879,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int char_code
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 574](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L574)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 579](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L579)
 ## EH_Func_Args_Ctrl_KeyDown
 
 Type: constant
@@ -1893,7 +1893,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int keyCode, bool shift_held, bool ctrl_held, bool alt_held
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 575](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L575)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 580](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L580)
 ## EH_Func_Args_Ctrl_KeyUp
 
 Type: constant
@@ -1907,7 +1907,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int keyCode, bool shift_held, bool ctrl_held, bool alt_held
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 576](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L576)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 581](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L581)
 ## EH_Func_Args_Ctrl_KillFocus
 
 Type: constant
@@ -1921,7 +1921,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 577](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L577)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 582](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L582)
 ## EH_Func_Args_Ctrl_LBDblClick
 
 Type: constant
@@ -1935,7 +1935,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int selected_index
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 578](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L578)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 583](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L583)
 ## EH_Func_Args_Ctrl_LBDrag
 
 Type: constant
@@ -1949,7 +1949,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<event_handlers_listbox_info> listBoxInfo
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 592](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L592)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 597](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L597)
 ## EH_Func_Args_Ctrl_LBDragging
 
 Type: constant
@@ -1963,7 +1963,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float x_pos, float y_pos, int ctrlIDC, types::auto_array<event_handlers_listbox_info> listBoxInfo
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 593](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L593)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 598](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L598)
 ## EH_Func_Args_Ctrl_LBDrop
 
 Type: constant
@@ -1977,7 +1977,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float x_pos, float y_pos, int ctrlIDC, types::auto_array<event_handlers_listbox_info> listBoxInfo
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 594](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L594)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 599](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L599)
 ## EH_Func_Args_Ctrl_LBListSelChanged
 
 Type: constant
@@ -1991,7 +1991,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int selected_index
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 595](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L595)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 600](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L600)
 ## EH_Func_Args_Ctrl_LBSelChanged
 
 Type: constant
@@ -2005,7 +2005,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int selected_index
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 596](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L596)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 601](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L601)
 ## EH_Func_Args_Ctrl_Load
 
 Type: constant
@@ -2019,7 +2019,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::config ctrl_config
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 597](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L597)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 602](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L602)
 ## EH_Func_Args_Ctrl_MenuSelected
 
 Type: constant
@@ -2033,7 +2033,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int menu_id
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 598](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L598)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 603](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L603)
 ## EH_Func_Args_Ctrl_MouseEnter
 
 Type: constant
@@ -2047,7 +2047,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 599](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L599)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 604](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L604)
 ## EH_Func_Args_Ctrl_MouseExit
 
 Type: constant
@@ -2061,7 +2061,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 600](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L600)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 605](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L605)
 ## EH_Func_Args_Ctrl_MouseZChanged
 
 Type: constant
@@ -2075,7 +2075,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float scroll_val
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 601](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L601)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 606](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L606)
 ## EH_Func_Args_Ctrl_ObjectMoved
 
 Type: constant
@@ -2089,7 +2089,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::vector3 offset_vector
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 602](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L602)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 607](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L607)
 ## EH_Func_Args_Ctrl_SetFocus
 
 Type: constant
@@ -2103,7 +2103,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 603](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L603)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 608](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L608)
 ## EH_Func_Args_Ctrl_SliderPosChanged
 
 Type: constant
@@ -2117,7 +2117,7 @@ Replaced value:
 ```sqf
 types::control ctrl, float new_value
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 604](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L604)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 609](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L609)
 ## EH_Func_Args_Ctrl_ToolBoxSelChanged
 
 Type: constant
@@ -2131,7 +2131,7 @@ Replaced value:
 ```sqf
 types::control ctrl, int selected_index
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 605](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L605)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 610](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L610)
 ## EH_Func_Args_Ctrl_TreeCollapsed
 
 Type: constant
@@ -2145,7 +2145,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 606](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L606)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 611](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L611)
 ## EH_Func_Args_Ctrl_TreeDblClick
 
 Type: constant
@@ -2159,7 +2159,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 607](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L607)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 612](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L612)
 ## EH_Func_Args_Ctrl_TreeExpanded
 
 Type: constant
@@ -2173,7 +2173,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 608](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L608)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 613](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L613)
 ## EH_Func_Args_Ctrl_TreeLButtonDown
 
 Type: constant
@@ -2187,7 +2187,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 609](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L609)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 614](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L614)
 ## EH_Func_Args_Ctrl_TreeMouseExit
 
 Type: constant
@@ -2201,7 +2201,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 610](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L610)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 615](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L615)
 ## EH_Func_Args_Ctrl_TreeMouseHold
 
 Type: constant
@@ -2215,7 +2215,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 611](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L611)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 616](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L616)
 ## EH_Func_Args_Ctrl_TreeMouseMove
 
 Type: constant
@@ -2229,7 +2229,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 612](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L612)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 617](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L617)
 ## EH_Func_Args_Ctrl_TreeSelChanged
 
 Type: constant
@@ -2243,7 +2243,7 @@ Replaced value:
 ```sqf
 types::control ctrl, types::auto_array<int> tree_path
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 613](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L613)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 618](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L618)
 ## EH_Func_Args_Ctrl_VideoStopped
 
 Type: constant
@@ -2257,7 +2257,7 @@ Replaced value:
 ```sqf
 types::control ctrl
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 614](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L614)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 619](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L619)
 ## EHDEF_CTRL(XX)
 
 Type: constant
@@ -2317,7 +2317,7 @@ Replaced value:
     XX(TreeSelChanged, void, EH_Func_Args_Ctrl_TreeSelChanged)                          \
     XX(VideoStopped, void, EH_Func_Args_Ctrl_VideoStopped)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 619](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L619)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 624](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L624)
 ## COMPILETIME_CHECK_ENUM_CTRL(name, retVal, funcArg)
 
 Type: constant
@@ -2333,7 +2333,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_ctrl::name >= eventhandlers_ctrl::ButtonClick);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 667](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L667)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 672](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L672)
 ## EH_Add_Ctrl_definition(name, retVal, fncArg)
 
 Type: constant
@@ -2358,7 +2358,7 @@ Replaced value:
         }                                                                                                                                                     \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 736](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L736)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 741](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L741)
 ## EH_Func_Args_MP_MPHit
 
 Type: constant
@@ -2372,7 +2372,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object caused_by, float damage, types::object instigator
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 765](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L765)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 770](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L770)
 ## EH_Func_Args_MP_MPKilled
 
 Type: constant
@@ -2386,7 +2386,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object killer, types::object instigator, bool use_effects
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 766](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L766)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 771](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L771)
 ## EH_Func_Args_MP_MPRespawn
 
 Type: constant
@@ -2400,7 +2400,7 @@ Replaced value:
 ```sqf
 types::object unit, types::object corpse
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 767](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L767)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 772](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L772)
 ## EHDEF_MP(XX)
 
 Type: constant
@@ -2417,7 +2417,7 @@ Replaced value:
     XX(MPKilled, void, EH_Func_Args_MP_MPKilled) \
     XX(MPRespawn, types::vector3, EH_Func_Args_MP_MPRespawn)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 770](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L770)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 775](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L775)
 ## COMPILETIME_CHECK_ENUM_MP(name, retVal, funcArg)
 
 Type: constant
@@ -2433,7 +2433,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_mp::name >= eventhandlers_mp::MPHit);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 775](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L775)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 780](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L780)
 ## EH_Add_MP_definition(name, retVal, fncArg)
 
 Type: constant
@@ -2458,7 +2458,7 @@ Replaced value:
         }                                                                                                                                                     \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 801](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L801)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 806](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L806)
 ## EH_Func_Args_Display_Load
 
 Type: constant
@@ -2472,7 +2472,7 @@ Replaced value:
 ```sqf
 types::display disp
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 831](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L831)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 836](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L836)
 ## EH_Func_Args_Display_Unload
 
 Type: constant
@@ -2486,7 +2486,7 @@ Replaced value:
 ```sqf
 types::display disp, float exit_code
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 832](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L832)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 837](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L837)
 ## EH_Func_Args_Display_ChildDestroyed
 
 Type: constant
@@ -2500,7 +2500,7 @@ Replaced value:
 ```sqf
 types::display disp, types::display closed_disp, float exit_code
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 833](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L833)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 838](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L838)
 ## EH_Func_Args_Display_KeyDown
 
 Type: constant
@@ -2514,7 +2514,7 @@ Replaced value:
 ```sqf
 types::display disp, int dik, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 834](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L834)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 839](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L839)
 ## EH_Func_Args_Display_KeyUp
 
 Type: constant
@@ -2528,7 +2528,7 @@ Replaced value:
 ```sqf
 types::display disp, int dik, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 835](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L835)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 840](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L840)
 ## EH_Func_Args_Display_MouseMoving
 
 Type: constant
@@ -2542,7 +2542,7 @@ Replaced value:
 ```sqf
 types::display disp, float delta_x, float delta_y
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 836](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L836)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 841](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L841)
 ## EH_Func_Args_Display_MouseZChanged
 
 Type: constant
@@ -2556,7 +2556,7 @@ Replaced value:
 ```sqf
 types::display disp, float change
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 837](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L837)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 842](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L842)
 ## EH_Func_Args_Display_MouseButtonDown
 
 Type: constant
@@ -2570,7 +2570,7 @@ Replaced value:
 ```sqf
 types::display disp, int button, float x_pos, float y_pos, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 838](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L838)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 843](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L843)
 ## EH_Func_Args_Display_MouseButtonUp
 
 Type: constant
@@ -2584,7 +2584,7 @@ Replaced value:
 ```sqf
 types::display disp, int button, float x_pos, float y_pos, bool shift, bool ctrl, bool alt
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 839](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L839)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 844](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L844)
 ## EH_Func_Args_Display_MouseHolding
 
 Type: constant
@@ -2598,7 +2598,7 @@ Replaced value:
 ```sqf
 types::display disp, float x_pos, float y_pos
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 840](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L840)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 845](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L845)
 ## EH_Func_Args_Display_Char
 
 Type: constant
@@ -2612,7 +2612,7 @@ Replaced value:
 ```sqf
 types::display disp, int char_code
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 841](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L841)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 846](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L846)
 ## EHDEF_Display(XX)
 
 Type: constant
@@ -2637,7 +2637,7 @@ Replaced value:
     XX(MouseZChanged, void, EH_Func_Args_Display_MouseZChanged)                    \
     XX(Unload, void, EH_Func_Args_Display_Unload)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 845](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L845)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 850](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L850)
 ## COMPILETIME_CHECK_ENUM_Display(name, retVal, funcArg)
 
 Type: constant
@@ -2653,7 +2653,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_display::name >= eventhandlers_display::Char);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 858](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L858)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 863](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L863)
 ## EH_Add_Display_definition(name, retVal, fncArg)
 
 Type: constant
@@ -2678,7 +2678,7 @@ Replaced value:
         }                                                                                                                                                     \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 892](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L892)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 897](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L897)
 ## EH_Func_Args_Group_UnitJoined
 
 Type: constant
@@ -2692,7 +2692,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object newUnit
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 921](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L921)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 926](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L926)
 ## EH_Func_Args_Group_UnitLeft
 
 Type: constant
@@ -2706,7 +2706,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object oldUnit
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 922](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L922)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 927](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L927)
 ## EH_Func_Args_Group_VehicleAdded
 
 Type: constant
@@ -2720,7 +2720,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object newVehicle
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 923](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L923)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 928](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L928)
 ## EH_Func_Args_Group_VehicleRemoved
 
 Type: constant
@@ -2734,7 +2734,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object oldVehicle
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 924](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L924)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 929](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L929)
 ## EH_Func_Args_Group_Empty
 
 Type: constant
@@ -2748,7 +2748,7 @@ Replaced value:
 ```sqf
 types::group grp
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 925](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L925)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 930](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L930)
 ## EH_Func_Args_Group_Deleted
 
 Type: constant
@@ -2762,7 +2762,7 @@ Replaced value:
 ```sqf
 types::group grp
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 926](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L926)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 931](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L931)
 ## EH_Func_Args_Group_Local
 
 Type: constant
@@ -2776,7 +2776,7 @@ Replaced value:
 ```sqf
 types::group grp
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 927](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L927)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 932](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L932)
 ## EH_Func_Args_Group_CombatModeChanged
 
 Type: constant
@@ -2790,7 +2790,7 @@ Replaced value:
 ```sqf
 types::group grp, types::r_string newMode
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 928](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L928)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 933](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L933)
 ## EH_Func_Args_Group_CommandChanged
 
 Type: constant
@@ -2804,7 +2804,7 @@ Replaced value:
 ```sqf
 types::group grp, types::r_string newCommand
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 929](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L929)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 934](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L934)
 ## EH_Func_Args_Group_FormationChanged
 
 Type: constant
@@ -2818,7 +2818,7 @@ Replaced value:
 ```sqf
 types::group grp, types::r_string newFormation
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 930](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L930)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 935](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L935)
 ## EH_Func_Args_Group_SpeedModeChanged
 
 Type: constant
@@ -2832,7 +2832,7 @@ Replaced value:
 ```sqf
 types::group grp, types::r_string newSpeedmode
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 931](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L931)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 936](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L936)
 ## EH_Func_Args_Group_EnableAttackChanged
 
 Type: constant
@@ -2846,7 +2846,7 @@ Replaced value:
 ```sqf
 types::group grp, bool attackEnabled
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 932](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L932)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 937](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L937)
 ## EH_Func_Args_Group_LeaderChanged
 
 Type: constant
@@ -2860,7 +2860,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object newLeader
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 933](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L933)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 938](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L938)
 ## EH_Func_Args_Group_GroupIdChanged
 
 Type: constant
@@ -2874,7 +2874,7 @@ Replaced value:
 ```sqf
 types::group grp, types::r_string newGroupID
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 934](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L934)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 939](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L939)
 ## EH_Func_Args_Group_KnowsAboutChanged
 
 Type: constant
@@ -2888,7 +2888,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object targetUnit, int newKnowsAbout, int oldKnowsAbout
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 935](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L935)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 940](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L940)
 ## EH_Func_Args_Group_WaypointComplete
 
 Type: constant
@@ -2902,7 +2902,7 @@ Replaced value:
 ```sqf
 types::group grp, int waypointIndex
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 936](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L936)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 941](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L941)
 ## EH_Func_Args_Group_Fleeing
 
 Type: constant
@@ -2916,7 +2916,7 @@ Replaced value:
 ```sqf
 types::group grp, bool fleeingNow
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 937](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L937)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 942](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L942)
 ## EH_Func_Args_Group_EnemyDetected
 
 Type: constant
@@ -2930,7 +2930,7 @@ Replaced value:
 ```sqf
 types::group grp, types::object newTarget
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 938](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L938)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 943](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L943)
 ## EHDEF_Group(XX)
 
 Type: constant
@@ -2962,7 +2962,7 @@ Replaced value:
     XX(Fleeing, void, EH_Func_Args_Group_Fleeing)                                      \
     XX(EnemyDetected, void, EH_Func_Args_Group_EnemyDetected)
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 942](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L942)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 947](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L947)
 ## COMPILETIME_CHECK_ENUM_Group(name, retVal, funcArg)
 
 Type: constant
@@ -2978,7 +2978,7 @@ Replaced value:
 ```sqf
 static_assert(eventhandlers_group::name >= eventhandlers_group::UnitJoined);
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 962](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L962)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 967](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L967)
 ## EH_Add_Group_definition(name, retVal, fncArg)
 
 Type: constant
@@ -3003,7 +3003,7 @@ Replaced value:
         }                                                                                                                                                           \
     };
 ```
-File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 1003](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L1003)
+File: [RVEngine\src\client\headers\client\eventhandlers.hpp at line 1008](../../../Src/RVEngine/src/client/headers/client/eventhandlers.hpp#L1008)
 # ai.hpp
 
 ## markers_
@@ -3013,7 +3013,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\headers\client\sqf\ai.hpp at line 131](../../../Src/RVEngine/src/client/headers/client/sqf/ai.hpp#L131)
+File: [RVEngine\src\client\headers\client\sqf\ai.hpp at line 136](../../../Src/RVEngine/src/client/headers/client/sqf/ai.hpp#L136)
 # sound.hpp
 
 ## markers_
@@ -3023,7 +3023,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\headers\client\sqf\sound.hpp at line 69](../../../Src/RVEngine/src/client/headers/client/sqf/sound.hpp#L69)
+File: [RVEngine\src\client\headers\client\sqf\sound.hpp at line 74](../../../Src/RVEngine/src/client/headers/client/sqf/sound.hpp#L74)
 # sqf.hpp
 
 ## __XXXSQF_QUOTE(...)
@@ -3037,7 +3037,7 @@ Replaced value:
 ```sqf
 #__VA_ARGS__
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 33](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L33)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 38](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L38)
 ## __XXXSQF_EXPAND_AND_QUOTE(str)
 
 Type: constant
@@ -3049,7 +3049,7 @@ Replaced value:
 ```sqf
 __XXXSQF_QUOTE(str)
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 34](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L34)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 39](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L39)
 ## __XXXSQF_L1(...)
 
 Type: constant
@@ -3061,7 +3061,7 @@ Replaced value:
 ```sqf
 __SQF(##__VA_ARGS__##)__SQF
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 35](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L35)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 40](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L40)
 ## __XXXSQF_L2(...)
 
 Type: constant
@@ -3073,7 +3073,7 @@ Replaced value:
 ```sqf
 __XXXSQF_EXPAND_AND_QUOTE(__XXXSQF_L1(__VA_ARGS__))
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 36](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L36)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 41](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L41)
 ## __XXXSQF_CAT(a,b)
 
 Type: constant
@@ -3086,7 +3086,7 @@ Replaced value:
 ```sqf
 a##b
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 38](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L38)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 43](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L43)
 ## __XXXSQF_EXPAND_AND_CAT(a,b)
 
 Type: constant
@@ -3099,7 +3099,7 @@ Replaced value:
 ```sqf
 __XXXSQF_CAT(a,b)
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 39](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L39)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 44](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L44)
 ## __XXXSQF_ARG(...)
 
 Type: constant
@@ -3111,7 +3111,7 @@ Replaced value:
 ```sqf
 __XXXSQF_EXPAND_AND_CAT(R,__XXXSQF_L2(__VA_ARGS__))
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 41](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L41)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 46](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L46)
 ## __SQF(...)
 
 Type: constant
@@ -3123,7 +3123,7 @@ Replaced value:
 ```sqf
 __inline_sqf_helper_launcher::generate(__XXXSQF_ARG(__VA_ARGS__))
 ```
-File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 43](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L43)
+File: [RVEngine\src\client\headers\client\sqf\sqf.hpp at line 48](../../../Src/RVEngine/src/client/headers/client/sqf/sqf.hpp#L48)
 # tasks.hpp
 
 ## parent_task_
@@ -3133,7 +3133,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\headers\client\sqf\tasks.hpp at line 53](../../../Src/RVEngine/src/client/headers/client/sqf/tasks.hpp#L53)
+File: [RVEngine\src\client\headers\client\sqf\tasks.hpp at line 58](../../../Src/RVEngine/src/client/headers/client/sqf/tasks.hpp#L58)
 # units.hpp
 
 ## markers_
@@ -3143,7 +3143,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\headers\client\sqf\units.hpp at line 94](../../../Src/RVEngine/src/client/headers/client/sqf/units.hpp#L94)
+File: [RVEngine\src\client\headers\client\sqf\units.hpp at line 99](../../../Src/RVEngine/src/client/headers/client/sqf/units.hpp#L99)
 # vehicles.hpp
 
 ## markers_
@@ -3153,7 +3153,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\headers\client\sqf\vehicles.hpp at line 447](../../../Src/RVEngine/src/client/headers/client/sqf/vehicles.hpp#L447)
+File: [RVEngine\src\client\headers\client\sqf\vehicles.hpp at line 452](../../../Src/RVEngine/src/client/headers/client/sqf/vehicles.hpp#L452)
 # client_types.hpp
 
 ## RV_GENERIC_OBJECT_DEC(type)
@@ -3176,7 +3176,7 @@ class type : public internal_object {\
             type & operator = (const type &copy_);\
         }
 ```
-File: [RVEngine\src\client\headers\shared\client_types.hpp at line 21](../../../Src/RVEngine/src/client/headers/shared/client_types.hpp#L21)
+File: [RVEngine\src\client\headers\shared\client_types.hpp at line 26](../../../Src/RVEngine/src/client/headers/shared/client_types.hpp#L26)
 ## DEFINE_HASH_FUNCTION_FOR_CLASS(type)
 
 Type: constant
@@ -3192,7 +3192,7 @@ template <> struct hash<intercept::types::type> { \
         } \
     }; 
 ```
-File: [RVEngine\src\client\headers\shared\client_types.hpp at line 525](../../../Src/RVEngine/src/client/headers/shared/client_types.hpp#L525)
+File: [RVEngine\src\client\headers\shared\client_types.hpp at line 530](../../../Src/RVEngine/src/client/headers/shared/client_types.hpp#L530)
 # functions.hpp
 
 ## INTERCEPT_SDK_API_VERSION
@@ -3206,7 +3206,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [RVEngine\src\client\headers\shared\functions.hpp at line 23](../../../Src/RVEngine/src/client/headers/shared/functions.hpp#L23)
+File: [RVEngine\src\client\headers\shared\functions.hpp at line 28](../../../Src/RVEngine/src/client/headers/shared/functions.hpp#L28)
 # eventhandlers.cpp
 
 ## EHMISS_CASE(name, retVal, args)
@@ -3225,7 +3225,7 @@ Replaced value:
 \
     case eventhandlers_mission::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 210](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L210)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 215](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L215)
 ## EHOBJ_CASE(name, retVal, args)
 
 Type: constant
@@ -3242,7 +3242,7 @@ Replaced value:
 \
     case eventhandlers_object::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 541](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L541)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 546](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L546)
 ## EHCTRL_CASE(name, retVal, args)
 
 Type: constant
@@ -3259,7 +3259,7 @@ Replaced value:
 \
     case eventhandlers_ctrl::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 681](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L681)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 686](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L686)
 ## EHMP_CASE(name, retVal, args)
 
 Type: constant
@@ -3276,7 +3276,7 @@ Replaced value:
 \
     case eventhandlers_mp::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 740](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L740)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 745](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L745)
 ## EHDisplay_CASE(name, retVal, args)
 
 Type: constant
@@ -3293,7 +3293,7 @@ Replaced value:
 \
     case eventhandlers_display::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 830](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L830)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 835](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L835)
 ## EHGroup_CASE(name, retVal, args)
 
 Type: constant
@@ -3310,7 +3310,7 @@ Replaced value:
 \
     case eventhandlers_group::name: typeStr = #name##sv; break;
 ```
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 948](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L948)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 953](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L953)
 ## type_
 
 Type: function
@@ -3320,7 +3320,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 101](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L101)
+File: [RVEngine\src\client\intercept\client\eventhandlers.cpp at line 106](../../../Src/RVEngine/src/client/intercept/client/eventhandlers.cpp#L106)
 # client_types.cpp
 
 ## RV_GENERIC_OBJECT_DEF(type)
@@ -3347,7 +3347,7 @@ type::type() : internal_object() {}\
         return *this;\
     }
 ```
-File: [RVEngine\src\client\intercept\shared\client_types.cpp at line 37](../../../Src/RVEngine/src/client/intercept/shared/client_types.cpp#L37)
+File: [RVEngine\src\client\intercept\shared\client_types.cpp at line 42](../../../Src/RVEngine/src/client/intercept/shared/client_types.cpp#L42)
 # containers.cpp
 
 ## GET_ENGINE_ALLOCATOR
@@ -3361,7 +3361,7 @@ Replaced value:
 ```sqf
 client::host::functions.get_engine_allocator()
 ```
-File: [RVEngine\src\client\intercept\shared\containers.cpp at line 9](../../../Src/RVEngine/src/client/intercept/shared/containers.cpp#L9)
+File: [RVEngine\src\client\intercept\shared\containers.cpp at line 14](../../../Src/RVEngine/src/client/intercept/shared/containers.cpp#L14)
 # types.cpp
 
 ## GET_ENGINE_ALLOCATOR
@@ -3375,7 +3375,7 @@ Replaced value:
 ```sqf
 client::host::functions.get_engine_allocator()
 ```
-File: [RVEngine\src\client\intercept\shared\types.cpp at line 12](../../../Src/RVEngine/src/client/intercept/shared/types.cpp#L12)
+File: [RVEngine\src\client\intercept\shared\types.cpp at line 17](../../../Src/RVEngine/src/client/intercept/shared/types.cpp#L17)
 # common.hpp
 
 ## ZERO_OUTPUT()
@@ -3391,7 +3391,7 @@ Replaced value:
 ```sqf
 { memset(output, 0x00, outputSize); }
 ```
-File: [RVEngine\src\host\common\common.hpp at line 17](../../../Src/RVEngine/src/host/common/common.hpp#L17)
+File: [RVEngine\src\host\common\common.hpp at line 22](../../../Src/RVEngine/src/host/common/common.hpp#L22)
 ## EXTENSION_RETURN()
 
 Type: constant
@@ -3405,7 +3405,7 @@ Replaced value:
 ```sqf
 {output[outputSize-1] = 0x00; } return;
 ```
-File: [RVEngine\src\host\common\common.hpp at line 19](../../../Src/RVEngine/src/host/common/common.hpp#L19)
+File: [RVEngine\src\host\common\common.hpp at line 24](../../../Src/RVEngine/src/host/common/common.hpp#L24)
 ## ZERO_OUTPUT()
 
 Type: constant
@@ -3419,7 +3419,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\common.hpp at line 21](../../../Src/RVEngine/src/host/common/common.hpp#L21)
+File: [RVEngine\src\host\common\common.hpp at line 26](../../../Src/RVEngine/src/host/common/common.hpp#L26)
 ## EXTENSION_RETURN()
 
 Type: constant
@@ -3433,7 +3433,7 @@ Replaced value:
 ```sqf
 return;
 ```
-File: [RVEngine\src\host\common\common.hpp at line 22](../../../Src/RVEngine/src/host/common/common.hpp#L22)
+File: [RVEngine\src\host\common\common.hpp at line 27](../../../Src/RVEngine/src/host/common/common.hpp#L27)
 ## sleep(x)
 
 Type: constant
@@ -3447,7 +3447,7 @@ Replaced value:
 ```sqf
 Sleep(x)
 ```
-File: [RVEngine\src\host\common\common.hpp at line 26](../../../Src/RVEngine/src/host/common/common.hpp#L26)
+File: [RVEngine\src\host\common\common.hpp at line 31](../../../Src/RVEngine/src/host/common/common.hpp#L31)
 ## INTERCEPT_ASSERT
 
 Type: constant
@@ -3461,7 +3461,7 @@ Replaced value:
 ```sqf
 assert()
 ```
-File: [RVEngine\src\host\common\common.hpp at line 66](../../../Src/RVEngine/src/host/common/common.hpp#L66)
+File: [RVEngine\src\host\common\common.hpp at line 71](../../../Src/RVEngine/src/host/common/common.hpp#L71)
 ## INTERCEPT_ASSERT
 
 Type: constant
@@ -3475,7 +3475,7 @@ Replaced value:
 ```sqf
 intercept::runtime_assert()
 ```
-File: [RVEngine\src\host\common\common.hpp at line 68](../../../Src/RVEngine/src/host/common/common.hpp#L68)
+File: [RVEngine\src\host\common\common.hpp at line 73](../../../Src/RVEngine/src/host/common/common.hpp#L73)
 # easyloggingc++.hpp
 
 ## SPDLOG_TRACE_ON
@@ -3491,7 +3491,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 13](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L13)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 18](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L18)
 ## _SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING
 
 Type: constant
@@ -3503,7 +3503,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 15](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L15)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 20](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L20)
 ## TRACE(...)
 
 Type: constant
@@ -3515,7 +3515,7 @@ Replaced value:
 ```sqf
 SPDLOG_TRACE(logging::logfile, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 17](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L17)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 22](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L22)
 ## TRACE_IF(flag, ...)
 
 Type: constant
@@ -3528,7 +3528,7 @@ Replaced value:
 ```sqf
 SPDLOG_TRACE(logging::logfile, flag, __VA_ARGS__))
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 18](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L18)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 23](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L23)
 ## INFO
 
 Type: constant
@@ -3540,7 +3540,7 @@ Replaced value:
 ```sqf
 logging::logfile->info
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 20](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L20)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 25](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L25)
 ## DEBUG
 
 Type: constant
@@ -3552,7 +3552,7 @@ Replaced value:
 ```sqf
 logging::logfile->debug
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 21](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L21)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 26](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L26)
 ## WARNING
 
 Type: constant
@@ -3564,7 +3564,7 @@ Replaced value:
 ```sqf
 logging::logfile->warn
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 22](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L22)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 27](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L27)
 ## ERROR
 
 Type: constant
@@ -3576,7 +3576,7 @@ Replaced value:
 ```sqf
 logging::logfile->error
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 26](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L26)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 31](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L31)
 ## LOG(LEVEL, ...)
 
 Type: constant
@@ -3589,7 +3589,7 @@ Replaced value:
 ```sqf
 LEVEL(__VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 28](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L28)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 33](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L33)
 ## INITIALIZE_EASYLOGGINGPP
 
 Type: constant
@@ -3601,7 +3601,7 @@ Replaced value:
 ```sqf
 std::shared_ptr<spdlog::logger> logging::logfile{};
 ```
-File: [RVEngine\src\host\common\easyloggingc++.hpp at line 30](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L30)
+File: [RVEngine\src\host\common\easyloggingc++.hpp at line 35](../../../Src/RVEngine/src/host/common/easyloggingc++.hpp#L35)
 # logging.hpp
 
 ## ELPP_THREAD_SAFE
@@ -3615,7 +3615,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\logging.hpp at line 2](../../../Src/RVEngine/src/host/common/logging.hpp#L2)
+File: [RVEngine\src\host\common\logging.hpp at line 7](../../../Src/RVEngine/src/host/common/logging.hpp#L7)
 ## ELPP_FORCE_USE_STD_THREAD
 
 Type: constant
@@ -3627,7 +3627,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\logging.hpp at line 3](../../../Src/RVEngine/src/host/common/logging.hpp#L3)
+File: [RVEngine\src\host\common\logging.hpp at line 8](../../../Src/RVEngine/src/host/common/logging.hpp#L8)
 ## ELPP_NO_DEFAULT_LOG_FILE
 
 Type: constant
@@ -3639,7 +3639,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\logging.hpp at line 4](../../../Src/RVEngine/src/host/common/logging.hpp#L4)
+File: [RVEngine\src\host\common\logging.hpp at line 9](../../../Src/RVEngine/src/host/common/logging.hpp#L9)
 ## ELPP_DISABLE_DEFAULT_CRASH_HANDLING
 
 Type: constant
@@ -3651,7 +3651,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\logging.hpp at line 5](../../../Src/RVEngine/src/host/common/logging.hpp#L5)
+File: [RVEngine\src\host\common\logging.hpp at line 10](../../../Src/RVEngine/src/host/common/logging.hpp#L10)
 # singleton.hpp
 
 ## __forceinline
@@ -3667,7 +3667,7 @@ Replaced value:
 ```sqf
 __attribute__((always_inline))
 ```
-File: [RVEngine\src\host\common\singleton.hpp at line 8](../../../Src/RVEngine/src/host/common/singleton.hpp#L8)
+File: [RVEngine\src\host\common\singleton.hpp at line 13](../../../Src/RVEngine/src/host/common/singleton.hpp#L13)
 # common.h
 
 ## SPDLOG_NOEXCEPT
@@ -3681,7 +3681,7 @@ Replaced value:
 ```sqf
 noexcept
 ```
-File: [RVEngine\src\host\common\system\spdlog\common.h at line 28](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L28)
+File: [RVEngine\src\host\common\system\spdlog\common.h at line 33](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L33)
 ## SPDLOG_CONSTEXPR
 
 Type: constant
@@ -3693,7 +3693,7 @@ Replaced value:
 ```sqf
 constexpr
 ```
-File: [RVEngine\src\host\common\system\spdlog\common.h at line 29](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L29)
+File: [RVEngine\src\host\common\system\spdlog\common.h at line 34](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L34)
 ## SPDLOG_FINAL
 
 Type: constant
@@ -3705,7 +3705,7 @@ Replaced value:
 ```sqf
 final
 ```
-File: [RVEngine\src\host\common\system\spdlog\common.h at line 36](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L36)
+File: [RVEngine\src\host\common\system\spdlog\common.h at line 41](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L41)
 ## SPDLOG_DEPRECATED
 
 Type: constant
@@ -3717,7 +3717,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\common.h at line 44](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L44)
+File: [RVEngine\src\host\common\system\spdlog\common.h at line 49](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L49)
 ## SPDLOG_LEVEL_NAMES
 
 Type: constant
@@ -3729,7 +3729,7 @@ Replaced value:
 ```sqf
 { "trace", "debug", "info",  "warning", "error", "critical", "off" }
 ```
-File: [RVEngine\src\host\common\system\spdlog\common.h at line 86](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L86)
+File: [RVEngine\src\host\common\system\spdlog\common.h at line 91](../../../Src/RVEngine/src/host/common/system/spdlog/common.h#L91)
 # spdlog.h
 
 ## SPDLOG_VERSION
@@ -3743,7 +3743,7 @@ Replaced value:
 ```sqf
 "0.16.3"
 ```
-File: [RVEngine\src\host\common\system\spdlog\spdlog.h at line 10](../../../Src/RVEngine/src/host/common/system/spdlog/spdlog.h#L10)
+File: [RVEngine\src\host\common\system\spdlog\spdlog.h at line 15](../../../Src/RVEngine/src/host/common/system/spdlog/spdlog.h#L15)
 # os.h
 
 ## NOMINMAX
@@ -3759,7 +3759,7 @@ Replaced value:
 ```sqf
 //prevent windows redefining min/max
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 24](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L24)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 29](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L29)
 ## WIN32_LEAN_AND_MEAN
 
 Type: constant
@@ -3773,7 +3773,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 28](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L28)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 33](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L33)
 ## __has_feature(x)
 
 Type: constant
@@ -3787,7 +3787,7 @@ Replaced value:
 ```sqf
 0  // Compatibility with non-clang compilers.
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 53](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L53)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 58](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L58)
 ## SPDLOG_EOL
 
 Type: constant
@@ -3801,7 +3801,7 @@ Replaced value:
 ```sqf
 "\r\n"
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 137](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L137)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 142](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L142)
 ## SPDLOG_EOL
 
 Type: constant
@@ -3815,7 +3815,7 @@ Replaced value:
 ```sqf
 "\n"
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 139](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L139)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 144](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L144)
 ## SPDLOG_FILENAME_T(s)
 
 Type: constant
@@ -3827,7 +3827,7 @@ Replaced value:
 ```sqf
 s
 ```
-File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 386](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L386)
+File: [RVEngine\src\host\common\system\spdlog\details\os.h at line 391](../../../Src/RVEngine/src/host/common/system/spdlog/details/os.h#L391)
 # fmt.h
 
 ## FMT_HEADER_ONLY
@@ -3843,7 +3843,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\fmt.h at line 16](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/fmt.h#L16)
+File: [RVEngine\src\host\common\system\spdlog\fmt\fmt.h at line 21](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/fmt.h#L21)
 ## FMT_USE_WINDOWS_H
 
 Type: constant
@@ -3857,7 +3857,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\fmt.h at line 19](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/fmt.h#L19)
+File: [RVEngine\src\host\common\system\spdlog\fmt\fmt.h at line 24](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/fmt.h#L24)
 # format.h
 
 ## FMT_FORMAT_H_
@@ -3873,7 +3873,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 29](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L29)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 34](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L34)
 ## FMT_INCLUDE
 
 Type: constant
@@ -3887,7 +3887,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 31](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L31)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 36](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L36)
 ## FMT_VERSION
 
 Type: constant
@@ -3901,7 +3901,7 @@ Replaced value:
 ```sqf
 40100
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 46](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L46)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 51](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L51)
 ## FMT_SPECIALIZE_MAKE_UNSIGNED(T, U)
 
 Type: constant
@@ -3916,7 +3916,7 @@ Replaced value:
   template <> \
   struct MakeUnsigned<T> { typedef U Type; }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 698](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L698)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 703](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L703)
 ## FMT_DISABLE_CONVERSION_TO_INT(Type)
 
 Type: constant
@@ -3930,7 +3930,7 @@ Replaced value:
   template <> \
   struct ConvertToInt<Type> {  enum { value = 0 }; }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1266](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1266)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1271](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1271)
 ## FMT_CONCAT(a, b)
 
 Type: constant
@@ -3943,7 +3943,7 @@ Replaced value:
 ```sqf
 a##b
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1312](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1312)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1317](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1317)
 ## FMT_MAKE_VALUE_(Type, field, TYPE, rhs)
 
 Type: constant
@@ -3960,7 +3960,7 @@ Replaced value:
   MakeValue(Type value) { field = rhs; } \
   static uint64_t type(Type) { return Arg::TYPE; }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1395](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1395)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1400](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1400)
 ## FMT_MAKE_VALUE(Type, field, TYPE)
 
 Type: constant
@@ -3975,7 +3975,7 @@ Replaced value:
 \
   FMT_MAKE_VALUE_(Type, field, TYPE, value)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1395](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1395)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1400](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1400)
 ## FMT_MAKE_STR_VALUE(Type, TYPE)
 
 Type: constant
@@ -3990,7 +3990,7 @@ Replaced value:
   MakeValue(Type value) { set_string(value); } \
   static uint64_t type(Type) { return Arg::TYPE; }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1461](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1461)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1466](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1466)
 ## FMT_MAKE_WSTR_VALUE(Type, TYPE)
 
 Type: constant
@@ -4007,7 +4007,7 @@ Replaced value:
   } \
   static uint64_t type(Type) { return Arg::TYPE; }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1478](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1478)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1483](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1483)
 ## FMT_DISPATCH(call)
 
 Type: constant
@@ -4019,7 +4019,7 @@ Replaced value:
 ```sqf
 static_cast<Impl*>(this)->call
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1632](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1632)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1637](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1637)
 ## FMT_DEFINE_INT_FORMATTERS(TYPE)
 
 Type: constant
@@ -4078,7 +4078,7 @@ inline IntFormatSpec<TYPE, AlignTypeSpec<0>, Char> pad( \
      value, AlignTypeSpec<0>(width, fill)); \
 }
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1938](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1938)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 1943](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L1943)
 ## FMT_FOR_EACH1(f, x0)
 
 Type: constant
@@ -4091,7 +4091,7 @@ Replaced value:
 ```sqf
 f(x0, 0)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2504](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2504)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2509](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2509)
 ## FMT_FOR_EACH2(f, x0, x1)
 
 Type: constant
@@ -4106,7 +4106,7 @@ Replaced value:
 \
   FMT_FOR_EACH1(f, x0), f(x1, 1)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2505](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2505)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2510](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2510)
 ## FMT_FOR_EACH3(f, x0, x1, x2)
 
 Type: constant
@@ -4122,7 +4122,7 @@ Replaced value:
 \
   FMT_FOR_EACH2(f, x0 ,x1), f(x2, 2)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2507](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2507)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2512](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2512)
 ## FMT_FOR_EACH4(f, x0, x1, x2, x3)
 
 Type: constant
@@ -4139,7 +4139,7 @@ Replaced value:
 \
   FMT_FOR_EACH3(f, x0, x1, x2), f(x3, 3)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2509](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2509)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2514](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2514)
 ## FMT_FOR_EACH5(f, x0, x1, x2, x3, x4)
 
 Type: constant
@@ -4157,7 +4157,7 @@ Replaced value:
 \
   FMT_FOR_EACH4(f, x0, x1, x2, x3), f(x4, 4)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2511](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2511)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2516](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2516)
 ## FMT_FOR_EACH6(f, x0, x1, x2, x3, x4, x5)
 
 Type: constant
@@ -4176,7 +4176,7 @@ Replaced value:
 \
   FMT_FOR_EACH5(f, x0, x1, x2, x3, x4), f(x5, 5)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2513](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2513)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2518](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2518)
 ## FMT_FOR_EACH7(f, x0, x1, x2, x3, x4, x5, x6)
 
 Type: constant
@@ -4196,7 +4196,7 @@ Replaced value:
 \
   FMT_FOR_EACH6(f, x0, x1, x2, x3, x4, x5), f(x6, 6)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2515](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2515)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2520](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2520)
 ## FMT_FOR_EACH8(f, x0, x1, x2, x3, x4, x5, x6, x7)
 
 Type: constant
@@ -4217,7 +4217,7 @@ Replaced value:
 \
   FMT_FOR_EACH7(f, x0, x1, x2, x3, x4, x5, x6), f(x7, 7)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2517](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2517)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2522](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2522)
 ## FMT_FOR_EACH9(f, x0, x1, x2, x3, x4, x5, x6, x7, x8)
 
 Type: constant
@@ -4239,7 +4239,7 @@ Replaced value:
 \
   FMT_FOR_EACH8(f, x0, x1, x2, x3, x4, x5, x6, x7), f(x8, 8)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2519](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2519)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2524](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2524)
 ## FMT_FOR_EACH10(f, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9)
 
 Type: constant
@@ -4262,7 +4262,7 @@ Replaced value:
 \
   FMT_FOR_EACH9(f, x0, x1, x2, x3, x4, x5, x6, x7, x8), f(x9, 9)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2521](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2521)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2526](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2526)
 ## FMT_EXPAND(args)
 
 Type: constant
@@ -4274,7 +4274,7 @@ Replaced value:
 ```sqf
 args
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3619](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3619)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3624](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3624)
 ## FMT_NARG(...)
 
 Type: constant
@@ -4286,7 +4286,7 @@ Replaced value:
 ```sqf
 FMT_NARG_(__VA_ARGS__, FMT_RSEQ_N())
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3623](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3623)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3628](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3628)
 ## FMT_NARG_(...)
 
 Type: constant
@@ -4298,7 +4298,7 @@ Replaced value:
 ```sqf
 FMT_EXPAND(FMT_ARG_N(__VA_ARGS__))
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3624](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3624)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3629](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3629)
 ## FMT_ARG_N(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...)
 
 Type: constant
@@ -4321,7 +4321,7 @@ Replaced value:
 ```sqf
 N
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3625](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3625)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3630](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3630)
 ## FMT_RSEQ_N()
 
 Type: constant
@@ -4333,7 +4333,7 @@ Replaced value:
 ```sqf
 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3626](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3626)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3631](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3631)
 ## FMT_FOR_EACH_(N, f, ...)
 
 Type: constant
@@ -4348,7 +4348,7 @@ Replaced value:
 \
   FMT_EXPAND(FMT_CONCAT(FMT_FOR_EACH, N)(f, __VA_ARGS__))
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3628](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3628)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3633](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3633)
 ## FMT_FOR_EACH(f, ...)
 
 Type: constant
@@ -4362,7 +4362,7 @@ Replaced value:
 \
   FMT_EXPAND(FMT_FOR_EACH_(FMT_NARG(__VA_ARGS__), f, __VA_ARGS__))
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2504](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2504)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2509](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2509)
 ## FMT_ADD_ARG_NAME(type, index)
 
 Type: constant
@@ -4375,7 +4375,7 @@ Replaced value:
 ```sqf
 type arg##index
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3633](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3633)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3638](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3638)
 ## FMT_GET_ARG_NAME(type, index)
 
 Type: constant
@@ -4388,7 +4388,7 @@ Replaced value:
 ```sqf
 arg##index
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3634](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3634)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3639](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3639)
 ## FMT_VARIADIC(ReturnType, func, ...)
 
 Type: constant
@@ -4403,7 +4403,7 @@ Replaced value:
 \
   FMT_VARIADIC_(, char, ReturnType, func, return func, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3708](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3708)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3713](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3713)
 ## FMT_VARIADIC_CONST(ReturnType, func, ...)
 
 Type: constant
@@ -4418,7 +4418,7 @@ Replaced value:
 \
   FMT_VARIADIC_(const, char, ReturnType, func, return func, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3711](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3711)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3716](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3716)
 ## FMT_VARIADIC_W(ReturnType, func, ...)
 
 Type: constant
@@ -4433,7 +4433,7 @@ Replaced value:
 \
   FMT_VARIADIC_(, wchar_t, ReturnType, func, return func, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3714](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3714)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3719](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3719)
 ## FMT_VARIADIC_CONST_W(ReturnType, func, ...)
 
 Type: constant
@@ -4448,7 +4448,7 @@ Replaced value:
 \
   FMT_VARIADIC_(const, wchar_t, ReturnType, func, return func, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3717](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3717)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3722](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3722)
 ## FMT_CAPTURE_ARG_(id, index)
 
 Type: constant
@@ -4461,7 +4461,7 @@ Replaced value:
 ```sqf
 ::fmt::arg(#id, id)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3720](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3720)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3725](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3725)
 ## FMT_CAPTURE_ARG_W_(id, index)
 
 Type: constant
@@ -4474,7 +4474,7 @@ Replaced value:
 ```sqf
 ::fmt::arg(L###id, id)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3722](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3722)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3727](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3727)
 ## FMT_CAPTURE(...)
 
 Type: constant
@@ -4486,7 +4486,7 @@ Replaced value:
 ```sqf
 FMT_FOR_EACH(FMT_CAPTURE_ARG_, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3720](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3720)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3725](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3725)
 ## FMT_CAPTURE_W(...)
 
 Type: constant
@@ -4498,7 +4498,7 @@ Replaced value:
 ```sqf
 FMT_FOR_EACH(FMT_CAPTURE_ARG_W_, __VA_ARGS__)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3740](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3740)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 3745](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L3745)
 ## start
 
 Type: Variable
@@ -4510,7 +4510,7 @@ Initial value:
 ```sqf
 s = format(s, arg)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 4028](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L4028)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 4033](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L4033)
 ## format_str
 
 Type: Variable
@@ -4522,7 +4522,7 @@ Initial value:
 ```sqf
 end + 1
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 4090](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L4090)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 4095](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L4095)
 ## str
 
 Type: function
@@ -4530,7 +4530,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2115](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2115)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2120](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2120)
 ## array
 
 Type: function
@@ -4538,7 +4538,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2483](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2483)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\format.h at line 2488](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/format.h#L2488)
 # ostream.h
 
 ## FMT_OSTREAM_H_
@@ -4554,7 +4554,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\ostream.h at line 11](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/ostream.h#L11)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\ostream.h at line 16](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/ostream.h#L16)
 # posix.h
 
 ## FMT_POSIX_H_
@@ -4570,7 +4570,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\posix.h at line 11](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/posix.h#L11)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\posix.h at line 16](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/posix.h#L16)
 ## FMT_RETRY(result, expression)
 
 Type: constant
@@ -4583,7 +4583,7 @@ Replaced value:
 ```sqf
 FMT_RETRY_VAL(result, expression, -1)
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\posix.h at line 65](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/posix.h#L65)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\posix.h at line 70](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/posix.h#L70)
 # printf.h
 
 ## FMT_PRINTF_H_
@@ -4599,7 +4599,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\printf.h at line 11](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/printf.h#L11)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\printf.h at line 16](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/printf.h#L16)
 # time.h
 
 ## FMT_TIME_H_
@@ -4615,7 +4615,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\time.h at line 11](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/time.h#L11)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\time.h at line 16](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/time.h#L16)
 ## format_str
 
 Type: Variable
@@ -4627,7 +4627,7 @@ Initial value:
 ```sqf
 end + 1
 ```
-File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\time.h at line 55](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/time.h#L55)
+File: [RVEngine\src\host\common\system\spdlog\fmt\bundled\time.h at line 60](../../../Src/RVEngine/src/host/common/system/spdlog/fmt/bundled/time.h#L60)
 # android_sink.h
 
 ## SPDLOG_ANDROID_RETRIES
@@ -4641,7 +4641,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [RVEngine\src\host\common\system\spdlog\sinks\android_sink.h at line 20](../../../Src/RVEngine/src/host/common/system/spdlog/sinks/android_sink.h#L20)
+File: [RVEngine\src\host\common\system\spdlog\sinks\android_sink.h at line 25](../../../Src/RVEngine/src/host/common/system/spdlog/sinks/android_sink.h#L25)
 # controller.cpp
 
 ## DEBUG_DISPATCH(x, y)
@@ -4658,7 +4658,7 @@ Replaced value:
 ```sqf
 { std::string empty; _debug_display->call(x, arguments(y), empty); }
 ```
-File: [RVEngine\src\host\controller\controller.cpp at line 10](../../../Src/RVEngine/src/host/controller/controller.cpp#L10)
+File: [RVEngine\src\host\controller\controller.cpp at line 15](../../../Src/RVEngine/src/host/controller/controller.cpp#L15)
 ## DEBUG_DISPATCH(x, y)
 
 Type: constant
@@ -4673,7 +4673,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\controller\controller.cpp at line 12](../../../Src/RVEngine/src/host/controller/controller.cpp#L12)
+File: [RVEngine\src\host\controller\controller.cpp at line 17](../../../Src/RVEngine/src/host/controller/controller.cpp#L17)
 # extensions.cpp
 
 ## PLUGIN_MIN_API_VERSION
@@ -4687,7 +4687,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [RVEngine\src\host\extensions\extensions.cpp at line 14](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L14)
+File: [RVEngine\src\host\extensions\extensions.cpp at line 19](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L19)
 ## GET_PROC_ADDR
 
 Type: constant
@@ -4701,7 +4701,7 @@ Replaced value:
 ```sqf
 dlsym
 ```
-File: [RVEngine\src\host\extensions\extensions.cpp at line 243](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L243)
+File: [RVEngine\src\host\extensions\extensions.cpp at line 248](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L248)
 ## GET_PROC_ADDR
 
 Type: constant
@@ -4715,7 +4715,7 @@ Replaced value:
 ```sqf
 GetProcAddress
 ```
-File: [RVEngine\src\host\extensions\extensions.cpp at line 245](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L245)
+File: [RVEngine\src\host\extensions\extensions.cpp at line 250](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L250)
 ## EH_PROC_DEF(name, ...)
 
 Type: constant
@@ -4728,7 +4728,7 @@ Replaced value:
 ```sqf
 new_module.eventhandlers.name = (module::name##_func)GET_PROC_ADDR(dllHandle, #name);
 ```
-File: [RVEngine\src\host\extensions\extensions.cpp at line 302](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L302)
+File: [RVEngine\src\host\extensions\extensions.cpp at line 307](../../../Src/RVEngine/src/host/extensions/extensions.cpp#L307)
 # extensions.hpp
 
 ## DLL_HANDLE
@@ -4742,7 +4742,7 @@ Replaced value:
 ```sqf
 HMODULE
 ```
-File: [RVEngine\src\host\extensions\extensions.hpp at line 27](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L27)
+File: [RVEngine\src\host\extensions\extensions.hpp at line 32](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L32)
 ## EXP_FNC_typedef(name, ...)
 
 Type: constant
@@ -4755,7 +4755,7 @@ Replaced value:
 ```sqf
 typedef void(CDECL * name##_func)(__VA_ARGS__);
 ```
-File: [RVEngine\src\host\extensions\extensions.hpp at line 30](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L30)
+File: [RVEngine\src\host\extensions\extensions.hpp at line 35](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L35)
 ## EXP_FNC_STRUCT_DEF(name, ...)
 
 Type: constant
@@ -4768,7 +4768,7 @@ Replaced value:
 ```sqf
 name##_func name;
 ```
-File: [RVEngine\src\host\extensions\extensions.hpp at line 31](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L31)
+File: [RVEngine\src\host\extensions\extensions.hpp at line 36](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L36)
 ## EH_LIST(XX)
 
 Type: constant
@@ -4824,7 +4824,7 @@ Replaced value:
     XX(weapon_deployed, object &unit_, bool is_deployed_)                                                                                 \
     XX(weapon_rested, object &unit_, bool is_rested_)
 ```
-File: [RVEngine\src\host\extensions\extensions.hpp at line 90](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L90)
+File: [RVEngine\src\host\extensions\extensions.hpp at line 95](../../../Src/RVEngine/src/host/extensions/extensions.hpp#L95)
 # search.cpp
 
 ## STATUS_INFO_LENGTH_MISMATCH
@@ -4838,7 +4838,7 @@ Replaced value:
 ```sqf
 0xc0000004
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 137](../../../Src/RVEngine/src/host/extensions/search.cpp#L137)
+File: [RVEngine\src\host\extensions\search.cpp at line 142](../../../Src/RVEngine/src/host/extensions/search.cpp#L142)
 ## SystemHandleInformation
 
 Type: constant
@@ -4850,7 +4850,7 @@ Replaced value:
 ```sqf
 16
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 139](../../../Src/RVEngine/src/host/extensions/search.cpp#L139)
+File: [RVEngine\src\host\extensions\search.cpp at line 144](../../../Src/RVEngine/src/host/extensions/search.cpp#L144)
 ## SystemHandleInformationEx
 
 Type: constant
@@ -4862,7 +4862,7 @@ Replaced value:
 ```sqf
 64
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 140](../../../Src/RVEngine/src/host/extensions/search.cpp#L140)
+File: [RVEngine\src\host\extensions\search.cpp at line 145](../../../Src/RVEngine/src/host/extensions/search.cpp#L145)
 ## ObjectBasicInformation
 
 Type: constant
@@ -4874,7 +4874,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 142](../../../Src/RVEngine/src/host/extensions/search.cpp#L142)
+File: [RVEngine\src\host\extensions\search.cpp at line 147](../../../Src/RVEngine/src/host/extensions/search.cpp#L147)
 ## ObjectNameInformation
 
 Type: constant
@@ -4886,7 +4886,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 143](../../../Src/RVEngine/src/host/extensions/search.cpp#L143)
+File: [RVEngine\src\host\extensions\search.cpp at line 148](../../../Src/RVEngine/src/host/extensions/search.cpp#L148)
 ## ObjectTypeInformation
 
 Type: constant
@@ -4898,7 +4898,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [RVEngine\src\host\extensions\search.cpp at line 144](../../../Src/RVEngine/src/host/extensions/search.cpp#L144)
+File: [RVEngine\src\host\extensions\search.cpp at line 149](../../../Src/RVEngine/src/host/extensions/search.cpp#L149)
 # signing.cpp
 
 ## policy2
@@ -4910,7 +4910,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\extensions\signing.cpp at line 275](../../../Src/RVEngine/src/host/extensions/signing.cpp#L275)
+File: [RVEngine\src\host\extensions\signing.cpp at line 280](../../../Src/RVEngine/src/host/extensions/signing.cpp#L280)
 ## status2
 
 Type: function
@@ -4920,7 +4920,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\extensions\signing.cpp at line 279](../../../Src/RVEngine/src/host/extensions/signing.cpp#L279)
+File: [RVEngine\src\host\extensions\signing.cpp at line 284](../../../Src/RVEngine/src/host/extensions/signing.cpp#L284)
 ## policy
 
 Type: function
@@ -4930,7 +4930,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\extensions\signing.cpp at line 281](../../../Src/RVEngine/src/host/extensions/signing.cpp#L281)
+File: [RVEngine\src\host\extensions\signing.cpp at line 286](../../../Src/RVEngine/src/host/extensions/signing.cpp#L286)
 ## status
 
 Type: function
@@ -4940,7 +4940,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\extensions\signing.cpp at line 284](../../../Src/RVEngine/src/host/extensions/signing.cpp#L284)
+File: [RVEngine\src\host\extensions\signing.cpp at line 289](../../../Src/RVEngine/src/host/extensions/signing.cpp#L289)
 ## returnCode
 
 Type: function
@@ -4950,7 +4950,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\extensions\signing.cpp at line 306](../../../Src/RVEngine/src/host/extensions/signing.cpp#L306)
+File: [RVEngine\src\host\extensions\signing.cpp at line 311](../../../Src/RVEngine/src/host/extensions/signing.cpp#L311)
 # signing.hpp
 
 ## CERT_ENTER
@@ -4971,7 +4971,7 @@ Replaced value:
             intercept::cert::current_security_class = intercept::extensions::get().get_module_security_class(reinterpret_cast<uintptr_t>(hmod));\
         }}
 ```
-File: [RVEngine\src\host\extensions\signing.hpp at line 33](../../../Src/RVEngine/src/host/extensions/signing.hpp#L33)
+File: [RVEngine\src\host\extensions\signing.hpp at line 38](../../../Src/RVEngine/src/host/extensions/signing.hpp#L38)
 ## CERT_EXIT
 
 Type: constant
@@ -4985,7 +4985,7 @@ Replaced value:
 ```sqf
 intercept::cert::current_security_class = intercept::cert::signing::security_class::not_signed;
 ```
-File: [RVEngine\src\host\extensions\signing.hpp at line 39](../../../Src/RVEngine/src/host/extensions/signing.hpp#L39)
+File: [RVEngine\src\host\extensions\signing.hpp at line 44](../../../Src/RVEngine/src/host/extensions/signing.hpp#L44)
 ## CERT_ENTER
 
 Type: constant
@@ -4999,7 +4999,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\extensions\signing.hpp at line 45](../../../Src/RVEngine/src/host/extensions/signing.hpp#L45)
+File: [RVEngine\src\host\extensions\signing.hpp at line 50](../../../Src/RVEngine/src/host/extensions/signing.hpp#L50)
 ## CERT_EXIT
 
 Type: constant
@@ -5013,7 +5013,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\extensions\signing.hpp at line 46](../../../Src/RVEngine/src/host/extensions/signing.hpp#L46)
+File: [RVEngine\src\host\extensions\signing.hpp at line 51](../../../Src/RVEngine/src/host/extensions/signing.hpp#L51)
 # eventhandlers.cpp
 
 ## EH_EVENT_DEF(x)
@@ -5027,7 +5027,7 @@ Replaced value:
 ```sqf
 invoker::get().add_eventhandler(#x, std::bind(&eventhandlers::x, std::placeholders::_1));
 ```
-File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 22](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L22)
+File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 27](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L27)
 ## EH_START(x)
 
 Type: constant
@@ -5041,7 +5041,7 @@ void eventhandlers::x(game_value_parameter args_) {\
         for (auto& module : extensions::get().modules()) {\
             if (module.second.eventhandlers.x) module.second.eventhandlers.x
 ```
-File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 136](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L136)
+File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 141](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L141)
 ## EH_END
 
 Type: constant
@@ -5055,7 +5055,7 @@ Replaced value:
         }\
     }
 ```
-File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 140](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L140)
+File: [RVEngine\src\host\invoker\eventhandlers.cpp at line 145](../../../Src/RVEngine/src/host/invoker/eventhandlers.cpp#L145)
 # eventhandlers.hpp
 
 ## EH_CLASS_DEF(x)
@@ -5069,7 +5069,7 @@ Replaced value:
 ```sqf
 static void x(game_value_parameter args_)
 ```
-File: [RVEngine\src\host\invoker\eventhandlers.hpp at line 38](../../../Src/RVEngine/src/host/invoker/eventhandlers.hpp#L38)
+File: [RVEngine\src\host\invoker\eventhandlers.hpp at line 43](../../../Src/RVEngine/src/host/invoker/eventhandlers.hpp#L43)
 # invoker.cpp
 
 ## structure
@@ -5079,7 +5079,7 @@ Type: function
 Description: #TODO add nothing and Nil
 
 
-File: [RVEngine\src\host\invoker\invoker.cpp at line 374](../../../Src/RVEngine/src/host/invoker/invoker.cpp#L374)
+File: [RVEngine\src\host\invoker\invoker.cpp at line 379](../../../Src/RVEngine/src/host/invoker/invoker.cpp#L379)
 # sqf_functions.cpp
 
 ## UNUSED_FUNC_SWITCH_FOR_GAMETYPES(ptr,type)
@@ -5111,7 +5111,7 @@ switch (_returnType) { \
         break; \
 }
 ```
-File: [RVEngine\src\host\invoker\sqf_functions.cpp at line 59](../../../Src/RVEngine/src/host/invoker/sqf_functions.cpp#L59)
+File: [RVEngine\src\host\invoker\sqf_functions.cpp at line 64](../../../Src/RVEngine/src/host/invoker/sqf_functions.cpp#L64)
 # CommandScan.cpp
 
 ## CMDSC_TYPE
@@ -5125,7 +5125,7 @@ Replaced value:
 ```sqf
 Base
 ```
-File: [RVEngine\src\host\loader\CommandScan.cpp at line 8](../../../Src/RVEngine/src/host/loader/CommandScan.cpp#L8)
+File: [RVEngine\src\host\loader\CommandScan.cpp at line 13](../../../Src/RVEngine/src/host/loader/CommandScan.cpp#L13)
 ## CT_VERSION
 
 Type: constant
@@ -5137,7 +5137,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [RVEngine\src\host\loader\CommandScan.cpp at line 9](../../../Src/RVEngine/src/host/loader/CommandScan.cpp#L9)
+File: [RVEngine\src\host\loader\CommandScan.cpp at line 14](../../../Src/RVEngine/src/host/loader/CommandScan.cpp#L14)
 # CommandScan.hpp
 
 ## CMDSC_TYPE
@@ -5153,7 +5153,7 @@ Replaced value:
 ```sqf
 Base
 ```
-File: [RVEngine\src\host\loader\CommandScan.hpp at line 6](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L6)
+File: [RVEngine\src\host\loader\CommandScan.hpp at line 11](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L11)
 ## CONCAT_(a,b)
 
 Type: constant
@@ -5166,7 +5166,7 @@ Replaced value:
 ```sqf
 a ## b
 ```
-File: [RVEngine\src\host\loader\CommandScan.hpp at line 10](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L10)
+File: [RVEngine\src\host\loader\CommandScan.hpp at line 15](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L15)
 ## CONCAT(a, b)
 
 Type: constant
@@ -5179,7 +5179,7 @@ Replaced value:
 ```sqf
 CONCAT_(a,b)
 ```
-File: [RVEngine\src\host\loader\CommandScan.hpp at line 10](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L10)
+File: [RVEngine\src\host\loader\CommandScan.hpp at line 15](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L15)
 ## BASE_NAMESPACE
 
 Type: constant
@@ -5191,7 +5191,7 @@ Replaced value:
 ```sqf
 CONCAT(__CT, CMDSC_TYPE)
 ```
-File: [RVEngine\src\host\loader\CommandScan.hpp at line 13](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L13)
+File: [RVEngine\src\host\loader\CommandScan.hpp at line 18](../../../Src/RVEngine/src/host/loader/CommandScan.hpp#L18)
 # CommandScan214.cpp
 
 ## CMDSC_TYPE
@@ -5205,7 +5205,7 @@ Replaced value:
 ```sqf
 214
 ```
-File: [RVEngine\src\host\loader\CommandScan214.cpp at line 10](../../../Src/RVEngine/src/host/loader/CommandScan214.cpp#L10)
+File: [RVEngine\src\host\loader\CommandScan214.cpp at line 15](../../../Src/RVEngine/src/host/loader/CommandScan214.cpp#L15)
 ## CT_VERSION
 
 Type: constant
@@ -5217,7 +5217,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [RVEngine\src\host\loader\CommandScan214.cpp at line 11](../../../Src/RVEngine/src/host/loader/CommandScan214.cpp#L11)
+File: [RVEngine\src\host\loader\CommandScan214.cpp at line 16](../../../Src/RVEngine/src/host/loader/CommandScan214.cpp#L16)
 # CommandTypes.hpp
 
 ## CT_VERSION
@@ -5233,7 +5233,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [RVEngine\src\host\loader\CommandTypes.hpp at line 5](../../../Src/RVEngine/src/host/loader/CommandTypes.hpp#L5)
+File: [RVEngine\src\host\loader\CommandTypes.hpp at line 10](../../../Src/RVEngine/src/host/loader/CommandTypes.hpp#L10)
 # CommandTypesDynamic.hpp
 
 ## CT_NOALLOC
@@ -5247,7 +5247,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\loader\CommandTypesDynamic.hpp at line 5](../../../Src/RVEngine/src/host/loader/CommandTypesDynamic.hpp#L5)
+File: [RVEngine\src\host\loader\CommandTypesDynamic.hpp at line 10](../../../Src/RVEngine/src/host/loader/CommandTypesDynamic.hpp#L10)
 ## CT_VERSION
 
 Type: constant
@@ -5259,7 +5259,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [RVEngine\src\host\loader\CommandTypesDynamic.hpp at line 14](../../../Src/RVEngine/src/host/loader/CommandTypesDynamic.hpp#L14)
+File: [RVEngine\src\host\loader\CommandTypesDynamic.hpp at line 19](../../../Src/RVEngine/src/host/loader/CommandTypesDynamic.hpp#L19)
 # loader.cpp
 
 ## DEBUG_PTR(n)
@@ -5275,7 +5275,7 @@ Replaced value:
 ```sqf
 std::cerr << "intercept::loader: " << #n << ": 0x" << std::hex << n << std::endl
 ```
-File: [RVEngine\src\host\loader\loader.cpp at line 26](../../../Src/RVEngine/src/host/loader/loader.cpp#L26)
+File: [RVEngine\src\host\loader\loader.cpp at line 31](../../../Src/RVEngine/src/host/loader/loader.cpp#L31)
 ## DEBUG_PTR(n)
 
 Type: constant
@@ -5289,7 +5289,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\loader\loader.cpp at line 28](../../../Src/RVEngine/src/host/loader/loader.cpp#L28)
+File: [RVEngine\src\host\loader\loader.cpp at line 33](../../../Src/RVEngine/src/host/loader/loader.cpp#L33)
 # MemorySection.cpp
 
 ## modInfo
@@ -5299,7 +5299,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\host\loader\MemorySection.cpp at line 13](../../../Src/RVEngine/src/host/loader/MemorySection.cpp#L13)
+File: [RVEngine\src\host\loader\MemorySection.cpp at line 18](../../../Src/RVEngine/src/host/loader/MemorySection.cpp#L18)
 # ptraccess.h
 
 ## IsBadWritePtr(p,n)
@@ -5316,7 +5316,7 @@ Replaced value:
 ```sqf
 (!CheckAccess<dwWriteRights>(p,n))
 ```
-File: [RVEngine\src\host\loader\ptraccess.h at line 41](../../../Src/RVEngine/src/host/loader/ptraccess.h#L41)
+File: [RVEngine\src\host\loader\ptraccess.h at line 46](../../../Src/RVEngine/src/host/loader/ptraccess.h#L46)
 ## IsBadReadPtr(p,n)
 
 Type: constant
@@ -5331,7 +5331,7 @@ Replaced value:
 ```sqf
 (!CheckAccess<dwReadRights>(p,n))
 ```
-File: [RVEngine\src\host\loader\ptraccess.h at line 42](../../../Src/RVEngine/src/host/loader/ptraccess.h#L42)
+File: [RVEngine\src\host\loader\ptraccess.h at line 47](../../../Src/RVEngine/src/host/loader/ptraccess.h#L47)
 ## IsBadStringPtrW(p,n)
 
 Type: constant
@@ -5346,7 +5346,7 @@ Replaced value:
 ```sqf
 (!CheckAccess<dwReadRights>(p,n*2))
 ```
-File: [RVEngine\src\host\loader\ptraccess.h at line 43](../../../Src/RVEngine/src/host/loader/ptraccess.h#L43)
+File: [RVEngine\src\host\loader\ptraccess.h at line 48](../../../Src/RVEngine/src/host/loader/ptraccess.h#L48)
 ## __CUSTOM_ISBADREADPTR
 
 Type: constant
@@ -5358,7 +5358,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [RVEngine\src\host\loader\ptraccess.h at line 46](../../../Src/RVEngine/src/host/loader/ptraccess.h#L46)
+File: [RVEngine\src\host\loader\ptraccess.h at line 51](../../../Src/RVEngine/src/host/loader/ptraccess.h#L51)
 # main.cpp
 
 ## search_pos
@@ -5368,7 +5368,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\main.cpp at line 181](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L181)
+File: [RVEngine\src\plugins\rv_client\main.cpp at line 186](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L186)
 ## target_pos
 
 Type: function
@@ -5376,7 +5376,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\main.cpp at line 216](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L216)
+File: [RVEngine\src\plugins\rv_client\main.cpp at line 221](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L221)
 ## start_pos
 
 Type: function
@@ -5384,7 +5384,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\main.cpp at line 251](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L251)
+File: [RVEngine\src\plugins\rv_client\main.cpp at line 256](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L256)
 ## end_pos
 
 Type: function
@@ -5392,7 +5392,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\main.cpp at line 258](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L258)
+File: [RVEngine\src\plugins\rv_client\main.cpp at line 263](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L263)
 ## pos
 
 Type: function
@@ -5400,7 +5400,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\main.cpp at line 181](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L181)
+File: [RVEngine\src\plugins\rv_client\main.cpp at line 186](../../../Src/RVEngine/src/plugins/rv_client/main.cpp#L186)
 # navigation.cpp
 
 ## v1
@@ -5410,7 +5410,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 425](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L425)
+File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 430](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L430)
 ## v2
 
 Type: function
@@ -5418,7 +5418,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 431](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L431)
+File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 436](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L436)
 ## gv_pos1
 
 Type: function
@@ -5426,7 +5426,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 462](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L462)
+File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 467](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L467)
 ## gv_pos2
 
 Type: function
@@ -5434,7 +5434,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 468](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L468)
+File: [RVEngine\src\plugins\rv_client\navigation.cpp at line 473](../../../Src/RVEngine/src/plugins/rv_client/navigation.cpp#L473)
 # navigation_region.cpp
 
 ## prev_pos
@@ -5444,7 +5444,7 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation_region.cpp at line 502](../../../Src/RVEngine/src/plugins/rv_client/navigation_region.cpp#L502)
+File: [RVEngine\src\plugins\rv_client\navigation_region.cpp at line 507](../../../Src/RVEngine/src/plugins/rv_client/navigation_region.cpp#L507)
 ## hit_pos
 
 Type: function
@@ -5452,4 +5452,4 @@ Type: function
 Description: 
 
 
-File: [RVEngine\src\plugins\rv_client\navigation_region.cpp at line 509](../../../Src/RVEngine/src/plugins/rv_client/navigation_region.cpp#L509)
+File: [RVEngine\src\plugins\rv_client\navigation_region.cpp at line 514](../../../Src/RVEngine/src/plugins/rv_client/navigation_region.cpp#L514)
