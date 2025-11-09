@@ -293,7 +293,7 @@ cm_serverKickById = {
 
 	pre_notifClientStatic = {
 		params ["_message","_owner","_nick"];
-		_message = format["%1 (ID: %2, Nick: %3)",_message,_owner,_nick];
+		_message = format["%1 (Owner: %2, Nick: %3)",_message,_owner,_nick];
 		[_message] call discError;
 		[_message] call logInfo;
 	};
