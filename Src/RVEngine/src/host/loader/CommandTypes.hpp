@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 //#pragma once
 
 // Used to swap between implementations for backwards/forwards compat

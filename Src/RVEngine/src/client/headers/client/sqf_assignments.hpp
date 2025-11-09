@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 //Exported Pointer Assignments For: Arma 3 217.151987 - Diag
 
 

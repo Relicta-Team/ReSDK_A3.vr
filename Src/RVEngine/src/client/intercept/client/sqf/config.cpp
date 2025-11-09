@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 #include "config.hpp"
 #include <utility>
 #include "client/pointers.hpp"

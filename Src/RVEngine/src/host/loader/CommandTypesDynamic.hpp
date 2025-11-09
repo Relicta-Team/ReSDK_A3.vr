@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 #pragma once
 
 // This is old file set up to turn static memory address lookups, into dynamic ones that can switch based on a bool being set or not. This can be used to adjust for game updates changing structure sizes

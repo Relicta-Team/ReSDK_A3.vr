@@ -1,8 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
-
 #include "vehicles.hpp"
 #include "client/pointers.hpp"
 #include "common_helpers.hpp"

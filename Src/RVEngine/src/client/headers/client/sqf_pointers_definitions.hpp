@@ -1,7 +1,3 @@
-// ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
-// sdk.relicta.ru
-// ======================================================
 
 // Unary Functions
 unary_function __sqf::unary__abs__scalar_nan__ret__scalar_nan;
