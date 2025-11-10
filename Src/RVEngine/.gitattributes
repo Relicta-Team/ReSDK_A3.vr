@@ -1,0 +1,5 @@
+* text eol=crlf
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg binary
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.dll -text binary

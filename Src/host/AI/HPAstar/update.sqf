@@ -33,7 +33,6 @@ ai_nav_updateRegion = {
     [_pos] call ai_nav_generateRegionNodes;
     
     // 3. Обновляем entrance points (текущего региона + соседей)
-	//! на обновлении это самая жирная часть (400-500мс)
     [_regionKey] call ai_nav_updateRegionEntrances_fast;
 
     //4. восстанавливаем мобов в регионе
@@ -560,3 +559,5 @@ ai_nav_getBorderNodes = {
     
     _borderNodes
 };
+
+

@@ -1,0 +1,32 @@
+rv/*
+!rv/addons
+rv/addons/*.pbo
+rv/addons/*.bat
+rv/*.dll
+rv/carma_dll.*
+build
+!.gitkeep
+!toolchain.cmake
+linux/*
+linux64/*
+vcproj/*
+vcproj64/*
+.vs
+x64/*
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake

@@ -641,8 +641,8 @@ struct(BAEater_Patrol) base(BABase)
     def(waitStartTime) 0;
     def(waitDuration) 0;
     def(isWaiting) false;
-    def(movePlanned) false;
-    
+    def(pathPatrolTask) pathTask_null;
+
     // Параметры патрулирования
 	def(_minWaitTime) 4;
 	def(_maxWaitTime) 8;
@@ -682,6 +682,7 @@ struct(BAEater_Patrol) base(BABase)
         
         self setv(patrolTarget, _patrolPos);
         self setv(isWaiting, false);
+        self setv(pathPatrolTask,pathTask_null);
     }
     
     def_ret(onUpdate) {
@@ -711,41 +712,39 @@ struct(BAEater_Patrol) base(BABase)
 
         // Режим движения
 		private _return = UPDATE_STATE_CONTINUE;
-		// планируем движение если еще не движемся
-		if !(self getv(movePlanned)) then {
-			private _success = [_mob,_targetPos] call ai_planMove;
-			if (!_success) exitWith {_return = UPDATE_STATE_FAILED};
-			self setv(movePlanned,true);
-		};
-		if (_return == UPDATE_STATE_FAILED) exitWith {_return};
-		
-		// проверяем достигли ли цели
-		if (_agent callv(isPathReached)) then {
+
+        // проверяем достигли ли цели
+		if pathTask_reached(self getv(pathPatrolTask)) exitWith {
 			// Достигли точки - останавливаемся и начинаем ждать			
 			// Случайная пауза от 3 до 8 секунд
 			private _waitTime = rand(self getv(_minWaitTime),self getv(_maxWaitTime));
 			self setv(waitStartTime, tickTime);
 			self setv(waitDuration, _waitTime);
 			self setv(isWaiting, true);
-			self setv(movePlanned,false);
-			
+			self setv(pathPatrolTask,pathTask_null);
+            _return
+		};
+
+		// планируем движение если еще не движемся
+		if !(_agent callv(hasPath)) then {
+			private _success = [_mob,_targetPos] call ai_planMove;
+			if (!_success) exitWith {_return = UPDATE_STATE_FAILED};
+            self setv(pathPatrolTask,_agent callv(getPathTask));
 		};
 		
-		UPDATE_STATE_CONTINUE
+		_return
     }
     
     def(onCompleted) {
         params ["_agent"];
         self setv(patrolTarget,[]);
         self setv(isWaiting, false);
-        self setv(movePlanned, false);
     }
     
     def(onFailed) {
         params ["_agent"];
         self setv(patrolTarget,[]);
         self setv(isWaiting, false);
-        self setv(movePlanned, false);
     }
 endstruct
 

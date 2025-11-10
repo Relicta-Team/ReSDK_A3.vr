@@ -815,7 +815,7 @@ Replaced value:
 ```sqf
 "Sign_Sphere25cm_F"
 ```
-File: [client\Rendering\Decals\Decals_init.sqf at line 185](../../../Src/client/Rendering/Decals/Decals_init.sqf#L185)
+File: [client\Rendering\Decals\Decals_init.sqf at line 336](../../../Src/client/Rendering/Decals/Decals_init.sqf#L336)
 ## dec_internal_index
 
 Type: Variable
@@ -827,7 +827,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\Rendering\Decals\Decals_init.sqf at line 84](../../../Src/client/Rendering/Decals/Decals_init.sqf#L84)
+File: [client\Rendering\Decals\Decals_init.sqf at line 194](../../../Src/client/Rendering/Decals/Decals_init.sqf#L194)
 ## dec_internal_const_pathPicture
 
 Type: Variable
@@ -839,7 +839,7 @@ Initial value:
 ```sqf
 PATH_PICTURE("textures\cloth_dirt.paa")
 ```
-File: [client\Rendering\Decals\Decals_init.sqf at line 85](../../../Src/client/Rendering/Decals/Decals_init.sqf#L85)
+File: [client\Rendering\Decals\Decals_init.sqf at line 195](../../../Src/client/Rendering/Decals/Decals_init.sqf#L195)
 ## dec_attachmentList
 
 Type: Variable
@@ -851,7 +851,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [client\Rendering\Decals\Decals_init.sqf at line 124](../../../Src/client/Rendering/Decals/Decals_init.sqf#L124)
+File: [client\Rendering\Decals\Decals_init.sqf at line 275](../../../Src/client/Rendering/Decals/Decals_init.sqf#L275)
 ## dec_setRenderTarget
 
 Type: function
@@ -908,20 +908,30 @@ File: [client\Rendering\Decals\Decals_init.sqf at line 68](../../../Src/client/R
 
 Type: function
 
-Description: 
+Description: ! Вероятно эта функция вызывает графические артефакты при первом вызове\первой установке для сущности
 - Param: _mob
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 77](../../../Src/client/Rendering/Decals/Decals_init.sqf#L77)
+File: [client\Rendering\Decals\Decals_init.sqf at line 187](../../../Src/client/Rendering/Decals/Decals_init.sqf#L187)
+## dec_getRenderLayerName
+
+Type: function
+
+Description: 
+- Param: _indUni
+- Param: _index
+
+File: [client\Rendering\Decals\Decals_init.sqf at line 205](../../../Src/client/Rendering/Decals/Decals_init.sqf#L205)
 ## dec_setRenderGerms
 
 Type: function
 
 Description: 
 - Param: _mob
+- Param: _tex
 - Param: _index
 - Param: _value
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 87](../../../Src/client/Rendering/Decals/Decals_init.sqf#L87)
+File: [client\Rendering\Decals\Decals_init.sqf at line 210](../../../Src/client/Rendering/Decals/Decals_init.sqf#L210)
 ## dec_reloadThis
 
 Type: function
@@ -931,7 +941,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 157](../../../Src/client/Rendering/Decals/Decals_init.sqf#L157)
+File: [client\Rendering\Decals\Decals_init.sqf at line 308](../../../Src/client/Rendering/Decals/Decals_init.sqf#L308)
 ## dec_genattachments
 
 Type: function
@@ -941,7 +951,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 160](../../../Src/client/Rendering/Decals/Decals_init.sqf#L160)
+File: [client\Rendering\Decals\Decals_init.sqf at line 311](../../../Src/client/Rendering/Decals/Decals_init.sqf#L311)
 ## dec_makePlane
 
 Type: function
@@ -951,7 +961,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 179](../../../Src/client/Rendering/Decals/Decals_init.sqf#L179)
+File: [client\Rendering\Decals\Decals_init.sqf at line 330](../../../Src/client/Rendering/Decals/Decals_init.sqf#L330)
 ## dec_makeSphere
 
 Type: function
@@ -961,7 +971,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\Decals\Decals_init.sqf at line 187](../../../Src/client/Rendering/Decals/Decals_init.sqf#L187)
+File: [client\Rendering\Decals\Decals_init.sqf at line 338](../../../Src/client/Rendering/Decals/Decals_init.sqf#L338)
 # Effects_init.sqf
 
 ## RENDER_EFFECTS_UPDATEDELAY
