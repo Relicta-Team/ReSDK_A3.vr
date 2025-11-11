@@ -108,60 +108,6 @@ gm_init = {
 	gm_preLobbyHandler = startUpdate(_code,1);
 };
 
-gm_showVoteMessage = {
-	params ["_client"];
-	
-	/*private _txt = "<t size='1.5'>Доступно голосование:" + sbr + sbr+"<t size='1.2' align='center'>";
-	private _gobj = nullPtr;
-	{
-		_gobj = missionNamespace getVariable ["story_" + _x,nullPtr];
-		if isNullReference(_gobj) then {continue};
-		modvar(_txt) + format["%1: %2",getVar(_gobj,name),_forEachIndex + 1] + sbr;
-	} foreach gm_allowedModes;
-	modvar(_txt) + "</t>"+sbr+"Для голосования используйте окно комманд: votemode число</t>";
-	callFuncParams(_client,localSay,_txt arg "system");*/
-	callFuncParams(_client,addSystemAction,"system" arg "system_votemode" arg "ГОЛОСОВАНИЕ!");
-};
-
-gm_getCanVoteCondition = {
-	private _countLobbyClients = count (call cm_getAllClientsInLobby);
-	private _output = _countLobbyClients <= ((count gm_votedClients)*70/100) && _countLobbyClients > 5;
-	#ifdef EDITOR
-	_output = count gm_votedClients > 0;
-	#endif
-	_output
-};
-
-gm_voteProcess = {
-	private _canVote = call gm_getCanVoteCondition;
-	
-	if (_canVote) then {
-		private _maxNum = 0;
-		private _maxMode = "";
-		private _listMaxModes = [];
-		{
-			if (_y > _maxNum) then {
-				_maxNum = _y;
-				//_maxMode = _x;
-				_listMaxModes = [_x];
-			} else {
-				if (_y == _maxNum) then {_listMaxModes pushBack _x};
-			};
-		} foreach gm_voteMap;
-		if (count _listMaxModes > 0) then {
-			gm_votedMode = pick _listMaxModes;
-		} else {
-			gm_votedMode = gm_defaultMode;
-		};
-		// if (_maxNum == 0) exitWith {
-		// 	_canVote = false;
-		// 	false;
-		// };
-		_canVote = true;
-	};
-	_canVote
-};
-
 //Выполняет рестарт раунда
 gm_restart = {
 	["gm::restart() - called"] call gameLog;

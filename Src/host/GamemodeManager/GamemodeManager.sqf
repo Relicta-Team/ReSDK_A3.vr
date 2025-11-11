@@ -98,17 +98,9 @@ gm_preLobbyHandler = -1;
 gm_currentAspect = nullPtr;
 gm_forcedAspect = "";
 
-
-//votable component
-gm_canVote = true;
-	gm_votedMode = "";
-	gm_votedClients = [];
-	gm_voteMap = createHashMap;
-	{
-		gm_voteMap set [_x,0];
-	} foreach gm_allowedModes;
-
 #include <Gamemode_internal_auto.sqf>
+
+#include "Gamemode_voting.sqf"
 
 //main init process
 call gm_init;
