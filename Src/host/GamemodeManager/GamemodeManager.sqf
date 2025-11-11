@@ -85,6 +85,7 @@ gm_state = GAME_STATE_PRELOAD;
 [GAME_STATE_PRELOAD] call gm_onChangeState;
 gm_lobbyTimeToStart = DEFAULT_TIME_TO_START;
 gm_lobbyTimeLeft = 60*5; //сколько до начала раунда. инициализированное состояние - превыбор режима
+gm_lobbyLowOnlineTimeLeft = 60*10; //время до выключения сервера при маленьком онлайне
 gm_lobbyCanProcessTime = true; //можно зафризить таймер до начала раунда
 gm_gameModeClass = ""; //тип установленного режима.
 gm_gameModeName = ""; //Русское название режима

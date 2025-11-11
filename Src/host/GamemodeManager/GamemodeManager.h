@@ -29,6 +29,11 @@
 
 //прелобби ожидание после которого пикнется режим
 #define PRE_LOBBY_AWAIT_TIME 60*5
+
+//время до выключения сервера при маленьком онлайне
+#define PRE_LOBBY_LOW_ONLINE_AWAIT 60*10
+
 #ifdef EDITOR
+#define PRE_LOBBY_LOW_ONLINE_AWAIT 100000
 //#define PRE_LOBBY_AWAIT_TIME 1
 #endif

@@ -34,6 +34,8 @@ gm_init = {
 	
 	//Устанавливаем пре лобби таймер
 	gm_lobbyTimeLeft = PRE_LOBBY_AWAIT_TIME;
+
+	gm_lobbyLowOnlineTimeLeft = PRE_LOBBY_LOW_ONLINE_AWAIT;
 	
 	//Запускаем прелобби ожидание
 	//copied and changed from GameMode_ThreadLobby.sqf
@@ -48,8 +50,26 @@ gm_init = {
 		// #endif
 		
 		if (!gm_lobbyCanProcessTime) exitWith {};
-		
+
+		#ifndef TEST_WHITELISTED
+		if (count (call cm_getAllClientsInLobby) <= 3) exitWith {
+			DEC(gm_lobbyLowOnlineTimeLeft);
+			if (gm_lobbyLowOnlineTimeLeft < 0) exitWith {
+				stopThisUpdate();
+				gm_preLobbyHandler = -1;
+				["Народа маловато. Расход!","system"] call cm_sendOOSMessage;
+				gm_lobbyCanProcessTime = false;
+				invokeAfterDelay(server_end,5);
+				RETURN(0);
+			};
+			if (gm_lobbyLowOnlineTimeLeft%60 == 0) then {
+				[format["Низкий онлайн. Если не наберется больше 3х игроков, сервер выключится через %1 секунд",gm_lobbyLowOnlineTimeLeft]] call cm_sendOOSMessage;
+			};
+		};
+		#endif
+
 		DEC(gm_lobbyTimeLeft);
+		gm_lobbyLowOnlineTimeLeft = PRE_LOBBY_LOW_ONLINE_AWAIT;
 		
 		//Каждые 5 секунд проверяем пора ли кончать раунд
 		if (gm_lobbyTimeLeft%6==5) then {
