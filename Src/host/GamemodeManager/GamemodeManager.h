@@ -28,7 +28,7 @@
 #endif
 
 //прелобби ожидание после которого пикнется режим
-#define PRE_LOBBY_AWAIT_TIME 60*3
+#define PRE_LOBBY_AWAIT_TIME 60*5
 #ifdef EDITOR
 //#define PRE_LOBBY_AWAIT_TIME 1
 #endif

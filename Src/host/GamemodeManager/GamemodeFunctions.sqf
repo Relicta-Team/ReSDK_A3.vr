@@ -40,12 +40,12 @@ gm_init = {
 	private _code = {
 		FHEADER;
 		
-		#ifndef EDITOR
-		if (gm_canVote && {!isNullReference(ACCESS_ADMIN call cm_findClientByAccessLevel)}) then {
-			gm_canVote = false;
-			["Админ в чати, голосование офф.","system"] call cm_sendOOSMessage;
-		};
-		#endif
+		// #ifndef EDITOR
+		// if (gm_canVote && {!isNullReference(ACCESS_ADMIN call cm_findClientByAccessLevel)}) then {
+		// 	gm_canVote = false;
+		// 	["Админ в чати, голосование офф.","system"] call cm_sendOOSMessage;
+		// };
+		// #endif
 		
 		if (!gm_lobbyCanProcessTime) exitWith {};
 		
@@ -73,6 +73,15 @@ gm_init = {
 
 		if (gm_lobbyTimeLeft < 0) then {
 			
+			//по истечению таймера и если игроков мало, то выключаемся
+			if (count _allClients <= 3) exitWith {
+				stopThisUpdate();
+				gm_preLobbyHandler = -1;
+				["Народа маловато. Расход!","system"] call cm_sendOOSMessage;
+				gm_lobbyCanProcessTime = false;
+				invokeAfterDelay(server_end,5);
+				RETURN(0);
+			};
 			
 			// После конца таймера мы хардкорно выбираем режим
 			//gm_canVote

@@ -31,7 +31,7 @@ gprint("All functions loaded");
 
 gm_currentMode = nullPtr; //текущий установленный игровой режим
 #include "Gamemode_AllowedModes.sqf"
-gm_defaultMode = "GMTVTGame";// режим по-умолчанию
+gm_defaultMode = "GMExtended";// режим по-умолчанию
 gm_currentModeId = -1; //айди установленного режима
 	gm_internal_ingameClients = []; //сюда записываются все клиенты, зашедшие в игру хотя-бы один раз
 
