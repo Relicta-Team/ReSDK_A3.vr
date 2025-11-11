@@ -443,7 +443,7 @@ region(Voting Helpers)
 			private _weight = _underMinFactor * _overMaxFactor;
 			(_weight max 0.1)
 		}
-	}
+	};
 
 endregion
 
