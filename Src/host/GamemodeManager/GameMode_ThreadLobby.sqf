@@ -7,6 +7,7 @@ FHEADER;
 
 if (!gm_lobbyCanProcessTime) exitWith {};
 
+#ifndef EDITOR
 #ifndef TEST_WHITELISTED
 if (count (call cm_getAllClientsInLobby) <= 3) exitWith {
 	DEC(gm_lobbyLowOnlineTimeLeft);
@@ -22,6 +23,7 @@ if (count (call cm_getAllClientsInLobby) <= 3) exitWith {
 		[format["Низкий онлайн. Если не наберется больше 3х игроков, сервер выключится через %1 секунд",gm_lobbyLowOnlineTimeLeft]] call cm_sendOOSMessage;
 	};
 };
+#endif
 #endif
 
 DEC(gm_lobbyTimeLeft);

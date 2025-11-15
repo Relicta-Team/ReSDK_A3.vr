@@ -295,7 +295,7 @@ class(IStructRadio) extends(ElectronicDeviceNode)
 	var(radioIsEnabled,true);
 	var(edIsEnabled,true);
 
-	var(radioSettings,[10 arg "someencoding" arg -10 arg 5 arg null arg 300 arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 5 arg null arg -1]);
 
 	func(InitModel)
 	{

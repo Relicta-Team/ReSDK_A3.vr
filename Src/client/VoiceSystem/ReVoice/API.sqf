@@ -76,6 +76,8 @@ vs_connectToVoiceSystem = {
 
     [player,vs_localName] call vs_initMob;
 
+    [2] call vs_changeVoiceVolume;
+
     vs_canProcess = true;
     _r
 };
@@ -354,8 +356,12 @@ vs_handleSpeak = {
         //unconscious/dead skip mic capture
         if !([] call interact_isActive) exitWith {};
         apiRequest(REQ_SPEAK_START);
+
+        [true] call vs_handleMicRadioObjects;
     } else {
         apiRequest(REQ_SPEAK_STOP);
+
+        [false] call vs_handleMicRadioObjects;
     };
 };
 
@@ -456,17 +462,23 @@ vs_internal_applyEffects = {
 
 //получает настройки реверба для текущего моба (~0.976563ms per call)
 vs_calcReverbEffect = {
-    params ["_mob"];
+    params ["_target"];
     private _rayDistance = 100;
     private _ignore1 = player;
     #ifdef REDITOR_VOICE_DEBUG
         _ignore1 = cameraon;
-        private _endPos = getposasl _mob;
+        private _endPos = getposasl _target;
+        private _isMob = _target in vs_reditor_procObjList;
     #else
-        private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
+        private _isMob = typeof _target == BASIC_MOB_TYPE;
+        private _endPos = if (_isMob) then {
+            atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+        } else {
+            getposasl _target;
+        };
     #endif
 
-    #define __postargs _ignore1,_mob,true,1,"VIEW","GEOM",true
+    #define __postargs _ignore1,_target,true,1,"VIEW","GEOM",true
     
     private _pointsQuery = [
         //cross check
@@ -552,7 +564,7 @@ vs_calcReverbEffect = {
     // private _dry = 0;
 
     // [
-    //     _mob,
+    //     _target,
     //     _decay * 1000,
     //     _edel,
     //     _ldel,
@@ -564,8 +576,13 @@ vs_calcReverbEffect = {
     //new algo v2(works fine)
     private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
-    private _distSpeaker = _mob getvariable ["rv_distance",4]; 
-    private _volumeFactor = linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+    private _volumeFactor = if (_isMob) then {
+        private _distSpeaker = _target getvariable ["rv_distance",4]; 
+        linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+    } else {
+        //currently constant value
+        1.5;
+    };
     
     private _avgDim = (_avgWall + _ceiling + _floor) / 3;
 
@@ -605,7 +622,7 @@ vs_calcReverbEffect = {
     private _dry = 0;
 
     [
-        _mob,
+        _target,
         _decay * 1000,
         _edel,
         _ldel,
@@ -617,18 +634,22 @@ vs_calcReverbEffect = {
 };
 
 vs_calcLowpassEffect = {
-    params ["_mob"];
+    params ["_target"];
     #ifdef REDITOR_VOICE_DEBUG
     private _startPos = getposasl cameraon;
-    private _endPos = getposasl _mob;
+    private _endPos = getposasl _target;
     private _ignore1 = cameraon;
     #else
     private _startPos = atltoasl(player modeltoworldvisual (player selectionposition "head"));
-    private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
+    private _endPos = if (typeof _target == BASIC_MOB_TYPE) then {
+        atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+    } else {
+        getposasl _target;
+    };
     private _ignore1 = player;
     #endif
 
-    private _ignore2 = _mob;
+    private _ignore2 = _target;
 
     // [begPosASL, endPosASL, ignoreObj1, ignoreObj2, sortMode, maxResults, LOD1, LOD2, returnUnique]
     
@@ -661,7 +682,7 @@ vs_calcLowpassEffect = {
         private _cutoff = 22000;
         private _q = 2; //снижено для более плавного перехода между есть\нет препятствий
         call _checkFilters;
-        [_mob,_cutoff,_q]
+        [_target,_cutoff,_q]
     };
 
     private _its = lineIntersectsSurfaces [_startPos,_endPos,_ignore1,_ignore2,true,100,"VIEW","GEOM",false];
@@ -734,7 +755,7 @@ vs_calcLowpassEffect = {
     ["lowpass timecall:%1ms; Thickness:%2",((tickTime - _t)*1000)toFixed 6,_thickness] call printTrace;
     #endif
 
-    [_mob,_cutoff,_q]
+    [_target,_cutoff,_q]
 };
 
 //Калькулирует понимание речи персонажа

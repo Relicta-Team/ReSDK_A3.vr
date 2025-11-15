@@ -606,11 +606,12 @@ smd_onChangeSlotData = {
 	//[int freq, float volume,float canHearUnits, [prob pos.x,..pos.z], float dist, int type]
 	if not_equals(_cfgRadio,-1) then {
 		//_cfgRadio params ["_freq","_vol","_hearDist",["_pos",[0,0,0]],"_dist","_raType"];
-		if isNull(_cfgRadio select 3) then {
-			_cfgRadio set [3,[0,0,0]];
-		};
+		#ifdef EDITOR
+		_cfgRadio = array_copy(_cfgRadio);
+		#endif
+		private _ptr = _cfgRadio deleteAt 0;
 
-		[_object,_cfgRadio,_mob getvariable "voiceptr",_isPlayer] call vs_loadWorldRadio;
+		[_object,_cfgRadio,_ptr,true] call vs_loadWorldRadio;
 	};
 
 

@@ -72,7 +72,7 @@ endclass
 
 class(Intercom) extends(IStructRadioEDLogic)
 	var(edNodeReqPower,5);
-	var(radioSettings,[10 arg "someencoding" arg -10 arg 10 arg null arg 300 arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 10 arg null arg -1]);
 
 	var(name,"Интерком");
 	var(model,"ml\ml_object_new\model_05\speeker.p3d");
@@ -87,7 +87,7 @@ endclass
 
 class(StationSpeaker) extends(IStructRadioEDLogic)
 	var(edNodeReqPower,15);
-	var(radioSettings,[10 arg "someencoding" arg 10 arg 30 arg null arg null arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 30 arg null arg -1]);
 
 	var(name,"Динамик");
 	var(model,"relicta_models\models\interier\speaker.p3d");

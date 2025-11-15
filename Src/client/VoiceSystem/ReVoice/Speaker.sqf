@@ -84,9 +84,12 @@ vs_getObjectRadioData = {
 
 //noe functions
 vs_loadWorldRadio = {
-	params ["_obj","_radioData","_ptr"];
+	params ["_obj","_radioData","_ptr",["_isInHand",false]];
 
 	private _rdataInfo = [_obj,_radioData,_ptr] call vs_prepRadioDataInternal;
+	if (_isInHand) then {
+		_rdataInfo set ["isInHand",true];
+	};
 
 	vs_allRadioSpeakers set [_ptr,_rdataInfo];
 
@@ -99,6 +102,8 @@ vs_prepRadioDataInternal = {
 	_radioData params ["_freq",["_vol",1],["_dist",10],["_bias",[0,0,0]],["_wavePower",-1]];
 	
 	private _data = createHashMapFromArray [
+		["isInHand",false], //bool - находится ли радио в руке
+
 		["freq",_freq], //string - ключ частоты
 		["vol",_vol], //float - громкость
 		["dist",_dist], //float - дистанция слышимости
@@ -123,7 +128,7 @@ vs_unloadWorldRadio = {
 
 	[_ptr] call vs_removeRadioStream;
 
-	_obj set ["__radio_data",null];
+	_obj setVariable ["__radio_data",null];
 
 	true;
 };
@@ -165,7 +170,7 @@ vs_handleRadioRetranslateStreamInternal = {
 
 	// создает стримы на каналгруппе. стримы будут удалены когда источник будет уничтожен
 	apiCmd [CMD_RADIO_SUBSCRIBE_RADIOSTREAM,[_ptr,keys _usersMap joinString ";"]] params ["_r","_rcode"];
-	rvd_subscribe = _r;
+	
 	if (_r != "ok") exitWith {};
 
 	//определяем радиоэффект в зависимости от мощности радио
@@ -190,10 +195,12 @@ vs_handleRadioRetranslateStreamInternal = {
 	{
 		private _targetDist = _playerDistMap get _x;
 		private _waveDist = _y;
-		if (_waveDist == -1) then {
-			continue;
+		private _filterValue = if (_waveDist == -1) then {
+			0;
+		} else {
+			_targetDist / _waveDist; //normalized value from 0 to 1
 		};
-		private _filterValue = _targetDist / _waveDist; //normalized value from 0 to 1
+		
 		(apiCmd [CMD_RADIO_APPLY_WAVE_FILTER,[_ptr,_x,_filterValue]]) params ["_r","_rcode"];
 		
 	} foreach _usersMap;
@@ -213,10 +220,50 @@ vs_handleRadioSpeakInternal = {
 	private _result = apiCmd [CMD_SYNC_REMOTE_RADIO,_params];
 
 	if ((_result select 0) == "ok") then {
-		private _params = [];
-		//apiCmd [CMD_SYNC_REMOTE_RADIO_LOWPASS,_params];
+		private _params = [_obj] call vs_calcLowpassEffect;
+		_params set [0,_rdata get "ptr"];
+		apiCmd [CMD_SYNC_REMOTE_RADIO_LOWPASS,_params];
 
-		_params = [];
-		//apiCmd [CMD_SYNC_REMOTE_RADIO_REVERB,_params];
+		_params = [_obj] call vs_calcReverbEffect;
+		_params set [0,_rdata get "ptr"];
+		apiCmd [CMD_SYNC_REMOTE_RADIO_REVERB,_params];
+	};
+};
+
+//возвращает ближайшие радио
+vs_getNearReceiverRadioObjects = {
+	
+	private _ppos = player modeltoworldvisual (player selectionposition "head");
+	private _nearRadios = [];
+	private _maxDist = 2;
+	{
+		private _rdata = _y;
+		private _obj = _rdata get "obj";
+		private _dist = _ppos distance _obj;
+		if (_dist < _maxDist) then {
+			_nearRadios pushback _obj;
+		};
+	} foreach vs_allRadioSpeakers;
+
+	_nearRadios;
+};
+
+vs_localReceivers = [];
+vs_hasTalkingOnRadio = {count vs_localReceivers > 0};
+
+//обработчик общения по рации. вызывается внутри апи обычного войса
+vs_handleMicRadioObjects = {
+	params ["_mode"];
+	if equals(_mode,call vs_hasTalkingOnRadio) exitWith {};
+	if (_mode) then {
+		vs_localReceivers = call vs_getNearReceiverRadioObjects;
+		{
+			[_x,true] call vs_radioSpeakProcess;
+		} foreach vs_localReceivers;
+	} else {
+		{
+			[_x,false] call vs_radioSpeakProcess;
+		} foreach vs_localReceivers;
+		vs_localReceivers = [];
 	};
 };

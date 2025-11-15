@@ -132,8 +132,8 @@ clistat_buffer pushback [colortext(57D4AC,"ATMOS_SRV: "),{
 	}];
 	#endif
 clistat_buffer append [
-	[colortext(5D56DB,"Receiver in world:"),{count vs_allWorldRadios}],
-	[colortext(5D56DB,"TF local transport:"),{count vs_processingRadiosList}],
+	[colortext(5D56DB,"Receiver in world:"),{format["all %1; plrlstnr %2",count vs_allRadioSpeakers,count vs_localReceivers]}],
+	[colortext(5D56DB,"TF local transport:"),{count(flatten(values vs_map_waveSpeakers apply {keys _x})) }],
 	[colortext(1FC4C4,"Cur music: "),{ifcheck(isNull(music_playedObject),"no",music_playedObject get "file")}],
 	[colortext(1FC4C4,"m_playedtime:"),{ifcheck(isNull(music_playedObject),"no",str(music_playedObject get "curtime"))}],
 	[colortext(1FC4C4,"m_vol:"),{str musicVolume}],
