@@ -3,9 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-//usage: apiCmd ["test",[arg1,arg2]]
-#define apiCmd "revoicer" callExtension 
-#define apiRequest(p) ("revoicer" callExtension (p))
+
 
 #ifdef REDITOR_VOICE_DEBUG
     #define revoice_debug_only(debug_expr) debug_expr;
@@ -166,6 +164,8 @@ vs_onProcessPlayerPosition = {
         //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
         //revoice_debug_only(if (((tickTime - _t)*1000) > 10) then {["LOWPERF: sync remote %1ms" arg (((tickTime - _t)*1000) )tofixed 0]call printTrace;_t=tickTime;})
+
+        call vs_processRadios;
     };
 };
 
