@@ -5,17 +5,18 @@
 
 // слои отображения
 #define OVERLAY_LAYER_HEAD 0
-#define OVERLAY_LAYER_FACE 2
-#define OVERLAY_LAYER_BODY 3
-#define OVERLAY_LAYER_ARMOR 4
-#define OVERLAY_LAYER_BACKPACK 5
+#define OVERLAY_LAYER_FACE 1
+#define OVERLAY_LAYER_BODY 2
+#define OVERLAY_LAYER_ARMOR 3
+#define OVERLAY_LAYER_BACKPACK 4
 
 #define OVERLAY_LAYER_LIST_ALL [OVERLAY_LAYER_HEAD,OVERLAY_LAYER_FACE,OVERLAY_LAYER_BODY,OVERLAY_LAYER_ARMOR,OVERLAY_LAYER_BACKPACK]
 
+#define OVERLAY_GROUP_KEY_CURRENT "currentOverlay"
 
 /* 
 	режим наслоения предмета. самый последний предмет в списке является отображаемым
-	base - добавляется всегда в начало списка
+	base - добавляется всегда в начало списка. существует только в единственном экземпляре
 	normal - добавляется в обычном порядке по приоритету
 	external - добавляется всегда в конец списка
 */

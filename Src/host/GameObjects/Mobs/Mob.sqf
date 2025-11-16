@@ -6,6 +6,7 @@
 
 #include "..\..\engine.hpp"
 #include "..\..\oop.hpp"
+#include "..\..\struct.hpp"
 #include "..\GameConstants.hpp"
 #include "..\..\PointerSystem\pointers.hpp"
 #include "..\..\ServerRpc\serverRpc.hpp"
