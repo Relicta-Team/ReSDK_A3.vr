@@ -20,6 +20,10 @@ if !isNullReference(_cli) then {
 	_mob = getVar(_cli,actor) getVariable "link";
 	if (!isNullVar(_mob) && {!isNullReference(_mob)}) then {
 		callFunc(_mob,onDisconnected);
+
+		private _mobIndex = cm_allInGamePlayerMobs find getVar(_mob,owner);
+		cm_allInGamePlayerMobs deleteAt _mobIndex;
+		netSetGlobal(smd_allInGamePlayerMobs,cm_allInGamePlayerMobs);
 	};
 
 	//удаляем клиента из всех его ролей

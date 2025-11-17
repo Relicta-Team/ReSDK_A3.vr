@@ -10,6 +10,8 @@ vs_transmithTypes = ["digital","digital_lr","airborne"];
 
 //список всех спикеров (рации\динамики). ключ - указатель на объект, значение - структура radioData
 vs_allRadioSpeakers = createHashMap;
+//рации в руках игроков
+vs_allInventoryRadios = createHashMap; //ключ - указатель на объект, значение - структура radioData
 
 //локальная мапа кто говорит в частоты
 vs_map_waveSpeakers = createHashMap; // 
@@ -46,22 +48,26 @@ vs_radioSpeakProcess = {
 	rpcSendToServer(_rpcName,_args);
 };
 
+#define REVOICE_SPEAKER_MAKEDATA(_p,_wave) [_p,_wave]
+#define REVOICE_SPEAKER_GETPTR(_data) ((_data) select 0)
+#define REVOICE_SPEAKER_GETWAVEPOWER(_data) ((_data) select 1)
+
 //вызывается когда какой-то игрок начал говорить в частоту
 vs_onRadioSpeakStarted = {
-	params ["_actorName","_freq","_wavePower"];
+	params ["_actorName","_ptr","_freq","_wavePower"];
 
 	if (_freq in vs_map_waveSpeakers) then {
 		private _playersMap = vs_map_waveSpeakers get _freq;
-		_playersMap set [_actorName,_wavePower];
+		_playersMap set [_actorName,REVOICE_SPEAKER_MAKEDATA(_ptr,_wavePower)];
 	} else {
-		private _playersMap = createHashMapFromArray [[_actorName,_wavePower]];
+		private _playersMap = createHashMapFromArray [[_actorName,REVOICE_SPEAKER_MAKEDATA(_ptr,_wavePower)]];
 		vs_map_waveSpeakers set [_freq,_playersMap];
 	};
 };
 
 //вызывается когда какой-то игрок закончил говорить в частоту
 vs_onRadioSpeakStopped = {
-	params ["_actorName","_freq"];
+	params ["_actorName","_ptr","_freq"];
 
 	private _playersMap = vs_map_waveSpeakers get _freq;
 	if !isNullVar(_playersMap) then {
@@ -91,7 +97,11 @@ vs_loadWorldRadio = {
 		_rdataInfo set ["isInHand",true];
 	};
 
-	vs_allRadioSpeakers set [_ptr,_rdataInfo];
+	if (_isInHand) then {
+		vs_allInventoryRadios set [_ptr,_rdataInfo];
+	} else {
+		vs_allRadioSpeakers set [_ptr,_rdataInfo];
+	};
 
 	[_ptr] call vs_addRadioStream;
 };
@@ -119,12 +129,16 @@ vs_prepRadioDataInternal = {
 };
 
 vs_unloadWorldRadio = {
-	params ["_obj"];
+	params ["_obj",["_isInHand",false]];
 	private _data = _obj call vs_getObjectRadioData;
 	if isNullVar(_data) exitWith {false};
 
 	private _ptr = _data get "ptr";
-	vs_allRadioSpeakers deleteAt _ptr;
+	if (_isInHand) then {
+		vs_allInventoryRadios deleteAt _ptr;
+	} else {
+		vs_allRadioSpeakers deleteAt _ptr;
+	};
 
 	[_ptr] call vs_removeRadioStream;
 
@@ -142,7 +156,7 @@ vs_processRadios = {
 	
 	private _allSpeakers = vs_map_waveSpeakers; //map<freq:string,players:map<string:name,float:wavePower>>
 	
-	{
+	private _iterator = {
 		private _rdata = _y;
 		private _radioObj = _rdata get "obj";
 		private _freq = _rdata get "freq";
@@ -156,10 +170,9 @@ vs_processRadios = {
 			//синхронизируем позицию и громкость радио
 			[_rdata] call vs_handleRadioSpeakInternal;
 		};
-
-
-
-	} foreach vs_allRadioSpeakers;
+	}; 
+	_iterator foreach vs_allRadioSpeakers;
+	_iterator foreach vs_allInventoryRadios;
 };
 
 //активирует ретрансляцию радио с клиентов на указанный источник. автоматически подписывается на событие радиопередачи
@@ -168,8 +181,21 @@ vs_handleRadioRetranslateStreamInternal = {
 
 	private _ptr = _rdata get "ptr";
 
+	// Фильтруем игроков, которые говорят в эту же рацию - исключаем их имена из подписки
+	private _filteredKeys = [];
+	{
+		private _playerName = _x;
+		private _playerData = _y;
+		private _playerPtr = REVOICE_SPEAKER_GETPTR(_playerData);
+		
+		// Если игрок говорит в эту же рацию, не добавляем его в список подписки
+		if (_playerPtr != _ptr) then {
+			_filteredKeys pushBack _playerName;
+		};
+	} foreach _usersMap;
+
 	// создает стримы на каналгруппе. стримы будут удалены когда источник будет уничтожен
-	apiCmd [CMD_RADIO_SUBSCRIBE_RADIOSTREAM,[_ptr,keys _usersMap joinString ";"]] params ["_r","_rcode"];
+	apiCmd [CMD_RADIO_SUBSCRIBE_RADIOSTREAM,[_ptr,_filteredKeys joinString ";"]] params ["_r","_rcode"];
 	
 	if (_r != "ok") exitWith {};
 
@@ -178,7 +204,7 @@ vs_handleRadioRetranslateStreamInternal = {
 		#ifdef REDITOR_VOICE_DEBUG
 		vs_reditor_procObjList
 		#else
-		allPlayers 
+		cm_allInGamePlayerMobs 
 		#endif
 		apply {
 			[_x getvariable "rv_name",
@@ -193,9 +219,13 @@ vs_handleRadioRetranslateStreamInternal = {
 
 	//применяем шум радио в зависимости от дистанции до игрока
 	{
+		if !(_x in _filteredKeys) then {continue};
+		
 		private _targetDist = _playerDistMap get _x;
-		private _waveDist = _y;
+		private _data = _y;
+		private _waveDist = REVOICE_SPEAKER_GETWAVEPOWER(_data);
 		private _filterValue = if (_waveDist == -1) then {
+			//это устройство без ограничений на дистанцию (телефония, интеркомы и т.п.)
 			0;
 		} else {
 			_targetDist / _waveDist; //normalized value from 0 to 1
@@ -215,7 +245,8 @@ vs_handleRadioSpeakInternal = {
 	_params append (_obj modelToWorldVisual (_rdata get "bias"));
 	_params append (vectorDir _obj);
 	_params pushback (_rdata get "dist");
-	_params pushback (_rdata get "vol");
+	private _vol = _rdata get "vol";
+	_params pushback _vol;
 
 	private _result = apiCmd [CMD_SYNC_REMOTE_RADIO,_params];
 
@@ -230,20 +261,24 @@ vs_handleRadioSpeakInternal = {
 	};
 };
 
-//возвращает ближайшие радио
+//возвращает ближайшие радио которые могут слышать игрока
 vs_getNearReceiverRadioObjects = {
 	
 	private _ppos = player modeltoworldvisual (player selectionposition "head");
 	private _nearRadios = [];
 	private _maxDist = 2;
-	{
+	private _iterator = {
 		private _rdata = _y;
 		private _obj = _rdata get "obj";
 		private _dist = _ppos distance _obj;
 		if (_dist < _maxDist) then {
 			_nearRadios pushback _obj;
 		};
-	} foreach vs_allRadioSpeakers;
+	}; 
+	_iterator foreach vs_allRadioSpeakers;
+
+	_maxDist = 1; //для раций в руках максимальная дистанция 1 метр
+	_iterator foreach vs_allInventoryRadios;
 
 	_nearRadios;
 };

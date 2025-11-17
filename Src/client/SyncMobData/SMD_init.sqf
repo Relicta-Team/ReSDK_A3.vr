@@ -23,6 +23,8 @@ namespace(SyncMobData,smd_)
 */
 
 // smd_allInGameMobs - global list of all ingame mobs
+//smd_allInGamePlayerMobs - global list of all ingame mobs that are players
+
 
 //ассоциативный список переменная слежения, метод выполнения при изменении состояния
 decl(string[][])
@@ -489,7 +491,7 @@ smd_setSlotDataProcessor = {
 				_srcObj = _mob getvariable (smd_local_prefix + _var + "_obj");
 				if !isNullReference(_srcObj) then {
 					if (_srcObj call vs_isWorldRadioObject) then {
-						[_srcObj] call vs_unloadWorldRadio;
+						[_srcObj,true] call vs_unloadWorldRadio;
 					};
 					deleteVehicle _srcObj;
 				};
@@ -545,7 +547,7 @@ smd_onChangeSlotData = {
 		};
 		
 		if (_prevObject call vs_isWorldRadioObject) then {
-			[_prevObject] call vs_unloadWorldRadio;
+			[_prevObject,true] call vs_unloadWorldRadio;
 		};
 		
 		//fix 0.7.358 - shortsword in left hand after disable two-handed mode
