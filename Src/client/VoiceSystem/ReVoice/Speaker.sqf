@@ -103,7 +103,9 @@ vs_loadWorldRadio = {
 		vs_allRadioSpeakers set [_ptr,_rdataInfo];
 	};
 
-	[_ptr,_rdataInfo get "radioType"] call vs_addRadioStream;
+	private _result = [_ptr,_rdataInfo get "radioType"] call vs_addRadioStream;
+	traceformat("vs_loadWorldRadio: %1 %2 %3",_ptr arg _rdataInfo get "radioType" arg _result);
+	_result
 };
 
 vs_prepRadioDataInternal = {
@@ -129,20 +131,26 @@ vs_prepRadioDataInternal = {
 };
 
 vs_unloadWorldRadio = {
-	params ["_obj",["_isInHand",false]];
+	params ["_obj",["_isInHand",false],["_removeStream",true]];
 	private _data = _obj call vs_getObjectRadioData;
 	if isNullVar(_data) exitWith {false};
 
 	private _ptr = _data get "ptr";
+	traceformat("vs_unloadWorldRadio: %1 %2",_ptr arg _isInHand);
 	if (_isInHand) then {
 		vs_allInventoryRadios deleteAt _ptr;
 	} else {
 		vs_allRadioSpeakers deleteAt _ptr;
 	};
 
-	[_ptr] call vs_removeRadioStream;
+	//этот флаг нужен для фикса гонки данных когда NOE обновление пришло раньше чем мы успели обновить слот инвентаря
+	if (_removeStream) then {
+		[_ptr] call vs_removeRadioStream;
+	};
 
 	_obj setVariable ["__radio_data",null];
+
+	//TODO если мы говорили в это радио - надо прекратить в него говорить
 
 	true;
 };
@@ -212,7 +220,7 @@ vs_handleRadioRetranslateStreamInternal = {
 		apply {
 			[_x getvariable "rv_name",
 				#ifdef REDITOR_VOICE_DEBUG
-				get3dencamera distance _x
+				ifcheck(is3den,get3dencamera,player) distance _x
 				#else
 				player distance _x
 				#endif
@@ -287,12 +295,13 @@ vs_getNearReceiverRadioObjects = {
 };
 
 vs_localReceivers = [];
-vs_hasTalkingOnRadio = {count vs_localReceivers > 0};
+vs_isTalkingOnRadio = false;
 
 //обработчик общения по рации. вызывается внутри апи обычного войса
 vs_handleMicRadioObjects = {
 	params ["_mode"];
-	if equals(_mode,call vs_hasTalkingOnRadio) exitWith {};
+	if equals(_mode,vs_isTalkingOnRadio) exitWith {};
+	vs_isTalkingOnRadio = _mode;
 	if (_mode) then {
 		vs_localReceivers = call vs_getNearReceiverRadioObjects;
 		{
@@ -308,7 +317,7 @@ vs_handleMicRadioObjects = {
 
 //процесс обновления списка объектов для записи
 vs_processUpdateMicRadioObjects = {
-	if !(call vs_hasTalkingOnRadio) exitWith {};
+	if !(vs_isTalkingOnRadio) exitWith {};
 	private _objs = vs_localReceivers;
 	private _probNewObjs = call vs_getNearReceiverRadioObjects;
 	
@@ -350,3 +359,40 @@ vs_onClientDisconnected = {
 	} foreach (+vs_map_waveSpeakers);//iterate at copy of map
 };
 rpcAdd("vsr_oncldis",vs_onClientDisconnected);
+
+#ifdef EDITOR
+vs_debug_TestMobSpeaking = {
+	[player,"newmob",false] call cm_processClientCommand;
+	o = array_selectlast(smd_allInGameMobs);
+	cm_allInGamePlayerMobs pushback o;
+	vs_reditor_procObjList=[o];
+	o setvariable ["rv_name","rem"];
+	o setvariable ["rv_distance",20];
+	o setvariable ["rv_filter",[]];
+	vs_localName = "user"; 
+	vs_canProcess = true; 
+	
+	vs_debug_remoteSpeaking = o getvariable ["rv_isSpeaking",false];
+	vs_debug_objectPtr = "123";
+	vs_debug_distanceTransmit = 100;
+	
+	_code = {
+		private _state = o getvariable ["rv_isSpeaking",false];
+		if not_equals(_state,vs_debug_remoteSpeaking) then {
+			vs_debug_remoteSpeaking = _state;
+			if (_state) then {
+				["rem",vs_debug_objectPtr,"10@someencoding",vs_debug_distanceTransmit] call vs_onRadioSpeakStarted;
+			} else {
+				["rem",vs_debug_objectPtr,"10@someencoding"] call vs_onRadioSpeakStopped;
+			};
+		};
+	};
+
+	if !isNull(vs_debug_remoteSpeakHandler) then {
+		stopUpdate(vs_debug_remoteSpeakHandler);
+		vs_debug_remoteSpeakHandler = null;
+	};
+	vs_debug_remoteSpeakHandler = startUpdate(_code,0.1);
+
+};
+#endif

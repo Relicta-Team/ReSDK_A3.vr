@@ -548,7 +548,21 @@ smd_onChangeSlotData = {
 		};
 		
 		if (_prevObject call vs_isWorldRadioObject) then {
-			[_prevObject,true] call vs_unloadWorldRadio;
+			//фикс гонки данных когда NOE обновление пришло раньше чем мы успели обновить слот инвентаря
+			//? пока не знаю как элегантно решить эту проблему
+			private _ptr = (_prevObject call vs_getObjectRadioData) get "ptr";
+			if (_ptr in vs_allRadioSpeakers) then {
+				//радио есть в мире - нам не нужно выгружать его
+				//оно вызывало vs_loadWorldRadio для нового объекта
+				//У этого просто очищаем инвентарные данные без удаления радиострима
+				[_prevObject,true,false] call vs_unloadWorldRadio;
+			} else {
+				//а здесь мы обрабатываем случай свапа радио между слотами. гонка тоже может быть
+				if !(_ptr in vs_allInventoryRadios) then {
+					//радио не в инвентаре - удаляем его
+					[_prevObject,true] call vs_unloadWorldRadio;
+				};
+			};
 		};
 		
 		//fix 0.7.358 - shortsword in left hand after disable two-handed mode
