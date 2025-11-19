@@ -29,7 +29,7 @@ vs_server_onRadioSpeakStart = {
 	private _freq = callFunc(_radio,getRadioFrequencyKey);
 	private _wavePower = callFunc(_radio,getRadioWavePower);
 
-	private _args = [_actorName,_freq,_wavePower];
+	private _args = [_actorName,_ptr,_freq,_wavePower];
 	rpcSendToAll("vsr_onspk",_args);
 };
 rpcAdd("vssrv_spk",vs_server_onRadioSpeakStart);
@@ -46,7 +46,7 @@ vs_server_onRadioSpeakStop = {
 
 	private _freq = callFunc(_radio,getRadioFrequencyKey); //!частота могла поменяться?
 
-	private _args = [_actorName,_freq];
+	private _args = [_actorName,_ptr,_freq];
 	rpcSendToAll("vsr_onnspk",_args);
 };
 rpcAdd("vssrv_nspk",vs_server_onRadioSpeakStop);

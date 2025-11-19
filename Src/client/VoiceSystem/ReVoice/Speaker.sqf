@@ -21,8 +21,8 @@ vs_map_waveSpeakers = createHashMap; //
 // vs_netSpeakers = [];
 
 vs_addRadioStream = {
-	params ["_ptr"];
-	(apiCmd [CMD_RADIO_ADD,[_ptr]]) params ["_r","_rcode"];
+	params ["_ptr",["_cfgName",RADIO_TYPE_WALKIETALKIE]];
+	(apiCmd [CMD_RADIO_ADD,[_ptr,_cfgName]]) params ["_r","_rcode"];
 	_r == "ok";
 };
 

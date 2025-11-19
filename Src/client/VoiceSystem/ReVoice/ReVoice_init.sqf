@@ -6,6 +6,7 @@
 #include <..\..\..\host\engine.hpp>
 #include <..\..\ClientRpc\clientRpc.hpp>
 #include <..\..\..\host\NOEngine\NOEngine.hpp>
+#include "..\..\..\host\ServerVoice\ReVoicer.hpp"
 
 #include "ReVoice.h"
 
