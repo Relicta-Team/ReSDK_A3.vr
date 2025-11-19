@@ -9,6 +9,7 @@
 #include <..\LightEngine\LightEngine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\Interactions\interact.hpp>
+#include "..\..\host\ServerVoice\ReVoicer.hpp"
 
 namespace(SyncMobData,smd_)
 
@@ -605,13 +606,14 @@ smd_onChangeSlotData = {
 
 
 	//radio setting
-	//[int freq, float volume,float canHearUnits, [prob pos.x,..pos.z], float dist, int type]
+	//[string freq, float volume,float dist, uint type, [prob pos.x,..pos.z] | null]
 	if not_equals(_cfgRadio,-1) then {
-		//_cfgRadio params ["_freq","_vol","_hearDist",["_pos",[0,0,0]],"_dist","_raType"];
+		//_cfgRadio params ["_freq","_vol","_hearDist","_raType",["_pos",[0,0,0]]];
 		#ifdef EDITOR
 		_cfgRadio = array_copy(_cfgRadio);
 		#endif
 		private _ptr = _cfgRadio deleteAt 0;
+		_cfgRadio set [3,RADIO_TYPE_ENUM_TO_STRING(_cfgRadio select 3)];
 
 		[_object,_cfgRadio,_ptr,true] call vs_loadWorldRadio;
 	};

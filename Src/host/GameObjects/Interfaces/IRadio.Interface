@@ -10,7 +10,10 @@ interfaceHeader
 	Требует определения 
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);
+	var(radioType,RADIO_TYPE_WALKIETALKIE);
 */
+
+attributeParams(hasField,"radioType" arg "radioIsEnabled" arg "radioSettings");
 
 //! новые переменные
 /*
@@ -42,13 +45,16 @@ func(getRadioData)
 		_hearDist
 	];
 	
-	if !isNullVar(_biasPos) then {
-		_data pushBack _biasPos;
+	private _radioType = getSelf(radioType);
+	_radioType = RADIO_TYPE_STRING_TO_ENUM(_radioType);
+
+	if !isNullVar(_radioType) then {	
+		_data pushBack _wavePower;
 	} else {
 		_data append [null];
 	};
-	if !isNullVar(_wavePower) then {	
-		_data pushBack _wavePower;
+	if !isNullVar(_biasPos) then {
+		_data pushBack _biasPos;
 	} else {
 		_data append [null];
 	};

@@ -103,13 +103,13 @@ vs_loadWorldRadio = {
 		vs_allRadioSpeakers set [_ptr,_rdataInfo];
 	};
 
-	[_ptr] call vs_addRadioStream;
+	[_ptr,_rdataInfo get "radioType"] call vs_addRadioStream;
 };
 
 vs_prepRadioDataInternal = {
 	params ["_obj","_radioData","_ptr"];
 
-	_radioData params ["_freq",["_vol",1],["_dist",10],["_bias",[0,0,0]],["_wavePower",-1]];
+	_radioData params ["_freq",["_vol",1],["_dist",10],["_radioType",""],["_bias",[0,0,0]]];
 	
 	private _data = createHashMapFromArray [
 		["isInHand",false], //bool - находится ли радио в руке
@@ -118,7 +118,7 @@ vs_prepRadioDataInternal = {
 		["vol",_vol], //float - громкость
 		["dist",_dist], //float - дистанция слышимости
 		["bias",_bias], //vec3 - смещение относительно источника
-		["wavePower",_wavePower], //float - мощность радио
+		["radioType",_radioType], //string - тип радио
 		["obj",_obj], //obj - объект радио
 		["ptr",_ptr] //ptr - указатель на объект радио
 	];
@@ -153,6 +153,9 @@ vs_isWorldRadioObject = {
 };
 
 vs_processRadios = {
+
+	//обновляем список объектов для записи
+	call vs_processUpdateMicRadioObjects;
 	
 	private _allSpeakers = vs_map_waveSpeakers; //map<freq:string,players:map<string:name,float:wavePower>>
 	
@@ -302,3 +305,48 @@ vs_handleMicRadioObjects = {
 		vs_localReceivers = [];
 	};
 };
+
+//процесс обновления списка объектов для записи
+vs_processUpdateMicRadioObjects = {
+	if !(call vs_hasTalkingOnRadio) exitWith {};
+	private _objs = vs_localReceivers;
+	private _probNewObjs = call vs_getNearReceiverRadioObjects;
+	
+	private _remIndexes = [];
+	private _toStartRecord = [];
+	{
+		// прослушиваемый объект не в списке новых - мы отдалились от него и должны прекратить запись
+		if !(_x in _probNewObjs) then {
+			[_x,false] call vs_radioSpeakProcess;
+			_remIndexes pushBack _forEachIndex;
+		};
+	} foreach _objs;
+	
+	_objs deleteAt _remIndexes;
+
+	{
+		// новый объект не в списке текущих - мы подошли к нему и должны начать запись
+		if !(_x in _objs) then {
+			_toStartRecord pushBack _x;
+			[_x,true] call vs_radioSpeakProcess;
+		};
+	} foreach _probNewObjs;
+
+	_objs append _toStartRecord;
+
+};
+
+//высвобождает ресурсы клиента, который отключился от сервера с включенным войсом по радио
+vs_onClientDisconnected = {
+	params ["_clientName"];
+	{
+		private _playersMap = _y;
+		if (_clientName in _playersMap) then {
+			_playersMap deleteAt _clientName;
+			if (count _playersMap == 0) then {
+				vs_map_waveSpeakers deleteAt _x;
+			};
+		}
+	} foreach (+vs_map_waveSpeakers);//iterate at copy of map
+};
+rpcAdd("vsr_oncldis",vs_onClientDisconnected);

@@ -13,6 +13,7 @@
 #include <..\..\host\Atmos\Atmos_shared.sqf>
 #include <..\ClientRpc\clientRpc.hpp>
 #include "..\Interactions\interact_component_shared.hpp"
+#include "..\..\host\ServerVoice\ReVoicer.hpp"
 
 namespace(NOEngine.Client,noe_client_)
 

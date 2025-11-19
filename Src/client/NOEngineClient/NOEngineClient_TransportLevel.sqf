@@ -488,13 +488,16 @@ noe_client_byteArrToObjStruct = {
 				if isTrue(_hasRadio) then {
 					private _fqid = getCurToken();
 					
-					//tokens: [string freq, float volume,float distance, prob [pos.x,..pos.z] | null, prob waveDistance]
+					//tokens: [string freq, float volume,float distance, uint radio type, prob [pos.x,..pos.z] | null]
 					_vec3 = [_fqid];
 					moveNext(); //from freq to vol
 					_vec3 pushBack getCurToken();
 					moveNext(); // from vol to distance
 					_vec3 pushBack getCurToken();
-					moveNext(); // from distance to prob pos
+					moveNext(); // from distance to radio type
+					_bufvar = RADIO_TYPE_ENUM_TO_STRING(getCurToken());
+					_vec3 append _bufvar;
+					moveNext(); //from radio type to prob pos
 					_bufvar = getCurToken();
 					if isNullVar(_bufvar) then {
 						_vec3 pushBack [0,0,0];//add bias
@@ -507,9 +510,6 @@ noe_client_byteArrToObjStruct = {
 						// _vec3 pushBack _bufvar;//add bias
 						_vec3 pushBack _bufvar;
 					};
-					moveNext(); //from prob pos to prob wave dist
-					_bufvar = [getCurToken()];
-					_vec3 append _bufvar;
 					// if (_fqid < 0) then {
 					// 	_vec3 set [0,-_fqid]; //inverse frequency
 					// 	moveNext(); //from bias to wave dist

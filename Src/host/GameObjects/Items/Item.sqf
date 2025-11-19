@@ -796,6 +796,7 @@ class(ItemRadio) extends(Item)
 	var(radioIsEnabled,true);
 
 	var(radioSettings,[10 arg "someencoding" arg 1 arg 5 arg null arg 200]);
+	var(radioType,RADIO_TYPE_WALKIETALKIE);
 
 	func(InitModel)
 	{

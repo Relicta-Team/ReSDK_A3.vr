@@ -52,3 +52,7 @@ vs_server_onRadioSpeakStop = {
 rpcAdd("vssrv_nspk",vs_server_onRadioSpeakStop);
 
 
+vs_server_onClientDisconnected = {
+	params ["_clientName"];
+	rpcSendToAll("vsr_oncldis",[_clientName]);
+};
