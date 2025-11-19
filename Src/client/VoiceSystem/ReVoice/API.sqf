@@ -89,6 +89,9 @@ vs_disconnectVoice = {
 
 //функция "правильного" завершения системы. Вызывается при выходе в лобби или перезагрузке войса
 vs_disconnectVoiceSystem = {
+    
+    [false] call vs_handleSpeak; //stop voice and radios
+
     vs_canProcess = false;
     {
         [_x,true] call vs_internal_clearEffectValues;
