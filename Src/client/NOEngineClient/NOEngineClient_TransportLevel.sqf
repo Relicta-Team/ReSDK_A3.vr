@@ -496,7 +496,7 @@ noe_client_byteArrToObjStruct = {
 					_vec3 pushBack getCurToken();
 					moveNext(); // from distance to radio type
 					_bufvar = RADIO_TYPE_ENUM_TO_STRING(getCurToken());
-					_vec3 append _bufvar;
+					_vec3 pushBack _bufvar;
 					moveNext(); //from radio type to prob pos
 					_bufvar = getCurToken();
 					if isNullVar(_bufvar) then {

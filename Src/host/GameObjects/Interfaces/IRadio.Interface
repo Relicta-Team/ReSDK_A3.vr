@@ -49,7 +49,7 @@ func(getRadioData)
 	_radioType = RADIO_TYPE_STRING_TO_ENUM(_radioType);
 
 	if !isNullVar(_radioType) then {	
-		_data pushBack _wavePower;
+		_data pushBack _radioType;
 	} else {
 		_data append [null];
 	};
