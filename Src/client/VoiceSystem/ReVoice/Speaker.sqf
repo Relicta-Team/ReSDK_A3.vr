@@ -103,6 +103,16 @@ vs_loadWorldRadio = {
 		vs_allRadioSpeakers set [_ptr,_rdataInfo];
 	};
 
+	private _rtype = _rdataInfo get "radioType";
+	call {
+		if (_rtype == RADIO_TYPE_WALKIETALKIE) exitWith {
+			_rdataInfo set ["canSpeakInto",_rdataInfo get "isInHand"];
+		}; 
+		if (_rtype == RADIO_TYPE_INTERCOM) exitWith {
+			_rdataInfo set ["canSpeakInto",true];
+		};
+	};
+
 	private _result = [_ptr,_rdataInfo get "radioType"] call vs_addRadioStream;
 	traceformat("vs_loadWorldRadio: %1 %2 %3",_ptr arg _rdataInfo get "radioType" arg _result);
 	_result
@@ -113,6 +123,8 @@ vs_prepRadioDataInternal = {
 
 	_radioData params ["_freq",["_vol",1],["_dist",10],["_radioType",""],["_bias",[0,0,0]]];
 	
+	_vol = 1; //TODO fix on transfer
+
 	private _data = createHashMapFromArray [
 		["isInHand",false], //bool - находится ли радио в руке
 
@@ -122,7 +134,8 @@ vs_prepRadioDataInternal = {
 		["bias",_bias], //vec3 - смещение относительно источника
 		["radioType",_radioType], //string - тип радио
 		["obj",_obj], //obj - объект радио
-		["ptr",_ptr] //ptr - указатель на объект радио
+		["ptr",_ptr], //ptr - указатель на объект радио
+		["canSpeakInto",false] //bool - может ли игрок говорить в эту рацию
 	];
 
 	_obj setVariable ["__radio_data",_data];
@@ -150,7 +163,14 @@ vs_unloadWorldRadio = {
 
 	_obj setVariable ["__radio_data",null];
 
-	//TODO если мы говорили в это радио - надо прекратить в него говорить
+	//если мы говорили в это радио - надо прекратить в него говорить
+	if (vs_isTalkingOnRadio) then {
+		if (_obj in vs_localReceivers) then {
+			[_obj,false] call vs_radioSpeakProcess;
+			//удаляем из списка объектов для записи
+			array_remove(vs_localReceivers,_obj);
+		};
+	};
 
 	true;
 };
@@ -241,8 +261,9 @@ vs_handleRadioRetranslateStreamInternal = {
 		} else {
 			_targetDist / _waveDist; //normalized value from 0 to 1
 		};
+		private _vol = ifcheck(_filterValue>=1,0,1);
 		
-		(apiCmd [CMD_RADIO_APPLY_WAVE_FILTER,[_ptr,_x,_filterValue]]) params ["_r","_rcode"];
+		(apiCmd [CMD_RADIO_APPLY_WAVE_FILTER,[_ptr,_x,_filterValue,_vol]]) params ["_r","_rcode"];
 		
 	} foreach _usersMap;
 };
@@ -280,6 +301,9 @@ vs_getNearReceiverRadioObjects = {
 	private _maxDist = 2;
 	private _iterator = {
 		private _rdata = _y;
+		
+		if !(_rdata get "canSpeakInto") then {continue};
+
 		private _obj = _rdata get "obj";
 		private _dist = _ppos distance _obj;
 		if (_dist < _maxDist) then {
@@ -374,6 +398,7 @@ vs_debug_TestMobSpeaking = {
 	
 	vs_debug_remoteSpeaking = o getvariable ["rv_isSpeaking",false];
 	vs_debug_objectPtr = "123";
+	vs_debug_objectFreq = "10@someencoding";
 	vs_debug_distanceTransmit = 100;
 	
 	_code = {
@@ -381,9 +406,9 @@ vs_debug_TestMobSpeaking = {
 		if not_equals(_state,vs_debug_remoteSpeaking) then {
 			vs_debug_remoteSpeaking = _state;
 			if (_state) then {
-				["rem",vs_debug_objectPtr,"10@someencoding",vs_debug_distanceTransmit] call vs_onRadioSpeakStarted;
+				["rem",vs_debug_objectPtr,vs_debug_objectFreq,vs_debug_distanceTransmit] call vs_onRadioSpeakStarted;
 			} else {
-				["rem",vs_debug_objectPtr,"10@someencoding"] call vs_onRadioSpeakStopped;
+				["rem",vs_debug_objectPtr,vs_debug_objectFreq] call vs_onRadioSpeakStopped;
 			};
 		};
 	};

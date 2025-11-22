@@ -15,6 +15,25 @@
 
 class(IStructRadioEDLogic) extends(IStructRadio)
 
+	func(constructor)
+	{
+		objParams();
+		//! нужно поправить генератор карт
+		callSelfAfter(__onRadioLoaded,0.9);
+	};
+
+	//быстрый фикс для синхронизации байт-данных
+	func(__onRadioLoaded)
+	{
+		objParams();
+		private _vObj = getSelf(loc);
+		if isNullReference(_vObj) exitWith {};
+		if getSelf(radioIsEnabled) then {
+			_vObj setVariable ["radio",callSelf(getRadioData)];
+			[_vObj] call noe_updateObjectByteArr; //обновляем байт массив
+		};
+	};
+
 	func(radioSetMode)
 	{
 		objParams_1(_mode);

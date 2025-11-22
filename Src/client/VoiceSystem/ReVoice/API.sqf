@@ -584,7 +584,12 @@ vs_calcReverbEffect = {
         linearConversion [4,60,_distSpeaker,0.8,1.5,true];
     } else {
         //currently constant value
-        1.5;
+        if (_target call vs_isWorldRadioObject) then {
+            private _rdata = _target call vs_getObjectRadioData;
+            linearConversion [4,60,_rdata get "dist",0.8,1.5,true];
+        } else {
+            1.5;
+        };
     };
     
     private _avgDim = (_avgWall + _ceiling + _floor) / 3;
