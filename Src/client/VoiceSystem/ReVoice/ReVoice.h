@@ -3,6 +3,10 @@
 // sdk.relicta.ru
 // ======================================================
 
+//usage: apiCmd ["test",[arg1,arg2]]
+#define apiCmd "revoicer" callExtension 
+#define apiRequest(p) ("revoicer" callExtension (p))
+
 // ================ api requests ==========================
 #define REQ_GET_VERSION "getVersion"
 #define REQ_IS_CONNECTED_VOICE "isConnectedVoice"
@@ -31,3 +35,13 @@
 
 #define CMD_SETLOWPASS "setLowpass"
 #define CMD_SETREVERB "setReverb"
+
+//radio commands
+#define CMD_RADIO_ADD "addRadio"
+#define CMD_RADIO_REMOVE "removeRadio"
+
+#define CMD_RADIO_SUBSCRIBE_RADIOSTREAM "subscribeRadio"
+#define CMD_RADIO_APPLY_WAVE_FILTER "applyRadioWaveFilter"
+#define CMD_SYNC_REMOTE_RADIO "syncRemoteRadio"
+#define CMD_SYNC_REMOTE_RADIO_LOWPASS "syncRemoteRadioLowpass"
+#define CMD_SYNC_REMOTE_RADIO_REVERB "syncRemoteRadioReverb"

@@ -17,6 +17,7 @@
 #include <..\GURPS\gurps.hpp>
 #include <..\SpecialActions\SpecialActions.hpp>
 
+#include "..\ServerVoice\ReVoicer.hpp"
 
 //todo add QDEL file
 // QDEL means query delete for antilagging objects

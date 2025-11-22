@@ -12,6 +12,9 @@ var(slots,INV_LIST_ALL);
 
 var(defaultUniform,"");//дефолтная форма (женское тело или бомжиные обноски)
 
+//контроллер слоёв отображения (волосы, бороды и т.д.)
+var(overlayController,struct_new(OverlayLayerController));
+
 region(Low level inventory api)
 	func(getSlotInfoForInventory)
 	{

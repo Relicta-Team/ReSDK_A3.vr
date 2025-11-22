@@ -6,12 +6,13 @@
 #include <..\..\..\host\engine.hpp>
 #include <..\..\ClientRpc\clientRpc.hpp>
 #include <..\..\..\host\NOEngine\NOEngine.hpp>
+#include "..\..\..\host\ServerVoice\ReVoicer.hpp"
 
 #include "ReVoice.h"
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
-vs_apiversion = "beta_v1";
+vs_apiversion = "stable_v3";
 
 vs_localName = ""; //sended from server on player connected
 vs_canProcess = false;

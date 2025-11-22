@@ -9,6 +9,7 @@
 #include <..\LightEngine\LightEngine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\Interactions\interact.hpp>
+#include "..\..\host\ServerVoice\ReVoicer.hpp"
 
 namespace(SyncMobData,smd_)
 
@@ -23,6 +24,8 @@ namespace(SyncMobData,smd_)
 */
 
 // smd_allInGameMobs - global list of all ingame mobs
+//smd_allInGamePlayerMobs - global list of all ingame mobs that are players
+
 
 //ассоциативный список переменная слежения, метод выполнения при изменении состояния
 decl(string[][])
@@ -489,7 +492,7 @@ smd_setSlotDataProcessor = {
 				_srcObj = _mob getvariable (smd_local_prefix + _var + "_obj");
 				if !isNullReference(_srcObj) then {
 					if (_srcObj call vs_isWorldRadioObject) then {
-						[_srcObj] call vs_unloadWorldRadio;
+						[_srcObj,true] call vs_unloadWorldRadio;
 					};
 					deleteVehicle _srcObj;
 				};
@@ -545,7 +548,21 @@ smd_onChangeSlotData = {
 		};
 		
 		if (_prevObject call vs_isWorldRadioObject) then {
-			[_prevObject] call vs_unloadWorldRadio;
+			//фикс гонки данных когда NOE обновление пришло раньше чем мы успели обновить слот инвентаря
+			//? пока не знаю как элегантно решить эту проблему
+			private _ptr = (_prevObject call vs_getObjectRadioData) get "ptr";
+			if (_ptr in vs_allRadioSpeakers) then {
+				//радио есть в мире - нам не нужно выгружать его
+				//оно вызывало vs_loadWorldRadio для нового объекта
+				//У этого просто очищаем инвентарные данные без удаления радиострима
+				[_prevObject,true,false] call vs_unloadWorldRadio;
+			} else {
+				//а здесь мы обрабатываем случай свапа радио между слотами. гонка тоже может быть
+				if !(_ptr in vs_allInventoryRadios) then {
+					//радио не в инвентаре - удаляем его
+					[_prevObject,true] call vs_unloadWorldRadio;
+				};
+			};
 		};
 		
 		//fix 0.7.358 - shortsword in left hand after disable two-handed mode
@@ -603,14 +620,16 @@ smd_onChangeSlotData = {
 
 
 	//radio setting
-	//[int freq, float volume,float canHearUnits, [prob pos.x,..pos.z], float dist, int type]
+	//[string freq, float volume,float dist, uint type, [prob pos.x,..pos.z] | null]
 	if not_equals(_cfgRadio,-1) then {
-		//_cfgRadio params ["_freq","_vol","_hearDist",["_pos",[0,0,0]],"_dist","_raType"];
-		if isNull(_cfgRadio select 3) then {
-			_cfgRadio set [3,[0,0,0]];
-		};
+		//_cfgRadio params ["_freq","_vol","_hearDist","_raType",["_pos",[0,0,0]]];
+		#ifdef EDITOR
+		_cfgRadio = array_copy(_cfgRadio);
+		#endif
+		private _ptr = _cfgRadio deleteAt 0;
+		_cfgRadio set [3,RADIO_TYPE_ENUM_TO_STRING(_cfgRadio select 3)];
 
-		[_object,_cfgRadio,_mob getvariable "voiceptr",_isPlayer] call vs_loadWorldRadio;
+		[_object,_cfgRadio,_ptr,true] call vs_loadWorldRadio;
 	};
 
 
