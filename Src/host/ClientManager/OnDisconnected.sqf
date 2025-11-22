@@ -22,8 +22,10 @@ if !isNullReference(_cli) then {
 		callFunc(_mob,onDisconnected);
 
 		private _mobIndex = cm_allInGamePlayerMobs find getVar(_mob,owner);
-		cm_allInGamePlayerMobs deleteAt _mobIndex;
-		netSetGlobal(smd_allInGamePlayerMobs,cm_allInGamePlayerMobs);
+		if (_mobIndex >= 0) then {
+			cm_allInGamePlayerMobs deleteAt _mobIndex;
+			netSetGlobal(smd_allInGamePlayerMobs,cm_allInGamePlayerMobs);
+		};
 	};
 
 	//удаляем клиента из всех его ролей
