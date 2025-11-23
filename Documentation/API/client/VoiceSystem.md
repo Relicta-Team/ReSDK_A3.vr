@@ -1949,7 +1949,7 @@ Description:
 
 Initial value:
 ```sqf
-"stable_v3"
+"stable_v4"
 ```
 File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 15](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L15)
 ## vs_localName
