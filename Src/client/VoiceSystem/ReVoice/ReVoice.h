@@ -45,3 +45,17 @@
 #define CMD_SYNC_REMOTE_RADIO "syncRemoteRadio"
 #define CMD_SYNC_REMOTE_RADIO_LOWPASS "syncRemoteRadioLowpass"
 #define CMD_SYNC_REMOTE_RADIO_REVERB "syncRemoteRadioReverb"
+
+
+// ================ audio system commands =================
+
+// requests
+#define REQ_AUDIO_GET_ALL_SOUNDS_IDS "audioGetAllSoundsIds"
+#define REQ_AUDIO_GET_MASTER_SOUND_VOLUME "audioGetMasterSoundVolume"
+#define REQ_AUDIO_RELEASE_ALL_SOUNDS "audioReleaseAllSounds"
+
+// commands
+#define CMD_AUDIO_IS_SOUND_EXISTS "audioIsSoundExists"
+#define CMD_AUDIO_STOP_SOUND "audioStopSound"
+#define CMD_AUDIO_SET_MASTER_SOUND_VOLUME "audioSetMasterSoundVolume"
+#define CMD_AUDIO_SET_SOUND_POS "audioSetSoundPos"
