@@ -235,7 +235,7 @@ vs_handleRadioRetranslateStreamInternal = {
 		#ifdef REDITOR_VOICE_DEBUG
 		vs_reditor_procObjList
 		#else
-		cm_allInGamePlayerMobs 
+		smd_allInGamePlayerMobs 
 		#endif
 		apply {
 			[_x getvariable "rv_name",

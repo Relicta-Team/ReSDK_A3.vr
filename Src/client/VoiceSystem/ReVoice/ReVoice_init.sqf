@@ -12,7 +12,7 @@
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
-vs_apiversion = "stable_v3";
+vs_apiversion = "stable_v4";
 
 vs_localName = ""; //sended from server on player connected
 vs_canProcess = false;
