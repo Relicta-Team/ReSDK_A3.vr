@@ -465,7 +465,8 @@ vs_internal_applyEffects = {
 
 //получает настройки реверба для текущего моба (~0.976563ms per call)
 vs_calcReverbEffect = {
-    params ["_target"];
+    params ["_target",["_targetAsPos",false],["_soundId",-1],["_dist",0]];
+    
     private _rayDistance = 100;
     private _ignore1 = player;
     #ifdef REDITOR_VOICE_DEBUG
@@ -473,15 +474,24 @@ vs_calcReverbEffect = {
         private _endPos = getposasl _target;
         private _isMob = _target in vs_reditor_procObjList;
     #else
-        private _isMob = typeof _target == BASIC_MOB_TYPE;
-        private _endPos = if (_isMob) then {
-            atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+        private _isMob = false;
+        private _endPos = [0,0,0];
+        private _ignore2 = _target;
+        if (_targetAsPos) then {
+            _ignore2 = objNull;
+            _endPos = _target;
+            _target = _soundId;
         } else {
-            getposasl _target;
+            _isMob = typeof _target == BASIC_MOB_TYPE;
+            _endPos = if (_isMob) then {
+                atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+            } else {
+                getposasl _target;
+            };
         };
     #endif
 
-    #define __postargs _ignore1,_target,true,1,"VIEW","GEOM",true
+    #define __postargs _ignore1,_ignore2,true,1,"VIEW","GEOM",true
     
     private _pointsQuery = [
         //cross check
@@ -579,16 +589,20 @@ vs_calcReverbEffect = {
     //new algo v2(works fine)
     private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
-    private _volumeFactor = if (_isMob) then {
-        private _distSpeaker = _target getvariable ["rv_distance",4]; 
-        linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+    private _volumeFactor = if (_targetAsPos) then {
+        linearConversion [4,60,_dist,0.8,1.5,true];
     } else {
-        //currently constant value
-        if (_target call vs_isWorldRadioObject) then {
-            private _rdata = _target call vs_getObjectRadioData;
-            linearConversion [4,60,_rdata get "dist",0.8,1.5,true];
+        if (_isMob) then {
+            private _distSpeaker = _target getvariable ["rv_distance",4]; 
+            linearConversion [4,60,_distSpeaker,0.8,1.5,true];
         } else {
-            1.5;
+            //currently constant value
+            if (_target call vs_isWorldRadioObject) then {
+                private _rdata = _target call vs_getObjectRadioData;
+                linearConversion [4,60,_rdata get "dist",0.8,1.5,true];
+            } else {
+                1.5;
+            };
         };
     };
     
@@ -642,22 +656,32 @@ vs_calcReverbEffect = {
 };
 
 vs_calcLowpassEffect = {
-    params ["_target"];
+    params ["_target",["_targetAsPos",false],["_soundId",-1]];
     #ifdef REDITOR_VOICE_DEBUG
     private _startPos = getposasl cameraon;
     private _endPos = getposasl _target;
     private _ignore1 = cameraon;
     #else
     private _startPos = atltoasl(player modeltoworldvisual (player selectionposition "head"));
-    private _endPos = if (typeof _target == BASIC_MOB_TYPE) then {
-        atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+    private _endPos = if (_targetAsPos) then {
+        _target
     } else {
-        getposasl _target;
+        if (typeof _target == BASIC_MOB_TYPE) then {
+            atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+        } else {
+            getposasl _target;
+        };
     };
     private _ignore1 = player;
     #endif
 
     private _ignore2 = _target;
+
+    //override ignore2 if target is sound id
+    if (_targetAsPos) then {
+        _ignore2 = objNull;
+        _target = _soundId;
+    };
 
     // [begPosASL, endPosASL, ignoreObj1, ignoreObj2, sortMode, maxResults, LOD1, LOD2, returnUnique]
     

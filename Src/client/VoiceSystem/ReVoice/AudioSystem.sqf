@@ -37,7 +37,9 @@ vs_audio_releaseAllSounds = {
 vs_audio_init = {
 	if (!vs_audio_useBackend) exitWith {};
 
-
+	//disable rvengine audio system
+	0.1 fadeSound 0; 
+	//todo fademusic
 };
 
 vs_audio_setMasterSoundVolume = {
@@ -97,9 +99,16 @@ vs_audio_playSound3d = {
 	_soundParams append [_distance,_pitch,_offset,_vol,_is2d,_loop];
 
 	private _id = (apiCmd [CMD_AUDIO_PLAY_SOUND,_soundParams]) select 0;
+
 	if (_useEffects) then {
-		//TODO: set effects
+		private _lowp = [_pos,true,_id] call vs_calcLowpassEffect;
+		private _reverb = [_pos,true,_id,_distance] call vs_calcReverbEffect;
+		
+		_lowp call vs_audio_setLowpassEffect;
+		_reverb call vs_audio_setReverbEffect;
 	};
+
+	[_id,false] call vs_audio_setPaused; //звук готов - можно воспроизводить
 
 	if (_doFollow) then {
 		private _asyncParams = [_id];
@@ -114,6 +123,7 @@ vs_audio_playSound3d = {
 				_id call vs_audio_stopSound;
 				true;
 			};
+			[_id,atltoasl((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset)] call vs_audio_setSoundPos;
 			false
 		},
 		{},
@@ -139,4 +149,19 @@ vs_audio_setSoundPos = {
 	private _params = [_id];
 	_params append _pos;
 	apiCmd [CMD_AUDIO_SET_SOUND_POS,_params];
+};
+
+vs_audio_setPaused = {
+	params ["_id","_paused"];
+	apiCmd [CMD_AUDIO_SET_PAUSED,[_id,_paused]];
+};
+
+vs_audio_setLowpassEffect = {
+    params ["_id",["_cut",22000],["_res",10]];
+    apiCmd [CMD_AUDIO_SETLOWPASS,[_id,_cut,_res]];
+};
+
+vs_audio_setReverbEffect = {
+    params ["_id",["_dec",1200],["_edel",20],["_ldel",40],["_hcut",8000],["_wet",-80],["_dry",0]];
+    apiCmd [CMD_AUDIO_SETREVERB,[_id,_dec,_edel,_ldel,_hcut,_wet,_dry]];
 };
