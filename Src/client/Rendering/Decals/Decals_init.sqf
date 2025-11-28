@@ -143,35 +143,6 @@ dec_updateUniformRender = {
 			nextFrameParams(_thisFnc,[_mob arg _value arg _curUniform arg _attempt arg _thisFnc]);
 		};
 		if (_needRestore) then {
-			[
-				format["<@231456737385775114> Decals restore at error: user %1; data: %2",[
-					cd_clientName,
-					_mob getvariable ["__dec_internal_origTextures",'nulltex'],
-					_mob getvariable ["__dec_internal_curUniform",'nulluni'],
-					_mob getvariable ["__dec_internal_targetValue",'nullval'],
-					_mob getvariable ["__dec_internal_index",'nullind'],
-					uniform _mob,
-					_mob,
-					count (getobjecttextures _mob),
-					call {
-						private _indUni = _mob getvariable "__dec_internal_index";
-						if isNullVar(_indUni) exitWith {"evalerror"};
-						private _avals = [];
-						{
-							_avals set [_foreachIndex, [_indUni,_foreachIndex] call dec_getRenderLayerName];
-						} foreach (getobjecttextures _mob);
-						_avals apply {
-							private _ctx = [_x] call dec_getRenderContext;
-							if isNullReference(_ctx) then {
-								[_x,"nullctx"]
-							} else {
-								[_x,allcontrols _ctx apply {[ctrlclassname _x,ctrltext _x]}]
-							};
-						} // evalerror | [[rtname,ctrlinfo],...] -> ctrlinfo: [classname,value]
-					}
-				]
-				]
-			] call client_sendStatisticToServer;
 			{
 				_mob setObjectTexture [_foreachIndex,_x];	
 			} foreach (_mob getvariable ["__dec_internal_origTextures",[]]);
@@ -238,8 +209,6 @@ dec_setRenderGerms = {
 			private _fd = [_mob getvariable vec2("__dec_internal_curUniform","UNDEFINED"),uniform _mob];
 			private _td = [_tex,_value,_index,_texW,_texH];
 			errorformat("Decals: Render context %1 not found; formdata: %2; texture data: %3",_rtName arg _fd arg _td);
-			//currently we need collect some information about the error to fix it
-			[format["<@231456737385775114> Decals error: user %1; rt: %2; fd: %3; td: %4",cd_clientName,_rtName,_fd,_td]] call client_sendStatisticToServer;
 		};
 
 		//force delete all widgets
