@@ -471,15 +471,20 @@ vs_calcReverbEffect = {
     private _ignore1 = player;
     #ifdef REDITOR_VOICE_DEBUG
         _ignore1 = cameraon;
-        private _endPos = getposasl _target;
+        private _endPos = ifcheck(_targetAsPos,atltoasl _target,getposasl _target);
         private _isMob = _target in vs_reditor_procObjList;
+        if (_targetAsPos) then {
+            _ignore2 = objNull;
+            _endPos = atltoasl _target;
+            _target = _soundId;
+        };
     #else
         private _isMob = false;
         private _endPos = [0,0,0];
         private _ignore2 = _target;
         if (_targetAsPos) then {
             _ignore2 = objNull;
-            _endPos = _target;
+            _endPos = atltoasl _target;
             _target = _soundId;
         } else {
             _isMob = typeof _target == BASIC_MOB_TYPE;
@@ -590,7 +595,7 @@ vs_calcReverbEffect = {
     private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
     private _volumeFactor = if (_targetAsPos) then {
-        linearConversion [4,60,_dist,0.8,1.5,true];
+        (linearConversion [4,60,_dist,0.8,1.5,true] ) * 1.5; //немного увеличенный фактор для лучшей "эффектности" реверба
     } else {
         if (_isMob) then {
             private _distSpeaker = _target getvariable ["rv_distance",4]; 
@@ -659,12 +664,12 @@ vs_calcLowpassEffect = {
     params ["_target",["_targetAsPos",false],["_soundId",-1]];
     #ifdef REDITOR_VOICE_DEBUG
     private _startPos = getposasl cameraon;
-    private _endPos = getposasl _target;
+    private _endPos = ifcheck(_targetAsPos,atltoasl _target,getposasl _target);
     private _ignore1 = cameraon;
     #else
     private _startPos = atltoasl(player modeltoworldvisual (player selectionposition "head"));
     private _endPos = if (_targetAsPos) then {
-        _target
+        atltoasl _target
     } else {
         if (typeof _target == BASIC_MOB_TYPE) then {
             atltoasl(_target modeltoworldvisual (_target selectionposition "head"));

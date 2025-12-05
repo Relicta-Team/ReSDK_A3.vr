@@ -9,10 +9,18 @@
 
 vs_audio_useBackend = true; // использовать новый движок аудио
 
+vs_audio_loadLib = {
+	((apiCmd [CMD_AUDIO_LOADLIB,[_this]]) select 0) == "True";
+};
+
+vs_audio_unloadLib = {
+	((apiCmd [CMD_AUDIO_UNLOADLIB,[_this]]) select 0) == "True";
+};
+
 // получает все работающие звуки в игре
 vs_audio_getAllSoundsIds = {
 	//get hashset of all sounds
-	apiRequest(REQ_AUDIO_GET_ALL_SOUNDS_IDS) splitString " " apply {parseNumber _x};
+	apiRequest(REQ_AUDIO_GET_ALL_SOUNDS_IDS) splitString " ";
 };
 
 vs_audio_isSoundExists = {
@@ -25,7 +33,7 @@ vs_audio_stopSound = {
 
 vs_audio_stopAllSounds = {
 	{
-		_this call vs_audio_stopSound;
+		_x call vs_audio_stopSound;
 	} foreach (call vs_audio_getAllSoundsIds);
 };
 
@@ -36,9 +44,9 @@ vs_audio_releaseAllSounds = {
 
 vs_audio_init = {
 	if (!vs_audio_useBackend) exitWith {};
-
+	logformat("Audio lib loaded: %1","@rlct\Addons\rel_gamecontent.pbo" call vs_audio_loadLib);
 	//disable rvengine audio system
-	0.1 fadeSound 0; 
+	//0.1 fadeSound 0; 
 	//todo fademusic
 };
 
@@ -87,10 +95,10 @@ vs_audio_playSound3d = {
 				_source params ["_obj",["_followSrc",false],["_offset",[0,0,0]]];
 				_doFollow = _followSrc;
 				_sourceParams = [_obj,_offset];
-				_pos = atltoasl((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
+				_pos = ((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
 			};
 		} else {
-			_pos = getPosASL (_source call vs_audio_internal_getSourceObj);
+			_pos = getPosATL (_source call vs_audio_internal_getSourceObj);
 		};
 	};
 
@@ -101,6 +109,7 @@ vs_audio_playSound3d = {
 	private _id = (apiCmd [CMD_AUDIO_PLAY_SOUND,_soundParams]) select 0;
 
 	if (_useEffects) then {
+		if (_is2d) exitWith {};
 		private _lowp = [_pos,true,_id] call vs_calcLowpassEffect;
 		private _reverb = [_pos,true,_id,_distance] call vs_calcReverbEffect;
 		
@@ -123,7 +132,7 @@ vs_audio_playSound3d = {
 				_id call vs_audio_stopSound;
 				true;
 			};
-			[_id,atltoasl((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset)] call vs_audio_setSoundPos;
+			[_id,((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset)] call vs_audio_setSoundPos;
 			false
 		},
 		{},
