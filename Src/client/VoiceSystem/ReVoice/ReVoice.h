@@ -55,6 +55,9 @@
 #define REQ_AUDIO_RELEASE_ALL_SOUNDS "audioReleaseAllSounds"
 
 // commands
+#define CMD_AUDIO_LOADLIB "audioLoadLib"
+#define CMD_AUDIO_UNLOADLIB "audioUnloadLib"
+#define CMD_AUDIO_PLAY_SOUND "audioPlaySound"
 #define CMD_AUDIO_IS_SOUND_EXISTS "audioIsSoundExists"
 #define CMD_AUDIO_STOP_SOUND "audioStopSound"
 #define CMD_AUDIO_SET_MASTER_SOUND_VOLUME "audioSetMasterSoundVolume"
