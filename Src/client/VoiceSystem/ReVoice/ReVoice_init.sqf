@@ -34,5 +34,7 @@ vs_isEnabledText = false;
 //система динамиков (и радио)
 #include "Speaker.sqf"
 
+//аудиосистема
+#include "AudioSystem.sqf"
 
 call vs_init;

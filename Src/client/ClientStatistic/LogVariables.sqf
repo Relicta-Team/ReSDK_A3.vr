@@ -136,8 +136,7 @@ clistat_buffer append [
 	[colortext(5D56DB,"Listen users:"),{count(flatten(values vs_map_waveSpeakers apply {keys _x})) }],
 	[colortext(1FC4C4,"Cur music: "),{ifcheck(isNull(music_playedObject),"no",music_playedObject get "file")}],
 	[colortext(1FC4C4,"m_playedtime:"),{ifcheck(isNull(music_playedObject),"no",str(music_playedObject get "curtime"))}],
-	[colortext(1FC4C4,"m_vol:"),{str musicVolume}],
-	[colortext(1FC4C4,"m_curchan:"),{str music_internal_lastPriority}]
+	[colortext(1FC4C4,"minf:"),{format["vol:%1;ch:%2",musicVolume,music_internal_lastPriority]}]
 ];
 	#ifdef EDITOR_OR_SP_MODE
 clistat_buffer append [
@@ -146,6 +145,7 @@ clistat_buffer append [
 		,os_steps_currentSoundCount
 		,os_steps_lastPtr
 		,count os_steps_map_objToMaterialPtr]}]
+	,[colortext(1FC4C4,"snds: "),{format["v:%1; bf:%2",(count call vs_audio_getAllSoundsIds),count sound3d_internal_list_soundBuff]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Global threads:",{format["upd %1; hndl %2",count cba_common_perFrameHandlerArray,count cba_common_PFHhandles]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Delayed:",{str count cba_common_waitAndExecArray}]
 	,["<t color='#832DCF'>[ENGINE]</t> Async delayed:",{str count cba_common_waitUntilAndExecArray}]
