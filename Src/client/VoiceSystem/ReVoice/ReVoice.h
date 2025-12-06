@@ -65,3 +65,5 @@
 #define CMD_AUDIO_SET_PAUSED "audioSetSoundPaused"
 #define CMD_AUDIO_SETLOWPASS "audioSetLowpass"
 #define CMD_AUDIO_SETREVERB "audioSetReverb"
+#define CMD_AUDIO_SET_LOOP_POINTS "audioSetLoopPoints"
+#define CMD_AUDIO_GET_SOUND_PARAMS "audioGetSoundParams"

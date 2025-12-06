@@ -48,13 +48,16 @@ vs_audio_init = {
 	//disable rvengine audio system
 	//0.1 fadeSound 0; 
 	//todo fademusic
-};
+	
+	if (is3den) exitWith {};
 
-vs_audio_setMasterSoundVolume = {
-	apiCmd [CMD_AUDIO_SET_MASTER_SOUND_VOLUME,[_this]];
-};
-vs_audio_getMasterSoundVolume = {
-	parseNumber (apiRequest(REQ_AUDIO_GET_MASTER_SOUND_VOLUME));
+	private _syncAudio = {
+		if (!isGameFocused) exitWith {
+			0 call vs_audio_setMasterSoundVolume;
+		};
+		clamp(getAudioOptionVolumes select 0,0,1) call vs_audio_setMasterSoundVolume;
+	};
+	startUpdate(_syncAudio,0.5);
 };
 
 /*
@@ -102,6 +105,10 @@ vs_audio_playSound3d = {
 		};
 	};
 
+	if !([_soundPath,".ogg"] call stringEndWith) then {
+		_soundPath = _soundPath + ".ogg";
+	};
+
 	private _soundParams = [_soundPath];
 	_soundParams append _pos;
 	_soundParams append [_distance,_pitch,_offset,_vol,_is2d,_loop];
@@ -118,21 +125,29 @@ vs_audio_playSound3d = {
 	};
 
 	[_id,false] call vs_audio_setPaused; //звук готов - можно воспроизводить
-
+	traceformat("[%1] sound played: %2; follow: %3; distance: %4; src: %5",_id arg _soundPath arg _doFollow arg _distance arg _source);
 	if (_doFollow) then {
 		private _asyncParams = [_id];
 		_asyncParams append _sourceParams;
+		_asyncParams pushBack _distance;
 
 		startAsyncInvoke
 		{
-			params ["_id","_obj","_offset"];
+			params ["_id","_obj","_offset","_distance"];
 			if !(_id call vs_audio_isSoundExists) exitWith {true};
 			
 			if isNullReference(_obj call vs_audio_internal_getSourceObj) exitWith {
 				_id call vs_audio_stopSound;
 				true;
 			};
-			[_id,((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset)] call vs_audio_setSoundPos;
+			private _pos = ((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
+			[_id,_pos] call vs_audio_setSoundPos;
+			private _lowp = [_pos,true,_id] call vs_calcLowpassEffect;
+			private _reverb = [_pos,true,_id,_distance] call vs_calcReverbEffect;
+			
+			_lowp call vs_audio_setLowpassEffect;
+			_reverb call vs_audio_setReverbEffect;
+			traceformat("[%3] lowp: %1, reverb: %2",_lowp arg _reverb arg _obj);
 			false
 		},
 		{},
@@ -173,4 +188,10 @@ vs_audio_setLowpassEffect = {
 vs_audio_setReverbEffect = {
     params ["_id",["_dec",1200],["_edel",20],["_ldel",40],["_hcut",8000],["_wet",-80],["_dry",0]];
     apiCmd [CMD_AUDIO_SETREVERB,[_id,_dec,_edel,_ldel,_hcut,_wet,_dry]];
+};
+
+vs_audio_getSoundParams = {
+	params ["_id"];
+	if !(_id call vs_audio_isSoundExists) exitWith {[]};
+	((apiCmd [CMD_AUDIO_GET_SOUND_PARAMS,[_id]]) select 0) splitString " " apply {parseNumber _x};
 };

@@ -111,6 +111,9 @@
 	#undef USE_LOCAL_PATHES
 #endif
 
+//новая аудиосистема
+#define ENABLE_NEW_AUDIO_SYSTEM
+
 //Пути до разных сегментов
 #ifdef USE_LOCAL_PATHES
 	#define PATH_SOUND_FOLDER "resources\sounds\"
@@ -119,7 +122,11 @@
 	#define PATH_SOUND(sound) (getMissionPath (PATH_SOUND_FOLDER + sound))
 	#define PATH_PICTURE(pic) (PATH_PICTURE_FOLDER + pic)
 #else
-	#define PATH_SOUND_FOLDER "rel_gamecontent\sounds\"
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+		#define PATH_SOUND_FOLDER "rel_gamecontent.pbo\sounds\"
+	#else
+		#define PATH_SOUND_FOLDER "rel_gamecontent\sounds\"
+	#endif
 	#define PATH_PICTURE_FOLDER "rel_gamecontent\data\"
 	
 	//#define PATH_PICTURE_FOLDER "rel_gamecontent\ui\"

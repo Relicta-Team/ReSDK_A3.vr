@@ -595,7 +595,7 @@ vs_calcReverbEffect = {
     private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
     private _volumeFactor = if (_targetAsPos) then {
-        (linearConversion [4,60,_dist,0.8,1.5,true] ) * 1.5; //немного увеличенный фактор для лучшей "эффектности" реверба
+        (linearConversion [4,60,_dist,0.8,1.5 * 1.5,true] ); //немного увеличенный фактор для лучшей "эффектности" реверба
     } else {
         if (_isMob) then {
             private _distSpeaker = _target getvariable ["rv_distance",4]; 
