@@ -51,6 +51,14 @@ vs_audio_init = {
 	
 	if (is3den) exitWith {};
 
+	0 spawn
+    {
+        waitUntil { !isNullReference(findDisplay 46) };
+        //внутри только нативный код. все функции клиента на этом этапе выгружены
+        private _nativeCode = (toString vs_audio_releaseAllSounds)+";diag_log 'vs_audio_init() - internal audio system disconnect on unload game display';";
+        findDisplay 46 displayAddEventHandler ["Unload",compile _nativeCode];
+    };
+
 	private _syncAudio = {
 		if (!isGameFocused) exitWith {
 			0 call vs_audio_setMasterSoundVolume;
@@ -58,6 +66,13 @@ vs_audio_init = {
 		clamp(getAudioOptionVolumes select 0,0,1) call vs_audio_setMasterSoundVolume;
 	};
 	startUpdate(_syncAudio,0.5);
+};
+
+vs_audio_setMasterSoundVolume = {
+	apiCmd [CMD_AUDIO_SET_MASTER_SOUND_VOLUME,[_this]];
+};
+vs_audio_getMasterSoundVolume = {
+	parseNumber (apiRequest(REQ_AUDIO_GET_MASTER_SOUND_VOLUME));
 };
 
 /*

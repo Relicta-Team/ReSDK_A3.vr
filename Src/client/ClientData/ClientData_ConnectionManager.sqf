@@ -124,6 +124,8 @@ cd_processConnection = {
 
 				call vs_disconnectVoiceSystem;
 
+				call vs_audio_releaseAllSounds; //stop all sounds
+
 				//остановка пакетирования атмоса
 				[false] call noe_client_nat_setEnabled;
 				
