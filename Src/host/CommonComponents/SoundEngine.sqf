@@ -55,7 +55,8 @@ soundGlobal_play = {
 				PATH_SOUND(_file),
 				_maxDist,
 				_pitch,
-				_offset
+				_offset,
+				_vol
 			] call vs_audio_playSound3d;
 		};
 	};
@@ -65,7 +66,8 @@ soundGlobal_play = {
 		PATH_SOUND(_file),
 		_maxDist,
 		_pitch,
-		_offset
+		_offset,
+		_vol
 	] call vs_audio_playSound3d;
 
 	
