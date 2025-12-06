@@ -55,6 +55,8 @@ if (!_canload_) exitWith {error("Unknown reason of cannot load client")};
 
 player allowDamage false;
 
+call vs_audio_init;
+
 client_sys_loaded = true; //flag for skip static asserts on client
 
 // initialization discord rpc
