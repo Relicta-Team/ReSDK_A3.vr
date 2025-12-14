@@ -14,7 +14,7 @@ if (isMultiplayer) then {
 	{
 		private _ext = _x get "name";
 		if (_ext in _extMap) then {
-			if not_equals(_extMap get "hash",_x get "hash") then {
+			if not_equals(_extMap get _ext,_x get "hash") then {
 				_signDLLError = true;
 				_signDLLErrorMessage = format["Library %1 wrong hash",_ext];
 				break;
