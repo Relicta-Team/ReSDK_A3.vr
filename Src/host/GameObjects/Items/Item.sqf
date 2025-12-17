@@ -5,6 +5,7 @@
 
 #include "..\..\engine.hpp"
 #include "..\..\oop.hpp"
+#include "..\..\text.hpp"
 #include <..\GameConstants.hpp>
 #include "..\..\PointerSystem\pointers.hpp"
 #include "..\..\ServerRpc\serverRpc.hpp"
@@ -713,8 +714,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		// отдается только половина от микробов источника
 		private _newMe = clamp(_germsMe + floor(_germHis * 0.25),0,GERM_COUNT_MAX);
 		private _newHim = clamp(_germHis + floor(_germsMe * 0.15),0,GERM_COUNT_MAX);
-		setSelf(germs,_newMe);
-		setVar(_p,germs,_newHim);
+		callSelfParams(setGerms,_newMe);
+		callFuncParams(_p,setGerms,_newHim);
 	};
 
 	//examine3d
@@ -795,7 +796,14 @@ class(ItemRadio) extends(Item)
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);
 
-	var(radioSettings,[10 arg "someencoding" arg -10 arg 5 arg null arg 300 arg 0]);
+	func(getDescFor)
+	{
+		objParams_1(_usr);
+		super() + sbr + ifcheck(getSelf(radioIsEnabled),"Лампочка горит","Лампочка не горит");
+	};
+
+	var(radioSettings,[10 arg "radio_enc_def" arg 1 arg 5 arg null arg 150]);
+	var(radioType,RADIO_TYPE_WALKIETALKIE);
 
 	func(InitModel)
 	{
@@ -845,6 +853,46 @@ class(ItemRadio) extends(Item)
 
 		_vObj
 	};
+
+	func(onMainAction)
+	{
+		objParams_1(_usr);
+		callSelfParams(radioItemSetMode,!getSelf(radioIsEnabled));
+	};
+	getter_func(getMainActionName,ifcheck(getSelf(radioIsEnabled),"Выключить","Включить"));
+
+	func(radioItemSetMode)
+	{
+		objParams_1(_mode);
+		private _isEnabled = getSelf(radioIsEnabled);
+		if (_isEnabled == _mode) exitWith {false;};
+		setSelf(radioIsEnabled,_mode);
+		
+		private _vObj = getSelf(loc); //mesh or mob
+		if callSelf(isInWorld) then {
+		
+			if (!_mode) then {
+				//_vObj setVariable ["radio",null];
+				//_vObj setvariable ["flags",0.1];
+				[_vObj,false] call noe_updateObjectRadio;
+			} else {
+				_vObj setVariable ["radio",callSelf(getRadioData)];
+				[_vObj,true] call noe_updateObjectRadio;
+			};
+			
+			[_vObj,CHUNK_TYPE_ITEM,true] call noe_replicateObject;
+		} else {
+			private _slot = getSelf(slot);
+			if (_slot >= 0) then {
+				callFuncParams(_vObj,syncSmdSlot,_slot);
+			};
+		};
+
+		callSelfParams(playSound, "electronics\click" arg getRandomPitch arg 3);
+
+		true;
+	};
+
 
 	#include "..\Interfaces\IRadio.Interface"
 

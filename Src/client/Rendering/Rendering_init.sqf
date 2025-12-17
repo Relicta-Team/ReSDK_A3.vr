@@ -14,6 +14,7 @@ namespace(Rendering,NULL)
 //#include "Effects\Effects_init.sqf"
 #include "RenderDistance.sqf"
 #include "Render_zpass.sqf"
+#include "Decals\Decals_init.sqf"
 
 #include "Render_debug.sqf"
 

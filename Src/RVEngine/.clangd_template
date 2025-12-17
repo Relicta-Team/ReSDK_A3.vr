@@ -1,0 +1,15 @@
+CompileFlags:
+  Add:
+    - "-std=c++17"
+    - "-IPLACE_FULLPATHHERE/Src/RVEngine/src/client/headers"
+    - "-DINTERCEPT_NO_THREAD_SAFETY"
+    - "-DWIN32"
+    - "-D_WIN32"
+    - "-DUNICODE"
+    - "-D_UNICODE"
+    - "--target=x86_64-pc-windows-msvc" 
+Diagnostics:
+  UnusedIncludes: None
+
+Index:
+  Background: Build

@@ -3,9 +3,7 @@
 // sdk.relicta.ru
 // ======================================================
 
-//usage: apiCmd ["test",[arg1,arg2]]
-#define apiCmd "revoicer" callExtension 
-#define apiRequest(p) ("revoicer" callExtension (p))
+
 
 #ifdef REDITOR_VOICE_DEBUG
     #define revoice_debug_only(debug_expr) debug_expr;
@@ -70,10 +68,15 @@ vs_connectVoice = {
 
 //вызывается когда клиент джоинится в игру
 vs_connectToVoiceSystem = {
+    #ifdef VOICE_DISABLE_IN_SINGLEPLAYERMODE
+        if (!isMultiplayer) exitWith {};
+    #endif
     vs_serverAddrPortPass params ["_addr","_port","_pass"];
     private _r = [_addr,_port,vs_localName,_pass] call vs_connectVoice;
 
     [player,vs_localName] call vs_initMob;
+
+    [2] call vs_changeVoiceVolume;
 
     vs_canProcess = true;
     _r
@@ -86,6 +89,9 @@ vs_disconnectVoice = {
 
 //функция "правильного" завершения системы. Вызывается при выходе в лобби или перезагрузке войса
 vs_disconnectVoiceSystem = {
+    
+    [false] call vs_handleSpeak; //stop voice and radios
+
     vs_canProcess = false;
     {
         [_x,true] call vs_internal_clearEffectValues;
@@ -163,6 +169,8 @@ vs_onProcessPlayerPosition = {
         //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
         //revoice_debug_only(if (((tickTime - _t)*1000) > 10) then {["LOWPERF: sync remote %1ms" arg (((tickTime - _t)*1000) )tofixed 0]call printTrace;_t=tickTime;})
+
+        call vs_processRadios;
     };
 };
 
@@ -351,8 +359,12 @@ vs_handleSpeak = {
         //unconscious/dead skip mic capture
         if !([] call interact_isActive) exitWith {};
         apiRequest(REQ_SPEAK_START);
+
+        [true] call vs_handleMicRadioObjects;
     } else {
         apiRequest(REQ_SPEAK_STOP);
+
+        [false] call vs_handleMicRadioObjects;
     };
 };
 
@@ -453,17 +465,38 @@ vs_internal_applyEffects = {
 
 //получает настройки реверба для текущего моба (~0.976563ms per call)
 vs_calcReverbEffect = {
-    params ["_mob"];
+    params ["_target",["_targetAsPos",false],["_soundId",-1],["_dist",0]];
+    
     private _rayDistance = 100;
     private _ignore1 = player;
     #ifdef REDITOR_VOICE_DEBUG
         _ignore1 = cameraon;
-        private _endPos = getposasl _mob;
+        private _endPos = ifcheck(_targetAsPos,atltoasl _target,getposasl _target);
+        private _isMob = _target in vs_reditor_procObjList;
+        if (_targetAsPos) then {
+            _ignore2 = objNull;
+            _endPos = atltoasl _target;
+            _target = _soundId;
+        };
     #else
-        private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
+        private _isMob = false;
+        private _endPos = [0,0,0];
+        private _ignore2 = _target;
+        if (_targetAsPos) then {
+            _ignore2 = objNull;
+            _endPos = atltoasl _target;
+            _target = _soundId;
+        } else {
+            _isMob = typeof _target == BASIC_MOB_TYPE;
+            _endPos = if (_isMob) then {
+                atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+            } else {
+                getposasl _target;
+            };
+        };
     #endif
 
-    #define __postargs _ignore1,_mob,true,1,"VIEW","GEOM",true
+    #define __postargs _ignore1,_ignore2,true,1,"VIEW","GEOM",true
     
     private _pointsQuery = [
         //cross check
@@ -549,7 +582,7 @@ vs_calcReverbEffect = {
     // private _dry = 0;
 
     // [
-    //     _mob,
+    //     _target,
     //     _decay * 1000,
     //     _edel,
     //     _ldel,
@@ -561,8 +594,22 @@ vs_calcReverbEffect = {
     //new algo v2(works fine)
     private _avgWall = if (_distancesCount > 0) then { _sumDistances / _distancesCount } else { _rayDistance };
 
-    private _distSpeaker = _mob getvariable ["rv_distance",4]; 
-    private _volumeFactor = linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+    private _volumeFactor = if (_targetAsPos) then {
+        (linearConversion [4,60,_dist,0.8,1.5 * 1.5,true] ); //немного увеличенный фактор для лучшей "эффектности" реверба
+    } else {
+        if (_isMob) then {
+            private _distSpeaker = _target getvariable ["rv_distance",4]; 
+            linearConversion [4,60,_distSpeaker,0.8,1.5,true];
+        } else {
+            //currently constant value
+            if (_target call vs_isWorldRadioObject) then {
+                private _rdata = _target call vs_getObjectRadioData;
+                linearConversion [4,60,_rdata get "dist",0.8,1.5,true];
+            } else {
+                1.5;
+            };
+        };
+    };
     
     private _avgDim = (_avgWall + _ceiling + _floor) / 3;
 
@@ -602,7 +649,7 @@ vs_calcReverbEffect = {
     private _dry = 0;
 
     [
-        _mob,
+        _target,
         _decay * 1000,
         _edel,
         _ldel,
@@ -614,18 +661,32 @@ vs_calcReverbEffect = {
 };
 
 vs_calcLowpassEffect = {
-    params ["_mob"];
+    params ["_target",["_targetAsPos",false],["_soundId",-1]];
     #ifdef REDITOR_VOICE_DEBUG
     private _startPos = getposasl cameraon;
-    private _endPos = getposasl _mob;
+    private _endPos = ifcheck(_targetAsPos,atltoasl _target,getposasl _target);
     private _ignore1 = cameraon;
     #else
     private _startPos = atltoasl(player modeltoworldvisual (player selectionposition "head"));
-    private _endPos = atltoasl(_mob modeltoworldvisual (_mob selectionposition "head"));
+    private _endPos = if (_targetAsPos) then {
+        atltoasl _target
+    } else {
+        if (typeof _target == BASIC_MOB_TYPE) then {
+            atltoasl(_target modeltoworldvisual (_target selectionposition "head"));
+        } else {
+            getposasl _target;
+        };
+    };
     private _ignore1 = player;
     #endif
 
-    private _ignore2 = _mob;
+    private _ignore2 = _target;
+
+    //override ignore2 if target is sound id
+    if (_targetAsPos) then {
+        _ignore2 = objNull;
+        _target = _soundId;
+    };
 
     // [begPosASL, endPosASL, ignoreObj1, ignoreObj2, sortMode, maxResults, LOD1, LOD2, returnUnique]
     
@@ -658,7 +719,7 @@ vs_calcLowpassEffect = {
         private _cutoff = 22000;
         private _q = 2; //снижено для более плавного перехода между есть\нет препятствий
         call _checkFilters;
-        [_mob,_cutoff,_q]
+        [_target,_cutoff,_q]
     };
 
     private _its = lineIntersectsSurfaces [_startPos,_endPos,_ignore1,_ignore2,true,100,"VIEW","GEOM",false];
@@ -731,7 +792,7 @@ vs_calcLowpassEffect = {
     ["lowpass timecall:%1ms; Thickness:%2",((tickTime - _t)*1000)toFixed 6,_thickness] call printTrace;
     #endif
 
-    [_mob,_cutoff,_q]
+    [_target,_cutoff,_q]
 };
 
 //Калькулирует понимание речи персонажа

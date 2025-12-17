@@ -422,6 +422,29 @@ region(Sound Helpers)
 		""
 	};
 
+region(Voting Helpers)
+
+	//получает приоритет голосования для режима
+	func(getVotePriority)
+	{
+		objParams();
+		private _online = count (call cm_getAllClientsInLobby);
+		if isTypeOf(this,ScriptedGamemode) then {
+			private _duration = getSelf(duration) max 600; // секунды
+			private _durFactor = clamp((_duration / (60*60)) ^ 0.5, 0.5, 2);
+			private _onlineFactor = clamp((_online / 30) ^ 0.7, 0.5, 2.5);
+			private _weight = _durFactor * _onlineFactor;
+			(_weight max 0.1)
+		} else {
+			private _reqMin = callSelf(getReqPlayersMin) max 1;
+			private _reqMax = callSelf(getReqPlayersMax) max _reqMin;
+			private _underMinFactor = clamp((_online / _reqMin), 0.3, 2);
+			private _overMaxFactor = ifcheck(_online > _reqMax,clamp((_reqMax / _online), 0.3, 1),1);
+			private _weight = _underMinFactor * _overMaxFactor;
+			(_weight max 0.1)
+		}
+	};
+
 endregion
 
 endclass

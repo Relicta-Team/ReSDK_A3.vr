@@ -31,8 +31,9 @@ class(DoorDynamic) extends(DynamicStruct)
 		private _doorData = [];
 		{
 			if (!callSelf(onDeanim)) then {_x set [1,0]}; //door to default state
-
-			_src animate _x; //аниматор сервера
+			//форсим скорость анимации для сервера для синхронизации навигационного региона
+			//upd - для рейкастов инфа обновится в следующем кадре
+			_src animate [_x select 0,_x select 1,true]; //аниматор сервера
 
 			__anass = [_x select 0] call anim_getAssoc;
 			_doorData append [__anass arg _x select 1 arg _x select 2];

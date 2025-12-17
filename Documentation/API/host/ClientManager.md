@@ -141,7 +141,7 @@ Description:
 - Param: _newMob
 - Param: _destroyOld (optional, default false)
 
-File: [host\ClientManager\ClientController.sqf at line 71](../../../Src/host/ClientManager/ClientController.sqf#L71)
+File: [host\ClientManager\ClientController.sqf at line 79](../../../Src/host/ClientManager/ClientController.sqf#L79)
 # ClientManager.h
 
 ## log_client(mes)
@@ -387,7 +387,7 @@ Replaced value:
 ```sqf
 isequalto
 ```
-File: [host\ClientManager\functions.sqf at line 67](../../../Src/host/ClientManager/functions.sqf#L67)
+File: [host\ClientManager\functions.sqf at line 71](../../../Src/host/ClientManager/functions.sqf#L71)
 ## __compare_equality_soft
 
 Type: constant
@@ -399,7 +399,7 @@ Replaced value:
 ```sqf
 ==
 ```
-File: [host\ClientManager\functions.sqf at line 68](../../../Src/host/ClientManager/functions.sqf#L68)
+File: [host\ClientManager\functions.sqf at line 72](../../../Src/host/ClientManager/functions.sqf#L72)
 ## protoFind(by_func,var,comparer)
 
 Type: constant
@@ -423,7 +423,7 @@ cm_findClientBy##by_func = { \
 	}; \
 	cm_allClients select _rez}
 ```
-File: [host\ClientManager\functions.sqf at line 69](../../../Src/host/ClientManager/functions.sqf#L69)
+File: [host\ClientManager\functions.sqf at line 73](../../../Src/host/ClientManager/functions.sqf#L73)
 ## __mapped(t1,t2)
 
 Type: constant
@@ -436,7 +436,7 @@ Replaced value:
 ```sqf
 cm_accessMap set [t1,t2]; cm_accessMap_inverted set [t2,t1];
 ```
-File: [host\ClientManager\functions.sqf at line 116](../../../Src/host/ClientManager/functions.sqf#L116)
+File: [host\ClientManager\functions.sqf at line 120](../../../Src/host/ClientManager/functions.sqf#L120)
 ## __colorMap(access,nick,mes)
 
 Type: constant
@@ -450,7 +450,7 @@ Replaced value:
 ```sqf
 cm_map_nickColor set [access,nick]; cm_map_messagesColor set [access,mes];
 ```
-File: [host\ClientManager\functions.sqf at line 121](../../../Src/host/ClientManager/functions.sqf#L121)
+File: [host\ClientManager\functions.sqf at line 125](../../../Src/host/ClientManager/functions.sqf#L125)
 ## cm_owners
 
 Type: Variable
@@ -462,7 +462,7 @@ Initial value:
 ```sqf
 ["76561198094364528"] //me
 ```
-File: [host\ClientManager\functions.sqf at line 37](../../../Src/host/ClientManager/functions.sqf#L37)
+File: [host\ClientManager\functions.sqf at line 39](../../../Src/host/ClientManager/functions.sqf#L39)
 ## cm_admins
 
 Type: Variable
@@ -474,7 +474,7 @@ Initial value:
 ```sqf
 ["76561198057042311","76561197994426107"]
 ```
-File: [host\ClientManager\functions.sqf at line 40](../../../Src/host/ClientManager/functions.sqf#L40)
+File: [host\ClientManager\functions.sqf at line 42](../../../Src/host/ClientManager/functions.sqf#L42)
 ## cm_forsakens
 
 Type: Variable
@@ -486,7 +486,7 @@ Initial value:
 ```sqf
 ["76561198096453655","76561198072294284","76561198156220735","76561198156220735",...
 ```
-File: [host\ClientManager\functions.sqf at line 43](../../../Src/host/ClientManager/functions.sqf#L43)
+File: [host\ClientManager\functions.sqf at line 45](../../../Src/host/ClientManager/functions.sqf#L45)
 ## cm_accessMap
 
 Type: Variable
@@ -498,7 +498,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ClientManager\functions.sqf at line 117](../../../Src/host/ClientManager/functions.sqf#L117)
+File: [host\ClientManager\functions.sqf at line 121](../../../Src/host/ClientManager/functions.sqf#L121)
 ## cm_accessMap_inverted
 
 Type: Variable
@@ -510,7 +510,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ClientManager\functions.sqf at line 118](../../../Src/host/ClientManager/functions.sqf#L118)
+File: [host\ClientManager\functions.sqf at line 122](../../../Src/host/ClientManager/functions.sqf#L122)
 ## cm_map_nickColor
 
 Type: Variable
@@ -522,7 +522,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ClientManager\functions.sqf at line 122](../../../Src/host/ClientManager/functions.sqf#L122)
+File: [host\ClientManager\functions.sqf at line 126](../../../Src/host/ClientManager/functions.sqf#L126)
 ## cm_map_messagesColor
 
 Type: Variable
@@ -534,7 +534,7 @@ Initial value:
 ```sqf
 createHashMap
 ```
-File: [host\ClientManager\functions.sqf at line 123](../../../Src/host/ClientManager/functions.sqf#L123)
+File: [host\ClientManager\functions.sqf at line 127](../../../Src/host/ClientManager/functions.sqf#L127)
 ## by_func
 
 Type: function
@@ -543,7 +543,7 @@ Description:
 - Param: _id
 - Param: _checkInDisconnected (optional, default false)
 
-File: [host\ClientManager\functions.sqf at line 69](../../../Src/host/ClientManager/functions.sqf#L69)
+File: [host\ClientManager\functions.sqf at line 73](../../../Src/host/ClientManager/functions.sqf#L73)
 ## cm_findClientByAccessLevel
 
 Type: function
@@ -551,7 +551,7 @@ Type: function
 Description: cm_findClientByAccess
 - Param: _id
 
-File: [host\ClientManager\functions.sqf at line 87](../../../Src/host/ClientManager/functions.sqf#L87)
+File: [host\ClientManager\functions.sqf at line 91](../../../Src/host/ClientManager/functions.sqf#L91)
 ## cm_getAllClientsByAccessLevel
 
 Type: function
@@ -560,7 +560,7 @@ Description: Получить клиентов по уровню доступа
 - Param: _lvl
 - Param: _thisAndHight (optional, default false)
 
-File: [host\ClientManager\functions.sqf at line 95](../../../Src/host/ClientManager/functions.sqf#L95)
+File: [host\ClientManager\functions.sqf at line 99](../../../Src/host/ClientManager/functions.sqf#L99)
 ## cm_getAccessByUid
 
 Type: function
@@ -568,7 +568,7 @@ Type: function
 Description: ! DEPRECATED - не используется
 
 
-File: [host\ClientManager\functions.sqf at line 109](../../../Src/host/ClientManager/functions.sqf#L109)
+File: [host\ClientManager\functions.sqf at line 113](../../../Src/host/ClientManager/functions.sqf#L113)
 ## cm_accessTypeToNum
 
 Type: function
@@ -576,7 +576,7 @@ Type: function
 Description: Получить уровень по строке
 - Param: _accessString
 
-File: [host\ClientManager\functions.sqf at line 135](../../../Src/host/ClientManager/functions.sqf#L135)
+File: [host\ClientManager\functions.sqf at line 139](../../../Src/host/ClientManager/functions.sqf#L139)
 ## cm_accessNumToType
 
 Type: function
@@ -584,7 +584,7 @@ Type: function
 Description: Получить уровень по числу
 - Param: _accessNum
 
-File: [host\ClientManager\functions.sqf at line 140](../../../Src/host/ClientManager/functions.sqf#L140)
+File: [host\ClientManager\functions.sqf at line 144](../../../Src/host/ClientManager/functions.sqf#L144)
 ## cm_getNickColorByAccess
 
 Type: function
@@ -592,7 +592,7 @@ Type: function
 Description: 
 - Param: _access
 
-File: [host\ClientManager\functions.sqf at line 155](../../../Src/host/ClientManager/functions.sqf#L155)
+File: [host\ClientManager\functions.sqf at line 159](../../../Src/host/ClientManager/functions.sqf#L159)
 ## cm_getMessageColorByAccess
 
 Type: function
@@ -600,7 +600,7 @@ Type: function
 Description: 
 - Param: _access
 
-File: [host\ClientManager\functions.sqf at line 156](../../../Src/host/ClientManager/functions.sqf#L156)
+File: [host\ClientManager\functions.sqf at line 160](../../../Src/host/ClientManager/functions.sqf#L160)
 ## cm_idToName
 
 Type: function
@@ -608,7 +608,7 @@ Type: function
 Description: конвертация айди в имя клиента
 - Param: _id
 
-File: [host\ClientManager\functions.sqf at line 164](../../../Src/host/ClientManager/functions.sqf#L164)
+File: [host\ClientManager\functions.sqf at line 168](../../../Src/host/ClientManager/functions.sqf#L168)
 ## cm_idToDisId
 
 Type: function
@@ -616,7 +616,7 @@ Type: function
 Description: 
 - Param: _id
 
-File: [host\ClientManager\functions.sqf at line 171](../../../Src/host/ClientManager/functions.sqf#L171)
+File: [host\ClientManager\functions.sqf at line 175](../../../Src/host/ClientManager/functions.sqf#L175)
 ## cm_isClientExist
 
 Type: function
@@ -624,7 +624,7 @@ Type: function
 Description: зарегистрирован в памяти или нет
 
 
-File: [host\ClientManager\functions.sqf at line 179](../../../Src/host/ClientManager/functions.sqf#L179)
+File: [host\ClientManager\functions.sqf at line 183](../../../Src/host/ClientManager/functions.sqf#L183)
 ## cm_serverCommand
 
 Type: function
@@ -632,7 +632,7 @@ Type: function
 Description: 
 - Param: _command
 
-File: [host\ClientManager\functions.sqf at line 184](../../../Src/host/ClientManager/functions.sqf#L184)
+File: [host\ClientManager\functions.sqf at line 188](../../../Src/host/ClientManager/functions.sqf#L188)
 ## cm_serverLock
 
 Type: function
@@ -640,7 +640,7 @@ Type: function
 Description: 
 
 
-File: [host\ClientManager\functions.sqf at line 202](../../../Src/host/ClientManager/functions.sqf#L202)
+File: [host\ClientManager\functions.sqf at line 206](../../../Src/host/ClientManager/functions.sqf#L206)
 ## cm_serverUnlock
 
 Type: function
@@ -648,7 +648,7 @@ Type: function
 Description: 
 
 
-File: [host\ClientManager\functions.sqf at line 212](../../../Src/host/ClientManager/functions.sqf#L212)
+File: [host\ClientManager\functions.sqf at line 216](../../../Src/host/ClientManager/functions.sqf#L216)
 ## cm_serverKickById
 
 Type: function
@@ -656,7 +656,7 @@ Type: function
 Description: 
 
 
-File: [host\ClientManager\functions.sqf at line 221](../../../Src/host/ClientManager/functions.sqf#L221)
+File: [host\ClientManager\functions.sqf at line 225](../../../Src/host/ClientManager/functions.sqf#L225)
 ## pre_oncheat
 
 Type: function
@@ -665,7 +665,7 @@ Description: Системная функция при обнаружении п�
 - Param: _owner
 - Param: _ctxCheat
 
-File: [host\ClientManager\functions.sqf at line 245](../../../Src/host/ClientManager/functions.sqf#L245)
+File: [host\ClientManager\functions.sqf at line 249](../../../Src/host/ClientManager/functions.sqf#L249)
 ## pre_notifClientAssert
 
 Type: function
@@ -674,7 +674,17 @@ Description:
 - Param: _message
 - Param: _owner
 
-File: [host\ClientManager\functions.sqf at line 283](../../../Src/host/ClientManager/functions.sqf#L283)
+File: [host\ClientManager\functions.sqf at line 287](../../../Src/host/ClientManager/functions.sqf#L287)
+## pre_notifClientStatistic
+
+Type: function
+
+Description: 
+- Param: _message
+- Param: _owner
+- Param: _nick
+
+File: [host\ClientManager\functions.sqf at line 296](../../../Src/host/ClientManager/functions.sqf#L296)
 ## cm_getAllClientsInLobby
 
 Type: function
@@ -682,7 +692,7 @@ Type: function
 Description: Получает всех клиентов в лобби
 
 
-File: [host\ClientManager\functions.sqf at line 302](../../../Src/host/ClientManager/functions.sqf#L302)
+File: [host\ClientManager\functions.sqf at line 313](../../../Src/host/ClientManager/functions.sqf#L313)
 ## cm_getAllClientsInGame
 
 Type: function
@@ -690,7 +700,7 @@ Type: function
 Description: Получает всех клиентов в игре
 
 
-File: [host\ClientManager\functions.sqf at line 315](../../../Src/host/ClientManager/functions.sqf#L315)
+File: [host\ClientManager\functions.sqf at line 326](../../../Src/host/ClientManager/functions.sqf#L326)
 ## cm_registerMobInGame
 
 Type: function
@@ -700,7 +710,7 @@ Description: регистрирует моба как ingameMob
 - Param: _client
 - Param: _vMob
 
-File: [host\ClientManager\functions.sqf at line 328](../../../Src/host/ClientManager/functions.sqf#L328)
+File: [host\ClientManager\functions.sqf at line 339](../../../Src/host/ClientManager/functions.sqf#L339)
 ## cm_unregisterMobInGame
 
 Type: function
@@ -709,7 +719,7 @@ Description: снимаем регистрацию моба с игры
 - Param: _mobObj
 - Param: _removeObj (optional, default true)
 
-File: [host\ClientManager\functions.sqf at line 338](../../../Src/host/ClientManager/functions.sqf#L338)
+File: [host\ClientManager\functions.sqf at line 351](../../../Src/host/ClientManager/functions.sqf#L351)
 ## cm_checkClientInJIPMemory
 
 Type: function
@@ -718,7 +728,7 @@ Description: Проверяет наличие ранее подключенно
 - Param: _disId
 - Param: _owner
 
-File: [host\ClientManager\functions.sqf at line 349](../../../Src/host/ClientManager/functions.sqf#L349)
+File: [host\ClientManager\functions.sqf at line 362](../../../Src/host/ClientManager/functions.sqf#L362)
 ## cm_sendOOSMessage
 
 Type: function
@@ -728,7 +738,7 @@ Description: Отправляет всем клиентам сообщение �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 380](../../../Src/host/ClientManager/functions.sqf#L380)
+File: [host\ClientManager\functions.sqf at line 393](../../../Src/host/ClientManager/functions.sqf#L393)
 ## cm_sendLobbyMessage
 
 Type: function
@@ -738,7 +748,7 @@ Description: Отправляет сообщение всем клиентам �
 - Param: _type (optional, default null)
 - Param: _groups (optional, default "")
 
-File: [host\ClientManager\functions.sqf at line 395](../../../Src/host/ClientManager/functions.sqf#L395)
+File: [host\ClientManager\functions.sqf at line 408](../../../Src/host/ClientManager/functions.sqf#L408)
 # OnConnected.sqf
 
 ## cm_maxClients
@@ -835,3 +845,17 @@ Replaced value:
 errorformat("[Command::spawnitem]: " + cause + " - (%1 = %2)",_varName arg _varValue)
 ```
 File: [host\ClientManager\cmds\Reflect.sqf at line 29](../../../Src/host/ClientManager/cmds/Reflect.sqf#L29)
+# ServerControl.sqf
+
+## cmd_ai_internal_nextSpawnPos
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+null
+```
+File: [host\ClientManager\cmds\ServerControl.sqf at line 273](../../../Src/host/ClientManager/cmds/ServerControl.sqf#L273)

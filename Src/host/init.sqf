@@ -6,6 +6,7 @@
 #include "engine.hpp"
 
 server_loadingState = 0;
+loadFile("src\host\RVEngine\init.sqf"); //RVEngine extension (for c++ plugins, always load first)
 
 loadFile("src\host\ScriptErrorHandler\ScriptErrorHandler_init.sqf");
 loadFile("src\host\Curl\Curl.sqf");
@@ -40,6 +41,7 @@ loadFile("src\host\GameEvents\loader.hpp");
 loadFile("src\host\SpecialActions\SpecialActions.sqf");
 loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
+loadFile("src\host\Overlays\overlays_init.sqf");
 loadFile("src\host\PersonServ\PersonServ_init.sqf");
 loadFile("src\host\ServerLighting\ServerLighting_init.sqf"); //serverside lighting system (uses atmos, materials)
 loadFile("src\host\Materials\Materials_init.sqf");
@@ -80,7 +82,7 @@ loadFile("src\host\CraftSystem\CraftSystem_init.sqf"); //craft system
 loadFile("src\host\AmbientControl\AmbientControl_init.sqf");
 loadFile("src\host\ServerInteraction\ServerInteractionInit.sqf"); //throwing, interactions etc. on serverside
 loadFile("src\host\Reputation\Reputation_init.sqf"); //reputation system
-//loadFile("src\host\AI\ai_init.sqf");//ai system
+loadFile("src\host\AI\ai_init.sqf");//ai system
 // Initialize tools in debug
 #ifdef EDITOR
 if (!isMultiplayer) then {
@@ -105,6 +107,7 @@ if (!isMultiplayer) then {
 //postload initialize systems
 call loot_prepareAll;// intialize loot only after structs loaded
 call csys_init; //craft table init
+call ai_init; //ai system init
 
 server_loadingState = 1;
 

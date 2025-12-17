@@ -74,7 +74,15 @@ func(setDoorOpen)
 	setSelf(lastDoorChangeOpenTime,tickTime + 0.4);
 
 	setSelf(isOpen,_mode);
+	
+	//сохраняем старую позицию до анимации
+	private _oldPos = getposasl callSelf(getBasicLoc);
+	
 	callSelf(animateSource);
+
+	//request update region для старой и новой позиции
+	[_oldPos] call ai_nav_requestUpdateRegion;
+	[getposasl callSelf(getBasicLoc)] call ai_nav_requestUpdateRegion;
 
 	private _snd = if (_mode) then {
 		callSelf(getOpenSoundParams);

@@ -22,45 +22,7 @@ sysmes("system_whatnews")
 	
 sysmes("system_votemode")
 
-	if (true) exitwith {
-		callFuncParams(this,localSay,"Голосование временно отключено.");
-	};
-
-	_handler = {
-	#ifdef EDITOR
-			["val is "+str _value] call chatPrint;
-	#endif
-		if (!gm_canVote) exitWith {
-			callSelf(CloseMessageBox);
-		};
-
-		private _num = parseNumber _value;
-		if (_num < 0 || _num >= count gm_allowedModes) exitWith {
-			callFuncParams(this,localSay,"Неверное число.");
-			callSelf(CloseMessageBox);
-		};
-		if array_exists(gm_votedClients,this) exitWith {
-			callFuncParams(this,localSay,"Вы уже проголосовали.");
-			callSelf(CloseMessageBox);
-		};
-
-		private _strMode = gm_allowedModes select _num;
-		gm_votedClients pushBackUnique this;
-
-		gm_voteMap set [_strMode,(gm_voteMap get _strMode) + 1];
-
-		[format["<t size='1.2'>%1 голосует %2</t>",getVar(this,name),pick["фуфлыжно","кучеряво","куралесно","бибово","сюсяво"]],"system"] call cm_sendLobbyMessage;
-
-		callSelf(CloseMessageBox);
-	};
-	_dat = ["Проголосуйте за режим:"];
-	{
-		_gobj = missionNamespace getVariable ["story_" + _x,nullPtr];
-		if isNullReference(_gobj) then {continue};
-		_dat pushBack (format["%2. %1|%3",getVar(_gobj,name),_forEachIndex + 1,_foreachIndex]);
-	} foreach gm_allowedModes;
-	
-	callSelfParams(ShowMessageBox,"Listbox" arg _dat arg _handler);
+	[this] call gm_tryVote;
 
 // -----------------------------------------------------------
 sysmes("admin_emptycmd")

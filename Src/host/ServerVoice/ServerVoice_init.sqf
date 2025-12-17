@@ -4,6 +4,10 @@
 // ======================================================
 
 #include <..\engine.hpp>
+#include <..\ServerRpc\serverRpc.hpp>
+#include <..\Networking\Network.hpp>
+
+#include "revoice_server.sqf"
 
 vsm_map_freqAndCode = createHashMap; //карта ассоциаций кода и частоты
 vsm_map_inverted = createHashMap; //инвертированная карта

@@ -61,14 +61,15 @@ try:
         'src/Editor/Bin/ProtoMap/',
         'src/version.hpp',
         'src/client/ProxyItems/RProx_cfg.h',
-        "src/host/LootSystem/loader.sqf"
+        "src/host/LootSystem/loader.sqf",
+        "src/RVEngine"
     ]
     
 
     curDir = os.getcwd()
     print(f'CWD: {curDir}')
     if curDir.split('/')[-1].lower() == 'src':
-        curDir = os.chdir(os.path.join(curDir,'../third-party/opyrightupdate'))
+        curDir = os.chdir(os.path.join(curDir,'../third-party/copyrightupdate'))
 
     print(f'CWD final: {os.getcwd()}')
 

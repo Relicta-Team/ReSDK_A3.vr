@@ -12,6 +12,9 @@ var(slots,INV_LIST_ALL);
 
 var(defaultUniform,"");//дефолтная форма (женское тело или бомжиные обноски)
 
+//контроллер слоёв отображения (волосы, бороды и т.д.)
+var(overlayController,struct_new(OverlayLayerController));
+
 region(Low level inventory api)
 	func(getSlotInfoForInventory)
 	{
@@ -52,15 +55,33 @@ region(Low level inventory api)
 	{
 		objParams();
 		private _stack = [];//key lh,rh,ts,hd
+		
 		private _ret = null;
+		
+		private _countParts = 0;
+		private _accVal = 0;
+
 		{
 			_ret = callFunc(_x,getGermOpacityData);
 			if !isNullVar(_ret) then {
 				_stack pushBack _ret;
 			};
+			
+			if !isNullReference(_x) then {
+				INC(_countParts);
+				_accVal = _accVal + callFunc(_x,getGermDecalVisibility);
+			};
 		} foreach (values getSelf(bodyParts));
 
+		if (_countParts > 0) then {
+			_accVal = _accVal / _countParts;
+		};
+
 		callSelfParams(sendInfo,"updateGermsInv" arg _stack);
+
+		//! когда персонажи без одежды будут иметь свою модель (ретекстур голого персонажа) - можно вернуть это с правками
+		//! Сейчас грязь хранится на самой одежде
+		//callSelfParams(syncSmdVar,"decals" arg _accVal);
 	};
 
 region(Getters and checkers)
