@@ -464,6 +464,70 @@ Description:
 File: [client\SoundSystem\Music.sqf at line 388](../../../Src/client/SoundSystem/Music.sqf#L388)
 # Sound3d.sqf
 
+## soundParams(x)
+
+Type: constant
+
+> Exists if **ENABLE_NEW_AUDIO_SYSTEM** defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+(x) call { \
+		private _spr = [_this] call vs_audio_getSoundParams; \
+		if (count _spr == 0) exitWith {_spr}; \
+		if equals(_spr,vec3(0,0,0)) exitWith {[]}; \
+		["",_spr select 0,_spr select 2,_spr select 1,1] \
+	}
+```
+File: [client\SoundSystem\Sound3d.sqf at line 14](../../../Src/client/SoundSystem/Sound3d.sqf#L14)
+## stopSound(x)
+
+Type: constant
+
+> Exists if **ENABLE_NEW_AUDIO_SYSTEM** defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+(x) call { private _spr = _this; \
+		if (count _spr == 0) exitWith {false}; \
+		(_spr call vs_audio_stopSound); \
+	}
+```
+File: [client\SoundSystem\Sound3d.sqf at line 21](../../../Src/client/SoundSystem/Sound3d.sqf#L21)
+## soundParams(x)
+
+Type: constant
+
+> Exists if **ENABLE_NEW_AUDIO_SYSTEM** not defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+SoundParams (x)
+```
+File: [client\SoundSystem\Sound3d.sqf at line 27](../../../Src/client/SoundSystem/Sound3d.sqf#L27)
+## stopSound(x)
+
+Type: constant
+
+> Exists if **ENABLE_NEW_AUDIO_SYSTEM** not defined
+
+Description: 
+- Param: x
+
+Replaced value:
+```sqf
+StopSound (x)
+```
+File: [client\SoundSystem\Sound3d.sqf at line 28](../../../Src/client/SoundSystem/Sound3d.sqf#L28)
 ## sound3d_internal_list_soundBuff
 
 Type: Variable
@@ -475,7 +539,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 177](../../../Src/client/SoundSystem/Sound3d.sqf#L177)
+File: [client\SoundSystem\Sound3d.sqf at line 210](../../../Src/client/SoundSystem/Sound3d.sqf#L210)
 ## sound3d_internal_handle3dSounds
 
 Type: Variable
@@ -487,7 +551,7 @@ Initial value:
 ```sqf
 startUpdate(sound3d_internal_localHandler,0.1)
 ```
-File: [client\SoundSystem\Sound3d.sqf at line 222](../../../Src/client/SoundSystem/Sound3d.sqf#L222)
+File: [client\SoundSystem\Sound3d.sqf at line 256](../../../Src/client/SoundSystem/Sound3d.sqf#L256)
 ## soundProcessor_play
 
 Type: function
@@ -495,7 +559,7 @@ Type: function
 Description: 
 
 
-File: [client\SoundSystem\Sound3d.sqf at line 21](../../../Src/client/SoundSystem/Sound3d.sqf#L21)
+File: [client\SoundSystem\Sound3d.sqf at line 38](../../../Src/client/SoundSystem/Sound3d.sqf#L38)
 ## sound3d_playOnObject
 
 Type: function
@@ -507,7 +571,7 @@ Description:
 - Param: _pitch (optional, default 1)
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 44](../../../Src/client/SoundSystem/Sound3d.sqf#L44)
+File: [client\SoundSystem\Sound3d.sqf at line 61](../../../Src/client/SoundSystem/Sound3d.sqf#L61)
 ## sound3d_playOnObjectLooped
 
 Type: function
@@ -517,7 +581,7 @@ Description:
 - Param: _3dSoundData
 - Param: _soundDuration (optional, default -1)
 
-File: [client\SoundSystem\Sound3d.sqf at line 73](../../../Src/client/SoundSystem/Sound3d.sqf#L73)
+File: [client\SoundSystem\Sound3d.sqf at line 98](../../../Src/client/SoundSystem/Sound3d.sqf#L98)
 ## sound_selfPlay
 
 Type: function
@@ -526,7 +590,7 @@ Description:
 - Param: _path
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 110](../../../Src/client/SoundSystem/Sound3d.sqf#L110)
+File: [client\SoundSystem\Sound3d.sqf at line 135](../../../Src/client/SoundSystem/Sound3d.sqf#L135)
 ## sound3d_playLocal
 
 Type: function
@@ -538,7 +602,7 @@ Description:
 - Param: _distance (optional, default 10)
 - Param: _offset (optional, default 0)
 
-File: [client\SoundSystem\Sound3d.sqf at line 120](../../../Src/client/SoundSystem/Sound3d.sqf#L120)
+File: [client\SoundSystem\Sound3d.sqf at line 146](../../../Src/client/SoundSystem/Sound3d.sqf#L146)
 ## sound3d_playLocalOnObjectLooped
 
 Type: function
@@ -552,7 +616,7 @@ Description:
 - Param: _preendbuf (optional, default 0)
 - Param: _vol (optional, default 1)
 
-File: [client\SoundSystem\Sound3d.sqf at line 133](../../../Src/client/SoundSystem/Sound3d.sqf#L133)
+File: [client\SoundSystem\Sound3d.sqf at line 159](../../../Src/client/SoundSystem/Sound3d.sqf#L159)
 ## sound3d_stopLocalLopped
 
 Type: function
@@ -560,7 +624,7 @@ Type: function
 Description: 
 - Param: _soundPtr
 
-File: [client\SoundSystem\Sound3d.sqf at line 156](../../../Src/client/SoundSystem/Sound3d.sqf#L156)
+File: [client\SoundSystem\Sound3d.sqf at line 188](../../../Src/client/SoundSystem/Sound3d.sqf#L188)
 ## sound3d_internal_localHandler
 
 Type: function
@@ -571,4 +635,4 @@ Description:
 - Param: _preend
 - Param: _psParams
 
-File: [client\SoundSystem\Sound3d.sqf at line 180](../../../Src/client/SoundSystem/Sound3d.sqf#L180)
+File: [client\SoundSystem\Sound3d.sqf at line 213](../../../Src/client/SoundSystem/Sound3d.sqf#L213)

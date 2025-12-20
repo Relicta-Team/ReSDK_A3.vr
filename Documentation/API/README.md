@@ -31,7 +31,7 @@ Count modules: 33
  - [SyncMobData](client//SyncMobData.md) - 2 files
  - [Traps](client//Traps.md) - 1 files
  - [VisualState](client//VisualState.md) - 10 files
- - [VoiceSystem](client//VoiceSystem.md) - 11 files
+ - [VoiceSystem](client//VoiceSystem.md) - 12 files
  - [WidgetSystem](client//WidgetSystem.md) - 6 files
 # Side: host
 Count modules: 59

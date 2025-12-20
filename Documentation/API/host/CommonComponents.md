@@ -1540,6 +1540,8 @@ File: [host\CommonComponents\SMD_shared.sqf at line 63](../../../Src/host/Common
 
 Type: constant
 
+> Exists if **ENABLE_NEW_AUDIO_SYSTEM** not defined
+
 Description: Упрощённый режим симуляции звуков
 
 
@@ -1547,7 +1549,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\CommonComponents\SoundEngine.sqf at line 27](../../../Src/host/CommonComponents/SoundEngine.sqf#L27)
+File: [host\CommonComponents\SoundEngine.sqf at line 78](../../../Src/host/CommonComponents/SoundEngine.sqf#L78)
 ## soundGlobal_play
 
 Type: function
@@ -1563,7 +1565,7 @@ Description: динамический источник звука, удален�
 - Param: _isLocal (optional, default false)
 - Param: _isRTProcess (optional, default false)
 
-File: [host\CommonComponents\SoundEngine.sqf at line 21](../../../Src/host/CommonComponents/SoundEngine.sqf#L21)
+File: [host\CommonComponents\SoundEngine.sqf at line 22](../../../Src/host/CommonComponents/SoundEngine.sqf#L22)
 ## soundLocal_play
 
 Type: function
@@ -1571,7 +1573,7 @@ Type: function
 Description: Аналог soundGlobal::play() но без репликации по сети
 
 
-File: [host\CommonComponents\SoundEngine.sqf at line 141](../../../Src/host/CommonComponents/SoundEngine.sqf#L141)
+File: [host\CommonComponents\SoundEngine.sqf at line 195](../../../Src/host/CommonComponents/SoundEngine.sqf#L195)
 ## soundUI_play
 
 Type: function
@@ -1584,7 +1586,7 @@ Description:
 - Param: _soundExtension (optional, default "ogg")
 - Param: _offset (optional, default 0)
 
-File: [host\CommonComponents\SoundEngine.sqf at line 147](../../../Src/host/CommonComponents/SoundEngine.sqf#L147)
+File: [host\CommonComponents\SoundEngine.sqf at line 201](../../../Src/host/CommonComponents/SoundEngine.sqf#L201)
 # TransportLayer.sqf
 
 ## rpc_internal_regEnum_server
