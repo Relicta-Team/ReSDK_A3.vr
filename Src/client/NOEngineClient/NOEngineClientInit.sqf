@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -13,6 +13,7 @@
 #include <..\..\host\Atmos\Atmos_shared.sqf>
 #include <..\ClientRpc\clientRpc.hpp>
 #include "..\Interactions\interact_component_shared.hpp"
+#include "..\..\host\ServerVoice\ReVoicer.hpp"
 
 namespace(NOEngine.Client,noe_client_)
 

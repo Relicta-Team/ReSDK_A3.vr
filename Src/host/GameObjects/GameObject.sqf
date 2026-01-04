@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -2072,7 +2072,7 @@ class(IDestructible) extends(GameObject)
 		if (_doSound) then {
 			private _sound = ifcheck(_useBlockSound,callFunc(_mat,getResistSound),callFunc(_mat,getDamageSound));
 			if (_sound == stringEmpty) exitWith {};
-			callSelfParams(playSound,_sound arg randInt(0.85,1.15) arg 15 arg null arg _pos);
+			callSelfParams(playSound,_sound arg rand(0.85,1.15) arg 15 arg null arg _pos);
 		};
 	};
 

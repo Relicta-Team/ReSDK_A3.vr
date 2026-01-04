@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -22,6 +22,8 @@ if (IS_INIT_MODULE) then {
 	cm_disconnectedClients = hashMapNew; //список дисконнектнутых клиентов. Отсюда берутся все jip-ам
 	cm_allInGameMobs = []; //список всех мобов в игре. Этот массив требуется в основном потоке обработчика карты
 		netSetGlobal(smd_allInGameMobs,cm_allInGameMobs);
+	cm_allInGamePlayerMobs = []; //список всех игроков в игре
+		netSetGlobal(smd_allInGamePlayerMobs,cm_allInGamePlayerMobs);
 	cm_allAwaitMobs = allUnits; //список нераспределённых мобов
 
 	cm_maxClients = 0; //сколько максимально клиентов подключалось

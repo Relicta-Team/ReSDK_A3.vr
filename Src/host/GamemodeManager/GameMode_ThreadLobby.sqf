@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -7,7 +7,28 @@ FHEADER;
 
 if (!gm_lobbyCanProcessTime) exitWith {};
 
+#ifndef EDITOR
+#ifndef TEST_WHITELISTED
+if (count (call cm_getAllClientsInLobby) <= 3) exitWith {
+	DEC(gm_lobbyLowOnlineTimeLeft);
+	if (gm_lobbyLowOnlineTimeLeft < 0) exitWith {
+		stopThisUpdate();
+		gm_preLobbyHandler = -1;
+		["Народа маловато. Расход!","system"] call cm_sendOOSMessage;
+		gm_lobbyCanProcessTime = false;
+		invokeAfterDelay(server_end,5);
+		RETURN(0);
+	};
+	if (gm_lobbyLowOnlineTimeLeft%60 == 0) then {
+		[format["Низкий онлайн. Если не наберется больше 3х игроков, сервер выключится через %1 секунд",gm_lobbyLowOnlineTimeLeft]] call cm_sendOOSMessage;
+	};
+};
+#endif
+#endif
+
 DEC(gm_lobbyTimeLeft);
+
+gm_lobbyLowOnlineTimeLeft = PRE_LOBBY_LOW_ONLINE_AWAIT;
 
 if (gm_lobbyTimeLeft < 0) then {
 

@@ -629,7 +629,7 @@ Description:
 - Param: _mob
 - Param: _nextAction (optional, default -1)
 
-File: [client\ClientData\ClientData_ConnectionManager.sqf at line 192](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L192)
+File: [client\ClientData\ClientData_ConnectionManager.sqf at line 194](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L194)
 ## cd_onPlayingEnd
 
 Type: function
@@ -638,7 +638,7 @@ Description:
 - Param: _mob
 - Param: _nextAction (optional, default -1)
 
-File: [client\ClientData\ClientData_ConnectionManager.sqf at line 199](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L199)
+File: [client\ClientData\ClientData_ConnectionManager.sqf at line 201](../../../Src/client/ClientData/ClientData_ConnectionManager.sqf#L201)
 # ClientData_customAnims.sqf
 
 ## cd_customAnim

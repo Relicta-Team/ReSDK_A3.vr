@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -193,6 +193,13 @@ class(ServerClient) /*extends(NetObject)*/
 			//снять с эмбарка. Включает сброс переменной
 			[this,false] call gm_removeClientFromEmbark;
 		};
+
+		//удаляем голос клиента из голосования
+		[this] call gm_voteOnClientDisconnected;
+
+		//отправляем на войс сигнал что клиент отключился
+		[getSelf(name)] call vs_server_onClientDisconnected;
+
 
 		[format["Disconnected - %1 (netid: %2; disid: %3)",getSelf(name),getSelf(id),getSelf(discordId)]] call discLog;
 	};
@@ -1286,6 +1293,9 @@ region(discord accounting)
 
 		true
 	};
+
+	//prestart vote vars
+	var(prestartVotedTo,""); //за какой режим проголосовал клиент
 
 endclass
 

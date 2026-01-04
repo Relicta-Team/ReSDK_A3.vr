@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -28,7 +28,12 @@
 #endif
 
 //прелобби ожидание после которого пикнется режим
-#define PRE_LOBBY_AWAIT_TIME 60*3
+#define PRE_LOBBY_AWAIT_TIME 60*5
+
+//время до выключения сервера при маленьком онлайне
+#define PRE_LOBBY_LOW_ONLINE_AWAIT 60*10
+
 #ifdef EDITOR
+#define PRE_LOBBY_LOW_ONLINE_AWAIT 100000
 //#define PRE_LOBBY_AWAIT_TIME 1
 #endif

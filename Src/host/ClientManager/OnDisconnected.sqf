@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -20,6 +20,12 @@ if !isNullReference(_cli) then {
 	_mob = getVar(_cli,actor) getVariable "link";
 	if (!isNullVar(_mob) && {!isNullReference(_mob)}) then {
 		callFunc(_mob,onDisconnected);
+
+		private _mobIndex = cm_allInGamePlayerMobs find getVar(_mob,owner);
+		if (_mobIndex >= 0) then {
+			cm_allInGamePlayerMobs deleteAt _mobIndex;
+			netSetGlobal(smd_allInGamePlayerMobs,cm_allInGamePlayerMobs);
+		};
 	};
 
 	//удаляем клиента из всех его ролей

@@ -1,17 +1,18 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 #include <..\..\..\host\engine.hpp>
 #include <..\..\ClientRpc\clientRpc.hpp>
 #include <..\..\..\host\NOEngine\NOEngine.hpp>
+#include "..\..\..\host\ServerVoice\ReVoicer.hpp"
 
 #include "ReVoice.h"
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
-vs_apiversion = "beta_v1";
+vs_apiversion = "stable_v4";
 
 vs_localName = ""; //sended from server on player connected
 vs_canProcess = false;
@@ -33,5 +34,7 @@ vs_isEnabledText = false;
 //система динамиков (и радио)
 #include "Speaker.sqf"
 
+//аудиосистема
+#include "AudioSystem.sqf"
 
 call vs_init;

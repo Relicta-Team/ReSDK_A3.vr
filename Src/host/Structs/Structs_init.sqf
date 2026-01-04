@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -22,3 +22,4 @@ loadFile("src\host\CraftSystem\ObjectSystems\FryingPanSystem_struct.sqf");
 loadFile("src\host\CraftSystem\ObjectSystems\BakingOvenSystem_struct.sqf");
 loadFile("src\host\ClientManager\PreAwaitStruct.sqf");
 loadFile("src\host\AI\Brain\Brain_struct.sqf");
+loadFile("src\host\Overlays\overlays_structs.sqf");
