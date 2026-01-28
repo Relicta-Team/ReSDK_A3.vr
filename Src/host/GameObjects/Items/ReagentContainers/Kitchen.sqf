@@ -231,9 +231,10 @@ class(Ashtray) extends(Container)
 	var(model,"ml_shabut\exodus\ashtray.p3d");
 	var(material,"MatMetal");
 	var(weight,gramm(130));
-	var_exprval(countSlots,BASE_STORAGE_CAPACITY(1.4));
+	var(countSlots,20);
 	var(size,ITEM_SIZE_SMALL);
 	var(maxSize,ITEM_SIZE_SMALL);
+	getterconst_func(allowedItemClasses,["Sigarette" arg "Zvak"]);
 endclass
 
 // Cups
