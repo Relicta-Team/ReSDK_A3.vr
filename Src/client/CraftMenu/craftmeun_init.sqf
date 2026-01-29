@@ -211,7 +211,7 @@ craft_onLoadCategory = {
 	// #endif
 
 	{
-		_x params ["_id","_recipeInfo"];
+		_x params ["_id","_recipeInfo",["_canCraft",true]];
 		(_recipeInfo splitString endl) params ["_name","_needs",["_optDesc",""]];
 
 		_t = [_d,TEXT,[0,SIZE_RECIPE_TEXT * _idx,100,SIZE_RECIPE_TEXT],_list] call createWidget;
@@ -220,8 +220,14 @@ craft_onLoadCategory = {
 		
 		_recipe = craft_client_allRecipes get _x;
 		
-		[_t,format["<t align='center'>%1</t>",_name]] call widgetSetText;
-		_t ctrlSetBackgroundColor [0.2,0.2,0.2,0.4];
+		// Визуальное оформление в зависимости от доступности крафта
+		if (_canCraft) then {
+			[_t,format["<t align='center'>%1</t>",_name]] call widgetSetText;
+			_t ctrlSetBackgroundColor [0.2,0.2,0.2,0.4];
+		} else {
+			[_t,format["<t align='center' color='#888888'>%1</t>",_name]] call widgetSetText;
+			_t ctrlSetBackgroundColor [0.25,0.15,0.15,0.4];
+		};
 		
 		_t ctrlAddEventHandler ["MouseButtonUp",{
 			params ["_ct","_bt"];
@@ -233,6 +239,7 @@ craft_onLoadCategory = {
 		_t setVariable ["name",_name];
 		_t setVariable ["needs",_needs];
 		_t setVariable ["optDesc",_optDesc];
+		_t setVariable ["canCraft",_canCraft];
 		_t setVariable ["index",_foreachindex];
 		
 		
@@ -247,6 +254,7 @@ craft_onSelectRecipe = {
 	private _name = _wid getVariable "name";
 	private _needs = _wid getVariable "needs";
 	private _optDesc = _wid getVariable "optDesc";
+	private _canCraft = _wid getVariable ["canCraft",true];
 
 	craft_lastPressedRecipeID = _id;
 	
@@ -261,7 +269,8 @@ craft_onSelectRecipe = {
 	sbr +
 	"%3",_name,_needs,_optDesc]] call widgetSetText;
 	
-	[true] call craft_setActiveCraftButton;
+	// Активируем кнопку только если крафт доступен
+	[_canCraft] call craft_setActiveCraftButton;
 };	
 
 decl(void())

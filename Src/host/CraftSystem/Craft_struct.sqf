@@ -489,15 +489,46 @@ struct(ICraftRecipeBase)
 		_canSee 
 	}
 
+	// Проверка возможности крафта по навыкам (без броска кубиков)
+	def(canCraftBySkills)
+	{
+		params ["_usr"];
+		private _skills = self getv(skills);
+		private _canCraft = true;
+		
+		if !isNullVar(_skills) then {
+			_canCraft = false;
+			{
+				if (callFuncReflect(_usr,"get" + _x) >= _y) exitWith {_canCraft = true};
+			} foreach _skills;
+		};
+		
+		_canCraft
+	}
+
 	def(getRecipeMenuData)
 	{
+		params [["_usr",objNull]];
 		private _buff = [self getv(craftId)];
 		private _buffText = [self getv(name)];
-		_buffText pushBack ((self getv(components) apply {_x callv(getComponentTextData)}) joinString " + ");
+		
+		// Проверяем возможность крафта по навыкам
+		private _canCraft = true;
+		if (!isNull _usr) then {
+			_canCraft = self callp(canCraftBySkills,_usr);
+		};
+		
+		if (_canCraft) then {
+			_buffText pushBack ((self getv(components) apply {_x callv(getComponentTextData)}) joinString " + ");
+		} else {
+			_buffText pushBack "Я не могу это сделать";
+		};
+		
 		if ((self getv(desc)) != "") then {
 			_buffText pushBack (self getv(desc));
 		};
 		_buff pushBack (_buffText joinString endl);
+		_buff pushBack _canCraft;
 		_buff
 	}
 

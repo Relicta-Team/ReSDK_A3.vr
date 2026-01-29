@@ -45,7 +45,7 @@ csys_requestOpenMenu = {
 	callFuncParams(_usr,sendInfo,"openCraftMenu" arg _data);	
 };
 
-//возвращает массив данных: vec2(recipeId,name + needs + optdesc)
+//возвращает массив данных: vec3(recipeId, name + needs + optdesc, canCraft)
 csys_getRecipesForUser = {
 	params ["_catId","_usr","_src",["_onlyPreview",false]];
 	private _crafts = ifcheck(_onlyPreview,csys_map_systems_storage,csys_map_storage) getOrDefault [_catId,[]];
@@ -53,7 +53,7 @@ csys_getRecipesForUser = {
 	{
 		
 		if (_x callp(canSeeRecipe,_usr arg _src)) then {
-			_recipes pushBack (_x callv(getRecipeMenuData));
+			_recipes pushBack (_x callp(getRecipeMenuData,_usr));
 		};
 	} foreach _crafts;
 	_recipes
