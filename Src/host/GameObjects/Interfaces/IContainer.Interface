@@ -289,7 +289,7 @@ func(closeContainerForAll)
 	{
 		callSelfParams(onContainerClose,_x);
 		callFuncParams(_x,sendInfo,"onChangeLocContainer");
-	} foreach getSelf(openedBy);
+	} foreach array_copy(getSelf(openedBy));
 	setSelf(openedBy,[]);
 };
 

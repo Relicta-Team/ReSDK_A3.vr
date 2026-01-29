@@ -137,6 +137,7 @@ class(KeyChain) extends(Container)
 				callSelf(unloadModel);
 			};
 			callFuncParams(this,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+			delete(this);
 		};
 
 		_result;
