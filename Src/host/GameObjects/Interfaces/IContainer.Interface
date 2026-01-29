@@ -282,6 +282,16 @@ func(onContainerClose)
 
 };
 
+// Закрывает контейнер для всех, кто его открыл
+func(closeContainerForAll)
+{
+	objParams();
+	{
+		callSelfParams(onContainerClose,_x);
+		callFuncParams(_x,sendInfo,"onChangeLocContainer");
+	} foreach getSelf(openedBy);
+	setSelf(openedBy,[]);
+};
 
 func(onContainerContentUpdate)
 {
