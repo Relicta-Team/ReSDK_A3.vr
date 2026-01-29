@@ -26,12 +26,7 @@ class(Container) extends(Item)
 	func(onChangeLoc)
 	{
 		objParams();
-		{
-			callSelfParams(onContainerClose,_x);
-			callFuncParams(_x,sendInfo,"onChangeLocContainer");
-		} foreach getSelf(openedBy);
-
-		setSelf(openedBy,[]);
+		callSelf(closeContainerForAll);
 	};
 
 

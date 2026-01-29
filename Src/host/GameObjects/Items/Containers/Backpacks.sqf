@@ -132,11 +132,12 @@ class(KeyChain) extends(Container)
 			getSelf(content) deleteAt 0;
 			callSelf(onContainerContentUpdate);
 			setSelf(countSlots,0);
-			setSelf(openedBy,[]);
+			callSelf(closeContainerForAll);
 			if (_isInWorld) then {
 				callSelf(unloadModel);
 			};
 			callFuncParams(this,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+			delete(this);
 		};
 
 		_result;
