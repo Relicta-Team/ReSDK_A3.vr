@@ -59,6 +59,11 @@ class(DODamageInfo) extends(DataObjectBase)
 		setSelf(lastAttackOptionalData,vec2(_optItem,_wm));
 		setSelf(lastAttackerTime,tickTime);
 
+		// Вызов обработчика события обновления последнего атакующего
+		if (!isNullReference(getSelf(loc)) && {callFunc(getSelf(loc),isMob)}) then {
+			callFuncParams(getSelf(loc),onLastAttackerUpdated,_usr arg _wm arg _optItem);
+		};
+
 		private _m = callSelf(getDamagetInfoFull);
 		#ifdef LOG_DAMAGE_INFO_EDITOR
 		callFuncParams(getSelf(loc),localSay,_m arg "log");
