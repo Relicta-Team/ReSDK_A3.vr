@@ -441,7 +441,7 @@ localCommand("disablecolorcorrection")
 	
 	["color_default",!cd_colorCorrection_disabled] call pp_setEnable;
 	
-	_msg = if (cd_colorCorrection_disabled) then {
+	private _msg = if (cd_colorCorrection_disabled) then {
 		"Цветокоррекция отключена"
 	} else {
 		"Цветокоррекция включена"
