@@ -1818,7 +1818,7 @@ region(shooting)
 		objParams_3(_attacker,_weapon,_optItem);
 		//Итерируем по копии массива чтобы избежать пропуска элементов
 		//при модификации оригинального массива из обработчика
-		private _handlers = +getSelf(attackHandlers);
+		private _handlers = array_copy(getSelf(attackHandlers));
 		{
 			if !equalTypes(_x,{}) then {
 				errorformat("Mob::invokeAttackHandlers() - handler is not code, got %1",typeName _x);
