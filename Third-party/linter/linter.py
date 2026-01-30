@@ -63,10 +63,11 @@ class SQFLinter:
     CLASS_FUNC_PATTERN = re.compile(r'^\t(func|def)\s*\(\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\)', re.MULTILINE)
     CLASS_VAR_PATTERN = re.compile(r'^\t(var|getter_func|getterconst_func)\s*\(', re.MULTILINE)
     
-    def __init__(self, root_path: str, verbose: bool = False):
+    def __init__(self, root_path: str, verbose: bool = False, github_actions: bool = False):
         self.root_path = Path(root_path)
         self.issues: List[LintIssue] = []
         self.verbose = verbose
+        self.github_actions = github_actions
         self.current_year = datetime.now().year
     
     def _is_excluded_path(self, file_path: Path) -> bool:
@@ -151,9 +152,9 @@ class SQFLinter:
         except ValueError:
             rel_path = str(file_path)
         
-        # Verbose logging (to stderr so it doesn't mix with issues)
+        # Verbose logging (to stdout for proper ordering with issues)
         if self.verbose:
-            print(f"[LINT] Checking: {rel_path}", file=sys.stderr)
+            print(f"\n[LINT] {rel_path}")
         
         try:
             with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
@@ -203,20 +204,41 @@ class SQFLinter:
     def _check_tabs(self, file_path: str, lines: List[str]) -> List[LintIssue]:
         """Check for spaces used instead of tabs for indentation"""
         issues = []
+        
+        # First pass: check if file has ANY tabs at line start
+        has_tabs = any(line.startswith('\t') for line in lines if line.strip())
+        
+        # Count lines with space indentation
+        space_indented_lines = []
         for i, line in enumerate(lines, 1):
-            # Check if line starts with spaces (not tabs) for indentation
             if line and not line.startswith('\t') and line.startswith('    '):
-                # Count leading spaces
                 spaces = len(line) - len(line.lstrip(' '))
-                if spaces >= 4:  # At least one tab-worth of spaces
+                if spaces >= 4:
+                    space_indented_lines.append((i, spaces))
+        
+        if space_indented_lines:
+            if not has_tabs:
+                # File uses "spaces as tabs" mode - single error for whole file
+                issues.append(LintIssue(
+                    file=file_path,
+                    line=1,
+                    column=1,
+                    severity=Severity.ERROR,
+                    rule="tabs-not-spaces",
+                    message=f"File uses spaces for indentation instead of tabs ({len(space_indented_lines)} lines affected)"
+                ))
+            else:
+                # Mixed mode - report each line
+                for line_num, spaces in space_indented_lines:
                     issues.append(LintIssue(
                         file=file_path,
-                        line=i,
+                        line=line_num,
                         column=1,
                         severity=Severity.ERROR,
                         rule="tabs-not-spaces",
                         message=f"Use tabs for indentation, not spaces (found {spaces} leading spaces)"
                     ))
+        
         return issues
     
     def _find_matching_paren(self, text: str, start: int) -> int:
@@ -521,8 +543,14 @@ class SQFLinter:
         
         return issues
     
-    def lint_directory(self, dir_path: Path, extensions: List[str]) -> List[LintIssue]:
-        """Lint all matching files in directory recursively"""
+    def lint_directory(self, dir_path: Path, extensions: List[str], output_callback=None) -> List[LintIssue]:
+        """Lint all matching files in directory recursively
+        
+        Args:
+            dir_path: Directory to lint
+            extensions: File extensions to check
+            output_callback: Optional callback(issues, file_path) called after each file
+        """
         all_issues = []
         
         for ext in extensions:
@@ -533,6 +561,10 @@ class SQFLinter:
                     
                 issues = self.lint_file(file_path)
                 all_issues.extend(issues)
+                
+                # Output issues immediately if callback provided
+                if output_callback and issues:
+                    output_callback(issues, file_path)
         
         return all_issues
 
@@ -573,8 +605,29 @@ Examples:
         else:
             root_path = Path(__file__).parent.parent.parent  # Assume Third-party/linter structure
     
-    linter = SQFLinter(str(root_path), verbose=args.verbose)
+    linter = SQFLinter(str(root_path), verbose=args.verbose, github_actions=args.github_actions)
     extensions = args.extensions.split(',')
+    
+    # Track totals
+    errors = 0
+    warnings = 0
+    
+    def output_issues(issues: List[LintIssue], file_path: Path = None):
+        """Output issues immediately (used in verbose mode)"""
+        nonlocal errors, warnings
+        for issue in sorted(issues, key=lambda x: x.line):
+            if args.github_actions:
+                print(issue.github_format())
+            else:
+                print(f"  {issue}")
+            
+            if issue.severity == Severity.ERROR:
+                errors += 1
+            else:
+                warnings += 1
+    
+    # Use callback for immediate output in verbose mode
+    output_callback = output_issues if args.verbose else None
     
     # Collect issues
     issues: List[LintIssue] = []
@@ -584,34 +637,34 @@ Examples:
         if not file_path.is_absolute():
             file_path = root_path / file_path
         issues = linter.lint_file(file_path)
+        if issues:
+            output_issues(issues)
     elif args.directory:
         dir_path = Path(args.directory)
         if not dir_path.is_absolute():
             dir_path = root_path / dir_path
-        issues = linter.lint_directory(dir_path, extensions)
+        issues = linter.lint_directory(dir_path, extensions, output_callback)
     else:
         # Lint Src directory by default
         src_path = root_path / 'Src'
         if src_path.exists():
-            issues = linter.lint_directory(src_path, extensions)
+            issues = linter.lint_directory(src_path, extensions, output_callback)
         else:
             print(f"Error: Src directory not found in {root_path}", file=sys.stderr)
             sys.exit(1)
     
-    # Output results
-    errors = 0
-    warnings = 0
-    
-    for issue in sorted(issues, key=lambda x: (x.file, x.line)):
-        if args.github_actions:
-            print(issue.github_format())
-        else:
-            print(issue)
-        
-        if issue.severity == Severity.ERROR:
-            errors += 1
-        else:
-            warnings += 1
+    # If not verbose mode, output all issues at once (sorted by file)
+    if not args.verbose:
+        for issue in sorted(issues, key=lambda x: (x.file, x.line)):
+            if args.github_actions:
+                print(issue.github_format())
+            else:
+                print(issue)
+            
+            if issue.severity == Severity.ERROR:
+                errors += 1
+            else:
+                warnings += 1
     
     # Summary
     if not args.github_actions:
