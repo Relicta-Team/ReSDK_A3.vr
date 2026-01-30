@@ -36,7 +36,15 @@ class LintIssue:
         return f"::{level} file={self.file},line={self.line},col={self.column}::[{self.rule}] {self.message}"
 
 class SQFLinter:
-    """Main linter class for SQF/HPP/CPP files"""
+    """Main linter class for SQF/HPP files"""
+    
+    # Directories to exclude from linting
+    EXCLUDED_DIRS = [
+        'Third-party',
+        'editor/bin',
+        'RVEngine', 
+        'host/MapManager/Maps',
+    ]
     
     # Copyright header pattern
     COPYRIGHT_PATTERN = re.compile(
@@ -71,13 +79,46 @@ class SQFLinter:
     CLASS_FUNC_PATTERN = re.compile(r'^\t(func|def)\s*\(\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\)', re.MULTILINE)
     CLASS_VAR_PATTERN = re.compile(r'^\t(var|getter_func|getterconst_func)\s*\(', re.MULTILINE)
     
-    def __init__(self, root_path: str):
+    def __init__(self, root_path: str, verbose: bool = False):
         self.root_path = Path(root_path)
         self.issues: List[LintIssue] = []
+        self.verbose = verbose
+    
+    def _is_excluded_path(self, file_path: Path) -> bool:
+        """Check if file path should be excluded"""
+        path_str = str(file_path).replace('\\', '/')
+        for excluded in self.EXCLUDED_DIRS:
+            if excluded in path_str:
+                return True
+        return False
+    
+    def _is_interface_file(self, file_path: Path, content: str) -> bool:
+        """Check if file is an interface file (included inside a class)"""
+        # Interface files don't have class/endclass declarations
+        # but contain class members like func(), var(), etc.
+        has_class_decl = bool(re.search(r'^(class|struct)\s*\(', content, re.MULTILINE))
+        has_endclass = bool(re.search(r'^(endclass|endstruct)', content, re.MULTILINE))
+        has_members = bool(re.search(r'^\t?(func|def|var|getter_func|getterconst_func)\s*\(', content, re.MULTILINE))
+        
+        # It's an interface file if it has members but no class/endclass
+        return has_members and not has_class_decl and not has_endclass
         
     def lint_file(self, file_path: Path) -> List[LintIssue]:
         """Lint a single file and return issues"""
         issues = []
+        
+        # Check if excluded
+        if self._is_excluded_path(file_path):
+            return issues
+        
+        try:
+            rel_path = str(file_path.relative_to(self.root_path) if file_path.is_relative_to(self.root_path) else file_path)
+        except ValueError:
+            rel_path = str(file_path)
+        
+        # Verbose logging
+        if self.verbose:
+            print(f"[LINT] Checking: {rel_path}", file=sys.stderr)
         
         try:
             with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
@@ -85,7 +126,7 @@ class SQFLinter:
                 lines = content.split('\n')
         except Exception as e:
             issues.append(LintIssue(
-                file=str(file_path),
+                file=rel_path,
                 line=1,
                 column=1,
                 severity=Severity.ERROR,
@@ -94,7 +135,8 @@ class SQFLinter:
             ))
             return issues
         
-        rel_path = str(file_path.relative_to(self.root_path) if file_path.is_relative_to(self.root_path) else file_path)
+        # Determine if this is an interface file
+        is_interface = self._is_interface_file(file_path, content)
         
         # Check copyright header
         issues.extend(self._check_copyright(rel_path, content))
@@ -117,8 +159,9 @@ class SQFLinter:
         # Check includes validity
         issues.extend(self._check_includes(rel_path, file_path, content, lines))
         
-        # Check class/struct member formatting
-        issues.extend(self._check_class_members(rel_path, content, lines))
+        # Check class/struct member formatting (skip for interface files)
+        if not is_interface:
+            issues.extend(self._check_class_members(rel_path, content, lines))
         
         return issues
     
@@ -476,8 +519,8 @@ class SQFLinter:
         
         for ext in extensions:
             for file_path in dir_path.rglob(f'*{ext}'):
-                # Skip Third-party directory
-                if 'Third-party' in str(file_path):
+                # Skip excluded directories (checked in lint_file too, but skip early)
+                if self._is_excluded_path(file_path):
                     continue
                     
                 issues = self.lint_file(file_path)
@@ -500,9 +543,10 @@ Examples:
     
     parser.add_argument('-f', '--file', type=str, help='Lint a single file')
     parser.add_argument('-d', '--directory', type=str, help='Lint a specific directory')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Show each file being checked')
     parser.add_argument('--github-actions', action='store_true', help='Output in GitHub Actions format')
     parser.add_argument('--root', type=str, default=None, help='Project root directory')
-    parser.add_argument('--extensions', type=str, default='.sqf,.hpp,.cpp', help='File extensions to lint (comma-separated)')
+    parser.add_argument('--extensions', type=str, default='.sqf,.hpp', help='File extensions to lint (comma-separated)')
     parser.add_argument('--warnings-as-errors', action='store_true', help='Treat warnings as errors')
     
     args = parser.parse_args()
@@ -521,7 +565,7 @@ Examples:
         else:
             root_path = Path(__file__).parent.parent.parent  # Assume Third-party/linter structure
     
-    linter = SQFLinter(str(root_path))
+    linter = SQFLinter(str(root_path), verbose=args.verbose)
     extensions = args.extensions.split(',')
     
     # Collect issues
