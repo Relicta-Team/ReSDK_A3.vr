@@ -262,12 +262,15 @@ craft_onSelectRecipe = {
 	
 	_txt = getRecipeInfoWidget();
 	
+	// Если крафт недоступен, показываем предупреждение вместо компонентов
+	private _displayNeeds = if (_canCraft) then {_needs} else {"Я не могу это сделать"};
+	
 	[_txt,format["%1:" +
 	sbr +
 	sbr +
 	"%2" + 
 	sbr +
-	"%3",_name,_needs,_optDesc]] call widgetSetText;
+	"%3",_name,_displayNeeds,_optDesc]] call widgetSetText;
 	
 	// Активируем кнопку только если крафт доступен
 	[_canCraft] call craft_setActiveCraftButton;

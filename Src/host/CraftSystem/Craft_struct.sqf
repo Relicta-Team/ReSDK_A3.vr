@@ -512,23 +512,21 @@ struct(ICraftRecipeBase)
 		private _buff = [self getv(craftId)];
 		private _buffText = [self getv(name)];
 		
-		// Проверяем возможность крафта по навыкам
-		private _canCraft = true;
-		if (!isNull _usr) then {
-			_canCraft = self callp(canCraftBySkills,_usr);
-		};
-		
-		if (_canCraft) then {
-			_buffText pushBack ((self getv(components) apply {_x callv(getComponentTextData)}) joinString " + ");
-		} else {
-			_buffText pushBack "Я не могу это сделать";
-		};
+		// Всегда отправляем список компонентов
+		_buffText pushBack ((self getv(components) apply {_x callv(getComponentTextData)}) joinString " + ");
 		
 		if ((self getv(desc)) != "") then {
 			_buffText pushBack (self getv(desc));
 		};
 		_buff pushBack (_buffText joinString endl);
+		
+		// Проверяем возможность крафта по навыкам
+		private _canCraft = true;
+		if (!isNull _usr) then {
+			_canCraft = self callp(canCraftBySkills,_usr);
+		};
 		_buff pushBack _canCraft;
+		
 		_buff
 	}
 
