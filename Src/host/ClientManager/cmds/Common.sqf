@@ -13,10 +13,10 @@ addCommandWithDescription("help",PUBLIC_COMMAND,"Отображает досту
 	_list = [];
 	{
 		_accessList = _y select 0;
-		_description = _y select 1;
 		if (!array_exists(_accessList,getVar(_client,access)) && !array_exists(_accessList,PUBLIC_COMMAND) && (selectMax _accessList > getVar(_client,access))) then {
 			//warningformat("processClientCommand() - No access to call %1 (called on %2): list access:%3; client access %4",_command arg _owner arg _accessList arg getVar(_client,access));
 		} else {
+			_description = _y select 1;
 			if (_description != "") then {
 				_list pushBack (sbr + _x + "            - " + _description);
 			};

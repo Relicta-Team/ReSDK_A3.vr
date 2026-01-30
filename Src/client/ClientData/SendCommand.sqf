@@ -433,6 +433,18 @@ localCommand("setvoipvol")
 
 localCommand("disablecolorcorrection")
 {
-	["color_default",false] call pp_setEnable;
-	["Цветокоррекция отключена","system"] call chatPrint;
+	if isNullVar(cd_colorCorrection_disabled) then {
+		cd_colorCorrection_disabled = false;
+	};
+	
+	cd_colorCorrection_disabled = !cd_colorCorrection_disabled;
+	
+	["color_default",!cd_colorCorrection_disabled] call pp_setEnable;
+	
+	_msg = if (cd_colorCorrection_disabled) then {
+		"Цветокоррекция отключена"
+	} else {
+		"Цветокоррекция включена"
+	};
+	[_msg,"system"] call chatPrint;
 };
