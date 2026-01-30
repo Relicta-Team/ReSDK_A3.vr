@@ -6,7 +6,11 @@
 #   -d <dir>  - lint specific directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
+
+if ! cd "$SCRIPT_DIR"; then
+    echo "Error: Failed to change directory to $SCRIPT_DIR" >&2
+    exit 1
+fi
 
 python3 linter.py "$@"
 exit_code=$?

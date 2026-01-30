@@ -9,8 +9,9 @@ import sys
 import os
 import argparse
 import re
+from datetime import datetime
 from pathlib import Path
-from typing import List, Tuple, Dict, Optional
+from typing import List, Tuple, Dict, Optional, ClassVar, Set
 from dataclasses import dataclass
 from enum import Enum
 
@@ -38,42 +39,25 @@ class LintIssue:
 class SQFLinter:
     """Main linter class for SQF/HPP files"""
     
-    # Directories to exclude from linting
-    EXCLUDED_DIRS = [
-        'Third-party',
+    # Directories to exclude from linting (lowercase for case-insensitive matching)
+    EXCLUDED_DIRS: ClassVar[List[str]] = [
+        'third-party',
         'editor/bin',
-        'RVEngine', 
-        'host/MapManager/Maps',
+        'rvengine', 
+        'host/mapmanager/maps',
     ]
     
-    # Copyright header pattern
-    COPYRIGHT_PATTERN = re.compile(
-        r'^// ======+\s*\n'
-        r'// Copyright \(c\) \d{4}(-\d{4})? the ReSDK_A3 project\s*\n'
-        r'// sdk\.relicta\.ru\s*\n'
-        r'// ======+',
-        re.MULTILINE
-    )
+    # Special variables that are automatically local in SQF
+    SPECIAL_VARS: ClassVar[Set[str]] = {'_x', '_y', '_forEachIndex', '_this', '_exception', '_thisScript', '_thisFSM'}
     
     # Module function pattern: moduleName_functionName = {
     MODULE_FUNC_PATTERN = re.compile(r'^([a-z][a-zA-Z0-9]*(?:_[a-z][a-zA-Z0-9]*)+)\s*=\s*\{', re.MULTILINE)
     
-    # Include patterns
-    INCLUDE_ANGLE_PATTERN = re.compile(r'#include\s*<([^>]+)>')
+    # Include pattern (only quote includes - angle brackets are for system headers)
     INCLUDE_QUOTE_PATTERN = re.compile(r'#include\s*"([^"]+)"')
     
     # Macro patterns
-    MACRO_CONST_PATTERN = re.compile(r'^#define\s+([A-Z][A-Z0-9_]*)\s+[^(]', re.MULTILINE)
     MACRO_FUNC_PATTERN = re.compile(r'^#define\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(', re.MULTILINE)
-    
-    # Enum macro pattern (consecutive #define with same prefix)
-    ENUM_PATTERN = re.compile(r'^#define\s+([A-Z][A-Z0-9_]*_)([A-Z][A-Z0-9_]*)\s+(\d+|"[^"]*")', re.MULTILINE)
-    
-    # Bad if-then formatting (then on new line)
-    BAD_IF_THEN_PATTERN = re.compile(r'if\s*\([^)]*\)\s*\n\s*then\s*\{', re.MULTILINE)
-    
-    # Local variable without private/params/objParams
-    LOCAL_VAR_PATTERN = re.compile(r'^\s+(_[a-zA-Z][a-zA-Z0-9_]*)\s*=\s*(?!.*;\s*$)', re.MULTILINE)
     
     # Class/struct member patterns
     CLASS_FUNC_PATTERN = re.compile(r'^\t(func|def)\s*\(\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\)', re.MULTILINE)
@@ -83,10 +67,11 @@ class SQFLinter:
         self.root_path = Path(root_path)
         self.issues: List[LintIssue] = []
         self.verbose = verbose
+        self.current_year = datetime.now().year
     
     def _is_excluded_path(self, file_path: Path) -> bool:
-        """Check if file path should be excluded"""
-        path_str = str(file_path).replace('\\', '/')
+        """Check if file path should be excluded (case-insensitive)"""
+        path_str = str(file_path).replace('\\', '/').lower()
         for excluded in self.EXCLUDED_DIRS:
             if excluded in path_str:
                 return True
@@ -102,6 +87,56 @@ class SQFLinter:
         
         # It's an interface file if it has members but no class/endclass
         return has_members and not has_class_decl and not has_endclass
+    
+    def _check_copyright(self, file_path: str, content: str) -> List[LintIssue]:
+        """Check for copyright header with valid year range"""
+        issues = []
+        
+        # Pattern for copyright header with dynamic year validation
+        copyright_pattern = re.compile(
+            r'^// ======+\s*\n'
+            r'// Copyright \(c\) (\d{4})(-(\d{4}))? the ReSDK_A3 project\s*\n'
+            r'// sdk\.relicta\.ru\s*\n'
+            r'// ======+',
+            re.MULTILINE
+        )
+        
+        match = copyright_pattern.search(content)
+        if not match:
+            issues.append(LintIssue(
+                file=file_path,
+                line=1,
+                column=1,
+                severity=Severity.ERROR,
+                rule="copyright-header",
+                message="Missing or invalid copyright header"
+            ))
+        else:
+            # Validate year range
+            start_year = int(match.group(1))
+            end_year = int(match.group(3)) if match.group(3) else start_year
+            
+            if start_year != 2017:
+                issues.append(LintIssue(
+                    file=file_path,
+                    line=2,
+                    column=1,
+                    severity=Severity.ERROR,
+                    rule="copyright-year",
+                    message=f"Copyright start year should be 2017, found {start_year}"
+                ))
+            
+            if end_year != self.current_year:
+                issues.append(LintIssue(
+                    file=file_path,
+                    line=2,
+                    column=1,
+                    severity=Severity.ERROR,
+                    rule="copyright-year",
+                    message=f"Copyright end year should be {self.current_year}, found {end_year}"
+                ))
+        
+        return issues
         
     def lint_file(self, file_path: Path) -> List[LintIssue]:
         """Lint a single file and return issues"""
@@ -116,7 +151,7 @@ class SQFLinter:
         except ValueError:
             rel_path = str(file_path)
         
-        # Verbose logging
+        # Verbose logging (to stderr so it doesn't mix with issues)
         if self.verbose:
             print(f"[LINT] Checking: {rel_path}", file=sys.stderr)
         
@@ -145,7 +180,7 @@ class SQFLinter:
         issues.extend(self._check_tabs(rel_path, lines))
         
         # Check if-then formatting
-        issues.extend(self._check_if_then_formatting(rel_path, content, lines))
+        issues.extend(self._check_if_then_formatting(rel_path, lines))
         
         # Check macro naming
         issues.extend(self._check_macros(rel_path, content, lines))
@@ -154,29 +189,15 @@ class SQFLinter:
         issues.extend(self._check_function_naming(rel_path, content, lines))
         
         # Check local variable declarations
-        issues.extend(self._check_local_variables(rel_path, content, lines))
+        issues.extend(self._check_local_variables(rel_path, lines))
         
-        # Check includes validity
-        issues.extend(self._check_includes(rel_path, file_path, content, lines))
+        # Check includes validity (only quote includes, not angle brackets)
+        issues.extend(self._check_includes(rel_path, file_path, lines))
         
         # Check class/struct member formatting (skip for interface files)
         if not is_interface:
-            issues.extend(self._check_class_members(rel_path, content, lines))
+            issues.extend(self._check_class_members(rel_path, lines))
         
-        return issues
-    
-    def _check_copyright(self, file_path: str, content: str) -> List[LintIssue]:
-        """Check for copyright header"""
-        issues = []
-        if not self.COPYRIGHT_PATTERN.search(content):
-            issues.append(LintIssue(
-                file=file_path,
-                line=1,
-                column=1,
-                severity=Severity.ERROR,
-                rule="copyright-header",
-                message="Missing or invalid copyright header"
-            ))
         return issues
     
     def _check_tabs(self, file_path: str, lines: List[str]) -> List[LintIssue]:
@@ -198,21 +219,61 @@ class SQFLinter:
                     ))
         return issues
     
-    def _check_if_then_formatting(self, file_path: str, content: str, lines: List[str]) -> List[LintIssue]:
-        """Check if-then-else formatting"""
+    def _find_matching_paren(self, text: str, start: int) -> int:
+        """Find the index of matching closing parenthesis, handling nested parens"""
+        depth = 0
+        i = start
+        while i < len(text):
+            if text[i] == '(':
+                depth += 1
+            elif text[i] == ')':
+                depth -= 1
+                if depth == 0:
+                    return i
+            i += 1
+        return -1
+    
+    def _check_if_then_formatting(self, file_path: str, lines: List[str]) -> List[LintIssue]:
+        """Check if-then-else formatting using parenthesis balancing"""
         issues = []
         
-        # Find bad if-then patterns (then on new line)
-        for match in self.BAD_IF_THEN_PATTERN.finditer(content):
-            line_num = content[:match.start()].count('\n') + 1
-            issues.append(LintIssue(
-                file=file_path,
-                line=line_num,
-                column=1,
-                severity=Severity.ERROR,
-                rule="if-then-format",
-                message="'then' should be on the same line as 'if', not on a new line"
-            ))
+        # Join lines to handle multiline if conditions
+        content = '\n'.join(lines)
+        
+        # Find all 'if' followed by '('
+        i = 0
+        while i < len(content):
+            # Find 'if' keyword (not part of another word)
+            if_match = re.search(r'\bif\s*\(', content[i:])
+            if not if_match:
+                break
+            
+            if_start = i + if_match.start()
+            paren_start = i + if_match.end() - 1  # Position of '('
+            
+            # Find matching ')'
+            paren_end = self._find_matching_paren(content, paren_start)
+            if paren_end == -1:
+                i = paren_start + 1
+                continue
+            
+            # Check what comes after the closing paren
+            after_paren = content[paren_end + 1:paren_end + 50]  # Look ahead
+            
+            # Check if 'then' is on a new line
+            then_match = re.match(r'\s*\n\s*then\s*[\{]?', after_paren)
+            if then_match:
+                line_num = content[:if_start].count('\n') + 1
+                issues.append(LintIssue(
+                    file=file_path,
+                    line=line_num,
+                    column=1,
+                    severity=Severity.ERROR,
+                    rule="if-then-format",
+                    message="'then' should be on the same line as 'if', not on a new line"
+                ))
+            
+            i = paren_end + 1
         
         return issues
     
@@ -225,7 +286,7 @@ class SQFLinter:
             name = match.group(1)
             line_num = content[:match.start()].count('\n') + 1
             
-            # Skip internal macros (starting with __ or ___)
+            # Skip internal macros (starting with __ or _)
             if name.startswith('__') or name.startswith('_'):
                 continue
             
@@ -243,40 +304,6 @@ class SQFLinter:
                     rule="macro-func-naming",
                     message=f"Macro function '{name}' should use camelCase (start with lowercase)"
                 ))
-        
-        # Check enum-like macros have consistent prefix
-        issues.extend(self._check_enum_macros(file_path, content, lines))
-        
-        return issues
-    
-    def _check_enum_macros(self, file_path: str, content: str, lines: List[str]) -> List[LintIssue]:
-        """Check that enum-like macros have consistent prefixes"""
-        issues = []
-        
-        # Group consecutive #define statements by prefix
-        enum_groups: Dict[str, List[Tuple[int, str]]] = {}
-        prev_line_was_define = False
-        current_prefix = None
-        
-        for i, line in enumerate(lines, 1):
-            stripped = line.strip()
-            match = re.match(r'^#define\s+([A-Z][A-Z0-9]*_)([A-Z][A-Z0-9_]*)\s+(\d+|"[^"]*")', stripped)
-            
-            if match:
-                prefix = match.group(1)
-                if prev_line_was_define and current_prefix and prefix != current_prefix:
-                    # Different prefix in consecutive defines - might be intentional break
-                    pass
-                
-                if prefix not in enum_groups:
-                    enum_groups[prefix] = []
-                enum_groups[prefix].append((i, match.group(0)))
-                
-                current_prefix = prefix
-                prev_line_was_define = True
-            else:
-                prev_line_was_define = False
-                current_prefix = None
         
         return issues
     
@@ -311,15 +338,12 @@ class SQFLinter:
         
         return issues
     
-    # Special variables that are automatically local in SQF
-    SPECIAL_VARS = {'_x', '_y', '_forEachIndex', '_this', '_exception', '_thisScript', '_thisFSM'}
-    
-    def _check_local_variables(self, file_path: str, content: str, lines: List[str]) -> List[LintIssue]:
+    def _check_local_variables(self, file_path: str, lines: List[str]) -> List[LintIssue]:
         """Check local variable declarations use private/params/objParams"""
         issues = []
         
         # Track variables that have been declared in the file
-        declared_vars = set()
+        declared_vars: Set[str] = set()
         
         # Track if we're inside a multiline #define
         in_multiline_define = False
@@ -420,29 +444,13 @@ class SQFLinter:
         
         return issues
     
-    def _check_includes(self, file_path: str, abs_path: Path, content: str, lines: List[str]) -> List[LintIssue]:
-        """Check include statements validity"""
+    def _check_includes(self, file_path: str, abs_path: Path, lines: List[str]) -> List[LintIssue]:
+        """Check include statements validity (only quote includes, not angle brackets)"""
         issues = []
         file_dir = abs_path.parent
         
         for i, line in enumerate(lines, 1):
-            # Check angle bracket includes
-            match = self.INCLUDE_ANGLE_PATTERN.search(line)
-            if match:
-                include_path = match.group(1)
-                # Normalize path
-                resolved = self._resolve_include_path(file_dir, include_path)
-                if resolved and not resolved.exists():
-                    issues.append(LintIssue(
-                        file=file_path,
-                        line=i,
-                        column=match.start() + 1,
-                        severity=Severity.ERROR,
-                        rule="include-not-found",
-                        message=f"Include file not found: {include_path}"
-                    ))
-            
-            # Check quote includes
+            # Only check quote includes (angle brackets are for system/SDK headers)
             match = self.INCLUDE_QUOTE_PATTERN.search(line)
             if match:
                 include_path = match.group(1)
@@ -474,7 +482,7 @@ class SQFLinter:
         except Exception:
             return None
     
-    def _check_class_members(self, file_path: str, content: str, lines: List[str]) -> List[LintIssue]:
+    def _check_class_members(self, file_path: str, lines: List[str]) -> List[LintIssue]:
         """Check class/struct member formatting"""
         issues = []
         

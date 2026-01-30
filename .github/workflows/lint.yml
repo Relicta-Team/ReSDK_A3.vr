@@ -22,4 +22,4 @@ jobs:
           python-version: '3.11'
       
       - name: Run linter
-        run: python Third-party/linter/linter.py --github-actions
+        run: python Third-party/linter/linter.py --verbose --github-actions
