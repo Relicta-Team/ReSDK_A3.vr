@@ -1795,6 +1795,7 @@ region(shooting)
 		objParams_1(_handler);
 		if !equalTypes(_handler,{}) exitWith {
 			errorformat("Mob::addAttackHandler() - handler must be code, got %1",typeName _handler);
+			-1
 		};
 		(getSelf(attackHandlers)) pushBack _handler;
 	};
