@@ -430,3 +430,9 @@ localCommand("setvoipvol")
 	_new = parseNumber arguments;
 	[_new] call vs_setMasterVoiceVolume;
 };
+
+localCommand("disablecolorcorrection")
+{
+	["color_default",false] call pp_setEnable;
+	["Цветокоррекция отключена","system"] call chatPrint;
+};
