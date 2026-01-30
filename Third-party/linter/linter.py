@@ -147,8 +147,9 @@ class SQFLinter:
         if self._is_excluded_path(file_path):
             return issues
         
+        # Python 3.8 compatible relative path check
         try:
-            rel_path = str(file_path.relative_to(self.root_path) if file_path.is_relative_to(self.root_path) else file_path)
+            rel_path = str(file_path.relative_to(self.root_path))
         except ValueError:
             rel_path = str(file_path)
         
@@ -208,13 +209,29 @@ class SQFLinter:
         # First pass: check if file has ANY tabs at line start
         has_tabs = any(line.startswith('\t') for line in lines if line.strip())
         
-        # Count lines with space indentation
+        # Count lines with space indentation and mixed indentation
         space_indented_lines = []
+        mixed_indented_lines = []
+        
         for i, line in enumerate(lines, 1):
-            if line and not line.startswith('\t') and line.startswith('    '):
+            if not line or not line.strip():
+                continue
+            
+            # Check for pure space indentation (line starts with spaces, not tabs)
+            if not line.startswith('\t') and line[0] == ' ':
                 spaces = len(line) - len(line.lstrip(' '))
-                if spaces >= 4:
+                if spaces >= 1:  # Any leading spaces
                     space_indented_lines.append((i, spaces))
+            
+            # Check for mixed indentation (tabs followed by spaces)
+            elif line.startswith('\t'):
+                stripped = line.lstrip('\t')
+                if stripped and stripped[0] == ' ':
+                    # Count spaces after tabs
+                    space_count = len(stripped) - len(stripped.lstrip(' '))
+                    if space_count >= 1:  # Any spaces after tabs
+                        tab_count = len(line) - len(stripped)
+                        mixed_indented_lines.append((i, tab_count, space_count))
         
         if space_indented_lines:
             if not has_tabs:
@@ -238,6 +255,17 @@ class SQFLinter:
                         rule="tabs-not-spaces",
                         message=f"Use tabs for indentation, not spaces (found {spaces} leading spaces)"
                     ))
+        
+        # Report mixed indentation (tabs + spaces)
+        for line_num, tabs, spaces in mixed_indented_lines:
+            issues.append(LintIssue(
+                file=file_path,
+                line=line_num,
+                column=tabs + 1,
+                severity=Severity.ERROR,
+                rule="mixed-indentation",
+                message=f"Mixed indentation: {tabs} tab(s) followed by {spaces} space(s)"
+            ))
         
         return issues
     

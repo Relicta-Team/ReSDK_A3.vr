@@ -1,5 +1,18 @@
 # ReSDK_A3 Code Style Linter
 
+## Тесты
+
+```bash
+# Запуск тестов
+cd Third-party/linter
+python test_linter.py
+
+# Или с pytest
+python -m pytest test_linter.py -v
+```
+
+---
+
 Линтер для проверки соответствия кода стайлгайду проекта (CODE-STANDARDS.md).
 
 ## Требования
