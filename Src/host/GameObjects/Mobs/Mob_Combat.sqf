@@ -1816,7 +1816,14 @@ region(shooting)
 	func(invokeAttackHandlers)
 	{
 		objParams_3(_attacker,_weapon,_optItem);
+		//Итерируем по копии массива чтобы избежать пропуска элементов
+		//при модификации оригинального массива из обработчика
+		private _handlers = +getSelf(attackHandlers);
 		{
-			[_attacker,_weapon,_optItem] call _x;
-		} foreach (getSelf(attackHandlers));
+			if !equalTypes(_x,{}) then {
+				errorformat("Mob::invokeAttackHandlers() - handler is not code, got %1",typeName _x);
+			} else {
+				[_attacker,_weapon,_optItem] call _x;
+			};
+		} forEach _handlers;
 	};
