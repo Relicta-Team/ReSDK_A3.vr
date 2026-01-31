@@ -218,7 +218,7 @@ craft_onLoadCategory = {
 		INC(_idx);
 		_listWidgets pushBack _t;
 		
-		_recipe = craft_client_allRecipes get _x;
+		_recipe = craft_client_allRecipes get _id;
 		
 		// Визуальное оформление в зависимости от доступности крафта
 		if (_canCraft) then {

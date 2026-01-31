@@ -494,15 +494,13 @@ struct(ICraftRecipeBase)
 	{
 		params ["_usr"];
 		private _skills = self getv(skills);
-		private _canCraft = true;
-		
-		if !isNullVar(_skills) then {
-			_canCraft = false;
+		private _canCraft = false;
+		call {
+			if isNullVar(_skills) exitWith {_canCraft = true};
 			{
 				if (callFuncReflect(_usr,"get" + _x) >= _y) exitWith {_canCraft = true};
 			} foreach _skills;
 		};
-		
 		_canCraft
 	}
 
