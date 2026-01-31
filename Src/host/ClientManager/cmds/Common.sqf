@@ -16,7 +16,10 @@ addCommandWithDescription("help",PUBLIC_COMMAND,"Отображает досту
 		if (!array_exists(_accessList,getVar(_client,access)) && !array_exists(_accessList,PUBLIC_COMMAND) && (selectMax _accessList > getVar(_client,access))) then {
 			//warningformat("processClientCommand() - No access to call %1 (called on %2): list access:%3; client access %4",_command arg _owner arg _accessList arg getVar(_client,access));
 		} else {
-			_list pushBack (sbr + _x + "            - " + (_y select 1));
+			_description = _y select 1;
+			if (_description != "") then {
+				_list pushBack (sbr + _x + "            - " + _description);
+			};
 		};
 	} foreach cm_commands_map;
 	_list sort true;

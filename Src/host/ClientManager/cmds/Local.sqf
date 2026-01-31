@@ -24,3 +24,5 @@ addCommandWithDescription("ping",PUBLIC_COMMAND,"Узнать реальный �
 #ifdef EDITOR
 addCommandWithDescription("lightdebug",PUBLIC_COMMAND,"Показывает отрисовку света для скриптовых эффектов") {IS_LOCAL_COMMAND()};
 #endif
+
+addCommand("disablecolorcorrection",ACCESS_ADMIN) {IS_LOCAL_COMMAND()};

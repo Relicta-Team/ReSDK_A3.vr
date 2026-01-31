@@ -430,3 +430,21 @@ localCommand("setvoipvol")
 	_new = parseNumber arguments;
 	[_new] call vs_setMasterVoiceVolume;
 };
+
+localCommand("disablecolorcorrection")
+{
+	if isNullVar(cd_colorCorrection_disabled) then {
+		cd_colorCorrection_disabled = false;
+	};
+	
+	cd_colorCorrection_disabled = !cd_colorCorrection_disabled;
+	
+	["color_default",!cd_colorCorrection_disabled] call pp_setEnable;
+	
+	private _msg = if (cd_colorCorrection_disabled) then {
+		"Цветокоррекция отключена"
+	} else {
+		"Цветокоррекция включена"
+	};
+	[_msg,"system"] call chatPrint;
+};
