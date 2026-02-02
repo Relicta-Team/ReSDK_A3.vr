@@ -258,7 +258,7 @@ craft_onSelectRecipe = {
 
 	craft_lastPressedRecipeID = _id;
 	
-	_recipe = craft_client_allRecipes get _systemId;
+	_recipe = craft_client_allRecipes get _id;
 	
 	_txt = getRecipeInfoWidget();
 	
