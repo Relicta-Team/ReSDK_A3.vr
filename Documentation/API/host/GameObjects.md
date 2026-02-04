@@ -4319,7 +4319,7 @@ Replaced value:
 ```sqf
 _d = D6 <= 3; [p1,p2] select _d
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 794](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L794)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 797](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L797)
 ## debuginfo(mes)
 
 Type: constant
@@ -4333,7 +4333,7 @@ Replaced value:
 ```sqf
 breakpoint("("+getSelf(name)+")::EVENT::("+_mode+") " + mes)
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1059](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1059)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1062](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1062)
 ## debuginfo(mes)
 
 Type: constant
@@ -4347,7 +4347,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1061](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1061)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1064](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1064)
 ## __isZoneIn(zones,modif)
 
 Type: constant
@@ -4360,7 +4360,7 @@ Replaced value:
 ```sqf
 if (_attTargetZone in [zones]) exitWith {MOD(_mod,modif)}
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1476](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1476)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 1479](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L1479)
 ## go_static_internal_map_redirzones
 
 Type: Variable
@@ -4372,7 +4372,7 @@ Initial value:
 ```sqf
 createHashMapFromArray[...
 ```
-File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 824](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L824)
+File: [host\GameObjects\Mobs\Mob_Combat.sqf at line 827](../../../Src/host/GameObjects/Mobs/Mob_Combat.sqf#L827)
 # Mob_combat_attdam_enum.hpp
 
 ## COMBAT_ATTDAM_ATTACK
