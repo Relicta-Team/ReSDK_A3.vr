@@ -22,6 +22,9 @@ var(curCombatStyle,COMBAT_STYLE_NO); //текущий боевой режим
 
 var(isReadyAttack,true); //готовность основной атаки
 
+//Обработчики события атаки (массив функций)
+var(attackHandlers,[]);
+
 //other hand vars
 var(otherAttackType,ATTACK_TYPE_THRUST);
 var(otherTargZone,TARGET_ZONE_TORSO);
@@ -1783,4 +1786,45 @@ region(shooting)
 			false
 		};
 		true
+	};
+
+	//Подписка на событие атаки
+	//Параметры обработчика: [_attacker, _weapon, _optItem]
+	func(addAttackHandler)
+	{
+		objParams_1(_handler);
+		if !equalTypes(_handler,{}) exitWith {
+			errorformat("Mob::addAttackHandler() - handler must be code, got %1",typeName _handler);
+			-1
+		};
+		(getSelf(attackHandlers)) pushBack _handler;
+	};
+
+	//Отписка от события атаки
+	//Принимает либо индекс обработчика, либо ссылку на код
+	func(removeAttackHandler)
+	{
+		objParams_1(_handlerOrIndex);
+		if equalTypes(_handlerOrIndex,0) then {
+			(getSelf(attackHandlers)) deleteAt _handlerOrIndex;
+		} else {
+			array_remove((getSelf(attackHandlers)),_handlerOrIndex);
+		};
+	};
+
+	//Вызов всех обработчиков атаки
+	//Вызывается из DODamageInfo::updateLastAttacker
+	func(invokeAttackHandlers)
+	{
+		objParams_3(_attacker,_weapon,_optItem);
+		//Итерируем по копии массива чтобы избежать пропуска элементов
+		//при модификации оригинального массива из обработчика
+		private _handlers = array_copy(getSelf(attackHandlers));
+		{
+			if !equalTypes(_x,{}) then {
+				errorformat("Mob::invokeAttackHandlers() - handler is not code, got %1",typeName _x);
+			} else {
+				[_attacker,_weapon,_optItem] call _x;
+			};
+		} forEach _handlers;
 	};
