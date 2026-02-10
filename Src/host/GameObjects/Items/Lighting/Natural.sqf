@@ -261,7 +261,8 @@ class(Torch) extends(ILightible)
 			callFuncParams(_usr,localSay,"Культя не кровоточит." arg "error");
 		};
 
-		callFuncParams(_usr,meSay,"собирается прижечь культю у "+callFuncParams(_targ,getNameEx,"кого"));
+		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+		callFuncParams(_usr,meSay,"собирается прижечь культю у "+_meSayTarget);
 		callFuncParams(_usr,startProgress,_targ arg "item.cauterizeStump" arg getVar(_usr,rta)*3 arg INTERACT_PROGRESS_TYPE_FULL arg this);
 	};
 
@@ -289,7 +290,8 @@ class(Torch) extends(ILightible)
 		};
 
 		callFuncParams(_targ,setDamageArtery,_bp arg false);
-		callFuncParams(_usr,meSay,"прижигает культю у "+callFuncParams(_targ,getNameEx,"кого"));
+		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+		callFuncParams(_usr,meSay,"прижигает культю у "+_meSayTarget);
 	};
 
 	func(canIgniteArea)
