@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -123,6 +123,8 @@ cd_processConnection = {
 				call os_stop;
 
 				call vs_disconnectVoiceSystem;
+
+				call vs_audio_releaseAllSounds; //stop all sounds
 
 				//остановка пакетирования атмоса
 				[false] call noe_client_nat_setEnabled;

@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -161,10 +161,11 @@ if (!isMultiplayer) then {
 			precent_to_real(20) * safezoneW,
 			precent_to_real(10) * safezoneH];
 			_bt ctrlCommit 0;
-			_bt ctrlSetText "TEMP BUTTON 2";
-			_bt ctrlSetTooltip "Зарезервированная кнопка для доп. функционала";
+			_bt ctrlSetText "Reload c++ libs";
+			_bt ctrlSetTooltip "Перезагрузка с++ библиотек RVEngine";
 			_bt ctrlAddEventHandler ["MouseButtonUp",{
 				(findDisplay 49) closeDisplay 0;
+				call rve_debug_reloadlibs;
 			}];
 
 			_bt = (findDisplay 49) ctrlCreate ["RscButton",-1];

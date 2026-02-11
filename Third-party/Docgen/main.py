@@ -34,7 +34,7 @@ if os.path.exists(docsource):
     shutil.rmtree(docsource)
 
 
-ignored = ['Database\MySQL','Database\\fDB','client\client_debug.h','vm_compile.sqf',"ReBridge\\","Editor\\"]
+ignored = ['Database\MySQL','Database\\fDB','client\client_debug.h','vm_compile.sqf',"ReBridge\\","Editor\\","Src\\RVEngine\\"]
 
 hout = open(outputdirs,"w",encoding="utf-8")
 

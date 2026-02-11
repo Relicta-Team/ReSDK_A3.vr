@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -11,6 +11,9 @@ var(slots,INV_LIST_ALL);
 
 
 var(defaultUniform,"");//дефолтная форма (женское тело или бомжиные обноски)
+
+//контроллер слоёв отображения (волосы, бороды и т.д.)
+var(overlayController,struct_new(OverlayLayerController));
 
 region(Low level inventory api)
 	func(getSlotInfoForInventory)

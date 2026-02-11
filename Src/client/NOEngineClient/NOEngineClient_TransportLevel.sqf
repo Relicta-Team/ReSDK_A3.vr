@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -487,32 +487,37 @@ noe_client_byteArrToObjStruct = {
 				_nobject append [null]; //no anim
 				if isTrue(_hasRadio) then {
 					private _fqid = getCurToken();
-					//tokens: [int freq, float volume,float canHearUnits, prob pos.x,..pos.z, prob waveDistance,prob radiotype]
+					
+					//tokens: [string freq, float volume,float distance, uint radio type, prob [pos.x,..pos.z] | null]
 					_vec3 = [_fqid];
 					moveNext(); //from freq to vol
 					_vec3 pushBack getCurToken();
-					moveNext(); // from vol to speakermode
+					moveNext(); // from vol to distance
 					_vec3 pushBack getCurToken();
-					moveNext(); // from speakermode to prob pos
+					moveNext(); // from distance to radio type
+					_bufvar = RADIO_TYPE_ENUM_TO_STRING(getCurToken());
+					_vec3 pushBack _bufvar;
+					moveNext(); //from radio type to prob pos
 					_bufvar = getCurToken();
 					if isNullVar(_bufvar) then {
 						_vec3 pushBack [0,0,0];//add bias
 					} else {
-						_bufvar = [_bufvar];
-						moveNext(); //from pos.x to pos.y
-						_bufvar pushBack getCurToken();
-						moveNext(); //from pos.y to pos.z
-						_bufvar pushBack getCurToken();
-						_vec3 pushBack _bufvar;//add bias
+						// _bufvar = [_bufvar];
+						// moveNext(); //from pos.x to pos.y
+						// _bufvar pushBack getCurToken();
+						// moveNext(); //from pos.y to pos.z
+						// _bufvar pushBack getCurToken();
+						// _vec3 pushBack _bufvar;//add bias
+						_vec3 pushBack _bufvar;
 					};
-					if (_fqid < 0) then {
-						_vec3 set [0,-_fqid]; //inverse frequency
-						moveNext(); //from bias to wave dist
-						_bufvar = [getCurToken()];
-						moveNext(); //from wave dist to radio type
-						_bufvar pushBack getCurToken();
-						_vec3 pushBack _bufvar; //add speak function
-					};
+					// if (_fqid < 0) then {
+					// 	_vec3 set [0,-_fqid]; //inverse frequency
+					// 	moveNext(); //from bias to wave dist
+					// 	_bufvar = [getCurToken()];
+					// 	moveNext(); //from wave dist to radio type
+					// 	_bufvar pushBack getCurToken();
+					// 	_vec3 pushBack _bufvar; //add speak function
+					// };
 					
 					_nobject pushBack _vec3;
 				};

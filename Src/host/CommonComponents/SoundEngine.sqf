@@ -1,9 +1,10 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 #include <..\engine.hpp>
+#include <..\ServerRpc\serverRpc.hpp>
 
 /*
 playSound3D [filename, soundSource, isInside, soundPosition, volume, soundPitch, distance, offset]
@@ -20,7 +21,57 @@ Parameters:
 //динамический источник звука, удаление невозможно. Публикуется по сети
 soundGlobal_play = {
 	params ["_file","_source",["_vol",1],["_pitch",1],["_maxDist",20],["_soundExtension","ogg"],["_offset",0],["_isLocal",false],["_isRTProcess",false]];
+#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	if (!_isLocal) exitWith {
+		//todo refactoring network sounds
+		private _args = _this;
+		private _pos = [0,0,0];
+		//replication
+		if equalTypes(_source,[]) then {
+			if equalTypes(_source select 0,0) exitWith {
+				_pos = _source;
+			};
+			if equalTypes(_source select 0,objNull) exitWith {
+				_source params ["_obj",["_followSrc",false],["_offset",[0,0,0]]];
+				_pos = ((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
+			};
+		} else {
+			_pos = getPosATL (_source call vs_audio_internal_getSourceObj);
+		};
+		private _playerList = if equals(_pos,vec3(0,0,0)) then {
+			allPlayers - [player]
+		} else {
+			((_pos nearEntities _maxDist) - [player]) select {isPlayer _x};
+		};
+		
+		_args set [7,true];
+		{
+			["repl_psound3d",_args,_x] call CBA_fnc_targetEvent; 
+		} foreach _playerList;
 
+		if (!isServer) then {
+			[
+				_source,
+				PATH_SOUND(_file),
+				_maxDist,
+				_pitch,
+				_offset,
+				_vol
+			] call vs_audio_playSound3d;
+		};
+	};
+
+	[
+		_source,
+		PATH_SOUND(_file),
+		_maxDist,
+		_pitch,
+		_offset,
+		_vol
+	] call vs_audio_playSound3d;
+
+	
+#else
 	FHEADER;
 
 	//Упрощённый режим симуляции звуков
@@ -135,7 +186,10 @@ soundGlobal_play = {
 	playSound3D [_file,_source,false,_pos,_vol,_pitch,_maxDist,_offset,_isLocal];
 
 	//playSound3D [getMissionPath "\sounds\mob\trauma" +str selectRandom [1,2,3] + ".ogg", vasya,false,getposasl vasya,1,1 + random [-.3,0,.3],100 / (player distance vasya)];
+#endif
 };
+
+rpcAddGlobal("repl_psound3d",soundGlobal_play);
 
 //Аналог soundGlobal::play() но без репликации по сети
 soundLocal_play = {
@@ -146,7 +200,9 @@ soundLocal_play = {
 
 soundUI_play = {
 	params ["_file", ["_volume",1], ["_soundPitch",1], ["_isEffect",false],["_soundExtension","ogg"],["_offset",0]];
-
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	[PATH_SOUND(_file),_soundPitch,_offset,_volume,false] call vs_audio_playSound2d;
+	#else
 	if (!("." in _file)) then {
 		MOD(_file,+"."+_soundExtension);
 	} else {
@@ -156,4 +212,5 @@ soundUI_play = {
 	_file = PATH_SOUND(_file);
 	
 	playSoundUI[_file,_volume,_soundPitch,_isEffect,_offset];
+	#endif
 };

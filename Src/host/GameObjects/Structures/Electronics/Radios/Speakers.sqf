@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -14,6 +14,25 @@
 //"ml\ml_object_new\model_05\speeker.p3d" transmither
 
 class(IStructRadioEDLogic) extends(IStructRadio)
+
+	func(constructor)
+	{
+		objParams();
+		//! нужно поправить генератор карт
+		callSelfAfter(__onRadioLoaded,0.9);
+	};
+
+	//быстрый фикс для синхронизации байт-данных
+	func(__onRadioLoaded)
+	{
+		objParams();
+		private _vObj = getSelf(loc);
+		if isNullReference(_vObj) exitWith {};
+		if getSelf(radioIsEnabled) then {
+			_vObj setVariable ["radio",callSelf(getRadioData)];
+			[_vObj] call noe_updateObjectByteArr; //обновляем байт массив
+		};
+	};
 
 	func(radioSetMode)
 	{
@@ -72,7 +91,8 @@ endclass
 
 class(Intercom) extends(IStructRadioEDLogic)
 	var(edNodeReqPower,5);
-	var(radioSettings,[10 arg "someencoding" arg -10 arg 10 arg null arg 300 arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 10 arg null arg -1]);
+	var(radioType,RADIO_TYPE_INTERCOM);
 
 	var(name,"Интерком");
 	var(model,"ml\ml_object_new\model_05\speeker.p3d");
@@ -87,7 +107,8 @@ endclass
 
 class(StationSpeaker) extends(IStructRadioEDLogic)
 	var(edNodeReqPower,15);
-	var(radioSettings,[10 arg "someencoding" arg 10 arg 30 arg null arg null arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 30 arg null arg -1]);
+	var(radioType,RADIO_TYPE_LOUDSPEAKER);
 
 	var(name,"Динамик");
 	var(model,"relicta_models\models\interier\speaker.p3d");

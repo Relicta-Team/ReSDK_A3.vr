@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -293,9 +293,10 @@ class(IStructRadio) extends(ElectronicDeviceNode)
 
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);
+	var(radioType,RADIO_TYPE_WALKIETALKIE);
 	var(edIsEnabled,true);
 
-	var(radioSettings,[10 arg "someencoding" arg -10 arg 5 arg null arg 300 arg 0]);
+	var(radioSettings,[10 arg "someencoding" arg 1 arg 5 arg null arg -1]);
 
 	func(InitModel)
 	{

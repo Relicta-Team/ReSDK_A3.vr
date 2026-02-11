@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -58,6 +58,11 @@ class(DODamageInfo) extends(DataObjectBase)
 		setSelf(lastAttacker,_usr);
 		setSelf(lastAttackOptionalData,vec2(_optItem,_wm));
 		setSelf(lastAttackerTime,tickTime);
+
+		//Вызов обработчиков события атаки
+		if (!isNullReference(getSelf(loc)) && {callFunc(getSelf(loc),isMob)}) then {
+			callFuncParams(getSelf(loc),invokeAttackHandlers,_usr arg _wm arg _optItem);
+		};
 
 		private _m = callSelf(getDamagetInfoFull);
 		#ifdef LOG_DAMAGE_INFO_EDITOR

@@ -968,30 +968,6 @@ Description:
 File: [client\VoiceSystem\VoiceSystem_WorldRadioComponent.sqf at line 135](../../../Src/client/VoiceSystem/VoiceSystem_WorldRadioComponent.sqf#L135)
 # API.sqf
 
-## apiCmd
-
-Type: constant
-
-Description: usage: apiCmd ["test",[arg1,arg2]]
-
-
-Replaced value:
-```sqf
-"revoicer" callExtension 
-```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 7](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L7)
-## apiRequest(p)
-
-Type: constant
-
-Description: 
-- Param: p
-
-Replaced value:
-```sqf
-("revoicer" callExtension (p))
-```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 8](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L8)
 ## revoice_debug_only(debug_expr)
 
 Type: constant
@@ -1005,7 +981,7 @@ Replaced value:
 ```sqf
 debug_expr;
 ```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 11](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L11)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 9](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L9)
 ## REDITOR_VOICE_DEBUG_RENDER
 
 Type: constant
@@ -1019,7 +995,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 12](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L12)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 10](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L10)
 ## revoice_debug_only(debug_expr)
 
 Type: constant
@@ -1033,7 +1009,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 14](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L14)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 12](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L12)
 ## VOICE_UPDATE_EFFECTS_DELAY
 
 Type: constant
@@ -1045,7 +1021,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 20](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L20)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 18](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L18)
 ## __postargs
 
 Type: constant
@@ -1055,9 +1031,9 @@ Description:
 
 Replaced value:
 ```sqf
-_ignore1,_mob,true,1,"VIEW","GEOM",true
+_ignore1,_ignore2,true,1,"VIEW","GEOM",true
 ```
-File: [client\VoiceSystem\ReVoice\API.sqf at line 469](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L469)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 499](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L499)
 ## vs_init
 
 Type: function
@@ -1065,7 +1041,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 22](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L22)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 20](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L20)
 ## vs_isConnectedVoice
 
 Type: function
@@ -1073,7 +1049,7 @@ Type: function
 Description: подключен ли к голосовому серверу
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 62](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L62)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 60](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L60)
 ## vs_connectVoice
 
 Type: function
@@ -1084,7 +1060,7 @@ Description:
 - Param: _user
 - Param: _pass
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 66](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L66)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 64](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L64)
 ## vs_connectToVoiceSystem
 
 Type: function
@@ -1092,7 +1068,7 @@ Type: function
 Description: вызывается когда клиент джоинится в игру
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 72](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L72)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 70](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L70)
 ## vs_disconnectVoice
 
 Type: function
@@ -1116,7 +1092,7 @@ Type: function
 Description: разговаривает ли
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 100](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L100)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 103](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L103)
 ## vs_getMicDevices
 
 Type: function
@@ -1124,7 +1100,7 @@ Type: function
 Description: получить микрофоны
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 105](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L105)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 108](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L108)
 ## vs_setMicDevice
 
 Type: function
@@ -1132,7 +1108,7 @@ Type: function
 Description: установить устройство записи
 - Param: _id
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 109](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L109)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 112](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L112)
 ## vs_getPlaybackDevices
 
 Type: function
@@ -1140,7 +1116,7 @@ Type: function
 Description: получить устройство воспроизведения
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 114](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L114)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 117](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L117)
 ## vs_setPlaybackDevice
 
 Type: function
@@ -1148,7 +1124,7 @@ Type: function
 Description: установить устройство воспроизведения
 - Param: _id
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 118](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L118)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 121](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L121)
 ## vs_getAllClients
 
 Type: function
@@ -1157,7 +1133,7 @@ Description:
 - Param: _r
 - Param: _rcode
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 123](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L123)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 126](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L126)
 ## vs_setMasterVoiceVolume
 
 Type: function
@@ -1165,7 +1141,7 @@ Type: function
 Description: 
 - Param: _vol
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 132](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L132)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 135](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L135)
 ## vs_startHandleProcessPlayerPos
 
 Type: function
@@ -1173,7 +1149,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 138](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L138)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 141](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L141)
 ## vs_stopHandleProcessPlayerPos
 
 Type: function
@@ -1181,7 +1157,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 147](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L147)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 150](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L150)
 ## vs_onProcessPlayerPosition
 
 Type: function
@@ -1189,7 +1165,7 @@ Type: function
 Description: main system loop
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 154](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L154)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 157](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L157)
 ## vs_checkConnection
 
 Type: function
@@ -1197,7 +1173,7 @@ Type: function
 Description: проверка подключения системы
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 173](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L173)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 178](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L178)
 ## vs_syncLocalPlayer
 
 Type: function
@@ -1205,7 +1181,7 @@ Type: function
 Description: синхронизация позиции локального юзера
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 193](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L193)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 198](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L198)
 ## vs_debug_generateClients
 
 Type: function
@@ -1215,7 +1191,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 216](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L216)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 221](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L221)
 ## vs_syncRemotePlayers
 
 Type: function
@@ -1223,7 +1199,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 233](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L233)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 238](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L238)
 ## vs_handleUserSpeakInternal
 
 Type: function
@@ -1232,7 +1208,7 @@ Description:
 - Param: _mob
 - Param: _state
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 324](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L324)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 329](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L329)
 ## vs_onUserSpeak
 
 Type: function
@@ -1241,7 +1217,7 @@ Description: событие когда другой клиент говорит 
 - Param: _mob
 - Param: _isSpeaking
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 341](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L341)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 346](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L346)
 ## vs_handleSpeak
 
 Type: function
@@ -1249,7 +1225,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 350](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L350)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 355](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L355)
 ## vs_speakReleaseAll
 
 Type: function
@@ -1257,7 +1233,7 @@ Type: function
 Description: 
 
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 362](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L362)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 371](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L371)
 ## vs_setLocalPlayerVoiceDistance
 
 Type: function
@@ -1265,7 +1241,7 @@ Type: function
 Description: 
 - Param: _d
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 366](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L366)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 375](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L375)
 ## vs_initMob
 
 Type: function
@@ -1274,7 +1250,7 @@ Description: иницилизация сущности
 - Param: _mob
 - Param: _nick
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 372](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L372)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 381](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L381)
 ## vs_setLowpassEffect
 
 Type: function
@@ -1284,7 +1260,7 @@ Description: effects extension
 - Param: _cut (optional, default 22000)
 - Param: _res (optional, default 10)
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 390](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L390)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 399](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L399)
 ## vs_setReverbEffect
 
 Type: function
@@ -1298,7 +1274,7 @@ Description:
 - Param: _wet (optional, default -80)
 - Param: _dry (optional, default 0)
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 395](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L395)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 404](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L404)
 ## vs_internal_setTargetEffectValues
 
 Type: function
@@ -1308,7 +1284,7 @@ Description:
 - Param: _lowpass
 - Param: _reverb
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 400](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L400)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 409](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L409)
 ## vs_internal_clearEffectValues
 
 Type: function
@@ -1317,7 +1293,7 @@ Description: сбрасывает все значения эффектов
 - Param: _mob
 - Param: _clearUpdateMark (optional, default false)
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 413](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L413)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 422](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L422)
 ## vs_internal_applyEffects
 
 Type: function
@@ -1325,23 +1301,28 @@ Type: function
 Description: 
 - Param: _mob
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 425](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L425)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 434](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L434)
 ## vs_calcReverbEffect
 
 Type: function
 
 Description: получает настройки реверба для текущего моба (~0.976563ms per call)
-- Param: _mob
+- Param: _target
+- Param: _targetAsPos (optional, default false)
+- Param: _soundId (optional, default -1)
+- Param: _dist (optional, default 0)
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 458](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L458)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 467](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L467)
 ## vs_calcLowpassEffect
 
 Type: function
 
 Description: 
-- Param: _mob
+- Param: _target
+- Param: _targetAsPos (optional, default false)
+- Param: _soundId (optional, default -1)
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 619](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L619)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 663](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L663)
 ## vs_processSpeakingLangs
 
 Type: function
@@ -1350,7 +1331,187 @@ Description: Калькулирует понимание речи персона
 - Param: _unit
 - Param: _curVol
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 741](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L741)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 799](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L799)
+# AudioSystem.sqf
+
+## vs_audio_useBackend
+
+Type: Variable
+
+Description: Реализация аудиосистемы на основе ReVoice с использованием fmod
+
+
+Initial value:
+```sqf
+true // использовать новый движок аудио
+```
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 10](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L10)
+## vs_audio_loadLib
+
+Type: function
+
+Description: использовать новый движок аудио
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 12](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L12)
+## vs_audio_unloadLib
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 16](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L16)
+## vs_audio_getAllSoundsIds
+
+Type: function
+
+Description: получает все работающие звуки в игре
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 21](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L21)
+## vs_audio_isSoundExists
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 26](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L26)
+## vs_audio_stopSound
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 30](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L30)
+## vs_audio_stopAllSounds
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 34](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L34)
+## vs_audio_releaseAllSounds
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 40](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L40)
+## vs_audio_init
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 45](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L45)
+## vs_audio_setMasterSoundVolume
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 71](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L71)
+## vs_audio_getMasterSoundVolume
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 74](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L74)
+## vs_audio_playSound3d
+
+Type: function
+
+Description: 
+- Param: _source
+- Param: _soundPath
+- Param: _distance
+- Param: _pitch (optional, default 1)
+- Param: _offset (optional, default 0)
+- Param: _vol (optional, default 1)
+- Param: _useEffects (optional, default true)
+- Param: _loop (optional, default false)
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 99](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L99)
+## vs_audio_playSound2d
+
+Type: function
+
+Description: 
+- Param: _soundPath
+- Param: _pitch (optional, default 1)
+- Param: _offset (optional, default 0)
+- Param: _vol (optional, default 1)
+- Param: _useEffects (optional, default true)
+- Param: _loop (optional, default false)
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 176](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L176)
+## vs_audio_internal_getSourceObj
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 181](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L181)
+## vs_audio_setSoundPos
+
+Type: function
+
+Description: 
+- Param: _id
+- Param: _pos
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 186](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L186)
+## vs_audio_setPaused
+
+Type: function
+
+Description: 
+- Param: _id
+- Param: _paused
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 193](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L193)
+## vs_audio_setLowpassEffect
+
+Type: function
+
+Description: 
+- Param: _id
+- Param: _cut (optional, default 22000)
+- Param: _res (optional, default 10)
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 198](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L198)
+## vs_audio_setReverbEffect
+
+Type: function
+
+Description: 
+- Param: _id
+- Param: _dec (optional, default 1200)
+- Param: _edel (optional, default 20)
+- Param: _ldel (optional, default 40)
+- Param: _hcut (optional, default 8000)
+- Param: _wet (optional, default -80)
+- Param: _dry (optional, default 0)
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 203](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L203)
+## vs_audio_getSoundParams
+
+Type: function
+
+Description: 
+- Param: _id
+
+File: [client\VoiceSystem\ReVoice\AudioSystem.sqf at line 208](../../../Src/client/VoiceSystem/ReVoice/AudioSystem.sqf#L208)
 # Input.sqf
 
 ## voice_changer_border_size_x
@@ -1614,6 +1775,30 @@ Description:
 File: [client\VoiceSystem\ReVoice\Input.sqf at line 208](../../../Src/client/VoiceSystem/ReVoice/Input.sqf#L208)
 # ReVoice.h
 
+## apiCmd
+
+Type: constant
+
+Description: usage: apiCmd ["test",[arg1,arg2]]
+
+
+Replaced value:
+```sqf
+"revoicer" callExtension 
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 7](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L7)
+## apiRequest(p)
+
+Type: constant
+
+Description: 
+- Param: p
+
+Replaced value:
+```sqf
+("revoicer" callExtension (p))
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 8](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L8)
 ## REQ_GET_VERSION
 
 Type: constant
@@ -1625,7 +1810,7 @@ Replaced value:
 ```sqf
 "getVersion"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 7](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L7)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 11](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L11)
 ## REQ_IS_CONNECTED_VOICE
 
 Type: constant
@@ -1637,7 +1822,7 @@ Replaced value:
 ```sqf
 "isConnectedVoice"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 8](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L8)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 12](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L12)
 ## REQ_GET_LAST_HEARTBEAT
 
 Type: constant
@@ -1649,7 +1834,7 @@ Replaced value:
 ```sqf
 "getLastHeartbeat"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 9](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L9)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 13](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L13)
 ## REQ_DISCONNECT_VOICE
 
 Type: constant
@@ -1661,7 +1846,7 @@ Replaced value:
 ```sqf
 "disconnectVoice"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 10](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L10)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 14](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L14)
 ## REQ_IS_SPEAKING
 
 Type: constant
@@ -1673,7 +1858,7 @@ Replaced value:
 ```sqf
 "isSpeaking"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 12](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L12)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 16](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L16)
 ## REQ_SPEAK_START
 
 Type: constant
@@ -1685,7 +1870,7 @@ Replaced value:
 ```sqf
 "speakStart"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 13](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L13)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 17](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L17)
 ## REQ_SPEAK_STOP
 
 Type: constant
@@ -1697,7 +1882,7 @@ Replaced value:
 ```sqf
 "speakStop"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 14](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L14)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 18](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L18)
 ## REQ_SPEAK_RELEASEALL
 
 Type: constant
@@ -1709,7 +1894,7 @@ Replaced value:
 ```sqf
 "speakReleaseAll"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 15](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L15)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 19](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L19)
 ## CMD_CONNECT_VOICE
 
 Type: constant
@@ -1721,7 +1906,7 @@ Replaced value:
 ```sqf
 "connectVoice"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 18](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L18)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 22](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L22)
 ## CMD_GET_MIC_DEVICES
 
 Type: constant
@@ -1733,7 +1918,7 @@ Replaced value:
 ```sqf
 "getMicDevices"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 20](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L20)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 24](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L24)
 ## CMD_SET_MIC_DEVICE
 
 Type: constant
@@ -1745,7 +1930,7 @@ Replaced value:
 ```sqf
 "setMicDevice"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 21](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L21)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 25](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L25)
 ## CMD_GET_PLAYBACK_DEVICES
 
 Type: constant
@@ -1757,7 +1942,7 @@ Replaced value:
 ```sqf
 "getPlaybackDevices"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 22](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L22)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 26](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L26)
 ## CMD_SET_PLAYBACK_DEVICE
 
 Type: constant
@@ -1769,7 +1954,7 @@ Replaced value:
 ```sqf
 "setPlaybackDevice"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 23](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L23)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 27](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L27)
 ## CMD_SET_MASTER_VOICE_VOLUME
 
 Type: constant
@@ -1781,7 +1966,7 @@ Replaced value:
 ```sqf
 "setMasterVoiceVolume"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 25](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L25)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 29](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L29)
 ## CMD_GET_ALL_CLIENTS
 
 Type: constant
@@ -1793,7 +1978,7 @@ Replaced value:
 ```sqf
 "getAllClients"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 27](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L27)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 31](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L31)
 ## CMD_SYNC_LOCAL_PLAYER
 
 Type: constant
@@ -1805,7 +1990,7 @@ Replaced value:
 ```sqf
 "syncLocalPlayer"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 29](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L29)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 33](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L33)
 ## CMD_SYNC_REMOTE_PLAYER
 
 Type: constant
@@ -1817,7 +2002,7 @@ Replaced value:
 ```sqf
 "syncRemotePlayer"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 30](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L30)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 34](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L34)
 ## CMD_SETLOWPASS
 
 Type: constant
@@ -1829,7 +2014,7 @@ Replaced value:
 ```sqf
 "setLowpass"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 32](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L32)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 36](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L36)
 ## CMD_SETREVERB
 
 Type: constant
@@ -1841,7 +2026,271 @@ Replaced value:
 ```sqf
 "setReverb"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice.h at line 33](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L33)
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 37](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L37)
+## CMD_RADIO_ADD
+
+Type: constant
+
+Description: radio commands
+
+
+Replaced value:
+```sqf
+"addRadio"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 40](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L40)
+## CMD_RADIO_REMOVE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"removeRadio"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 41](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L41)
+## CMD_RADIO_SUBSCRIBE_RADIOSTREAM
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"subscribeRadio"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 43](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L43)
+## CMD_RADIO_APPLY_WAVE_FILTER
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"applyRadioWaveFilter"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 44](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L44)
+## CMD_SYNC_REMOTE_RADIO
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"syncRemoteRadio"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 45](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L45)
+## CMD_SYNC_REMOTE_RADIO_LOWPASS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"syncRemoteRadioLowpass"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 46](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L46)
+## CMD_SYNC_REMOTE_RADIO_REVERB
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"syncRemoteRadioReverb"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 47](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L47)
+## REQ_AUDIO_GET_ALL_SOUNDS_IDS
+
+Type: constant
+
+Description: requests
+
+
+Replaced value:
+```sqf
+"audioGetAllSoundsIds"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 53](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L53)
+## REQ_AUDIO_GET_MASTER_SOUND_VOLUME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioGetMasterSoundVolume"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 54](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L54)
+## REQ_AUDIO_RELEASE_ALL_SOUNDS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioReleaseAllSounds"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 55](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L55)
+## CMD_AUDIO_LOADLIB
+
+Type: constant
+
+Description: commands
+
+
+Replaced value:
+```sqf
+"audioLoadLib"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 58](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L58)
+## CMD_AUDIO_UNLOADLIB
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioUnloadLib"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 59](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L59)
+## CMD_AUDIO_PLAY_SOUND
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioPlaySound"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 60](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L60)
+## CMD_AUDIO_IS_SOUND_EXISTS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioIsSoundExists"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 61](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L61)
+## CMD_AUDIO_STOP_SOUND
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioStopSound"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 62](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L62)
+## CMD_AUDIO_SET_MASTER_SOUND_VOLUME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetMasterSoundVolume"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 63](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L63)
+## CMD_AUDIO_SET_SOUND_POS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetSoundPos"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 64](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L64)
+## CMD_AUDIO_SET_PAUSED
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetSoundPaused"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 65](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L65)
+## CMD_AUDIO_SETLOWPASS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetLowpass"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 66](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L66)
+## CMD_AUDIO_SETREVERB
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetReverb"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 67](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L67)
+## CMD_AUDIO_SET_LOOP_POINTS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioSetLoopPoints"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 68](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L68)
+## CMD_AUDIO_GET_SOUND_PARAMS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"audioGetSoundParams"
+```
+File: [client\VoiceSystem\ReVoice\ReVoice.h at line 69](../../../Src/client/VoiceSystem/ReVoice/ReVoice.h#L69)
 # ReVoice_init.sqf
 
 ## VOICE_DISABLE_IN_SINGLEPLAYERMODE
@@ -1855,7 +2304,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 12](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L12)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 13](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L13)
 ## vs_apiversion
 
 Type: Variable
@@ -1865,9 +2314,9 @@ Description:
 
 Initial value:
 ```sqf
-"beta_v1"
+"stable_v4"
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 14](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L14)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 15](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L15)
 ## vs_localName
 
 Type: Variable
@@ -1879,7 +2328,7 @@ Initial value:
 ```sqf
 "" //sended from server on player connected
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 16](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L16)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 17](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L17)
 ## vs_canProcess
 
 Type: Variable
@@ -1891,7 +2340,7 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 17](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L17)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 18](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L18)
 ## vs_max_voice_volume
 
 Type: Variable
@@ -1903,7 +2352,7 @@ Initial value:
 ```sqf
 60
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 18](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L18)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 19](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L19)
 ## vs_horizontal_tab
 
 Type: Variable
@@ -1915,7 +2364,7 @@ Initial value:
 ```sqf
 toString [9] //для запросов
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 19](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L19)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 20](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L20)
 ## vs_isEnabledText
 
 Type: Variable
@@ -1927,21 +2376,58 @@ Initial value:
 ```sqf
 false
 ```
-File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 20](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L20)
+File: [client\VoiceSystem\ReVoice\ReVoice_init.sqf at line 21](../../../Src/client/VoiceSystem/ReVoice/ReVoice_init.sqf#L21)
 # Speaker.sqf
 
+## REVOICE_SPEAKER_MAKEDATA(_p,_wave)
+
+Type: constant
+
+Description: 
+- Param: _p
+- Param: _wave
+
+Replaced value:
+```sqf
+[_p,_wave]
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 51](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L51)
+## REVOICE_SPEAKER_GETPTR(_data)
+
+Type: constant
+
+Description: 
+- Param: _data
+
+Replaced value:
+```sqf
+((_data) select 0)
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 52](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L52)
+## REVOICE_SPEAKER_GETWAVEPOWER(_data)
+
+Type: constant
+
+Description: 
+- Param: _data
+
+Replaced value:
+```sqf
+((_data) select 1)
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 53](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L53)
 ## vs_transmithDistance
 
 Type: Variable
 
-Description: 
+Description: ! deprecated section
 
 
 Initial value:
 ```sqf
 1000
 ```
-File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 6](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L6)
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 7](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L7)
 ## vs_curTransmithType
 
 Type: Variable
@@ -1953,7 +2439,7 @@ Initial value:
 ```sqf
 0 //режим передачи
 ```
-File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 7](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L7)
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 8](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L8)
 ## vs_transmithTypes
 
 Type: Variable
@@ -1965,4 +2451,225 @@ Initial value:
 ```sqf
 ["digital","digital_lr","airborne"]
 ```
-File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 8](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L8)
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 9](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L9)
+## vs_allRadioSpeakers
+
+Type: Variable
+
+Description: список всех спикеров (рации\динамики). ключ - указатель на объект, значение - структура radioData
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 12](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L12)
+## vs_allInventoryRadios
+
+Type: Variable
+
+Description: рации в руках игроков
+
+
+Initial value:
+```sqf
+createHashMap //ключ - указатель на объект, значение - структура radioData
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 14](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L14)
+## vs_map_waveSpeakers
+
+Type: Variable
+
+Description: локальная мапа кто говорит в частоты
+
+
+Initial value:
+```sqf
+createHashMap // 
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 17](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L17)
+## vs_localReceivers
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 321](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L321)
+## vs_isTalkingOnRadio
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+false
+```
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 322](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L322)
+## vs_addRadioStream
+
+Type: function
+
+Description: vs_netSpeakers = [];
+- Param: _ptr
+- Param: _cfgName (optional, default RADIO_TYPE_WALKIETALKIE)
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 23](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L23)
+## vs_removeRadioStream
+
+Type: function
+
+Description: 
+- Param: _ptr
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 29](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L29)
+## vs_radioSpeakProcess
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _mode
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 35](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L35)
+## vs_onRadioSpeakStarted
+
+Type: function
+
+Description: вызывается когда какой-то игрок начал говорить в частоту
+- Param: _actorName
+- Param: _ptr
+- Param: _freq
+- Param: _wavePower
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 56](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L56)
+## vs_onRadioSpeakStopped
+
+Type: function
+
+Description: вызывается когда какой-то игрок закончил говорить в частоту
+- Param: _actorName
+- Param: _ptr
+- Param: _freq
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 69](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L69)
+## vs_getObjectRadioData
+
+Type: function
+
+Description: 
+- Param: _obj
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 86](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L86)
+## vs_loadWorldRadio
+
+Type: function
+
+Description: noe functions
+- Param: _obj
+- Param: _radioData
+- Param: _ptr
+- Param: _isInHand (optional, default false)
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 92](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L92)
+## vs_prepRadioDataInternal
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _radioData
+- Param: _ptr
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 121](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L121)
+## vs_unloadWorldRadio
+
+Type: function
+
+Description: 
+- Param: _obj
+- Param: _isInHand (optional, default false)
+- Param: _removeStream (optional, default true)
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 146](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L146)
+## vs_isWorldRadioObject
+
+Type: function
+
+Description: 
+- Param: _obj
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 178](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L178)
+## vs_processRadios
+
+Type: function
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 183](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L183)
+## vs_handleRadioRetranslateStreamInternal
+
+Type: function
+
+Description: активирует ретрансляцию радио с клиентов на указанный источник. автоматически подписывается на событие радиопередачи
+- Param: _rdata
+- Param: _usersMap
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 210](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L210)
+## vs_handleRadioSpeakInternal
+
+Type: function
+
+Description: синхронизируем позицию радио и эффекты
+- Param: _rdata
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 272](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L272)
+## vs_getNearReceiverRadioObjects
+
+Type: function
+
+Description: возвращает ближайшие радио которые могут слышать игрока
+
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 297](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L297)
+## vs_handleMicRadioObjects
+
+Type: function
+
+Description: обработчик общения по рации. вызывается внутри апи обычного войса
+- Param: _mode
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 325](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L325)
+## vs_processUpdateMicRadioObjects
+
+Type: function
+
+Description: процесс обновления списка объектов для записи
+
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 343](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L343)
+## vs_onClientDisconnected
+
+Type: function
+
+Description: высвобождает ресурсы клиента, который отключился от сервера с включенным войсом по радио
+- Param: _clientName
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 373](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L373)
+## vs_debug_TestMobSpeaking
+
+Type: function
+
+> Exists if **EDITOR** defined
+
+Description: 
+
+
+File: [client\VoiceSystem\ReVoice\Speaker.sqf at line 388](../../../Src/client/VoiceSystem/ReVoice/Speaker.sqf#L388)

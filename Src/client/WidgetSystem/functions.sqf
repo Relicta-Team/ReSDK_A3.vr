@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -750,7 +750,7 @@ widget_createDisconnectMessage = {
 	_okButton ctrlSetText "Выход";
 	_okButton ctrlSetBackgroundColor [0,0.113,0.01,0.8];
 	_okButton ctrlAddEventHandler ["MouseButtonUp",{
-		_h = [] spawn {call displayClose};
+		_h = [] spawn {getDisplay closeDisplay 0}; //here displayClose is undefined (engine specific)
 	}];
 	_headerText = "Отключен";
 	_reasonText = "Вы вышли с сервера";

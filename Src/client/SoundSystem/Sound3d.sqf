@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -10,6 +10,23 @@
 
 namespace(AudioSystem.Sound,sound3d_;sound_)
 
+#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	#define soundParams(x) (x) call { \
+		private _spr = [_this] call vs_audio_getSoundParams; \
+		if (count _spr == 0) exitWith {_spr}; \
+		if equals(_spr,vec3(0,0,0)) exitWith {[]}; \
+		["",_spr select 0,_spr select 2,_spr select 1,1] \
+	}
+
+	#define stopSound(x) (x) call { private _spr = _this; \
+		if (count _spr == 0) exitWith {false}; \
+		(_spr call vs_audio_stopSound); \
+	}
+
+#else
+	#define soundParams(x) SoundParams (x)
+	#define stopSound(x) StopSound (x)
+#endif
 
 // params: ["_file","_source","_vol","_pitch","_maxDist",["_soundExtension","ogg"]];
 rpcAdd("soundPlayGlobal",soundGlobal_play);
@@ -44,6 +61,13 @@ decl(mesh(mesh;string;float;float;float))
 sound3d_playOnObject = {
 	params ["_source","_class","_dist",["_pitch",1],["_offset",0]];
 
+#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	private _cfgObj = configFile;
+	private _soundPath = (getArray(_cfgObj >> "CfgSounds" >> _class >> "sound")) select 0;
+	_soundPath = [_soundPath,"rel_gamecontent\","rel_gamecontent.pbo\"] call stringReplace;
+	[[_source,true,[0,0,0]],_soundPath,_dist,_pitch,_offset] call vs_audio_playSound3d;
+#else
+
 /*	if (typeOf _source == BASIC_MOB_TYPE) then {
 		private _dummy = "#particlesource" createVehicleLocal [0,0,0];
 		_dummy attachto [player,[0,0,0],"head"];
@@ -66,6 +90,7 @@ sound3d_playOnObject = {
 
 	//just returning sound source
 	_sound
+#endif
 }; rpcAdd("soundPlayOnObject",sound3d_playOnObject);
 
 //функция локальна
@@ -116,6 +141,7 @@ sound_selfPlay = {
 
 // проигрывание локальных звуков
 //from say3D [sound, maxDistance, pitch, isSpeech, offset]
+//! this function is not used
 decl(mesh(mesh;string;float;float;float))
 sound3d_playLocal = {
 	params ["_obj","_clsSound",["_pitch",1],["_distance",10],["_offset",0]];
@@ -138,11 +164,17 @@ sound3d_playLocalOnObjectLooped = {
 		_pitch = rand(_pitch select 0,_pitch select 1);
 	};
 	//params ["_file","_source",["_vol",1],["_pitch",1],["_maxDist",20],["_soundExtension","ogg"],["_offset",0],["_isLocal",false],["_isRTProcess",false]];
-	private _playSoundParams = [_file,_src,_vol,_pitch,_dist,null,_offset,true,false];
+	private _playSoundParams = [_file,
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	[_src,true,[0,0,0]],
+	#else
+	_src,
+	#endif
+	_vol,_pitch,_dist,null,_offset,true,false];
 	private _pspFT = array_copy(_playSoundParams);
 	_pspFT set [6,_preendbuf];
 	private _sid = _pspFT call soundGlobal_play;
-	private _spar = soundParams _sid;
+	private _spar = soundParams(_sid);
 	if equals(_spar,[]) exitWith {
 		setLastError("Sound params empty; Args: " + str _this);
 		warningformat("sound3d::playLocalOnObjectLooped() - Sound params empty; Args: %1",_this);
@@ -164,6 +196,7 @@ sound3d_stopLocalLopped = {
 	true
 };
 
+
 //hotreload cleanup sounds
 #ifdef EDITOR_OR_SP_MODE
 if !isNullVar(sound3d_internal_list_soundBuff) then {
@@ -183,10 +216,10 @@ sound3d_internal_localHandler = {
 	{
 		_x params ["_src","_sid","_preend","_psParams"];
 		//traceformat("check sound %1",_psParams)
-		private _spar = soundParams _sid;
+		private _spar = soundParams(_sid);
 		//this stop event
 		if isNullReference(_src) then {
-			stopSound _sid;
+			stopSound(_sid);
 			_slist set [_foreachindex,objNull];
 			_needDel = true;
 			continue; //next iter
@@ -218,5 +251,6 @@ sound3d_internal_localHandler = {
 		
 	};
 }; 
+
 
 sound3d_internal_handle3dSounds = startUpdate(sound3d_internal_localHandler,0.1);

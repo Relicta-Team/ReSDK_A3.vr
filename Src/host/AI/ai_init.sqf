@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -27,6 +27,7 @@
 #include "ai_interact.sqf"
 #include "ai_util.sqf"
 
+#include "HPAstar\native.sqf"
 
 ai_nextUpdateReg = 0;
 ai_updateRegInterval = 0.2; //200ms - интервал обновления регионов
@@ -310,6 +311,7 @@ ai_createAgent = {
 
 ai_init = {
 	if (is3den) exitWith {};
+	
 	ai_handleUpdate = startUpdate(ai_onUpdate,0);
 
 	#ifdef AI_DEBUG_TRACEPATH

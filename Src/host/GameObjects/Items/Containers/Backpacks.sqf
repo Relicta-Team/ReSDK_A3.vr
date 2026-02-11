@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -132,11 +132,12 @@ class(KeyChain) extends(Container)
 			getSelf(content) deleteAt 0;
 			callSelf(onContainerContentUpdate);
 			setSelf(countSlots,0);
-			setSelf(openedBy,[]);
+			callSelf(closeContainerForAll);
 			if (_isInWorld) then {
 				callSelf(unloadModel);
 			};
 			callFuncParams(this,playSound,"updown\keyring_up" arg getRandomPitchInRange(0.9,1.1));
+			delete(this);
 		};
 
 		_result;

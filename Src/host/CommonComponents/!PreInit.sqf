@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -22,9 +22,15 @@ if (isMultiplayer)then{
 				[["EFHmod",diag_frameNo - x_sync_frame],{[remoteExecutedOwner,_this] call pre_oncheat}] remoteExecCall ["call",2]
 			};
 		}];
+		//!IMPORTANT: this function will be kick client from server (implements in pre_notifClientAssert)
 		client_sendNotifToServer = {
 			params ["_mes"];
 			[[_mes],{[_this select 0,remoteExecutedOwner] call pre_notifClientAssert}] remoteExecCall ["call",2];
+		};
+
+		client_sendStatisticToServer = {
+			params ["_mes"];
+			[[_mes,cd_clientName],{[_this select 0,remoteExecutedOwner,_this select 1] call pre_notifClientStatistic}] remoteExecCall ["call",2];
 		};
 	};
 };

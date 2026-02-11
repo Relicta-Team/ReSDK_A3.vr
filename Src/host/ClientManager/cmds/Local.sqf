@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -24,3 +24,5 @@ addCommandWithDescription("ping",PUBLIC_COMMAND,"Узнать реальный �
 #ifdef EDITOR
 addCommandWithDescription("lightdebug",PUBLIC_COMMAND,"Показывает отрисовку света для скриптовых эффектов") {IS_LOCAL_COMMAND()};
 #endif
+
+addCommand("disablecolorcorrection",ACCESS_ADMIN) {IS_LOCAL_COMMAND()};

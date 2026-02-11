@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -17,6 +17,7 @@
 #include <..\GURPS\gurps.hpp>
 #include <..\SpecialActions\SpecialActions.hpp>
 
+#include "..\ServerVoice\ReVoicer.hpp"
 
 //todo add QDEL file
 // QDEL means query delete for antilagging objects

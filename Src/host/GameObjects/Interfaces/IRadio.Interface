@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -10,74 +10,100 @@ interfaceHeader
 	Требует определения 
 	getterconst_func(isRadio,true);
 	var(radioIsEnabled,true);
+	var(radioType,RADIO_TYPE_WALKIETALKIE);
 */
 
+attributeParams(hasField,"radioType" arg "radioIsEnabled" arg "radioSettings");
 
-//настройки на земле и в теле персонажа
-// float - текущая частота
-// string - текущая кодировка
-// float - громкость приёмника. Все отрицательные значения указывают что рация не на громкой связи
-// float - дистанция слышимости объектом людей на земле если громкость > 0
-// ?vec3 - смещение относительно источника
-// ?float - расстояние рации. Если null то рацией нельзя пользоваться как говорительной
-// int - режим рации digital,digital_lr,airborne
-//var(radioSettings,[10 arg "someencoding" arg -10 arg 5 arg null arg 300 arg 0]);
+//! новые переменные
+/*
+	Переменные для радио:
+	
+	float - текущая частота
+	string - текущая кодировка
+		фактическая частота - частода_кодировка
+	float - громкость приёмника. отрицательное значение указывает что радио в режиме наушника. значение нормализованное от -1 до 1
+	float - дистанция слышимости объекта (при отрицательной громкости не учитывается)
+	?vec3 - смещение относительно источника
+	?float - мощность радио (отвечает за снижение качества звука на больших расстояниях)
+*/
 
-// OBSOLETE FUNCTION
-func(getRadioDataForInventory)
+func(getRadioFrequencyKey)
 {
 	objParams();
-	//[int freq, float volume,float canHearUnits, [prob pos.x,..pos.z], float dist, int type]
-	getSelf(radioSettings) params ["_freq","_enc","_vol","_hearDist","_biasPos","_waveDist","_raType"];
-	
-	private _unicalFreqInt = [_freq,_enc] call vsm_packFreqData;
-	private _result = [
-		_unicalFreqInt,
-		_vol,
-		_hearDist,
-		_biasPos
-	];
-	if !isNullVar(_waveDist) then {
-		_result pushBack [_waveDist,_raType];
-	};
-	
-	_result
-};	
+	getSelf(radioSettings) params ["_freq","_enc"];
+	[_freq,_enc] joinString "@"; //todo generate freq id by freq-enc combination
+};
 
-//Получает данные радио для bytearr
 func(getRadioData)
 {
 	objParams();
-	//[int freq, float volume,float canHearUnits, prob pos.x,..pos.z,radiowave distance,type]
-	
-	getSelf(radioSettings) params ["_freq","_enc","_vol","_dist","_biasPos","_waveDist","_rType"];
-	
-	private _unicalFreqInt = [_freq,_enc] call vsm_packFreqData;
-	
-	private _dat = [
-		_unicalFreqInt,
+	getSelf(radioSettings) params ["_freq","_enc","_vol","_hearDist","_biasPos","_wavePower"];
+	private _data = [
+		callSelf(getRadioFrequencyKey),
 		_vol,
-		_dist
+		_hearDist
 	];
 	
-	if isNullVar(_biasPos) then {
-		_biasPos = [null];
-	};
-	
-	_dat append _biasPos;
-	
-	if !isNullVar(_waveDist) then {
-		_dat set [0,-_unicalFreqInt]; //inverse freq
-		_dat pushBack _waveDist; //add working distance
-		_dat pushBack _rType; //add radio sound type
-	};
+	private _radioType = getSelf(radioType);
+	_radioType = RADIO_TYPE_STRING_TO_ENUM(_radioType);
 
-	_dat
+	if !isNullVar(_radioType) then {	
+		_data pushBack _radioType;
+	} else {
+		_data append [null];
+	};
+	if !isNullVar(_biasPos) then {
+		_data pushBack _biasPos;
+	} else {
+		_data append [null];
+	};
+	_data
 };
 
-/*
-	updateRadioData - обновляет дату рации отсылая её клиентам
-		setRadioFrequency - устанавливает новую частоту и обновляет данные
-		setRadioVolume - устанавливает новую громкость
-		setRadioHearingDistance - устанавливает новую дистанцию слышимости
-*/
+func(getRadioDataForInventory)
+{
+	objParams();
+	private _data = callSelf(getRadioData);
+	_data insert [0,[getSelf(pointer)]];
+	_data
+};
+
+func(setRadioFrequency)
+{
+	objParams_1(_freq);
+	_freq = clamp(_freq,0,1000);
+	getSelf(radioSettings) set [0,_freq];
+};
+
+getter_func(getRadioFrequency,getSelf(radioSettings) select 0);
+
+func(setRadioVolume)
+{
+	objParams_1(_vol);
+	_vol = clamp(_vol,0,1);
+	if (callSelf(isRadioSpeakerModeEnabled)) then {
+		_vol = _vol * -1;
+	};
+	getSelf(radioSettings) set [2,_vol];
+};
+
+getter_func(getRadioVolume,getSelf(radioSettings) select 2);
+
+func(setRadioSpeakerMode)
+{
+	objParams_1(_mode);
+	
+	if equals(_mode,callSelf(isRadioSpeakerModeEnabled)) exitWith {};
+
+	private _settings = getSelf(radioSettings);
+	if (_mode) then {
+		_settings set [2,(_settings select 2) * -1];
+	} else {
+		_settings set [2,abs(_settings select 2)];
+	};
+};
+
+getter_func(isRadioSpeakerModeEnabled,callSelf(getRadioVolume) < 0);
+
+getter_func(getRadioWavePower,private _pwr = getSelf(radioSettings) select 5; ifcheck(isNullVar(_pwr),-1,_pwr));

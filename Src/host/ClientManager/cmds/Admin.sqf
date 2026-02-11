@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -174,6 +174,62 @@ addCommandWithDescription("mindmes",ACCESS_ADMIN,"Совесть говорит.
 			callSelfParams(localSay,"Пустой список" arg "error");
 		};
 		setSelf(__internal_mindmes_lastvalue,_value);
+		callSelfParams(ShowMessageBox,"Listbox" arg _dat arg _handler);
+	};
+	callFuncParams(thisClient,ShowMessageBox,"Input" arg ["Сначала сообщение"] arg _h);
+};
+
+addCommandWithDescription("thoughts",ACCESS_ADMIN,"Мысли (как mind, без звука)")
+{
+
+	_h = {
+		if (_value == "") exitwith {
+			callSelfParams(localSay,"Пустое сообщение" arg "error");
+		};
+
+		_handler = {
+			private _success = false;
+			private _text = getSelf(__internal_thoughts_lastvalue);
+			setSelf(__internal_thoughts_lastvalue,null);
+			private _name = ifcheck(isTypeOf(this,ServerClient),getSelf(name),getVar(getSelf(client),name));
+
+			call {
+				private _cli = _value call cm_findClientByName;
+				if isNullReference(_cli) exitwith {};
+				if !callFunc(_cli,isInGame) exitwith {};
+				_act = getVar(_cli,actor) getvariable vec2("link",nullPtr);
+				if isNullReference(_act) exitwith {};
+				
+				private _m = format["<t size='1.3' color='#23E899' font='RobotoCondensed'>%1</t>",_text];
+				callFuncParams(_act,localSay,_m);
+				_success = true;
+
+				private _mStr = format["(from %1 to %2): %3",_name,getVar(_cli,name),_text];
+				["ADMIN_THOUGHTS: "+ _mStr] call adminLog;
+				["@everyone ADMIN_THOUGHTS: "+_mStr] call disc_adminlog_provider;
+			};
+			callSelf(CloseMessageBox);
+			callSelfParams(localSay,"Выполнено - " + ifcheck(_success,"да","нет") arg "system");
+		};
+		private _dat = ["Выберите кому отправить:"];
+		{
+			#ifndef EDITOR
+			if equals(_x,this) then {continue};
+			#endif
+
+			_m = getVar(_x,actor) getvariable vec2("link",nullPtr);
+			if !isNullReference(_m) then {
+				_dat pushback (format["%1|%2",
+					callFuncParams(gm_currentMode,getCreditsInfo,_m arg false),
+					getVar(_x,name)
+				]);
+			};
+		} foreach (call cm_getAllClientsInGame);
+		
+		if (count _dat == 1) exitWith {
+			callSelfParams(localSay,"Пустой список" arg "error");
+		};
+		setSelf(__internal_thoughts_lastvalue,_value);
 		callSelfParams(ShowMessageBox,"Listbox" arg _dat arg _handler);
 	};
 	callFuncParams(thisClient,ShowMessageBox,"Input" arg ["Сначала сообщение"] arg _h);

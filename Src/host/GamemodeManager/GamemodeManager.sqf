@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -31,7 +31,7 @@ gprint("All functions loaded");
 
 gm_currentMode = nullPtr; //текущий установленный игровой режим
 #include "Gamemode_AllowedModes.sqf"
-gm_defaultMode = "GMTVTGame";// режим по-умолчанию
+gm_defaultMode = "GMExtended";// режим по-умолчанию
 gm_currentModeId = -1; //айди установленного режима
 	gm_internal_ingameClients = []; //сюда записываются все клиенты, зашедшие в игру хотя-бы один раз
 
@@ -85,6 +85,7 @@ gm_state = GAME_STATE_PRELOAD;
 [GAME_STATE_PRELOAD] call gm_onChangeState;
 gm_lobbyTimeToStart = DEFAULT_TIME_TO_START;
 gm_lobbyTimeLeft = 60*5; //сколько до начала раунда. инициализированное состояние - превыбор режима
+gm_lobbyLowOnlineTimeLeft = 60*10; //время до выключения сервера при маленьком онлайне
 gm_lobbyCanProcessTime = true; //можно зафризить таймер до начала раунда
 gm_gameModeClass = ""; //тип установленного режима.
 gm_gameModeName = ""; //Русское название режима
@@ -98,17 +99,9 @@ gm_preLobbyHandler = -1;
 gm_currentAspect = nullPtr;
 gm_forcedAspect = "";
 
-
-//votable component
-gm_canVote = true;
-	gm_votedMode = "";
-	gm_votedClients = [];
-	gm_voteMap = createHashMap;
-	{
-		gm_voteMap set [_x,0];
-	} foreach gm_allowedModes;
-
 #include <Gamemode_internal_auto.sqf>
+
+#include "Gamemode_voting.sqf"
 
 //main init process
 call gm_init;

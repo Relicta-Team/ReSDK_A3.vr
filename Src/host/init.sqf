@@ -1,11 +1,12 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
 #include "engine.hpp"
 
 server_loadingState = 0;
+loadFile("src\host\RVEngine\init.sqf"); //RVEngine extension (for c++ plugins, always load first)
 
 loadFile("src\host\ScriptErrorHandler\ScriptErrorHandler_init.sqf");
 loadFile("src\host\Curl\Curl.sqf");
@@ -40,6 +41,7 @@ loadFile("src\host\GameEvents\loader.hpp");
 loadFile("src\host\SpecialActions\SpecialActions.sqf");
 loadFile("src\host\Client\client.sqf");
 loadFile("src\host\Gender\Genders.sqf");
+loadFile("src\host\Overlays\overlays_init.sqf");
 loadFile("src\host\PersonServ\PersonServ_init.sqf");
 loadFile("src\host\ServerLighting\ServerLighting_init.sqf"); //serverside lighting system (uses atmos, materials)
 loadFile("src\host\Materials\Materials_init.sqf");

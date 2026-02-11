@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 /*
@@ -244,4 +244,106 @@ ai_nav_debug_clientDrawRegionInfo = {
 		struct_newp(LoopedObjectFunction,ai_nav_debug_drawNode arg _x arg null arg player);
 	} foreach _drawInfo;
 	_drawInfo
+};
+
+ai_nav_debug_nativeTest = {
+	params [["_native",true]];
+	if (!is3den) exitWith {
+		error("ai_nav_debug_nativeTest can only be used in editor");
+	};
+
+	ai_nav_debug_nativeTest_flags = createhashmapfromarray [
+		// сравнивает время выполнения скриптовой и нативной функции
+		["comparescript",false],
+		// логирует время выполнения поиска пути
+		["logpathtime",false],
+		//отладочная отрисовка узлов
+		["debugdraw",true]
+	];
+	
+	if !isNull(ai_nav_debug_internal_nativeTestObjects) then {
+		delete3denentities ai_nav_debug_internal_nativeTestObjects;
+		ai_nav_debug_internal_nativeTestObjects = [];
+	};
+	private _cfg = "Sign_Arrow_F";
+	// ([screenToWorld getMousePosition,ai_nav_debug_internal_targetCursor] call golib_om_getRayCastData)params["_obj","_pos","_vecup"];
+	private _atlPos = getposatl get3dencamera;
+	ai_nav_debug_internal_nativeTestObjects = [
+		create3DENEntity ["Object",_cfg, _atlPos],
+		create3DENEntity ["Object",_cfg, _atlPos]
+	];
+	
+	call compile preprocessFileLineNumbers "src\host\RVEngine\init.sqf";
+	["rv_client"] call rve_loadlib;
+	call ai_nav_clearDebugObjects;
+	_t = tickTime;
+	_p = getposasl get3dencamera;
+	_key = _p call ai_nav_getregionkey;
+	_key splitString "_" apply {parsenumber _x} params ["_xp","_yp"];
+	private _ctrupd = 0;
+
+	_cnt = 1;
+	_icnt=1;
+	if (!_native) then {
+		ai_nav_useNative = {false};
+	};
+	for "_i" from 1 to _cnt do {
+		for "_xd" from _xp-_icnt to _xp+_icnt do {
+			for "_yd" from _yp-_icnt to _yp+_icnt do {
+			_pd = [format["%1_%2",_xd,_yd]] call ai_nav_regionToPos; _ctrupd=_ctrupd+1;
+			[_pd] call ai_nav_updateregion;
+			}
+		}
+	};
+
+	_t2 = tickTime-_t;
+	[_t2/_cnt * 1000/_ctrupd,_ctrupd];
+	["Generated %1 regions in %2ms, avg %3ms/region", _ctrupd, _t2*1000,((_t2/_cnt * 1000)/_ctrupd) toFixed 2] call printLog;
+	
+	if (ai_nav_debug_nativeTest_flags get "debugdraw") then {
+		{
+			_pos = _y get "pos";
+			[_pos, [0,1,0,1], 5, true] call ai_nav_debug_createObj;
+		} foreach ai_nav_nodes;
+	};
+	
+	if !isNull(ai_nav_debug_internal_handleOnFrame) then {
+		["onFrame",ai_nav_debug_internal_handleOnFrame] call Core_removeEventHandler;
+		ai_nav_debug_internal_handleOnFrame = null;
+	};
+	
+	ai_nav_debug_internal_handleOnFrame = ["onFrame",{
+		if (!isgamefocused) exitWith {};
+		
+		ai_nav_debug_internal_nativeTestObjects params ["_startObj","_endObj"];
+		
+		private _ref = refcreate([]);
+		_t = tickTime;
+		_p = [getposasl _startObj,getposatl _endObj,true,_ref] call ai_nav_findPartialPath;
+		_t2 = tickTime-_t;
+
+		_perfboost = "disabled";
+		if (ai_nav_debug_nativeTest_flags get "comparescript") then {
+			//override native func
+			_canusefncptr = ai_nav_useNative;
+			ai_nav_useNative = {false};
+
+			_tscr = tickTime;
+			_p = [getposasl _startObj,getposatl _endObj,true,_ref] call ai_nav_findPartialPath_sqf;
+			_tscr2 = tickTime-_tscr;
+
+			//restore native func
+			ai_nav_useNative = _canusefncptr;
+			_perfboost = (_tscr2-_t2)*1000;
+		};
+
+		{
+			if (_foreachindex == 0) then {continue};
+			drawline3d [asltoagl(_p select (_foreachindex-1)),asltoagl(_p select _foreachindex),[1,0,0,1],50];
+		} foreach _p;
+
+		if (ai_nav_debug_nativeTest_flags get "logpathtime") then {
+			["path time %1 (%2/%3); perf boost %4ms",_t2*1000,count _p,count refget(_ref),_perfboost] call printLog;
+		};
+	}] call Core_addEventHandler;
 };

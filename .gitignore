@@ -44,3 +44,4 @@ RBuilder/VM/cmp.exe
 RBuilder/platform_path.cache
 RBuilder/bin/**
 Third-party/SPBuilder/voice_gen.txt
+Src/RVEngine/vcproj64

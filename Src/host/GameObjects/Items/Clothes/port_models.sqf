@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -39,12 +39,12 @@ class(loaded_trebuchet) extends(REPLACE_REQUIRED)
 	var(model,"fantasy\models\loaded_trebuchet.p3d");
 endclass
 
-class(palisade-inny) extends(REPLACE_REQUIRED)
+class(palisade_inny) extends(REPLACE_REQUIRED)
 	var(name,"palisade-inny");
 	var(model,"fantasy\models\palisade-inny.p3d");
 endclass
 
-class(palisade-innycat) extends(REPLACE_REQUIRED)
+class(palisade_innycat) extends(REPLACE_REQUIRED)
 	var(name,"palisade-innycat");
 	var(model,"fantasy\models\palisade-innycat.p3d");
 endclass

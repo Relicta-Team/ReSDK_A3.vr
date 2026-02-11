@@ -1,5 +1,5 @@
 // ======================================================
-// Copyright (c) 2017-2025 the ReSDK_A3 project
+// Copyright (c) 2017-2026 the ReSDK_A3 project
 // sdk.relicta.ru
 // ======================================================
 
@@ -33,7 +33,6 @@ ai_nav_updateRegion = {
     [_pos] call ai_nav_generateRegionNodes;
     
     // 3. Обновляем entrance points (текущего региона + соседей)
-	//! на обновлении это самая жирная часть (400-500мс)
     [_regionKey] call ai_nav_updateRegionEntrances_fast;
 
     //4. восстанавливаем мобов в регионе
@@ -560,3 +559,5 @@ ai_nav_getBorderNodes = {
     
     _borderNodes
 };
+
+
