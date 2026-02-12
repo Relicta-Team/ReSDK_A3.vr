@@ -69,6 +69,6 @@ jobs:
           # Optional: Configure Claude's behavior with CLI arguments
           claude_args: |
             --model claude-sonnet-4-5-20250929
-            --max-turns 10
+            --max-turns 50
             --allowedTools "Bash(npm install),Bash(npm run build),Bash(npm run test:*),Bash(npm run lint:*)"
             --system-prompt "Следуй нашим стандартам кодирования, используй только наше dsl-подмножество языка. Пиши четко и по факту, отвечай на русском."
