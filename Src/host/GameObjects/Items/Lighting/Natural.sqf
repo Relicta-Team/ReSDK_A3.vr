@@ -136,6 +136,7 @@ class(Torch) extends(ILightible)
 	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
+	getter_func(canUseInteractToMethod,callSelf(getClassName) == "Torch");
 
 	autoref var(handleUpdate,-1);
 	var(fuelLeft,60 * 60 * 1.2);
@@ -238,6 +239,61 @@ class(Torch) extends(ILightible)
 				callFuncParams(_with,doBurn,this arg _usr);
 			};
 		};
+	};
+
+	func(interactTo)
+	{
+		objParams_2(_targ,_usr);
+		if (!getSelf(lightIsEnabled) || {!callSelf(isFireLight)}) exitWith {
+			callFuncParams(_usr,localSay,"Нужно использовать горящий факел." arg "error");
+		};
+		if (callFunc(_targ,isDead)) exitWith {};
+
+		private _ctz = getVar(_usr,curTargZone);
+		private _bp = [_ctz] call gurps_convertTargetZoneToBodyPart;
+		if !(_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) exitWith {
+			callFuncParams(_usr,localSay,"Прижечь можно только культю руки или ноги." arg "error");
+		};
+		if callFuncParams(_targ,hasPart,_bp) exitWith {
+			callFuncParams(_usr,localSay,"Нечего прижигать, конечность на месте." arg "error");
+		};
+		if !callFuncParams(_targ,isArteryDamaged,_bp) exitWith {
+			callFuncParams(_usr,localSay,"Культя не кровоточит." arg "error");
+		};
+
+		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+		callFuncParams(_usr,meSay,"собирается прижечь культю у "+_meSayTarget);
+		setSelf(__cauterizeBp,_bp);
+		callFuncParams(_usr,startProgress,_targ arg "item.cauterizeStump" arg getVar(_usr,rta)*3 arg INTERACT_PROGRESS_TYPE_FULL arg this);
+	};
+
+	func(cauterizeStump)
+	{
+		objParams_2(_targ,_usr);
+		if (callFunc(_targ,isDead)) exitWith {};
+		if (!getSelf(lightIsEnabled) || {!callSelf(isFireLight)}) exitWith {};
+
+		private _bp = getSelf(__cauterizeBp);
+		if (isNullVar(_bp)) exitWith {};
+		if !(_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) exitWith {};
+		if callFuncParams(_targ,hasPart,_bp) exitWith {};
+		if !callFuncParams(_targ,isArteryDamaged,_bp) exitWith {};
+		if callFunc(_targ,canFeelPain) then {
+			callFuncParams(_targ,playEmoteSound,"agonyscream");
+		};
+
+
+		private _isSelf = equals(_targ,_usr);
+		private _deathChance = if (_isSelf) then {0.1} else {0.04};
+		if ((random 1) < _deathChance) exitWith {
+			callFuncParams(_targ,meSay,"умирает от болевого шока.");
+			callFuncParams(_targ,Die,di_partDamage);
+		};
+
+		callFuncParams(_targ,setDamageArtery,_bp arg false);
+		callFuncParams(_targ,addPainLevel,_bp);
+		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+		callFuncParams(_usr,meSay,"прижигает культю у "+_meSayTarget);
 	};
 
 	func(canIgniteArea)
