@@ -136,7 +136,7 @@ class(Torch) extends(ILightible)
 	getterconst_func(getHandAnim,ITEM_HANDANIM_TORCH);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
-	getterconst_func(canUseInteractToMethod,true);
+	getter_func(canUseInteractToMethod,callSelf(getClassName) == "Torch");
 
 	autoref var(handleUpdate,-1);
 	var(fuelLeft,60 * 60 * 1.2);
@@ -263,6 +263,7 @@ class(Torch) extends(ILightible)
 
 		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
 		callFuncParams(_usr,meSay,"собирается прижечь культю у "+_meSayTarget);
+		setSelf(__cauterizeBp,_bp);
 		callFuncParams(_usr,startProgress,_targ arg "item.cauterizeStump" arg getVar(_usr,rta)*3 arg INTERACT_PROGRESS_TYPE_FULL arg this);
 	};
 
@@ -272,8 +273,8 @@ class(Torch) extends(ILightible)
 		if (callFunc(_targ,isDead)) exitWith {};
 		if (!getSelf(lightIsEnabled) || {!callSelf(isFireLight)}) exitWith {};
 
-		private _ctz = getVar(_usr,curTargZone);
-		private _bp = [_ctz] call gurps_convertTargetZoneToBodyPart;
+		private _bp = getSelf(__cauterizeBp);
+		if (isNullVar(_bp)) exitWith {};
 		if !(_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) exitWith {};
 		if callFuncParams(_targ,hasPart,_bp) exitWith {};
 		if !callFuncParams(_targ,isArteryDamaged,_bp) exitWith {};
@@ -290,6 +291,7 @@ class(Torch) extends(ILightible)
 		};
 
 		callFuncParams(_targ,setDamageArtery,_bp arg false);
+		callFuncParams(_targ,addPainLevel,_bp);
 		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
 		callFuncParams(_usr,meSay,"прижигает культю у "+_meSayTarget);
 	};
