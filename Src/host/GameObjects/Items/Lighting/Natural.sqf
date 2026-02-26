@@ -241,6 +241,90 @@ class(Torch) extends(ILightible)
 		};
 	};
 
+	// =====================================================================
+	//  СИСТЕМА ПРИЖИГАНИЯ — константы и хелперы
+	// =====================================================================
+
+	// Референсный уровень навыка (без модификатора при этом значении)
+	#define CAUT_SKILL_REFERENCE           10
+
+	// Базовый шанс смерти
+	#define CAUT_DEATH_BASE_SELF           0.10
+	#define CAUT_DEATH_BASE_OTHER          0.04
+	// Эскалация шанса смерти за каждое предыдущее успешное прижигание
+	#define CAUT_DEATH_ESCALATION          0.04
+	// Потолок шанса смерти
+	#define CAUT_DEATH_CAP                 0.60
+	// Снижение шанса смерти за каждый пункт навыка выше референса
+	#define CAUT_SKILL_DEATH_REDUCTION     0.015
+	// Увеличение шанса смерти за каждый пункт навыка ниже референса
+	#define CAUT_SKILL_DEATH_INCREASE      0.02
+
+	// Модификатор шанса смерти от тяжести раны (лёгкая/обычная/тяжёлая)
+	#define CAUT_SEV_DEATH_MINOR           0.0
+	#define CAUT_SEV_DEATH_NORMAL          0.02
+	#define CAUT_SEV_DEATH_SEVERE          0.05
+
+	// Шанс неудачного прижигания: базовый при референсном навыке
+	// Лучший случай (высокий навык): ~4%, худший случай (низкий навык): ~18%
+	#define CAUT_FAIL_BASE                 0.10
+	// Снижение шанса провала за пункт навыка выше референса
+	#define CAUT_FAIL_SKILL_REDUCTION      0.015
+	// Увеличение шанса провала за пункт навыка ниже референса
+	#define CAUT_FAIL_SKILL_INCREASE       0.02
+	// Абсолютные границы
+	#define CAUT_FAIL_MIN                  0.04
+	#define CAUT_FAIL_MAX                  0.18
+
+	// Уровней боли при прижигании
+	#define CAUT_PAIN_LEVELS               2
+
+	// Переменная на цели - счётчик успешных прижиганий
+	#define CAUT_VAR_SUCCESSES             "__cautSuccesses"
+
+	//получить уровень навыка первой помощи актора
+	#define CAUT_GET_HEALING_SKILL(actor)   callFunc(actor,gethealing)
+
+	// --- хелпер: классификация тяжести кровотечения на части тела -------------
+	//  0 = лёгкое (только SCRATCH/MINOR раны), 1 = обычное (MODERATE/MAJOR),
+	//  2 = тяжёлое (CRITICAL+ или повреждена артерия)
+	// Работает с картой WOUND_TYPE_BLEEDING объекта BodyPart.
+	caut_classifyBleedingSeverity = {
+		params ["_partObj","_targ","_bp"];
+		private _woundArr = getVar(_partObj,partDamage) get WOUND_TYPE_BLEEDING;
+		private _maxSize = -1;
+		{ if (_x > _maxSize) then { _maxSize = _x } } forEach (keys _woundArr);
+		private _hasArtery = callFuncParams(_targ,isArteryDamaged,_bp);
+		if (_hasArtery || {_maxSize >= WOUND_SIZE_CRITICAL}) exitWith {2};
+		if (_maxSize >= WOUND_SIZE_MODERATE) exitWith {1};
+		0
+	};
+
+	// --- хелпер: тяжесть → бонус к шансу смерти ------------------------------
+	caut_severityDeathBonus = {
+		params ["_sev"];
+		if (_sev >= 2) exitWith {CAUT_SEV_DEATH_SEVERE};
+		if (_sev >= 1) exitWith {CAUT_SEV_DEATH_NORMAL};
+		CAUT_SEV_DEATH_MINOR
+	};
+
+	// --- хелпер: убрать все кровоточащие раны с части тела --------------------
+	caut_clearBleedingOnPart = {
+		params ["_partObj","_targ","_bp"];
+		private _woundMap = getVar(_partObj,partDamage) get WOUND_TYPE_BLEEDING;
+		private _hadWounds = count _woundMap > 0;
+		// очищаем карту ран
+		{ _woundMap deleteAt _x } forEach (keys _woundMap);
+		// также убираем повреждение артерии на этой части
+		if callFuncParams(_targ,isArteryDamaged,_bp) then {
+			callFuncParams(_targ,setDamageArtery,_bp arg false);
+		};
+		if (_hadWounds) then {
+			callFunc(_targ,recalcBloodLoss);
+		};
+	};
+
+	//  interactTo - валидация + запуск прогресс-бара
 	func(interactTo)
 	{
 		objParams_2(_targ,_usr);
@@ -251,23 +335,58 @@ class(Torch) extends(ILightible)
 
 		private _ctz = getVar(_usr,curTargZone);
 		private _bp = [_ctz] call gurps_convertTargetZoneToBodyPart;
-		if !(_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) exitWith {
-			callFuncParams(_usr,localSay,"Прижечь можно только культю руки или ноги." arg "error");
-		};
-		if callFuncParams(_targ,hasPart,_bp) exitWith {
-			callFuncParams(_usr,localSay,"Нечего прижигать, конечность на месте." arg "error");
-		};
-		if !callFuncParams(_targ,isArteryDamaged,_bp) exitWith {
-			callFuncParams(_usr,localSay,"Культя не кровоточит." arg "error");
+
+		// --- Раны головы нельзя прижигать ------------------------------------
+		if (_bp == BP_INDEX_HEAD) exitWith {
+			callFuncParams(_usr,localSay,"Хорошая ли это идея?" arg "error");
 		};
 
+		// --- Определяем, есть ли что прижигать --------------------------------
+		private _isStump = false;
+		private _hasBleed = false;
+
+		if (_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) then {
+			if (!callFuncParams(_targ,hasPart,_bp)) then {
+				// конечность отсутствует — прижигание культи (артерия должна кровоточить)
+				if callFuncParams(_targ,isArteryDamaged,_bp) then {
+					_isStump = true;
+				};
+			};
+		};
+
+		// Если часть тела на месте, проверяем наличие кровоточащих ран
+		if (!_isStump && {callFuncParams(_targ,hasPart,_bp)}) then {
+			private _partObj = callFuncParams(_targ,getPart,_bp);
+			if (!isNullObject(_partObj)) then {
+				if callFuncParams(_partObj,hasAnyDamageOfType,WOUND_TYPE_BLEEDING) then {
+					_hasBleed = true;
+				} else {
+					// также учитываем повреждение артерии без записей о ранах
+					if callFuncParams(_targ,isArteryDamaged,_bp) then {
+						_hasBleed = true;
+					};
+				};
+			};
+		};
+
+		if (!_isStump && !_hasBleed) exitWith {
+			callFuncParams(_usr,localSay,"Здесь нечего прижигать — нет кровотечения." arg "error");
+		};
+
+		// --- Объявление и запуск прогресс-бара --------------------------------
 		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
-		callFuncParams(_usr,meSay,"собирается прижечь культю у "+_meSayTarget);
+		private _actionText = if (_isStump) then {"прижечь культю"} else {"прижечь рану"};
+		callFuncParams(_usr,meSay,"собирается " + _actionText + " у " + _meSayTarget);
+
 		setSelf(__cauterizeBp,_bp);
-		callFuncParams(_usr,startProgress,_targ arg "item.cauterizeStump" arg getVar(_usr,rta)*3 arg INTERACT_PROGRESS_TYPE_FULL arg this);
+		setSelf(__cauterizeIsStump,_isStump);
+		callFuncParams(_usr,startProgress,_targ arg "item.cauterizeWound" arg getVar(_usr,rta)*3 arg INTERACT_PROGRESS_TYPE_FULL arg this);
 	};
 
-	func(cauterizeStump)
+	// =====================================================================
+	//  cauterizeWound — основной колбэк после завершения прогресс-бара
+	// =====================================================================
+	func(cauterizeWound)
 	{
 		objParams_2(_targ,_usr);
 		if (callFunc(_targ,isDead)) exitWith {};
@@ -275,25 +394,96 @@ class(Torch) extends(ILightible)
 
 		private _bp = getSelf(__cauterizeBp);
 		if (isNullVar(_bp)) exitWith {};
-		if !(_bp in [BP_INDEX_ARM_L,BP_INDEX_ARM_R,BP_INDEX_LEG_L,BP_INDEX_LEG_R]) exitWith {};
-		if callFuncParams(_targ,hasPart,_bp) exitWith {};
-		if !callFuncParams(_targ,isArteryDamaged,_bp) exitWith {};
+
+		private _isStump = getSelf(__cauterizeIsStump);
+		if (isNil "_isStump") then {_isStump = false};
+		private _isSelf = equals(_targ,_usr);
+
+		// --- Повторная валидация условий --------------------------------------
+		private _valid = true;
+		if (_isStump) then {
+			if (callFuncParams(_targ,hasPart,_bp) || {!callFuncParams(_targ,isArteryDamaged,_bp)}) then {
+				_valid = false;
+			};
+		} else {
+			if (!callFuncParams(_targ,hasPart,_bp)) then {
+				_valid = false;
+			};
+		};
+		if (!_valid) exitWith {};
+
+		// --- Отслеживание попыток --------------------------------------------
+		private _successes = _targ getVariable [CAUT_VAR_SUCCESSES, 0];
+		_targ setVariable [CAUT_VAR_SUCCESSES, _successes + 1];
+
+		// --- Навык -----------------------------------------------------------
+		private _skill = CAUT_GET_HEALING_SKILL(_usr);
+		private _skillDelta = _skill - CAUT_SKILL_REFERENCE;
+
+		// --- Боль (применяется всегда, даже при провале) ---------------------
 		if callFunc(_targ,canFeelPain) then {
 			callFuncParams(_targ,playEmoteSound,"agonyscream");
 		};
+		callFuncParams(_targ,addPainLevel,_bp arg CAUT_PAIN_LEVELS);
 
+		// --- Бросок на провал (низкий шанс, зависит от навыка) ---------------
+		private _failChance = CAUT_FAIL_BASE;
+		if (_skillDelta > 0) then {
+			modvar(_failChance) - (_skillDelta * CAUT_FAIL_SKILL_REDUCTION);
+		} else {
+			modvar(_failChance) - (_skillDelta * CAUT_FAIL_SKILL_INCREASE);
+		};
+		_failChance = (_failChance max CAUT_FAIL_MIN) min CAUT_FAIL_MAX;
 
-		private _isSelf = equals(_targ,_usr);
-		private _deathChance = if (_isSelf) then {0.1} else {0.04};
+		if ((random 1) < _failChance) exitWith {
+			private _meSayTarget = if (_isSelf) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+			callFuncParams(_usr,meSay,"пытается прижечь рану у " + _meSayTarget + ", но безуспешно.");
+			_targ setVariable [CAUT_VAR_SUCCESSES, _successes - 1 max 0];
+		};
+
+		// Определяем тяжесть для модификатора смерти
+		private _severity = 0;
+		if (_isStump) then {
+			_severity = 2; // культя всегда считается тяжёлой
+		} else {
+			private _partObj = callFuncParams(_targ,getPart,_bp);
+			if (!isNullObject(_partObj)) then {
+				_severity = [_partObj, _targ, _bp] call caut_classifyBleedingSeverity;
+			};
+		};
+		private _sevBonus = [_severity] call caut_severityDeathBonus;
+
+		private _deathBase = if (_isSelf) then {CAUT_DEATH_BASE_SELF} else {CAUT_DEATH_BASE_OTHER};
+		private _deathChance = _deathBase
+			+ (_successes * CAUT_DEATH_ESCALATION)
+			+ _sevBonus;
+
+		// Модификатор навыка на шанс смерти
+		if (_skillDelta > 0) then {
+			modvar(_deathChance) - (_skillDelta * CAUT_SKILL_DEATH_REDUCTION);
+		} else {
+			modvar(_deathChance) - (_skillDelta * CAUT_SKILL_DEATH_INCREASE);
+		};
+		_deathChance = (_deathChance max 0.01) min CAUT_DEATH_CAP;
+
 		if ((random 1) < _deathChance) exitWith {
 			callFuncParams(_targ,meSay,"умирает от болевого шока.");
 			callFuncParams(_targ,Die,di_partDamage);
 		};
 
-		callFuncParams(_targ,setDamageArtery,_bp arg false);
-		callFuncParams(_targ,addPainLevel,_bp);
-		private _meSayTarget = if (equals(_targ,_usr)) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
-		callFuncParams(_usr,meSay,"прижигает культю у "+_meSayTarget);
+		// --- Применяем лечение ------------------------------------------------
+		if (_isStump) then {
+			callFuncParams(_targ,setDamageArtery,_bp arg false);
+		} else {
+			private _partObj = callFuncParams(_targ,getPart,_bp);
+			if (!isNullObject(_partObj)) then {
+				[_partObj, _targ, _bp] call caut_clearBleedingOnPart;
+			};
+		};
+
+		private _meSayTarget = if (_isSelf) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
+		private _actionText = if (_isStump) then {"прижигает культю"} else {"прижигает рану"};
+		callFuncParams(_usr,meSay,_actionText + " у " + _meSayTarget);
 	};
 
 	func(canIgniteArea)
