@@ -111,6 +111,50 @@
 #define SIDE_RIGHT 1
 #define NODE_SIDE_LIST_ALL ['Левая сторона:SIDE_LEFT','Правая сторона:SIDE_RIGHT']
 
+// =====================================================================
+//  Константы системы прижигания (Torch → cauterizeWound)
+// =====================================================================
+
+// Референсный уровень навыка (без модификатора при этом значении)
+#define CAUT_SKILL_REFERENCE           10
+
+// Базовый шанс смерти
+#define CAUT_DEATH_BASE_SELF           0.10
+#define CAUT_DEATH_BASE_OTHER          0.04
+// Эскалация шанса смерти за каждое предыдущее успешное прижигание
+#define CAUT_DEATH_ESCALATION          0.04
+// Потолок шанса смерти
+#define CAUT_DEATH_CAP                 0.60
+// Снижение шанса смерти за каждый пункт навыка выше референса
+#define CAUT_SKILL_DEATH_REDUCTION     0.015
+// Увеличение шанса смерти за каждый пункт навыка ниже референса
+#define CAUT_SKILL_DEATH_INCREASE      0.02
+
+// Модификатор шанса смерти от тяжести раны (лёгкая/обычная/тяжёлая)
+#define CAUT_SEV_DEATH_MINOR           0.0
+#define CAUT_SEV_DEATH_NORMAL          0.02
+#define CAUT_SEV_DEATH_SEVERE          0.05
+
+// Шанс неудачного прижигания: базовый при референсном навыке
+// Лучший случай (высокий навык): ~4%, худший случай (низкий навык): ~18%
+#define CAUT_FAIL_BASE                 0.10
+// Снижение шанса провала за пункт навыка выше референса
+#define CAUT_FAIL_SKILL_REDUCTION      0.015
+// Увеличение шанса провала за пункт навыка ниже референса
+#define CAUT_FAIL_SKILL_INCREASE       0.02
+// Абсолютные границы
+#define CAUT_FAIL_MIN                  0.04
+#define CAUT_FAIL_MAX                  0.18
+
+// Уровней боли при прижигании
+#define CAUT_PAIN_LEVELS               2
+
+// Переменная на цели — счётчик успешных прижиганий
+#define CAUT_VAR_SUCCESSES             "__cautSuccesses"
+
+// Получить уровень навыка первой помощи актора
+#define CAUT_GET_HEALING_SKILL(actor)   callFunc(actor,gethealing)
+
 //fast declaration object class
 //not implemented yet
 //#define declgotype(_t,_mot,_mdl) class(_t) extends(_mot) var(model,_mdl) endclass

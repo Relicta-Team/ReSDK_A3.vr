@@ -242,48 +242,9 @@ class(Torch) extends(ILightible)
 	};
 
 	// =====================================================================
-	//  СИСТЕМА ПРИЖИГАНИЯ — константы и хелперы
+	//  СИСТЕМА ПРИЖИГАНИЯ — хелперы
+	//  Константы CAUT_* определены в GameConstants.hpp
 	// =====================================================================
-
-	// Референсный уровень навыка (без модификатора при этом значении)
-	#define CAUT_SKILL_REFERENCE           10
-
-	// Базовый шанс смерти
-	#define CAUT_DEATH_BASE_SELF           0.10
-	#define CAUT_DEATH_BASE_OTHER          0.04
-	// Эскалация шанса смерти за каждое предыдущее успешное прижигание
-	#define CAUT_DEATH_ESCALATION          0.04
-	// Потолок шанса смерти
-	#define CAUT_DEATH_CAP                 0.60
-	// Снижение шанса смерти за каждый пункт навыка выше референса
-	#define CAUT_SKILL_DEATH_REDUCTION     0.015
-	// Увеличение шанса смерти за каждый пункт навыка ниже референса
-	#define CAUT_SKILL_DEATH_INCREASE      0.02
-
-	// Модификатор шанса смерти от тяжести раны (лёгкая/обычная/тяжёлая)
-	#define CAUT_SEV_DEATH_MINOR           0.0
-	#define CAUT_SEV_DEATH_NORMAL          0.02
-	#define CAUT_SEV_DEATH_SEVERE          0.05
-
-	// Шанс неудачного прижигания: базовый при референсном навыке
-	// Лучший случай (высокий навык): ~4%, худший случай (низкий навык): ~18%
-	#define CAUT_FAIL_BASE                 0.10
-	// Снижение шанса провала за пункт навыка выше референса
-	#define CAUT_FAIL_SKILL_REDUCTION      0.015
-	// Увеличение шанса провала за пункт навыка ниже референса
-	#define CAUT_FAIL_SKILL_INCREASE       0.02
-	// Абсолютные границы
-	#define CAUT_FAIL_MIN                  0.04
-	#define CAUT_FAIL_MAX                  0.18
-
-	// Уровней боли при прижигании
-	#define CAUT_PAIN_LEVELS               2
-
-	// Переменная на цели - счётчик успешных прижиганий
-	#define CAUT_VAR_SUCCESSES             "__cautSuccesses"
-
-	//получить уровень навыка первой помощи актора
-	#define CAUT_GET_HEALING_SKILL(actor)   callFunc(actor,gethealing)
 
 	// --- хелпер: классификация тяжести кровотечения на части тела -------------
 	//  0 = лёгкое (только SCRATCH/MINOR раны), 1 = обычное (MODERATE/MAJOR),
@@ -316,10 +277,13 @@ class(Torch) extends(ILightible)
 		// очищаем карту ран
 		{ _woundMap deleteAt _x } forEach (keys _woundMap);
 		// также убираем повреждение артерии на этой части
-		if callFuncParams(_targ,isArteryDamaged,_bp) then {
+		private _hadArtery = callFuncParams(_targ,isArteryDamaged,_bp);
+		if (_hadArtery) then {
+			// setDamageArtery сам вызывает recalcBloodLoss
 			callFuncParams(_targ,setDamageArtery,_bp arg false);
 		};
-		if (_hadWounds) then {
+		// пересчитываем только если были раны, но артерию не трогали (иначе уже пересчитано)
+		if (_hadWounds && !_hadArtery) then {
 			callFunc(_targ,recalcBloodLoss);
 		};
 	};
@@ -413,8 +377,9 @@ class(Torch) extends(ILightible)
 		if (!_valid) exitWith {};
 
 		// --- Отслеживание попыток --------------------------------------------
-		private _successes = _targ getVariable [CAUT_VAR_SUCCESSES, 0];
-		_targ setVariable [CAUT_VAR_SUCCESSES, _successes + 1];
+		private _successes = getVarReflect(_targ,CAUT_VAR_SUCCESSES);
+		if (isNil "_successes") then {_successes = 0};
+		setVarReflect(_targ,CAUT_VAR_SUCCESSES,_successes + 1);
 
 		// --- Навык -----------------------------------------------------------
 		private _skill = CAUT_GET_HEALING_SKILL(_usr);
@@ -435,10 +400,12 @@ class(Torch) extends(ILightible)
 		};
 		_failChance = (_failChance max CAUT_FAIL_MIN) min CAUT_FAIL_MAX;
 
+		private _actionText = if (_isStump) then {"прижечь культю"} else {"прижечь рану"};
+
 		if ((random 1) < _failChance) exitWith {
 			private _meSayTarget = if (_isSelf) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
-			callFuncParams(_usr,meSay,"пытается прижечь рану у " + _meSayTarget + ", но безуспешно.");
-			_targ setVariable [CAUT_VAR_SUCCESSES, _successes - 1 max 0];
+			callFuncParams(_usr,meSay,"пытается " + _actionText + " у " + _meSayTarget + ", но безуспешно.");
+			setVarReflect(_targ,CAUT_VAR_SUCCESSES,_successes);
 		};
 
 		// Определяем тяжесть для модификатора смерти
@@ -482,8 +449,8 @@ class(Torch) extends(ILightible)
 		};
 
 		private _meSayTarget = if (_isSelf) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
-		private _actionText = if (_isStump) then {"прижигает культю"} else {"прижигает рану"};
-		callFuncParams(_usr,meSay,_actionText + " у " + _meSayTarget);
+		private _successText = if (_isStump) then {"прижигает культю"} else {"прижигает рану"};
+		callFuncParams(_usr,meSay,_successText + " у " + _meSayTarget);
 	};
 
 	func(canIgniteArea)
