@@ -360,7 +360,7 @@ class(Torch) extends(ILightible)
 		if (isNullVar(_bp)) exitWith {};
 
 		private _isStump = getSelf(__cauterizeIsStump);
-		if (isNil "_isStump") then {_isStump = false};
+		if (isNullVar(_isStump)) then {_isStump = false};
 		private _isSelf = equals(_targ,_usr);
 
 		// --- Повторная валидация условий --------------------------------------
@@ -372,13 +372,25 @@ class(Torch) extends(ILightible)
 		} else {
 			if (!callFuncParams(_targ,hasPart,_bp)) then {
 				_valid = false;
+			} else {
+				// проверяем, что кровотечение ещё не остановлено
+				private _partObj = callFuncParams(_targ,getPart,_bp);
+				private _hasBleedNow = false;
+				if (!isNullObject(_partObj)) then {
+					_hasBleedNow =
+						callFuncParams(_partObj,hasAnyDamageOfType,WOUND_TYPE_BLEEDING)
+						|| {callFuncParams(_targ,isArteryDamaged,_bp)};
+				};
+				if (!_hasBleedNow) then {
+					_valid = false;
+				};
 			};
 		};
 		if (!_valid) exitWith {};
 
 		// --- Отслеживание попыток --------------------------------------------
 		private _successes = getVarReflect(_targ,CAUT_VAR_SUCCESSES);
-		if (isNil "_successes") then {_successes = 0};
+		if (isNullVar(_successes)) then {_successes = 0};
 		setVarReflect(_targ,CAUT_VAR_SUCCESSES,_successes + 1);
 
 		// --- Навык -----------------------------------------------------------
@@ -404,7 +416,7 @@ class(Torch) extends(ILightible)
 
 		if ((random 1) < _failChance) exitWith {
 			private _meSayTarget = if (_isSelf) then {"себя"} else {callFuncParams(_targ,getNameEx,"кого")};
-			callFuncParams(_usr,meSay,"пытается " + _actionText + " у " + _meSayTarget + ", но безуспешно.");
+			callFuncParams(_usr,meSay,"пытается " + _actionText + " у " + _meSayTarget + comma + " но безуспешно.");
 			setVarReflect(_targ,CAUT_VAR_SUCCESSES,_successes);
 		};
 
