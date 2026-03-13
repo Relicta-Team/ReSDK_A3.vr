@@ -364,9 +364,7 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 				gm_lobbyTimeLeft = gm_lobbyTimeToStart;
 			};
 
-			{
-				netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_x,getOwner));
-			} foreach (call cm_getAllClientsInLobby);
+			call gm_syncLobbyTimer;
 		};
 
 		//ограничение по времени

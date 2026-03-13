@@ -429,6 +429,9 @@ class(ServerClient) /*extends(NetObject)*/
 
 			rpcSendToClient(callSelf(getOwner),"openLobby",callSelf(collectClientSettings));
 
+			//синхронизация таймера лобби новому клиенту
+			[this] call gm_syncLobbyTimer;
+
 			//проверка до старта
 			call _postCheck;
 		};
@@ -451,6 +454,9 @@ class(ServerClient) /*extends(NetObject)*/
 				callSelfParams(onChangeState,"lobby");
 				
 				rpcSendToClient(callSelf(getOwner),"openLobby",callSelf(collectClientSettings));
+
+				//синхронизация таймера лобби новому клиенту
+				[this] call gm_syncLobbyTimer;
 			};
 		};
 	};

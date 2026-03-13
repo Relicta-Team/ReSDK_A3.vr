@@ -129,9 +129,7 @@ gm_init = {
 			RETURN(0);
 		};
 		
-		{
-			netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_x,getOwner));
-		} foreach _allClients;
+		call gm_syncLobbyTimer;
 
 	};
 	gm_preLobbyHandler = startUpdate(_code,1);
@@ -218,6 +216,19 @@ gm_startMainThread = {
 		gm_handleMainLoop = _handle;
 	} else {
 		errorformat("gm::startMainThread() - Cant launch main thread. Handle return %1",_handle);
+	};
+};
+
+// Синхронизирует gm_lobbyTimeLeft клиентам.
+// Без параметров - рассылает всем клиентам в лобби.
+// С параметром [_client] - отправляет конкретному клиенту.
+gm_syncLobbyTimer = {
+	if (params ["_client"]) then {
+		netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_client,getOwner));
+	} else {
+		{
+			netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_x,getOwner));
+		} foreach (call cm_getAllClientsInLobby);
 	};
 };
 
