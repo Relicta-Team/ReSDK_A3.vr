@@ -219,11 +219,12 @@ gm_startMainThread = {
 	};
 };
 
-// Синхронизирует gm_lobbyTimeLeft клиентам.
-// Без параметров - рассылает всем клиентам в лобби.
-// С параметром [_client] - отправляет конкретному клиенту.
+/* Синхронизирует gm_lobbyTimeLeft клиентам.
+ С параметром _client - отправляет конкретному клиенту. 
+ Без параметров - рассылает всем клиентам в лобби. */
 gm_syncLobbyTimer = {
-	if (params ["_client"]) then {
+	params ["_client"];
+	if !isNullVar(_client) then {
 		netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_client,getOwner));
 	} else {
 		{
