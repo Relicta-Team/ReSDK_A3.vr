@@ -23,7 +23,7 @@ Replaced value:
 ```sqf
 (missionNamespace getVariable ["role_"+(val),nullPtr])
 ```
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 536](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L536)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 548](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L548)
 ## gm_init
 
 Type: function
@@ -39,7 +39,7 @@ Type: function
 Description: Выполняет рестарт раунда
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 141](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L141)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 139](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L139)
 ## gm_getLobbySoundsCount
 
 Type: function
@@ -47,7 +47,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 160](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L160)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 158](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L158)
 ## gm_setLobbySound
 
 Type: function
@@ -55,7 +55,7 @@ Type: function
 Description: 
 - Param: _number_name_rnd (optional, default "random")
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 164](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L164)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 162](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L162)
 ## gm_onChangeState
 
 Type: function
@@ -63,7 +63,7 @@ Type: function
 Description: for checking gamemode states visit src\host\CommonComponents\Gamemode.sqf
 - Param: _newState
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 194](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L194)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 192](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L192)
 ## gm_startMainThread
 
 Type: function
@@ -71,7 +71,15 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 210](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L210)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 208](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L208)
+## gm_syncLobbyTimer
+
+Type: function
+
+Description: 
+- Param: _client
+
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 225](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L225)
 ## gm_startLobbyThread
 
 Type: function
@@ -79,7 +87,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 224](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L224)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 236](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L236)
 ## gm_startEventHandle
 
 Type: function
@@ -87,7 +95,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 238](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L238)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 250](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L250)
 ## gm_initGameMode
 
 Type: function
@@ -95,7 +103,7 @@ Type: function
 Description: Инициализация режима. Выполняет основные сабсистемы раннера: загрузка карты, подгрузка ролей, перевод в стейт лобби
 - Param: _name (optional, default "")
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 259](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L259)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 271](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L271)
 ## gm_loadGamemode
 
 Type: function
@@ -104,7 +112,7 @@ Description: Загружает игровой режим. Запускает п
 - Param: _modeName
 - Param: _gmName
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 357](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L357)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 369](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L369)
 ## gm_pickMode
 
 Type: function
@@ -112,7 +120,7 @@ Type: function
 Description: 
 - Param: _name (optional, default "")
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 400](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L400)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 412](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L412)
 ## gm_syncRolelistToAllClients
 
 Type: function
@@ -120,7 +128,7 @@ Type: function
 Description: синхронизирует со всеми клиентами ролелист
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 481](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L481)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 493](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L493)
 ## gm_syncRolelistToClient
 
 Type: function
@@ -128,7 +136,7 @@ Type: function
 Description: отсылает клиенту все доступные роли для лобби или игры
 - Param: _cli
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 489](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L489)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 501](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L501)
 ## gm_addContenderToRole
 
 Type: function
@@ -140,7 +148,7 @@ Description: Добавляет претендента в лист претен�
 - Param: _oldRoleName (optional, default "none")
 - Param: _doNeedSyncAfterSet (optional, default false)
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 531](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L531)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 543](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L543)
 ## gm_syncRoleContenders
 
 Type: function
@@ -148,7 +156,7 @@ Type: function
 Description: синхронизирует со всеми клиентами информацию о занятых ролях
 - Param: _idxContenders
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 592](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L592)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 604](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L604)
 ## gm_isPreStartRoleExist
 
 Type: function
@@ -156,7 +164,7 @@ Type: function
 Description: Проверяет наличие роли в списке дефолтных ролей. Принимает ссылку на объект роли или строковое название
 - Param: _roleClass
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 650](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L650)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 662](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L662)
 ## gm_isRoleExists
 
 Type: function
@@ -164,7 +172,7 @@ Type: function
 Description: ! not used anywhere...
 - Param: _roleClass
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 661](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L661)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 673](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L673)
 ## gm_getRoleObject
 
 Type: function
@@ -172,7 +180,7 @@ Type: function
 Description: 
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 670](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L670)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 682](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L682)
 ## gm_getGameModeObject
 
 Type: function
@@ -180,7 +188,7 @@ Type: function
 Description: Получаем объект игрового режима
 
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 673](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L673)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 685](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L685)
 ## gm_prepDesc
 
 Type: function
@@ -188,7 +196,7 @@ Type: function
 Description: Подготавливает описание роли, заменяя куски текста на \n
 - Param: _sourceText
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 676](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L676)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 688](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L688)
 ## gm_printRoleNamesEx
 
 Type: function
@@ -196,7 +204,7 @@ Type: function
 Description: 
 - Param: _name
 
-File: [host\GamemodeManager\GamemodeFunctions.sqf at line 690](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L690)
+File: [host\GamemodeManager\GamemodeFunctions.sqf at line 702](../../../Src/host/GamemodeManager/GamemodeFunctions.sqf#L702)
 # GamemodeManager.h
 
 ## IS_ENABLE_GAMEMODEMANAGER
