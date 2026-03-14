@@ -53,9 +53,4 @@ if (gm_lobbyTimeLeft < 0) then {
 };
 
 
-//TODO собирать массив айди при изменении статуса клиентов. ИЛИ глобально рассылать переменную
-_allClients = call cm_getAllClientsInLobby;
-
-{
-	netSendVar("lobby_timeLeft",gm_lobbyTimeLeft,callFunc(_x,getOwner));
-} foreach _allClients;
+call gm_syncLobbyTimer;

@@ -227,6 +227,8 @@ _RequestOpenLobby = {
 	};
 	
 	rpcSendToClient(callFunc(_client,getOwner),"openLobby",callFunc(_client,collectClientSettings));
+
+	[_client] call gm_syncLobbyTimer;
 }; rpcAdd("RequestOpenLobby",_RequestOpenLobby);
 
 _RequestNextMob = {
