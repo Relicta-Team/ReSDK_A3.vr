@@ -227,6 +227,9 @@ noe_client_nat_onLoadArea = {
 			{
 				_aObj callp(mergeRegions,_regions select (_x-1) arg _x)
 			} foreach _lvls;
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			_aObj callp(applyRenderBudget,_lvls);
+			#endif
 		};
 		#endif
 
@@ -292,10 +295,23 @@ noe_client_nat_procLoad = {
 	params ["_aObj"];
 	traceformat("============================== PROC[LOAD]: %1",_aObj)
 	{
-		{
-			_x callp(setRenderMode,true);
-		} foreach _x;
-	} foreach (_aObj getv(_regions));
+		private _ltObj = _y select NAT_CHUNKDAT_OBJECT;
+		if !isNullVar(_ltObj) then {
+			if !(_ltObj callv(isInsideRegion)) then {
+				_aObj callp(optimizeSingle,_ltObj);
+			};
+		};
+	} foreach (_aObj getv(chunks));
+
+	private _lvls = _aObj getv(toUpdateLevels);
+	_aObj setv(toUpdateLevels,[]);
+	private _regions = _aObj getv(_regions);
+	{
+		_aObj callp(mergeRegions,_regions select (_x-1) arg _x)
+	} foreach _lvls;
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	_aObj callp(applyRenderBudget,_lvls);
+	#endif
 	#endif
 };
 
@@ -332,19 +348,13 @@ noe_client_nat_procDelEff = {
 	// private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
 			
 	if (_ltob callv(isInsideRegion)) then {
-		private _rpinf = _ltob getv(regionPosInfo);
-		private _coord = _ltob getv(localChId);
-		private _regions = _aObj getv(_regions) select ((_coord select 2)-1);
-		private _foundRegion = null;
-		{
-			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
-				_foundRegion = _x;
-			};
-		} foreach _regions;
+		(_aObj callp(getRegionDatForVLight,_ltob)) params ["_foundRegion","_regions"];
 		//!temporary code
 		if !isNullVar(_foundRegion) then {
 			//traceformat("founded region for unloading: %1",_foundRegion);
 			_aObj callp(onDecreaseRegion,_regions arg _foundRegion arg _ltob);
+		} else {
+			_ltob setv(regionPosInfo,null);
 		};
 	};
 	#endif
@@ -358,7 +368,12 @@ noe_client_nat_procUpdEff = {
 	traceformat("============================== PROC[UPDATE]: %1",_ltob)
 	if (_ltob callv(isInsideRegion)) then {
 		(_aObj callp(getRegionDatForVLight,_ltob)) params ["_region","_rgList"];
-		assert_str(!isNullVar(_region),"Region not found: " + str(_ltob getv(regionPosInfo)));
+		if isNullVar(_region) exitWith {
+			traceformat("Region not found for updated atmos light; rebuilding as single: %1 rpi %2",_ltob arg _ltob getv(regionPosInfo))
+			_ltob setv(regionPosInfo,null);
+			_ltob callv(reloadLight);
+			_aObj callp(optimizeSingle,_ltob);
+		};
 		if (_region callp(isSameCfgType,_ltob)) then {
 			//?what we need here?
 		} else {

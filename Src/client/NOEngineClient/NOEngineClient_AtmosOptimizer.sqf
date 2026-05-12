@@ -10,6 +10,9 @@
 
 namespace(NOEngine.Client.AtmosOptimizer,aopt_cli_)
 
+//temporary perf test: disables continuous batch-region z-pass culling
+#define AOPT_CLI_DISABLE_RENDER_CULLING
+
 decl(bool)
 aopt_cli_enableSystem = !false;
 
@@ -57,6 +60,9 @@ aopt_cli_process = {
 		
 		{
 			{
+				if !(_x getv(batchIsLoaded)) then {continue};
+				if isNullVar(_x getv(emitter)) then {continue};
+
 				_bps = _x getv(batchPos); //centerpos
 				//_r = _bps vectorDiff (_x getv(startPos));
 				// _ssMin = (_x getv(sizes)) vectorMultiply 0.5 vectorAdd [1,1];
@@ -64,8 +70,9 @@ aopt_cli_process = {
 				// _min = [0,0,-0.5] vectorAdd _ssMin;
 				// _max = [0,0,0.5] vectorAdd _ssMax;
 				(_x getv(sizes)) params ["_sm","_sy"];
-				_min = [_sm/2 + 0.5,_sy/2 + 0.5,-0.5];
-				_max = [-_sm/2 - 0.5,-_sy/2 - 0.5,0.5];
+				private _sz = _x getv(zSize);
+				_min = [_sm/2 + 0.5,_sy/2 + 0.5,-_sz/2 - 0.5];
+				_max = [-_sm/2 - 0.5,-_sy/2 - 0.5,_sz/2 + 0.5];
 
 				_bbd = [_bps,_min,_max] call 
 						#ifdef NET_ATMOS_OPTIMIZATION_RENDER_DEBUG
@@ -303,7 +310,9 @@ aopt_cli_testItsc = {
 
 
 #ifdef NET_ATMOS_OPTIMIZATION_RENDER
+#ifndef AOPT_CLI_DISABLE_RENDER_CULLING
 _looped = {while {true}do{call aopt_cli_process}};
 //aopt_cli_handler = startUpdate(aopt_cli_process,0.1);
 aopt_cli_thd = threadStart(threadNew(_looped));
+#endif
 #endif
