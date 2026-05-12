@@ -54,6 +54,14 @@ macro_def(nat_atmos_enable_visual_budget)
 // Experimental client visual budget. Keeps custom render limits behind a switch.
 //#define NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 
+macro_def(nat_atmos_enable_coarse_visuals)
+#define NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+
+macro_const(nat_atmos_coarse_divs_xy)
+#define NOE_CLIENT_NAT_COARSE_DIVS_XY 4
+macro_const(nat_atmos_coarse_divs_z)
+#define NOE_CLIENT_NAT_COARSE_DIVS_Z 4
+
 //флаг одиночной оптимизации для каждого блока
 // ! не должен быть включен вместе с ENABLE_OPTIMIZATION
 //#define ENABLE_PERBLOCK_ZPASS_CULLING

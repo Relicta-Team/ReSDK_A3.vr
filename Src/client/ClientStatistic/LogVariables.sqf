@@ -120,6 +120,12 @@ clistat_buffer pushback [colortext(57D4AC,"NAT_RGC:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
 		format["%1",(_ar get "_regions") apply {count _x}]
 	}];
+	#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+clistat_buffer pushback [colortext(57D4AC,"NAT_CRS:"),{
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		format["f:%1;s:%2",_ar get "debugCoarseFire",_ar get "debugCoarseSmoke"]
+	}];
+	#endif
 	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 clistat_buffer pushback [colortext(57D4AC,"NAT_VB:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;

@@ -219,6 +219,9 @@ noe_client_nat_onLoadArea = {
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
 		
 		//_aObj callp(optimizeProcess, null);
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		_aObj callv(rebuildCoarseVisuals);
+		#else
 		#ifdef ENABLE_OPTIMIZATION
 		if (count (_aObj getv(toUpdateLevels))>0)then{
 			private _lvls = _aObj getv(toUpdateLevels);
@@ -231,6 +234,7 @@ noe_client_nat_onLoadArea = {
 			_aObj callp(applyRenderBudget,_lvls);
 			#endif
 		};
+		#endif
 		#endif
 
 		if (_isUpdate) exitWith {};
@@ -284,7 +288,9 @@ noe_client_nat_loadArea = {
 
 	if (!_isUpdateFlag) then {
 		_aObj call ["loadArea"];
+		#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 		[_aObj] call noe_client_nat_procLoad;
+		#endif
 	};
 };
 
@@ -292,6 +298,7 @@ noe_client_nat_loadArea = {
 decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procLoad = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj"];
 	traceformat("============================== PROC[LOAD]: %1",_aObj)
 	{
@@ -313,12 +320,14 @@ noe_client_nat_procLoad = {
 	_aObj callp(applyRenderBudget,_lvls);
 	#endif
 	#endif
+	#endif
 };
 
 //процессор оптимизатора при выгрузке
 decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procUnload = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj"];
 	traceformat("============================== PROC[UNLOAD]: %1",_aObj)
 	{
@@ -327,15 +336,18 @@ noe_client_nat_procUnload = {
 		} foreach _x;
 	} foreach (_aObj getv(_regions));
 	#endif
+	#endif
 };
 
 //добавление эффекторв (оптимизатор)
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procAddEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[ADD]: %1",_ltob)
 	_aObj callp(optimizeSingle,_ltob);
+	#endif
 	#endif
 };
 
@@ -343,6 +355,7 @@ noe_client_nat_procAddEff = {
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procDelEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[DELETE]: %1",_ltob)
 	// private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
@@ -358,12 +371,14 @@ noe_client_nat_procDelEff = {
 		};
 	};
 	#endif
+	#endif
 };
 
 //обновление эффекторв (оптимизатор)
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procUpdEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[UPDATE]: %1",_ltob)
 	if (_ltob callv(isInsideRegion)) then {
@@ -382,6 +397,7 @@ noe_client_nat_procUpdEff = {
 	} else {
 		_aObj callp(optimizeSingle,_ltob);
 	};
+	#endif
 	#endif
 };
 
