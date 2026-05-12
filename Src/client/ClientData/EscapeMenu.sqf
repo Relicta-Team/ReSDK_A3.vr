@@ -52,7 +52,7 @@ esc_internal_handleSettings = {
 	addOpenerAndActivator(_openerEv); 
 	addCloseEventToSetting(_closerEv);
 	if (_closerEv == ces_video) then {
-		nextFrame({[true] call pp_reload}); //check on server. this will reload pp on opening graphic options
+		nextFrame({[true] call pp_reload}); // todo check on prod - work or not?. this will reload pp on opening graphic options
 		(findDisplay _closerEv) displayAddEventHandler ["Unload",{
 			(findDisplay 49) closeDisplay 0;
 			[true] call pp_reload;
