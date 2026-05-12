@@ -61,6 +61,12 @@ macro_const(nat_atmos_coarse_divs_xy)
 #define NOE_CLIENT_NAT_COARSE_DIVS_XY 4
 macro_const(nat_atmos_coarse_divs_z)
 #define NOE_CLIENT_NAT_COARSE_DIVS_Z 4
+macro_const(nat_atmos_coarse_visual_ttl)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_TTL 4
+macro_const(nat_atmos_coarse_visual_ops_per_frame)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME 1
+macro_const(nat_atmos_coarse_visual_queue_delay)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY 0
 
 //флаг одиночной оптимизации для каждого блока
 // ! не должен быть включен вместе с ENABLE_OPTIMIZATION

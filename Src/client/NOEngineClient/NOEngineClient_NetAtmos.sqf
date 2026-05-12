@@ -34,6 +34,12 @@ decl(int[])
 noe_client_nat_ltCfg_fire = [];
 decl(int[])
 noe_client_nat_ltCfg_smoke = [];
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(int)
+noe_client_nat_coarseVisualHandleUpdate = -1;
+decl(map<string;struct_t.AtmosAreaClient>)
+noe_client_nat_coarseVisualDirtyAreas = createHashMap;
+#endif
 
 decl(void())
 noe_client_nat_initializeLtCfg = {
@@ -45,6 +51,35 @@ noe_client_nat_initializeLtCfg = {
 		noe_client_nat_ltCfg_smoke set [_foreachIndex,_x call lightSys_getConfigIdByName];
 	} foreach ["SLIGHT_ATMOS_SMOKE_1","SLIGHT_ATMOS_SMOKE_2","SLIGHT_ATMOS_SMOKE_3"];
 };
+
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(void())
+noe_client_nat_processCoarseVisualQueue = {
+	private _opsLeft = (floor (missionNamespace getVariable ["noe_client_nat_coarseVisualOpsPerFrame",NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME])) max 0;
+	private _dropAreas = [];
+	{
+		if ((_opsLeft > 0) && {_y callv(isLoaded)}) then {
+			_opsLeft = _opsLeft - (_y callp(processCoarseVisualQueue,_opsLeft));
+		};
+		if (!(_y callv(isLoaded)) || {!(_y callv(hasPendingCoarseVisualOps))}) then {
+			_dropAreas pushBack _x;
+		};
+	} foreach noe_client_nat_coarseVisualDirtyAreas;
+
+	{
+		noe_client_nat_coarseVisualDirtyAreas deleteAt _x;
+	} foreach _dropAreas;
+};
+
+decl(void())
+noe_client_nat_applyCoarseVisualBudgetAll = {
+	{
+		if (_y callv(isLoaded)) then {
+			_y callv(rebuildCoarseVisuals);
+		};
+	} foreach noe_client_nat_areas;
+};
+#endif
 
 #ifndef EDITOR
 	#undef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
@@ -62,6 +97,11 @@ noe_client_nat_setEnabled = {
 		};
 
 		noe_client_nat_handleUpdate = startUpdate(noe_client_nat_onUpdate,NOE_NETATMOS_UPDATE_DELAY);
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		if (noe_client_nat_coarseVisualHandleUpdate == -1) then {
+			noe_client_nat_coarseVisualHandleUpdate = startUpdate(noe_client_nat_processCoarseVisualQueue,NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY);
+		};
+		#endif
 
 		#ifdef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 		[{
@@ -91,6 +131,13 @@ noe_client_nat_setEnabled = {
 	} else {
 		stopUpdate(noe_client_nat_handleUpdate);
 		noe_client_nat_handleUpdate = -1;
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		if (noe_client_nat_coarseVisualHandleUpdate != -1) then {
+			stopUpdate(noe_client_nat_coarseVisualHandleUpdate);
+			noe_client_nat_coarseVisualHandleUpdate = -1;
+		};
+		noe_client_nat_coarseVisualDirtyAreas = createHashMap;
+		#endif
 	};
 	true;
 };

@@ -123,7 +123,7 @@ clistat_buffer pushback [colortext(57D4AC,"NAT_RGC:"),{
 	#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 clistat_buffer pushback [colortext(57D4AC,"NAT_CRS:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
-		format["f:%1;s:%2",_ar get "debugCoarseFire",_ar get "debugCoarseSmoke"]
+		format["f:%1;s:%2;q:%3",_ar get "debugCoarseFire",_ar get "debugCoarseSmoke",_ar get "debugCoarsePending"]
 	}];
 	#endif
 	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET

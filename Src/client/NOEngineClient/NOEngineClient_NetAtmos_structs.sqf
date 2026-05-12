@@ -81,6 +81,13 @@ decl(int) noe_client_nat_budgetMaxSingleLightsPerZ = 1;
 decl(int) noe_client_nat_budgetMaxSingleLightsTotal = 30;
 decl(int) noe_client_nat_budgetMaxFireLights = 3;
 #endif
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(int) noe_client_nat_coarseBudgetMaxFireRegions = 8;
+decl(int) noe_client_nat_coarseBudgetMaxSmokeRegions = 16;
+decl(int) noe_client_nat_coarseBudgetMaxRegionsTotal = 24;
+decl(int) noe_client_nat_coarseVisualOpsPerFrame = NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME;
+decl(float) noe_client_nat_coarseVisualTtl = NOE_CLIENT_NAT_COARSE_VISUAL_TTL;
+#endif
 
 #ifndef EDITOR
 	#undef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
@@ -107,6 +114,7 @@ struct(AtmosAreaClient)
 	decl(map<string;any>) def(coarseVisuals) null
 	decl(int) def(debugCoarseFire) 0
 	decl(int) def(debugCoarseSmoke) 0
+	decl(int) def(debugCoarsePending) 0
 	#endif
 	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 	decl(int) def(debugActiveFireLights) 0
@@ -344,12 +352,67 @@ struct(AtmosAreaClient)
 		self setv(coarseVisuals,createHashMap);
 		self setv(debugCoarseFire,0);
 		self setv(debugCoarseSmoke,0);
+		self setv(debugCoarsePending,0);
+		noe_client_nat_coarseVisualDirtyAreas deleteAt (str (self getv(areaId)));
+	}
+
+	decl(int()) def(countPendingCoarseVisualOps)
+	{
+		private _pending = 0;
+		{
+			if (((_y getv(deleteAfter)) >= 0) || {(_y getv(visualDirty))}) then {
+				INC(_pending);
+			};
+		} foreach (self getv(coarseVisuals));
+		_pending
+	}
+
+	decl(bool()) def(hasPendingCoarseVisualOps)
+	{
+		(self callv(countPendingCoarseVisualOps)) > 0
+	}
+
+	decl(int(int)) def(processCoarseVisualQueue)
+	{
+		params ["_opsMax"];
+		private _opsDone = 0;
+		private _visuals = self getv(coarseVisuals);
+		private _keysToDelete = [];
+		private _now = tickTime;
+
+		{
+			if (_opsDone >= _opsMax) exitWith {};
+			if (_y callp(isDeleteExpired,_now)) then {
+				if (_y getv(batchIsLoaded)) then {
+					_y callv(deleteVisual);
+					INC(_opsDone);
+				};
+				_keysToDelete pushBack _x;
+			};
+		} foreach _visuals;
+
+		{
+			_visuals deleteAt _x;
+		} foreach _keysToDelete;
+
+		if (_opsDone < _opsMax) then {
+			{
+				if (_opsDone >= _opsMax) exitWith {};
+				if (_y callv(applyPendingVisual)) then {
+					INC(_opsDone);
+				};
+			} foreach _visuals;
+		};
+
+		self setv(debugCoarsePending,self callv(countPendingCoarseVisualOps));
+		_opsDone
 	}
 
 	decl(void()) def(rebuildCoarseVisuals)
 	{
 		private _chunks = self getv(chunks);
 		private _stats = createHashMap;
+		private _visuals = self getv(coarseVisuals);
 		private _fireCfgs = noe_client_nat_ltCfg_fire;
 		private _smokeCfgs = noe_client_nat_ltCfg_smoke;
 
@@ -412,6 +475,42 @@ struct(AtmosAreaClient)
 			]
 		};
 
+		private _selectLevel = {
+			params ["_score","_oldLevel"];
+			if (_oldLevel <= 0) exitWith {
+				ifcheck(_score >= 0.66,3,ifcheck(_score >= 0.33,2,1))
+			};
+			private _newLevel = _oldLevel;
+			if (_oldLevel <= 1) then {
+				if (_score >= 0.72) then {
+					_newLevel = 3;
+				} else {
+					if (_score >= 0.38) then {
+						_newLevel = 2;
+					};
+				};
+			} else {
+				if (_oldLevel == 2) then {
+					if (_score < 0.28) then {
+						_newLevel = 1;
+					} else {
+						if (_score >= 0.72) then {
+							_newLevel = 3;
+						};
+					};
+				} else {
+					if (_score < 0.28) then {
+						_newLevel = 1;
+					} else {
+						if (_score < 0.58) then {
+							_newLevel = 2;
+						};
+					};
+				};
+			};
+			_newLevel
+		};
+
 		private _desired = createHashMap;
 		{
 			_y params ["_effType","_gx","_gy","_gz","_sumPower","_activeCount","_mins","_maxs","_weighted"];
@@ -428,41 +527,79 @@ struct(AtmosAreaClient)
 			private _densityScore = (_sumPower / (3 * _bboxVol)) min 1;
 			private _massScore = sqrt ((_sumPower / (3 * _groupVol)) min 1);
 			private _score = ((_densityScore * 0.85) + (_massScore * 0.15)) min 1;
-			private _cfgLevel = 1;
-			if (_score >= 0.66) then {
-				_cfgLevel = 3;
-			} else {
-				if (_score >= 0.33) then {
-					_cfgLevel = 2;
-				};
-			};
+			private _visual = _visuals get _x;
+			private _oldLevel = ifcheck(isNullVar(_visual),0,_visual getv(cfgLevel));
+			private _cfgLevel = [_score,_oldLevel] call _selectLevel;
 
 			private _cfgList = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_fireCfgs} else {_smokeCfgs};
 			private _cfg = _cfgList select (_cfgLevel - 1);
-			private _startPos = [_mins select 0,_mins select 1,_mins select 2];
-			private _sizes = [(_maxs select 0) - (_mins select 0),(_maxs select 1) - (_mins select 1)];
-			private _zSize = (_maxs select 2) - (_mins select 2);
-			_desired set [_x,[_cfg,_effType,_startPos,_sizes,_zSize,_score,_activeCount]];
+			private _startPos = [_xb select 0,_yb select 0,_zb select 0];
+			private _sizes = [(_xb select 1) - (_xb select 0),(_yb select 1) - (_yb select 0)];
+			private _zSize = (_zb select 1) - (_zb select 0);
+			_desired set [_x,[_cfg,_cfgLevel,_effType,_startPos,_sizes,_zSize,_score,_activeCount]];
 		} foreach _stats;
 
-		private _visuals = self getv(coarseVisuals);
+		private _readBudget = {
+			params ["_var","_def"];
+			private _value = missionNamespace getVariable [_var,_def];
+			if (_value < 0) exitWith {1000000};
+			(floor _value) max 0
+		};
+		private _maxFireRegions = ["noe_client_nat_coarseBudgetMaxFireRegions",8] call _readBudget;
+		private _maxSmokeRegions = ["noe_client_nat_coarseBudgetMaxSmokeRegions",16] call _readBudget;
+		private _maxRegionsTotal = ["noe_client_nat_coarseBudgetMaxRegionsTotal",24] call _readBudget;
+
+		private _budgetItems = [];
+		{
+			_y params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+			private _priority = (_score * 100000) + (_cfgLevel * 1000) + _activeCount;
+			_budgetItems pushBack [_priority,_x,_effType];
+		} foreach _desired;
+		_budgetItems sort false;
+
+		private _keep = createHashMap;
+		private _fireKept = 0;
+		private _smokeKept = 0;
+		private _totalKept = 0;
+		{
+			_x params ["_priority","_key","_effType"];
+			private _typeLimit = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_maxFireRegions} else {_maxSmokeRegions};
+			private _typeKept = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_fireKept} else {_smokeKept};
+			if ((_totalKept < _maxRegionsTotal) && {_typeKept < _typeLimit}) then {
+				_keep set [_key,true];
+				INC(_totalKept);
+				if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {
+					INC(_fireKept);
+				} else {
+					INC(_smokeKept);
+				};
+			};
+		} foreach _budgetItems;
+
+		{
+			if !(_x in _keep) then {
+				_desired deleteAt _x;
+			};
+		} foreach (keys _desired);
+
+		private _now = tickTime;
+		private _ttl = (missionNamespace getVariable ["noe_client_nat_coarseVisualTtl",NOE_CLIENT_NAT_COARSE_VISUAL_TTL]) max 0;
 		{
 			if !(_x in _desired) then {
-				(_visuals get _x) callv(deleteVisual);
-				_visuals deleteAt _x;
+				(_visuals get _x) callp(markInactive,_now + _ttl);
 			};
 		} foreach (keys _visuals);
 
 		private _debugFire = 0;
 		private _debugSmoke = 0;
 		{
-			_y params ["_cfg","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+			_y params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
 			private _visual = _visuals get _x;
 			if isNullVar(_visual) then {
-				_visual = struct_newp(AtmosClientCoarseVisual,self arg _x arg _cfg arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+				_visual = struct_newp(AtmosClientCoarseVisual,self arg _x arg _cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
 				_visuals set [_x,_visual];
 			} else {
-				_visual callp(updateVisual,_cfg arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+				_visual callp(updateVisual,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
 			};
 
 			if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {
@@ -474,6 +611,10 @@ struct(AtmosAreaClient)
 
 		self setv(debugCoarseFire,_debugFire);
 		self setv(debugCoarseSmoke,_debugSmoke);
+		self setv(debugCoarsePending,self callv(countPendingCoarseVisualOps));
+		if (self callv(hasPendingCoarseVisualOps)) then {
+			noe_client_nat_coarseVisualDirtyAreas set [str (self getv(areaId)),self];
+		};
 	}
 	#endif
 
@@ -1655,26 +1796,30 @@ struct(AtmosClientCoarseVisual)
 	decl(vector2) def(sizes) [0,0]
 	decl(int) def(zSize) 0
 	decl(int) def(batchCfg) -1
+	decl(int) def(cfgLevel) 0
 	decl(int) def(effType) -1
 	decl(vector3) def(batchPos) [0,0,0]
 	decl(bool) def(batchIsLoaded) false
 	decl(mesh[]) def(emitter) null
 	decl(float) def(score) 0
 	decl(int) def(activeCount) 0
+	decl(bool) def(visualDirty) false
+	decl(float) def(deleteAfter) -1
 
-	decl(void(struct_t.AtmosAreaClient;string;int;int;vector3;vector2;int;float;int)) def(init)
+	decl(void(struct_t.AtmosAreaClient;string;int;int;int;vector3;vector2;int;float;int)) def(init)
 	{
-		params ["_area","_key","_cfg","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		params ["_area","_key","_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
 		self setv(areaId,_area getv(areaId));
 		self setv(key,_key);
-		self callp(updateData,_cfg arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
-		self callv(loadVisual);
+		self callp(updateData,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+		self setv(visualDirty,true);
 	}
 
-	decl(void(int;int;vector3;vector2;int;float;int)) def(updateData)
+	decl(void(int;int;int;vector3;vector2;int;float;int)) def(updateData)
 	{
-		params ["_cfg","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
 		self setv(batchCfg,_cfg);
+		self setv(cfgLevel,_cfgLevel);
 		self setv(effType,_effType);
 		self setv(startPos,_startPos);
 		self setv(sizes,_sizes);
@@ -1684,18 +1829,20 @@ struct(AtmosClientCoarseVisual)
 		self callv(rebuildData);
 	}
 
-	decl(void(int;int;vector3;vector2;int;float;int)) def(updateVisual)
+	decl(void(int;int;int;vector3;vector2;int;float;int)) def(updateVisual)
 	{
-		params ["_cfg","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
 		private _needReload = !equals(_cfg,self getv(batchCfg))
+			|| {!equals(_cfgLevel,self getv(cfgLevel))}
 			|| {!equals(_effType,self getv(effType))}
 			|| {!equals(_startPos,self getv(startPos))}
 			|| {!equals(_sizes,self getv(sizes))}
 			|| {!equals(_zSize,self getv(zSize))};
-		self callp(updateData,_cfg arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+		self callp(updateData,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
 		if (_needReload) then {
-			self callv(reloadVisual);
+			self setv(visualDirty,true);
 		};
+		self setv(deleteAfter,-1);
 	}
 
 	decl(void()) def(rebuildData)
@@ -1705,6 +1852,36 @@ struct(AtmosClientCoarseVisual)
 		private _chid = [self getv(areaId),self getv(startPos)] call atmos_localChunkIdToGlobal;
 		private _pos = _chid call atmos_chunkIdToPos;
 		self setv(batchPos,_pos vectorAdd vec3((_sizes select 0) / 2,(_sizes select 1) / 2,_zSize / 2));
+	}
+
+	decl(void(float)) def(markInactive)
+	{
+		params ["_deleteAfter"];
+		if ((self getv(deleteAfter)) < 0) then {
+			self setv(deleteAfter,_deleteAfter);
+		};
+		self setv(visualDirty,false);
+	}
+
+	decl(bool(float)) def(isDeleteExpired)
+	{
+		params ["_now"];
+		private _deleteAfter = self getv(deleteAfter);
+		(_deleteAfter >= 0) && {_now >= _deleteAfter}
+	}
+
+	decl(bool()) def(applyPendingVisual)
+	{
+		if ((self getv(deleteAfter)) >= 0) exitWith {false};
+		if !(self getv(visualDirty)) exitWith {false};
+
+		if (self getv(batchIsLoaded)) then {
+			self callv(reloadVisual);
+		} else {
+			self callv(loadVisual);
+		};
+		self setv(visualDirty,false);
+		true
 	}
 
 	decl(void()) def(reloadVisual)
@@ -1801,7 +1978,7 @@ struct(AtmosClientCoarseVisual)
 
 	decl(string()) def(str)
 	{
-		format["ACV:%1 cfg:%2 cnt:%3 score:%4",self getv(key),self getv(batchCfg),self getv(activeCount),self getv(score)]
+		format["ACV:%1 cfg:%2 lvl:%3 cnt:%4 score:%5",self getv(key),self getv(batchCfg),self getv(cfgLevel),self getv(activeCount),self getv(score)]
 	}
 endstruct
 #endif
