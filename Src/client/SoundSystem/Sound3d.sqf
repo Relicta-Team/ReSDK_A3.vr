@@ -154,6 +154,8 @@ sound3d_playLocal = {
 	Параметр _preendbuf - отвечает за смещение повтороного запуска. 
 	звук располагается статично и не перемещается за объектом. при удалении источника звук автоматически остановится
 	Возвращает указатель зацикленного звука
+
+	!эта функция не должна использоваться при ENABLE_NEW_AUDIO_SYSTEM
 */
 decl(int(string;mesh;float;float;float;float;float))
 sound3d_playLocalOnObjectLooped = {
@@ -252,5 +254,6 @@ sound3d_internal_localHandler = {
 	};
 }; 
 
-
+#ifndef ENABLE_NEW_AUDIO_SYSTEM
 sound3d_internal_handle3dSounds = startUpdate(sound3d_internal_localHandler,0.1);
+#endif

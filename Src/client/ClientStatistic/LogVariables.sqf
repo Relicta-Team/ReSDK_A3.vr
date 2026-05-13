@@ -157,7 +157,11 @@ clistat_buffer append [
 		,os_steps_currentSoundCount
 		,os_steps_lastPtr
 		,count os_steps_map_objToMaterialPtr]}]
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	,[colortext(1FC4C4,"new_snds: "),{format["all:%1; flw:%2",(count call vs_audio_getAllSoundsIds),count vs_audio_followedData]}]
+	#else
 	,[colortext(1FC4C4,"snds: "),{format["v:%1; bf:%2",(count call vs_audio_getAllSoundsIds),count sound3d_internal_list_soundBuff]}]
+	#endif
 	,["<t color='#832DCF'>[ENGINE]</t> Global threads:",{format["upd %1; hndl %2",count cba_common_perFrameHandlerArray,count cba_common_PFHhandles]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Delayed:",{str count cba_common_waitAndExecArray}]
 	,["<t color='#832DCF'>[ENGINE]</t> Async delayed:",{str count cba_common_waitUntilAndExecArray}]
