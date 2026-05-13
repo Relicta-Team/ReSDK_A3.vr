@@ -403,6 +403,8 @@ noe_client_nat_onLoadArea = {
 
 		if (_isUpdate) exitWith {};
 
+		// Store delta marker only for full load responses; negative packets can be partial updates.
+		_aObj setv(lastUpd,_upd);
 		_aObj setv(state,NAT_LOADING_STATE_LOADED);
 
 		if (_del > 0 && {_del != (_aObj getv(lastDel))}) then {
