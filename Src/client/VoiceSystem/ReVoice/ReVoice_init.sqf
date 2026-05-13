@@ -12,13 +12,30 @@
 
 #define VOICE_DISABLE_IN_SINGLEPLAYERMODE
 
-vs_apiversion = "stable_v4";
+vs_apiversion = "stable_v5_with_subscribers";
 
 vs_localName = ""; //sended from server on player connected
 vs_canProcess = false;
 vs_max_voice_volume = 60;
 vs_horizontal_tab = toString [9]; //для запросов
 vs_isEnabledText = false;
+
+vs_voiceListenersEnabled = true;
+vs_voiceListenerReady = false;
+vs_voiceListenerMaxTargets = 10;
+vs_voiceListenerEnterDistance = vs_max_voice_volume;
+vs_voiceListenerExitDistance = vs_max_voice_volume + 10;
+vs_voiceListenerLingerTime = 10;
+vs_voiceListenerUpdateDelay = 5;
+vs_voiceListenerUpdateJitter = 1;
+vs_voiceListenerRetryDelay = 5;
+vs_voiceListenerRadioTtl = 2;
+vs_voiceListenerNextUpdate = 0;
+vs_voiceListenerNextEnsure = 0;
+vs_voiceListenerLastPayload = "";
+vs_voiceListenerTargets = [];
+vs_voiceListenerExpires = createHashMap;
+vs_voiceListenerRadioRequired = createHashMap;
 
 vs_voipVolCurrent = profileNamespace getvariable ["rel_voipvol",1];
 if not_equalTypes(vs_voipVolCurrent,0) then {

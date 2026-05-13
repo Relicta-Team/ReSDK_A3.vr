@@ -229,6 +229,7 @@ vs_handleRadioRetranslateStreamInternal = {
 	apiCmd [CMD_RADIO_SUBSCRIBE_RADIOSTREAM,[_ptr,_filteredKeys joinString ";"]] params ["_r","_rcode"];
 	
 	if (_r != "ok") exitWith {};
+	[_filteredKeys] call vs_markVoiceListenerRadioRequired;
 
 	//определяем радиоэффект в зависимости от мощности радио
 	private _playerDistMap = createHashMapFromArray (
