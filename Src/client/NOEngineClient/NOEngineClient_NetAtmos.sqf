@@ -37,6 +37,14 @@ noe_client_nat_ltCfg_smoke = [];
 #ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 decl(int)
 noe_client_nat_coarseVisualHandleUpdate = -1;
+decl(int)
+noe_client_nat_coarseCullHandleUpdate = -1;
+decl(int)
+noe_client_nat_coarseCullCursor = 0;
+decl(int)
+noe_client_nat_coarseCullCount = 0;
+decl(float)
+noe_client_nat_coarseCullPrevCallTime = 0;
 decl(map<string;struct_t.AtmosAreaClient>)
 noe_client_nat_coarseVisualDirtyAreas = createHashMap;
 #endif
@@ -72,6 +80,93 @@ noe_client_nat_processCoarseVisualQueue = {
 };
 
 decl(void())
+noe_client_nat_processCoarseScreenCulling = {
+	private _tmStart = tickTime;
+	private _enabled = missionNamespace getVariable ["noe_client_nat_coarseCullEnabled",true];
+	private _items = [];
+
+	{
+		if (_y callv(isLoaded)) then {
+			private _area = _y;
+			private _culledInArea = 0;
+			{
+				private _visual = _y;
+				if ((_visual getv(batchIsLoaded)) && {(_visual getv(deleteAfter)) < 0}) then {
+					_items pushBack _visual;
+					if (_visual getv(isCulled)) then {
+						INC(_culledInArea);
+					};
+				};
+			} foreach (_area getv(coarseVisuals));
+			_area setv(debugCoarseCulled,_culledInArea);
+		};
+	} foreach noe_client_nat_areas;
+
+	if (!_enabled) exitWith {
+		{
+			_x callp(setCull,false);
+		} foreach _items;
+		{
+			if (_y callv(isLoaded)) then {
+				_y setv(debugCoarseCulled,0);
+			};
+		} foreach noe_client_nat_areas;
+		noe_client_nat_coarseCullCursor = 0;
+		noe_client_nat_coarseCullCount = 0;
+		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+	};
+
+	private _count = count _items;
+	if (_count == 0) exitWith {
+		noe_client_nat_coarseCullCursor = 0;
+		noe_client_nat_coarseCullCount = 0;
+		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+	};
+
+	private _opsLeft = (floor (missionNamespace getVariable ["noe_client_nat_coarseCullOpsPerFrame",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_OPS_PER_FRAME])) max 0;
+	if (_opsLeft <= 0) exitWith {
+		noe_client_nat_coarseCullCount = 0;
+		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+	};
+
+	private _opsDone = _opsLeft min _count;
+	private _cursor = noe_client_nat_coarseCullCursor % _count;
+	private _idx = 0;
+	for "_i" from 0 to (_opsDone - 1) do {
+		_idx = (_cursor + _i) % _count;
+		(_items select _idx) callv(updateScreenCull);
+	};
+	noe_client_nat_coarseCullCursor = (_cursor + _opsDone) % _count;
+
+	{
+		if (_x getv(isCulled)) then {
+			_x callp(setCull,true);
+		};
+	} foreach _items;
+
+	private _culledTotal = 0;
+	{
+		if (_x getv(isCulled)) then {
+			INC(_culledTotal);
+		};
+	} foreach _items;
+	{
+		if (_y callv(isLoaded)) then {
+			private _area = _y;
+			private _culledInArea = 0;
+			{
+				if (_y getv(isCulled)) then {
+					INC(_culledInArea);
+				};
+			} foreach (_area getv(coarseVisuals));
+			_area setv(debugCoarseCulled,_culledInArea);
+		};
+	} foreach noe_client_nat_areas;
+	noe_client_nat_coarseCullCount = _culledTotal;
+	noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+};
+
+decl(void())
 noe_client_nat_applyCoarseVisualBudgetAll = {
 	{
 		if (_y callv(isLoaded)) then {
@@ -100,6 +195,9 @@ noe_client_nat_setEnabled = {
 		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 		if (noe_client_nat_coarseVisualHandleUpdate == -1) then {
 			noe_client_nat_coarseVisualHandleUpdate = startUpdate(noe_client_nat_processCoarseVisualQueue,NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY);
+		};
+		if (noe_client_nat_coarseCullHandleUpdate == -1) then {
+			noe_client_nat_coarseCullHandleUpdate = startUpdate(noe_client_nat_processCoarseScreenCulling,NOE_CLIENT_NAT_COARSE_SCREEN_CULL_DELAY);
 		};
 		#endif
 
@@ -136,6 +234,12 @@ noe_client_nat_setEnabled = {
 			stopUpdate(noe_client_nat_coarseVisualHandleUpdate);
 			noe_client_nat_coarseVisualHandleUpdate = -1;
 		};
+		if (noe_client_nat_coarseCullHandleUpdate != -1) then {
+			stopUpdate(noe_client_nat_coarseCullHandleUpdate);
+			noe_client_nat_coarseCullHandleUpdate = -1;
+		};
+		noe_client_nat_coarseCullCursor = 0;
+		noe_client_nat_coarseCullCount = 0;
 		noe_client_nat_coarseVisualDirtyAreas = createHashMap;
 		#endif
 	};

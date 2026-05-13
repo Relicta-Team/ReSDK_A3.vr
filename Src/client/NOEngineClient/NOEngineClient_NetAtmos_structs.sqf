@@ -87,6 +87,10 @@ decl(int) noe_client_nat_coarseBudgetMaxSmokeRegions = 16;
 decl(int) noe_client_nat_coarseBudgetMaxRegionsTotal = 24;
 decl(int) noe_client_nat_coarseVisualOpsPerFrame = NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME;
 decl(float) noe_client_nat_coarseVisualTtl = NOE_CLIENT_NAT_COARSE_VISUAL_TTL;
+decl(bool) noe_client_nat_coarseCullEnabled = true;
+decl(int) noe_client_nat_coarseCullOpsPerFrame = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_OPS_PER_FRAME;
+decl(float) noe_client_nat_coarseCullShowMargin = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_SHOW_MARGIN;
+decl(float) noe_client_nat_coarseCullHideMargin = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_HIDE_MARGIN;
 #endif
 
 #ifndef EDITOR
@@ -115,6 +119,7 @@ struct(AtmosAreaClient)
 	decl(int) def(debugCoarseFire) 0
 	decl(int) def(debugCoarseSmoke) 0
 	decl(int) def(debugCoarsePending) 0
+	decl(int) def(debugCoarseCulled) 0
 	#endif
 	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 	decl(int) def(debugActiveFireLights) 0
@@ -353,6 +358,7 @@ struct(AtmosAreaClient)
 		self setv(debugCoarseFire,0);
 		self setv(debugCoarseSmoke,0);
 		self setv(debugCoarsePending,0);
+		self setv(debugCoarseCulled,0);
 		noe_client_nat_coarseVisualDirtyAreas deleteAt (str (self getv(areaId)));
 	}
 
@@ -1805,6 +1811,10 @@ struct(AtmosClientCoarseVisual)
 	decl(int) def(activeCount) 0
 	decl(bool) def(visualDirty) false
 	decl(float) def(deleteAfter) -1
+	decl(bool) def(isCulled) false
+	decl(any[]) def(_cull_cache) null
+	decl(int) def(_fireLightIdx) -1
+	decl(float) def(_fireLightIntensity) 0
 
 	decl(void(struct_t.AtmosAreaClient;string;int;int;int;vector3;vector2;int;float;int)) def(init)
 	{
@@ -1870,6 +1880,118 @@ struct(AtmosClientCoarseVisual)
 		(_deleteAfter >= 0) && {_now >= _deleteAfter}
 	}
 
+	decl(bool()) def(isInsideScreenCull)
+	{
+		private _margin = if (self getv(isCulled)) then {
+			missionNamespace getVariable ["noe_client_nat_coarseCullShowMargin",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_SHOW_MARGIN]
+		} else {
+			missionNamespace getVariable ["noe_client_nat_coarseCullHideMargin",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_HIDE_MARGIN]
+		};
+		_margin = _margin max 0;
+
+		private _pos = self getv(batchPos);
+		private _sizes = self getv(sizes);
+		private _hx = ((_sizes select 0) / 2) + ATMOS_SIZE_HALF;
+		private _hy = ((_sizes select 1) / 2) + ATMOS_SIZE_HALF;
+		private _hz = ((self getv(zSize)) / 2) + ATMOS_SIZE_HALF;
+
+		private _camPos = asltoatl eyepos player;
+		private _delta = _camPos vectorDiff _pos;
+		if (((abs (_delta select 0)) <= (_hx + 1)) && {((abs (_delta select 1)) <= (_hy + 1)) && {((abs (_delta select 2)) <= (_hz + 2))}}) exitWith {true};
+
+		private _minScr = -_margin;
+		private _maxScr = 1 + _margin;
+		private _visible = false;
+		private _sp = [];
+		{
+			_sp = worldToScreen (_pos vectorAdd _x);
+			if !(_sp isEqualTo []) then {
+				if (((_sp select 0) >= _minScr) && {((_sp select 0) <= _maxScr) && {((_sp select 1) >= _minScr) && {(_sp select 1) <= _maxScr}}}) then {
+					_visible = true;
+					break;
+				};
+			};
+		} foreach [
+			[0,0,0],
+			[-_hx,-_hy,-_hz],
+			[_hx,-_hy,-_hz],
+			[-_hx,_hy,-_hz],
+			[_hx,_hy,-_hz],
+			[-_hx,-_hy,_hz],
+			[_hx,-_hy,_hz],
+			[-_hx,_hy,_hz],
+			[_hx,_hy,_hz]
+		];
+		_visible
+	}
+
+	decl(void(bool)) def(setCull)
+	{
+		params ["_hide"];
+		if !(self getv(batchIsLoaded)) exitWith {
+			self setv(isCulled,false);
+			self setv(_cull_cache,[]);
+		};
+
+		private _emitters = self getv(emitter);
+		if isNullVar(_emitters) exitWith {};
+
+		private _sameState = equals(_hide,self getv(isCulled));
+		private _fireLightIdx = self getv(_fireLightIdx);
+
+		if (_hide) then {
+			if (!_sameState) then {
+				self setv(isCulled,true);
+				private _cullCache = [];
+				{
+					if isNullReference(_x) then {continue};
+					_cullCache set [_foreachIndex,getposatl _x];
+					_x setposatl [0,0,0];
+				} foreach _emitters;
+				self setv(_cull_cache,_cullCache);
+			};
+			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
+				private _fireLight = _emitters select _fireLightIdx;
+				if !isNullReference(_fireLight) then {
+					_fireLight setLightIntensity 0;
+				};
+			};
+		} else {
+			if (_sameState) exitWith {};
+			self setv(isCulled,false);
+			private _cullCache = self getv(_cull_cache);
+			{
+				if isNullReference(_x) then {continue};
+				if (_foreachIndex < count _cullCache) then {
+					private _oldPos = _cullCache select _foreachIndex;
+					if !isNullVar(_oldPos) then {
+						_x setposatl _oldPos;
+					};
+				};
+			} foreach _emitters;
+			self setv(_cull_cache,[]);
+			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
+				private _fireLight = _emitters select _fireLightIdx;
+				if !isNullReference(_fireLight) then {
+					_fireLight setLightIntensity ((self getv(_fireLightIntensity)) max 0);
+				};
+			};
+		};
+	}
+
+	decl(bool()) def(updateScreenCull)
+	{
+		if !(self getv(batchIsLoaded)) exitWith {false};
+		if ((self getv(deleteAfter)) >= 0) exitWith {
+			self callp(setCull,false);
+			false
+		};
+
+		private _isVisible = self callv(isInsideScreenCull);
+		self callp(setCull,!_isVisible);
+		!_isVisible
+	}
+
 	decl(bool()) def(applyPendingVisual)
 	{
 		if ((self getv(deleteAfter)) >= 0) exitWith {false};
@@ -1894,10 +2016,20 @@ struct(AtmosClientCoarseVisual)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
 
+		self setv(isCulled,false);
+		self setv(_cull_cache,[]);
+		self setv(_fireLightIdx,-1);
+		self setv(_fireLightIntensity,0);
+
 		private _renderZone = self getv(sizes);
 		private _renderDepth = self getv(zSize);
 		private _funcHandle = {
 			params ["_o","_p","_v","_alias"];
+
+			if (_p == "setLightIntensity") then {
+				self setv(_fireLightIdx,call le_se_getCurrentEmitterIndex);
+				self setv(_fireLightIntensity,_v);
+			};
 
 			if !isNullVar(_renderZone) then {
 				_renderZone params ["_szX","_szY"];
@@ -1965,9 +2097,13 @@ struct(AtmosClientCoarseVisual)
 	{
 		if (self getv(batchIsLoaded)) then {
 			self setv(batchIsLoaded,false);
+			self setv(isCulled,false);
+			self setv(_cull_cache,[]);
 			deleteVehicle (self getv(emitter));
 			[0] call lesc_onLightRemove;
 			self setv(emitter,null);
+			self setv(_fireLightIdx,-1);
+			self setv(_fireLightIntensity,0);
 		};
 	}
 
