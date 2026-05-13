@@ -105,12 +105,13 @@ le_loadLight = {
 
 	//выгрузка старого конфига света
 	private _oldCfg = _src getvariable "__config";
-	if (!isNullVar(_oldCfg)) then {
-		//? это может вызывать проблемы когда требуется обновить внутреннее состояние одного источника.
-		if not_equals(_oldCfg,_type) then {
-			//Вот этот код может вызывать определённые проблемы в некоторых случаях
-			[_src] call le_unloadLight;
-		};
+	private _oldLight = _src getvariable ["__light",objNull];
+	private _hasOldCfg = !isNullVar(_oldCfg);
+	if (_hasOldCfg && {equals(_oldCfg,_type)} && {!isNullReference(_oldLight)}) exitWith {
+		_oldLight
+	};
+	if (_hasOldCfg) then {
+		[_src] call le_unloadLight;
 	};
 
 	[_src] call _code;
@@ -149,16 +150,20 @@ le_unloadLight = {
 	} foreach _allEmitters;
 	_obj setVariable ["__allEmitters",null];
 	_obj setvariable ["__config",null];
+	_obj setvariable ["__light",objNull];
 
 	_obj setvariable ["__defBright",null];
 
-	le_allLights deleteat (le_allLights find _light);
-	le_allLights deleteat (le_allLights find _obj);
+	private _idx = le_allLights find _light;
+	if (_idx >= 0) then {le_allLights deleteAt _idx};
+	_idx = le_allLights find _obj;
+	if (_idx >= 0) then {le_allLights deleteAt _idx};
 
 	[0] call lesc_onLightRemove;
 	
 	
-	os_light_list_noProcessedLights deleteAt (os_light_list_noProcessedLights findif {equals(_x select 0,_light)});
+	_idx = os_light_list_noProcessedLights findif {equals(_x select 0,_light)};
+	if (_idx >= 0) then {os_light_list_noProcessedLights deleteAt _idx};
 
 	deleteVehicle _light;
 };

@@ -106,6 +106,8 @@ le_addTransitionState = {
 };
 
 le_onupdrender = {
+	if (count le_allLights == 0) exitWith {};
+
 	//basic alg
 	//#define inline_canSee(ob) (!lineIntersects [eyePos player, (ATLToASL getPosATL ob), player, ob] || (eyePos player) distance (getPosASL ob) <= 5)
 
