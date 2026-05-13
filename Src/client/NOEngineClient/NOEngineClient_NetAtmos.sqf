@@ -38,13 +38,11 @@ noe_client_nat_ltCfg_smoke = [];
 decl(int)
 noe_client_nat_coarseVisualHandleUpdate = -1;
 decl(int)
-noe_client_nat_coarseCullHandleUpdate = -1;
+noe_client_nat_coarseOcclusionHandleUpdate = -1;
 decl(int)
-noe_client_nat_coarseCullCursor = 0;
-decl(int)
-noe_client_nat_coarseCullCount = 0;
+noe_client_nat_coarseOcclusionCount = 0;
 decl(float)
-noe_client_nat_coarseCullPrevCallTime = 0;
+noe_client_nat_coarseOcclusionPrevCallTime = 0;
 decl(map<string;struct_t.AtmosAreaClient>)
 noe_client_nat_coarseVisualDirtyAreas = createHashMap;
 #endif
@@ -80,90 +78,106 @@ noe_client_nat_processCoarseVisualQueue = {
 };
 
 decl(void())
-noe_client_nat_processCoarseScreenCulling = {
+noe_client_nat_processCoarseOcclusion = {
 	private _tmStart = tickTime;
-	private _enabled = missionNamespace getVariable ["noe_client_nat_coarseCullEnabled",true];
+	private _enabled = missionNamespace getVariable ["noe_client_nat_coarseOcclusionEnabled",true];
 	private _items = [];
 
 	{
 		if (_y callv(isLoaded)) then {
 			private _area = _y;
-			private _culledInArea = 0;
+			private _occludedInArea = 0;
 			{
 				private _visual = _y;
 				if ((_visual getv(batchIsLoaded)) && {(_visual getv(deleteAfter)) < 0}) then {
 					_items pushBack _visual;
-					if (_visual getv(isCulled)) then {
-						INC(_culledInArea);
+					if (_visual getv(isOccluded)) then {
+						INC(_occludedInArea);
 					};
 				};
 			} foreach (_area getv(coarseVisuals));
-			_area setv(debugCoarseCulled,_culledInArea);
+			_area setv(debugCoarseOccluded,_occludedInArea);
 		};
 	} foreach noe_client_nat_areas;
 
 	if (!_enabled) exitWith {
 		{
-			_x callp(setCull,false);
+			_x callp(setOcclusionHidden,false);
 		} foreach _items;
 		{
 			if (_y callv(isLoaded)) then {
-				_y setv(debugCoarseCulled,0);
+				_y setv(debugCoarseOccluded,0);
 			};
 		} foreach noe_client_nat_areas;
-		noe_client_nat_coarseCullCursor = 0;
-		noe_client_nat_coarseCullCount = 0;
-		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+		noe_client_nat_coarseOcclusionCount = 0;
+		noe_client_nat_coarseOcclusionPrevCallTime = tickTime - _tmStart;
 	};
 
-	private _count = count _items;
-	if (_count == 0) exitWith {
-		noe_client_nat_coarseCullCursor = 0;
-		noe_client_nat_coarseCullCount = 0;
-		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
-	};
-
-	private _opsLeft = (floor (missionNamespace getVariable ["noe_client_nat_coarseCullOpsPerFrame",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_OPS_PER_FRAME])) max 0;
-	if (_opsLeft <= 0) exitWith {
-		noe_client_nat_coarseCullCount = 0;
-		noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
-	};
-
-	private _opsDone = _opsLeft min _count;
-	private _cursor = noe_client_nat_coarseCullCursor % _count;
-	private _idx = 0;
-	for "_i" from 0 to (_opsDone - 1) do {
-		_idx = (_cursor + _i) % _count;
-		(_items select _idx) callv(updateScreenCull);
-	};
-	noe_client_nat_coarseCullCursor = (_cursor + _opsDone) % _count;
-
+	private _screenData = [];
 	{
-		if (_x getv(isCulled)) then {
-			_x callp(setCull,true);
+		private _data = _x callv(getOcclusionScreenData);
+		if !isNullVar(_data) then {
+			_data set [1,_foreachIndex];
+			_screenData pushBack _data;
 		};
 	} foreach _items;
 
-	private _culledTotal = 0;
+	private _allowFireOccludeSmoke = missionNamespace getVariable ["noe_client_nat_coarseOcclusionFireOccludesSmoke",true];
+	private _overlapLimit = missionNamespace getVariable ["noe_client_nat_coarseOcclusionOverlap",NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP];
+	private _depthLimit = missionNamespace getVariable ["noe_client_nat_coarseOcclusionDepth",NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH];
+	_overlapLimit = (_overlapLimit max 0) min 1;
+	_depthLimit = _depthLimit max 0;
+
+	_screenData sort true;
+	private _accepted = [];
+	private _hiddenItems = [];
+	private _occludedTotal = 0;
 	{
-		if (_x getv(isCulled)) then {
-			INC(_culledTotal);
+		_x params ["_dist","_sortId","_minX","_minY","_maxX","_maxY","_effType","_visual"];
+		private _areaA = (((_maxX - _minX) max 0.001) * ((_maxY - _minY) max 0.001)) max 0.001;
+		private _isOccluded = false;
+		{
+			_x params ["_distB","_sortIdB","_minXB","_minYB","_maxXB","_maxYB","_effTypeB","_visualB"];
+			if ((_dist - _distB) < _depthLimit) then {continue};
+			private _canOcclude = (_effType == _effTypeB)
+				|| {_allowFireOccludeSmoke && {_effTypeB == NAT_ATMOS_EFFTYPE_FIRE && {_effType == NAT_ATMOS_EFFTYPE_SMOKE}}};
+			if (!_canOcclude) then {continue};
+			private _iw = ((_maxX min _maxXB) - (_minX max _minXB)) max 0;
+			private _ih = ((_maxY min _maxYB) - (_minY max _minYB)) max 0;
+			if (((_iw * _ih) / _areaA) >= _overlapLimit) then {
+				_isOccluded = true;
+				break;
+			};
+		} foreach _accepted;
+
+		if (_isOccluded) then {
+			_hiddenItems pushBack _visual;
+			INC(_occludedTotal);
+		} else {
+			_accepted pushBack _x;
 		};
+	} foreach _screenData;
+
+	{
+		_x callp(setOcclusionHidden,_x in _hiddenItems);
 	} foreach _items;
+
 	{
 		if (_y callv(isLoaded)) then {
 			private _area = _y;
-			private _culledInArea = 0;
+			private _occludedInArea = 0;
 			{
-				if (_y getv(isCulled)) then {
-					INC(_culledInArea);
+				private _visual = _y;
+				if ((_visual getv(batchIsLoaded)) && {(_visual getv(deleteAfter)) < 0 && {_visual getv(isOccluded)}}) then {
+					INC(_occludedInArea);
 				};
 			} foreach (_area getv(coarseVisuals));
-			_area setv(debugCoarseCulled,_culledInArea);
+			_area setv(debugCoarseOccluded,_occludedInArea);
 		};
 	} foreach noe_client_nat_areas;
-	noe_client_nat_coarseCullCount = _culledTotal;
-	noe_client_nat_coarseCullPrevCallTime = tickTime - _tmStart;
+
+	noe_client_nat_coarseOcclusionCount = _occludedTotal;
+	noe_client_nat_coarseOcclusionPrevCallTime = tickTime - _tmStart;
 };
 
 decl(void())
@@ -196,8 +210,8 @@ noe_client_nat_setEnabled = {
 		if (noe_client_nat_coarseVisualHandleUpdate == -1) then {
 			noe_client_nat_coarseVisualHandleUpdate = startUpdate(noe_client_nat_processCoarseVisualQueue,NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY);
 		};
-		if (noe_client_nat_coarseCullHandleUpdate == -1) then {
-			noe_client_nat_coarseCullHandleUpdate = startUpdate(noe_client_nat_processCoarseScreenCulling,NOE_CLIENT_NAT_COARSE_SCREEN_CULL_DELAY);
+		if (noe_client_nat_coarseOcclusionHandleUpdate == -1) then {
+			noe_client_nat_coarseOcclusionHandleUpdate = startUpdate(noe_client_nat_processCoarseOcclusion,NOE_CLIENT_NAT_COARSE_OCCLUSION_DELAY);
 		};
 		#endif
 
@@ -234,12 +248,11 @@ noe_client_nat_setEnabled = {
 			stopUpdate(noe_client_nat_coarseVisualHandleUpdate);
 			noe_client_nat_coarseVisualHandleUpdate = -1;
 		};
-		if (noe_client_nat_coarseCullHandleUpdate != -1) then {
-			stopUpdate(noe_client_nat_coarseCullHandleUpdate);
-			noe_client_nat_coarseCullHandleUpdate = -1;
+		if (noe_client_nat_coarseOcclusionHandleUpdate != -1) then {
+			stopUpdate(noe_client_nat_coarseOcclusionHandleUpdate);
+			noe_client_nat_coarseOcclusionHandleUpdate = -1;
 		};
-		noe_client_nat_coarseCullCursor = 0;
-		noe_client_nat_coarseCullCount = 0;
+		noe_client_nat_coarseOcclusionCount = 0;
 		noe_client_nat_coarseVisualDirtyAreas = createHashMap;
 		#endif
 	};

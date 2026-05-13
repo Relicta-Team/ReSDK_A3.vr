@@ -87,10 +87,10 @@ decl(int) noe_client_nat_coarseBudgetMaxSmokeRegions = 16;
 decl(int) noe_client_nat_coarseBudgetMaxRegionsTotal = 24;
 decl(int) noe_client_nat_coarseVisualOpsPerFrame = NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME;
 decl(float) noe_client_nat_coarseVisualTtl = NOE_CLIENT_NAT_COARSE_VISUAL_TTL;
-decl(bool) noe_client_nat_coarseCullEnabled = true;
-decl(int) noe_client_nat_coarseCullOpsPerFrame = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_OPS_PER_FRAME;
-decl(float) noe_client_nat_coarseCullShowMargin = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_SHOW_MARGIN;
-decl(float) noe_client_nat_coarseCullHideMargin = NOE_CLIENT_NAT_COARSE_SCREEN_CULL_HIDE_MARGIN;
+decl(bool) noe_client_nat_coarseOcclusionEnabled = true;
+decl(bool) noe_client_nat_coarseOcclusionFireOccludesSmoke = true;
+decl(float) noe_client_nat_coarseOcclusionOverlap = NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP;
+decl(float) noe_client_nat_coarseOcclusionDepth = NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH;
 #endif
 
 #ifndef EDITOR
@@ -119,7 +119,7 @@ struct(AtmosAreaClient)
 	decl(int) def(debugCoarseFire) 0
 	decl(int) def(debugCoarseSmoke) 0
 	decl(int) def(debugCoarsePending) 0
-	decl(int) def(debugCoarseCulled) 0
+	decl(int) def(debugCoarseOccluded) 0
 	#endif
 	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 	decl(int) def(debugActiveFireLights) 0
@@ -358,7 +358,7 @@ struct(AtmosAreaClient)
 		self setv(debugCoarseFire,0);
 		self setv(debugCoarseSmoke,0);
 		self setv(debugCoarsePending,0);
-		self setv(debugCoarseCulled,0);
+		self setv(debugCoarseOccluded,0);
 		noe_client_nat_coarseVisualDirtyAreas deleteAt (str (self getv(areaId)));
 	}
 
@@ -1811,8 +1811,8 @@ struct(AtmosClientCoarseVisual)
 	decl(int) def(activeCount) 0
 	decl(bool) def(visualDirty) false
 	decl(float) def(deleteAfter) -1
-	decl(bool) def(isCulled) false
-	decl(any[]) def(_cull_cache) null
+	decl(bool) def(isOccluded) false
+	decl(any[]) def(_occlusion_cache) null
 	decl(int) def(_fireLightIdx) -1
 	decl(float) def(_fireLightIntensity) 0
 
@@ -1880,15 +1880,8 @@ struct(AtmosClientCoarseVisual)
 		(_deleteAfter >= 0) && {_now >= _deleteAfter}
 	}
 
-	decl(bool()) def(isInsideScreenCull)
+	decl(NULL|any()) def(getOcclusionScreenData)
 	{
-		private _margin = if (self getv(isCulled)) then {
-			missionNamespace getVariable ["noe_client_nat_coarseCullShowMargin",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_SHOW_MARGIN]
-		} else {
-			missionNamespace getVariable ["noe_client_nat_coarseCullHideMargin",NOE_CLIENT_NAT_COARSE_SCREEN_CULL_HIDE_MARGIN]
-		};
-		_margin = _margin max 0;
-
 		private _pos = self getv(batchPos);
 		private _sizes = self getv(sizes);
 		private _hx = ((_sizes select 0) / 2) + ATMOS_SIZE_HALF;
@@ -1896,20 +1889,28 @@ struct(AtmosClientCoarseVisual)
 		private _hz = ((self getv(zSize)) / 2) + ATMOS_SIZE_HALF;
 
 		private _camPos = asltoatl eyepos player;
+		private _dist = _camPos distance _pos;
 		private _delta = _camPos vectorDiff _pos;
-		if (((abs (_delta select 0)) <= (_hx + 1)) && {((abs (_delta select 1)) <= (_hy + 1)) && {((abs (_delta select 2)) <= (_hz + 2))}}) exitWith {true};
+		if (((abs (_delta select 0)) <= (_hx + 1)) && {((abs (_delta select 1)) <= (_hy + 1)) && {((abs (_delta select 2)) <= (_hz + 2))}}) exitWith {
+			[_dist,0,0,0,1,1,self getv(effType),self]
+		};
 
-		private _minScr = -_margin;
-		private _maxScr = 1 + _margin;
-		private _visible = false;
+		private _hasProjection = false;
+		private _minX = 999999;
+		private _minY = 999999;
+		private _maxX = -999999;
+		private _maxY = -999999;
 		private _sp = [];
 		{
 			_sp = worldToScreen (_pos vectorAdd _x);
 			if !(_sp isEqualTo []) then {
-				if (((_sp select 0) >= _minScr) && {((_sp select 0) <= _maxScr) && {((_sp select 1) >= _minScr) && {(_sp select 1) <= _maxScr}}}) then {
-					_visible = true;
-					break;
-				};
+				_hasProjection = true;
+				private _sx = _sp select 0;
+				private _sy = _sp select 1;
+				_minX = _minX min _sx;
+				_minY = _minY min _sy;
+				_maxX = _maxX max _sx;
+				_maxY = _maxY max _sy;
 			};
 		} foreach [
 			[0,0,0],
@@ -1922,33 +1923,42 @@ struct(AtmosClientCoarseVisual)
 			[-_hx,_hy,_hz],
 			[_hx,_hy,_hz]
 		];
-		_visible
+		if (!_hasProjection) exitWith {null};
+		if ((_maxX < 0) || {_minX > 1 || {_maxY < 0 || {_minY > 1}}}) exitWith {null};
+
+		_minX = (_minX max 0) min 1;
+		_minY = (_minY max 0) min 1;
+		_maxX = (_maxX max 0) min 1;
+		_maxY = (_maxY max 0) min 1;
+		if (((_maxX - _minX) <= 0.001) || {((_maxY - _minY) <= 0.001)}) exitWith {null};
+
+		[_dist,0,_minX,_minY,_maxX,_maxY,self getv(effType),self]
 	}
 
-	decl(void(bool)) def(setCull)
+	decl(void(bool)) def(setOcclusionHidden)
 	{
 		params ["_hide"];
 		if !(self getv(batchIsLoaded)) exitWith {
-			self setv(isCulled,false);
-			self setv(_cull_cache,[]);
+			self setv(isOccluded,false);
+			self setv(_occlusion_cache,[]);
 		};
 
 		private _emitters = self getv(emitter);
 		if isNullVar(_emitters) exitWith {};
 
-		private _sameState = equals(_hide,self getv(isCulled));
+		private _sameState = equals(_hide,self getv(isOccluded));
 		private _fireLightIdx = self getv(_fireLightIdx);
 
 		if (_hide) then {
 			if (!_sameState) then {
-				self setv(isCulled,true);
-				private _cullCache = [];
+				self setv(isOccluded,true);
+				private _cache = [];
 				{
 					if isNullReference(_x) then {continue};
-					_cullCache set [_foreachIndex,getposatl _x];
+					_cache set [_foreachIndex,getposatl _x];
 					_x setposatl [0,0,0];
 				} foreach _emitters;
-				self setv(_cull_cache,_cullCache);
+				self setv(_occlusion_cache,_cache);
 			};
 			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
 				private _fireLight = _emitters select _fireLightIdx;
@@ -1958,18 +1968,19 @@ struct(AtmosClientCoarseVisual)
 			};
 		} else {
 			if (_sameState) exitWith {};
-			self setv(isCulled,false);
-			private _cullCache = self getv(_cull_cache);
+			self setv(isOccluded,false);
+			private _cache = self getv(_occlusion_cache);
+			if isNullVar(_cache) then {_cache = []};
 			{
 				if isNullReference(_x) then {continue};
-				if (_foreachIndex < count _cullCache) then {
-					private _oldPos = _cullCache select _foreachIndex;
+				if (_foreachIndex < count _cache) then {
+					private _oldPos = _cache select _foreachIndex;
 					if !isNullVar(_oldPos) then {
 						_x setposatl _oldPos;
 					};
 				};
 			} foreach _emitters;
-			self setv(_cull_cache,[]);
+			self setv(_occlusion_cache,[]);
 			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
 				private _fireLight = _emitters select _fireLightIdx;
 				if !isNullReference(_fireLight) then {
@@ -1977,19 +1988,6 @@ struct(AtmosClientCoarseVisual)
 				};
 			};
 		};
-	}
-
-	decl(bool()) def(updateScreenCull)
-	{
-		if !(self getv(batchIsLoaded)) exitWith {false};
-		if ((self getv(deleteAfter)) >= 0) exitWith {
-			self callp(setCull,false);
-			false
-		};
-
-		private _isVisible = self callv(isInsideScreenCull);
-		self callp(setCull,!_isVisible);
-		!_isVisible
 	}
 
 	decl(bool()) def(applyPendingVisual)
@@ -2016,8 +2014,8 @@ struct(AtmosClientCoarseVisual)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
 
-		self setv(isCulled,false);
-		self setv(_cull_cache,[]);
+		self setv(isOccluded,false);
+		self setv(_occlusion_cache,[]);
 		self setv(_fireLightIdx,-1);
 		self setv(_fireLightIntensity,0);
 
@@ -2097,8 +2095,8 @@ struct(AtmosClientCoarseVisual)
 	{
 		if (self getv(batchIsLoaded)) then {
 			self setv(batchIsLoaded,false);
-			self setv(isCulled,false);
-			self setv(_cull_cache,[]);
+			self setv(isOccluded,false);
+			self setv(_occlusion_cache,[]);
 			deleteVehicle (self getv(emitter));
 			[0] call lesc_onLightRemove;
 			self setv(emitter,null);
