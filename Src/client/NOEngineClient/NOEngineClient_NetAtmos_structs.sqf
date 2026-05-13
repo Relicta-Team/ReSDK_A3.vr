@@ -76,9 +76,9 @@ macro_def(noe_client_nat_enable_randomization_color)
 #ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 decl(int) noe_client_nat_budgetMaxBatchRegionsPerZ = 3;
 decl(int) noe_client_nat_budgetMaxBatchRegionsTotal = 5;
-decl(int) noe_client_nat_budgetMaxSmokeBatchRegionsTotal = 2;
-decl(int) noe_client_nat_budgetMaxSingleLightsPerZ = 1;
-decl(int) noe_client_nat_budgetMaxSingleLightsTotal = 30;
+decl(int) noe_client_nat_budgetMaxSmokeBatchRegionsTotal = 5;
+decl(int) noe_client_nat_budgetMaxSingleLightsPerZ = 8;
+decl(int) noe_client_nat_budgetMaxSingleLightsTotal = 20;
 decl(int) noe_client_nat_budgetMaxFireLights = 3;
 #endif
 #ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
