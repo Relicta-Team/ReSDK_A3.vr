@@ -3004,6 +3004,14 @@ _3761_650393872_5437023_98277 = ['RatCage',[3761.65,3872.54,23.9828],270,[0,0,1]
 ['MetalAndConcreteRuins',[3770.63,3870.5,23.875],0,[0,0,1]] call InitStruct; 
 ['MetalBarrel4',[3766.69,3878.73,29.6577,true],[-0.0190374,0.99077,0.134212],[-0.155838,-0.135536,0.97844]] call InitStruct; 
 ['Torch',[3798.27,3853.81,29.0532,true],0,[-0.0435289,0.0413034,0.998198]] call InitItem; 
+['CampfireBig',[3785.33,3795.51,24.0375],0,[0,0,1]] call InitStruct; 
+['SleepingMatras',[3783.28,3792.63,29.2116,true],188.725,[-0.0164068,0,0.999865]] call InitStruct; 
+['SleepingMatras',[3781.48,3795.07,24.2366],80.6161,[0,0,1]] call InitStruct; 
+['OldWoodenBox',[3782.44,3797.76,24.1282],292.611,[0,0,1]] call InitStruct; 
+['FabricBagBig2',[3781.64,3793.32,24.0493],223.761,[0,0,1]] call InitItem; 
+['MediumClothCanopy',[3783.91,3799.15,24.3882],357.722,[0,0,1]] call InitStruct; 
+['SmallClothShelter',[3782.11,3795.97,30.7364,true],78.2603,[-0.00291949,0.0061282,0.999977]] call InitStruct; 
+['SteelCanopySmall',[3783.45,3792.66,24.4292],233.772,[0,0,1]] call InitStruct; 
 
 
 

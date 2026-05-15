@@ -8,22 +8,22 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=5960;
+		nextID=5971;
 	};
 	class LayerIndexProvider
 	{
-		nextID=525;
+		nextID=531;
 	};
 	class Camera
 	{
-		pos[]={3794.6575,33.415619,3855.8308};
-		dir[]={0.483026,-0.49390689,-0.7230103};
-		up[]={0.27437124,0.86951411,-0.41068822};
-		aside[]={-0.83150995,-4.3408363e-08,-0.55551171};
+		pos[]={3777.8789,33.470776,3872.2766};
+		dir[]={-0.65289605,-0.29598036,0.69740325};
+		up[]={-0.20234379,0.95505142,0.21613379};
+		aside[]={0.73006016,-1.0449294e-06,0.68347734};
 	};
 };
 binarizationWanted=0;
-sourceName="resdk_a3";
+sourceName="ReSDK_A3";
 addons[]=
 {
 	"A3_Characters_F",
@@ -852,7 +852,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=2728;
+		items=2736;
 		class Item0
 		{
 			dataType="Group";
@@ -50918,6 +50918,148 @@ class Mission
 			id=5959;
 			type="torch";
 			atlOffset=0.069835663;
+		};
+		class Item2728
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3785.3325,29.345284,3795.5137};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""CampfireBig""]]}";
+			};
+			id=5960;
+			type="Land_pepelishe";
+			atlOffset=24.037451;
+		};
+		class Item2729
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3783.2822,29.211607,3792.6287};
+				angles[]={0,3.2938888,0.016407529};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SleepingMatras""]]}";
+			};
+			id=5961;
+			type="matras_2";
+			atlOffset=0.014896393;
+		};
+		class Item2730
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3781.4761,29.236624,3795.0659};
+				angles[]={0,1.407017,-0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SleepingMatras""]]}";
+			};
+			id=5962;
+			type="matras_2";
+			atlOffset=0.014968872;
+		};
+		class Item2731
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3782.4399,29.12822,3797.7551};
+				angles[]={0,5.1070299,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""OldWoodenBox""]]}";
+			};
+			id=5965;
+			type="land_tarkov_wood";
+			atlOffset=1.8435802;
+		};
+		class Item2732
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3781.6438,29.51363,3793.3169};
+				angles[]={0,3.9053576,-0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""FabricBagBig2""]]}";
+			};
+			id=5966;
+			type="meshok2";
+			atlOffset=24.04928;
+		};
+		class Item2733
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3783.9148,30.905687,3799.1479};
+				angles[]={0,6.243433,-0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MediumClothCanopy""]]}";
+			};
+			id=5968;
+			type="Land_ClothShelter_02_F";
+			atlOffset=0.054964066;
+		};
+		class Item2734
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3782.1123,30.73642,3795.9724};
+				angles[]={0.0061282665,1.3659146,0.0029194893};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallClothShelter""]]}";
+			};
+			id=5969;
+			type="Land_ClothShelter_01_F";
+			atlOffset=0.044979095;
+		};
+		class Item2735
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3783.4485,29.873352,3792.656};
+				angles[]={0,4.0800886,-0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SteelCanopySmall""]]}";
+			};
+			id=5970;
+			type="Land_cargo_addon01_V2_F";
+			atlOffset=0.21020317;
 		};
 	};
 };
