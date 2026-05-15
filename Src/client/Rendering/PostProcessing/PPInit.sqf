@@ -50,12 +50,17 @@ pp_reload = {
 		//! i think is double initialization. maybee need remove?!
 		call (_x select 6); //reload init statements
 
+		//apply enabled state
+		private _stateId = if (_enableUpdated) then {8} else {7};
+		private _targetState = _x select _stateId;
 		_x call pp_init;
-		//apply enabled
-		if (_x select 7) then {
-			[_name,true] call pp_setEnable;			
+
+		private _bufferIdx = pp_buffer_efx findIf {equals(_x select 0,_name)};
+		if (_bufferIdx != -1) then {
+			(pp_buffer_efx select _bufferIdx) set [8,_targetState];
 		};
-		if (_enableUpdated && _h != -1) then {
+
+		if (_targetState) then {
 			[_name,true,false] call pp_setEnable;
 		};
 	} foreach _copyBuffer;
@@ -84,7 +89,7 @@ pp_init = {
 	setPPVar(_name + "_args",_args);
 	setPPVar(_name + "_updateDelay",_delay);
 	
-	private _curState = true;
+	private _curState = _isActive;
 
 	pp_buffer_efx pushBack [_name,_config,_settings,_args,_code,_delay,_initStatement,_isActive,_curState];
 };
@@ -104,6 +109,11 @@ pp_setEnable = {
 
 	if isNullVar(_effect) exitWith {
 		errorformat("PostProcessing::setEnable() - Cant find effect %1",_varName);
+	};
+
+	private _bufferIdx = pp_buffer_efx findIf {equals(_x select 0,_varName)};
+	if (_bufferIdx != -1) then {
+		(pp_buffer_efx select _bufferIdx) set [8,_mode];
 	};
 
 	if (_mode == (ppEffectEnabled _effect)) exitWith {
