@@ -68,7 +68,7 @@ Type: function
 Description: 
 
 
-File: [client\ClientStatistic\LogVariables.sqf at line 169](../../../Src/client/ClientStatistic/LogVariables.sqf#L169)
+File: [client\ClientStatistic\LogVariables.sqf at line 185](../../../Src/client/ClientStatistic/LogVariables.sqf#L185)
 ## clistat_setLogVars
 
 Type: function
@@ -76,7 +76,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\ClientStatistic\LogVariables.sqf at line 183](../../../Src/client/ClientStatistic/LogVariables.sqf#L183)
+File: [client\ClientStatistic\LogVariables.sqf at line 199](../../../Src/client/ClientStatistic/LogVariables.sqf#L199)
 # MemUsage_init.sqf
 
 ## memvis_size_x
