@@ -1772,7 +1772,7 @@ _3716_221194220_4951255_33688 = ['SteelArmoredDoor2',[3716.22,4220.5,55.3369],27
 ['WoodenOldBench',[3830.4,4120.85,65.5322],180,[0,0,1]] call InitStruct; 
 ['WoodenOldBench',[3827.4,4120.88,65.5103],180,[0,0,1]] call InitStruct; 
 ['SmallFenceMadeOfSticks',[3824.5,4134.25,65.5],260,[0,0,1]] call InitStruct; 
-['SteelBrownDoor',[3828.03,4135.08,64.875],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"baron, abbat"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
+_3828_027594135_0752064_87500 = ['SteelBrownDoor',[3828.03,4135.08,64.875],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"baron, abbat"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['TrashCan',[3831.13,4133.44,65.5],330,[0,0,1]] call InitStruct; 
 ['Bench2',[3830.09,4134.12,70.7399,true],180,[0.038482,-0.0261701,0.998917]] call InitStruct; 
 ['WoodCross',[3832.63,4129.41,68.8539],90,[0,0,1]] call InitStruct; 
@@ -2981,7 +2981,7 @@ _3847_868904122_7714863_64828 = ['Wicket',[3847.87,4122.77,63.6483],270,[0,0,1],
 ['WoodenSmallFloor',[3842.97,4121.46,63.6293],0,[0,0,1]] call InitStruct; 
 ['SteelThinWallMedium',[3841.04,4121.88,63.2255],269.655,[0,0,1]] call InitStruct; 
 ['SteelCanopySmall',[3842.96,4121.31,69.3297,true],0,[0,0.234617,0.972088]] call InitStruct; 
-['WoodenDoor',[3844.1,4123.21,63.6646],0,[0,0,1]] call InitStruct; 
+_3844_101814123_2133863_66457 = ['WoodenDoor',[3844.1,4123.21,63.6646],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"baron, general, soldat"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WhiteBrickWall5',[3841.87,4123.15,63.9928],0,[0,0,1]] call InitStruct; 
 ['SteelCurtainSmall',[3842.32,4120.32,63.7492],89.8547,[0,0,1]] call InitStruct; 
 ['ConcreteLongPole',[3841.1,4123.15,67.9684,true],[0,0.998809,0.0488014],[0.0657064,-0.0486959,0.99665]] call InitStruct; 
@@ -2993,6 +2993,7 @@ _3847_868904122_7714863_64828 = ['Wicket',[3847.87,4122.77,63.6483],270,[0,0,1],
 ['SquareWoodenBox',[3844,4120.91,63.868],0,[0,0,1]] call InitStruct; 
 ['SleepingMatras',[3842.29,4121.6,63.9589],90.0001,[0,0,1], {go_editor_globalRefs set ["RKomandirSluzhivyyBaronyBed",_thisObj];
 }] call InitStruct; 
+['SleevelessOuterwearCuirass1',[3843.74,4120.66,64.8712],0,[0,0,1]] call InitItem; 
 
 
 
@@ -3328,6 +3329,9 @@ if (!isNil'_3723_026614211_2968855_55122') then {
 if (!isNil'_3716_221194220_4951255_33688') then {
 	_3716_221194220_4951255_33688 setvariable ['islocked',true];
 };
+if (!isNil'_3828_027594135_0752064_87500') then {
+	_3828_027594135_0752064_87500 setvariable ['islocked',true];
+};
 if (!isNil'_3827_900154134_9126070_61567') then {
 	_3827_900154134_9126070_61567 setvariable ['name',"Бревно"];
 };
@@ -3487,4 +3491,7 @@ if (!isNil'_3850_756354123_5776463_78343') then {
 };
 if (!isNil'_3847_868904122_7714863_64828') then {
 	_3847_868904122_7714863_64828 setvariable ['islocked',true];
+};
+if (!isNil'_3844_101814123_2133863_66457') then {
+	_3844_101814123_2133863_66457 setvariable ['islocked',true];
 };
