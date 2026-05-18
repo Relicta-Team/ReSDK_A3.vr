@@ -633,6 +633,11 @@ vs_speakReleaseAll = {
     apiRequest(REQ_SPEAK_RELEASEALL);
 };
 
+vs_releaseAllVoipButtons = {
+    [false] call vs_handleTransmith;
+	[false] call vs_handleSpeak;
+};
+
 vs_setLocalPlayerVoiceDistance = {
     params ["_d"];
     player setvariable ["rv_distance",_d,true];
