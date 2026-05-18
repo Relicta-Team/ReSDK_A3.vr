@@ -8,77 +8,93 @@
     "variables":{},
     "info":{
       "type":"role",
-      "name":"Кухмастер",
-      "classname":"RKukhmasterBarony",
+      "name":"KomandirSluzhivyy",
+      "classname":"RKomandirSluzhivyyBarony",
       "parent":"ScriptedRole",
       "desc":"",
-      "path":".Пользовательские.Кухмастер",
+      "path":".Пользовательские.KomandirSluzhivyy",
       "props":{
         "fields":{
-          "_currentSpawnLocation":[
-            "Спавнпоинт",
-            "RKukhmasterBarony"
-          ],
-          "_currentConnectedTo":[
-            "Глобальная ссылка",
-            "RKukhmasterBaronyBed",
-            "GameObject",
-            -1
-          ],
-          "name":"Кухмастер",
-          "desc":"Главный кухарь всего имения. \nЗаведует роскошной столовой в главном зале замка, в которой он иногда подкармливает местную стражу, но чаще он принимает всяческих приезжих особ или кормит самого барона и его семью.\nКомандует своим помощником - поварешкой.\nВ последние смены, правда, вся еду потратили по всяческим поводам и пора бы зайти на склад к гриблану за пополнением. \nТак еще и какие-то важные люди едут - надо подготовиться.",
-          "_deadTimeout":350,
           "_currentBaseSkills":[
             [
+              12.0,
+              14.0
+            ],
+            [
               11.0,
-              12.0
-            ],
-            [
-              9.0,
-              11.0
+              13.0
             ],
             [
               10.0,
-              11.0
+              13.0
             ],
             [
               10.0,
-              11.0
+              13.0
             ]
           ],
           "_currentOtherSkills":[
             [
-              "Готовка",
-              [
-                5.0,
-                6.0
-              ]
-            ],
-            [
-              "Фермерство",
-              [
-                5.0,
-                6.0
-              ]
-            ],
-            [
               "Рукопашный бой",
               [
-                1.0,
-                1.0
+                2.0,
+                4.0
+              ]
+            ],
+            [
+              "Фехтование",
+              [
+                2.0,
+                3.0
+              ]
+            ],
+            [
+              "Топоры",
+              [
+                2.0,
+                4.0
+              ]
+            ],
+            [
+              "Мечи",
+              [
+                2.0,
+                4.0
               ]
             ],
             [
               "Ножи",
               [
+                2.0,
+                4.0
+              ]
+            ],
+            [
+              "Пистолеты",
+              [
                 1.0,
-                1.0
+                2.0
               ]
             ]
           ],
-          "count":1
+          "_deadTimeout":300,
+          "desc":"Командир служивых. \nВ отличие от своих подчинённых является заместителем маршала, несёт бремя большой ответственности, а также шлем на голове, железяку на пузе и острый меч на поясе. \nСвоим существованием облегчает жизнь маршалу и решает конфликты среди придворных. \nТеперь, когда баронство ожидает гостей, его роль для местной политики особенно важна.",
+          "name":"Командир",
+          "_currentSpawnLocation":[
+            "Спавнпоинт",
+            "RKomandirSluzhivyyBarony"
+          ],
+          "_currentConnectedTo":[
+            "Глобальная ссылка",
+            "RKomandirSluzhivyyBaronyBed",
+            "GameObject",
+            -1
+          ]
         },
         "methods":{
+          "needDiscordRoles":[
+            "Forsaken"
+          ],
           "_canVisibleAfterStartConst":false
         }
       },
@@ -86,22 +102,22 @@
       "graphVersion":2
     },
     "mpos":[
-      2072.5445107521155,
-      -633.1907931851047,
-      1043.2480650161042,
-      981.8805317798626
+      867.4035490655551,
+      -252.74214884551344,
+      975.1312475663304,
+      917.7705859447811
     ],
-    "mzoom":0.05
+    "mzoom":0.12
   },
   "nodes":{
-    "0x2b1c6ff50a0":{
+    "0x2250c7055b0":{
       "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Event_16x",
-      "name":"Выдача снаряжения",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Задать типы ключа",
       "color":[
-        255,
         0,
-        0
+        69,
+        104
       ],
       "border_color":[
         74,
@@ -118,18 +134,142 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":243.0,
-      "height":108.55000000000001,
+      "width":321.0,
+      "height":153.3,
       "pos":[
-        268.91374977387056,
-        137.91485317802596
+        1203.2013474054938,
+        -42.51905110337617
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
       "subgraph_session":{},
-      "class_":"methods.ScriptedRole.getEquipment_0"
+      "custom":{
+        "Цель":"Объект Key",
+        "Типы":"soldat"
+      },
+      "class_":"methods.Key._setKeyOwnerWrapper_0"
     },
-    "0x2b1c6ff78f0":{
+    "0x2250c705940":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Создать предмет в контейнере",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":296.0,
+      "height":124.55,
+      "pos":[
+        690.5359508946108,
+        386.7996483362073
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Тип предмета":"Zvak"
+      },
+      "class_":"func.createItemInContainer"
+    },
+    "0x2250c705c10":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#ff00ff"
+      ],
+      "name":"Имя",
+      "color":[
+        255,
+        0,
+        255,
+        255
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":369.0,
+      "height":166.3,
+      "pos":[
+        1576.545328230317,
+        78.12541365150997
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Цель":"Объект GameObject",
+        "Значение":"Ключ командира служивых"
+      },
+      "class_":"fields.GameObject.name_0.set"
+    },
+    "0x2250c705f10":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
+      "name":"Создать предмет в инвентаре",
+      "color":[
+        0,
+        69,
+        104
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":366.0,
+      "height":169.70000000000002,
+      "pos":[
+        -242.3853347372758,
+        283.3636326729091
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "custom":{
+        "Тип предмета":"ArmyCloth1",
+        "Слот":"Одеяния"
+      },
+      "class_":"func.createItemInInventory"
+    },
+    "0x2250c7062a0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Cast_16x",
       "name":"Преобразовать тип",
@@ -157,8 +297,8 @@
       "width":324.0,
       "height":123.5,
       "pos":[
-        605.8674821049345,
-        150.16881602510054
+        -771.4925141005675,
+        341.2485320002932
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
@@ -168,7 +308,7 @@
       },
       "class_":"control.castto"
     },
-    "0x2b1c7092d80":{
+    "0x2250c706570":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
       "name":"Задать количество в стаке",
@@ -195,8 +335,8 @@
       "width":256.0,
       "height":149.10000000000002,
       "pos":[
-        3159.2723596605447,
-        136.72985737287692
+        1289.927042416769,
+        316.3680542541562
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
@@ -207,154 +347,7 @@
       },
       "class_":"methods.Stack.setStackCount_0"
     },
-    "0x2b1c7100500":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
-      "name":"Задать типы ключа",
-      "color":[
-        0,
-        69,
-        104
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":321.0,
-      "height":153.3,
-      "pos":[
-        3072.546664649269,
-        -222.15724798465544
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "Цель":"Объект Key",
-        "Типы":"povar"
-      },
-      "class_":"methods.Key._setKeyOwnerWrapper_0"
-    },
-    "0x2b1c7100fb0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
-      "name":"Создать предмет в контейнере",
-      "color":[
-        0,
-        69,
-        104
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":296.0,
-      "height":124.55,
-      "pos":[
-        2684.529049915795,
-        -34.171237491328355
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "Тип предмета":"Key"
-      },
-      "class_":"func.createItemInContainer"
-    },
-    "0x2b1c7100aa0":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
-      "name":"Последовательность",
-      "color":[
-        119,
-        119,
-        119,
-        255
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":251.0,
-      "height":99.35000000000001,
-      "pos":[
-        1385.2870553193407,
-        206.92073551054133
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":true,
-      "subgraph_session":{},
-      "input_ports":[
-        {
-          "name":"Вход",
-          "multi_connection":false,
-          "display_name":false,
-          "color":[
-            255,
-            255,
-            255,
-            255
-          ],
-          "type":"Exec",
-          "style":1
-        }
-      ],
-      "output_ports":[
-        {
-          "name":"Действие 1",
-          "multi_connection":false,
-          "display_name":true,
-          "color":[
-            255,
-            255,
-            255,
-            255
-          ],
-          "type":"Exec",
-          "style":1
-        }
-      ],
-      "custom":{
-        "autoportdata":{},
-        "makeport_out":""
-      },
-      "class_":"operators.sequence"
-    },
-    "0x2b1c7101eb0":{
+    "0x2250c706750":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_Blueprint_Sequence_16x",
       "name":"Последовательность",
@@ -382,8 +375,8 @@
       "width":251.0,
       "height":102.5,
       "pos":[
-        2289.34018638454,
-        -187.19432433631448
+        129.87683086583456,
+        62.92270814043627
       ],
       "layout_direction":0,
       "port_deletion_allowed":true,
@@ -450,14 +443,18 @@
       },
       "class_":"operators.sequence"
     },
-    "0x2b1c7101d00":{
+    "0x2250c706a20":{
       "type_":"runtime_domain.RuntimeNode",
-      "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
-      "name":"Создать предмет в контейнере",
+      "icon":[
+        "data\\icons\\pill_16x.png",
+        "#ff00ff"
+      ],
+      "name":"Имя",
       "color":[
+        255,
         0,
-        69,
-        104
+        255,
+        255
       ],
       "border_color":[
         74,
@@ -474,21 +471,57 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":296.0,
-      "height":124.55,
+      "width":369.0,
+      "height":166.3,
       "pos":[
-        2559.881268138387,
-        207.16145145492814
+        699.2261819785022,
+        -228.1886376708232
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Тип предмета":"Zvak"
+        "Цель":"Объект GameObject",
+        "Значение":"Одежда командира служивых"
       },
-      "class_":"func.createItemInContainer"
+      "class_":"fields.GameObject.name_0.set"
     },
-    "0x2b1c7101a30":{
+    "0x2250c706d20":{
+      "type_":"runtime_domain.RuntimeNode",
+      "icon":"data\\icons\\icon_Blueprint_Event_16x",
+      "name":"Выдача снаряжения",
+      "color":[
+        255,
+        0,
+        0
+      ],
+      "border_color":[
+        74,
+        84,
+        85,
+        255
+      ],
+      "text_color":[
+        255,
+        255,
+        255,
+        180
+      ],
+      "disabled":false,
+      "selected":false,
+      "visible":true,
+      "width":243.0,
+      "height":108.55000000000001,
+      "pos":[
+        -1151.0166434553637,
+        307.5786804064699
+      ],
+      "layout_direction":0,
+      "port_deletion_allowed":false,
+      "subgraph_session":{},
+      "class_":"methods.ScriptedRole.getEquipment_0"
+    },
+    "0x2250c706de0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\node_base.png",
       "name":"RandInt",
@@ -516,8 +549,8 @@
       "width":184.0,
       "height":92.3,
       "pos":[
-        2960.280177670589,
-        349.500664852907
+        1090.9348604268134,
+        529.1388617341863
       ],
       "layout_direction":0,
       "port_deletion_allowed":true,
@@ -577,58 +610,15 @@
             255
           ]
         },
-        "Число 1":1.0,
-        "Число 2":8.0
+        "Число 1":5.0,
+        "Число 2":9.0
       },
       "class_":"math.randomInt"
     },
-    "0x2b1c7187050":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":[
-        "data\\icons\\pill_16x.png",
-        "#ff00ff"
-      ],
-      "name":"Имя",
-      "color":[
-        255,
-        0,
-        255,
-        255
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":369.0,
-      "height":166.3,
-      "pos":[
-        3778.415775273099,
-        -105.72196208798462
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "Цель":"Объект GameObject",
-        "Значение":"Ключ кухмастера"
-      },
-      "class_":"fields.GameObject.name_0.set"
-    },
-    "0x2b1c7187f20":{
+    "0x2250c706ff0":{
       "type_":"runtime_domain.RuntimeNode",
       "icon":"data\\icons\\icon_BluePrintEditor_Function_16px",
-      "name":"Создать предмет в инвентаре",
+      "name":"Создать предмет в контейнере",
       "color":[
         0,
         69,
@@ -649,254 +639,200 @@
       "disabled":false,
       "selected":false,
       "visible":true,
-      "width":366.0,
-      "height":169.70000000000002,
+      "width":296.0,
+      "height":124.55,
       "pos":[
-        1776.8386942935285,
-        -5.455112660740042
+        747.9648079952785,
+        131.16506052255926
       ],
       "layout_direction":0,
       "port_deletion_allowed":false,
       "subgraph_session":{},
       "custom":{
-        "Тип предмета":"BarmenCloth",
-        "Слот":"Одеяния"
+        "Тип предмета":"Key"
       },
-      "class_":"func.createItemInInventory"
-    },
-    "0x2b1c7101970":{
-      "type_":"runtime_domain.RuntimeNode",
-      "icon":[
-        "data\\icons\\pill_16x.png",
-        "#ff00ff"
-      ],
-      "name":"Имя",
-      "color":[
-        255,
-        0,
-        255,
-        255
-      ],
-      "border_color":[
-        74,
-        84,
-        85,
-        255
-      ],
-      "text_color":[
-        255,
-        255,
-        255,
-        180
-      ],
-      "disabled":false,
-      "selected":false,
-      "visible":true,
-      "width":369.0,
-      "height":166.3,
-      "pos":[
-        2578.1741673587558,
-        -594.9759008196834
-      ],
-      "layout_direction":0,
-      "port_deletion_allowed":false,
-      "subgraph_session":{},
-      "custom":{
-        "Цель":"Объект GameObject",
-        "Значение":"Одежда кухмастера"
-      },
-      "class_":"fields.GameObject.name_0.set"
+      "class_":"func.createItemInContainer"
     }
   },
   "connections":[
     {
-      "out":[
-        "0x2b1c6ff50a0",
-        "Выход"
-      ],
       "in":[
-        "0x2b1c6ff78f0",
-        "Вход"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c6ff50a0",
-        "Моб"
-      ],
-      "in":[
-        "0x2b1c6ff78f0",
-        "Входной объект"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c6ff78f0",
-        "Успешное преобразование"
-      ],
-      "in":[
-        "0x2b1c7100aa0",
-        "Вход"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c6ff78f0",
-        "Объект"
-      ],
-      "in":[
-        "0x2b1c7187f20",
-        "Персонаж"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7092d80",
+        "0x2250c7055b0",
         "Вход"
       ],
       "out":[
-        "0x2b1c7101d00",
+        "0x2250c706ff0",
         "Выход"
       ]
     },
     {
       "in":[
-        "0x2b1c7092d80",
+        "0x2250c7055b0",
         "Цель"
       ],
       "out":[
-        "0x2b1c7101d00",
+        "0x2250c706ff0",
+        "Предмет"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c7055b0",
+        "Выход"
+      ],
+      "in":[
+        "0x2250c705c10",
+        "Вход"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c705940",
+        "Вход"
+      ],
+      "out":[
+        "0x2250c706750",
+        "Действие 2"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c705940",
+        "Контейнер"
+      ],
+      "out":[
+        "0x2250c705f10",
+        "Предмет"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c705940",
+        "Выход"
+      ],
+      "in":[
+        "0x2250c706570",
+        "Вход"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c705940",
+        "Предмет"
+      ],
+      "in":[
+        "0x2250c706570",
+        "Цель"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c705c10",
+        "Цель"
+      ],
+      "out":[
+        "0x2250c706ff0",
         "Предмет"
       ]
     },
     {
       "in":[
-        "0x2b1c7092d80",
+        "0x2250c705f10",
+        "Вход"
+      ],
+      "out":[
+        "0x2250c7062a0",
+        "Успешное преобразование"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c705f10",
+        "Персонаж"
+      ],
+      "out":[
+        "0x2250c7062a0",
+        "Объект"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c705f10",
+        "Выход"
+      ],
+      "in":[
+        "0x2250c706750",
+        "Вход"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c705f10",
+        "Предмет"
+      ],
+      "in":[
+        "0x2250c706ff0",
+        "Контейнер"
+      ]
+    },
+    {
+      "out":[
+        "0x2250c705f10",
+        "Предмет"
+      ],
+      "in":[
+        "0x2250c706a20",
+        "Цель"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c7062a0",
+        "Вход"
+      ],
+      "out":[
+        "0x2250c706d20",
+        "Выход"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c7062a0",
+        "Входной объект"
+      ],
+      "out":[
+        "0x2250c706d20",
+        "Моб"
+      ]
+    },
+    {
+      "in":[
+        "0x2250c706570",
         "Количество"
       ],
       "out":[
-        "0x2b1c7101a30",
+        "0x2250c706de0",
         "Результат"
       ]
     },
     {
-      "in":[
-        "0x2b1c7100500",
-        "Вход"
-      ],
       "out":[
-        "0x2b1c7100fb0",
-        "Выход"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7100500",
-        "Цель"
-      ],
-      "out":[
-        "0x2b1c7100fb0",
-        "Предмет"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c7100500",
-        "Выход"
-      ],
-      "in":[
-        "0x2b1c7187050",
-        "Вход"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7100fb0",
-        "Вход"
-      ],
-      "out":[
-        "0x2b1c7101eb0",
-        "Действие 1"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7100fb0",
-        "Контейнер"
-      ],
-      "out":[
-        "0x2b1c7187f20",
-        "Предмет"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c7100fb0",
-        "Предмет"
-      ],
-      "in":[
-        "0x2b1c7187050",
-        "Цель"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c7100aa0",
+        "0x2250c706750",
         "Действие 1"
       ],
       "in":[
-        "0x2b1c7187f20",
-        "Вход"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7101eb0",
-        "Вход"
-      ],
-      "out":[
-        "0x2b1c7187f20",
-        "Выход"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c7101eb0",
-        "Действие 2"
-      ],
-      "in":[
-        "0x2b1c7101d00",
+        "0x2250c706ff0",
         "Вход"
       ]
     },
     {
       "out":[
-        "0x2b1c7101eb0",
+        "0x2250c706750",
         "Действие 3"
       ],
       "in":[
-        "0x2b1c7101970",
+        "0x2250c706a20",
         "Вход"
-      ]
-    },
-    {
-      "in":[
-        "0x2b1c7101d00",
-        "Контейнер"
-      ],
-      "out":[
-        "0x2b1c7187f20",
-        "Предмет"
-      ]
-    },
-    {
-      "out":[
-        "0x2b1c7187f20",
-        "Предмет"
-      ],
-      "in":[
-        "0x2b1c7101970",
-        "Цель"
       ]
     }
   ]
