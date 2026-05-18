@@ -34,6 +34,18 @@ decl(int[])
 noe_client_nat_ltCfg_fire = [];
 decl(int[])
 noe_client_nat_ltCfg_smoke = [];
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(int)
+noe_client_nat_coarseVisualHandleUpdate = -1;
+decl(int)
+noe_client_nat_coarseOcclusionHandleUpdate = -1;
+decl(int)
+noe_client_nat_coarseOcclusionCount = 0;
+decl(float)
+noe_client_nat_coarseOcclusionPrevCallTime = 0;
+decl(map<string;struct_t.AtmosAreaClient>)
+noe_client_nat_coarseVisualDirtyAreas = createHashMap;
+#endif
 
 decl(void())
 noe_client_nat_initializeLtCfg = {
@@ -45,6 +57,138 @@ noe_client_nat_initializeLtCfg = {
 		noe_client_nat_ltCfg_smoke set [_foreachIndex,_x call lightSys_getConfigIdByName];
 	} foreach ["SLIGHT_ATMOS_SMOKE_1","SLIGHT_ATMOS_SMOKE_2","SLIGHT_ATMOS_SMOKE_3"];
 };
+
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(void())
+noe_client_nat_processCoarseVisualQueue = {
+	private _opsLeft = (floor (missionNamespace getVariable ["noe_client_nat_coarseVisualOpsPerFrame",NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME])) max 0;
+	private _dropAreas = [];
+	{
+		if ((_opsLeft > 0) && {_y callv(isLoaded)}) then {
+			_opsLeft = _opsLeft - (_y callp(processCoarseVisualQueue,_opsLeft));
+		};
+		if (!(_y callv(isLoaded)) || {!(_y callv(hasPendingCoarseVisualOps))}) then {
+			_dropAreas pushBack _x;
+		};
+	} foreach noe_client_nat_coarseVisualDirtyAreas;
+
+	{
+		noe_client_nat_coarseVisualDirtyAreas deleteAt _x;
+	} foreach _dropAreas;
+};
+
+decl(void())
+noe_client_nat_processCoarseOcclusion = {
+	private _tmStart = tickTime;
+	private _enabled = missionNamespace getVariable ["noe_client_nat_coarseOcclusionEnabled",true];
+	private _items = [];
+
+	{
+		if (_y callv(isLoaded)) then {
+			private _area = _y;
+			private _occludedInArea = 0;
+			{
+				private _visual = _y;
+				if ((_visual getv(batchIsLoaded)) && {(_visual getv(deleteAfter)) < 0}) then {
+					_items pushBack _visual;
+					if (_visual getv(isOccluded)) then {
+						INC(_occludedInArea);
+					};
+				};
+			} foreach (_area getv(coarseVisuals));
+			_area setv(debugCoarseOccluded,_occludedInArea);
+		};
+	} foreach noe_client_nat_areas;
+
+	if (!_enabled) exitWith {
+		{
+			_x callp(setOcclusionHidden,false);
+		} foreach _items;
+		{
+			if (_y callv(isLoaded)) then {
+				_y setv(debugCoarseOccluded,0);
+			};
+		} foreach noe_client_nat_areas;
+		noe_client_nat_coarseOcclusionCount = 0;
+		noe_client_nat_coarseOcclusionPrevCallTime = tickTime - _tmStart;
+	};
+
+	private _screenData = [];
+	{
+		private _data = _x callv(getOcclusionScreenData);
+		if !isNullVar(_data) then {
+			_data set [1,_foreachIndex];
+			_screenData pushBack _data;
+		};
+	} foreach _items;
+
+	private _allowFireOccludeSmoke = missionNamespace getVariable ["noe_client_nat_coarseOcclusionFireOccludesSmoke",true];
+	private _overlapLimit = missionNamespace getVariable ["noe_client_nat_coarseOcclusionOverlap",NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP];
+	private _depthLimit = missionNamespace getVariable ["noe_client_nat_coarseOcclusionDepth",NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH];
+	_overlapLimit = (_overlapLimit max 0) min 1;
+	_depthLimit = _depthLimit max 0;
+
+	_screenData sort true;
+	private _accepted = [];
+	private _hiddenItems = [];
+	private _occludedTotal = 0;
+	{
+		_x params ["_dist","_sortId","_minX","_minY","_maxX","_maxY","_effType","_visual"];
+		private _areaA = (((_maxX - _minX) max 0.001) * ((_maxY - _minY) max 0.001)) max 0.001;
+		private _isOccluded = false;
+		{
+			_x params ["_distB","_sortIdB","_minXB","_minYB","_maxXB","_maxYB","_effTypeB","_visualB"];
+			if ((_dist - _distB) < _depthLimit) then {continue};
+			private _canOcclude = (_effType == _effTypeB)
+				|| {_allowFireOccludeSmoke && {_effTypeB == NAT_ATMOS_EFFTYPE_FIRE && {_effType == NAT_ATMOS_EFFTYPE_SMOKE}}};
+			if (!_canOcclude) then {continue};
+			private _iw = ((_maxX min _maxXB) - (_minX max _minXB)) max 0;
+			private _ih = ((_maxY min _maxYB) - (_minY max _minYB)) max 0;
+			if (((_iw * _ih) / _areaA) >= _overlapLimit) then {
+				_isOccluded = true;
+				break;
+			};
+		} foreach _accepted;
+
+		if (_isOccluded) then {
+			_hiddenItems pushBack _visual;
+			INC(_occludedTotal);
+		} else {
+			_accepted pushBack _x;
+		};
+	} foreach _screenData;
+
+	{
+		_x callp(setOcclusionHidden,_x in _hiddenItems);
+	} foreach _items;
+
+	{
+		if (_y callv(isLoaded)) then {
+			private _area = _y;
+			private _occludedInArea = 0;
+			{
+				private _visual = _y;
+				if ((_visual getv(batchIsLoaded)) && {(_visual getv(deleteAfter)) < 0 && {_visual getv(isOccluded)}}) then {
+					INC(_occludedInArea);
+				};
+			} foreach (_area getv(coarseVisuals));
+			_area setv(debugCoarseOccluded,_occludedInArea);
+		};
+	} foreach noe_client_nat_areas;
+
+	noe_client_nat_coarseOcclusionCount = _occludedTotal;
+	noe_client_nat_coarseOcclusionPrevCallTime = tickTime - _tmStart;
+};
+
+decl(void())
+noe_client_nat_applyCoarseVisualBudgetAll = {
+	{
+		if (_y callv(isLoaded)) then {
+			_y callv(rebuildCoarseVisuals);
+		};
+	} foreach noe_client_nat_areas;
+};
+#endif
 
 #ifndef EDITOR
 	#undef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
@@ -62,6 +206,14 @@ noe_client_nat_setEnabled = {
 		};
 
 		noe_client_nat_handleUpdate = startUpdate(noe_client_nat_onUpdate,NOE_NETATMOS_UPDATE_DELAY);
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		if (noe_client_nat_coarseVisualHandleUpdate == -1) then {
+			noe_client_nat_coarseVisualHandleUpdate = startUpdate(noe_client_nat_processCoarseVisualQueue,NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY);
+		};
+		if (noe_client_nat_coarseOcclusionHandleUpdate == -1) then {
+			noe_client_nat_coarseOcclusionHandleUpdate = startUpdate(noe_client_nat_processCoarseOcclusion,NOE_CLIENT_NAT_COARSE_OCCLUSION_DELAY);
+		};
+		#endif
 
 		#ifdef NOE_NETATMOS_ENABLE_DEBUG_ADD_ONMOUSE
 		[{
@@ -91,6 +243,18 @@ noe_client_nat_setEnabled = {
 	} else {
 		stopUpdate(noe_client_nat_handleUpdate);
 		noe_client_nat_handleUpdate = -1;
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		if (noe_client_nat_coarseVisualHandleUpdate != -1) then {
+			stopUpdate(noe_client_nat_coarseVisualHandleUpdate);
+			noe_client_nat_coarseVisualHandleUpdate = -1;
+		};
+		if (noe_client_nat_coarseOcclusionHandleUpdate != -1) then {
+			stopUpdate(noe_client_nat_coarseOcclusionHandleUpdate);
+			noe_client_nat_coarseOcclusionHandleUpdate = -1;
+		};
+		noe_client_nat_coarseOcclusionCount = 0;
+		noe_client_nat_coarseVisualDirtyAreas = createHashMap;
+		#endif
 	};
 	true;
 };
@@ -219,6 +383,9 @@ noe_client_nat_onLoadArea = {
 		[_aObj,_remList] call noe_client_nat_deleteChunks;
 		
 		//_aObj callp(optimizeProcess, null);
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		_aObj callv(rebuildCoarseVisuals);
+		#else
 		#ifdef ENABLE_OPTIMIZATION
 		if (count (_aObj getv(toUpdateLevels))>0)then{
 			private _lvls = _aObj getv(toUpdateLevels);
@@ -227,11 +394,17 @@ noe_client_nat_onLoadArea = {
 			{
 				_aObj callp(mergeRegions,_regions select (_x-1) arg _x)
 			} foreach _lvls;
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			_aObj callp(applyRenderBudget,_lvls);
+			#endif
 		};
+		#endif
 		#endif
 
 		if (_isUpdate) exitWith {};
 
+		// Store delta marker only for full load responses; negative packets can be partial updates.
+		_aObj setv(lastUpd,_upd);
 		_aObj setv(state,NAT_LOADING_STATE_LOADED);
 
 		if (_del > 0 && {_del != (_aObj getv(lastDel))}) then {
@@ -281,7 +454,9 @@ noe_client_nat_loadArea = {
 
 	if (!_isUpdateFlag) then {
 		_aObj call ["loadArea"];
+		#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 		[_aObj] call noe_client_nat_procLoad;
+		#endif
 	};
 };
 
@@ -289,13 +464,28 @@ noe_client_nat_loadArea = {
 decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procLoad = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj"];
 	traceformat("============================== PROC[LOAD]: %1",_aObj)
 	{
-		{
-			_x callp(setRenderMode,true);
-		} foreach _x;
-	} foreach (_aObj getv(_regions));
+		private _ltObj = _y select NAT_CHUNKDAT_OBJECT;
+		if !isNullVar(_ltObj) then {
+			if !(_ltObj callv(isInsideRegion)) then {
+				_aObj callp(optimizeSingle,_ltObj);
+			};
+		};
+	} foreach (_aObj getv(chunks));
+
+	private _lvls = _aObj getv(toUpdateLevels);
+	_aObj setv(toUpdateLevels,[]);
+	private _regions = _aObj getv(_regions);
+	{
+		_aObj callp(mergeRegions,_regions select (_x-1) arg _x)
+	} foreach _lvls;
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	_aObj callp(applyRenderBudget,_lvls);
+	#endif
+	#endif
 	#endif
 };
 
@@ -303,6 +493,7 @@ noe_client_nat_procLoad = {
 decl(void(struct_t.AtmosAreaClient))
 noe_client_nat_procUnload = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj"];
 	traceformat("============================== PROC[UNLOAD]: %1",_aObj)
 	{
@@ -311,15 +502,18 @@ noe_client_nat_procUnload = {
 		} foreach _x;
 	} foreach (_aObj getv(_regions));
 	#endif
+	#endif
 };
 
 //добавление эффекторв (оптимизатор)
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procAddEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[ADD]: %1",_ltob)
 	_aObj callp(optimizeSingle,_ltob);
+	#endif
 	#endif
 };
 
@@ -327,26 +521,22 @@ noe_client_nat_procAddEff = {
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procDelEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[DELETE]: %1",_ltob)
 	// private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
 			
 	if (_ltob callv(isInsideRegion)) then {
-		private _rpinf = _ltob getv(regionPosInfo);
-		private _coord = _ltob getv(localChId);
-		private _regions = _aObj getv(_regions) select ((_coord select 2)-1);
-		private _foundRegion = null;
-		{
-			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
-				_foundRegion = _x;
-			};
-		} foreach _regions;
+		(_aObj callp(getRegionDatForVLight,_ltob)) params ["_foundRegion","_regions"];
 		//!temporary code
 		if !isNullVar(_foundRegion) then {
 			//traceformat("founded region for unloading: %1",_foundRegion);
 			_aObj callp(onDecreaseRegion,_regions arg _foundRegion arg _ltob);
+		} else {
+			_ltob setv(regionPosInfo,null);
 		};
 	};
+	#endif
 	#endif
 };
 
@@ -354,11 +544,17 @@ noe_client_nat_procDelEff = {
 decl(void(struct_t.AtmosAreaClient;mesh))
 noe_client_nat_procUpdEff = {
 	#ifdef ENABLE_OPTIMIZATION
+	#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 	params ["_aObj","_ltob"];
 	traceformat("============================== PROC[UPDATE]: %1",_ltob)
 	if (_ltob callv(isInsideRegion)) then {
 		(_aObj callp(getRegionDatForVLight,_ltob)) params ["_region","_rgList"];
-		assert_str(!isNullVar(_region),"Region not found: " + str(_ltob getv(regionPosInfo)));
+		if isNullVar(_region) exitWith {
+			traceformat("Region not found for updated atmos light; rebuilding as single: %1 rpi %2",_ltob arg _ltob getv(regionPosInfo))
+			_ltob setv(regionPosInfo,null);
+			_ltob callv(reloadLight);
+			_aObj callp(optimizeSingle,_ltob);
+		};
 		if (_region callp(isSameCfgType,_ltob)) then {
 			//?what we need here?
 		} else {
@@ -367,6 +563,7 @@ noe_client_nat_procUpdEff = {
 	} else {
 		_aObj callp(optimizeSingle,_ltob);
 	};
+	#endif
 	#endif
 };
 

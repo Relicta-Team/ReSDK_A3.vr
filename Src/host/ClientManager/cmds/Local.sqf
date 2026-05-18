@@ -11,6 +11,8 @@ addCommandWithDescription("escnative",ACCESS_ADMIN,"Установить реж�
 
 addCommandWithDescription("debugvars",ACCESS_ADMIN,"Отображает общую статистику. Параметры: 0 - выкл; 1 - вкл") {IS_LOCAL_COMMAND()};
 
+addCommandWithDescription("debugvoice",PUBLIC_COMMAND,"Отображение статистики войса. Параметры: 0 - выкл; 1 - вкл") {IS_LOCAL_COMMAND()};
+
 addCommandWithDescription("camswitch",ACCESS_ADMIN,"Переключает режим камеры (аркадная/реализм)") {IS_LOCAL_COMMAND()};
 
 addCommandWithDescription("reloadvoice",PUBLIC_COMMAND,"Перезапускает модуль голосового чата") {IS_LOCAL_COMMAND()};

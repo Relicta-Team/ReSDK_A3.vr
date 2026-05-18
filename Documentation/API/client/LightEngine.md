@@ -256,7 +256,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 138](../../../Src/client/LightEngine/LightEngine.sqf#L138)
+File: [client\LightEngine\LightEngine.sqf at line 139](../../../Src/client/LightEngine/LightEngine.sqf#L139)
 ## le_isLoadedLight
 
 Type: function
@@ -264,7 +264,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 168](../../../Src/client/LightEngine/LightEngine.sqf#L168)
+File: [client\LightEngine\LightEngine.sqf at line 173](../../../Src/client/LightEngine/LightEngine.sqf#L173)
 ## le_getLoadedLightCfg
 
 Type: function
@@ -272,7 +272,7 @@ Type: function
 Description: 
 - Param: _obj
 
-File: [client\LightEngine\LightEngine.sqf at line 175](../../../Src/client/LightEngine/LightEngine.sqf#L175)
+File: [client\LightEngine\LightEngine.sqf at line 180](../../../Src/client/LightEngine/LightEngine.sqf#L180)
 ## le_isLightConfig
 
 Type: function
@@ -280,7 +280,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\LightEngine.sqf at line 183](../../../Src/client/LightEngine/LightEngine.sqf#L183)
+File: [client\LightEngine\LightEngine.sqf at line 188](../../../Src/client/LightEngine/LightEngine.sqf#L188)
 ## le_debug_canViewLight
 
 Type: function
@@ -289,7 +289,7 @@ Description:
 - Param: _src
 - Param: _isLightObject
 
-File: [client\LightEngine\LightEngine.sqf at line 223](../../../Src/client/LightEngine/LightEngine.sqf#L223)
+File: [client\LightEngine\LightEngine.sqf at line 228](../../../Src/client/LightEngine/LightEngine.sqf#L228)
 ## le_se_emitFireAtPos
 
 Type: function
@@ -300,7 +300,7 @@ Description:
 - Param: _norm
 - Param: _deleteAfter
 
-File: [client\LightEngine\LightEngine.sqf at line 374](../../../Src/client/LightEngine/LightEngine.sqf#L374)
+File: [client\LightEngine\LightEngine.sqf at line 379](../../../Src/client/LightEngine/LightEngine.sqf#L379)
 ## le_se_emitFireAtActor
 
 Type: function
@@ -311,7 +311,7 @@ Description:
 - Param: _sel (optional, default "spine3")
 - Param: _deleteAfter
 
-File: [client\LightEngine\LightEngine.sqf at line 382](../../../Src/client/LightEngine/LightEngine.sqf#L382)
+File: [client\LightEngine\LightEngine.sqf at line 387](../../../Src/client/LightEngine/LightEngine.sqf#L387)
 # LightEngine_mainThread.sqf
 
 ## loadLightOnObject(_x)
@@ -584,7 +584,7 @@ Replaced value:
 ```sqf
 0.1
 ```
-File: [client\LightEngine\LightRender.sqf at line 153](../../../Src/client/LightEngine/LightRender.sqf#L153)
+File: [client\LightEngine\LightRender.sqf at line 155](../../../Src/client/LightEngine/LightRender.sqf#L155)
 ## gvar(obj,val)
 
 Type: constant
@@ -597,7 +597,7 @@ Replaced value:
 ```sqf
 (obj getvariable #val)
 ```
-File: [client\LightEngine\LightRender.sqf at line 162](../../../Src/client/LightEngine/LightRender.sqf#L162)
+File: [client\LightEngine\LightRender.sqf at line 164](../../../Src/client/LightEngine/LightRender.sqf#L164)
 ## gvardef(obj,val,def)
 
 Type: constant
@@ -611,7 +611,7 @@ Replaced value:
 ```sqf
 (obj getvariable [#val,def])
 ```
-File: [client\LightEngine\LightRender.sqf at line 163](../../../Src/client/LightEngine/LightRender.sqf#L163)
+File: [client\LightEngine\LightRender.sqf at line 165](../../../Src/client/LightEngine/LightRender.sqf#L165)
 ## svar(obj,var,val)
 
 Type: constant
@@ -625,7 +625,7 @@ Replaced value:
 ```sqf
 obj setvariable [#var,val]
 ```
-File: [client\LightEngine\LightRender.sqf at line 164](../../../Src/client/LightEngine/LightRender.sqf#L164)
+File: [client\LightEngine\LightRender.sqf at line 166](../../../Src/client/LightEngine/LightRender.sqf#L166)
 ## timetofadelight
 
 Type: constant
@@ -637,7 +637,7 @@ Replaced value:
 ```sqf
 0.05
 ```
-File: [client\LightEngine\LightRender.sqf at line 165](../../../Src/client/LightEngine/LightRender.sqf#L165)
+File: [client\LightEngine\LightRender.sqf at line 167](../../../Src/client/LightEngine/LightRender.sqf#L167)
 ## le_list_changevis
 
 Type: Variable
@@ -663,7 +663,7 @@ Initial value:
 ```sqf
 startUpdate(le_onchangeview,0)
 ```
-File: [client\LightEngine\LightRender.sqf at line 309](../../../Src/client/LightEngine/LightRender.sqf#L309)
+File: [client\LightEngine\LightRender.sqf at line 311](../../../Src/client/LightEngine/LightRender.sqf#L311)
 ## le_render_handleUpdate
 
 Type: Variable
@@ -675,7 +675,7 @@ Initial value:
 ```sqf
 startUpdate(le_onupdrender,0)
 ```
-File: [client\LightEngine\LightRender.sqf at line 312](../../../Src/client/LightEngine/LightRender.sqf#L312)
+File: [client\LightEngine\LightRender.sqf at line 314](../../../Src/client/LightEngine/LightRender.sqf#L314)
 ## le_initRenderer
 
 Type: function
@@ -720,7 +720,7 @@ Description:
 - Param: _modif
 - Param: _mode
 
-File: [client\LightEngine\LightRender.sqf at line 261](../../../Src/client/LightEngine/LightRender.sqf#L261)
+File: [client\LightEngine\LightRender.sqf at line 263](../../../Src/client/LightEngine/LightRender.sqf#L263)
 # ScriptedEffects.sqf
 
 ## le_se_map
@@ -1031,3 +1031,50 @@ Description:
 
 
 File: [client\LightEngine\ScriptedEffects.sqf at line 531](../../../Src/client/LightEngine/ScriptedEffects.sqf#L531)
+# SEConfigHandlers.sqf
+
+## le_se_internal_randomizeData
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+[]
+```
+File: [client\LightEngine\SEConfigHandlers.sqf at line 32](../../../Src/client/LightEngine/SEConfigHandlers.sqf#L32)
+## le_se_internal_randomizeDelegateMap
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMapFromArray [...
+```
+File: [client\LightEngine\SEConfigHandlers.sqf at line 33](../../../Src/client/LightEngine/SEConfigHandlers.sqf#L33)
+## le_se_randHandle
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+startUpdate(le_se_randOnUpdate,0.3) //! может быть недостаточным для хорошей динамики
+```
+File: [client\LightEngine\SEConfigHandlers.sqf at line 66](../../../Src/client/LightEngine/SEConfigHandlers.sqf#L66)
+## le_se_randOnUpdate
+
+Type: function
+
+Description: 
+- Param: _k
+- Param: _v
+
+File: [client\LightEngine\SEConfigHandlers.sqf at line 20](../../../Src/client/LightEngine/SEConfigHandlers.sqf#L20)

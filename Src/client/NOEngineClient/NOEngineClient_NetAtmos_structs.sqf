@@ -26,7 +26,7 @@
 		последовательно создаем зависимости
 
 	Оптимизатор:
-	
+
 	Оптимизация основана на объединении (батчинге) блоков в регионы с упрощённой отрисовкой.
 
 	При загрузке зоны:
@@ -36,7 +36,7 @@
 	При добавлении блока:
 		если регионов нет
 			optimizeSingle
-			выполняем поиск смежных блоков на соответствие. 
+			выполняем поиск смежных блоков на соответствие.
 			достаточно одного соседнего блока для образования региона.
 			после создания проверяем мержинг
 		если регионы есть
@@ -57,7 +57,7 @@
 			иначе
 				удаляем блок с помощью onDecreaseRegion
 				производим мерж новых зон при наличии
-		иначе	
+		иначе
 			обновляем блок
 			находим ближайший и проверяем возможность расширения
 			после обновления проверяем мержинг
@@ -71,6 +71,27 @@
 //рандомные цвета для зон
 macro_def(noe_client_nat_enable_randomization_color)
 #define ENABLE_RANDOMIZATION_COLOR
+
+//experimental visual budget. Runtime-tunable from debug console.
+#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+decl(int) noe_client_nat_budgetMaxBatchRegionsPerZ = 3;
+decl(int) noe_client_nat_budgetMaxBatchRegionsTotal = 5;
+decl(int) noe_client_nat_budgetMaxSmokeBatchRegionsTotal = 5;
+decl(int) noe_client_nat_budgetMaxSingleLightsPerZ = 8;
+decl(int) noe_client_nat_budgetMaxSingleLightsTotal = 20;
+decl(int) noe_client_nat_budgetMaxFireLights = 3;
+#endif
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+decl(int) noe_client_nat_coarseBudgetMaxFireRegions = 8;
+decl(int) noe_client_nat_coarseBudgetMaxSmokeRegions = 16;
+decl(int) noe_client_nat_coarseBudgetMaxRegionsTotal = 24;
+decl(int) noe_client_nat_coarseVisualOpsPerFrame = NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME;
+decl(float) noe_client_nat_coarseVisualTtl = NOE_CLIENT_NAT_COARSE_VISUAL_TTL;
+decl(bool) noe_client_nat_coarseOcclusionEnabled = true;
+decl(bool) noe_client_nat_coarseOcclusionFireOccludesSmoke = true;
+decl(float) noe_client_nat_coarseOcclusionOverlap = NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP;
+decl(float) noe_client_nat_coarseOcclusionDepth = NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH;
+#endif
 
 #ifndef EDITOR
 	#undef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
@@ -88,23 +109,39 @@ struct(AtmosAreaClient)
 	decl(bool()) def(isLoaded) {(self getv(state)) == NAT_LOADING_STATE_LOADED}
 
 	decl(map<int;any[]>) def(chunks) null; //key:localid,value vec2(cfg,obj)
-	
+
 	//хранящиеся регионы
 	decl(any[]) def(_regions) null //list[9] -> list<AtmosClientBatchRegion
 
 	decl(int[]) def(toUpdateLevels) null
+	#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+	decl(map<string;any>) def(coarseVisuals) null
+	decl(int) def(debugCoarseFire) 0
+	decl(int) def(debugCoarseSmoke) 0
+	decl(int) def(debugCoarsePending) 0
+	decl(int) def(debugCoarseOccluded) 0
+	#endif
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	decl(int) def(debugActiveFireLights) 0
+	decl(int) def(debugActiveBatchRegions) 0
+	decl(int) def(debugActiveSmokeBatchRegions) 0
+	decl(int) def(debugActiveSingles) 0
+	#endif
 
 	decl(void(string)) def(init)
 	{
 		params ["_aId"];
 		self setv(areaId,_aId);
-		self setv(chunks,createHashMap); 
+		self setv(chunks,createHashMap);
 		private _lst = [];
 		_lst resize ATMOS_AREA_SIZE;
 
 		self setv(_regions,_lst apply {[]});
 
 		self setv(toUpdateLevels,[]);
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		self setv(coarseVisuals,createHashMap);
+		#endif
 	}
 
 	//регистрация|перерегистрация эффектов в зоне
@@ -119,16 +156,17 @@ struct(AtmosAreaClient)
 		};
 
 		if (self callv(isLoaded)) then {
+			#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 			self callp(onUpdateChunk,_locid);
 
 			// private _lt = self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT;
 			// self callp(optimizeSingle,_lt);
-		};
-
-		if (_isExist) then {
-			[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procUpdEff;
-		} else {
-			[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procAddEff;
+			if (_isExist) then {
+				[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procUpdEff;
+			} else {
+				[self, self getv(chunks) get _locid select NAT_CHUNKDAT_OBJECT] call noe_client_nat_procAddEff;
+			};
+			#endif
 		};
 	}
 
@@ -140,9 +178,11 @@ struct(AtmosAreaClient)
 		if !isNullVar(_chDat) then {
 			self getv(chunks) deleteAt _locid;
 
+			#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 			private _ltObj = _chDat select NAT_CHUNKDAT_OBJECT;
 			[self,_ltObj] call noe_client_nat_procDelEff;
-			
+			#endif
+
 			// if (_ltObj callv(isInsideRegion)) then {
 			// 	private _rpinf = _ltObj getv(regionPosInfo);
 			// 	private _regions = self getv(_regions) select ((_coord select 2)-1);
@@ -164,11 +204,13 @@ struct(AtmosAreaClient)
 
 	//загружает визуал зоны
 	decl(void()) def(loadArea)
-	{		
+	{
+		#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 		{
 			self callp(onUpdateChunk,_x);
 		} foreach (self callv(getChunkIdList));
-		
+		#endif
+
 		// {
 		// 	{
 		// 		_x callp(setRenderMode,true);
@@ -184,9 +226,33 @@ struct(AtmosAreaClient)
 
 	decl(void()) def(unloadArea)
 	{
+		#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+		self callv(unloadCoarseVisuals);
+		#else
+		{
+			private _levelRegions = _x;
+			{
+				private _region = _x;
+				_region callv(unloadBatchEmitter);
+				{
+					_x setv(regionPosInfo,null);
+				} foreach (_region getv(virtLights));
+			} foreach _levelRegions;
+			_levelRegions resize 0;
+		} foreach (self getv(_regions));
+		self setv(toUpdateLevels,[]);
+
+		{
+			private _ltObj = _y select NAT_CHUNKDAT_OBJECT;
+			if !isNullVar(_ltObj) then {
+				_ltObj setv(regionPosInfo,null);
+			};
+		} foreach (self getv(chunks));
+
 		{
 			self callp(unloadChunkInternal,_x);
 		} foreach (self callv(getChunkIdList));
+		#endif
 
 		//unload regions
 		// {
@@ -196,7 +262,7 @@ struct(AtmosAreaClient)
 		// 	} count _x;
 		// 	false
 		// } count (self getv(_regions));
-		
+
 		//full unload area
 		//self callp(optimizeProcess, null);
 	}
@@ -218,10 +284,10 @@ struct(AtmosAreaClient)
 		private _basePos = _pos;
 		//random offset position
 		_pos = _pos vectorAdd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_Z];
-		
+
 		//creating visuals
 		private _ltObj = self callp(_createVisual,_light arg _pos arg _basePos arg _locChId);
-		
+
 		//saving data
 		_cDat set [NAT_CHUNKDAT_OBJECT,_ltObj];
 	}
@@ -237,7 +303,7 @@ struct(AtmosAreaClient)
 			//create new object
 			self callp(loadChunkInternal,_locid);
 		} else {
-			//update or create light 
+			//update or create light
 			private _ltCfg = _cDat select NAT_CHUNKDAT_CFG;
 			_ltObj callp(updateLight,_ltCfg);
 		};
@@ -247,15 +313,15 @@ struct(AtmosAreaClient)
 	{
 		params ["_locid"];
 		private _cDat = self getv(chunks) get _locid;
-		
+
 		if isNullVar(_cDat) exitWith {};
 		private _ltObj = _cDat select NAT_CHUNKDAT_OBJECT;
 		if isNullVar(_ltObj) exitWith {};
 		self callp(_deleteVisual,_ltObj);
-		
+
 		//так как выгрузка чанка это не unregisterEffects то просто удаляем эмиттеры
 		_ltObj callv(deleteEmitters);
-		
+
 		//_cDat set [NAT_CHUNKDAT_OBJECT,null];
 	}
 
@@ -264,21 +330,299 @@ struct(AtmosAreaClient)
 		params ["_locid"];
 		private _needUpdate = false;
 		if (_locid in (self getv(chunks))) then {
+			#ifndef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
 			self callp(unloadChunkInternal,_locid);
+			#endif
 			_needUpdate = true;
 		};
 		self callp(unregisterEffects,_locid);
-		
+
 		//temporary region cleanup
 		// private _locChId = _locid call atmos_decodeChId;
 		// private _rlst = (self getv(_regions)) select ((_locChId select 2) - 1);
 		// _rlst resize 0;
-		
+
 		//single level update
 		if (_needUpdate) then {
 			//self callp(optimizeProcess, _locid call atmos_decodeChId);
 		};
 	}
+
+	#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+	decl(void()) def(unloadCoarseVisuals)
+	{
+		{
+			_y callv(deleteVisual);
+		} foreach (self getv(coarseVisuals));
+		self setv(coarseVisuals,createHashMap);
+		self setv(debugCoarseFire,0);
+		self setv(debugCoarseSmoke,0);
+		self setv(debugCoarsePending,0);
+		self setv(debugCoarseOccluded,0);
+		noe_client_nat_coarseVisualDirtyAreas deleteAt (str (self getv(areaId)));
+	}
+
+	decl(int()) def(countPendingCoarseVisualOps)
+	{
+		private _pending = 0;
+		{
+			if (((_y getv(deleteAfter)) >= 0) || {(_y getv(visualDirty))}) then {
+				INC(_pending);
+			};
+		} foreach (self getv(coarseVisuals));
+		_pending
+	}
+
+	decl(bool()) def(hasPendingCoarseVisualOps)
+	{
+		(self callv(countPendingCoarseVisualOps)) > 0
+	}
+
+	decl(int(int)) def(processCoarseVisualQueue)
+	{
+		params ["_opsMax"];
+		private _opsDone = 0;
+		private _visuals = self getv(coarseVisuals);
+		private _keysToDelete = [];
+		private _now = tickTime;
+
+		{
+			if (_opsDone >= _opsMax) exitWith {};
+			if (_y callp(isDeleteExpired,_now)) then {
+				if (_y getv(batchIsLoaded)) then {
+					_y callv(deleteVisual);
+					INC(_opsDone);
+				};
+				_keysToDelete pushBack _x;
+			};
+		} foreach _visuals;
+
+		{
+			_visuals deleteAt _x;
+		} foreach _keysToDelete;
+
+		if (_opsDone < _opsMax) then {
+			{
+				if (_opsDone >= _opsMax) exitWith {};
+				if (_y callv(applyPendingVisual)) then {
+					INC(_opsDone);
+				};
+			} foreach _visuals;
+		};
+
+		self setv(debugCoarsePending,self callv(countPendingCoarseVisualOps));
+		_opsDone
+	}
+
+	decl(void()) def(rebuildCoarseVisuals)
+	{
+		private _chunks = self getv(chunks);
+		private _stats = createHashMap;
+		private _visuals = self getv(coarseVisuals);
+		private _fireCfgs = noe_client_nat_ltCfg_fire;
+		private _smokeCfgs = noe_client_nat_ltCfg_smoke;
+
+		{
+			private _cfg = _y select NAT_CHUNKDAT_CFG;
+			private _fireIdx = _fireCfgs find _cfg;
+			private _smokeIdx = _smokeCfgs find _cfg;
+			private _effType = -1;
+			private _level = 0;
+			if (_fireIdx != -1) then {
+				_effType = NAT_ATMOS_EFFTYPE_FIRE;
+				_level = _fireIdx + 1;
+			} else {
+				if (_smokeIdx != -1) then {
+					_effType = NAT_ATMOS_EFFTYPE_SMOKE;
+					_level = _smokeIdx + 1;
+				};
+			};
+			if (_effType == -1) then {continue};
+
+			private _loc = _x call atmos_decodeChId;
+			private _gx = floor ((((_loc select 0) - 1) * NOE_CLIENT_NAT_COARSE_DIVS_XY) / ATMOS_AREA_SIZE);
+			private _gy = floor ((((_loc select 1) - 1) * NOE_CLIENT_NAT_COARSE_DIVS_XY) / ATMOS_AREA_SIZE);
+			private _gz = floor ((((_loc select 2) - 1) * NOE_CLIENT_NAT_COARSE_DIVS_Z) / ATMOS_AREA_SIZE);
+			private _key = format["%1:%2:%3:%4",_effType,_gx,_gy,_gz];
+			private _stat = _stats get _key;
+			if isNullVar(_stat) then {
+				_stat = [
+					_effType,
+					_gx,
+					_gy,
+					_gz,
+					0,
+					0,
+					[ATMOS_AREA_SIZE + 1,ATMOS_AREA_SIZE + 1,ATMOS_AREA_SIZE + 1],
+					[0,0,0],
+					[0,0,0]
+				];
+				_stats set [_key,_stat];
+			};
+
+			_stat set [4,(_stat select 4) + _level];
+			_stat set [5,(_stat select 5) + 1];
+
+			private _mins = _stat select 6;
+			private _maxs = _stat select 7;
+			private _weighted = _stat select 8;
+			for "_i" from 0 to 2 do {
+				_mins set [_i,(_mins select _i) min (_loc select _i)];
+				_maxs set [_i,(_maxs select _i) max (_loc select _i)];
+				_weighted set [_i,(_weighted select _i) + ((_loc select _i) * _level)];
+			};
+		} foreach _chunks;
+
+		private _getAxisBounds = {
+			params ["_idx","_divs"];
+			[
+				(ceil ((_idx * ATMOS_AREA_SIZE) / _divs)) + 1,
+				ceil (((_idx + 1) * ATMOS_AREA_SIZE) / _divs)
+			]
+		};
+
+		private _selectLevel = {
+			params ["_score","_oldLevel"];
+			if (_oldLevel <= 0) exitWith {
+				ifcheck(_score >= 0.66,3,ifcheck(_score >= 0.33,2,1))
+			};
+			private _newLevel = _oldLevel;
+			if (_oldLevel <= 1) then {
+				if (_score >= 0.72) then {
+					_newLevel = 3;
+				} else {
+					if (_score >= 0.38) then {
+						_newLevel = 2;
+					};
+				};
+			} else {
+				if (_oldLevel == 2) then {
+					if (_score < 0.28) then {
+						_newLevel = 1;
+					} else {
+						if (_score >= 0.72) then {
+							_newLevel = 3;
+						};
+					};
+				} else {
+					if (_score < 0.28) then {
+						_newLevel = 1;
+					} else {
+						if (_score < 0.58) then {
+							_newLevel = 2;
+						};
+					};
+				};
+			};
+			_newLevel
+		};
+
+		private _desired = createHashMap;
+		{
+			_y params ["_effType","_gx","_gy","_gz","_sumPower","_activeCount","_mins","_maxs","_weighted"];
+			private _xb = [_gx,NOE_CLIENT_NAT_COARSE_DIVS_XY] call _getAxisBounds;
+			private _yb = [_gy,NOE_CLIENT_NAT_COARSE_DIVS_XY] call _getAxisBounds;
+			private _zb = [_gz,NOE_CLIENT_NAT_COARSE_DIVS_Z] call _getAxisBounds;
+			private _groupVol = ((((_xb select 1) - (_xb select 0) + 1) max 1)
+				* (((_yb select 1) - (_yb select 0) + 1) max 1)
+				* (((_zb select 1) - (_zb select 0) + 1) max 1)) max 1;
+			private _bboxVol = ((((_maxs select 0) - (_mins select 0) + 1) max 1)
+				* (((_maxs select 1) - (_mins select 1) + 1) max 1)
+				* (((_maxs select 2) - (_mins select 2) + 1) max 1)) max 1;
+
+			private _densityScore = (_sumPower / (3 * _bboxVol)) min 1;
+			private _massScore = sqrt ((_sumPower / (3 * _groupVol)) min 1);
+			private _score = ((_densityScore * 0.85) + (_massScore * 0.15)) min 1;
+			private _visual = _visuals get _x;
+			private _oldLevel = ifcheck(isNullVar(_visual),0,_visual getv(cfgLevel));
+			private _cfgLevel = [_score,_oldLevel] call _selectLevel;
+
+			private _cfgList = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_fireCfgs} else {_smokeCfgs};
+			private _cfg = _cfgList select (_cfgLevel - 1);
+			private _startPos = [_xb select 0,_yb select 0,_zb select 0];
+			private _sizes = [(_xb select 1) - (_xb select 0),(_yb select 1) - (_yb select 0)];
+			private _zSize = (_zb select 1) - (_zb select 0);
+			_desired set [_x,[_cfg,_cfgLevel,_effType,_startPos,_sizes,_zSize,_score,_activeCount]];
+		} foreach _stats;
+
+		private _readBudget = {
+			params ["_var","_def"];
+			private _value = missionNamespace getVariable [_var,_def];
+			if (_value < 0) exitWith {1000000};
+			(floor _value) max 0
+		};
+		private _maxFireRegions = ["noe_client_nat_coarseBudgetMaxFireRegions",8] call _readBudget;
+		private _maxSmokeRegions = ["noe_client_nat_coarseBudgetMaxSmokeRegions",16] call _readBudget;
+		private _maxRegionsTotal = ["noe_client_nat_coarseBudgetMaxRegionsTotal",24] call _readBudget;
+
+		private _budgetItems = [];
+		{
+			_y params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+			private _priority = (_score * 100000) + (_cfgLevel * 1000) + _activeCount;
+			_budgetItems pushBack [_priority,_x,_effType];
+		} foreach _desired;
+		_budgetItems sort false;
+
+		private _keep = createHashMap;
+		private _fireKept = 0;
+		private _smokeKept = 0;
+		private _totalKept = 0;
+		{
+			_x params ["_priority","_key","_effType"];
+			private _typeLimit = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_maxFireRegions} else {_maxSmokeRegions};
+			private _typeKept = if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {_fireKept} else {_smokeKept};
+			if ((_totalKept < _maxRegionsTotal) && {_typeKept < _typeLimit}) then {
+				_keep set [_key,true];
+				INC(_totalKept);
+				if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {
+					INC(_fireKept);
+				} else {
+					INC(_smokeKept);
+				};
+			};
+		} foreach _budgetItems;
+
+		{
+			if !(_x in _keep) then {
+				_desired deleteAt _x;
+			};
+		} foreach (keys _desired);
+
+		private _now = tickTime;
+		private _ttl = (missionNamespace getVariable ["noe_client_nat_coarseVisualTtl",NOE_CLIENT_NAT_COARSE_VISUAL_TTL]) max 0;
+		{
+			if !(_x in _desired) then {
+				(_visuals get _x) callp(markInactive,_now + _ttl);
+			};
+		} foreach (keys _visuals);
+
+		private _debugFire = 0;
+		private _debugSmoke = 0;
+		{
+			_y params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+			private _visual = _visuals get _x;
+			if isNullVar(_visual) then {
+				_visual = struct_newp(AtmosClientCoarseVisual,self arg _x arg _cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+				_visuals set [_x,_visual];
+			} else {
+				_visual callp(updateVisual,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+			};
+
+			if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {
+				INC(_debugFire);
+			} else {
+				INC(_debugSmoke);
+			};
+		} foreach _desired;
+
+		self setv(debugCoarseFire,_debugFire);
+		self setv(debugCoarseSmoke,_debugSmoke);
+		self setv(debugCoarsePending,self callv(countPendingCoarseVisualOps));
+		if (self callv(hasPendingCoarseVisualOps)) then {
+			noe_client_nat_coarseVisualDirtyAreas set [str (self getv(areaId)),self];
+		};
+	}
+	#endif
 
 
 	decl(mesh(int;vector3;vector3;vector3)) def(_createVisual)
@@ -291,7 +635,7 @@ struct(AtmosAreaClient)
 		self set ["__debug_visual",_vobj];
 		setLastError("this can be undefined behaviour because self is atmosareaclient. use atmosvirtualstruct to store __debug_visual");
 		#endif
-		
+
 		private _obj = struct_newp(AtmosVirtualLight,_light arg _pos arg _chid arg _basePos);
 
 		#ifdef ENABLE_DRAW_DEBUG_LINES_VIRTUALCHUNKS
@@ -305,7 +649,7 @@ struct(AtmosAreaClient)
 	decl(void(mesh)) def(_deleteVisual)
 	{
 		params ["_obj"];
-		
+
 		#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 		deleteVehicle (self get "__debug_visual");
 		#endif
@@ -321,7 +665,7 @@ struct(AtmosAreaClient)
 	// 	params ["_light","_obj"];
 	// 	private _lightObj = [_light,_obj] call le_loadLight;
 	// 	_obj setvariable ["_atmos_light",_lightObj];
-		
+
 	// 	//! это пока работает плоховато...
 	// 	// private _basePos = _obj getvariable "_basePos";
 	// 	// if (self callp(hasSnapToDownCfg,_light)) then {
@@ -330,7 +674,7 @@ struct(AtmosAreaClient)
 	// 	// 		_obj setposatl ((_itDat select 1) vectoradd [ATMOS_ADDITIONAL_RANGE_XY,ATMOS_ADDITIONAL_RANGE_XY,0]);
 	// 	// 	};
 	// 	// };
-		
+
 	// 	_lightObj
 	// }
 
@@ -344,7 +688,7 @@ struct(AtmosAreaClient)
 	{
 		keys (self getv(chunks))
 	}
-	
+
 	decl(NULL|mesh(vector3)) def(getLightByPos)
 	{
 		params ["_ps"];
@@ -374,13 +718,13 @@ struct(AtmosAreaClient)
 
 	// 		TODO доп оптимизация. валидируем только уровень на который добавлен чанк
 
-	// 		инфо: 
+	// 		инфо:
 	// 		мы можем делать доп оптимизацию по z
 	// 		если в регионе сверху есть регион такого же уровня
 	// 	*/
 	// 	//collect zposes
 	// 	private _chMap = self getv(chunks);
-		
+
 	// 	private _alist = [];
 	// 	_alist resize (ATMOS_AREA_SIZE);
 	// 	_alist = _alist apply {[]};
@@ -395,7 +739,7 @@ struct(AtmosAreaClient)
 	// 		{
 	// 			_x params ["_locPos","_chidloc"];
 	// 			_curZ = (_locpos select 2);
-				
+
 	// 			(_alist select (_curZ-1)) pushBack _locPos;
 	// 			_obj = _chMap get _chidloc select NAT_CHUNKDAT_OBJECT;
 	// 			_mapAssoc set [_locPos,_obj];
@@ -412,22 +756,22 @@ struct(AtmosAreaClient)
 	// 			} count _lvllist;
 	// 		} foreach _levels;
 	// 	};
-		
-		
+
+
 	// 	private _obj = null;
 
 	// 	// Функция для поиска максимального региона с текущей позиции
 	// 	private _findMaxZone = {
 	// 		params ["_pos", "_activeChunks","_curObj"];
 	// 		_pos params ["_x","_y","_z"];
-			
+
 	// 		private _sizeX = 0;
 	// 		private _sizeY = 0;
 
 	// 		// Максимальное расширение по X
 	// 		for "_i" from 1 to ATMOS_AREA_SIZE do {
 	// 			private _pX = [_x + _i, _y, _z];
-				
+
 	// 			if (_pX in _processed) exitWith {};
 
 	// 			// Проверяем, можем ли расшириться по X
@@ -441,12 +785,12 @@ struct(AtmosAreaClient)
 	// 		// Максимальное расширение по Y при зафиксированной ширине _sizeX
 	// 		for "_j" from 1 to ATMOS_AREA_SIZE do {
 	// 			private _canExpandY = true;
-				
+
 	// 			for "_dx" from 0 to _sizeX do {
 	// 				private _pY = [_x + _dx, _y + _j, _z];
 
 	// 				if (_pY in _processed) exitWith {_canExpandY = false};
-					
+
 	// 				// Проверяем, можем ли расшириться по Y
 	// 				if (!(_pY in _activeChunks) || !(_curObj callp(isSameCfgType, _mapAssoc get _pY))) then {
 	// 					_canExpandY = false;
@@ -467,7 +811,7 @@ struct(AtmosAreaClient)
 	// 	private _processZOpt = {
 	// 		params ["_z","_activeChunks"];
 	// 		private _optList = []; //сюда записываются объекты оптимизации
-			
+
 	// 		private _processed = []; // Отслеживание обработанных чанков для уровня
 
 	// 		self getv(_regions) select (_z - 1) resize 0;
@@ -487,7 +831,7 @@ struct(AtmosAreaClient)
 	// 			private _curObj = _mapAssoc get _pos;
 	// 			private _sizes = [_pos, _activeChunks,_curObj] call _findMaxZone;
 	// 			traceformat("  Max size for pos %1 is %2", _pos arg _sizes)
-				
+
 	// 			//ограничение зоны по квадратам. Прим.: 5x5 - ok; 6x6 -> lower to 5
 	// 			//_size = _size - (_size%2);
 
@@ -544,7 +888,7 @@ struct(AtmosAreaClient)
 	// 				_region setv(virtLights,_lproc);
 	// 				_region callp(setRenderMode,true);
 	// 			};
-				
+
 	// 		} foreach _activeChunks;
 
 	// 		//second optimization layer
@@ -574,11 +918,11 @@ struct(AtmosAreaClient)
 	decl(void(struct_t.AtmosVirtualLight)) def(optimizeSingle)
 	{
 		params ["_vlight"];
-		
+
 		private _pos = _vlight getv(localChId);
 		private _z = _pos select 2;
 		private _regions = self getv(_regions) select (_z - 1);
-		
+
 		// Функция для поиска соседних регионов рядом с новым блоком
 		private _findNeighborRegions = {
 			private _neighborRegions = [];
@@ -611,7 +955,7 @@ struct(AtmosAreaClient)
 
 		private _singleOptimize = {
 			traceformat("--- single check for make region %1",_vlight)
-			
+
 			private _tlocid = null;
 			private _id = null;
 			private _chmap = self getv(chunks);
@@ -648,7 +992,11 @@ struct(AtmosAreaClient)
 			if !isNullVar(_lproc) then {
 				_region = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _startPos arg _lproc);
 				_regions pushBack _region;
+				#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+				_region callv(disableBudgetRender);
+				#else
 				_region callp(setRenderMode,true);
+				#endif
 			};
 		};
 
@@ -660,7 +1008,7 @@ struct(AtmosAreaClient)
         {
             private _startPos = _x getv(startPos);
             private _endPos = _x getv(endPos);
-			
+
 			private _expandableRegion = null;
 			private _expandAxis = -1; // Ось расширения: 0 — по X, 1 — по Y
 			private _expandDirection = 0; // Направление: -1 для уменьшения, 1 для увеличения
@@ -738,7 +1086,11 @@ struct(AtmosAreaClient)
 					};
 					_expandableRegion callv(rebuildData);
 					traceformat("UPDATED REGION: %1",_expandableRegion)
+					#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+					_expandableRegion callv(disableBudgetRender);
+					#else
 					_expandableRegion callp(setRenderMode,true);
+					#endif
 					_usedNear = true;
 					break;
 				};
@@ -749,7 +1101,7 @@ struct(AtmosAreaClient)
 		if (!_usedNear) then {
 			call _singleOptimize;
 		};
-		
+
 		self getv(toUpdateLevels) pushBackUnique _z;
 		//self callp(mergeRegions,_regions arg _z);
 	}
@@ -758,22 +1110,22 @@ struct(AtmosAreaClient)
 	decl(void(struct_t.AtmosClientBatchRegion[];int)) def(mergeRegions)
 	{
 		params ["_regions","_z"];
-		
-		
+
+
 		// Функция для проверки, можно ли объединить два региона
 		private _canMerge = {
 			params ["_regionA", "_regionB"];
-			
+
 			// Разные типы батчей
 			if not_equals(_regionA getv(batchCfg),_regionB getv(batchCfg)) exitWith {false};
-			
+
 			//!performance
 			//if (((_regionA getv(sizes)) findAny (_regionB getv(sizes)))==-1)exitWith{false};
 
 			//!performance
 			// if ([0,0]vectordistance(_regionA getv(sizes)) <= 4) exitWith {false};
 			// if ([0,0]vectordistance(_regionB getv(sizes)) <= 4) exitWith {false};
-			
+
 			private _startA = _regionA getv(startPos);
 			private _endA = _regionA getv(endPos);
 			private _startB = _regionB getv(startPos);
@@ -789,13 +1141,13 @@ struct(AtmosAreaClient)
 			// Считаем, что регионы можно объединить, если они прилегают по одной из осей
 			(_adjacentX && {(_startA select 1 == _startB select 1)} && {(_endA select 1 == _endB select 1)}) ||
 			{(_adjacentY && {(_startA select 0 == _startB select 0)} && {(_endA select 0 == _endB select 0)})}
-			
+
 		};
 
 		// Процесс слияния двух регионов в новый
 		private _merge = {
 			params ["_regionA", "_regionB"];
-			
+
 			private _startA = _regionA getv(startPos);
 			private _endA = _regionA getv(endPos);
 			private _startB = _regionB getv(startPos);
@@ -813,7 +1165,7 @@ struct(AtmosAreaClient)
 			];
 			private _size = _newEndPos vectorDiff _newStartPos;
 			private _sizes = _size select [0,2];
-			
+
 			private _lproc = [];
 			_lproc append (_regionA getv(virtLights));
 			_lproc append (_regionB getv(virtLights));
@@ -831,21 +1183,21 @@ struct(AtmosAreaClient)
 		traceformat("+++ region combine: curcount: %1",count _regions)
 		// while {_continueMerge} do {
 		// 	_continueMerge = false;
-			
+
 		// 	private _newRegions = [];
 		// 	private _usedRegions = [];
 
 		// 	for "_i" from 0 to (count _mergedRegions - 1) do {
 		// 		private _regionA = _mergedRegions select _i;
 		// 		//if (_regionA in _usedRegions) then {continue};
-				
+
 		// 		private _mergedRegion = _regionA;
 		// 		private _mergedThisCycle = false;
 
 		// 		for "_j" from (_i + 1) to (count _mergedRegions - 1) do {
 		// 			private _regionB = _mergedRegions select _j;
 		// 			//if (_regionB in _usedRegions) then {continue};
-					
+
 		// 			// Проверяем, можно ли объединить регионы
 		// 			if ([_mergedRegion, _regionB] call _canMerge) then {
 		// 				_mergedRegion = [_mergedRegion, _regionB] call _merge;
@@ -882,6 +1234,8 @@ struct(AtmosAreaClient)
 				//errorformat("  MERGE CHECK %1 to %2 => %3",_freq arg _x arg vec2(_freq,_x) call _canMerge);
 				if ([_freq,_x] call _canMerge) then {
 					_mergedRegion = [_freq,_x] call _merge;
+					_freq callv(unloadBatchEmitter);
+					_x callv(unloadBatchEmitter);
 					array_remove(_mergedRegions,_x);
 					_mergedRegions pushBack _mergedRegion;
 					_continueMerge = true;
@@ -895,19 +1249,152 @@ struct(AtmosAreaClient)
 		};
 
 		if (_anyMerge) then {
+			#ifndef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
 			{
 				_x callp(setRenderMode,true);
 			} foreach _mergedRegions;
+			#endif
 			traceformat("output regions: %1",_mergedRegions)
 			self getv(_regions) set [(_z - 1),_mergedRegions];
 		};
 	}
 
-	//внутренняя функция проверки при расширении
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	decl(void(int[])) def(applyRenderBudget)
+	{
+		params [["_levels",[]]];
+
+		private _levelsToApply = [];
+		for "_i" from 1 to ATMOS_AREA_SIZE do {
+			_levelsToApply pushBack _i;
+		};
+
+		private _regionLevels = self getv(_regions);
+		private _chunks = self getv(chunks);
+		private _maxBatchRegionsPerZ = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxBatchRegionsPerZ",3])) max 0;
+		private _maxBatchRegionsTotal = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxBatchRegionsTotal",5])) max 0;
+		private _maxSmokeBatchRegionsTotal = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxSmokeBatchRegionsTotal",2])) max 0;
+		private _maxSingleLightsPerZ = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxSingleLightsPerZ",1])) max 0;
+		private _maxSingleLightsTotal = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxSingleLightsTotal",30])) max 0;
+		private _maxFireLights = (floor (missionNamespace getVariable ["noe_client_nat_budgetMaxFireLights",3])) max 0;
+		private _batchRegionScores = [];
+		private _fireRegionScores = [];
+
+		{
+			private _z = _x;
+			private _regions = _regionLevels select (_z - 1);
+			private _regionScores = [];
+			{
+				_regionScores pushBack [-(count (_x getv(virtLights))),_foreachIndex,_x];
+			} foreach _regions;
+			_regionScores sort true;
+
+			private _activeRegions = [];
+			{
+				if (count _activeRegions < _maxBatchRegionsPerZ) then {
+					private _region = _x select 2;
+					_activeRegions pushBack _region;
+					_batchRegionScores pushBack [_x select 0,_z,_foreachIndex,_region];
+				};
+			} foreach _regionScores;
+		} foreach _levelsToApply;
+
+		_batchRegionScores sort true;
+		private _activeBatchRegions = [];
+		private _activeSmokeBatchRegions = 0;
+		{
+			if (count _activeBatchRegions >= _maxBatchRegionsTotal) then {continue};
+			private _region = _x select 3;
+			private _effType = _region getv(effType);
+			if (_effType == NAT_ATMOS_EFFTYPE_SMOKE) then {
+				if (_activeSmokeBatchRegions >= _maxSmokeBatchRegionsTotal) then {continue};
+				INC(_activeSmokeBatchRegions);
+			};
+			_activeBatchRegions pushBack _region;
+			if (_effType == NAT_ATMOS_EFFTYPE_FIRE) then {
+				_fireRegionScores pushBack _x;
+			};
+		} foreach _batchRegionScores;
+
+		_fireRegionScores sort true;
+		private _fireLightRegions = [];
+		{
+			if (count _fireLightRegions < _maxFireLights) then {
+				_fireLightRegions pushBack (_x select 3);
+			};
+		} foreach _fireRegionScores;
+
+		private _activeFireLights = count _fireLightRegions;
+		private _debugActiveBatchRegions = 0;
+		private _debugActiveSingles = 0;
+		private _activeSinglesTotal = 0;
+
+		{
+			private _z = _x;
+			if (_z < 1 || {_z > ATMOS_AREA_SIZE}) then {continue};
+
+			private _regions = _regionLevels select (_z - 1);
+			{
+				if (_x in _activeBatchRegions) then {
+					if ((_x getv(effType)) == NAT_ATMOS_EFFTYPE_FIRE) then {
+						_x setv(fireLightEnabled,_x in _fireLightRegions);
+					} else {
+						_x setv(fireLightEnabled,true);
+					};
+					_x callv(enableBudgetRender);
+					INC(_debugActiveBatchRegions);
+				} else {
+					_x setv(fireLightEnabled,false);
+					_x callv(disableBudgetRender);
+				};
+			} foreach _regions;
+
+			private _singleScores = [];
+			{
+				private _ltObj = _y select NAT_CHUNKDAT_OBJECT;
+				if !isNullVar(_ltObj) then {
+					if (!(_ltObj callv(isInsideRegion)) && {((_ltObj getv(localChId)) select 2) == _z}) then {
+						_singleScores pushBack [_x,_ltObj];
+					};
+				};
+			} foreach _chunks;
+			_singleScores sort true;
+
+			private _activeSingles = 0;
+			{
+				private _ltObj = _x select 1;
+				private _isFire = _ltObj callv(isFireType);
+				if (_isFire) then {
+					if (_activeFireLights >= _maxFireLights) then {
+						_ltObj callv(disableSingleRender);
+						continue;
+					};
+				};
+				if (_activeSingles < _maxSingleLightsPerZ && {_activeSinglesTotal < _maxSingleLightsTotal}) then {
+					_ltObj callv(enableSingleRender);
+					INC(_activeSingles);
+					INC(_activeSinglesTotal);
+					INC(_debugActiveSingles);
+					if (_isFire) then {
+						INC(_activeFireLights);
+					};
+				} else {
+					_ltObj callv(disableSingleRender);
+				};
+			} foreach _singleScores;
+		} foreach _levelsToApply;
+
+		self setv(debugActiveFireLights,_activeFireLights);
+		self setv(debugActiveBatchRegions,_debugActiveBatchRegions);
+		self setv(debugActiveSmokeBatchRegions,_activeSmokeBatchRegions);
+		self setv(debugActiveSingles,_debugActiveSingles);
+	}
+	#endif
+
 	decl(bool(vector3;mesh[];struct_t.AtmosClientBatchRegion)) def_ret(_isValidCombPos)
 	{
 		params ["_pos","_lts","_region"];
-		
+
 		private _id = _pos call atmos_encodeChId;
 		private _chs = self getv(chunks);
 		if !(_id in _chs) exitWith {false};
@@ -916,7 +1403,7 @@ struct(AtmosAreaClient)
 
 		//check type of config
 		if !(_region callp(isSameCfgType,_obj)) exitWith {false};
-		
+
 		_lts pushBack _obj;
 		true
 	}
@@ -925,18 +1412,27 @@ struct(AtmosAreaClient)
 	decl(void(struct_t.AtmosClientBatchRegion[];struct_t.AtmosClientBatchRegion;mesh)) def(onDecreaseRegion)
 	{
 		params ["_regionList","_region","_ltObj"];
-		
+
 		[_region getv(virtLights),_ltObj] call arrayDeleteItem;
 		_ltObj setv(regionPosInfo,null);
 		_ltObj callv(reloadLight);
-		
+
 		private _pos = _ltObj getv(localChId);
 
 		private _startPos = _region getv(startPos);
 		private _endPos = _region getv(endPos);
-		
+
 		//removing region from list
 		[_regionList,_region] call arrayDeleteItem;
+		_region callv(unloadBatchEmitter);
+
+		if ((_region getv(zSize)) > 0) exitWith {
+			{
+				_x setv(regionPosInfo,null);
+				_x callv(reloadLight);
+				self getv(toUpdateLevels) pushBackUnique ((_x getv(localChId)) select 2);
+			} foreach (_region getv(virtLights));
+		};
 
 		// Если блок внутри региона, нужно разбить на несколько подрегионов
 		private _newRegions = [];
@@ -998,11 +1494,15 @@ struct(AtmosAreaClient)
 
 			//remove lights
 			_vligts = _vligts - _lproc;
-			
+
 			//traceformat("spliting: %1->%2 cnt: %3",_sp arg _sizes arg count _lproc)
 			private _r = struct_newp(AtmosClientBatchRegion,self arg _sizes arg _sp arg _lproc);
 			_regionList pushBack _r;
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			_r callv(disableBudgetRender);
+			#else
 			_r callp(setRenderMode,true);
+			#endif
 		} foreach _newRegions;
 
 		//enable left lights
@@ -1011,7 +1511,7 @@ struct(AtmosAreaClient)
 			_x callv(reloadLight);
 		} foreach _vligts;
 		//traceformat("LEFT VLIGHTS: %1",_vligts apply {_x getv(localChId)})
-		
+
 		private _z = (_pos select 2);
 		self getv(toUpdateLevels) pushBackUnique _z;
 		//self callp(mergeRegions,_regionList arg _z);
@@ -1023,17 +1523,72 @@ struct(AtmosAreaClient)
 		params ["_ltob"];
 		private _rpinf = _ltob getv(regionPosInfo);
 		private _coord = _ltob getv(localChId);
-		private _regions = _aObj getv(_regions) select ((_coord select 2)-1);
+		private _regionLevels = self getv(_regions);
+		private _regions = _regionLevels select ((_coord select 2)-1);
 		private _foundRegion = null;
+
+		{
+			if (_ltob in (_x getv(virtLights))) exitWith {
+				_foundRegion = _x;
+			};
+		} foreach _regions;
+
+		if isNullVar(_foundRegion) then {
+			{
+				private _levelRegions = _x;
+				{
+					if (_ltob in (_x getv(virtLights))) exitWith {
+						_foundRegion = _x;
+						_regions = _levelRegions;
+					};
+				} foreach _levelRegions;
+				if !isNullVar(_foundRegion) exitWith {};
+			} foreach _regionLevels;
+		};
+
+		if !isNullVar(_foundRegion) exitWith {
+			_ltob setv(regionPosInfo,vec2(_foundRegion getv(startPos),_foundRegion getv(sizes)));
+			[_foundRegion,_regions]
+		};
+
+		if isNullVar(_rpinf) exitWith {[_foundRegion,_regions]};
+
 		{
 			if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
 				_foundRegion = _x;
 			};
 		} foreach _regions;
+
+		if isNullVar(_foundRegion) then {
+			{
+				private _levelRegions = _x;
+				{
+					if (_x callp(isEqualPosInfo,_rpinf select 0 arg _rpinf select 1)) exitWith {
+						_foundRegion = _x;
+						_regions = _levelRegions;
+					};
+				} foreach _levelRegions;
+				if !isNullVar(_foundRegion) exitWith {};
+			} foreach _regionLevels;
+		};
+		if !isNullVar(_foundRegion) then {
+			_ltob setv(regionPosInfo,vec2(_foundRegion getv(startPos),_foundRegion getv(sizes)));
+		};
 		[_foundRegion,_regions]
 	}
 
 endstruct
+
+#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+decl(void())
+noe_client_nat_applyRenderBudgetAll = {
+	{
+		if (_y callv(isLoaded)) then {
+			_y callp(applyRenderBudget,[]);
+		};
+	} foreach noe_client_nat_areas;
+};
+#endif
 
 struct(AtmosVirtualLight)
 	decl(mesh[]) def(effects) null;
@@ -1052,6 +1607,13 @@ struct(AtmosVirtualLight)
 	decl(bool()) def(isSmokeType) {(self getv(id)) in (self getv(_smokeTypes))}
 
 	decl(int) def(effType) -1; //NAT_ATMOS_EFFTYPE_
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	#ifdef ENABLE_OPTIMIZATION
+	decl(bool) def(renderEnabled) false
+	#else
+	decl(bool) def(renderEnabled) true
+	#endif
+	#endif
 
 	decl(void(int;vector3;vector3;vector3)) def(init)
 	{
@@ -1067,11 +1629,6 @@ struct(AtmosVirtualLight)
 	{
 		params ["_cfg","_pos"];
 
-		//can load only outside region
-		if !(self callv(isInsideRegion)) then {
-			self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
-		};
-
 		self setv(id,_cfg);
 		self setv(_pos,_pos);
 
@@ -1081,14 +1638,50 @@ struct(AtmosVirtualLight)
 		if (self callv(isSmokeType)) then {
 			self setv(effType,NAT_ATMOS_EFFTYPE_SMOKE);
 		};
+
+		#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+		if ((self getv(renderEnabled)) && {!(self callv(isInsideRegion))}) then {
+			self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
+		} else {
+			self setv(effects,[]);
+		};
+		#else
+		//can load only outside region
+		if !(self callv(isInsideRegion)) then {
+			self setv(effects,[_cfg arg _pos] call le_se_createUnmanagedEmitter);
+		};
+		#endif
 	}
 
 	decl(void()) def(deleteEmitters)
 	{
+		private _effects = self getv(effects);
+		if isNullVar(_effects) exitWith {
+			self setv(effects,[]);
+		};
 		{
 			deleteVehicle _x;
-		} foreach (self getv(effects));
+		} foreach _effects;
+		[0] call lesc_onLightRemove;
+		self setv(effects,[]);
 	}
+
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+		decl(void()) def(enableSingleRender)
+		{
+			self setv(renderEnabled,true);
+			private _effects = self getv(effects);
+			if (isNullVar(_effects) || {count _effects == 0}) then {
+				self callv(reloadLight);
+			};
+		}
+
+		decl(void()) def(disableSingleRender)
+		{
+			self setv(renderEnabled,false);
+			self callv(deleteEmitters);
+		}
+	#endif
 
 	decl(vector3) def(_pos) [0,0,0];
 
@@ -1096,7 +1689,7 @@ struct(AtmosVirtualLight)
 	{
 		self getv(_pos)
 	}
-	
+
 	decl(vector3()) def(getEmitterRealPos)
 	{
 		private _p = self getv(_unhide_pos);
@@ -1134,7 +1727,7 @@ struct(AtmosVirtualLight)
 		if (_mode) then {
 			private _curPos = self callv(getEmitterPos);
 			self setv(_unhide_pos,_curPos);
-			
+
 			#ifdef NAT_DEBUG_ENABLE_VISUAL_HELPER
 			_s = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 			_s setObjectTexture [0,"#(rgb,8,8,3)color(1,0,0,1)"];
@@ -1160,7 +1753,7 @@ struct(AtmosVirtualLight)
 	{
 		self callv(deleteEmitters);
 	}
-	
+
 	decl(void(int)) def(updateLight)
 	{
 		params ["_cfg"];
@@ -1201,11 +1794,335 @@ struct(AtmosVirtualLight)
 endstruct
 
 //структура региона
+#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+struct(AtmosClientCoarseVisual)
+	decl(string) def(key) ""
+	decl(vector3) def(areaId) null
+	decl(vector3) def(startPos) [0,0,0]
+	decl(vector2) def(sizes) [0,0]
+	decl(int) def(zSize) 0
+	decl(int) def(batchCfg) -1
+	decl(int) def(cfgLevel) 0
+	decl(int) def(effType) -1
+	decl(vector3) def(batchPos) [0,0,0]
+	decl(bool) def(batchIsLoaded) false
+	decl(mesh[]) def(emitter) null
+	decl(float) def(score) 0
+	decl(int) def(activeCount) 0
+	decl(bool) def(visualDirty) false
+	decl(float) def(deleteAfter) -1
+	decl(bool) def(isOccluded) false
+	decl(any[]) def(_occlusion_cache) null
+	decl(int) def(_fireLightIdx) -1
+	decl(float) def(_fireLightIntensity) 0
+
+	decl(void(struct_t.AtmosAreaClient;string;int;int;int;vector3;vector2;int;float;int)) def(init)
+	{
+		params ["_area","_key","_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		self setv(areaId,_area getv(areaId));
+		self setv(key,_key);
+		self callp(updateData,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+		self setv(visualDirty,true);
+	}
+
+	decl(void(int;int;int;vector3;vector2;int;float;int)) def(updateData)
+	{
+		params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		self setv(batchCfg,_cfg);
+		self setv(cfgLevel,_cfgLevel);
+		self setv(effType,_effType);
+		self setv(startPos,_startPos);
+		self setv(sizes,_sizes);
+		self setv(zSize,_zSize);
+		self setv(score,_score);
+		self setv(activeCount,_activeCount);
+		self callv(rebuildData);
+	}
+
+	decl(void(int;int;int;vector3;vector2;int;float;int)) def(updateVisual)
+	{
+		params ["_cfg","_cfgLevel","_effType","_startPos","_sizes","_zSize","_score","_activeCount"];
+		private _needReload = !equals(_cfg,self getv(batchCfg))
+			|| {!equals(_cfgLevel,self getv(cfgLevel))}
+			|| {!equals(_effType,self getv(effType))}
+			|| {!equals(_startPos,self getv(startPos))}
+			|| {!equals(_sizes,self getv(sizes))}
+			|| {!equals(_zSize,self getv(zSize))};
+		self callp(updateData,_cfg arg _cfgLevel arg _effType arg _startPos arg _sizes arg _zSize arg _score arg _activeCount);
+		if (_needReload) then {
+			self setv(visualDirty,true);
+		};
+		self setv(deleteAfter,-1);
+	}
+
+	decl(void()) def(rebuildData)
+	{
+		private _sizes = self getv(sizes);
+		private _zSize = self getv(zSize);
+		private _chid = [self getv(areaId),self getv(startPos)] call atmos_localChunkIdToGlobal;
+		private _pos = _chid call atmos_chunkIdToPos;
+		self setv(batchPos,_pos vectorAdd vec3((_sizes select 0) / 2,(_sizes select 1) / 2,_zSize / 2));
+	}
+
+	decl(void(float)) def(markInactive)
+	{
+		params ["_deleteAfter"];
+		if ((self getv(deleteAfter)) < 0) then {
+			self setv(deleteAfter,_deleteAfter);
+		};
+		self setv(visualDirty,false);
+	}
+
+	decl(bool(float)) def(isDeleteExpired)
+	{
+		params ["_now"];
+		private _deleteAfter = self getv(deleteAfter);
+		(_deleteAfter >= 0) && {_now >= _deleteAfter}
+	}
+
+	decl(NULL|any()) def(getOcclusionScreenData)
+	{
+		private _pos = self getv(batchPos);
+		private _sizes = self getv(sizes);
+		private _hx = ((_sizes select 0) / 2) + ATMOS_SIZE_HALF;
+		private _hy = ((_sizes select 1) / 2) + ATMOS_SIZE_HALF;
+		private _hz = ((self getv(zSize)) / 2) + ATMOS_SIZE_HALF;
+
+		private _camPos = asltoatl eyepos player;
+		private _dist = _camPos distance _pos;
+		private _delta = _camPos vectorDiff _pos;
+		if (((abs (_delta select 0)) <= (_hx + 1)) && {((abs (_delta select 1)) <= (_hy + 1)) && {((abs (_delta select 2)) <= (_hz + 2))}}) exitWith {
+			[_dist,0,0,0,1,1,self getv(effType),self]
+		};
+
+		private _hasProjection = false;
+		private _minX = 999999;
+		private _minY = 999999;
+		private _maxX = -999999;
+		private _maxY = -999999;
+		private _sp = [];
+		{
+			_sp = worldToScreen (_pos vectorAdd _x);
+			if !(_sp isEqualTo []) then {
+				_hasProjection = true;
+				private _sx = _sp select 0;
+				private _sy = _sp select 1;
+				_minX = _minX min _sx;
+				_minY = _minY min _sy;
+				_maxX = _maxX max _sx;
+				_maxY = _maxY max _sy;
+			};
+		} foreach [
+			[0,0,0],
+			[-_hx,-_hy,-_hz],
+			[_hx,-_hy,-_hz],
+			[-_hx,_hy,-_hz],
+			[_hx,_hy,-_hz],
+			[-_hx,-_hy,_hz],
+			[_hx,-_hy,_hz],
+			[-_hx,_hy,_hz],
+			[_hx,_hy,_hz]
+		];
+		if (!_hasProjection) exitWith {null};
+		if ((_maxX < 0) || {_minX > 1 || {_maxY < 0 || {_minY > 1}}}) exitWith {null};
+
+		_minX = (_minX max 0) min 1;
+		_minY = (_minY max 0) min 1;
+		_maxX = (_maxX max 0) min 1;
+		_maxY = (_maxY max 0) min 1;
+		if (((_maxX - _minX) <= 0.001) || {((_maxY - _minY) <= 0.001)}) exitWith {null};
+
+		[_dist,0,_minX,_minY,_maxX,_maxY,self getv(effType),self]
+	}
+
+	decl(void(bool)) def(setOcclusionHidden)
+	{
+		params ["_hide"];
+		if !(self getv(batchIsLoaded)) exitWith {
+			self setv(isOccluded,false);
+			self setv(_occlusion_cache,[]);
+		};
+
+		private _emitters = self getv(emitter);
+		if isNullVar(_emitters) exitWith {};
+
+		private _sameState = equals(_hide,self getv(isOccluded));
+		private _fireLightIdx = self getv(_fireLightIdx);
+
+		if (_hide) then {
+			if (!_sameState) then {
+				self setv(isOccluded,true);
+				private _cache = [];
+				{
+					if isNullReference(_x) then {continue};
+					_cache set [_foreachIndex,getposatl _x];
+					_x setposatl [0,0,0];
+				} foreach _emitters;
+				self setv(_occlusion_cache,_cache);
+			};
+			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
+				private _fireLight = _emitters select _fireLightIdx;
+				if !isNullReference(_fireLight) then {
+					_fireLight setLightIntensity 0;
+				};
+			};
+		} else {
+			if (_sameState) exitWith {};
+			self setv(isOccluded,false);
+			private _cache = self getv(_occlusion_cache);
+			if isNullVar(_cache) then {_cache = []};
+			{
+				if isNullReference(_x) then {continue};
+				if (_foreachIndex < count _cache) then {
+					private _oldPos = _cache select _foreachIndex;
+					if !isNullVar(_oldPos) then {
+						_x setposatl _oldPos;
+					};
+				};
+			} foreach _emitters;
+			self setv(_occlusion_cache,[]);
+			if ((_fireLightIdx >= 0) && {_fireLightIdx < count _emitters}) then {
+				private _fireLight = _emitters select _fireLightIdx;
+				if !isNullReference(_fireLight) then {
+					_fireLight setLightIntensity ((self getv(_fireLightIntensity)) max 0);
+				};
+			};
+		};
+	}
+
+	decl(bool()) def(applyPendingVisual)
+	{
+		if ((self getv(deleteAfter)) >= 0) exitWith {false};
+		if !(self getv(visualDirty)) exitWith {false};
+
+		if (self getv(batchIsLoaded)) then {
+			self callv(reloadVisual);
+		} else {
+			self callv(loadVisual);
+		};
+		self setv(visualDirty,false);
+		true
+	}
+
+	decl(void()) def(reloadVisual)
+	{
+		self callv(deleteVisual);
+		self callv(loadVisual);
+	}
+
+	decl(void()) def(loadVisual)
+	{
+		if (self getv(batchIsLoaded)) exitWith {};
+
+		self setv(isOccluded,false);
+		self setv(_occlusion_cache,[]);
+		self setv(_fireLightIdx,-1);
+		self setv(_fireLightIntensity,0);
+
+		private _renderZone = self getv(sizes);
+		private _renderDepth = self getv(zSize);
+		private _funcHandle = {
+			params ["_o","_p","_v","_alias"];
+
+			if (_p == "setLightIntensity") then {
+				self setv(_fireLightIdx,call le_se_getCurrentEmitterIndex);
+				self setv(_fireLightIntensity,_v);
+			};
+
+			if !isNullVar(_renderZone) then {
+				_renderZone params ["_szX","_szY"];
+				private _szZ = _renderDepth;
+
+				if (_alias == "Пламя") then {
+					if (_p == "setParticleRandom") then {
+						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+						_old set [0,_szX / 2 + ATMOS_SIZE_HALF];
+						_old set [1,_szY / 2 + ATMOS_SIZE_HALF];
+						if (_szZ > 0) then {
+							_old set [2,_szZ / 2 + ATMOS_SIZE_HALF];
+						};
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+					};
+					if (_p == "setParticleParams") then {
+						private _size = [_p,"size",_v] call le_se_getParticleOption;
+						private _scale = (((_szX + _szY) / 2) / 2) max 1;
+						[_p,"size",_v,_size apply {_x * _scale}] call le_se_setParticleOption;
+					};
+				};
+
+				if (_alias == "Искры") then {
+					if (_p == "setDropInterval") then {
+						[_p,"interval",_v,1000] call le_se_setParticleOption;
+					};
+				};
+
+				if (_alias == "Преломление") then {
+					if (_p == "setDropInterval") then {
+						[_p,"interval",_v,1000] call le_se_setParticleOption;
+					};
+				};
+
+				if (_alias == "Частицы 1") then {
+					if (_p == "setParticleParams") then {
+						private _size = [_p,"size",_v] call le_se_getParticleOption;
+						private _scale = (((_szX + _szY) / 2) / 5) max 1;
+						[_p,"size",_v,_size apply {_x * _scale}] call le_se_setParticleOption;
+					};
+					if (_p == "setParticleRandom") then {
+						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
+						_old set [0,_szX / 2 + ATMOS_SIZE_HALF];
+						_old set [1,_szY / 2 + ATMOS_SIZE_HALF];
+						if (_szZ > 0) then {
+							_old set [2,_szZ / 2 + ATMOS_SIZE_HALF];
+						};
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
+					};
+					if (_p == "setDropInterval") then {
+						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
+						private _cval = (_szX + _szY) / 2;
+						private _newdrop = linearconversion [0,10,_cval,_dropInterval,_dropInterval / 50,true];
+						[_p,"interval",_v,_newdrop] call le_se_setParticleOption;
+					};
+				};
+			};
+		};
+
+		self setv(emitter,[self getv(batchCfg) arg self getv(batchPos) arg _funcHandle] call le_se_createUnmanagedEmitter);
+		self setv(batchIsLoaded,true);
+	}
+
+	decl(void()) def(deleteVisual)
+	{
+		if (self getv(batchIsLoaded)) then {
+			self setv(batchIsLoaded,false);
+			self setv(isOccluded,false);
+			self setv(_occlusion_cache,[]);
+			deleteVehicle (self getv(emitter));
+			[0] call lesc_onLightRemove;
+			self setv(emitter,null);
+			self setv(_fireLightIdx,-1);
+			self setv(_fireLightIntensity,0);
+		};
+	}
+
+	decl(void()) def(del)
+	{
+		self callv(deleteVisual);
+	}
+
+	decl(string()) def(str)
+	{
+		format["ACV:%1 cfg:%2 lvl:%3 cnt:%4 score:%5",self getv(key),self getv(batchCfg),self getv(cfgLevel),self getv(activeCount),self getv(score)]
+	}
+endstruct
+#endif
+
 struct(AtmosClientBatchRegion)
 	//локальные точки начала и конца зоны
 	decl(vector3) def(startPos) [0,0,0]
 	decl(vector3) def(endPos) [0,0,0]
 	decl(vector2) def(sizes) [0,0] //размер зоны
+	decl(int) def(zSize) 0
 
 	decl(vector3) def(areaId) null //айди зоны
 
@@ -1226,7 +2143,7 @@ struct(AtmosClientBatchRegion)
 	//размер зоны оптимизации vec2
 	decl(vector2) def(renderZone) null
 	//уменьшение дропа частиц
-	decl(float) def(decZoneRend) null 
+	decl(float) def(decZoneRend) null
 
 	//references to AtmosVirtualLight
 	decl(AtmosVirtualLight[]) def(virtLights) null //list<AtmosVirtualLight>
@@ -1249,8 +2166,9 @@ struct(AtmosClientBatchRegion)
 	decl(void()) def(rebuildData)
 	{
 		private _sizes = self getv(sizes);
+		private _zSize = self getv(zSize);
 
-		self setv(endPos,(self getv(startPos)) vectorAdd _sizes);
+		self setv(endPos,(self getv(startPos)) vectorAdd vec3(_sizes select 0,_sizes select 1,_zSize));
 
 		//define batchpos
 		private _chid = [self getv(areaId),self getv(startPos)] call atmos_localChunkIdToGlobal;
@@ -1259,7 +2177,7 @@ struct(AtmosClientBatchRegion)
 		private _midPos = _pos vectorAdd [
 			(_sizes select 0)/2,
 			(_sizes select 1)/2,
-			0
+			_zSize/2
 		];
 		self setv(batchPos,_midPos);
 	}
@@ -1268,11 +2186,12 @@ struct(AtmosClientBatchRegion)
 	{
 		params ["_area","_sizes","_startPos",["_virtLights",[]]];
 		self setv(startPos,_startPos);
-		private _endPos = _startPos vectorAdd _sizes;
+		self setv(zSize,0);
+		private _endPos = _startPos vectorAdd [_sizes select 0,_sizes select 1,self getv(zSize)];
 		self setv(endPos,_endPos);
 		self setv(sizes,_sizes);
 		self setv(virtLights,_virtLights);
-		
+
 		self setv(areaId,_area getv(areaId));
 
 		{
@@ -1302,7 +2221,7 @@ struct(AtmosClientBatchRegion)
 		private _midPos = _pos vectorAdd [
 			(_sizes select 0)/2,
 			(_sizes select 1)/2,
-			0
+			(self getv(zSize))/2
 		];
 		self setv(batchPos,_midPos);
 	}
@@ -1317,7 +2236,7 @@ struct(AtmosClientBatchRegion)
 		self callv(unloadBatchEmitter);
 	}
 
-	//выполняет задание по ближайшим блокам зоны. 
+	//выполняет задание по ближайшим блокам зоны.
 	// в параметры qtask отдается объект AtmosVirtualLight (при наличии) и позиция
 	decl(void(any)) def(nearBlocksQuery)
 	{
@@ -1361,17 +2280,53 @@ struct(AtmosClientBatchRegion)
 	{
 		params ["_mode"];
 		if (_mode) then {
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			self setv(fireLightEnabled,true);
+			{
+				_x callv(disableSingleRender);
+			} foreach (self getv(virtLights));
+			#else
 			{
 				_x callv(deleteEmitters);
 			} foreach (self getv(virtLights));
+			#endif
 			self callv(reloadBatchEmitter);
 		} else {
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			{
+				_x callv(enableSingleRender);
+			} foreach (self getv(virtLights));
+			#else
 			{
 				_x callv(reloadLight);
 			} foreach (self getv(virtLights));
+			#endif
 			self callv(unloadBatchEmitter);
 		};
 	}
+
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	decl(void()) def(enableBudgetRender)
+	{
+		{
+			_x callv(disableSingleRender);
+		} foreach (self getv(virtLights));
+		if ((self getv(batchIsLoaded)) && {not_equals(self getv(_fireLightLoaded),self getv(fireLightEnabled))}) exitWith {
+			self callv(reloadBatchEmitter);
+		};
+		if !(self getv(batchIsLoaded)) then {
+			self callv(loadBatchEmitter);
+		};
+	}
+
+	decl(void()) def(disableBudgetRender)
+	{
+		self callv(unloadBatchEmitter);
+		{
+			_x callv(disableSingleRender);
+		} foreach (self getv(virtLights));
+	}
+	#endif
 
 	decl(void(bool)) def(setCull)
 	{
@@ -1394,7 +2349,7 @@ struct(AtmosClientBatchRegion)
 			//traceformat("SHOWING BATCH; cull %1",_cull_cache);
 			{
 				if equals(_ncuIdx,_foreachIndex) then {continue};
-				
+
 				_x setposatl (_cull_cache select _foreachIndex);
 			} foreach (self getv(emitter));
 			self setv(_cull_cache,[]);
@@ -1406,6 +2361,10 @@ struct(AtmosClientBatchRegion)
 	decl(int) def(batchCfg) -1 //конфиг батч эмиттера
 	decl(vector3) def(batchPos) [0,0,0] //глобальная позиция батч эмиттера
 	decl(bool) def(batchIsLoaded) false //загружен ли визуал
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+	decl(bool) def(fireLightEnabled) true
+	decl(bool) def(_fireLightLoaded) false
+	#endif
 	decl(mesh[]) def(emitter) null //массив на world эмиттеры
 
 	decl(bool) def(canUseCullOpt) false
@@ -1430,17 +2389,22 @@ struct(AtmosClientBatchRegion)
 	decl(void()) def(loadBatchEmitter)
 	{
 		if (self getv(batchIsLoaded)) exitWith {};
-		
+
 		self setv(isCulled,false);
 		self setv(_cull_cache,[]);
 		self setv(_nocullLight,-1);
 
 		private _renderZone = self getv(sizes);
+		private _renderDepth = self getv(zSize);
 		private _decZoneRend = self getv(decZoneRend);
+		#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+		private _fireLightEnabled = self getv(fireLightEnabled);
+		private _fireLightScale = linearconversion [1,16,count (self getv(virtLights)),1,3,true];
+		#endif
 		private _funcHandle = {
 			params ["_o","_p","_v","_alias"];
 			//use le_se_getParticleOption, le_se_setParticleOption for change object options
-			
+
 			if !isNullVar(_decZoneRend) then {
 				if (_p == "setDropInterval") then {
 					private _dint = [_p,"interval",_v] call le_se_getParticleOption;
@@ -1453,22 +2417,26 @@ struct(AtmosClientBatchRegion)
 			//оптимизация батченной зоны
 			if !isNullVar(_renderZone) then {
 				_renderZone params ["_szX","_szY"];
+				private _szZ = _renderDepth;
 				if (_alias == "Свет огня") then {
 					self setv(_nocullLight,call le_se_getCurrentEmitterIndex);
 				};
 				if (_alias == "Пламя") then {
-					if (_p == "setparticlerandom") then {
-						
+					if (_p == "setParticleRandom") then {
+
 						//update position
 						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
 						_old set [0,_szX/2 + ATMOS_SIZE_HALF];
 						_old set [1,_szY/2 + ATMOS_SIZE_HALF];
+						if (_szZ > 0) then {
+							_old set [2,_szZ/2 + ATMOS_SIZE_HALF];
+						};
 						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
 
-						
+
 					};
 					//update drop
-					if (_p == "setdropinterval") then {
+					if (_p == "setDropInterval") then {
 						// private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
 						// [_p,"interval",_v,_dropInterval
 						// // /_renderZone
@@ -1499,19 +2467,19 @@ struct(AtmosClientBatchRegion)
 				};
 				//disable sparks
 				if (_alias == "Искры") then {
-					if (_p == "setdropinterval") then {
+					if (_p == "setDropInterval") then {
 						[_p,"interval",_v,1000] call le_se_setParticleOption;
 					};
 				};
 				//disable refract
 				if (_alias == "Преломление") then {
-					if (_p == "setdropinterval") then {
+					if (_p == "setDropInterval") then {
 						[_p,"interval",_v,1000] call le_se_setParticleOption;
 					};
 				};
 				//smoke
 				if (_alias == "Частицы 1") then {
-					if (_p == "setparticleparams") then {
+					if (_p == "setParticleParams") then {
 						private _size = [_p,"size",_v] call le_se_getParticleOption;
 						//["DEFSIZE: %1",_size] call cprint;
 						[_p,"size",_v,_size apply {
@@ -1519,21 +2487,32 @@ struct(AtmosClientBatchRegion)
 							_svr max _x
 						}] call le_se_setParticleOption;
 
-						_old = [_p,"lifeTime",_v] call le_se_getParticleOption;
-						
+						private _old = [_p,"lifeTime",_v] call le_se_getParticleOption;
+
 						private _cval = (_szX+_szY)/2;
 						private _newdrop = linearconversion [0,10,_cval,_old,_old*5,true];
 
 						[_p,"lifeTime",_v,_old] call le_se_setParticleOption;
+
+						#ifdef ENABLE_RANDOMIZATION_COLOR
+						//random color
+						private _colorArr = [_p,"color",_v] call le_se_getParticleOption;
+						private _rndClr = [rand(0,1),rand(0,1),rand(0,1),1];
+						_colorArr = _colorArr apply {_rndClr};
+						[_p,"color",_v,_colorArr] call le_se_setParticleOption;
+						#endif
 					};
-					if (_p == "setparticlerandom") then {
+					if (_p == "setParticleRandom") then {
 						//update position
 						private _old = [_p,"positionVar",_v] call le_se_getParticleOption;
 						_old set [0,_szX/2 + ATMOS_SIZE_HALF];
 						_old set [1,_szY/2 + ATMOS_SIZE_HALF];
-						[_p,"positionVar",_v,_old] call le_se_setParticleOption;						
+						if (_szZ > 0) then {
+							_old set [2,_szZ/2 + ATMOS_SIZE_HALF];
+						};
+						[_p,"positionVar",_v,_old] call le_se_setParticleOption;
 					};
-					if (_p == "setdropinterval") then {
+					if (_p == "setDropInterval") then {
 						private _dropInterval = [_p,"interval",_v] call le_se_getParticleOption;
 						//[_p,"interval",_v,_dropInterval/((_szX+_szY)/2)] call le_se_setParticleOption;
 						private _cval = (_szX+_szY)/2;
@@ -1542,13 +2521,48 @@ struct(AtmosClientBatchRegion)
 					};
 				};
 			};
-			
-			
+
+
 
 		};
-		
-		self setv(emitter,[self getv(batchCfg) arg self getv(batchPos) arg _funcHandle] call le_se_createUnmanagedEmitter);
+
+		private _emitters = [self getv(batchCfg) arg self getv(batchPos) arg _funcHandle] call le_se_createUnmanagedEmitter;
+		#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+		if ((self getv(effType)) == NAT_ATMOS_EFFTYPE_FIRE) then {
+			private _fireLightIdx = self getv(_nocullLight);
+			if (_fireLightIdx >= 0 && {_fireLightIdx < count _emitters}) then {
+				private _fireLight = _emitters select _fireLightIdx;
+				if (!_fireLightEnabled) then {
+					deleteVehicle _fireLight;
+					_emitters deleteAt _fireLightIdx;
+					self setv(_nocullLight,-1);
+					[0] call lesc_onLightRemove;
+				} else {
+					private _baseIntensity = 6754.07;
+					private _rndIntensity = [-1000,-500];
+					_fireLight setLightIntensity ((_baseIntensity + rand(_rndIntensity select 0,_rndIntensity select 1)) * _fireLightScale) min 18000;
+					startAsyncInvoke
+					{
+						params ["_t","_light","_base","_rng","_scale"];
+						if isNullReference(_light) exitWith {true};
+						if (tickTime < _t) exitWith {false};
+						_this set [0,tickTime + rand(0.03,0.05)];
+						_light setLightIntensity ((_base + rand(_rng select 0,_rng select 1)) * _scale) min 18000;
+						false
+					},
+					{},
+					[tickTime,_fireLight,_baseIntensity,_rndIntensity,_fireLightScale]
+					endAsyncInvoke
+				};
+			};
+		};
+		#endif
+
+		self setv(emitter,_emitters);
 		self setv(batchIsLoaded,true);
+		#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+		self setv(_fireLightLoaded,_fireLightEnabled && {(self getv(_nocullLight)) >= 0});
+		#endif
 
 		#ifdef ENABLE_DRAW_DEBUG_LINES_REGIONS
 		self getv(sizes) params ["_ddlX","_ddlY"];
@@ -1578,7 +2592,11 @@ struct(AtmosClientBatchRegion)
 	{
 		if (self getv(batchIsLoaded)) then {
 			self setv(batchIsLoaded,false);
+			#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+			self setv(_fireLightLoaded,false);
+			#endif
 			deleteVehicle (self getv(emitter));
+			[0] call lesc_onLightRemove;
 			self setv(emitter,null);
 
 			#ifdef ENABLE_DRAW_DEBUG_LINES_REGIONS
@@ -1628,6 +2646,6 @@ _t = diag_tickTime;
 _aobj call ["optimizeSingle",[_av]];
 
 
-diag_tickTime - _t; 
+diag_tickTime - _t;
 
 */

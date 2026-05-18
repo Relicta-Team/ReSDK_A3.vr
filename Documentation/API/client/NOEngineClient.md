@@ -633,6 +633,18 @@ Description:
 File: [client\NOEngineClient\NOEngineClientInit.sqf at line 159](../../../Src/client/NOEngineClient/NOEngineClientInit.sqf#L159)
 # NOEngineClient_AtmosOptimizer.sqf
 
+## AOPT_CLI_DISABLE_RENDER_CULLING
+
+Type: constant
+
+Description: temporary perf test: disables continuous batch-region z-pass culling
+
+
+Replaced value:
+```sqf
+
+```
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 14](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L14)
 ## aopt_cli_enableSystem
 
 Type: Variable
@@ -644,7 +656,7 @@ Initial value:
 ```sqf
 !false
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 14](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L14)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 17](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L17)
 ## aopt_cli_handler
 
 Type: Variable
@@ -656,7 +668,7 @@ Initial value:
 ```sqf
 -1
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 17](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L17)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 20](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L20)
 ## aopt_cli_thd
 
 Type: Variable
@@ -668,7 +680,7 @@ Initial value:
 ```sqf
 threadNull
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 19](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L19)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 22](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L22)
 ## aopt_cli_lastUpd
 
 Type: Variable
@@ -680,7 +692,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 21](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L21)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 24](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L24)
 ## aopt_cli_prevCallTime
 
 Type: Variable
@@ -692,7 +704,7 @@ Initial value:
 ```sqf
 0
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 23](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L23)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 26](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L26)
 ## aopt_cli_culledCnt
 
 Type: Variable
@@ -704,7 +716,7 @@ Initial value:
 ```sqf
 0 //отсеченные по видимости на буфере глубины
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 26](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L26)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 29](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L29)
 ## aopt_cli_gbuffCull
 
 Type: Variable
@@ -716,7 +728,7 @@ Initial value:
 ```sqf
 0 //отсеченные по видимости на буфере геометрии
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 28](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L28)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 31](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L31)
 ## aopt_cli_debug_listobs
 
 Type: Variable
@@ -728,7 +740,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 246](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L246)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 253](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L253)
 ## aopt_cli_debug_thread
 
 Type: Variable
@@ -740,12 +752,12 @@ Initial value:
 ```sqf
 threadNull
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 248](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L248)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 255](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L255)
 ## aopt_cli_thd
 
 Type: Variable
 
-> Exists if **NET_ATMOS_OPTIMIZATION_RENDER** defined
+> Exists if **AOPT_CLI_DISABLE_RENDER_CULLING** not defined
 
 Description: 
 
@@ -754,7 +766,7 @@ Initial value:
 ```sqf
 threadStart(threadNew(_looped))
 ```
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 308](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L308)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 316](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L316)
 ## aopt_cli_process
 
 Type: function
@@ -762,7 +774,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 31](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L31)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 34](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L34)
 ## aopt_cli_processZPass
 
 Type: function
@@ -772,7 +784,7 @@ Description:
 - Param: _cameraDir
 - Param: _objects
 
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 119](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L119)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 126](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L126)
 ## aopt_cli_checkOverlapWithZone
 
 Type: function
@@ -781,7 +793,7 @@ Description:
 - Param: _screenBoxA
 - Param: _screenBoxB
 
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 203](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L203)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 210](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L210)
 ## aopt_cli_checkFullOverlap
 
 Type: function
@@ -790,7 +802,7 @@ Description:
 - Param: _screenBoxA
 - Param: _screenBoxB
 
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 220](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L220)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 227](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L227)
 ## aopt_cli_testItsc
 
 Type: function
@@ -798,7 +810,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 251](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L251)
+File: [client\NOEngineClient\NOEngineClient_AtmosOptimizer.sqf at line 258](../../../Src/client/NOEngineClient/NOEngineClient_AtmosOptimizer.sqf#L258)
 # NOEngineClient_chunkDebug.sqf
 
 ## upside
@@ -1407,6 +1419,114 @@ Replaced value:
 
 ```
 File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 51](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L51)
+## NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+
+Type: constant
+
+Description: Experimental client visual budget. Keeps custom render limits behind a switch.
+
+
+Replaced value:
+```sqf
+
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 55](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L55)
+## NOE_CLIENT_NAT_COARSE_DIVS_XY
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+4
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 61](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L61)
+## NOE_CLIENT_NAT_COARSE_DIVS_Z
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+4
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 63](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L63)
+## NOE_CLIENT_NAT_COARSE_VISUAL_TTL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+4
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 65](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L65)
+## NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 67](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L67)
+## NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 69](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L69)
+## NOE_CLIENT_NAT_COARSE_OCCLUSION_DELAY
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0.15
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 71](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L71)
+## NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0.45
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 73](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L73)
+## NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0.5
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.hpp at line 75](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.hpp#L75)
 # NOEngineClient_NetAtmos.sqf
 
 ## NOE_NETATMOS_UPDATE_DELAY
@@ -1493,6 +1613,68 @@ Initial value:
 []
 ```
 File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 36](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L36)
+## noe_client_nat_coarseVisualHandleUpdate
+
+Type: Variable
+
+> Exists if **NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS** defined
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 39](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L39)
+## noe_client_nat_coarseOcclusionHandleUpdate
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+-1
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 41](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L41)
+## noe_client_nat_coarseOcclusionCount
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 43](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L43)
+## noe_client_nat_coarseOcclusionPrevCallTime
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+0
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 45](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L45)
+## noe_client_nat_coarseVisualDirtyAreas
+
+Type: Variable
+
+Description: 
+
+
+Initial value:
+```sqf
+createHashMap
+```
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 47](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L47)
 ## noe_client_nat_const_nearList
 
 Type: Variable
@@ -1504,7 +1686,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 402](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L402)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 599](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L599)
 ## noe_client_nat_isEnabled
 
 Type: function
@@ -1520,7 +1702,37 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 39](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L39)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 51](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L51)
+## noe_client_nat_processCoarseVisualQueue
+
+Type: function
+
+> Exists if **NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS** defined
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 63](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L63)
+## noe_client_nat_processCoarseOcclusion
+
+Type: function
+
+> Exists if **NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS** defined
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 81](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L81)
+## noe_client_nat_applyCoarseVisualBudgetAll
+
+Type: function
+
+> Exists if **NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS** defined
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 184](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L184)
 ## noe_client_nat_setEnabled
 
 Type: function
@@ -1528,7 +1740,7 @@ Type: function
 Description: 
 - Param: _mode
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 53](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L53)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 197](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L197)
 ## noe_client_nat_onUpdate
 
 Type: function
@@ -1536,7 +1748,7 @@ Type: function
 Description: 
 
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 100](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L100)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 264](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L264)
 ## noe_client_nat_getArea
 
 Type: function
@@ -1544,7 +1756,7 @@ Type: function
 Description: 
 - Param: _areaId
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 142](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L142)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 306](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L306)
 ## noe_client_nat_getAreaUnsafe
 
 Type: function
@@ -1552,7 +1764,7 @@ Type: function
 Description: 
 - Param: _areaId
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 152](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L152)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 316](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L316)
 ## noe_client_nat_requestLoad
 
 Type: function
@@ -1560,7 +1772,7 @@ Type: function
 Description: 
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 160](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L160)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 324](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L324)
 ## noe_client_nat_requestDelExpired
 
 Type: function
@@ -1569,7 +1781,7 @@ Description:
 - Param: _areaObj
 - Param: _newTick
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 172](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L172)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 336](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L336)
 ## noe_client_nat_onLoadArea
 
 Type: function
@@ -1577,7 +1789,7 @@ Type: function
 Description: 
 - Param: _packet
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 186](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L186)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 350](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L350)
 ## noe_client_nat_decodePacket
 
 Type: function
@@ -1587,7 +1799,7 @@ Description:
 - Param: _addList
 - Param: _remList
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 252](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L252)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 425](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L425)
 ## noe_client_nat_loadArea
 
 Type: function
@@ -1597,7 +1809,7 @@ Description:
 - Param: _arrChDat (optional, default [])
 - Param: _isUpdateFlag (optional, default false)
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 276](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L276)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 449](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L449)
 ## noe_client_nat_procLoad
 
 Type: function
@@ -1605,7 +1817,7 @@ Type: function
 Description: 
 - Param: _aObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 290](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L290)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 465](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L465)
 ## noe_client_nat_procUnload
 
 Type: function
@@ -1613,7 +1825,7 @@ Type: function
 Description: 
 - Param: _aObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 304](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L304)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 494](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L494)
 ## noe_client_nat_procAddEff
 
 Type: function
@@ -1622,7 +1834,7 @@ Description:
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 318](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L318)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 510](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L510)
 ## noe_client_nat_procDelEff
 
 Type: function
@@ -1631,7 +1843,7 @@ Description:
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 328](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L328)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 522](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L522)
 ## noe_client_nat_procUpdEff
 
 Type: function
@@ -1640,7 +1852,7 @@ Description:
 - Param: _aObj
 - Param: _ltob
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 355](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L355)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 545](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L545)
 ## noe_client_nat_deleteChunks
 
 Type: function
@@ -1649,7 +1861,7 @@ Description:
 - Param: _aObj
 - Param: _arrChIds
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 374](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L374)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 571](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L571)
 ## noe_client_nat_unloadArea
 
 Type: function
@@ -1657,7 +1869,7 @@ Type: function
 Description: 
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 383](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L383)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 580](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L580)
 ## noe_client_nat_unsubscribeArea
 
 Type: function
@@ -1665,7 +1877,7 @@ Type: function
 Description: 
 - Param: _areaObj
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 394](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L394)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 591](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L591)
 ## noe_client_nat_nearId
 
 Type: function
@@ -1674,7 +1886,7 @@ Description:
 - Param: _id
 - Param: _xyz
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 410](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L410)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 607](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L607)
 ## noe_client_getAtmosVirtualLight
 
 Type: function
@@ -1682,7 +1894,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 426](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L426)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 623](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L623)
 ## noe_client_getAtmosArea
 
 Type: function
@@ -1690,7 +1902,7 @@ Type: function
 Description: 
 - Param: _pos
 
-File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 439](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L439)
+File: [client\NOEngineClient\NOEngineClient_NetAtmos.sqf at line 636](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos.sqf#L636)
 # NOEngineClient_NetAtmosPerBlockOptimize.sqf
 
 ## nat_pbo_threadHandle
@@ -1798,6 +2010,16 @@ Replaced value:
 
 ```
 File: [client\NOEngineClient\NOEngineClient_NetAtmos_structs.sqf at line 73](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos_structs.sqf#L73)
+## noe_client_nat_applyRenderBudgetAll
+
+Type: function
+
+> Exists if **NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET** defined
+
+Description: 
+
+
+File: [client\NOEngineClient\NOEngineClient_NetAtmos_structs.sqf at line 1584](../../../Src/client/NOEngineClient/NOEngineClient_NetAtmos_structs.sqf#L1584)
 # NOEngineClient_NOGEOM_ext.sqf
 
 ## NGOExt_create

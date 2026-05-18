@@ -3,7 +3,8 @@
 // sdk.relicta.ru
 // ======================================================
 
-
+#include <..\..\WidgetSystem\widgets.hpp>
+#include <..\..\..\host\text.hpp>
 
 #ifdef REDITOR_VOICE_DEBUG
     #define revoice_debug_only(debug_expr) debug_expr;
@@ -75,6 +76,10 @@ vs_connectToVoiceSystem = {
     private _r = [_addr,_port,vs_localName,_pass] call vs_connectVoice;
 
     [player,vs_localName] call vs_initMob;
+    call vs_resetVoiceListeners;
+    if (_r && {vs_voiceListenersEnabled}) then {
+        call vs_ensurePersonalVoiceChannel;
+    };
 
     [2] call vs_changeVoiceVolume;
     [vs_voipVolCurrent] call vs_setMasterVoiceVolume;
@@ -131,6 +136,242 @@ vs_getAllClients = {
     } else {
         [];
     };
+};
+
+vs_getVoiceDiagnostics = {
+    apiRequest(REQ_GET_VOICE_DIAGNOSTICS)
+};
+
+vs_getVoiceNetworkDiagnostics = {
+    apiRequest(REQ_GET_VOICE_NETWORK_DIAGNOSTICS)
+};
+
+vs_getVoiceListenerDiagnostics = {
+    apiRequest(REQ_GET_VOICE_LISTENER_DIAGNOSTICS)
+};
+
+vs_internal_diag_wid = null;
+vs_internal_diag_enabled = null;
+vs_internal_diag_handleUpdate = null;
+
+vs_setDiagnosticMenuVisible = {
+    params ["_mode"];
+    
+    if (!_mode && {isNull(vs_internal_diag_enabled)}) exitWith {};
+    if equals(_mode,vs_internal_diag_enabled) exitWith {};
+
+    if (_mode) then {
+        if isNull(vs_internal_diag_wid) then {
+            private _gui = getGUI;
+            private _sizeX = 10;
+            private _sizeY = 60;
+            private _ctg = [_gui,WIDGETGROUP,[100-_sizeX,0,_sizeX,_sizeY]] call createWidget;
+            private _txt = [_gui,TEXT,WIDGET_FULLSIZE,_ctg] call createWidget;
+            _txt setBackgroundColor [0.3,0.3,0.3,0.3];
+            vs_internal_diag_wid = [_ctg,_txt];
+            vs_internal_diag_handleUpdate = -1;
+        };
+
+        private _updCode = {
+            private _adata = ["<t size='0.8'>"];
+            
+            _adata pushBack (format["apiv:%1",vs_apiversion]);
+            _adata pushBack (format["extver:%1",apiRequest(REQ_GET_VERSION)]);
+            _adata pushback "---network---";
+            _adata append (
+                (parseSimpleArray call vs_getVoiceNetworkDiagnostics) apply {
+                    format["%1:%2",_x select 0,_x select 1]
+                }
+            );
+
+            _adata pushBack "</t>";
+            [vs_internal_diag_wid select 1,_adata joinString sbr] call widgetSetText;
+        };
+
+        vs_internal_diag_handleUpdate = startUpdate(_updCode,0);    
+    } else {
+        if (vs_internal_diag_handleUpdate != -1) then {
+            stopUpdate(vs_internal_diag_handleUpdate);
+        };
+        vs_internal_diag_handleUpdate = -1;
+    };
+    
+    (vs_internal_diag_wid select 0) ctrlShow _mode;
+    vs_internal_diag_enabled = _mode;
+};
+
+vs_getLastLogs = {
+    apiRequest(REQ_GET_LAST_LOGS)
+};
+
+vs_getLogPath = {
+    apiRequest(REQ_GET_LOG_PATH)
+};
+
+vs_getPersonalVoiceChannel = {
+    apiRequest(REQ_GET_PERSONAL_VOICE_CHANNEL)
+};
+
+vs_resetVoiceListeners = {
+    vs_voiceListenerReady = false;
+    vs_voiceListenerNextUpdate = 0;
+    vs_voiceListenerNextEnsure = 0;
+    vs_voiceListenerLastPayload = "";
+    vs_voiceListenerTargets = [];
+    vs_voiceListenerExpires = createHashMap;
+    vs_voiceListenerRadioRequired = createHashMap;
+};
+
+vs_ensurePersonalVoiceChannel = {
+    if (!vs_voiceListenersEnabled) exitWith {false};
+    (apiCmd [CMD_ENSURE_PERSONAL_VOICE_CHANNEL,[]]) params ["_r","_rcode"];
+    vs_voiceListenerReady = (_rcode == 0) && {_r == "ok"};
+    vs_voiceListenerReady
+};
+
+vs_clearVoiceListeners = {
+    (apiCmd [CMD_CLEAR_VOICE_LISTENERS,[]]) params ["_r","_rcode"];
+    call vs_resetVoiceListeners;
+    (_rcode == 0) && {_r == "ok"}
+};
+
+vs_markVoiceListenerRadioRequired = {
+    params ["_names"];
+    if (!vs_voiceListenersEnabled) exitWith {};
+    private _expireAt = tickTime + vs_voiceListenerRadioTtl;
+    {
+        if not_equals(_x,"") then {
+            vs_voiceListenerRadioRequired set [_x,_expireAt];
+        };
+    } foreach _names;
+};
+
+vs_collectVoiceListenerRadioRequired = {
+    private _now = tickTime;
+    private _names = [];
+    private _expired = [];
+
+    {
+        if (_y > _now) then {
+            _names pushBackUnique _x;
+        } else {
+            _expired pushBack _x;
+        };
+    } foreach vs_voiceListenerRadioRequired;
+
+    {
+        vs_voiceListenerRadioRequired deleteAt _x;
+    } foreach _expired;
+
+    _names
+};
+
+vs_collectNearbyVoiceListeners = {
+    private _now = tickTime;
+    private _scanDistance = vs_voiceListenerEnterDistance max vs_voiceListenerExitDistance;
+    private _candidates = [];
+
+    private _nearPlayers = (player nearEntities ["Man",_scanDistance]) - [player];
+    #ifdef REDITOR_VOICE_DEBUG
+    _nearPlayers = vs_reditor_procObjList;
+    #endif
+
+    private _localPos =
+        #ifdef REDITOR_VOICE_DEBUG
+        ifcheck(is3den,getposatl get3dencamera,getposatl player)
+        #else
+        getposatl player
+        #endif
+    ;
+
+    {
+        if (
+            isPlayer _x
+            #ifdef REDITOR_VOICE_DEBUG
+            || true
+            #endif
+            #ifndef VOICE_DISABLE_IN_SINGLEPLAYERMODE
+            || true
+            #endif
+        ) then {
+            private _name = _x getvariable ["rv_name",""];
+            if not_equals(_name,"") then {
+                if not_equals(_name,vs_localName) then {
+                    private _dist = _localPos distance (getposatl _x);
+                    private _prevExpire = vs_voiceListenerExpires getOrDefault [_name,0];
+                    if ((_dist <= vs_voiceListenerEnterDistance) || {(_prevExpire > _now) && {_dist <= vs_voiceListenerExitDistance}}) then {
+                        vs_voiceListenerExpires set [_name,_now + vs_voiceListenerLingerTime];
+                        _candidates pushBack [_dist,_name];
+                    };
+                };
+            };
+        };
+    } foreach _nearPlayers;
+
+    private _expired = [];
+    {
+        if (_y <= _now) then {
+            _expired pushBack _x;
+        };
+    } foreach vs_voiceListenerExpires;
+    {
+        vs_voiceListenerExpires deleteAt _x;
+    } foreach _expired;
+
+    _candidates sort true;
+
+    private _names = [];
+    {
+        if (count _names >= vs_voiceListenerMaxTargets) exitWith {};
+        _names pushBackUnique (_x select 1);
+    } foreach _candidates;
+
+    _names
+};
+
+vs_setVoiceListeners = {
+    params ["_names"];
+    private _payload = _names joinString ";";
+    (apiCmd [CMD_SET_VOICE_LISTENERS,[_payload]]) params ["_r","_rcode"];
+    private _ok = (_rcode == 0) && {_r == "ok"};
+    vs_voiceListenerTargets = +_names;
+    if (_ok) then {
+        vs_voiceListenerLastPayload = _payload;
+    };
+    _ok
+};
+
+vs_processVoiceListeners = {
+    if (!vs_voiceListenersEnabled) exitWith {};
+    private _now = tickTime;
+
+    if (!vs_voiceListenerReady) then {
+        if (_now >= vs_voiceListenerNextEnsure) then {
+            vs_voiceListenerNextEnsure = _now + vs_voiceListenerRetryDelay;
+            call vs_ensurePersonalVoiceChannel;
+        };
+        if (!vs_voiceListenerReady) exitWith {};
+    };
+
+    if (_now < vs_voiceListenerNextUpdate) exitWith {};
+    vs_voiceListenerNextUpdate = _now + vs_voiceListenerUpdateDelay + random vs_voiceListenerUpdateJitter;
+
+    private _targets = [];
+    private _radioNames = call vs_collectVoiceListenerRadioRequired;
+    {
+        if (count _targets >= vs_voiceListenerMaxTargets) exitWith {};
+        _targets pushBackUnique _x;
+    } foreach _radioNames;
+
+    if (count _targets < vs_voiceListenerMaxTargets) then {
+        private _nearNames = call vs_collectNearbyVoiceListeners;
+        {
+            if (count _targets >= vs_voiceListenerMaxTargets) exitWith {};
+            _targets pushBackUnique _x;
+        } foreach _nearNames;
+    };
+
+    [_targets] call vs_setVoiceListeners;
 };
 
 vs_setMasterVoiceVolume = {
@@ -190,6 +431,7 @@ vs_onProcessPlayerPosition = {
         //revoice_debug_only(if (((tickTime - _t)*1000) > 10) then {["LOWPERF: sync remote %1ms" arg (((tickTime - _t)*1000) )tofixed 0]call printTrace;_t=tickTime;})
 
         call vs_processRadios;
+        call vs_processVoiceListeners;
     };
 };
 
@@ -389,6 +631,11 @@ vs_handleSpeak = {
 
 vs_speakReleaseAll = {
     apiRequest(REQ_SPEAK_RELEASEALL);
+};
+
+vs_releaseAllVoipButtons = {
+    [false] call vs_handleTransmith;
+	[false] call vs_handleSpeak;
 };
 
 vs_setLocalPlayerVoiceDistance = {

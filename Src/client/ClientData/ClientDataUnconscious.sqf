@@ -53,6 +53,8 @@ cd_onUnconsciousEvent = {
 				call inventory_unloadVerbMenu;
 			};
 		};
+
+		[] call vs_releaseAllVoipButtons;
 		
 	} else {
 		if ([player] call smd_isCombatModeEnabled) then {

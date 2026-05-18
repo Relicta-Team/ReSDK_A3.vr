@@ -49,7 +49,13 @@ soundGlobal_play = {
 			["repl_psound3d",_args,_x] call CBA_fnc_targetEvent; 
 		} foreach _playerList;
 
-		if (!isServer) then {
+		if (
+			#ifdef DEBUG
+			!isServer || {!isMultiplayer}
+			#else
+			!isServer
+			#endif
+		) then {
 			[
 				_source,
 				PATH_SOUND(_file),

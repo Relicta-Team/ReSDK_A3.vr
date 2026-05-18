@@ -120,6 +120,18 @@ clistat_buffer pushback [colortext(57D4AC,"NAT_RGC:"),{
 		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
 		format["%1",(_ar get "_regions") apply {count _x}]
 	}];
+	#ifdef NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+clistat_buffer pushback [colortext(57D4AC,"NAT_CRS:"),{
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		format["f:%1;s:%2;q:%3;o:%4",_ar get "debugCoarseFire",_ar get "debugCoarseSmoke",_ar get "debugCoarsePending",_ar get "debugCoarseOccluded"]
+	}];
+	#endif
+	#ifdef NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+clistat_buffer pushback [colortext(57D4AC,"NAT_VB:"),{
+		_ar = [getposatl player call atmos_getAreaIdByPos] call noe_client_nat_getArea;
+		format["fl:%1;b:%2;sm:%3;s:%4",_ar get "debugActiveFireLights",_ar get "debugActiveBatchRegions",_ar get "debugActiveSmokeBatchRegions",_ar get "debugActiveSingles"]
+	}];
+	#endif
 	#endif
 	#ifdef NET_ATMOS_OPTIMIZATION_RENDER
 clistat_buffer pushback [colortext(57D4AC,"NAT_CULL:"),{
@@ -145,7 +157,11 @@ clistat_buffer append [
 		,os_steps_currentSoundCount
 		,os_steps_lastPtr
 		,count os_steps_map_objToMaterialPtr]}]
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	,[colortext(1FC4C4,"new_snds: "),{format["all:%1; flw:%2",(count call vs_audio_getAllSoundsIds),count vs_audio_followedData]}]
+	#else
 	,[colortext(1FC4C4,"snds: "),{format["v:%1; bf:%2",(count call vs_audio_getAllSoundsIds),count sound3d_internal_list_soundBuff]}]
+	#endif
 	,["<t color='#832DCF'>[ENGINE]</t> Global threads:",{format["upd %1; hndl %2",count cba_common_perFrameHandlerArray,count cba_common_PFHhandles]}]
 	,["<t color='#832DCF'>[ENGINE]</t> Delayed:",{str count cba_common_waitAndExecArray}]
 	,["<t color='#832DCF'>[ENGINE]</t> Async delayed:",{str count cba_common_waitUntilAndExecArray}]
