@@ -50,6 +50,30 @@ macro_def(nat_atmos_optimization_render)
 macro_def(nat_atmos_enable_optimization)
 #define ENABLE_OPTIMIZATION
 
+macro_def(nat_atmos_enable_visual_budget)
+// Experimental client visual budget. Keeps custom render limits behind a switch.
+#define NOE_CLIENT_NAT_ENABLE_VISUAL_BUDGET
+
+macro_def(nat_atmos_enable_coarse_visuals)
+//#define NOE_CLIENT_NAT_ENABLE_COARSE_VISUALS
+
+macro_const(nat_atmos_coarse_divs_xy)
+#define NOE_CLIENT_NAT_COARSE_DIVS_XY 4
+macro_const(nat_atmos_coarse_divs_z)
+#define NOE_CLIENT_NAT_COARSE_DIVS_Z 4
+macro_const(nat_atmos_coarse_visual_ttl)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_TTL 4
+macro_const(nat_atmos_coarse_visual_ops_per_frame)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_OPS_PER_FRAME 1
+macro_const(nat_atmos_coarse_visual_queue_delay)
+#define NOE_CLIENT_NAT_COARSE_VISUAL_QUEUE_DELAY 0
+macro_const(nat_atmos_coarse_occlusion_delay)
+#define NOE_CLIENT_NAT_COARSE_OCCLUSION_DELAY 0.15
+macro_const(nat_atmos_coarse_occlusion_overlap)
+#define NOE_CLIENT_NAT_COARSE_OCCLUSION_OVERLAP 0.45
+macro_const(nat_atmos_coarse_occlusion_depth)
+#define NOE_CLIENT_NAT_COARSE_OCCLUSION_DEPTH 0.5
+
 //флаг одиночной оптимизации для каждого блока
 // ! не должен быть включен вместе с ENABLE_OPTIMIZATION
 //#define ENABLE_PERBLOCK_ZPASS_CULLING

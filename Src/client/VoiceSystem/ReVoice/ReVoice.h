@@ -19,6 +19,12 @@
 #define REQ_SPEAK_RELEASEALL "speakReleaseAll"
 
 #define REQ_GET_MASTER_VOICE_VOLUME "getMasterVoiceVolume"
+#define REQ_GET_VOICE_DIAGNOSTICS "getVoiceDiagnostics"
+#define REQ_GET_VOICE_NETWORK_DIAGNOSTICS "getVoiceNetworkDiagnostics"
+#define REQ_GET_VOICE_LISTENER_DIAGNOSTICS "getVoiceListenerDiagnostics"
+#define REQ_GET_PERSONAL_VOICE_CHANNEL "getPersonalVoiceChannel"
+#define REQ_GET_LAST_LOGS "getLastLogs"
+#define REQ_GET_LOG_PATH "getLogPath"
 
 //=============== api command ===========================
 #define CMD_CONNECT_VOICE "connectVoice"
@@ -35,6 +41,9 @@
 
 #define CMD_SYNC_LOCAL_PLAYER "syncLocalPlayer"
 #define CMD_SYNC_REMOTE_PLAYER "syncRemotePlayer"
+#define CMD_ENSURE_PERSONAL_VOICE_CHANNEL "ensurePersonalVoiceChannel"
+#define CMD_SET_VOICE_LISTENERS "setVoiceListeners"
+#define CMD_CLEAR_VOICE_LISTENERS "clearVoiceListeners"
 
 #define CMD_SETLOWPASS "setLowpass"
 #define CMD_SETREVERB "setReverb"

@@ -7,7 +7,18 @@
 	Реализация аудиосистемы на основе ReVoice с использованием fmod
 */
 
-vs_audio_useBackend = true; // использовать новый движок аудио
+#define VS_AUDIO_NEXT_EFFECT_UPDATE 1
+
+// использовать новый движок аудио
+vs_audio_useBackend =
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+		true; 
+	#else
+		false;
+	#endif
+
+vs_audio_updateHandle = -1;
+vs_audio_updateLoopedHandle = -1;
 
 vs_audio_loadLib = {
 	((apiCmd [CMD_AUDIO_LOADLIB,[_this]]) select 0) == "True";
@@ -44,6 +55,11 @@ vs_audio_releaseAllSounds = {
 
 vs_audio_init = {
 	if (!vs_audio_useBackend) exitWith {};
+	
+	#ifdef EDITOR
+	call vs_audio_stopAllSounds;
+	#endif
+
 	logformat("Audio lib loaded: %1","@rlct\Addons\rel_gamecontent.pbo" call vs_audio_loadLib);
 	//disable rvengine audio system
 	//0.1 fadeSound 0; 
@@ -59,6 +75,10 @@ vs_audio_init = {
         findDisplay 46 displayAddEventHandler ["Unload",compile _nativeCode];
     };
 
+	vs_audio_updateHandle = startUpdate(vs_audio_onUpdate,0.3);
+	vs_audio_updateLoopedHandle = startUpdate(vs_audio_onUpdateLooped,0.1);
+
+	//todo replace to onexit audio settings
 	private _syncAudio = {
 		if (!isGameFocused) exitWith {
 			0 call vs_audio_setMasterSoundVolume;
@@ -143,36 +163,126 @@ vs_audio_playSound3d = {
 
 	[_id,false] call vs_audio_setPaused; //звук готов - можно воспроизводить
 	traceformat("[%1] sound played: %2; follow: %3; distance: %4; src: %5",_id arg _soundPath arg _doFollow arg _distance arg _source);
+	
 	if (_doFollow) then {
+		if (_is2d) exitWith {}; //2d sounds has no effects 
 		private _asyncParams = [_id];
 		_asyncParams append _sourceParams;
 		_asyncParams pushBack _distance;
+		_asyncParams pushback (tickTime + VS_AUDIO_NEXT_EFFECT_UPDATE);
 
-		startAsyncInvoke
-		{
-			params ["_id","_obj","_offset","_distance"];
-			if !(_id call vs_audio_isSoundExists) exitWith {true};
-			
-			if isNullReference(_obj call vs_audio_internal_getSourceObj) exitWith {
-				_id call vs_audio_stopSound;
-				true;
-			};
-			private _pos = ((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
-			[_id,_pos] call vs_audio_setSoundPos;
-			private _lowp = [_pos,true,_id] call vs_calcLowpassEffect;
-			private _reverb = [_pos,true,_id,_distance] call vs_calcReverbEffect;
-			
-			_lowp call vs_audio_setLowpassEffect;
-			_reverb call vs_audio_setReverbEffect;
-			//traceformat("[%3] lowp: %1, reverb: %2",_lowp arg _reverb arg _obj);
-			false
-		},
-		{},
-		_asyncParams
-		endAsyncInvoke
+		vs_audio_followedData pushBack _asyncParams;
 	};
 
 	_id
+};
+
+
+vs_audio_playSound3dDynamicLooped = {
+	params ["_file","_src",["_pitch",1],["_dist",10],["_preendbuf",0],["_vol",1]];
+
+	//params ["_source","_soundPath","_distance",["_pitch",1],["_offset",0],["_vol",1],["_useEffects",true],["_loop",false]];
+
+	private _sdata = [_src,PATH_SOUND(_file),_dist,_pitch,null,_vol,true];
+	private _sdataEmplace = array_copy(_sdata);
+	if equalTypes(_pitch,[]) then {
+		_pitch = rand(_pitch select 0,_pitch select 1);
+		_sdataEmplace set [3,_pitch];
+	};
+	private _shndl = _sdataEmplace call vs_audio_playSound3d;
+
+	if (_shndl == "0") exitWith {null};
+
+	private _params = [_src,_shndl,_preendbuf,_sdata];
+	vs_audio_loopedSoundsData pushBack _params;
+	_shndl
+};
+
+vs_audio_loopedSoundsData = []; //looped sounds
+vs_audio_followedData = []; //followed sounds
+
+vs_audio_onUpdate = {
+	private _idxDel = [];
+	private _pos = null;
+	private _lowp = null;
+	private _reverb = null;
+	{
+		_x params ["_id","_obj","_offset","_distance","_nextEffectUpd"];
+		if !(_id call vs_audio_isSoundExists) then {
+			_idxDel pushback _foreachIndex;
+			continue
+		};
+		if isNullReference(_obj call vs_audio_internal_getSourceObj) then {
+			_id call vs_audio_stopSound;
+			_idxDel pushBack _foreachIndex;
+			continue;
+		};
+		
+		_pos = ((_obj call vs_audio_internal_getSourceObj) modeltoworldvisual _offset);
+		[_id,_pos] call vs_audio_setSoundPos;
+
+		if (tickTime >= _nextEffectUpd) then {
+			_lowp = [_pos,true,_id] call vs_calcLowpassEffect;
+			_reverb = [_pos,true,_id,_distance] call vs_calcReverbEffect;
+			
+			_lowp call vs_audio_setLowpassEffect;
+			_reverb call vs_audio_setReverbEffect;
+			
+			_x set [4,tickTime + VS_AUDIO_NEXT_EFFECT_UPDATE];
+		};
+
+	} foreach vs_audio_followedData;
+
+	if (count _idxDel > 0) then {
+		vs_audio_followedData deleteAt _idxDel;
+	};
+};
+
+vs_audio_onUpdateLooped = {
+
+	private _del = [];
+	private _spar = [];
+	private _doRestart = false;
+	{
+		_x params ["_src","_shndl","_preend","_sdata"];
+		if isNullReference(_src) then {
+			_shndl call vs_audio_stopSound;
+			_del pushBack _foreachIndex;
+			continue;
+		};
+
+		_spar = [_shndl] call vs_audio_getSoundParams;
+
+		_doRestart = false;
+		if (count _spar == 0) then {
+			_doRestart = true;
+		} else {
+			private _maxLen = _spar select 2;
+			private _time = _spar select 1;
+			if (_maxLen > 0) then {
+				_doRestart = _time >= (_maxLen - _preend);
+			};
+		};
+
+		if (_doRestart) then {
+			private _pitch = _sdata select 3;
+			private _sdataEmplace = array_copy(_sdata);
+			if equalTypes(_pitch,[]) then {
+				_pitch = rand(_pitch select 0,_pitch select 1);
+				_sdataEmplace set [3,_pitch];
+			};
+			private _newHndl = _sdataEmplace call vs_audio_playSound3d;
+			if (_newHndl == "0") then {
+				_del pushBack _foreachIndex;
+				continue;
+			};
+			_x set [1,_newHndl];
+		};
+	} foreach vs_audio_loopedSoundsData;
+
+	if (count _del > 0) then {
+		vs_audio_loopedSoundsData deleteAt _del;
+	};
 };
 
 vs_audio_playSound2d = {
@@ -207,8 +317,14 @@ vs_audio_setReverbEffect = {
     apiCmd [CMD_AUDIO_SETREVERB,[_id,_dec,_edel,_ldel,_hcut,_wet,_dry]];
 };
 
+// Returns [progress 0..1, current time seconds, duration seconds].
 vs_audio_getSoundParams = {
 	params ["_id"];
 	if !(_id call vs_audio_isSoundExists) exitWith {[]};
 	((apiCmd [CMD_AUDIO_GET_SOUND_PARAMS,[_id]]) select 0) splitString " " apply {parseNumber _x};
+};
+
+vs_audio_setLoopPoints = {
+	params ["_id","_startMs","_endMs"];
+	apiCmd [CMD_AUDIO_SET_LOOP_POINTS,[_id,_startMs,_endMs]];
 };

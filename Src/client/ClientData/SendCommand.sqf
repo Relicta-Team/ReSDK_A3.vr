@@ -342,6 +342,11 @@ localCommand("debugvars")
 	[(parseNumber arguments) > 0] call clistat_setLogVars;
 };
 
+localCommand("debugvoice")
+{
+	[(parseNumber arguments) > 0] call vs_setDiagnosticMenuVisible;
+};
+
 localCommand("ping")
 {
 	[[diag_tickTime],{

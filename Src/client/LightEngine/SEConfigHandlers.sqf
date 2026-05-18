@@ -10,10 +10,63 @@
 	_inPar params ["_sndPath","_pitORpitv2","_dist","_preend","_vol"];
 	// _dist = 8;
 	// _preend = 1.5;
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	[_sndPath,_emit,_pitORpitv2,_dist,_preend,_vol] call vs_audio_playSound3dDynamicLooped;
+	#else
 	[_sndPath,_emit,_pitORpitv2,_dist,null,_preend,_vol] call sound3d_playLocalOnObjectLooped;
+	#endif
 }] call le_se_registerConfigHandler;
 
+le_se_randOnUpdate = {
+	private _delListOut = [];
+	private _delmap = le_se_internal_randomizeDelegateMap;
+	{
+		_x params ["_k","_v"];
+		_v call (_delmap get _k);
+	} foreach le_se_internal_randomizeData;
+
+	if (count _delListOut > 0) then {
+		le_se_internal_randomizeData deleteAt _delListOut;
+	};
+};
+le_se_internal_randomizeData = [];
+le_se_internal_randomizeDelegateMap = createHashMapFromArray [
+	["vec3",{
+		params ["_t","_o","_fnc","_val","_rng","_del","_isset"];
+		if isNullReference(_o) exitWith {
+			_delListOut pushBack _foreachIndex;
+		};
+		if (tickTime < _t) exitWith {};
+		_this set [0,tickTime + rand(_del select 0,_del select 1)];
+		
+		(_rng select 0) params ["_xb","_yb","_zb"];
+		(_rng select 1) params ["_xe","_ye","_ze"];
+		if (_isset) then {
+			_val = [rand(_xb,_xe),rand(_yb,_ye),rand(_zb,_ze)];
+		} else {
+			_val = _val vectorAdd [rand(_xb,_xe),rand(_yb,_ye),rand(_zb,_ze)];
+		};
+		[_o,_val] call _fnc;
+	}],
+	["float",{
+		params ["_t","_o","_fnc","_val","_rng","_del","_isset"];
+		if isNullReference(_o) exitWith {
+			_delListOut pushBack _foreachIndex;
+		};
+		if (tickTime < _t) exitWith {};
+		_this set [0,tickTime + rand(_del select 0,_del select 1)];
+		if (_isset) then {
+			_val = rand(_rng select 0,_rng select 1);
+		} else {
+			_val = _val + rand(_rng select 0,_rng select 1);
+		};
+		[_o,_val] call _fnc;
+	}]
+];
+le_se_randHandle =  startUpdate(le_se_randOnUpdate,0.3); //! может быть недостаточным для хорошей динамики
+
 ["randomize_value_vec3",{
+
 	params ["_emit","_src","_inPar"];
 	_inPar params ["_pname","_rangeNVals","_rangeDelay",["_isSet",false]];
 	private _pvFunc = le_se_mapHandlers get _pname;
@@ -26,31 +79,14 @@
 	private _curval_const = [_pname] call le_se_getCurrentConfigPropVal;
 	if isNullVar(_curval_const) exitWith {};
 
-	startAsyncInvoke
-	{
-		params ["_t","_o","_fnc","_val","_rng","_del","_isset"];
-		if isNullReference(_o) exitWith {true};
-		if (tickTime < _t) exitWith {false};
-		_this set [0,tickTime + rand(_del select 0,_del select 1)];
-		
-		(_rng select 0) params ["_xb","_yb","_zb"];
-		(_rng select 1) params ["_xe","_ye","_ze"];
-		if (_isset) then {
-			_val = [rand(_xb,_xe),rand(_yb,_ye),rand(_zb,_ze)];
-		} else {
-			_val = _val vectorAdd [rand(_xb,_xe),rand(_yb,_ye),rand(_zb,_ze)];
-		};
-		[_o,_val] call _fnc;
-
-		false
-	},
-	{},//exiter 
-	[tickTime,_emit,_pvFunc,_curval_const,_rangeNVals,_rangeDelay,_isSet]
-	endAsyncInvoke
+	le_se_internal_randomizeData pushBack [
+		"vec3",[tickTime,_emit,_pvFunc,_curval_const,_rangeNVals,_rangeDelay,_isSet]
+	];
 
 }] call le_se_registerConfigHandler;
 
 ["randomize_value_float",{
+
 	params ["_emit","_src","_inPar"];
 	_inPar params ["_pname","_rangeVals","_rangeDelay",["_isSet",false]];
 	private _pvFunc = le_se_mapHandlers get _pname;
@@ -63,24 +99,9 @@
 	private _curval_const = [_pname] call le_se_getCurrentConfigPropVal;
 	if isNullVar(_curval_const) exitWith {};
 
-	startAsyncInvoke
-	{
-		params ["_t","_o","_fnc","_val","_rng","_del","_isset"];
-		if isNullReference(_o) exitWith {true};
-		if (tickTime < _t) exitWith {false};
-		_this set [0,tickTime + rand(_del select 0,_del select 1)];
-		if (_isset) then {
-			_val = rand(_rng select 0,_rng select 1);
-		} else {
-			_val = _val + rand(_rng select 0,_rng select 1);
-		};
-		[_o,_val] call _fnc;
-
-		false
-	},
-	{},//exiter 
-	[tickTime,_emit,_pvFunc,_curval_const,_rangeVals,_rangeDelay,_isSet]
-	endAsyncInvoke
+	le_se_internal_randomizeData pushBack [
+		"float",[tickTime,_emit,_pvFunc,_curval_const,_rangeVals,_rangeDelay,_isSet]
+	];
 }] call le_se_registerConfigHandler;
 
 
