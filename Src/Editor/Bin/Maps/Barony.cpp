@@ -8,18 +8,18 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=10959;
+		nextID=10963;
 	};
 	class LayerIndexProvider
 	{
-		nextID=2084;
+		nextID=2138;
 	};
 	class Camera
 	{
-		pos[]={3845.3218,79.055977,4133.1743};
-		dir[]={-0.56821352,-0.5031907,0.65110505};
-		up[]={-0.33085829,0.86417538,0.37912402};
-		aside[]={0.75343966,6.5563654e-08,0.65752053};
+		pos[]={3845.0442,77.151199,4139.0996};
+		dir[]={-0.14656283,-0.46851498,-0.87123275};
+		up[]={-0.077726379,0.88344324,-0.46204069};
+		aside[]={-0.98615742,3.4211553e-07,0.16589536};
 	};
 };
 binarizationWanted=0;
@@ -6507,7 +6507,6 @@ class Mission
 		{
 			dataType="Layer";
 			name="ЗАМОК";
-			state=1;
 			class Entities
 			{
 				items=19;
@@ -28357,7 +28356,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Дом бригаббата";
-					state=1;
 					class Entities
 					{
 						items=126;
@@ -28826,7 +28824,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__keytypesstr"",""baron, abbat""]]],[""class"",""SteelBrownDoor""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""islocked"",true],[""preinit@__keytypesstr"",""baron, abbat""]]],[""class"",""SteelBrownDoor""]]}";
 							};
 							id=3228;
 							type="dwerrj";
@@ -35392,6 +35390,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Главное здание";
+					state=1;
 					class Entities
 					{
 						items=4;
@@ -49805,7 +49804,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=22;
+						items=23;
 						class Item0
 						{
 							dataType="Object";
@@ -50010,7 +50009,7 @@ class Mission
 									flags=5;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenDoor""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""islocked"",true],[""preinit@__keytypesstr"",""baron, general, soldat""]]],[""class"",""WoodenDoor""]]}";
 									};
 									id=9764;
 									type="Land_xlamdoor";
@@ -50200,13 +50199,29 @@ class Mission
 							type="matras_2";
 							atlOffset=0.014938354;
 						};
+						class Item22
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3843.7363,69.893105,4120.6641};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SleevelessOuterwearCuirass1""]]}";
+							};
+							id=10961;
+							type="S_Clothes";
+							atlOffset=0.029876709;
+						};
 					};
 					id=9741;
-					atlOffset=61.852821;
+					atlOffset=63.362022;
 				};
 			};
 			id=8803;
-			atlOffset=62.75032;
+			atlOffset=0.1029129;
 		};
 	};
 };

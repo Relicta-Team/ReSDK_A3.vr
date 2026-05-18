@@ -1,0 +1,35 @@
+Materials: &Materials_base
+  name: Строительные материалы
+  health: {min: 50%, max: 90%}
+  quality: {min: 40%, max: 80%}
+  pass_count: {min: 2, max: 6}
+
+Materials_all:
+  <<: *Materials_base
+  items: &Materials_all
+    WoodenDebris1:
+      prob: 4%
+    WoodenDebris2:
+      prob: 4%
+    WoodenDebris3:
+      prob: 4%
+    WoodenDebris4:
+      prob: 4%
+    WoodenDebris5:
+      prob: 4%
+    WoodenDebris6:
+      prob: 4%
+    WoodenDebris7:
+      prob: 4%
+    ClothDebris1:
+      prob: 4%
+    ClothDebris2:
+      prob: 4%
+    MetalDebris1:
+      prob: 4%
+    MetalDebris2:
+      prob: 4%
+    SmallStone:
+      prob: 4%
+    SyntDebris1:
+      prob: 4%
