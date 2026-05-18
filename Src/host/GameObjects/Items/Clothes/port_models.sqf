@@ -1811,6 +1811,7 @@ endclass
 
 class(MilkBottle2) extends(MilkBottle)
 	var(model,"sterben_top\am_items_2\misc\food\milkbottle.p3d");
+	var(icon,"gen\relicta_models+models+interier+props+kitchen+buhlo1+p3d");
 endclass
 
 class(am_mre) extends(REPLACE_REQUIRED)

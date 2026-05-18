@@ -71,3 +71,4 @@ model("\ml_shabut\furniture\teabaggin.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95
 model("\relicta_models\models\interier\props\treasure\perfume\perfume.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.064,0.012,-0.038],[-26,13,25]]],[INV_HAND_R,[[-0.005,-0.005,0.02],[110,46,7]]]]
 model("\relicta_models\models\interier\props\treasure\necklace\necklace.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.03,0.037,0.012],[-207,-8,49]]],[INV_HAND_R,[[-0.005,-0.005,0.02],[-161,-11,-44]]]]
 model("\ml_shabut\exodus\ashtray.p3d") [[INV_FACE,[[-0.048,0.069,0.004],[95,78,-8]]],[INV_HAND_L,[[-0.047,0.02,-0.038],[-204,-2,7]]],[INV_HAND_R,[[-0.005,-0.064,-0.022],[7,-11,1]]]]
+model("\sterben_top\am_items_2\misc\food\milkbottle.p3d") [[INV_HAND_L,[[0.045,-0.022,0.003],[-23,-77,0]]],[INV_HAND_R,[[-0.089,-0.097,-0.03],[-2,-62,10]]]]

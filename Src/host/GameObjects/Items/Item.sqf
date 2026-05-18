@@ -139,6 +139,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		};
 		#endif
 		
+		if not_equals(getSelf(icon), "temp_item") exitWith {};
+		
 		//если в пути модели есть \ - убираем
 		if ((_m select [0,1]) == "\") then {
 			_m = _m select [1,count _m];
@@ -160,7 +162,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 	func(syncIcon)
 	{
 		objParams();
-		//copypaste... bruh...
+		
 		private _m = getSelf(model);
 		//сначала проверяем если это конфиг модель то получаем путь до модели
 		if (!(".p3d" in _m) && !("\" in _m)) then {
@@ -174,6 +176,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 			appExit(APPEXIT_REASON_COMPILATIOEXCEPTION);
 		};
 		#endif
+
+		if not_equals(getSelf(icon), "temp_item") exitWith {};
 		
 		//если в пути модели есть \ - убираем
 		if ((_m select [0,1]) == "\") then {

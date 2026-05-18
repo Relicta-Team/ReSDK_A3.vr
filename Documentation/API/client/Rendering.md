@@ -1347,7 +1347,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 65](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L65)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 70](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L70)
 ## pp_init_active
 
 Type: function
@@ -1355,7 +1355,7 @@ Type: function
 Description: 
 
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 93](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L93)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 98](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L98)
 ## pp_setEnable
 
 Type: function
@@ -1365,7 +1365,7 @@ Description:
 - Param: _mode
 - Param: _showError (optional, default true)
 
-File: [client\Rendering\PostProcessing\PPInit.sqf at line 100](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L100)
+File: [client\Rendering\PostProcessing\PPInit.sqf at line 105](../../../Src/client/Rendering/PostProcessing/PPInit.sqf#L105)
 # vd_dynamicFog.sqf
 
 ## SPHERE_CLASS
