@@ -139,6 +139,8 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		};
 		#endif
 		
+		if not_equals(getSelf(icon), "temp_item") exitWith {};
+		
 		//если в пути модели есть \ - убираем
 		if ((_m select [0,1]) == "\") then {
 			_m = _m select [1,count _m];
