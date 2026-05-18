@@ -3469,7 +3469,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 918](../../../Src/host/GameObjects/Items/Item.sqf#L918)
+File: [host\GameObjects\Items\Item.sqf at line 922](../../../Src/host/GameObjects/Items/Item.sqf#L922)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3483,7 +3483,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1355](../../../Src/host/GameObjects/Items/Item.sqf#L1355)
+File: [host\GameObjects\Items\Item.sqf at line 1359](../../../Src/host/GameObjects/Items/Item.sqf#L1359)
 ## generateItemSize
 
 Type: function
@@ -3493,7 +3493,7 @@ Description:
 - Param: _bmax
 - Param: _radius
 
-File: [host\GameObjects\Items\Item.sqf at line 186](../../../Src/host/GameObjects/Items/Item.sqf#L186)
+File: [host\GameObjects\Items\Item.sqf at line 190](../../../Src/host/GameObjects/Items/Item.sqf#L190)
 ## generateItemInfoList
 
 Type: function
@@ -3504,7 +3504,7 @@ Description:
 - Param: _file (optional, default "unknown_file")
 - Param: _line (optional, default 0)
 
-File: [host\GameObjects\Items\Item.sqf at line 212](../../../Src/host/GameObjects/Items/Item.sqf#L212)
+File: [host\GameObjects\Items\Item.sqf at line 216](../../../Src/host/GameObjects/Items/Item.sqf#L216)
 # Item_HandAnim.hpp
 
 ## ANIM_INDEX_HANDED
