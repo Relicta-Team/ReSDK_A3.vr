@@ -10,7 +10,11 @@
 	_inPar params ["_sndPath","_pitORpitv2","_dist","_preend","_vol"];
 	// _dist = 8;
 	// _preend = 1.5;
+	#ifdef ENABLE_NEW_AUDIO_SYSTEM
+	[_sndPath,_emit,_pitORpitv2,_dist,_preend,_vol] call vs_audio_playSound3dDynamicLooped;
+	#else
 	[_sndPath,_emit,_pitORpitv2,_dist,null,_preend,_vol] call sound3d_playLocalOnObjectLooped;
+	#endif
 }] call le_se_registerConfigHandler;
 
 le_se_randOnUpdate = {
