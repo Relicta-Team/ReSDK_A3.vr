@@ -371,9 +371,6 @@ vs_processVoiceListeners = {
         } foreach _nearNames;
     };
 
-    private _payload = _targets joinString ";";
-    if (_payload == vs_voiceListenerLastPayload) exitWith {};
-
     [_targets] call vs_setVoiceListeners;
 };
 
