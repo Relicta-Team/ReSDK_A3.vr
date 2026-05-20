@@ -1001,8 +1001,6 @@ class(RBum) extends(BasicRole)
 	var(desc,"Пещерный недочеловек.");
 	var(count,9);
 	var(reputationNeed,rolerep(0,0,0));
-	getter_func(getInitialDir,88);
-	getter_func(getInitialPos,callSelf(pickPos); getSelf(lastPos));
 
 	getter_func(getSkills,vec4(randInt(6,15),randInt(6,15),randInt(6,15),randInt(6,15)));
 	func(getOtherSkills) {[
@@ -1011,18 +1009,32 @@ class(RBum) extends(BasicRole)
 		skillrand(stealth,4,7)
 	]};
 
-	var(__posesList,null);
-	var(lastPos,[]);
+	var(lastSpawnObj,nullPtr);
 
-	getter_func(needDiscordRoles,["Dweller"]);
+	func(pickSpawn)
+	{
+		objParams();
+		setSelf(lastSpawnObj,["bumcave"] call getRandomSpawnObjectByName);
+	};
+
+	func(getInitialDir)
+	{
+		objParams();
+		if (isNullReference(getSelf(lastSpawnObj))) then {callSelf(pickSpawn)};
+		getDir getVar(getSelf(lastSpawnObj),loc)
+	};
+
+	func(getInitialPos)
+	{
+		objParams();
+		if (isNullReference(getSelf(lastSpawnObj))) then {callSelf(pickSpawn)};
+		getPosAtl getVar(getSelf(lastSpawnObj),loc)
+	};
 
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
-		private _hasBums = count callSelf(Poses) > 0;
-		gm_roundDuration >=
-		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),1,t_asMin(5))
-		&& _hasBums
+		gm_roundDuration >= t_asMin(5)
 	};
 
 	func(getEquipment)
@@ -1033,15 +1045,7 @@ class(RBum) extends(BasicRole)
 			["HatUshankaUp2",_mob,INV_HEAD] call createItemInInventory;
 		};
 
-		["Torch",_mob,INV_HAND_R] call createItemInInventory;
-	};
-
-	func(pickPos)
-	{
-		objParams();
-		private _homes = callSelf(Poses);
-		private _randIdx = randInt(0,count _homes - 1);
-		setSelf(lastPos,_homes deleteAt _randIdx);
+		["TorchDisabled",_mob,INV_HAND_R] call createItemInInventory;
 	};
 
 	func(onAssigned)
@@ -1051,26 +1055,7 @@ class(RBum) extends(BasicRole)
 		callSuper(BasicRole,onAssigned);
 
 		callFuncParams(_mob,setHunger,randInt(20,40));
-	};
-
-	func(Poses)
-	{
-		objParams();
-		if isNull(getSelf(__posesList)) then {
-			private _dat = [
-				[3824,3850.29,24.0271],
-				[3833.33,3868.98,24.204],
-				[3817.43,3854.08,24.4883], //[3822.57,3883.1,23.9169],!broken pos
-				[3839.97,3861.5,24.0861],
-				[3832.68,3859.35,24.7087],
-				[3850.02,3849.9,24.2201],
-				[3840.46,3861.62,27.5295],
-				[3828.9,3837.7,27.6718],
-				[3850,3845.6,26.6419]
-			];
-			setSelf(__posesList,_dat);
-		};
-		getSelf(__posesList);
+		callSelf(pickSpawn);
 	};
 
 endclass
@@ -1142,24 +1127,17 @@ class(RNomadDirtpit) extends(BasicRole)
 	};
 
 	var(name,"Кочевник");
-	var(desc,"Вы перебрались в окрестности Грязноямска в поисках лучшей жизни. Может именно вам повезет попасть в прекрасный и чистый городок.");
+	var(desc,"После долгой и утомительной дороги вы наконец добрались до окрестностей Грязноямска. Может именно вам повезет попасть в прекрасный и чистый городок.");
 	getter_func(canTakeInLobby,false);
 	func(canVisibleAfterStart)
 	{
 		objParams_1(_cliObj);
 		not_equals(["kochevniki" arg 0] call getSpawnPosByName,0) &&
-		#ifdef EDITOR
-		true
-		#else
-		gm_roundDuration >= 
-		ifcheck(!callFuncParams(_cliObj,hasDiscordRole,"Forsaken"),t_asMin(1),t_asMin(10))
-		#endif
-
+		gm_roundDuration >= t_asMin(5)
 		//Чтобы кочевник с дробовиком не заспавнился без него...
 		&& callFunc(gm_currentMode,isPickedIdeology)
 	};
 	var(count,999);
-	getter_func(needDiscordRoles,["Dweller"]);
 	
 	getter_func(getInitialPos,(["kochevniki"] call getSpawnPosByName)vectorAdd vec3(rand(-0.1,0.1),rand(-0.1,0.1),0));
 	getter_func(getInitialDir,random 360);
@@ -1179,6 +1157,7 @@ class(RNomadDirtpit) extends(BasicRole)
 	{
 		objParams_1(_mob);
 		callFuncParams(getSelf(currentNomadRole),getEquipment,_mob);
+		["Torch",_mob] call createItemInInventory;
 	};
 
 	getter_func(getSkills,callFunc(getSelf(currentNomadRole),getSkills));
@@ -1193,12 +1172,12 @@ class(RNomadDirtpit) extends(BasicRole)
 	func(onAssigned)
 	{
 		objParams_2(_mob,_usr);
-		callSelf(nextNomadRole);
 		super();
 		private _m = format["%1 - вот каким было моё призвание в пещерах!",getVar(getSelf(currentNomadRole),name)];
 		callFuncParams(_mob,addFirstJoinMessage,_m);
 		callFuncParams(getSelf(currentNomadRole),onAssigned,_mob arg _usr); //тут onAssigned переопределен RTEmbNomadBase
 		callFuncParams(_mob,setHunger,randInt(40,60));
+		callSelf(nextNomadRole);
 	};
 
 endclass
@@ -1221,7 +1200,6 @@ class(RTEmbNomadBase) extends(BasicRole)
 		};
 		private _c = ["NomadCloth" + str randInt(1,15),_mob,INV_CLOTH] call createItemInInventory;
 		callFuncParams(_c,initMoney,randInt(1,8));
-		["Torch",_mob] call createItemInInventory;
 		_c
 	};
 
@@ -1247,8 +1225,7 @@ class(RTEmbNomadHunter) extends(RTEmbNomadBase)
 	{
 		objParams_1(_mob);
 		_cl = super();
-		private _shot = ["Shotgun",_mob,INV_BACKPACK] call createItemInInventory;
-		callFuncParams(_shot,createAmmoInMagazine,"AmmoShotgun");
+		private _shot = ["DBShotgun",_mob,INV_BACKPACK] call createItemInInventory;
 		
 		_ammo = ["AmmoShotgun",_cl] call createItemInContainer;
 		callFuncParams(_ammo,initCount,randInt(5,10));
@@ -1375,4 +1352,201 @@ class(RTEmbNomadSpirter) extends(RTEmbNomadBase)
 			setVar(_s,bottleName,"Самогон");
 		};
 	};
+endclass
+
+// Забродок
+class(MerchantClothZabrodok) extends(MerchantCloth)
+	var(armaClass,"rds_uniform_citizen3");
+	var(name,"Поношенная куртка");
+	var(desc,"Простая, чуть потрёпанная куртка из плотной ткани.");
+endclass
+
+class(GromilaClothZabrodok) extends(GromilaCloth)
+	var(armaClass,"Skyline_Character_U_CivilC_03_F");
+	var(name,"Кожанка");
+	var(desc,"Грубая кожаная куртка.");
+endclass
+
+class(RSmotriyashchy) extends(BasicRole)
+	var(name,"Смотрящий");
+	var(desc,"Будучи одним из первых жителей Забродка и самым смекалистым — ты сумел сделать себе имя.\nКогда-то давно ты хотел попасть в город, а теперь зарабатываешь почти так же много, как и Торгаш: ведь под твоим владением бар ""Прохлада"", единственное место Забродка, где готовят еду и подают пещерный алкоголь уставшим путникам.\nНо с властью приходит ответственность: тебе иногда приходится подгонять работу всяческим хвостам, чтобы те не перерезали друг-друга, и за тобой последнее слово в конфликтах и спорах Забродка.");
+	var(count,1);
+	var(reputationNeed,rolerep(1,1,2));
+	getter_func(canTakeInLobby,true);
+	getter_func(getInitialDir,random 360);
+	getter_func(getInitialPos,vec3(3767.41,3897.91,27.9577));
+	getter_func(connectedTo,"ref:RSmotrZabrodokBed");
+	getter_func(getSkills,vec4(randInt(8,10),randInt(10,13),randInt(8,10),randInt(9,11)));
+	func(getOtherSkills) {[
+		skillrand(fight,1,3) arg
+		skillrand(pistol,1,4) arg
+		skillrand(knife,1,3)
+	]};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		private _cloth = ["MerchantClothZabrodok",_mob,INV_CLOTH] call createItemInInventory;
+		regKeyInUniform(_cloth,["prohladaKey"],"Ключ бара ""Прохлада""");
+		callFuncParams(_cloth,initMoney,randInt(5,10));
+		["Revolver",_mob,INV_BELT] call createItemInInventory;
+		private _ammo = ["AmmoRevolver",_cloth] call createItemInContainer;
+		callFuncParams(_ammo,initCount,randInt(4,8));
+	};
+endclass
+
+class(RUshibala) extends(BasicRole)
+	var(name,"Ушибала");
+	var(desc,"Ты сам себе правая рука. Сильный, выносливый и достаточно смышлёный, чтобы понять, что пока существует Забродок — существует необходимость поддержания в нём порядка, за который Смотрящий ещё готов и заплатить.\nРаботайте вместе, чтобы привести Забродок и друг-друга к обогащению.");
+	var(count,1);
+	var(reputationNeed,rolerep(1,1,2));
+	getter_func(canTakeInLobby,true);
+	getter_func(getInitialDir,random 360);
+	getter_func(getInitialPos,vec3(3768.14,3898.73,27.9577));
+	getter_func(connectedTo,"ref:RUshibalaZabrodokBed");
+	getter_func(getSkills,vec4(randInt(11,13),randInt(8,10),randInt(10,12),randInt(11,13)));
+	func(getOtherSkills) {[
+		skillrand(fight,2,5) arg
+		skillrand(shotgun,1,4) arg
+		skillrand(stealth,1,3)
+	]};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		private _cloth = ["GromilaClothZabrodok",_mob,INV_CLOTH] call createItemInInventory;
+		["HatBandana",_mob,INV_HEAD] call createItemInInventory;
+		regKeyInUniform(_cloth,["prohladaKey"],"Ключ бара ""Прохлада""");
+		callFuncParams(_cloth,initMoney,randInt(3,10));
+		["Shotgun",_mob,INV_BACKPACK] call createItemInInventory;
+		private _ammo = ["AmmoShotgun",_cloth] call createItemInContainer;
+		callFuncParams(_ammo,initCount,randInt(5,10));
+	};
+endclass
+
+class(RNomadZabrodok) extends(BasicRole)
+	var(name,"Подворотник");
+	var(desc,"Будучи кочевником, ты пришёл в Грязноямск, но по какой-то причине тебя не пустили.\nНеподалёку от Грязноямска есть Забродок — перевалочный пункт для путников, предоставляющий ночлег, припасы и очаг тем, которые разделили с тобой участь отверженного.\nИ в эту смену ты снова попытаешь счастье: либо на гермовратах, либо в Забродке.");
+	var(count,10);
+	var(reputationNeed,rolerep(1,1,2));
+	getter_func(canTakeInLobby,true);
+	getter_func(getInitialDir,random 360);
+
+	var(currentNomadRole,nullPtr);
+	var(__bedsRef,null);
+	var(lastBed,"");
+
+	func(constructor)
+	{
+		objParams();
+		callSelfAfter(_firstInitNomadRole,2);
+	};
+
+	func(_firstInitNomadRole)
+	{
+		objParams();
+		callSelf(nextNomadRole);
+		if (isNull(getSelf(currentNomadRole)) || {isNullReference(getSelf(currentNomadRole))}) then {
+			["Current nomad role not setupped %1",callSelf(getClassName)] call logError;
+		};
+	};
+
+	func(nextNomadRole)
+	{
+		objParams();
+		private _next = pick[
+			"RTEmbNomadHunter","RTEmbNomadHealer","RTEmbNomadCook","RTEmbNomadRatter","RTEmbNomadMushromer","RTEmbNomadSpirter"
+		];
+		setSelf(currentNomadRole,_next call gm_getRoleObject);
+	};
+
+	func(Beds)
+	{
+		objParams();
+		if isNull(getSelf(__bedsRef)) then {
+			private _dat = [
+				"RNomadZabrodokBed0",
+				"RNomadZabrodokBed1",
+				"RNomadZabrodokBed2",
+				"RNomadZabrodokBed3",
+				"RNomadZabrodokBed4",
+				"RNomadZabrodokBed5",
+				"RNomadZabrodokBed6",
+				"RNomadZabrodokBed7",
+				"RNomadZabrodokBed8",
+				"RNomadZabrodokBed9"
+			];
+			setSelf(__bedsRef,_dat);
+		};
+		getSelf(__bedsRef)
+	};
+
+	func(pickBed)
+	{
+		objParams();
+		private _beds = callSelf(Beds);
+		if (count _beds == 0) exitWith { setSelf(lastBed,""); };
+		private _randIdx = randInt(0,count _beds - 1);
+		setSelf(lastBed,_beds deleteAt _randIdx);
+	};
+
+	func(getInitialPos)
+	{
+		objParams();
+		if (getSelf(lastBed) isEqualTo "") then { callSelf(pickBed); };
+		private _bed = getSelf(lastBed);
+		if (_bed isEqualTo "") exitWith { vec3(3773.38,3863.65,24.0324) };
+		private _positions = [
+			vec3(3773.38,3863.65,24.0324),
+			vec3(3777.65,3872.25,24.0348),
+			vec3(3777.68,3888.82,24.0244),
+			vec3(3777.99,3888.26,26.9843),
+			vec3(3766.78,3872.93,27.1249),
+			vec3(3768.37,3889.19,24.0239),
+			vec3(3764.73,3887.33,24.0267),
+			vec3(3752.71,3873.25,24.033),
+			vec3(3752.44,3873.44,27.1052),
+			vec3(3752.69,3877.11,24.0269)
+		];
+		private _idx = parseNumber (_bed select [count "RNomadZabrodokBed"]);
+		_positions select _idx
+	};
+
+	func(connectedTo)
+	{
+		objParams();
+		if (getSelf(lastBed) isEqualTo "") then { callSelf(pickBed); };
+		private _bed = getSelf(lastBed);
+		if (_bed isEqualTo "") exitWith { "" };
+		"ref:" + _bed
+	};
+
+	getter_func(getSkills,callFunc(getSelf(currentNomadRole),getSkills));
+	getter_func(getOtherSkills,callFunc(getSelf(currentNomadRole),getOtherSkills));
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		callFuncParams(getSelf(currentNomadRole),getEquipment,_mob);
+		["TorchDisabled",_mob] call createItemInInventory;
+	};
+
+	func(onAssigned)
+	{
+		objParams_2(_mob,_usr);
+		super();
+		private _m = format["%1 - вот каким было моё призвание в пещерах!",getVar(getSelf(currentNomadRole),name)];
+		callFuncParams(_mob,addFirstJoinMessage,_m);
+		callFuncParams(getSelf(currentNomadRole),onAssigned,_mob arg _usr);
+		callFuncParams(_mob,setHunger,randInt(40,60));
+		callSelf(pickBed);
+		callSelf(nextNomadRole);
+	};
+
+	func(onDeadBasic)
+	{
+		objParams_2(_mob,_usr);
+		super();
+	};
+
 endclass
