@@ -1393,6 +1393,12 @@ class(RSmotriyashchy) extends(BasicRole)
 		private _ammo = ["AmmoRevolver",_cloth] call createItemInContainer;
 		callFuncParams(_ammo,initCount,randInt(4,8));
 	};
+
+	func(initWelcome)
+	{
+		objParams_1(_mob);
+		callFuncParams(_mob,addFirstJoinMessage,"Будучи одним из первых жителей Забродка и самым смекалистым — ты сумел сделать себе имя." + sbr + "Когда-то давно ты хотел попасть в город, а теперь зарабатываешь почти так же много, как и Торгаш: ведь под твоим владением бар ""Прохлада"", единственное место Забродка, где готовят еду и подают пещерный алкоголь уставшим путникам." + sbr + "Но с властью приходит ответственность: тебе иногда приходится подгонять работу всяческим хвостам, чтобы те не перерезали друг-друга, и за тобой последнее слово в конфликтах и спорах Забродка.");
+	};
 endclass
 
 class(RUshibala) extends(BasicRole)
@@ -1421,6 +1427,12 @@ class(RUshibala) extends(BasicRole)
 		["Shotgun",_mob,INV_BACKPACK] call createItemInInventory;
 		private _ammo = ["AmmoShotgun",_cloth] call createItemInContainer;
 		callFuncParams(_ammo,initCount,randInt(5,10));
+	};
+
+	func(initWelcome)
+	{
+		objParams_1(_mob);
+		callFuncParams(_mob,addFirstJoinMessage,"Ты сам себе правая рука. Сильный, выносливый и достаточно смышлёный, чтобы понять, что пока существует Забродок — существует необходимость поддержания в нём порядка, за который Смотрящий ещё готов и заплатить." + sbr + "Работайте вместе, чтобы привести Забродок и друг-друга к обогащению.");
 	};
 endclass
 
@@ -1529,6 +1541,12 @@ class(RNomadZabrodok) extends(BasicRole)
 		objParams_1(_mob);
 		callFuncParams(getSelf(currentNomadRole),getEquipment,_mob);
 		["TorchDisabled",_mob] call createItemInInventory;
+	};
+
+	func(initWelcome)
+	{
+		objParams_1(_mob);
+		callFuncParams(_mob,addFirstJoinMessage,"Будучи кочевником, ты пришёл в Грязноямск, но по какой-то причине тебя не пустили." + sbr + "Неподалёку от Грязноямска есть Забродок — перевалочный пункт для путников, предоставляющий ночлег, припасы и очаг тем, которые разделили с тобой участь отверженного." + sbr + "И в эту смену ты снова попытаешь счастье: либо на гермовратах, либо в Забродке.");
 	};
 
 	func(onAssigned)
