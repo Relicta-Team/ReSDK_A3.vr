@@ -1358,7 +1358,8 @@ endclass
 class(MerchantClothZabrodok) extends(MerchantCloth)
 	var(armaClass,"rds_uniform_citizen3");
 	var(name,"Поношенная куртка");
-	var(desc,"Простая, чуть потрёпанная куртка из плотной ткани.");
+	private _descValue = "Простая, чуть потрёпанная куртка из плотной ткани.";
+	var_exprval(desc,_descValue);
 endclass
 
 class(GromilaClothZabrodok) extends(GromilaCloth)
@@ -1369,7 +1370,8 @@ endclass
 
 class(RSmotriyashchy) extends(BasicRole)
 	var(name,"Смотрящий");
-	var(desc,"Будучи одним из первых жителей Забродка и самым смекалистым — ты сумел сделать себе имя.\nКогда-то давно ты хотел попасть в город, а теперь зарабатываешь почти так же много, как и Торгаш: ведь под твоим владением бар ""Прохлада"", единственное место Забродка, где готовят еду и подают пещерный алкоголь уставшим путникам.\nНо с властью приходит ответственность: тебе иногда приходится подгонять работу всяческим хвостам, чтобы те не перерезали друг-друга, и за тобой последнее слово в конфликтах и спорах Забродка.");
+	private _descValue = "Будучи одним из первых жителей Забродка и самым смекалистым — ты сумел сделать себе имя.\nКогда-то давно ты хотел попасть в город, а теперь зарабатываешь почти так же много, как и Торгаш: ведь под твоим владением бар ""Прохлада"", единственное место Забродка, где готовят еду и подают пещерный алкоголь уставшим путникам.\nНо с властью приходит ответственность: тебе иногда приходится подгонять работу всяческим хвостам, чтобы те не перерезали друг-друга, и за тобой последнее слово в конфликтах и спорах Забродка.";
+	var_exprval(desc,_descValue);
 	var(count,1);
 	var(reputationNeed,rolerep(1,1,2));
 	getter_func(canTakeInLobby,true);
@@ -1404,7 +1406,8 @@ endclass
 
 class(RUshibala) extends(BasicRole)
 	var(name,"Ушибала");
-	var(desc,"Ты сам себе правая рука. Сильный, выносливый и достаточно смышлёный, чтобы понять, что пока существует Забродок — существует необходимость поддержания в нём порядка, за который Смотрящий ещё готов и заплатить.\nРаботайте вместе, чтобы привести Забродок и друг-друга к обогащению.");
+	private _descValue = "Ты сам себе правая рука. Сильный, выносливый и достаточно смышлёный, чтобы понять, что пока существует Забродок — существует необходимость поддержания в нём порядка, за который Смотрящий ещё готов и заплатить.\nРаботайте вместе, чтобы привести Забродок и друг-друга к обогащению.";
+	var_exprval(desc,_descValue);
 	var(count,1);
 	var(reputationNeed,rolerep(1,1,2));
 	getter_func(canTakeInLobby,true);
@@ -1440,7 +1443,8 @@ endclass
 
 class(RNomadZabrodok) extends(BasicRole)
 	var(name,"Подворотник");
-	var(desc,"Будучи кочевником, ты пришёл в Грязноямск, но по какой-то причине тебя не пустили.\nНеподалёку от Грязноямска есть Забродок — перевалочный пункт для путников, предоставляющий ночлег, припасы и очаг тем, которые разделили с тобой участь отверженного.\nИ в эту смену ты снова попытаешь счастье: либо на гермовратах, либо в Забродке.");
+	private _descValue = "Будучи кочевником, ты пришёл в Грязноямск, но по какой-то причине тебя не пустили.\nНеподалёку от Грязноямска есть Забродок — перевалочный пункт для путников, предоставляющий ночлег, припасы и очаг тем, которые разделили с тобой участь отверженного.\nИ в эту смену ты снова попытаешь счастье: либо на гермовратах, либо в Забродке.";
+	var_exprval(desc,_descValue);
 	var(count,10);
 	var(reputationNeed,rolerep(1,1,2));
 	getter_func(canTakeInLobby,true);
@@ -1507,9 +1511,9 @@ class(RNomadZabrodok) extends(BasicRole)
 	func(getInitialPos)
 	{
 		objParams();
-		if (getSelf(lastBed) isEqualTo "") then { callSelf(pickBed); };
+		if equals(getSelf(lastBed),"") then { callSelf(pickBed); };
 		private _bed = getSelf(lastBed);
-		if (_bed isEqualTo "") exitWith { vec3(3773.38,3863.65,24.0324) };
+		if equals(_bed,"") exitWith { vec3(3773.38,3863.65,24.0324) };
 		private _positions = [
 			vec3(3773.38,3863.65,24.0324),
 			vec3(3777.65,3872.25,24.0348),
@@ -1529,9 +1533,9 @@ class(RNomadZabrodok) extends(BasicRole)
 	func(connectedTo)
 	{
 		objParams();
-		if (getSelf(lastBed) isEqualTo "") then { callSelf(pickBed); };
+		if equals(getSelf(lastBed),"") then { callSelf(pickBed); };
 		private _bed = getSelf(lastBed);
-		if (_bed isEqualTo "") exitWith { "" };
+		if equals(_bed,"") exitWith { "" };
 		"ref:" + _bed
 	};
 
