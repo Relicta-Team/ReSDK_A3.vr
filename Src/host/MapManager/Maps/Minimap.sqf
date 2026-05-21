@@ -475,7 +475,7 @@ _3797_379883775_4899923_88790 = ['SteelGridDoor',[3797.38,3775.49,23.8879],91.09
 _3802_850103761_9799824_70220 = ['Decor',[3802.85,3761.98,24.7022],272.303,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\cultural\castleruins\castleruins_01_wall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3797_919923765_8400924_40050 = ['Decor',[3797.92,3765.84,24.4005],181.712,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\cultural\castleruins\castleruins_01_wall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!
 _3793_739993762_3300824_47850 = ['Decor',[3793.74,3762.33,24.4785],88.2896,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\cultural\castleruins\castleruins_01_wall_10m_f.p3d'];}] call InitDecor; // !!! realocated model !!!
-['ClayWallBig',[3786.05,3758.81,26.174],0.19764,[0,0,1]] call InitStruct; 
+['ClayWallBig',[3785.82,3755.48,26.174],0.19764,[0,0,1]] call InitStruct; 
 ['ClayWallBig',[3779.27,3750.64,24.6112],244.781,[0,0,1]] call InitStruct; 
 ['ClayWallBig',[3797.3,3759.51,25.4067],357.795,[0,0,1]] call InitStruct; 
 ['ClayWallBig',[3800.16,3759.68,28.638],359.209,[0,0,1]] call InitStruct; 
@@ -3366,7 +3366,7 @@ _3766_211433899_8508324_27135 = ['RedSteelBox',[3766.21,3899.85,24.2714],350,[0,
 ['StoneDebris1',[3771.09,3862.65,29.0614,true],0,[0.141554,0.0323306,0.989403]] call InitItem; 
 ['DirtDebris2',[3770.86,3861.5,29.096,true],[-0.965819,-0.258787,-0.0149684],[-0.0420572,0.0994594,0.994152]] call InitItem; 
 ['Ashtray',[3762.02,3896.7,24.7887],10.0002,[0,0,1]] call InitItem; 
-['MilkBottle2',[3762.13,3897.16,29.9462,true],0,[-0.00659628,-0.00162294,0.999977]] call InitItem; 
+['MilkBottle2',[3762.13,3897.16,29.9462,true],0,[-0.00659628,-0.00161913,0.999977]] call InitItem; 
 ['BlockStone',[3787.47,3794.11,24.1287],0,[0,0,1]] call InitDecor; 
 ['AmmoBoxShotgun',[3765.08,3899.2,34.0968,true],104.455,[-0.00294776,-0.00138551,0.999995]] call InitItem; 
 ['ConcretePanelDamaged',[3769.09,3898,27.875],0,[0,0,1]] call InitStruct; 

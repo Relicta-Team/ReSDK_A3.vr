@@ -1380,7 +1380,8 @@ class(RSmotriyashchy) extends(BasicRole)
 	func(getOtherSkills) {[
 		skillrand(fight,1,3) arg
 		skillrand(pistol,1,4) arg
-		skillrand(knife,1,3)
+		skillrand(knife,1,3) arg
+		skillrand(cooking,3,8)
 	]};
 
 	func(getEquipment)
@@ -1413,8 +1414,9 @@ class(RUshibala) extends(BasicRole)
 	getter_func(getSkills,vec4(randInt(11,13),randInt(8,10),randInt(10,12),randInt(11,13)));
 	func(getOtherSkills) {[
 		skillrand(fight,2,5) arg
-		skillrand(shotgun,1,4) arg
-		skillrand(stealth,1,3)
+		skillrand(shotgun,2,4) arg
+		skillrand(stealth,1,3) arg
+		skillrand(cooking,1,4)
 	]};
 
 	func(getEquipment)
