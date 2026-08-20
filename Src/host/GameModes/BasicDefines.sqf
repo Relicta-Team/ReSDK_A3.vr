@@ -252,7 +252,10 @@ class(GMBase) extends(IGameEvent) attribute(Story)
 			"RCleaner",
 			"RMerchant",
 			"RGromila",
-			"RCitizen"
+			"RCitizen",
+			"RSmotriyashchy",
+			"RUshibala",
+			"RNomadZabrodok"
 		]
 	};
 	//Список лейт ролей. Массив строк. Инициализируется во время пикинга режима
