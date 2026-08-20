@@ -22,7 +22,6 @@ vs_isEnabledText = false;
 
 vs_voiceListenersEnabled = true;
 vs_voiceListenerReady = false;
-vs_voiceListenerMaxTargets = 10;
 vs_voiceListenerEnterDistance = vs_max_voice_volume;
 vs_voiceListenerExitDistance = vs_max_voice_volume + 10;
 vs_voiceListenerLingerTime = 10;
