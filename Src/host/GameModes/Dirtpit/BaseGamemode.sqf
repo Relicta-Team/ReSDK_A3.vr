@@ -488,6 +488,10 @@ class(GMStationIdeologyDictatorship) extends(GMStationIdeology)
 		callFuncParams(_docs,makeRegList,_mob arg _id);
 
 		private _baseRole = getVar(_mob,basicRole);
+
+		// disallow documents outside dirtpit
+		if (isTypeOf(_baseRole,IZabrodokBaseRole)) exitWith {};
+
 		private _class = callFunc(_baseRole,getClassName);
 
 		if (_class == "RHead") exitwith {
