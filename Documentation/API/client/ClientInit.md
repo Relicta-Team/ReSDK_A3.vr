@@ -11,7 +11,7 @@ Initial value:
 ```sqf
 true //flag for skip static asserts on client
 ```
-File: [client\ClientInit\ClientInit.sqf at line 60](../../../Src/client/ClientInit/ClientInit.sqf#L60)
+File: [client\ClientInit\ClientInit.sqf at line 69](../../../Src/client/ClientInit/ClientInit.sqf#L69)
 # _allowed_extensions.h
 
 ## CLIENTSIDE_LIST_ALLOWED_EXTENSIONS
