@@ -322,7 +322,6 @@ vs_collectNearbyVoiceListeners = {
 
     private _names = [];
     {
-        if (count _names >= vs_voiceListenerMaxTargets) exitWith {};
         _names pushBackUnique (_x select 1);
     } foreach _candidates;
 
@@ -359,17 +358,13 @@ vs_processVoiceListeners = {
     private _targets = [];
     private _radioNames = call vs_collectVoiceListenerRadioRequired;
     {
-        if (count _targets >= vs_voiceListenerMaxTargets) exitWith {};
         _targets pushBackUnique _x;
     } foreach _radioNames;
 
-    if (count _targets < vs_voiceListenerMaxTargets) then {
-        private _nearNames = call vs_collectNearbyVoiceListeners;
-        {
-            if (count _targets >= vs_voiceListenerMaxTargets) exitWith {};
-            _targets pushBackUnique _x;
-        } foreach _nearNames;
-    };
+    private _nearNames = call vs_collectNearbyVoiceListeners;
+    {
+        _targets pushBackUnique _x;
+    } foreach _nearNames;
 
     [_targets] call vs_setVoiceListeners;
 };
