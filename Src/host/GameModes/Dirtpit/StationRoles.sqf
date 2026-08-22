@@ -1368,7 +1368,10 @@ class(GromilaClothZabrodok) extends(GromilaCloth)
 	var(desc,"Грубая кожаная куртка.");
 endclass
 
-class(RSmotriyashchy) extends(BasicRole)
+
+class(IZabrodokBaseRole) extends(BasicRole) endclass
+
+class(RSmotriyashchy) extends(IZabrodokBaseRole)
 	var(name,"Смотрящий");
 	private _descValue = "Будучи одним из первых жителей Забродка и самым смекалистым — ты сумел сделать себе имя.\nКогда-то давно ты хотел попасть в город, а теперь зарабатываешь почти так же много, как и Торгаш: ведь под твоим владением бар ""Прохлада"", единственное место Забродка, где готовят еду и подают пещерный алкоголь уставшим путникам.\nНо с властью приходит ответственность: тебе иногда приходится подгонять работу всяческим хвостам, чтобы те не перерезали друг-друга, и за тобой последнее слово в конфликтах и спорах Забродка.";
 	var_exprval(desc,_descValue);
@@ -1407,7 +1410,7 @@ class(RSmotriyashchy) extends(BasicRole)
 	};
 endclass
 
-class(RUshibala) extends(BasicRole)
+class(RUshibala) extends(IZabrodokBaseRole)
 	var(name,"Ушибала");
 	private _descValue = "Ты сам себе правая рука. Сильный, выносливый и достаточно смышлёный, чтобы понять, что пока существует Забродок — существует необходимость поддержания в нём порядка, за который Смотрящий ещё готов и заплатить.\nРаботайте вместе, чтобы привести Забродок и друг-друга к обогащению.";
 	var_exprval(desc,_descValue);
@@ -1446,7 +1449,7 @@ class(RUshibala) extends(BasicRole)
 	};
 endclass
 
-class(RNomadZabrodok) extends(BasicRole)
+class(RNomadZabrodok) extends(IZabrodokBaseRole)
 	var(name,"Подворотник");
 	private _descValue = "Будучи кочевником, ты пришёл в Грязноямск, но по какой-то причине тебя не пустили.\nНеподалёку от Грязноямска есть Забродок — перевалочный пункт для путников, предоставляющий ночлег, припасы и очаг тем, которые разделили с тобой участь отверженного.\nИ в эту смену ты снова попытаешь счастье: либо на гермовратах, либо в Забродке.";
 	var_exprval(desc,_descValue);
