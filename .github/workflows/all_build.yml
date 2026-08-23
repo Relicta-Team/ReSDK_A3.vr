@@ -188,7 +188,7 @@ jobs:
   
   rvengine-build:
     name: Build RVEngine
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: true
       matrix:

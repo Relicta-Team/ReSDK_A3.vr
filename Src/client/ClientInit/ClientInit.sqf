@@ -33,6 +33,15 @@ if (not_equals(relicta_version,client_version) && isMultiplayer) exitWith {
     endMission "LOSER";
 };
 
+#ifndef EDITOR
+productVersion params ["", "", "", "", "_buildType"];
+if (_buildType != "Stable") exitWith {
+    errorformat("Wrong build type: %1",_buildType);
+    private _msg = format["Недопустимый тип билда: %1. Переключитесь на Stable ветку.",_buildType];
+    rpcCall("clientDisconnect",vec2("Вы были отключены от сервера",_msg));
+};
+#endif
+
 _canload_ = true;
 //validate gamma and squad
 if (isMultiplayer) then {
