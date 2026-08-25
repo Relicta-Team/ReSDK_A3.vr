@@ -881,7 +881,7 @@ struct(BAEater_EatBodyParts) base(BABase)
             
             // Восстанавливаем голод
             private _newHunger = (_currentHunger + (self getv(biteHungerRestore))) min 100;
-            callFuncParams(_mob,setHunger,_newHunger);
+            setVar(_mob,hunger,_newHunger);
             
             // Устанавливаем время следующего укуса
             self setv(lastBiteTime,tickTime + rand(0,self getv(biteCooldownRand)));
