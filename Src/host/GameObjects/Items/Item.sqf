@@ -1647,7 +1647,7 @@ class(Debug_Item_damager) extends(Item)
 			callFuncParams(_m,addStaminaRegen,1000);
 			setVar(_m,lastCombatActionTime,0);
 			setVar(_m,otherLastCombatActionTime,0);
-			setVar(_m,hunger,100);
+			callFuncParams(_m,setHunger,100);
 			setVar(_m,thirst,100);
 			
 		};

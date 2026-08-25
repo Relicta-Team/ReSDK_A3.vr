@@ -214,7 +214,7 @@ class(GMOkopovo) extends(GMBase)
 					callFuncParams(_x,playSoundLocal,"effects\tension5" arg getRandomPitchInRange(0.7,1.3));
 				};
 				setVar(_x,__gmokopovo_creppyFlag,true);
-				modVar(_x,hunger, - 0.5);
+				callFuncParams(_x,adjustHunger,-0.5);
 				callFuncParams(_x,addStaminaLoss,2.5);
 			} else {
 				setVar(_x,__gmokopovo_creppyFlag,null);
