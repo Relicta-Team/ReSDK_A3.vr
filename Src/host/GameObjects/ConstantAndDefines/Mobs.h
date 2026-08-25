@@ -75,15 +75,23 @@
 
 //hunger and thirst coefs
 
-//1.8h for non-activity
-#define HUNGER_PER_TICK_LESS 0.015
+//~2.31h to zero without food or stamina restoration
+#define HUNGER_PER_TICK_LESS 0.012
+
+#define HUNGER_MAX 140
+#define HUNGER_SATED_THRESHOLD 100
+#define HUNGER_OVEREAT_THRESHOLD 120
+//Together with the passive loss, reduces 140 hunger to 120 in ~4 minutes.
+#define HUNGER_OVEREAT_PER_TICK_LESS 0.0715
+#define HUNGER_OVEREAT_VOMIT_MIN 45
+#define HUNGER_OVEREAT_VOMIT_MAX 75
 //rand(0.05,0.06)
 
 #define THIRST_PER_TICK_LESS 0
 //rand(0.06,0.07)
 
-//for non-encum: ~50min regen, for full encum: 16 min
-#define HUNGER_STAMINA_LESS 0.034
+//Additional hunger loss per stamina-restoration update
+#define HUNGER_STAMINA_LESS 0.00585
 
 #define HUNGER_UNC_TIME randInt(10,60 * 3)
 #define THIRST_UNC_TIME randInt(10,60 * 2)
