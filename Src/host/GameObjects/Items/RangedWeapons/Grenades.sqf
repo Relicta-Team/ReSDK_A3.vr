@@ -80,7 +80,10 @@ class(Grenade) extends(Item)
 		if (getSelf(grenadeState) != GRENADE_STATE_SAFE) exitWith {false};
 		setSelf(grenadeState,GRENADE_STATE_PIN_PULLED);
 		callSelfParams(playSound,callSelf(activateSound) arg rand(0.8,1.2) arg 35);
-		callSelfParams(worldSay,setstyle(format["%1 ВЫДЁРГИВАЕТ ЧЕКУ ИЗ ГРАНАТЫ!",callFuncParams(_usr,getNameEx,"кто")],style_redbig) arg "combat" arg 25 arg false);
+		private _actorName = callFuncParams(_usr,getNameEx,"кто");
+		private _message = format["%1 ВЫДЁРГИВАЕТ ЧЕКУ ИЗ ГРАНАТЫ!",_actorName];
+		_message = setstyle(_message,style_redbig);
+		callSelfParams(worldSay,_message arg "combat" arg 25 arg false);
 		true
 	};
 
@@ -91,7 +94,9 @@ class(Grenade) extends(Item)
 		setSelf(grenadeState,GRENADE_STATE_SAFE);
 		callSelfParams(playSound,callSelf(replacePinSound) arg rand(0.9,1.1) arg 20);
 		if !isNullReference(_usr) then {
-			callSelfParams(worldSay,format["%1 вставляет чеку обратно в гранату.",callFuncParams(_usr,getNameEx,"кто")] arg "info" arg 20 arg false);
+			private _actorName = callFuncParams(_usr,getNameEx,"кто");
+			private _message = format["%1 вставляет чеку обратно в гранату.",_actorName];
+			callSelfParams(worldSay,_message arg "info" arg 20 arg false);
 		};
 		true
 	};
@@ -300,12 +305,13 @@ class(Grenade) extends(Item)
 		objParams_1(_origin);
 		private _radius = callSelf(getConcussionRadius);
 		private _effectId = "SLIGHT_FX_GRENADE" call lightSys_getConfigIdByName;
+		private _effectUp = vec3(0,0,1);
 		private _distance = 0;
 		private _intensity = 0;
 		{
 			_distance = _origin distance getPosATL getVar(_x,owner);
 			_intensity = linearConversion [0,_radius,_distance,1,0.05,true];
-			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg [0,0,1] arg 0.35]);
+			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.35]);
 			callFuncParams(_x,sendInfo,"grenade_concussion" arg [_origin arg _intensity]);
 		} foreach callSelfParams(getNearMobs,_radius arg false);
 	};
