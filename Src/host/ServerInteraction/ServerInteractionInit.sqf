@@ -339,6 +339,7 @@ si_addThrowTask = {
 	call {
 		if (_throwMode == SI_TM_THROW) exitWith {
 			_tempObj setVariable ["_sysRef",_gobj];
+			callFuncParams(_gobj,onBeforeThrow,_refThis);
 
 			_tempObj setVariable ["_dmgData",callFuncParams(_gobj,thGetDamageData,_refThis)];
 			_tempObj setVariable ["_isContacted",false];

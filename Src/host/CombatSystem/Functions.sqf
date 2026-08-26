@@ -96,7 +96,7 @@ gurps_applyDamageType = {
 //конвертирует тип повреждений в тип раны
 gurps_convertDamageToWound = {
 	params ["_type"];
-	if (_type == DAMAGE_TYPE_CRUSHING) exitWith {WOUND_TYPE_BRUISE};
+	if (_type in [DAMAGE_TYPE_CRUSHING,DAMAGE_TYPE_BLAST]) exitWith {WOUND_TYPE_BRUISE};
 	if (_type in [DAMAGE_TYPE_BURN]) exitWith {WOUND_TYPE_BURN};
 	WOUND_TYPE_BLEEDING
 };

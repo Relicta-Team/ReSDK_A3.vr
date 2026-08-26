@@ -415,8 +415,6 @@ le_se_fireEmit = {
 	// } foreach allEmitters;
 	// _et setposatl _pos;
 	// _et setVectorUp _norm;
-	allEmitters pushBack _et;
-	
 	private _rp = rand(0.05,0.2);
 	if !isNullVar(_deleteAfter) then {
 		_rp = _deleteAfter;

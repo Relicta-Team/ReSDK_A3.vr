@@ -223,6 +223,17 @@ VERB(mainact)
 		if (_t!="")then{setName(_t)};
 ENDVERB
 
+VERB(replacegrenadepin)
+	cond
+		skipCond(!isTypeOf(usr,Mob));
+		skipCond(!equals(getVar(src,loc),usr));
+		skipCond(!callFunc(src,canReplacePin));
+	act
+		if (equals(getVar(src,loc),usr) && callFunc(src,canReplacePin)) then {
+			callFuncParams(src,replacePin,usr);
+		};
+ENDVERB
+
 VERB(wpnopnmode)
 	cond
 		skipCond(!isTypeOf(usr,Mob));

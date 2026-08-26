@@ -34,3 +34,4 @@ verb(wpnopnmode,"Оружие",noargs) //пример: разломить, со�
 	verb(spinrev,"Крутить барабан",noargs)
 	verb(dropammorev,"Опустошить барабан",noargs)
 verb(showOrgans,"Внутренности",noargs)
+verb(replacegrenadepin,"Вставить чеку",noargs)

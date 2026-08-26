@@ -386,7 +386,7 @@ _onMainAction = {
 
 	private _item = if (_targHash isEqualType "") then {
 		private _itemRef = pointer_get(_targHash);
-		if !pointer_isValidResult(_item) exitWith {
+		if !pointer_isValidResult(_itemRef) exitWith {
 			errorformat("onMainAction() - Target reference has no exists in pointers table - %1",_targHash);
 			RETURN(0);
 		};

@@ -427,9 +427,10 @@ region(Inventory control)
 	func(setItemOnSlot)
 	{
 		objParams_2(_item,_slot);
+		private _oldLoc = getVar(_item,loc);
 
 		//установка локации
-		if not_equals(getVar(_item,loc),this) then {
+		if not_equals(_oldLoc,this) then {
 			setVar(_item,loc,this);
 			callFunc(_item,onChangeLoc);
 		};
@@ -443,6 +444,9 @@ region(Inventory control)
 		private _slots_data = getSelf(slots);
 		_slots_data set [_slot,_item];
 		setVar(_item,slot,_slot);
+		if getVar(_item,processInventoryTransitions) then {
+			callFuncParams(_item,onInventorySlotChanged,this arg _oldLoc arg _idFrom arg _slot);
+		};
 
 		//вызываем событие onEquip или onUnequip
 		if array_exists(INV_LIST_HANDS,_slot) then { //новый слот руки и предыдущий слот был определён
