@@ -138,3 +138,14 @@ class(GreenAmbarWithDoors) extends(DoorDynamic)
 	getter_func(animateData,[["door_3_rot" arg 1 arg 5] arg vec3("door_1_rot",1,5)]);
 	var(serializedAnim,[-1 arg -1 arg -1 arg -1 arg -1 arg -1]);
 endclass
+
+class(FactoryBigBrick1) extends(GreenAmbarWithDoors)
+	var(model,"Land_Mine_01_warehouse_f");
+	var(name,"Большое здание");
+
+	getterconst_func(getChunkType,CHUNK_TYPE_DECOR);
+    getter_func(isStruct,false);
+    getter_func(isDecor,true);
+
+	getter_func(animateData,[["door_2_rot" arg 1 arg 5] arg vec3("door_1_rot",1,5)]);
+endclass
