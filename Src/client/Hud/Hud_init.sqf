@@ -46,10 +46,10 @@ hud_hunger = 100; //голод
 		{
 			if (_value > HUNGER_OVEREAT_THRESHOLD) exitWith {["Переедание!","#FF0000"]};
 			if (_value > HUNGER_SATED_THRESHOLD) exitWith {["Сытый","#00B74A"]};
-			if (_value > 50) exitWith {["",""]};
+			if (_value > BODY_PART_HUNGER_REGEN_LOWLEVEL) exitWith {["",""]};
 			"Голод"
 		},
-		[[51,"#FFFFFF"],[50,"#F2BF8F"],[40,"#D18E4F"],[30,"#A8611E"],[20,"#8C420D"],[10,"#630603"]],
+		[[41,"#FFFFFF"],[40,"#F2BF8F"],[30,"#D18E4F"],[20,"#A8611E"],[10,"#8C420D"],[0,"#630603"]],
 		false
 	];
 decl(float)
