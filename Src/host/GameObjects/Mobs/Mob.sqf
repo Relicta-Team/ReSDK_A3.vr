@@ -281,6 +281,7 @@ region(Connect control events)
 
 		callSelfParams(fastSendInfo,"hud_thirst" arg getSelf(thirst));
 		callSelfParams(fastSendInfo,"hud_hunger" arg getSelf(hunger));
+		callSelfParams(fastSendInfo,"hud_hungerStatus" arg getSelf(__hungerStatusLevel));
 		callSelfParams(fastSendInfo,"hud_encumb" arg getSelf(curEncumbranceLevel));
 		callSelfParams(fastSendInfo,"hud_oxy" arg getSelf(oxygen));
 		callSelfParams(fastSendInfo,"hud_pee" arg getSelf(urine));

@@ -25,7 +25,7 @@ inline_macro
 #define setWidgetVar(_w,var,val) _w setVariable [#var,val]
 
 decl(string[])
-hud_vars = ["oxy","hunger","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
+hud_vars = ["oxy","hunger","hungerStatus","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
 "holdbreath","tox"];
 decl(map)
 hud_map_defaultValues = createHashMap;
@@ -42,6 +42,14 @@ decl(float)
 hud_hunger = 100; //голод
 	decl(any[])
 	hud_hunger_overlay = ["Голод",[[51,""],[50,"#F2BF8F"],[40,"#D18E4F"],[30,"#A8611E"],[20,"#8C420D"],[10,"#630603"]],false];
+decl(float)
+hud_hungerStatus = 0;
+	decl(any[])
+	hud_hungerStatus_overlay = [
+		{ifcheck(equals(_value,2),"Переедание!","Сытый")},
+		[[0,""],[1,"#00B74A"],[2,"#FF0000"]],
+		true
+	];
 decl(float)
 hud_encumb = 0; //перегруз
 	decl(any[])

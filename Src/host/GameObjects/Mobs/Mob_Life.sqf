@@ -1184,12 +1184,7 @@ region(Status effects)
 		private _oldStatusLevel = getSelf(__hungerStatusLevel);
 		if (_oldStatusLevel != _newStatusLevel) then {
 			setSelf(__hungerStatusLevel,_newStatusLevel);
-			if (_newStatusLevel == 2) then {
-				callSelfParams(mindSay,setstyle("Переедание!",style_redbig));
-			};
-			if (_newStatusLevel == 1) then {
-				callSelfParams(mindSay,setstyle("Сытый",style_learnedskills));
-			};
+			callSelfParams(fastSendInfo,"hud_hungerStatus" arg _newStatusLevel);
 		};
 
 		if (_newStatusLevel == 2 && {tickTime >= getSelf(__hungerNextVomit)}) then {
