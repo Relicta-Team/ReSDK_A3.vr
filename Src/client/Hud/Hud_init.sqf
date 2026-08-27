@@ -7,6 +7,7 @@
 #include <..\WidgetSystem\widgets.hpp>
 #include <..\..\host\text.hpp>
 #include <..\..\host\CombatSystem\CombatSystem.hpp>
+#include <..\..\host\GameObjects\ConstantAndDefines\Mobs.h>
 
 namespace(Hud,hud_)
 
@@ -25,14 +26,14 @@ inline_macro
 #define setWidgetVar(_w,var,val) _w setVariable [#var,val]
 
 decl(string[])
-hud_vars = ["oxy","hunger","hungerStatus","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
+hud_vars = ["oxy","hunger","thirst","encumb","pee","poo","vs_lastError","combatMode","bone","pain","sleep","bleeding","stealth","light","combStyle","specAct",
 "holdbreath","tox"];
 decl(map)
 hud_map_defaultValues = createHashMap;
 decl(map)
 hud_map_widgets = createHashMap;
 
-//hud_[var]_overlay select 0 -название. может быть кодом для рантайм вычисления. _value будет текущим значением (!!!_curval рантайм значение!!!)
+//hud_[var]_overlay select 0 -название. Может быть кодом, возвращающим текст или [текст,цвет]. _value будет текущим значением.
 //hud_[var]_overlay select 1 - сортировка. true для тех где от меньшего к большему и false наоборот
 decl(float)
 hud_thirst = 100; //жажда
@@ -41,14 +42,15 @@ hud_thirst = 100; //жажда
 decl(float)
 hud_hunger = 100; //голод
 	decl(any[])
-	hud_hunger_overlay = ["Голод",[[51,""],[50,"#F2BF8F"],[40,"#D18E4F"],[30,"#A8611E"],[20,"#8C420D"],[10,"#630603"]],false];
-decl(float)
-hud_hungerStatus = 0;
-	decl(any[])
-	hud_hungerStatus_overlay = [
-		{ifcheck(equals(_value,2),"Переедание!","Сытый")},
-		[[0,""],[1,"#00B74A"],[2,"#FF0000"]],
-		true
+	hud_hunger_overlay = [
+		{
+			if (_value > HUNGER_OVEREAT_THRESHOLD) exitWith {["Переедание!","#FF0000"]};
+			if (_value > HUNGER_SATED_THRESHOLD) exitWith {["Сытый","#00B74A"]};
+			if (_value > 50) exitWith {["",""]};
+			"Голод"
+		},
+		[[51,"#FFFFFF"],[50,"#F2BF8F"],[40,"#D18E4F"],[30,"#A8611E"],[20,"#8C420D"],[10,"#630603"]],
+		false
 	];
 decl(float)
 hud_encumb = 0; //перегруз
@@ -295,6 +297,16 @@ hud_onUpdate = {
 		_curSettings params ["_value","_vis"];
 		setWidgetVar(_wid,curValue,_curval);
 		//traceformat("udp val %1",_curSettings)
+		_value = _curval;
+		_oldat = _overlay select 0;
+		private _displayData = ifcheck(equalTypes(_oldat,""),_oldat,call _oldat);
+		if equalTypes(_displayData,[]) then {
+			_displayData params ["_displayText","_displayColor"];
+			_oldat = _displayText;
+			_vis = _displayColor;
+		} else {
+			_oldat = _displayData;
+		};
 
 		_needRecalculatePos = true;
 
@@ -304,8 +316,7 @@ hud_onUpdate = {
 				_wid commit 0.2;
 				setWidgetVar(_wid,isVisible,true);
 			};
-			_oldat = _overlay select 0;
-			[_wid,format["<t align='center' color='%1'>%2</t>",_vis,ifcheck(equalTypes(_oldat,""),_oldat,call _oldat)]] call widgetSetText;
+			[_wid,format["<t align='center' color='%1'>%2</t>",_vis,_oldat]] call widgetSetText;
 		} else {
 			if getWidgetVar(_wid,isVisible) then {
 				_wid setFade 1;

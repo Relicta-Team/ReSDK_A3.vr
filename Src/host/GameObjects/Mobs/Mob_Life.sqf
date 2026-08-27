@@ -1184,7 +1184,6 @@ region(Status effects)
 		private _oldStatusLevel = getSelf(__hungerStatusLevel);
 		if (_oldStatusLevel != _newStatusLevel) then {
 			setSelf(__hungerStatusLevel,_newStatusLevel);
-			callSelfParams(fastSendInfo,"hud_hungerStatus" arg _newStatusLevel);
 		};
 
 		if (_newStatusLevel == 2 && {tickTime >= getSelf(__hungerNextVomit)}) then {
