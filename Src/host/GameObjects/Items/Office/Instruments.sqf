@@ -12,6 +12,7 @@ class(Holotape) extends(Item)
 	var(name,"Кассета");
 	var(desc,"Небольшая кассета с магнитной лентой.");
 	var(model,"sterben_top\am_items\misc\electronics\holotape\am_holotape.p3d");
+	var(icon,"\STERBEN_TOP\am_items\misc\electronics\holotape\ui\holotape_ca.paa");
 	var(material,"MatSynt");
 	var(size,ITEM_SIZE_TINY);
 	var(weight,gramm(80));

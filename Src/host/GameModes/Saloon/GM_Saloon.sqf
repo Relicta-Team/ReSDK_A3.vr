@@ -1024,9 +1024,15 @@ class(GMSaloonV2) extends(GMBase)
 		};
 
 		private _escapedNames = [];
+		private _rewardedClients = [];
 		{
 			if (!isNullReference(_x) && {!getVar(_x,isDead)} && {callSelfParams(isMobInEscapeArea,_x)}) then {
 				_escapedNames pushBackUnique (callFuncParams(_x,getNameEx,"кто"));
+				private _client = callFunc(_x,getLastPlayerClient);
+				if (!isNullReference(_client) && {!(_client in _rewardedClients)}) then {
+					_rewardedClients pushBack _client;
+					callFuncParams(_client,addPoints,1 arg true);
+				};
 			};
 		} foreach system_internal_list_allJoiners;
 		setSelf(escapedPeopleNames,_escapedNames);
