@@ -148,7 +148,6 @@ class(GMSaloon) extends(GMBase)
 			callFunc(_gen,beginUpdateGenerator);
 		};
 		setVar(_gen,energyleft,100000000);
-		
 
 		if (count cm_allClients >= 20) then {	
 			setSelf(duration,60* (60*2));
@@ -682,6 +681,7 @@ class(GMSaloonV2) extends(GMBase)
 		"RBanditMainSaloon",
 		"RBanditMiniSaloon",
 		"RTorgSaloon",
+		"RBrigadirSaloon",
 		"RDoctorSaloon"
 		]
 	};
@@ -703,6 +703,10 @@ class(GMSaloonV2) extends(GMBase)
 	var(task,nullPtr);
 	//var(taskList,["Saloon_Task_PortfelV2"]);
 	var(taskList,["Saloon_Task_PortfelV2" arg "Saloon_Task_DocsV2" arg "Saloon_Task_KillV2" arg "Saloon_Task_RoofV2"]);
+	var(isEscapeSequenceStarted,false);
+	var(isEscapeSequenceFinished,false);
+	var_array(escapedPeopleNames);
+	getterconst_func(getEscapeFinishCode,9001);
 
 	var(protectedWalls,[]);//защитные стены убираются когда спавнится командир охров
 	var(countDoors,0);
@@ -735,6 +739,40 @@ class(GMSaloonV2) extends(GMBase)
 			callFunc(_gen,beginUpdateGenerator);
 		};
 		setVar(_gen,energyleft,100000000);
+
+		// Свет в этой части Злачника должен быть отключён со старта раунда.
+		private _lightShield = "PlantLightShield" call getObjectByRef;
+		assert_str(!isNullReference(_lightShield),"Global reference 'PlantLightShield' not found");
+		if !isNullReference(_lightShield) then {
+			callFunc(_lightShield,__disableAllWires);
+		};
+
+		private _exitShield = "ElectricalShieldSaloonExit" call getObjectByRef;
+		private _insertBlock = "HolotapeInsertBlock" call getObjectByRef;
+		private _exitGate1 = "SaloonExitGate1" call getObjectByRef;
+		private _exitGate2 = "SaloonExitGate2" call getObjectByRef;
+		assert_str(!isNullReference(_exitShield),"Global reference 'ElectricalShieldSaloonExit' not found");
+		assert_str(!isNullReference(_insertBlock),"Global reference 'HolotapeInsertBlock' not found");
+		assert_str(!isNullReference(_exitGate1),"Global reference 'SaloonExitGate1' not found");
+		assert_str(!isNullReference(_exitGate2),"Global reference 'SaloonExitGate2' not found");
+		if !isNullReference(_exitShield) then {
+			callFunc(_exitShield,__disableAllWires);
+		};
+		{
+			if !isNullReference(_x) then {
+				if getVar(_x,isLocked) then {
+					callFuncParams(_x,setDoorLock,false arg false);
+				};
+				if getVar(_x,isOpen) then {
+					callFuncParams(_x,setDoorOpen,false arg true);
+				};
+				callFuncParams(_x,setDoorLock,true arg false);
+			};
+		} foreach [_exitGate1,_exitGate2];
+		if !isNullReference(_insertBlock) then {
+			private _scriptCreated = ["SaloonHolotapeInsertScript",_insertBlock] call createGameObjectScript;
+			assert_str(_scriptCreated,"Cannot assign SaloonHolotapeInsertScript to HolotapeInsertBlock");
+		};
 		
 
 		if (count cm_allClients >= 20) then {	
@@ -929,10 +967,84 @@ class(GMSaloonV2) extends(GMBase)
 		if isNullReference(_mob) exitWith {false};
 		(callFunc(_mob,getPos)) inArea [[3362.780,3654.742,33.725],4.6,2.2,0,true,5];
 	};
+
+	func(isMobInEscapeArea)
+	{
+		objParams_1(_mob);
+		if isNullReference(_mob) exitWith {false};
+		(callFunc(_mob,getPos)) inArea [[3346.00,3763.80,27.21],5,6,0,true,100];
+	};
+
+	func(startEscapeSequence)
+	{
+		objParams();
+		if getSelf(isEscapeSequenceStarted) exitWith {false};
+
+		private _exitShield = "ElectricalShieldSaloonExit" call getObjectByRef;
+		private _insertBlock = "HolotapeInsertBlock" call getObjectByRef;
+		private _exitGate1 = "SaloonExitGate1" call getObjectByRef;
+		private _exitGate2 = "SaloonExitGate2" call getObjectByRef;
+		if (isNullReference(_exitShield) || {isNullReference(_insertBlock)} || {isNullReference(_exitGate1)} || {isNullReference(_exitGate2)}) exitWith {
+			error("GMSaloonV2::startEscapeSequence() - One or more escape objects are missing");
+			false
+		};
+
+		setSelf(isEscapeSequenceStarted,true);
+		callFunc(_exitShield,__enableAllWires);
+		if getVar(_exitGate1,isLocked) then {
+			callFuncParams(_exitGate1,setDoorLock,false arg false);
+		};
+		callFuncParams(_exitGate1,setDoorOpen,true arg true);
+		callSelf(playEscapeAlarm);
+		callSelfAfter(finishEscapeSequence,45);
+		true
+	};
+
+	func(playEscapeAlarm)
+	{
+		objParams();
+		if (!getSelf(isEscapeSequenceStarted) || getSelf(isEscapeSequenceFinished)) exitWith {};
+		private _insertBlock = "HolotapeInsertBlock" call getObjectByRef;
+		if isNullReference(_insertBlock) exitWith {};
+		private _alarmPosition = callFunc(_insertBlock,getModelPosition) vectorAdd [0,0,5];
+		callFuncParams(_insertBlock,playSound,"UNCATEGORIZED\cool_alarm.ogg" arg 1 arg 6000 arg 0.2 arg _alarmPosition arg true);
+		callSelfAfter(playEscapeAlarm,8);
+	};
+
+	func(finishEscapeSequence)
+	{
+		objParams();
+		if (!getSelf(isEscapeSequenceStarted) || getSelf(isEscapeSequenceFinished)) exitWith {};
+		private _exitGate1 = "SaloonExitGate1" call getObjectByRef;
+		private _exitGate2 = "SaloonExitGate2" call getObjectByRef;
+
+		if !isNullReference(_exitGate1) then {
+			callFuncParams(_exitGate1,setDoorOpen,false arg true);
+			callFuncParams(_exitGate1,setDoorLock,true arg false);
+		};
+
+		private _escapedNames = [];
+		{
+			if (!isNullReference(_x) && {!getVar(_x,isDead)} && {callSelfParams(isMobInEscapeArea,_x)}) then {
+				_escapedNames pushBackUnique (callFuncParams(_x,getNameEx,"кто"));
+			};
+		} foreach system_internal_list_allJoiners;
+		setSelf(escapedPeopleNames,_escapedNames);
+
+		if !isNullReference(_exitGate2) then {
+			if getVar(_exitGate2,isLocked) then {
+				callFuncParams(_exitGate2,setDoorLock,false arg false);
+			};
+			callFuncParams(_exitGate2,setDoorOpen,true arg true);
+		};
+		setSelf(isEscapeSequenceFinished,true);
+	};
 	
 	func(checkFinish)
 	{
 		objParams();
+		if getSelf(isEscapeSequenceFinished) exitWith {callSelf(getEscapeFinishCode)};
+		if getSelf(isEscapeSequenceStarted) exitWith {0};
 		#ifdef EDITOR
 		_r = callFunc(getSelf(task),checkFinish);
 		if (_r == -2) exitWith {0};
@@ -946,6 +1058,11 @@ class(GMSaloonV2) extends(GMBase)
 	func(getResultTextOnFinish)
 	{
 		objParams();
+		if (getSelf(finishResult) == callSelf(getEscapeFinishCode)) exitWith {
+			private _escapedNames = getSelf(escapedPeopleNames);
+			if (count _escapedNames == 0) exitWith {"Ворота открылись, но никому не удалось сбежать из Злачника."};
+			"Они сумели сбежать из Злачника в поисках лучшей жизни: " + (_escapedNames joinString ", ") + "."
+		};
 		private _post = format["<t align='left' color='#FAB475' font='PuristaMedium' size='1.5'>Задача бандитов: %1</t>",
 		callFunc(getSelf(task),getDesc)];
 		private _ft = callFuncParams(getSelf(task),getFinishDesc,getSelf(finishResult));
@@ -976,6 +1093,30 @@ class(GMSaloonV2) extends(GMBase)
 	var(countAliveBandits,0);//сколько живых бандитов
 	var(deadMobs,0); //убито
 	var(isSBSCommandirSpawned,false); //заспавнился ли командир сбс
+endclass
+
+class(SaloonHolotapeInsertScript) extends(ScriptedGameObject)
+	var(isActivated,false);
+	func(_onInteractWithWrapper)
+	{
+		objParams_4(_with,_usr,_combat,_inventory);
+		if !isTypeOf(_with,Holotape) exitWith {
+			callSelf(callBaseInteractWith);
+		};
+		if getSelf(isActivated) exitWith {
+			callFuncParams(_usr,localSay,"Кассета уже вставлена." arg "error");
+		};
+		if !isTypeOf(gm_currentMode,GMSaloonV2) exitWith {
+			callFuncParams(_usr,localSay,"Ничего не происходит." arg "error");
+		};
+		if !callFunc(gm_currentMode,startEscapeSequence) exitWith {
+			callFuncParams(_usr,localSay,"Механизм не отвечает." arg "error");
+		};
+
+		setSelf(isActivated,true);
+		callFuncParams(_usr,meSay,"вставляет кассету в устройство");
+		delete(_with);
+	};
 endclass
 
 class(Saloon_Task_BaseV2) extends(IGamemodeSpecificClass)
@@ -1169,7 +1310,7 @@ class(Saloon_Task_PortfelV2) extends(Saloon_Task_BaseV2)
 		if isNullReference(_portf) exitWith {0};
 		if (callFunc(_portf,isInWorld) && {(callFunc(_portf,getModelPosition) distance [3366.69,3743.81,27.6037]) <= 2}) exitWith {1};
 		if callSelf(isAllBanditsInCages) exitWith {-3};
-		if !getVar(_portf,isLockedSaloon) exitWith {-4};
+		if getVar(_portf,isOpenedByTrader) exitWith {-4};
 		if callFunc(_portf,isStolenSaloon) exitWith {-5};
 		#ifdef EDITOR
 		if (getVar(gm_currentMode,countAliveBandits) <= 0 && gm_roundDuration > 10) exitWith {-2};
@@ -1184,6 +1325,7 @@ endclass
 		var(desc,"Тяжеленный чемодан закрыт на маленький замочек. Внутри что-то звенит.");
 		var(weight,6.3);
 		var(isLockedSaloon,true);
+		var(isOpenedByTrader,false);
 		/*func(canPickup)
 		{
 			objParams();
@@ -1193,18 +1335,51 @@ endclass
 		{
 			objParams_1(_usr);
 		};*/
-		getter_func(canUseMainAction,isTypeOf(getVar(_usr,basicRole),RTorgSaloon) && super());
-		getter_func(getMainActionName,"Вскрыть");
+		getter_func(canUseMainAction,(!getSelf(isLockedSaloon) || isTypeOf(getVar(_usr,basicRole),RTorgSaloon)) && super());
+		getter_func(getMainActionName,ifcheck(getSelf(isLockedSaloon),"Вскрыть","Открыть"));
 		func(onMainAction)
 		{
 			objParams_1(_usr);
+			if !getSelf(isLockedSaloon) exitWith {
+				callSuper(Container,onMainAction);
+			};
+
 			if (callSelf(getModelPosition) distance2d [3426.21,3714.96,27.6805] >= 5) then {
 				callFuncParams(_usr,mindSay,"Чтобы вскрыть этот замок надо тащить чемодан ко мне в магазин. Все необходимые инструменты для вскрытия там есть!");
 			} else {
 				callFuncParams(_usr,mindSay,"Я с лёгкостью вскрываю замок!");
+				setSelf(isOpenedByTrader,true);
 				setSelf(isLockedSaloon,false);
 			};
-			
+		};
+		func(onInteractWith)
+		{
+			objParams_2(_with,_usr);
+			if (getSelf(isLockedSaloon) && {isTypeOf(_with,Lockpick) || isTypeOf(_with,Crowbar)}) exitWith {
+				if !isTypeOf(getVar(_usr,basicRole),RBrigadirSaloon) exitWith {
+					callFuncParams(_usr,mindSay,"Я не понимаю, как вскрыть этот замок.");
+				};
+
+				callFuncParams(_usr,meSay,"начинает вскрывать замок на чемодане");
+				callFuncParams(_usr,startProgress,this arg "target.onSuitcaseBreaking" arg 10 arg INTERACT_PROGRESS_TYPE_FULL arg _with);
+			};
+
+			callSuper(Container,onInteractWith);
+		};
+		func(onSuitcaseBreaking)
+		{
+			objParams_2(_usr,_tool);
+			if !getSelf(isLockedSaloon) exitWith {};
+			if !isTypeOf(getVar(_usr,basicRole),RBrigadirSaloon) exitWith {};
+			if isNullReference(_tool) exitWith {};
+			if !(isTypeOf(_tool,Lockpick) || isTypeOf(_tool,Crowbar)) exitWith {};
+			if not_equals(callFunc(_usr,getItemInActiveHandRedirect),_tool) exitWith {};
+
+			setSelf(isLockedSaloon,false);
+			setSelf(canUseContainer,true);
+			setSelf(desc,"Вскрытый чемодан. Внутри лежат бряки.");
+			callSelfParams(initMoney,(randInt(19,22) * 10) arg true);
+			callFuncParams(_usr,meSay,"вскрывает чемодан");
 		};
 		var(timerCount,0); //timer incremented
 		var(timerCountMax,15);//maxtime

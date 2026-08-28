@@ -1328,7 +1328,7 @@ _3432_711673653_4465327_36512 = ['RedButton',[3432.71,3653.45,32.365,true],2.866
 }] call InitStruct; 
 ['StreetLampEnabled',[3458.03,3792.26,30.7372,true],[0.0858201,-0.996196,-0.0151324],[0.173648,0,0.984808], {_thisObj setvariable ['light',"SLIGHT_STREET_LAMP" call lightSys_getConfigIdByName]; go_editor_globalRefs set ["StreetLampEnabled G:DN9PsZzniqg (11)",_thisObj];
 }] call InitStruct; 
-_3334_210213715_4301829_00000 = ['ElectricalShieldSmall2',[3334.21,3715.43,29],180,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall2 G:06+cw+AXujg",_thisObj];
+_3334_209963715_4299329_00000 = ['ElectricalShieldSmall2',[3334.21,3715.43,29],180,[0,0,1], {go_editor_globalRefs set ["PlantLightShield",_thisObj];
 }] call InitStruct; 
 _3336_649173710_5649429_63420 = ['RedButton',[3336.65,3710.56,34.634,true],[0,7.54979e-08,-1],[0,1,7.54979e-08], {go_editor_globalRefs set ["RedButton G:hlFI5lgsLMs",_thisObj];
 }] call InitStruct; 
@@ -1402,7 +1402,7 @@ _3336_702883754_5427228_78093 = ['PowerSwitcherBig',[3336.7,3754.54,28.7809],270
 }] call InitStruct; 
 _3336_623783755_2639228_68454 = ['Tumbler',[3336.62,3755.26,28.6845],270,[0,0,1], {go_editor_globalRefs set ["Tumbler G:r/u3eJsXE2w",_thisObj];
 }] call InitStruct; 
-_3336_722413756_2341327_67651 = ['ElectricalShieldSmall',[3336.72,3756.23,27.6765],270,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall G:WpD4V+oMPBM",_thisObj];
+_3336_722413756_2341327_67651 = ['ElectricalShieldSmall',[3336.72,3756.23,27.6765],270,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSaloonExit",_thisObj];
 }] call InitStruct; 
 ['LampCeiling',[3338.8,3754.42,29.6345],0,[0,0,1], {go_editor_globalRefs set ["LampCeiling G:si76UWMW4Vw",_thisObj];
 }] call InitStruct; 
@@ -3399,9 +3399,10 @@ _3350_625003750_5000027_25000 = ['IStruct',[3350.62,3750.5,27.25],90.0001,[0,0,1
 ['Wicket',[3349,3752.5,27],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"SouthGatesCheckpoint"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3348_031493742_0383326_87500 = ['SteelGridDoor',[3348.03,3742.04,26.875],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"SouthGatesCheckpoint"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallRuinedWoodenBuilding',[3338.88,3747.75,27.625],270.001,[0,0,1]] call InitStruct; 
-_3339_750003754_1250027_00000 = ['IStruct',[3339.75,3754.12,27],180,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\military\barracks\guardhouse_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3339_674563754_0224627_00000 = ['IStruct',[3339.67,3754.02,27],180,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_enoch\military\barracks\guardhouse_03_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['MediumStoneHouseRuins',[3349.25,3727.25,27.25],270,[0,0,1]] call InitDecor; 
-['GateCity',[3345.88,3769.59,27.467],180,[0,0,1]] call InitStruct; 
+['GateCity',[3345.88,3769.59,27.467],180,[0,0,1], {go_editor_globalRefs set ["SaloonExitGate2",_thisObj];
+}] call InitStruct; 
 ['GateCity',[3354.77,3772.46,26.9917],90.0003,[0,0,1]] call InitStruct; 
 ['BrickThinWallDoorwayWindow',[3349.41,3781.04,26.9926],90,[0,0,1]] call InitStruct; 
 ['BrickThinWall',[3352.26,3777.91,27.0023],6.44599e-05,[0,0,1]] call InitStruct; 
@@ -3428,7 +3429,8 @@ _3349_253173779_8310526_74611 = ['SteelGreenDoor',[3349.25,3779.83,26.7461],90,[
 ['Rail',[3340.41,3773.92,26.8773],274.001,[0,0,1]] call InitStruct; 
 ['LargeConcreteWallWithReinforcement',[3344.98,3795.63,31.1522],180,[0,0,1]] call InitStruct; 
 _3341_188723754_3452127_20546 = ['SteelDoorThinSmall',[3341.19,3754.35,27.2055],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"SouthGatesCheckpoint"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
-_3346_125003758_0000026_95916 = ['GateCity',[3346.12,3758,26.9592],0.000146849,[0,0,1]] call InitStruct; 
+_3346_125003758_0000026_95916 = ['GateCity',[3346.12,3758,26.9592],0.000146849,[0,0,1], {go_editor_globalRefs set ["SaloonExitGate1",_thisObj];
+}] call InitStruct; 
 ['SteelCanopySmall',[3351.58,3756.02,27.0262],0,[0,0,1]] call InitStruct; 
 ['SmallDirtGrey',[3351.28,3773.17,27.0023],90,[0,0,1]] call InitStruct; 
 ['SmallPileOfConcreteFragments',[3344.81,3779.36,32.1041,true],50.0001,[-0.00166705,-0.00878686,0.99996]] call InitStruct; 
@@ -3442,7 +3444,8 @@ _3346_125003758_0000026_95916 = ['GateCity',[3346.12,3758,26.9592],0.000146849,[
 ['hamradio',[3340.62,3751.38,28.2278],285,[0,0,1]] call InitStruct; 
 _3340_918953753_1472228_22667 = ['IStruct',[3340.92,3753.15,28.2267],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\mayfun.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3340_894783752_0590828_22781 = ['IStruct',[3340.89,3752.06,28.2278],0,[0,0,1], {_thisObj setvariable ['model','ca\misc\mutt_vysilacka.p3d'];}] call InitStruct; // !!! realocated model !!!
-['TechBlock',[3337.03,3752.52,27.2026],80,[0,0,1]] call InitStruct; 
+['TechBlock',[3337.03,3752.52,27.2026],80,[0,0,1], {go_editor_globalRefs set ["HolotapeInsertBlock",_thisObj];
+}] call InitStruct; 
 ['TrashCan',[3349.21,3741.61,26.9855],275,[0,0,1]] call InitStruct; 
 _3351_506103740_9929226_99874 = ['RedSteelBox',[3351.51,3740.99,26.9987],280,[0,0,1]] call InitStruct; 
 ['SquareWoodenBox',[3352.27,3740.87,26.9997],5,[0,0,1]] call InitStruct; 
@@ -3608,8 +3611,6 @@ _3420_738043499_405031_46790 = ['IStruct',[3420.74,3499.41,6.66745,true],95.3356
 _3420_746093499_722662_13411 = ['IStruct',[3420.75,3499.72,7.13388,true],0,[-0.00091349,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\shyrevo.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3433_983643658_7255924_98982 = ['IStruct',[3433.98,3658.73,24.9898],9.8184e-06,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_oldman\decals\brokencarglass_01_4x4_f.p3d'];}] call InitStruct; // !!! realocated model !!!
 ['Campfire',[3391.99,3658.66,8.16739],50,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
-['MerchantConsole',[3428.28,3713.57,28.664],1.36604e-05,[0,0,1], {go_editor_globalRefs set ["MerchantConsole G:gFC8kWrxlD8",_thisObj];
-}] call InitStruct; 
 ['SmallSteelTable',[3426.33,3714.61,31.0579],0,[0,0,1]] call InitStruct; 
 _3427_989013709_5878928_82880 = ['ElectricalShieldSmall',[3427.99,3709.59,28.8288],180,[0,0,1], {go_editor_globalRefs set ["ElectricalShieldSmall G:woag8jdvhEQ",_thisObj];
 }] call InitStruct; 
@@ -3617,9 +3618,7 @@ _3427_989013709_5878928_82880 = ['ElectricalShieldSmall',[3427.99,3709.59,28.828
 _3420_982913766_8093322_36000 = ['SteelDoorThinSmall',[3420.98,3766.81,22.36],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"LomnyaKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3416_156743769_5715322_40865 = ['SteelDoorThinSmall',[3416.16,3769.57,22.4086],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"LomnyaKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3420_227783762_8501023_01149 = ['KeyHolder',[3420.23,3762.85,23.0115],90,[0,0,1]] call InitStruct; 
-['FabricBagBig1',[3446.89,3658.01,10.0515],0,[0,0,1]] call InitItem; 
-['FabricBagBig1',[3396.35,3781.2,8.08064],0,[0,0,1]] call InitItem; 
-['FabricBagBig1',[3461.89,3706.94,8.2022],90.0001,[0,0,1]] call InitItem; 
+['MerchantConsoleSaloon',[3428.25,3713.6,28.6425],0,[0,0,1]] call InitStruct; 
 
 
 
@@ -3913,7 +3912,6 @@ if (!isNil'_3405_625003707_500007_98954') then {
 	[_3405_625003707_500007_98954,go_editor_globalRefs get "Imported LampCeiling_Red54736 (4)"] call (_3405_625003707_500007_98954 getvariable 'proto' getvariable 'addConnection');
 	[_3405_625003707_500007_98954,go_editor_globalRefs get "Imported StreetLamp394622 (6)"] call (_3405_625003707_500007_98954 getvariable 'proto' getvariable 'addConnection');
 	[_3405_625003707_500007_98954,go_editor_globalRefs get "Imported StreetLamp299223 (1)"] call (_3405_625003707_500007_98954 getvariable 'proto' getvariable 'addConnection');
-	[_3405_625003707_500007_98954,go_editor_globalRefs get "ElectricalShieldSmall2 G:06+cw+AXujg"] call (_3405_625003707_500007_98954 getvariable 'proto' getvariable 'addConnection');
 	[_3405_625003707_500007_98954,go_editor_globalRefs get "Tumbler_Activator G:9GDbM6xbRms"] call (_3405_625003707_500007_98954 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3421_001223552_166507_52494') then {
@@ -3922,6 +3920,8 @@ if (!isNil'_3421_001223552_166507_52494') then {
 	[_3421_001223552_166507_52494,go_editor_globalRefs get "_transbar"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');
 	[_3421_001223552_166507_52494,go_editor_globalRefs get "ElectricalShield G:yhGfe9DFHqM"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');
 	[_3421_001223552_166507_52494,go_editor_globalRefs get "ElectricalShieldSmall G:woag8jdvhEQ"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');
+	[_3421_001223552_166507_52494,go_editor_globalRefs get "PlantLightShield"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');
+	[_3421_001223552_166507_52494,go_editor_globalRefs get "ElectricalShieldSaloonExit"] call (_3421_001223552_166507_52494 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3454_833253641_1513727_91209') then {
 	_3454_833253641_1513727_91209 setvariable ['name',"Вывеска"];
@@ -4007,16 +4007,16 @@ if (!isNil'_3432_711673653_4465327_36512') then {
 	_3432_711673653_4465327_36512 setvariable ['name',"Вывеска"];
 	[_3432_711673653_4465327_36512,go_editor_globalRefs get "SignMedical G:FMT6lAGm0Ko"] call (_3432_711673653_4465327_36512 getvariable 'proto' getvariable 'addConnection');
 };
-if (!isNil'_3334_210213715_4301829_00000') then {
-	_3334_210213715_4301829_00000 setvariable ['edisenabled',false];
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:hlFI5lgsLMs"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:9icEVPTIEyw"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:jbY9lawb01g"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:rDOVWYBDXOE"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:QdxtbcVuX08"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:LWXECemw5B8"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:heqyoihiMHo"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
-	[_3334_210213715_4301829_00000,go_editor_globalRefs get "RedButton G:TREwY+EDAK4"] call (_3334_210213715_4301829_00000 getvariable 'proto' getvariable 'addConnection');
+if (!isNil'_3334_209963715_4299329_00000') then {
+	_3334_209963715_4299329_00000 setvariable ['edisenabled',false];
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:hlFI5lgsLMs"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:9icEVPTIEyw"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:jbY9lawb01g"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:rDOVWYBDXOE"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:QdxtbcVuX08"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:LWXECemw5B8"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:heqyoihiMHo"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
+	[_3334_209963715_4299329_00000,go_editor_globalRefs get "RedButton G:TREwY+EDAK4"] call (_3334_209963715_4299329_00000 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3336_649173710_5649429_63420') then {
 	[_3336_649173710_5649429_63420,go_editor_globalRefs get "LampCeiling G:xD34CuaWXBk"] call (_3336_649173710_5649429_63420 getvariable 'proto' getvariable 'addConnection');
@@ -4075,7 +4075,6 @@ if (!isNil'_3392_010743654_6250035_87500') then {
 	[_3392_010743654_6250035_87500,go_editor_globalRefs get "GateCity G:esyLrXTDYxQ"] call (_3392_010743654_6250035_87500 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3336_875003799_1250027_50000') then {
-	[_3336_875003799_1250027_50000,go_editor_globalRefs get "ElectricalShieldSmall G:WpD4V+oMPBM"] call (_3336_875003799_1250027_50000 getvariable 'proto' getvariable 'addConnection');
 	[_3336_875003799_1250027_50000,go_editor_globalRefs get "ElectricalShieldSmall G:+DHfTDjqYXw"] call (_3336_875003799_1250027_50000 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3336_702883754_5427228_78093') then {
@@ -4448,10 +4447,10 @@ if (!isNil'_3435_571533652_4748525_81233') then {
 	_3435_571533652_4748525_81233 setvariable ['spawnpointname',"RDoctorSaloon"];
 };
 if (!isNil'_3418_374273763_9492222_31279') then {
-	_3418_374273763_9492222_31279 setvariable ['spawnpointname',"1"];
+	_3418_374273763_9492222_31279 setvariable ['spawnpointname',"RBrigadirSaloon"];
 };
 if (!isNil'_3427_440193772_3608422_08584') then {
-	_3427_440193772_3608422_08584 setvariable ['spawnpointname',"2"];
+	_3427_440193772_3608422_08584 setvariable ['spawnpointname',"RCitizenLomnya"];
 };
 if (!isNil'_3429_514893663_5712925_00001') then {
 	[_3429_514893663_5712925_00001,"dust_clouds_10m"] call (_3429_514893663_5712925_00001 getvariable 'proto' getvariable 'setEffectType');
@@ -4544,7 +4543,6 @@ if (!isNil'_3307_040283762_5253913_93069') then {
 	[_3307_040283762_5253913_93069,"govnelin"] call (_3307_040283762_5253913_93069 getvariable 'proto' getvariable 'setEffectType');
 };
 if (!isNil'_3427_989013709_5878928_82880') then {
-	[_3427_989013709_5878928_82880,go_editor_globalRefs get "MerchantConsole G:gFC8kWrxlD8"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
 	[_3427_989013709_5878928_82880,go_editor_globalRefs get "Imported StreetLamp674401"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
 	[_3427_989013709_5878928_82880,go_editor_globalRefs get "Imported LampCeiling715977"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
 };
