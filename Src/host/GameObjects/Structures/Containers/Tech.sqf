@@ -1724,7 +1724,7 @@ class(MerchantConsoleSaloon) extends(MerchantConsole)
 		objParams_1(_deliveryPoint);
 		_deliveryPoint params ["","_placeDescription"];
 		private _text = format[
-			"Здорова, получил твой заказ. Товар доставлю в условленное место: %1. Примерно через 5 промежутков мешок будет там. Если я увижу, что ты явился туда раньше меня — сделки не будет.",
+			"Здорова, получил твой заказ. Товар доставлю в условленное место: %1. Примерно через 5 промежутков мешок будет там. Если я увижу, что ты явился туда раньше меня - сделки не будет.",
 			_placeDescription
 		];
 		private _paper = ["Paper",[3428.23,3713.86,28.664],null,false] call createItemInWorld;
