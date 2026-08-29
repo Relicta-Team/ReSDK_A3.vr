@@ -156,15 +156,25 @@ endclass
 
 class(RCitizenSaloon) extends(BasicRoleSaloon)
 	var(name,"Работяга");
-	var(desc,"Утро всегда тяжёлое... Но день-то будет нормальный! Надо выпить!");
+	var(desc,"Начальник сказал, в эту смену надо работать. Надо на ломню идти въёбывать. Начало всегда тяжёлое... Но смена-то будет нормальной!");
 	var(reputationNeed,rolerep(0,5,0));
 	var(count,4 + 3 + 5);
 	var(canStealMoneyBank,true);
 	getter_func(getInitialDir,callFuncParams(gm_currentMode,handleRandomDir,357));
 	getter_func(getInitialPos,callFuncParams(gm_currentMode,handleRandomPos,vec3(3441.08,3591.36,18.3334)));
 		
-	//Новые точки спавна работяг	
-	getter_func(spawnLocation,	__skipIfOldGM	"rpos:RCitizenSaloon");
+	// Первые два работяги появляются на ломне, остальные — на обычных точках.
+	var(lomnyaSpawnsLeft,2);
+	func(spawnLocation)
+	{
+		objParams();
+		__skipIfOldGM
+		if (getSelf(lomnyaSpawnsLeft) > 0) exitWith {
+			modSelf(lomnyaSpawnsLeft,-1);
+			"pos:RCitizenLomnya"
+		};
+		"rpos:RCitizenSaloon"
+	};
 
 	getter_func(canTakeInLobby,true);
 	getter_func(canVisibleAfterStart,true);
@@ -186,24 +196,13 @@ class(RCitizenSaloon) extends(BasicRoleSaloon)
 		objParams_1(_mob);
 		private _cloth = ["CitizenCloth" + str randInt(1,22),_mob,INV_CLOTH] call createItemInInventory;
 		callFuncParams(_cloth,initMoney,randInt(5,10));
-		
-		if prob(70) then {
-			[
-			pick["HatUshankaUp2","HatUshanka","WorkerCap","WorkerCap2","HatUshankaUp"],
-			_mob,INV_HEAD
-			] call createItemInInventory;
-		};
-		if prob(40) then {
-			private _pistol = ["PistolPBM",_mob,INV_BELT] call createItemInInventory;
-			callFuncParams(_pistol,createMagazine,"MagazinePBMLoaded");
-			["MagazinePBMLoaded",_cloth] call createItemInContainer;
-			private _ammo = ["AmmoPBM",_cloth] call createItemInContainer;
-			callFuncParams(_ammo,initCount,randInt(2,20));
-		} else {
-			private _weapon = [pick["Crowbar","WorkingAxe"],_mob,INV_BELT] call createItemInInventory;
-			private _wname = pick["Рабочий инструмент","Прибор","Работяжья приблуда"];
-			setVar(_weapon,name,_wname);
-		};
+		[pick["HatUshanka","HatUshanka1","HatUshanka2"],_mob,INV_HEAD] call createItemInInventory;
+
+		private _toolType = pick["Crowbar","WorkingAxe","Shovel","Pickaxe","Sledgehammer1","Hammer"];
+		private _toolSlot = ifcheck(_toolType == "Shovel",INV_BACK,INV_BELT);
+		private _tool = [_toolType,_mob,_toolSlot] call createItemInInventory;
+		private _toolName = pick["Рабочий инструмент","Прибор","Работяжья приблуда"];
+		setVar(_tool,name,_toolName);
 	};
 endclass
 
@@ -355,6 +354,30 @@ class(RDoctorSaloon) extends(BasicRoleSaloon)
 	};
 endclass
 
+class(RBrigadirSaloon) extends(BasicRoleSaloon)
+	var(name,"Начальник ломни");
+	var(desc,"Бывший бригадир, превративший заброшенный завод Злачника в Ломню, ныне единственный, кто остался из бывшего руководства предприятия. Только на Ломне есть стабильная работа в Злачнике для работяг. Поддерживай дисциплину, не подводи работяг - обеспечь их работой и плати вовремя.");
+	var(count,1);
+	var(reputationNeed,rolerep(1,5,6));
+	getter_func(spawnLocation,"pos:RBrigadirSaloon");
+
+	getter_func(getSkills,vec4(randInt(12,13),randInt(8,10),randInt(7,9),randInt(11,13)));
+	func(getOtherSkills) {[
+		skillrand(engineering,4,8) arg
+		skillrand(repair,4,8) arg
+		skillrand(baton,1,4) arg
+		skillrand(fight,1,3)
+	]};
+
+	func(getEquipment)
+	{
+		objParams_1(_mob);
+		private _cloth = ["BrigadirCloth",_mob,INV_CLOTH] call createItemInInventory;
+		regKeyInUniform(_cloth,["LomnyaKey"],"Ключ от ломни");
+		callFuncParams(_cloth,initMoney,randInt(5,8));
+	};
+endclass
+
 class(RTrampSaloon) extends(BasicRoleSaloon)
 	var(name,"Бродяга");
 	var(desc,"Нелёгкая судьба занесла тебя в этот ужасный район. Ну хоть сходи в местный бар. Говорят"+comma+" там отличная выпивка.");
@@ -397,13 +420,15 @@ class(RTrampSaloon) extends(BasicRoleSaloon)
 			_mob,INV_FACE
 			] call createItemInInventory;
 		};
-		if prob(50) then {
+		private _firearmRoll = randInt(1,100);
+		if (_firearmRoll <= 25) then {
 			private _pistol = ["PistolPBM",_mob,INV_BELT] call createItemInInventory;
 			callFuncParams(_pistol,createMagazine,"MagazinePBMLoaded");
 			["MagazinePBMLoaded",_cloth] call createItemInContainer;
 			private _ammo = ["AmmoPBM",_cloth] call createItemInContainer;
 			callFuncParams(_ammo,initCount,randInt(2,20));
-		} else {
+		};
+		if (_firearmRoll > 25 && {_firearmRoll <= 50}) then {
 			private _pistol = ["Revolver",_mob,INV_BELT] call createItemInInventory;
 			private _ammo = ["AmmoRevolver",_cloth] call createItemInContainer;
 			callFuncParams(_ammo,initCount,randInt(2,20));

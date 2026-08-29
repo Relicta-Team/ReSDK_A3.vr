@@ -297,6 +297,21 @@ class(ElectricalShield) extends(ElectronicDeviceNode)
 		};
 	};
 
+	//! Принудительно соединяет все провода и восстанавливает питание щитка.
+	func(__enableAllWires)
+	{
+		objParams();
+		for "_i" from 0 to (count getSelf(wiresState)) - 1 do {
+			if ((getSelf(wiresState) select _i) == 0) then {
+				callSelfParams(onWireChangeState,_i);
+			};
+		};
+		setSelf(disabledWires,0);
+		setSelf(disabledSource,0);
+		callSelfParams(setEnable,true);
+		callSelf(updateNDisplay);
+	};
+
 endclass
 
 editor_attribute("EditorGenerated")
