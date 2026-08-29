@@ -1363,7 +1363,8 @@ endclass
 			objParams_2(_with,_usr);
 			if (getSelf(isLockedSaloon) && {isTypeOf(_with,Lockpick) || isTypeOf(_with,Crowbar)}) exitWith {
 				if !isTypeOf(getVar(_usr,basicRole),RBrigadirSaloon) exitWith {
-					callFuncParams(_usr,mindSay,"Я не понимаю, как вскрыть этот замок.");
+					private _m = pick["Я не понимаю, как вскрыть этот замок.","Не знаю как открывать его.","Не получается открыть.","Не получилось, соскакивает.","Не могу разобраться как.","Не выходит вскрыть."];
+					callFuncParams(_usr,mindSay,_m);
 				};
 
 				callFuncParams(_usr,meSay,"начинает вскрывать замок на чемодане");
