@@ -407,7 +407,7 @@ class(Saloon_Task_Portfel) extends(Saloon_Task_Base)
 		_port = [getSelf(portfelClass),[3470.12,3605.8,23.5769],88,false] call createItemInWorld;
 		setSelf(portfel,_port);
 	};
-	getter_func(getDesc,"Надо грабануть владельца Дыры. У него есть целый чемодан со звяками. Нужно найти бабки и притащить их в общак. Общак в нашей хате.");
+	getter_func(getDesc,"Надо грабануть владельца Дыры. У него есть целый чемодан со звяками. Нужно найти бабки и притащить их в общак. Общак в нашей хате. Или можно чемоданчик этот вскрыть и лавэ потратить. Есть один мужик на ломне который знает как открывать замки, возможно он сможет помочь.");
 	func(getFinishDesc)
 	{
 		objParams_1(_result);
@@ -1066,8 +1066,8 @@ class(GMSaloonV2) extends(GMBase)
 		objParams();
 		if (getSelf(finishResult) == callSelf(getEscapeFinishCode)) exitWith {
 			private _escapedNames = getSelf(escapedPeopleNames);
-			if (count _escapedNames == 0) exitWith {"Ворота открылись, но никому не удалось сбежать из Злачника."};
-			"Они сумели сбежать из Злачника в поисках лучшей жизни: " + (_escapedNames joinString ", ") + "."
+			if (count _escapedNames == 0) exitWith {"Ворота открылись, но никому не удалось покинуть Злачник."};
+			"Эти люди дорого заплатили за возможность покинуть Злачник: " + (_escapedNames joinString ", ") + "." + " Они даже не могут себе представить, чем это обернётся.." + "."
 		};
 		private _post = format["<t align='left' color='#FAB475' font='PuristaMedium' size='1.5'>Задача бандитов: %1</t>",
 		callFunc(getSelf(task),getDesc)];
@@ -1330,6 +1330,7 @@ endclass
 		var(name,pick["Бабосы" arg "Лавэ" arg "Лавандос" arg "Бабло"]);
 		var(desc,"Тяжеленный чемодан закрыт на маленький замочек. Внутри что-то звенит.");
 		var(weight,6.3);
+		var(countSlots,22);
 		var(isLockedSaloon,true);
 		var(isOpenedByTrader,false);
 		/*func(canPickup)
@@ -1363,7 +1364,8 @@ endclass
 			objParams_2(_with,_usr);
 			if (getSelf(isLockedSaloon) && {isTypeOf(_with,Lockpick) || isTypeOf(_with,Crowbar)}) exitWith {
 				if !isTypeOf(getVar(_usr,basicRole),RBrigadirSaloon) exitWith {
-					callFuncParams(_usr,mindSay,"Я не понимаю, как вскрыть этот замок.");
+					private _m = pick["Я не понимаю, как вскрыть этот замок.","Не знаю как открывать его.","Не получается открыть.","Не получилось, соскакивает.","Не могу разобраться как.","Не выходит вскрыть."];
+					callFuncParams(_usr,mindSay,_m);
 				};
 
 				callFuncParams(_usr,meSay,"начинает вскрывать замок на чемодане");
@@ -1383,8 +1385,8 @@ endclass
 
 			setSelf(isLockedSaloon,false);
 			setSelf(canUseContainer,true);
-			setSelf(desc,"Вскрытый чемодан. Внутри лежат бряки.");
-			callSelfParams(initMoney,(randInt(19,22) * 10) arg true);
+			setSelf(desc,"Вскрытый чемодан. Внутри лежат звяки.");
+			callSelfParams(initMoney,randInt(190,220));
 			callFuncParams(_usr,meSay,"вскрывает чемодан");
 		};
 		var(timerCount,0); //timer incremented

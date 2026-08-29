@@ -1531,14 +1531,14 @@ endclass
 
 class(MerchantConsoleSaloon) extends(MerchantConsole)
 	var(name,"Торговая консоль");
-	var(money,0);
+	var(money,randInt(16,38));
 	var(nextOrderTime,0);
 	var_array(pendingOrders);
 	autoref var(orderUpdateHandle,-1);
 
-	getterconst_func(getResponseDelay,90);
-	getterconst_func(getDeliveryDelay,390);
-	getterconst_func(getOrderCooldown,300);
+	getterconst_func(getResponseDelay,30);
+	getterconst_func(getDeliveryDelay,330);
+	getterconst_func(getOrderCooldown,600);
 	getterconst_func(getDeliveryBagSlots,1000);
 
 	func(constructor)
