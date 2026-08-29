@@ -1330,6 +1330,7 @@ endclass
 		var(name,pick["Бабосы" arg "Лавэ" arg "Лавандос" arg "Бабло"]);
 		var(desc,"Тяжеленный чемодан закрыт на маленький замочек. Внутри что-то звенит.");
 		var(weight,6.3);
+		var(countSlots,22);
 		var(isLockedSaloon,true);
 		var(isOpenedByTrader,false);
 		/*func(canPickup)
@@ -1384,8 +1385,8 @@ endclass
 
 			setSelf(isLockedSaloon,false);
 			setSelf(canUseContainer,true);
-			setSelf(desc,"Вскрытый чемодан. Внутри лежат бряки.");
-			callSelfParams(initMoney,(randInt(19,22) * 10) arg true);
+			setSelf(desc,"Вскрытый чемодан. Внутри лежат звяки.");
+			callSelfParams(initMoney,randInt(190,220));
 			callFuncParams(_usr,meSay,"вскрывает чемодан");
 		};
 		var(timerCount,0); //timer incremented
