@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4060;
+		nextID=4172;
 	};
 	class Camera
 	{
-		pos[]={3388.9697,69.511566,3674.8645};
-		dir[]={0.80999202,-0.44087631,-0.38680068};
-		up[]={0.39786062,0.89756191,-0.18999363};
-		aside[]={-0.4309397,-2.841698e-07,-0.90242398};
+		pos[]={3366.0649,52.922932,3706.7717};
+		dir[]={0.35030362,-0.59301478,-0.72517228};
+		up[]={0.25795302,0.80495828,-0.53399032};
+		aside[]={-0.90046167,-4.0286686e-06,-0.4349902};
 	};
 };
 binarizationWanted=0;
@@ -831,7 +831,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=10;
+		items=9;
 		class Item0
 		{
 			dataType="Group";
@@ -5539,7 +5539,7 @@ class Mission
 									};
 									id=9492;
 									type="Land_A_Castle_Wall1_20";
-									atlOffset=1.2411938;
+									atlOffset=1.2958183;
 								};
 								class Item47
 								{
@@ -7319,6 +7319,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="А Бар ""Дыра""";
+					state=1;
 					class Entities
 					{
 						items=4;
@@ -18644,6 +18645,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Электричество";
+					state=1;
 					class Entities
 					{
 						items=168;
@@ -20305,7 +20307,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3389.3306,36.20026,3733.6624};
+								position[]={3389.5046,36.20026,3733.709};
 								angles[]={0,6.0213861,0};
 							};
 							side="Empty";
@@ -20316,7 +20318,7 @@ class Mission
 							};
 							id=8550;
 							type="Lamp_tarelka";
-							atlOffset=4.0522099;
+							atlOffset=4.0509853;
 						};
 						class Item96
 						{
@@ -21144,7 +21146,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Tumbler_Activator""],[""edConnected"",[""GateCity G:esyLrXTDYxQ""]],[""mark"",""Tumbler_Activator G:9GDbM6xbRms""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Южные врата""]]],[""class"",""Tumbler_Activator""],[""edConnected"",[""GateCity G:esyLrXTDYxQ""]],[""mark"",""Tumbler_Activator G:9GDbM6xbRms""]]}";
 							};
 							id=10042;
 							type="tumbler";
@@ -21261,7 +21263,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3348.625,33.89703,3752};
+								position[]={3348.115,33.89703,3751.6919};
 								angles[]={0,4.7996573,0};
 							};
 							side="Empty";
@@ -21314,7 +21316,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3336.6238,33.684387,3755.4207};
+								position[]={3336.5559,33.684387,3755.3562};
 								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
@@ -21325,14 +21327,14 @@ class Mission
 							};
 							id=9975;
 							type="tumbler";
-							atlOffset=1.4749107;
+							atlOffset=1.5869598;
 						};
 						class Item153
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3336.7224,33.608761,3754.6262};
+								position[]={3336.634,33.608761,3754.4915};
 								angles[]={0,4.7123909,0};
 							};
 							side="Empty";
@@ -21367,7 +21369,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3341.0867,33.201717,3755.2905};
+								position[]={3341.1038,33.201717,3755.2905};
 								angles[]={0,0,1.5707964};
 							};
 							side="Empty";
@@ -21378,7 +21380,7 @@ class Mission
 							};
 							id=9974;
 							type="knopka";
-							atlOffset=1.053299;
+							atlOffset=1.0532684;
 						};
 						class Item156
 						{
@@ -21594,7 +21596,7 @@ class Mission
 						};
 					};
 					id=5214;
-					atlOffset=1.5528755;
+					atlOffset=1.5528774;
 				};
 				class Item3
 				{
@@ -35773,8 +35775,8 @@ class Mission
 											dataType="Object";
 											class PositionInfo
 											{
-												position[]={3391.9375,14.03022,3779.4155};
-												angles[]={0.087598085,0.0076249875,0.086933553};
+												position[]={3392.1292,13.985357,3779.3242};
+												angles[]={6.2755609,2.9667277,0.086933546};
 											};
 											side="Empty";
 											flags=1;
@@ -35784,7 +35786,7 @@ class Mission
 											};
 											id=11554;
 											type="Land_xlamdoor";
-											atlOffset=7.9382648;
+											atlOffset=7.8934011;
 										};
 										class Item2
 										{
@@ -36051,7 +36053,7 @@ class Mission
 										};
 									};
 									id=11567;
-									atlOffset=7.5397854;
+									atlOffset=7.5397844;
 								};
 								class Item2
 								{
@@ -39704,9 +39706,10 @@ class Mission
 				{
 					dataType="Layer";
 					name="А Торгаш";
+					state=1;
 					class Entities
 					{
-						items=67;
+						items=68;
 						class Item0
 						{
 							dataType="Object";
@@ -40866,9 +40869,26 @@ class Mission
 							type="CUP_A2_smalltable";
 							atlOffset=2.5127983;
 						};
+						class Item67
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3428.2803,33.720531,3713.5708};
+								angles[]={0,2.3841856e-07,0};
+							};
+							side="Empty";
+							flags=5;
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MerchantConsoleSaloon""],[""mark"",""MerchantConsole G:gFC8kWrxlD8""]]}";
+							};
+							id=11795;
+							type="panelka";
+						};
 					};
 					id=5224;
-					atlOffset=1.23703;
+					atlOffset=1.522007;
 				};
 				class Item5
 				{
@@ -50567,6 +50587,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Ломня";
+					state=1;
 					class Entities
 					{
 						items=7;
@@ -54188,6 +54209,7 @@ class Mission
 						{
 							dataType="Layer";
 							name="Мебель";
+							state=1;
 							class Entities
 							{
 								items=65;
@@ -55806,6 +55828,7 @@ class Mission
 						{
 							dataType="Layer";
 							name="Предметы";
+							state=1;
 							class Entities
 							{
 								items=153;
@@ -58436,6 +58459,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Комбинат";
+					state=1;
 					class Entities
 					{
 						items=183;
@@ -61615,6 +61639,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Южные врата";
+					state=1;
 					class Entities
 					{
 						items=8;
@@ -61622,6 +61647,7 @@ class Mission
 						{
 							dataType="Layer";
 							name="Конструкции";
+							state=1;
 							class Entities
 							{
 								items=44;
@@ -61647,17 +61673,18 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3350.5,31.734188,3741.875};
-										angles[]={6.2827368,0.17453673,0.0067772628};
+										position[]={3350.5,31.859188,3741.875};
+										angles[]={0,0.17453292,0};
 									};
 									side="Empty";
+									flags=4;
 									class Attributes
 									{
 										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BlackConcreteWallPieces""]]}";
 									};
 									id=9949;
 									type="CUP_A2_indcnc_end_3";
-									atlOffset=27;
+									atlOffset=0.0039138794;
 								};
 								class Item2
 								{
@@ -61758,7 +61785,7 @@ class Mission
 									flags=5;
 									class Attributes
 									{
-										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""preinit@__keytypesstr"",""SouthGatesCheckpoint""]]],[""class"",""Wicket""]]}";
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""islocked"",true],[""preinit@__keytypesstr"",""SouthGatesCheckpoint""]]],[""class"",""Wicket""]]}";
 									};
 									id=9944;
 									type="tinfence";
@@ -61804,7 +61831,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3339.6746,33.213734,3754.0225};
+										position[]={3339.7664,33.213734,3754.0225};
 										angles[]={0,3.1415987,0};
 									};
 									side="Empty";
@@ -62229,7 +62256,7 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3336.2593,33.234501,3755.0298};
+										position[]={3336.1902,33.234501,3755.0298};
 										angles[]={0,4.7123909,0};
 									};
 									side="Empty";
@@ -62240,7 +62267,7 @@ class Mission
 									};
 									id=9964;
 									type="Land_Concrete_SmallWall_4m_F";
-									atlOffset=1.4763336;
+									atlOffset=1.4797821;
 								};
 								class Item35
 								{
@@ -62390,8 +62417,8 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3344.2888,36.552746,3745.9297};
-										angles[]={0.34417412,3.3058007,6.2237587};
+										position[]={3344.2925,36.545128,3745.9509};
+										angles[]={0.33161256,3.298672,6.2133722};
 									};
 									side="Empty";
 									flags=1;
@@ -62401,11 +62428,11 @@ class Mission
 									};
 									id=11755;
 									type="Projector";
-									atlOffset=4.1984978;
+									atlOffset=4.1908302;
 								};
 							};
 							id=10081;
-							atlOffset=3.8735962;
+							atlOffset=3.8697586;
 						};
 						class Item1
 						{
@@ -62586,7 +62613,7 @@ class Mission
 							flags=1;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\mayfun.p3d""]]],[""class"",""IStruct""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""model"",""ml_shabut\exoduss\mayfun.p3d""],[""name"",""Штуковина""]]],[""class"",""IStruct""]]}";
 							};
 							id=10066;
 							type="mayfun";
@@ -62613,7 +62640,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3337.0283,33.582062,3752.5212};
+								position[]={3337.0283,33.582062,3752.3708};
 								angles[]={0,1.3962634,0};
 							};
 							side="Empty";
@@ -62624,7 +62651,7 @@ class Mission
 							};
 							id=10079;
 							type="teh_shkaf";
-							atlOffset=0.077693939;
+							atlOffset=0.078216553;
 						};
 						class Item6
 						{
@@ -62872,8 +62899,8 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3336.8154,32.196915,3756.217};
-										angles[]={0,1.5707963,0};
+										position[]={3337.1494,32.196915,3756.9514};
+										angles[]={0,3.1415923,-0};
 									};
 									side="Empty";
 									flags=4;
@@ -62883,14 +62910,14 @@ class Mission
 									};
 									id=11792;
 									type="CUP_A2_case_cans_b";
-									atlOffset=0.094161987;
+									atlOffset=0.098953247;
 								};
 								class Item14
 								{
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3338.2568,32.966442,3757.0361};
+										position[]={3338.3181,32.966442,3757.0361};
 										angles[]={0,1.5707963,0};
 									};
 									side="Empty";
@@ -62901,14 +62928,14 @@ class Mission
 									};
 									id=11789;
 									type="shkafsin";
-									atlOffset=0.085716248;
+									atlOffset=0.085651398;
 								};
 								class Item15
 								{
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3339.6182,32.196915,3756.8394};
+										position[]={3339.646,32.196915,3756.7903};
 										angles[]={0,4.7123961,6.2703967};
 									};
 									side="Empty";
@@ -62919,7 +62946,7 @@ class Mission
 									};
 									id=11788;
 									type="CUP_A2_vojenska_palanda";
-									atlOffset=0.095085144;
+									atlOffset=0.094715118;
 								};
 								class Item16
 								{
@@ -62941,7 +62968,7 @@ class Mission
 								};
 							};
 							id=10085;
-							atlOffset=0.097942352;
+							atlOffset=0.10016632;
 						};
 						class Item7
 						{
@@ -64037,16 +64064,17 @@ class Mission
 						};
 					};
 					id=9851;
-					atlOffset=24.403156;
+					atlOffset=24.403126;
 				};
 			};
 			id=6175;
-			atlOffset=25.419067;
+			atlOffset=25.416868;
 		};
 		class Item4
 		{
 			dataType="Layer";
 			name="Spawn points";
+			state=3;
 			class Entities
 			{
 				items=52;
@@ -67349,23 +67377,6 @@ class Mission
 			name="Teleports";
 			id=11309;
 			atlOffset=-5;
-		};
-		class Item9
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3428.2803,33.720531,3713.5708};
-				angles[]={0,2.3841856e-07,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MerchantConsoleSaloon""],[""mark"",""MerchantConsole G:gFC8kWrxlD8""]]}";
-			};
-			id=11795;
-			type="panelka";
 		};
 	};
 };
