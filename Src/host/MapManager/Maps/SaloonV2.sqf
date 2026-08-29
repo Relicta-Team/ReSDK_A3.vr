@@ -3618,7 +3618,8 @@ _3427_989013709_5878928_82880 = ['ElectricalShieldSmall',[3427.99,3709.59,28.828
 _3420_982913766_8093322_36000 = ['SteelDoorThinSmall',[3420.98,3766.81,22.36],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"LomnyaKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3416_156743769_5715322_40865 = ['SteelDoorThinSmall',[3416.16,3769.57,22.4086],270,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"LomnyaKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3420_227783762_8501023_01149 = ['KeyHolder',[3420.23,3762.85,23.0115],90,[0,0,1]] call InitStruct; 
-['MerchantConsoleSaloon',[3428.25,3713.6,28.6425],0,[0,0,1]] call InitStruct; 
+['MerchantConsoleSaloon',[3428.25,3713.6,28.6425],0,[0,0,1], {go_editor_globalRefs set ["MerchantConsoleSaloon G:obV9vktQpzo",_thisObj];
+}] call InitStruct; 
 
 
 
@@ -4545,6 +4546,7 @@ if (!isNil'_3307_040283762_5253913_93069') then {
 if (!isNil'_3427_989013709_5878928_82880') then {
 	[_3427_989013709_5878928_82880,go_editor_globalRefs get "Imported StreetLamp674401"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
 	[_3427_989013709_5878928_82880,go_editor_globalRefs get "Imported LampCeiling715977"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
+	[_3427_989013709_5878928_82880,go_editor_globalRefs get "MerchantConsoleSaloon G:obV9vktQpzo"] call (_3427_989013709_5878928_82880 getvariable 'proto' getvariable 'addConnection');
 };
 if (!isNil'_3420_982913766_8093322_36000') then {
 	_3420_982913766_8093322_36000 setvariable ['islocked',true];

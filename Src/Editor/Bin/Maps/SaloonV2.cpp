@@ -12,14 +12,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=3787;
+		nextID=3881;
 	};
 	class Camera
 	{
-		pos[]={3389.1204,38.276909,3664.1267};
-		dir[]={0.98309219,-0.16951279,0.069507673};
-		up[]={0.16909568,0.98552144,0.011955446};
-		aside[]={0.070526965,-3.5605626e-07,-0.99752825};
+		pos[]={3427.4678,34.429935,3716.407};
+		dir[]={0.04033836,-0.32793495,-0.94384062};
+		up[]={0.014002517,0.94469953,-0.32763669};
+		aside[]={-0.99908996,-1.3482349e-08,-0.042698611};
 	};
 };
 binarizationWanted=0;
@@ -61301,7 +61301,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""Imported StreetLamp674401"",""Imported LampCeiling715977""]],[""mark"",""ElectricalShieldSmall G:woag8jdvhEQ""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ElectricalShieldSmall""],[""edConnected"",[""Imported StreetLamp674401"",""Imported LampCeiling715977"",""MerchantConsoleSaloon G:obV9vktQpzo""]],[""mark"",""ElectricalShieldSmall G:woag8jdvhEQ""]]}";
 			};
 			id=11191;
 			type="transformator";
@@ -61390,7 +61390,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MerchantConsoleSaloon""]]}";
+				init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MerchantConsoleSaloon""],[""mark"",""MerchantConsoleSaloon G:obV9vktQpzo""]]}";
 			};
 			id=11212;
 			type="panelka";
