@@ -5688,6 +5688,18 @@ Replaced value:
 9
 ```
 File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 16](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L16)
+## MC_CAT_SPECIAL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+10
+```
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 17](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L17)
 ## MC_CATSYS_LAST_INDEX
 
 Type: constant
@@ -5697,9 +5709,9 @@ Description:
 
 Replaced value:
 ```sqf
-MC_CAT_ENEGRY
+MC_CAT_SPECIAL
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 18](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L18)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 19](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L19)
 ## MC_MODE_MAINMENU
 
 Type: constant
@@ -5711,7 +5723,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 20](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L20)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 21](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L21)
 ## MC_MODE_SELECTCAT
 
 Type: constant
@@ -5723,7 +5735,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 21](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L21)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 22](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L22)
 ## MC_MODE_CHANGEMON
 
 Type: constant
@@ -5735,7 +5747,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 22](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L22)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 23](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L23)
 ## MC_MODE_GETSTATUS
 
 Type: constant
@@ -5747,7 +5759,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 23](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L23)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 24](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L24)
 ## MC_MODE_DISABLED
 
 Type: constant
@@ -5759,7 +5771,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 24](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L24)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 25](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L25)
 ## MC_MODE_CATLIST
 
 Type: constant
@@ -5771,7 +5783,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 26](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L26)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 27](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L27)
 ## MC_MODE_PRINT
 
 Type: constant
@@ -5783,7 +5795,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 28](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L28)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 29](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L29)
 ## MC_MAIN_TOTRADE
 
 Type: constant
@@ -5795,7 +5807,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 30](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L30)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 31](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L31)
 ## MC_MAIN_PRINT
 
 Type: constant
@@ -5807,7 +5819,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 31](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L31)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 32](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L32)
 ## MC_MAIN_CHANGEMON
 
 Type: constant
@@ -5819,7 +5831,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 32](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L32)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 33](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L33)
 ## MC_MAIN_GETSTATUS
 
 Type: constant
@@ -5831,7 +5843,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 33](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L33)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 34](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L34)
 ## MC_MAIN_SWITCHMODE
 
 Type: constant
@@ -5843,7 +5855,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 34](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L34)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 35](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L35)
 ## MC_CATLIST_DEC
 
 Type: constant
@@ -5855,7 +5867,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 37](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L37)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 38](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L38)
 ## MC_CATLIST_INC
 
 Type: constant
@@ -5867,7 +5879,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 38](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L38)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 39](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L39)
 ## MC_PRINT_DO
 
 Type: constant
@@ -5879,7 +5891,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 41](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L41)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 42](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L42)
 ## MC_PRINT_CLEAR
 
 Type: constant
@@ -5891,7 +5903,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 42](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L42)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 43](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L43)
 ## MC_GENERIC_BACK
 
 Type: constant
@@ -5903,7 +5915,7 @@ Replaced value:
 ```sqf
 -100
 ```
-File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 45](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L45)
+File: [host\GameObjects\Structures\Containers\MerchantConsole.hpp at line 46](../../../Src/host/GameObjects/Structures/Containers/MerchantConsole.hpp#L46)
 # Tech.sqf
 
 ## item_data(typename,lowprice,maxprice,ctg,countslow,countsmax)
