@@ -1980,6 +1980,9 @@ _3417_539793643_616210_35935 = ['IStruct',[3417.54,3643.62,0.359352],0,[0,0,1], 
 ['IndPipeValve',[3447.25,3722.62,8.375],90.0009,[0,0,1]] call InitStruct; 
 ['MediumPieceSuspendedPipe',[3407.5,3659.25,13.271,true],[0,3.34978e-06,1],[0,-1,3.34978e-06]] call InitStruct; 
 ['ShortPipeBlueMetal',[3410.43,3700.43,8.0251],15,[0,0,1]] call InitStruct; 
+['SmallSteelRustyStairs',[3408.27,3704.47,7.96815],180,[0,0,1]] call InitStruct; 
+['SmallSteelRustyStairs',[3408.27,3705.5,8.59315],180,[0,0,1]] call InitStruct; 
+['SmallSteelPlate2',[3408.78,3707.69,9.10107],90,[0,0,1]] call InitStruct; 
 ['ThickConcreteFloorMedium',[3399.75,3672.75,12.875],0,[0,0,1]] call InitStruct; 
 ['ThickConcreteFloorMedium',[3418.25,3649.62,12.875],0,[0,0,1]] call InitStruct; 
 ['ThickConcreteFloorMedium',[3418.25,3667.62,12.875],0,[0,0,1]] call InitStruct; 
@@ -2288,11 +2291,27 @@ _3406_048343713_960457_79437 = ['Statue5',[3406.05,3713.96,7.79437],270,[0,0,1]]
 ['BrushCleaner',[3414.54,3713.06,8.82534],60,[0,0,1]] call InitItem; 
 ['RedSteelBox',[3405.47,3711.39,8.90526],320,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['WoodenBucket',[3406.03,3713.97,14.232,true],[1.08108e-05,-0.996195,-0.0871532],[0.258824,0.0841862,-0.962249]] call InitItem; 
-_3407_037113709_678718_02581 = ['SteelGreenDoor',[3407.04,3709.68,8.02581],0,[0,0,1]] call InitStruct; 
+_3407_037113709_678717_86860 = ['SteelGreenDoor',[3407.04,3709.68,7.8686],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"ShapkeKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SleepingMatras1',[3413.6,3715.06,7.99205],90,[0,0,1]] call InitStruct; 
 ['ContainerGreen',[3414.74,3712.64,7.95016],175,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"Kintchen_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 ['SmallChair',[3413.92,3713.67,13.0213,true],270,[0.00693012,-0.0154593,0.999856]] call InitItem; 
 ['WoodenDoor',[3411.7,3712.84,8.02155],270,[0,0,1]] call InitStruct; 
+_3414_520513714_048108_82534 = ['Paper',[3414.52,3714.05,8.82534],345,[0,0,1], {_thisObj setvariable ['preinit@__content',"Здарова кореш, у меня дела все нормальные. Я вот чего пишу, у меня тут вещица появилась, её надо бы Оводу Горану принести. Какая-то кассета, ходят слухи что с помощью неё можно южные врата открыть. Горану она очень нужна, не знаю зачем да и не моё это дело. Мне самому она ни к чему, и так в достатке, да и Горан на меня зуб точит, не вариант кароче. Я тебе её могу за так подогнать, может всё таки ты хочешь из Злачника свинтить? Тебе всего делов, эту кассету доставить куда надо и я тебе обещаю что проблем не будет потом. Я попросил торгоша записку эту передать тебе через Уголька. Если он денег попросит - не давай, я ему звяку дал."]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+_3413_412353712_174329_01114 = ['Paper',[3413.41,3712.17,9.01114],342.001,[0,0,1], {_thisObj setvariable ['preinit@__content',"Замешиваем два хороших шмата теста, кладём их в печь сырыми, печь греть не надо. Отрезаем кусочек масла и смазываем тесто. Берём какой-нибудь гриб и берём масло смазываем гриб. Гриб кладём в печку. Печку смазываем маслом и кладём в неё масло. Зажигаем печь и ждём вкусный пирог смазанный маслом! После того как пирог будет готов - смазываем его маслом."]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['SpirtBottle',[3414.65,3713.68,8.82534],0,[0,0,1]] call InitItem; 
+['Svetlolik',[3413.66,3712.17,9.01328],0,[0,0,1]] call InitItem; 
+['BlackSmallStove',[3411.3,3714.44,8.0123],0,[0,0,1], {_thisObj setvariable ['lightisenabled',false];}] call InitStruct; 
+['WoodenShelf',[3413.66,3712.22,9.06723],183,[0,0,1]] call InitStruct; 
+['ButterPiece',[3413.8,3712.17,14.0248,true],0,[-0.0154596,-0.00693025,0.999856]] call InitItem; 
+['Testo',[3413.99,3712.16,14.0497,true],0,[-0.0154596,-0.00693025,0.999856]] call InitItem; 
+['MatchBox',[3414.21,3713.07,8.82534],328,[0,0,1]] call InitItem; 
+['ConcretePole2',[3405.5,3712.5,8],0,[0,0,1]] call InitStruct; 
+['ConcretePole2',[3405.5,3715.38,8],0,[0,0,1]] call InitStruct; 
+['Candle',[3406.55,3713.93,7.9787],0,[0,0,1]] call InitItem; 
+['Candle',[3405.49,3712.5,9.48847],0,[0,0,1]] call InitItem; 
+['Candle',[3405.49,3715.37,9.48847],0,[0,0,1]] call InitItem; 
+_3408_062743709_279308_05128 = ['Key',[3408.06,3709.28,8.05128],0,[0,0,1], {_thisObj setvariable ['preinit@__keytypesstr',"ShapkeKey"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['WoodenBucket',[3408.07,3709.28,13.2817,true],0,[0.00566271,-0.00693096,0.99996]] call InitItem; 
 ['MetalAndConcreteRuins',[3447,3656.88,8.03289],265,[0,0,1]] call InitStruct; 
 ['SmallGrayStone',[3444.58,3658.95,13.0323,true],135,[0.00421315,0.00567535,0.999975]] call InitStruct; 
 ['WoodenDoor',[3442.87,3659.09,8.01483],90.0004,[0,0,1]] call InitStruct; 
@@ -3802,7 +3821,7 @@ _3344_292483745_9509331_31160 = ['IStruct',[3344.29,3745.95,36.5451,true],[-0.15
 _3340_625003751_3750028_22781 = ['hamradio',[3340.62,3751.38,28.2278],285,[0,0,1]] call InitStruct; 
 _3340_918953753_1472228_22667 = ['IStruct',[3340.92,3753.15,28.2267],0,[0,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\mayfun.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3340_894783752_0590828_22781 = ['IStruct',[3340.89,3752.06,28.2278],0,[0,0,1], {_thisObj setvariable ['model','ca\misc\mutt_vysilacka.p3d'];}] call InitStruct; // !!! realocated model !!!
-['TechBlock',[3337.03,3752.37,27.2026],80,[0,0,1], {go_editor_globalRefs set ["HolotapeInsertBlock",_thisObj];
+_3337_028323752_3708527_20256 = ['TechBlock',[3337.03,3752.37,27.2026],80,[0,0,1], {go_editor_globalRefs set ["HolotapeInsertBlock",_thisObj];
 }] call InitStruct; 
 ['TrashCan',[3349.21,3741.61,26.9855],275,[0,0,1], {_thisObj setvariable ['preinit@__loottemplate',"TrashCan_all"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitStruct; 
 _3351_506103740_9929226_99874 = ['RedSteelBox',[3351.51,3740.99,26.9987],280,[0,0,1]] call InitStruct; 
@@ -3972,6 +3991,17 @@ _3420_941893497_050291_37144 = ['IStruct',[3420.94,3497.05,1.37144],0,[0,0,1], {
 _3420_738043499_405031_46790 = ['IStruct',[3420.74,3499.41,6.66745,true],95.3356,[7.75496e-05,0.000909055,1], {_thisObj setvariable ['model','relicta_models\models\mutants\spider.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3420_746093499_722662_13411 = ['IStruct',[3420.75,3499.72,7.13388,true],0,[-0.00091349,0,1], {_thisObj setvariable ['model','ml_shabut\exoduss\shyrevo.p3d'];}] call InitStruct; // !!! realocated model !!!
 _3433_983643658_7255924_98982 = ['IStruct',[3433.98,3658.73,24.9898],9.8184e-06,[0,0,1], {_thisObj setvariable ['model','a3\structures_f_oldman\decals\brokencarglass_01_4x4_f.p3d'];}] call InitStruct; // !!! realocated model !!!
+_3426_898193707_6787113_33063 = ['Paper',[3426.9,3707.68,13.3306],284.624,[0,0,1], {_thisObj setvariable ['preinit@__content',"Доброго промежутка, Пролаза, друг мой! Твою весточку я получил в прошлом промежутке, вот пишу тебе ответ. Дела у меня и так и сяк иногда всё наперекосяк, но живём потихоньку. Углярчики мои ведут себя хорошо и это радует. Вот Уголёк получил работу от каких-то важных людей, а он собственно мне весточку твою и передал. 
+
+Вещь которую ты мне предлагаешь, она мне не надо, я тут останусь, мне тут хорошо, тут дом мой и люди мои и привык уже я. Ты только сам в Канаве её никому не продавай - убьют, лучше тут загони, пади найдётся дурник какой-нибудь. 
+
+Ты ко мне приходи,  я недавно жительство сменил, теперь в подвалах обитаю, там где баки здоровенные, дверь у меня такая, ну типа, зелёная, не ошибёшься. Там теперь... обитель наша. Пирог, бражка - я угощаю!"]; _thisObj call (_thisObj getvariable 'proto' getvariable '__handlePreInitVars__');}] call InitItem; 
+['BloodPoolMedium',[3427.27,3703.04,21.1995,true],0.0349556,[-0.0348942,0.0523149,0.998021]] call InitItem; 
+['BloodPoolMedium',[3427.01,3708.15,18.2813,true],0.0349556,[0.0523412,0.0522219,0.997263]] call InitItem; 
+['Head3',[3426.78,3702.76,21.2306,true],[6.99256e-07,2.52072e-06,-1],[-0.891003,0.453997,5.21362e-07]] call InitItem; 
+['Arm',[3426.95,3707.99,18.3304,true],[-0.352283,0.932493,0.0797133],[0,0.0851734,-0.996366]] call InitItem; 
+['Candle',[3429.72,3702.46,18.8517],0,[0,0,1]] call InitItem; 
+['BloodPoolSmall',[3426.9,3703.4,21.16,true],0.0583399,[-0.0276179,0.0697485,0.997182]] call InitItem; 
 
 
 
@@ -4509,8 +4539,17 @@ if (!isNil'_3406_048343713_960457_79437') then {
 	_3406_048343713_960457_79437 setvariable ['name',"Шапке"];
 	_3406_048343713_960457_79437 setvariable ['desc',"О! Шапке! Сокожий собрат!"];
 };
-if (!isNil'_3407_037113709_678718_02581') then {
-	_3407_037113709_678718_02581 setvariable ['islocked',true];
+if (!isNil'_3407_037113709_678717_86860') then {
+	_3407_037113709_678717_86860 setvariable ['islocked',true];
+};
+if (!isNil'_3414_520513714_048108_82534') then {
+	_3414_520513714_048108_82534 setvariable ['name',"Письмо другу"];
+};
+if (!isNil'_3413_412353712_174329_01114') then {
+	_3413_412353712_174329_01114 setvariable ['name',"Рецепт пирога"];
+};
+if (!isNil'_3408_062743709_279308_05128') then {
+	_3408_062743709_279308_05128 setvariable ['name',"Ключ от обители Шапке"];
 };
 if (!isNil'_3447_397953660_289558_80517') then {
 	_3447_397953660_289558_80517 setvariable ['name',"Записка для Сёмки"];
@@ -4748,6 +4787,10 @@ if (!isNil'_3340_918953753_1472228_22667') then {
 };
 if (!isNil'_3340_894783752_0590828_22781') then {
 	_3340_894783752_0590828_22781 setvariable ['name',"Прибор"];
+};
+if (!isNil'_3337_028323752_3708527_20256') then {
+	_3337_028323752_3708527_20256 setvariable ['name',"Панель управления вратами"];
+	_3337_028323752_3708527_20256 setvariable ['desc',"Очень много всяких кнопочек и прямоугольная дырыочка, интересно, что туда можно засунуть и что потом будет?"];
 };
 if (!isNil'_3351_506103740_9929226_99874') then {
 	[_3351_506103740_9929226_99874,'Paper',1,100,[["var","preinit@__content","Начальник! Пока мне положенные звяки не выдадут, я больше тут сторожить эти врата закрытые не буду! На какую мельтешиную бибу их вообще сторожить ежели они запертые!?
@@ -5005,4 +5048,7 @@ if (!isNil'_3454_722663745_757578_00001') then {
 };
 if (!isNil'_3307_040283762_5253913_93069') then {
 	[_3307_040283762_5253913_93069,"govnelin"] call (_3307_040283762_5253913_93069 getvariable 'proto' getvariable 'setEffectType');
+};
+if (!isNil'_3426_898193707_6787113_33063') then {
+	_3426_898193707_6787113_33063 setvariable ['name',"Ответ пролазе"];
 };

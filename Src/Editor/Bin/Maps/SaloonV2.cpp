@@ -8,18 +8,18 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=11800;
+		nextID=11858;
 	};
 	class LayerIndexProvider
 	{
-		nextID=4172;
+		nextID=4173;
 	};
 	class Camera
 	{
-		pos[]={3366.0649,52.922932,3706.7717};
-		dir[]={0.35030362,-0.59301478,-0.72517228};
-		up[]={0.25795302,0.80495828,-0.53399032};
-		aside[]={-0.90046167,-4.0286686e-06,-0.4349902};
+		pos[]={3449.0068,42.926971,3703.9451};
+		dir[]={-0.81447846,-0.56991112,-0.10985677};
+		up[]={-0.56500429,0.82153803,-0.076205887};
+		aside[]={-0.13368054,-4.2311149e-07,0.99113691};
 	};
 };
 binarizationWanted=0;
@@ -132,6 +132,7 @@ addons[]=
 	"A3_Structures_F_Enoch_Walls_Net",
 	"A3_Structures_F_EPC_Civ_Accessories",
 	"A3_Structures_F_Exp_Cultural_Totems",
+	"A3_Structures_F_Exp_Walls_Net",
 	"A3_Structures_F_Civ_Camping",
 	"BSG_EFT",
 	"A3_Structures_F_Exp_Infrastructure_Roads",
@@ -142,7 +143,6 @@ addons[]=
 	"A3_Structures_F_Items_Documents",
 	"A3_Structures_F_Exp_Walls_Slum",
 	"A3_Structures_F_Households_WIP",
-	"A3_Structures_F_Exp_Walls_Net",
 	"A3_Structures_F_Argo_Military_Domes",
 	"Ferrum",
 	"A3_Structures_F_Heli_Furniture",
@@ -831,7 +831,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=9;
+		items=10;
 		class Item0
 		{
 			dataType="Group";
@@ -978,7 +978,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14.286093,5.039001,8100.0669};
+				position[]={14.300793,5.0390015,8100.0698};
 			};
 			side="Empty";
 			flags=4;
@@ -988,7 +988,7 @@ class Mission
 			};
 			id=2205;
 			type="Land_Orange_01_F";
-			atlOffset=-0.0021977425;
+			atlOffset=-0.0021972656;
 		};
 		class Item3
 		{
@@ -30160,7 +30160,7 @@ class Mission
 							state=1;
 							class Entities
 							{
-								items=57;
+								items=60;
 								class Item0
 								{
 									dataType="Object";
@@ -31151,9 +31151,63 @@ class Mission
 									type="land_trubaduba1";
 									atlOffset=8.0250969;
 								};
+								class Item57
+								{
+									dataType="Object";
+									class PositionInfo
+									{
+										position[]={3408.272,13.360066,3704.4692};
+										angles[]={0,3.1415992,-0};
+									};
+									side="Empty";
+									flags=5;
+									class Attributes
+									{
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelRustyStairs""]]}";
+									};
+									id=11846;
+									type="stair01";
+									atlOffset=0.073745728;
+								};
+								class Item58
+								{
+									dataType="Object";
+									class PositionInfo
+									{
+										position[]={3408.272,13.985066,3705.5};
+										angles[]={0,3.1415992,-0};
+									};
+									side="Empty";
+									flags=1;
+									class Attributes
+									{
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelRustyStairs""]]}";
+									};
+									id=11848;
+									type="stair01";
+									atlOffset=0.49325371;
+								};
+								class Item59
+								{
+									dataType="Object";
+									class PositionInfo
+									{
+										position[]={3408.7812,14.979609,3707.6877};
+										angles[]={0,1.5707963,-0};
+									};
+									side="Empty";
+									flags=1;
+									class Attributes
+									{
+										init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SmallSteelPlate2""]]}";
+									};
+									id=11852;
+									type="gate_bridge";
+									atlOffset=0.99503899;
+								};
 							};
 							id=9575;
-							atlOffset=0.34876442;
+							atlOffset=0.64248371;
 						};
 						class Item3
 						{
@@ -35786,7 +35840,7 @@ class Mission
 											};
 											id=11554;
 											type="Land_xlamdoor";
-											atlOffset=7.8934011;
+											atlOffset=7.8934021;
 										};
 										class Item2
 										{
@@ -36062,7 +36116,7 @@ class Mission
 									state=1;
 									class Entities
 									{
-										items=15;
+										items=31;
 										class Item0
 										{
 											dataType="Object";
@@ -36243,17 +36297,17 @@ class Mission
 											dataType="Object";
 											class PositionInfo
 											{
-												position[]={3407.0371,14.391413,3709.6787};
+												position[]={3407.0371,14.234198,3709.6787};
 											};
 											side="Empty";
 											flags=1;
 											class Attributes
 											{
-												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""islocked"",true]]],[""class"",""SteelGreenDoor""]]}";
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""islocked"",true],[""preinit@__keytypesstr"",""ShapkeKey""]]],[""class"",""SteelGreenDoor""]]}";
 											};
 											id=11523;
 											type="dooor";
-											atlOffset=8.0258131;
+											atlOffset=7.868598;
 										};
 										class Item11
 										{
@@ -36326,9 +36380,276 @@ class Mission
 											type="Land_xlamdoor";
 											atlOffset=8.0215473;
 										};
+										class Item15
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3414.5205,13.828005,3714.0481};
+												angles[]={0,6.0213861,-0};
+											};
+											side="Empty";
+											flags=4;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Письмо другу""],[""preinit@__content"",""Здарова кореш, у меня дела все нормальные. Я вот чего пишу, у меня тут вещица появилась, её надо бы Оводу Горану принести. Какая-то кассета, ходят слухи что с помощью неё можно южные врата открыть. Горану она очень нужна, не знаю зачем да и не моё это дело. Мне самому она ни к чему, и так в достатке, да и Горан на меня зуб точит, не вариант кароче. Я тебе её могу за так подогнать, может всё таки ты хочешь из Злачника свинтить? Тебе всего делов, эту кассету доставить куда надо и я тебе обещаю что проблем не будет потом. Я попросил торгоша записку эту передать тебе через Уголька. Если он денег попросит - не давай, я ему звяку дал.""]]],[""class"",""Paper""]]}";
+											};
+											id=11802;
+											type="Leaflet_05_Old_F";
+										};
+										class Item16
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3413.4124,14.013804,3712.1743};
+												angles[]={0,5.9690442,-0};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Рецепт пирога""],[""preinit@__content"",""Замешиваем два хороших шмата теста, кладём их в печь сырыми, печь греть не надо. Отрезаем кусочек масла и смазываем тесто. Берём какой-нибудь гриб и берём масло смазываем гриб. Гриб кладём в печку. Печку смазываем маслом и кладём в неё масло. Зажигаем печь и ждём вкусный пирог смазанный маслом! После того как пирог будет готов - смазываем его маслом.""]]],[""class"",""Paper""]]}";
+											};
+											id=11821;
+											type="Leaflet_05_Old_F";
+											atlOffset=0.90781116;
+										};
+										class Item17
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3414.6501,13.962337,3713.6765};
+											};
+											side="Empty";
+											flags=4;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""SpirtBottle""]]}";
+											};
+											id=11815;
+											type="buhlo1";
+										};
+										class Item18
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3413.6638,14.128512,3712.1707};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Svetlolik""]]}";
+											};
+											id=11826;
+											type="mushroom1";
+											atlOffset=0.90281963;
+										};
+										class Item19
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3411.3042,17.023552,3714.4429};
+											};
+											side="Empty";
+											flags=5;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""lightisenabled"",false]]],[""class"",""BlackSmallStove""]]}";
+											};
+											id=11817;
+											type="pechechkas";
+											atlOffset=0.088698387;
+										};
+										class Item20
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3413.6641,14.0734,3712.218};
+												angles[]={0,3.1939602,-0};
+											};
+											side="Empty";
+											flags=1;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenShelf""]]}";
+											};
+											id=11822;
+											type="polka_2";
+											atlOffset=0.95643425;
+										};
+										class Item21
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3413.8035,14.024846,3712.1711};
+												angles[]={6.2762542,0,0.015460252};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ButterPiece""]]}";
+											};
+											id=11824;
+											type="S_Butter_Piece";
+											atlOffset=0.91227245;
+										};
+										class Item22
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3413.991,14.049659,3712.1582};
+												angles[]={6.2762542,0,0.015460252};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Testo""]]}";
+											};
+											id=11823;
+											type="S_Dough";
+											atlOffset=0.9165554;
+										};
+										class Item23
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3414.2141,13.836438,3713.0698};
+												angles[]={0,5.7246833,-0};
+											};
+											side="Empty";
+											flags=4;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""MatchBox""]]}";
+											};
+											id=11825;
+											type="Land_Matches_F";
+										};
+										class Item24
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3405.5,13.0142,3712.5};
+											};
+											side="Empty";
+											flags=1;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcretePole2""]]}";
+											};
+											id=11840;
+											type="Land_NetFence_02_m_pole_F";
+											atlOffset=8;
+										};
+										class Item25
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3405.5,13.0142,3715.375};
+											};
+											side="Empty";
+											flags=1;
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""ConcretePole2""]]}";
+											};
+											id=11843;
+											type="Land_NetFence_02_m_pole_F";
+											atlOffset=8;
+										};
+										class Item26
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3406.5493,13.062839,3713.9277};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Candle""]]}";
+											};
+											id=11837;
+											type="svecha";
+											atlOffset=0.086930275;
+										};
+										class Item27
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3405.4866,14.572608,3712.4985};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Candle""]]}";
+											};
+											id=11842;
+											type="svecha";
+											atlOffset=0.82675266;
+										};
+										class Item28
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3405.4866,14.572608,3715.3735};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Candle""]]}";
+											};
+											id=11844;
+											type="svecha";
+											atlOffset=1.0013971;
+										};
+										class Item29
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3408.0627,13.055444,3709.2793};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ключ от обители Шапке""],[""preinit@__keytypesstr"",""ShapkeKey""]]],[""class"",""Key""]]}";
+											};
+											id=11855;
+											type="key";
+											atlOffset=8.0512762;
+										};
+										class Item30
+										{
+											dataType="Object";
+											class PositionInfo
+											{
+												position[]={3408.0706,13.281662,3709.2793};
+												angles[]={6.2762542,0,6.2775226};
+											};
+											side="Empty";
+											class Attributes
+											{
+												init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""WoodenBucket""]]}";
+											};
+											id=11856;
+											type="CUP_A2_bucket_ep1";
+											atlOffset=8.0504484;
+										};
 									};
 									id=11553;
-									atlOffset=8.0358105;
+									atlOffset=0.22566223;
 								};
 								class Item3
 								{
@@ -38930,7 +39251,7 @@ class Mission
 								};
 							};
 							id=11641;
-							atlOffset=0.1818552;
+							atlOffset=0.18605995;
 						};
 						class Item10
 						{
@@ -39700,7 +40021,7 @@ class Mission
 						};
 					};
 					id=5211;
-					atlOffset=9.9202013;
+					atlOffset=9.9210587;
 				};
 				class Item4
 				{
@@ -61639,7 +61960,6 @@ class Mission
 				{
 					dataType="Layer";
 					name="Южные врата";
-					state=1;
 					class Entities
 					{
 						items=8;
@@ -62647,7 +62967,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
-								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""TechBlock""],[""mark"",""HolotapeInsertBlock""]]}";
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Панель управления вратами""],[""desc"",""Очень много всяких кнопочек и прямоугольная дырыочка, интересно, что туда можно засунуть и что потом будет?""]]],[""class"",""TechBlock""],[""mark"",""HolotapeInsertBlock""]]}";
 							};
 							id=10079;
 							type="teh_shkaf";
@@ -64068,7 +64388,7 @@ class Mission
 				};
 			};
 			id=6175;
-			atlOffset=25.416868;
+			atlOffset=25.41687;
 		};
 		class Item4
 		{
@@ -67377,6 +67697,137 @@ class Mission
 			name="Teleports";
 			id=11309;
 			atlOffset=-5;
+		};
+		class Item9
+		{
+			dataType="Layer";
+			name="111А ЭТО НАДО РАСПРЕДЕЛИТЬ ПО НУЖНЫМ МЕСТАМ";
+			state=1;
+			class Entities
+			{
+				items=7;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3426.8982,18.333302,3707.6787};
+						angles[]={0,4.9676189,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[[""name"",""Ответ пролазе""],[""preinit@__content"",""Доброго промежутка, Пролаза, друг мой! Твою весточку я получил в прошлом промежутке, вот пишу тебе ответ. Дела у меня и так и сяк иногда всё наперекосяк, но живём потихоньку. Углярчики мои ведут себя хорошо и это радует. Вот Уголёк получил работу от каких-то важных людей, а он собственно мне весточку твою и передал. " \n "" \n "Вещь которую ты мне предлагаешь, она мне не надо, я тут останусь, мне тут хорошо, тут дом мой и люди мои и привык уже я. Ты только сам в Канаве её никому не продавай - убьют, лучше тут загони, пади найдётся дурник какой-нибудь. " \n "" \n "Ты ко мне приходи,  я недавно жительство сменил, теперь в подвалах обитаю, там где баки здоровенные, дверь у меня такая, ну типа, зелёная, не ошибёшься. Там теперь... обитель наша. Пирог, бражка - я угощаю!""]]],[""class"",""Paper""]]}";
+					};
+					id=11811;
+					type="Leaflet_05_Old_F";
+					atlOffset=5.3199472;
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3427.2664,21.199478,3703.0413};
+						angles[]={0.052370675,0.000609626,0.034901258};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BloodPoolMedium""]]}";
+					};
+					id=11806;
+					type="BloodPool_01_Medium_New_F";
+					atlOffset=8.110076;
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3427.0129,18.281254,3708.1533};
+						angles[]={0.052317474,0.00061009079,6.2308202};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BloodPoolMedium""]]}";
+					};
+					id=11814;
+					type="BloodPool_01_Medium_New_F";
+					atlOffset=5.1919518;
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3426.7793,21.23061,3702.7622};
+						angles[]={1.5707952,1.5402211e-06,1.0995502};
+					};
+					side="Empty";
+					flags=1;
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Head3""]]}";
+					};
+					id=11808;
+					type="golova_trup3";
+					atlOffset=8.139123;
+				};
+				class Item4
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3426.9546,18.330353,3707.989};
+						angles[]={3.0563159,3.5016017,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Arm""]]}";
+					};
+					id=11813;
+					type="S_Arm";
+					atlOffset=5.2272959;
+				};
+				class Item5
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3429.7236,23.935818,3702.4626};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""Candle""]]}";
+					};
+					id=11812;
+					type="svecha";
+					atlOffset=10.586917;
+				};
+				class Item6
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3426.9031,21.159975,3703.3965};
+						angles[]={0.069831848,0.0010161321,0.027621444};
+					};
+					side="Empty";
+					class Attributes
+					{
+						init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""class"",""BloodPoolSmall""]]}";
+					};
+					id=11810;
+					type="BloodSplatter_01_Small_New_F";
+					atlOffset=8.1225166;
+				};
+			};
+			id=11857;
+			atlOffset=0.2347641;
 		};
 	};
 };
