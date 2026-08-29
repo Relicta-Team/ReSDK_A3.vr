@@ -1066,8 +1066,8 @@ class(GMSaloonV2) extends(GMBase)
 		objParams();
 		if (getSelf(finishResult) == callSelf(getEscapeFinishCode)) exitWith {
 			private _escapedNames = getSelf(escapedPeopleNames);
-			if (count _escapedNames == 0) exitWith {"Ворота открылись, но никому не удалось сбежать из Злачника."};
-			"Они сумели сбежать из Злачника в поисках лучшей жизни: " + (_escapedNames joinString ", ") + "."
+			if (count _escapedNames == 0) exitWith {"Ворота открылись, но никому не удалось покинуть Злачник."};
+			"Эти люди дорого заплатили за возможность покинуть Злачник: " + (_escapedNames joinString ", ") + "." + " Они даже не могут себе представить, чем это обернётся.." + "."
 		};
 		private _post = format["<t align='left' color='#FAB475' font='PuristaMedium' size='1.5'>Задача бандитов: %1</t>",
 		callFunc(getSelf(task),getDesc)];
