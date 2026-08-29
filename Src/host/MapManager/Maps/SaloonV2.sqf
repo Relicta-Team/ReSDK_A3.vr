@@ -3132,6 +3132,12 @@ _3434_323973656_9838925_12475 = ['SteelGridDoorElectronic',[3434.32,3656.98,25.1
 ['SmallPileOfBricksAndPlanks',[3439.09,3654.78,29.6514,true],250,[0.00457125,0.00768903,0.99996]] call InitStruct; 
 ['ClayWallSmall',[3427.43,3657.09,25.7814],179.89,[0,0,1]] call InitStruct; 
 ['MedicalCurtainSmall',[3426.92,3652.26,25.75],0.960737,[0,0,1]] call InitStruct; 
+if ((random 1) < 0.5) then {
+	['BrushCleaner',[3435.98,3656.27,26.4727],155,[0,0,1]] call InitItem; 
+};
+if ((random 1) < 0.5) then {
+	['SurgeryScalpel',[3436.72,3653.76,26.7494],80,[0,0,1]] call InitItem; 
+};
 ['MediumJunkShed',[3430.75,3771.5,21.25],180,[0,0,1]] call InitStruct; 
 ['PlywoodThinWall',[3427.58,3753.28,24.8967],275,[0,0,1]] call InitStruct; 
 ['SteelThinWallGreen',[3432.25,3753.12,25.0296],90,[0,0,1]] call InitStruct; 

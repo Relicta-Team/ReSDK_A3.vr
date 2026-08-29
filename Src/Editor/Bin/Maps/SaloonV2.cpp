@@ -8,7 +8,7 @@ class EditorData
 	toggles=42;
 	class ItemIDProvider
 	{
-		nextID=11858;
+		nextID=11862;
 	};
 	class LayerIndexProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3449.0068,42.926971,3703.9451};
-		dir[]={-0.81447846,-0.56991112,-0.10985677};
-		up[]={-0.56500429,0.82153803,-0.076205887};
-		aside[]={-0.13368054,-4.2311149e-07,0.99113691};
+		pos[]={3444.4309,38.34914,3639.0732};
+		dir[]={0.13453278,-0.48045138,0.86666101};
+		up[]={0.073700257,0.87701243,0.4747771};
+		aside[]={0.98817801,2.8981594e-07,-0.15339524};
 	};
 };
 binarizationWanted=0;
@@ -49925,7 +49925,7 @@ class Mission
 					state=1;
 					class Entities
 					{
-						items=57;
+						items=59;
 						class Item0
 						{
 							dataType="Object";
@@ -50900,9 +50900,43 @@ class Mission
 							type="medzanaves2";
 							atlOffset=0.64410782;
 						};
+						class Item57
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3435.9768,31.531572,3656.2715};
+								angles[]={0,2.70526,-0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""prob"",50],[""class"",""BrushCleaner""]]}";
+							};
+							id=11858;
+							type="Brush_01_green_F";
+							atlOffset=0.66039658;
+						};
+						class Item58
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={3436.7197,31.765368,3653.7561};
+								angles[]={0,1.3962634,-0};
+							};
+							side="Empty";
+							class Attributes
+							{
+								init="{createHashMapFromArray[[""customProps"",createHashMapFromArray[]],[""prob"",50],[""class"",""SurgeryScalpel""]]}";
+							};
+							id=11859;
+							type="shank";
+							atlOffset=0.93703842;
+						};
 					};
 					id=8458;
-					atlOffset=0.54603195;
+					atlOffset=0.58662224;
 				};
 				class Item9
 				{
@@ -61960,6 +61994,7 @@ class Mission
 				{
 					dataType="Layer";
 					name="Южные врата";
+					state=1;
 					class Entities
 					{
 						items=8;
@@ -64388,7 +64423,7 @@ class Mission
 				};
 			};
 			id=6175;
-			atlOffset=25.41687;
+			atlOffset=25.465282;
 		};
 		class Item4
 		{
