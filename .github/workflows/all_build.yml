@@ -158,7 +158,7 @@ jobs:
   
   checkserver-vm:
     name: Check server VM
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: [ValidatePR]
     strategy:
       fail-fast: true
