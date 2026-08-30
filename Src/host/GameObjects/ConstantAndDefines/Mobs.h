@@ -78,11 +78,14 @@
 //~2.06h to zero without food or stamina restoration (-10% from the original rate)
 #define HUNGER_PER_TICK_LESS 0.0135
 
-#define HUNGER_MAX 140
+#define HUNGER_MAX 160
 #define HUNGER_SATED_THRESHOLD 100
 #define HUNGER_OVEREAT_THRESHOLD 120
+#define HUNGER_SEVERE_OVEREAT_THRESHOLD 140
 //Together with the passive loss, reduces 140 hunger to 120 in ~4 minutes.
 #define HUNGER_OVEREAT_PER_TICK_LESS 0.0715
+//Added after the passive loss to make the total rate twice as high above 140.
+#define HUNGER_SEVERE_OVEREAT_PER_TICK_LESS (HUNGER_PER_TICK_LESS + HUNGER_OVEREAT_PER_TICK_LESS * 2)
 #define HUNGER_OVEREAT_VOMIT_MIN 45
 #define HUNGER_OVEREAT_VOMIT_MAX 75
 //rand(0.05,0.06)

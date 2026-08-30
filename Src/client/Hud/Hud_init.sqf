@@ -44,7 +44,8 @@ hud_hunger = 100; //голод
 	decl(any[])
 	hud_hunger_overlay = [
 		{
-			if (_value > HUNGER_OVEREAT_THRESHOLD) exitWith {["Переедание!","#FF0000"]};
+			if (_value > HUNGER_SEVERE_OVEREAT_THRESHOLD) exitWith {["Ух бля...","#FF0000"]};
+			if (_value > HUNGER_OVEREAT_THRESHOLD) exitWith {["Переедание","#FFD200"]};
 			if (_value > HUNGER_SATED_THRESHOLD) exitWith {["Сытый","#00B74A"]};
 			if (_value > BODY_PART_HUNGER_REGEN_LOWLEVEL) exitWith {["",""]};
 			"Голод"
