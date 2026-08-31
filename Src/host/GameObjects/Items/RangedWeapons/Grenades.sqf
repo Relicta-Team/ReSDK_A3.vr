@@ -14,6 +14,32 @@
 #define GRENADE_STATE_DUD 3
 #define GRENADE_STATE_DETONATED 4
 
+// Raycasts are cheap enough to resolve together. Projectile hit processing is
+// not, so confirmed impacts are consumed in small batches on later frames.
+grenade_processShrapnelImpact = {
+	params ["_target","_hitPos","_damage","_usr","_distance"];
+	if (isNullReference(_target) || {!isExistsObject(_target)}) exitWith {};
+
+	private _projectile = instantiate("GrenadeShrapnelProjectile");
+	setVar(_projectile,shooter,_usr);
+	// onBulletAct reads the impact point through its legacy _p exref and owns
+	// deletion of the temporary projectile instance.
+	private _p = _hitPos;
+	callFuncParams(_target,onBulletAct,_damage arg DAMAGE_TYPE_PIERCING_NO arg TARGET_ZONE_RANDOM arg _usr arg _distance arg _projectile);
+};
+
+grenade_processShrapnelQueue = {
+	params ["_queue","_batchSize"];
+	private _count = (count _queue) min _batchSize;
+	for "_i" from 1 to _count do {
+		(_queue deleteAt 0) call grenade_processShrapnelImpact;
+	};
+	if (count _queue > 0) then {
+		private _nextFrameArgs = [_queue,_batchSize];
+		nextFrameParams(grenade_processShrapnelQueue,_nextFrameArgs);
+	};
+};
+
 editor_attribute("HiddenClass")
 class(GrenadeShrapnelProjectile) extends(IAmmoBase)
 	var(name,"Осколок гранаты");
@@ -27,8 +53,8 @@ class(GrenadeShrapnelProjectile) extends(IAmmoBase)
 endclass
 
 class(Grenade) extends(Item)
-	var(name,"Разрывная граната");
-	var(desc,"Тяжёлая ручная граната с предохранительной чекой и рычагом.");
+	var(name,"Разрывная осколочная граната");
+	var(desc,"Тяжёлая ручная граната с предохранительной чекой и рычагом. Говорят, что одна из таких десяти может иметь сырую воду в своем составе.");
 	var(model,"relicta_models\models\weapons\rgd5.p3d");
 	var(weight,gramm(310));
 	var(size,ITEM_SIZE_SMALL);
@@ -48,12 +74,18 @@ class(Grenade) extends(Item)
 	getterconst_func(leverSound,"electronics\click");
 	getterconst_func(replacePinSound,"updown\keyring_up");
 	getterconst_func(getThrowSkillModifier,3);
-	getterconst_func(getBlastRadius,6);
+	getterconst_func(getBlastRadius,5);
 	getterconst_func(getShrapnelRadius,20);
-	getterconst_func(getConcussionRadius,6);
+	getterconst_func(getConcussionRadius,8);
 	getterconst_func(getExplosionVisualRadius,35);
-	getterconst_func(getShrapnelCount,20);
-	getterconst_func(getBlastDamageDice,5);
+	getterconst_func(getShrapnelCount,50);
+	getterconst_func(getShrapnelSectorCount,12);
+	getterconst_func(getShrapnelMinElevation,1);
+	getterconst_func(getShrapnelMaxElevation,16);
+	getterconst_func(getShrapnelHitsPerFrame,5);
+	getterconst_func(getBlastDamageDice,7);
+	getterconst_func(getBlastEdgeDamageFactor,0.1);
+	getterconst_func(getBlastObjectDamageMultiplier,3);
 	getterconst_func(getShrapnelDamageDice,2);
 
 	region(state_and_interaction)
@@ -301,7 +333,54 @@ class(Grenade) extends(Item)
 	func(getExplosionMobPosition)
 	{
 		objParams_1(_mob);
-		getPosATL getVar(_mob,owner) vectorAdd [0,0,1]
+		private _owner = getVar(_mob,owner);
+		_owner modelToWorldVisual (_owner selectionPosition "spine3")
+	};
+
+	func(getMobSelectionPosition)
+	{
+		objParams_2(_mob,_selection);
+		private _owner = getVar(_mob,owner);
+		_owner modelToWorldVisual (_owner selectionPosition _selection)
+	};
+
+	// Select the body region nearest to the detonation using actual animated
+	// model selections. Object origins are not reliable indicators of whether a
+	// grenade is above, below, or beside a person.
+	func(getBlastMobTargetData)
+	{
+		objParams_2(_mob,_origin);
+		private _candidates = [
+			[TARGET_ZONE_HEAD,callSelfParams(getMobSelectionPosition,_mob arg "head")],
+			[TARGET_ZONE_TORSO,callSelfParams(getMobSelectionPosition,_mob arg "spine3")],
+			[TARGET_ZONE_ABDOMEN,callSelfParams(getMobSelectionPosition,_mob arg "pelvis")],
+			[TARGET_ZONE_LEG_L,callSelfParams(getMobSelectionPosition,_mob arg "leftleg")],
+			[TARGET_ZONE_LEG_R,callSelfParams(getMobSelectionPosition,_mob arg "rightleg")]
+		];
+		private _best = _candidates select 0;
+		private _bestDistance = _origin distance (_best select 1);
+		private _candidateDistance = 0;
+		{
+			_candidateDistance = _origin distance (_x select 1);
+			if (_candidateDistance < _bestDistance) then {
+				_best = _x;
+				_bestDistance = _candidateDistance;
+			};
+		} foreach _candidates;
+
+		private _zone = callFuncParams(_mob,redirectZoneInExistingParts,_best select 0);
+		private _selection = [_zone] call gurps_convertTargetZoneToArmaSelection;
+		[_zone,callSelfParams(getMobSelectionPosition,_mob arg _selection)]
+	};
+
+	func(getBlastSecondaryZone)
+	{
+		objParams_2(_mob,_primaryZone);
+		private _zone = TARGET_ZONE_TORSO;
+		if (_primaryZone == TARGET_ZONE_TORSO) then {_zone = TARGET_ZONE_ABDOMEN};
+		if (_primaryZone == TARGET_ZONE_LEG_L) then {_zone = TARGET_ZONE_LEG_R};
+		if (_primaryZone == TARGET_ZONE_LEG_R) then {_zone = TARGET_ZONE_LEG_L};
+		callFuncParams(_mob,redirectZoneInExistingParts,_zone)
 	};
 
 	func(getVisualCenter)
@@ -317,9 +396,9 @@ class(Grenade) extends(Item)
 		]
 	};
 
-	// One spatial set for blast damage. Mobs use their authoritative owner
-	// model; structures retain the nearby visual that was actually discovered,
-	// preferring an NGO collision proxy when one exists.
+	// One spatial set for blast damage. Mobs use their authoritative owner model;
+	// all other damageable object families retain the nearby visual that was
+	// actually discovered, preferring an NGO collision proxy when one exists.
 	func(getBlastWaveTargets)
 	{
 		objParams_2(_origin,_radius);
@@ -335,7 +414,9 @@ class(Grenade) extends(Item)
 		{
 			_target = [_x] call si_handleObjectReturnCheckVirtual;
 			if isNullReference(_target) then {continue};
-			if !callFunc(_target,isStruct) then {continue};
+			if equals(_target,this) then {continue};
+			if callFunc(_target,isMob) then {continue};
+			if !callFunc(_target,canApplyDamage) then {continue};
 			_key = getVar(_target,pointer);
 			_stored = _targets getOrDefault [_key,[]];
 			if (count _stored == 0 || {_x call noe_server_isNGO}) then {
@@ -343,6 +424,19 @@ class(Grenade) extends(Item)
 			};
 		} foreach (_origin nearObjects _radius);
 		values _targets
+	};
+
+	// Returns [impact-or-center position, unobstructed]. A hit on another visual
+	// belonging to the same virtual object is still a valid blast path.
+	func(getBlastObjectTargetData)
+	{
+		objParams_4(_origin,_target,_sourceVis,_targetVis);
+		private _center = callSelfParams(getVisualCenter,_targetVis);
+		private _hit = [_origin,_center,_sourceVis] call si_getIntersectData;
+		private _hitObj = _hit select 0;
+		if isNullReference(_hitObj) exitWith {[_center,true]};
+		private _hitTarget = [_hitObj] call si_handleObjectReturnCheckVirtual;
+		[_hit select 1,equals(_hitTarget,_target)]
 	};
 
 	func(applyBlastWave)
@@ -359,6 +453,9 @@ class(Grenade) extends(Item)
 		private _rayColor = [1,0,0,0.85];
 		private _target = nullPtr;
 		private _isMob = false;
+		private _targetData = [];
+		private _targetZone = TARGET_ZONE_TORSO;
+		private _baseDamage = callSelf(getBlastDamageDice) call gurps_throwdices;
 
 		{
 			_x params ["_target","_targetVis"];
@@ -366,31 +463,71 @@ class(Grenade) extends(Item)
 			_isMob = callFunc(_target,isMob);
 			if (!_isMob && {!callFunc(_target,canApplyDamage)}) then {continue};
 			if (_isMob) then {
-				_targetPos = getPosATL _targetVis vectorAdd [0,0,1];
+				_targetData = callSelfParams(getBlastMobTargetData,_target arg _origin);
+				_targetZone = _targetData select 0;
+				_targetPos = _targetData select 1;
+				_hasLine = callSelfParams(hasBlastLine,_origin arg _targetPos arg _sourceVis arg _targetVis);
 			} else {
-				_targetPos = callSelfParams(getVisualCenter,_targetVis);
+				_targetData = callSelfParams(getBlastObjectTargetData,_origin arg _target arg _sourceVis arg _targetVis);
+				_targetPos = _targetData select 0;
+				_hasLine = _targetData select 1;
 			};
 			_distance = _origin distance _targetPos;
-			_hasLine = callSelfParams(hasBlastLine,_origin arg _targetPos arg _sourceVis arg _targetVis);
 			#ifdef DEBUG
 			_rayColor = [1,0,0,0.85];
 			if (_hasLine) then {_rayColor = [0,1,0,0.85]};
 			_debugRays pushBack [_origin,_targetPos,_rayColor];
 			#endif
 			if (_distance <= _radius && {_hasLine}) then {
-				_factor = linearConversion [0,_radius,_distance,1,0.1,true];
-				_damage = round (((callSelf(getBlastDamageDice) call gurps_throwdices) * _factor) max 1);
+				_factor = linearConversion [0,_radius,_distance,1,callSelf(getBlastEdgeDamageFactor),true];
+				_damage = round ((_baseDamage * _factor) max 1);
 				if (_isMob) then {
-					callFuncParams(_target,applyDamage,_damage arg DAMAGE_TYPE_BLAST arg pick [TARGET_ZONE_TORSO arg TARGET_ZONE_ABDOMEN] arg DIR_RANDOM arg di_grenade);
+					callFuncParams(_target,applyDamage,_damage arg DAMAGE_TYPE_BLAST arg _targetZone arg DIR_RANDOM arg di_grenade);
 					if (_distance <= (_radius * 0.35)) then {
-						callFuncParams(_target,applyDamage,round ((_damage * 0.5) max 1) arg DAMAGE_TYPE_BLAST arg callFunc(_target,pickRandomTargZone) arg DIR_RANDOM arg di_grenade);
+						private _secondaryZone = callSelfParams(getBlastSecondaryZone,_target arg _targetZone);
+						callFuncParams(_target,applyDamage,round ((_damage * 0.5) max 1) arg DAMAGE_TYPE_BLAST arg _secondaryZone arg DIR_RANDOM arg di_grenade);
 					};
 				} else {
-					callFuncParams(_target,applyDamage,_damage arg DAMAGE_TYPE_BLAST arg _targetPos arg di_grenade);
+					private _objectDamage = round (_damage * callSelf(getBlastObjectDamageMultiplier));
+					callFuncParams(_target,applyDamage,_objectDamage arg DAMAGE_TYPE_BLAST arg _targetPos arg di_grenade);
 				};
 			};
 		} foreach callSelfParams(getBlastWaveTargets,_origin arg _radius);
 		_debugRays
+	};
+
+	func(sendShrapnelDust)
+	{
+		objParams_2(_origin,_impacts);
+		if (count _impacts == 0) exitWith {};
+		private _effectId = "SLIGHT_DAM_BETON" call lightSys_getConfigIdByName;
+		private _recipients = callSelfParams(getExplosionMobs,_origin arg callSelf(getExplosionVisualRadius));
+		{
+			_x params ["_hitPos","_normal"];
+			{
+				callFuncParams(_x,sendInfo,"do_fe" arg [_hitPos arg _effectId arg _normal arg 0.35]);
+			} foreach _recipients;
+		} foreach _impacts;
+	};
+
+	func(getHeldArmTarget)
+	{
+		objParams();
+		if !callSelf(isHeldByMob) exitWith {[]};
+		private _holder = getSelf(loc);
+		private _bodyPart = ifcheck(equals(getSelf(slot),INV_HAND_L),BP_INDEX_ARM_L,BP_INDEX_ARM_R);
+		[_holder,_bodyPart]
+	};
+
+	func(annihilateHeldArm)
+	{
+		objParams_1(_heldArmTarget);
+		if (count _heldArmTarget == 0) exitWith {};
+		_heldArmTarget params ["_holder","_bodyPart"];
+		if (isNullReference(_holder) || {!isExistsObject(_holder)}) exitWith {};
+		if callFuncParams(_holder,hasPart,_bodyPart) then {
+			callFuncParams(_holder,destroyLimb,_bodyPart);
+		};
 	};
 
 	func(applyShrapnel)
@@ -409,13 +546,20 @@ class(Grenade) extends(Item)
 		private _damage = 0;
 		private _debugRays = [];
 		private _rayEnd = [0,0,0];
-		private _projectile = nullPtr;
 		private _usr = getSelf(activator);
 		private _distance = 0;
+		private _sectorCount = callSelf(getShrapnelSectorCount);
+		private _sectorWidth = 360 / _sectorCount;
+		private _sectorOffset = randInt(0,_sectorCount - 1);
+		private _minElevation = callSelf(getShrapnelMinElevation);
+		private _maxElevation = callSelf(getShrapnelMaxElevation);
+		private _impactQueue = [];
+		private _dustImpacts = [];
 
 		for "_i" from 1 to callSelf(getShrapnelCount) do {
-			_azimuth = random 360;
-			_elevation = rand(1,8);
+			private _sector = (_sectorOffset + (_i - 1)) mod _sectorCount;
+			_azimuth = (_sector * _sectorWidth) + random _sectorWidth;
+			_elevation = rand(_minElevation,_maxElevation);
 			_direction = [sin _azimuth * cos _elevation,cos _azimuth * cos _elevation,sin _elevation];
 			_endPos = _origin vectorAdd (_direction vectorMultiply _radius);
 			_hitData = [_origin,_endPos,_sourceVis] call si_getIntersectData;
@@ -428,20 +572,20 @@ class(Grenade) extends(Item)
 			if isNullReference(_hitObj) then {continue};
 			_hitPos = _hitData select 1;
 			_target = [_hitObj] call si_handleObjectReturnCheckVirtual;
-			if isNullReference(_target) then {continue};
+			if (isNullReference(_target) || {(!callFunc(_target,isMob) && {!callFunc(_target,canApplyDamage)})}) then {
+				_dustImpacts pushBack [_hitPos,_hitData select 2];
+				continue;
+			};
 			_distance = _origin distance _hitPos;
 			_factor = linearConversion [0,_radius,_distance,1,0.25,true];
 			_damage = round (((callSelf(getShrapnelDamageDice) call gurps_throwdices) * _factor) max 1);
-			if (!callFunc(_target,isMob) && {!callFunc(_target,canApplyDamage)}) then {continue};
+			_impactQueue pushBack [_target,_hitPos,_damage,_usr,_distance];
+		};
 
-			// Pure raycast, standard projectile hit contract. No throw task or
-			// attack-visual RPC is created for grenade fragments.
-			_projectile = instantiate("GrenadeShrapnelProjectile");
-			setVar(_projectile,shooter,_usr);
-			setVar(_projectile,shotedFrom,this);
-			// onBulletAct reads the impact point through its legacy _p exref.
-			private _p = _hitPos;
-			callFuncParams(_target,onBulletAct,_damage arg DAMAGE_TYPE_PIERCING_NO arg TARGET_ZONE_RANDOM arg _usr arg _distance arg _projectile);
+		callSelfParams(sendShrapnelDust,_origin arg _dustImpacts);
+		if (count _impactQueue > 0) then {
+			private _queueArgs = [_impactQueue,callSelf(getShrapnelHitsPerFrame)];
+			nextFrameParams(grenade_processShrapnelQueue,_queueArgs);
 		};
 		_debugRays
 	};
@@ -483,6 +627,13 @@ class(Grenade) extends(Item)
 	{
 		objParams_1(_sourceVis);
 		if !callSelf(isInWorld) exitWith {
+			private _holder = callSelfParams(getMobOwnerFromLoc,getSelf(loc));
+			if !isNullReference(_holder) exitWith {
+				private _selection = "spine3";
+				if (getSelf(slot) == INV_HAND_L) then {_selection = "lefthand"};
+				if (getSelf(slot) == INV_HAND_R) then {_selection = "righthand"};
+				callSelfParams(getMobSelectionPosition,_holder arg _selection)
+			};
 			getPosATL _sourceVis vectorAdd [0,0,0.15]
 		};
 
@@ -515,12 +666,14 @@ class(Grenade) extends(Item)
 	func(onExplosionAct)
 	{
 		objParams();
+		private _heldArmTarget = callSelf(getHeldArmTarget);
 		private _sourceVis = ifcheck(callSelf(isInWorld),getSelf(loc),callSelf(getBasicLoc));
 		private _origin = callSelfParams(getExplosionOrigin,_sourceVis);
 		callSelfParams(playSound,"atmos\grenade" arg rand(0.8,1.2) arg 120);
 		callSelfParams(sendExplosionPresentation,_origin);
 		private _blastRays = callSelfParams(applyBlastWave,_origin arg _sourceVis);
 		private _shrapnelRays = callSelfParams(applyShrapnel,_origin arg _sourceVis);
+		callSelfParams(annihilateHeldArm,_heldArmTarget);
 		private _blastRadius = callSelf(getBlastRadius);
 		private _debugRays = _blastRays + _shrapnelRays;
 		callSelfParams(sendExplosionDebug,_origin arg _blastRadius arg _debugRays);

@@ -35,27 +35,30 @@ The server resolves two independent effects from a point slightly above the gren
 
 - Add a distinct `blast` damage type. It is blunt pressure trauma, not ordinary crushing damage wearing a different label.
 - Apply distance falloff inside the smaller blast radius and require a physical line of effect.
-- Damage characters and destructible world objects. Close victims can receive secondary-zone trauma; wound processing may break bones, destroy extremities, and rupture torso or abdominal organs according to injury severity and health checks.
+- Use a five-metre blast radius and roll one base pressure value per explosion so distance falloff remains monotonic before armour and object DR.
+- Damage characters and all nearby destructible object families. Objects receive a separate pressure multiplier. Close victims can receive secondary-zone trauma; wound processing may break bones, destroy extremities, and rupture torso or abdominal organs according to injury severity and health checks.
+- Select mob blast zones from the nearest animated head, torso, pelvis, or leg selection rather than from the entity origin. A grenade exploding in a held hand destroys that arm unconditionally.
 - Cover is based on geometry intersection, not player visibility or `canSeeObject`.
 
 ### Shrapnel
 
-- Cast 20 physical rays from just above the grenade.
-- Each ray receives a random azimuth and a small positive elevation. Together the possible paths form a shallow, upward-climbing 360-degree cone.
-- Resolve only the first physical hit per ray, translate engine objects back to game objects, and apply piercing damage with distance falloff.
+- Cast 50 physical rays from just above the grenade, distributed across 12 equal azimuth sectors.
+- Each ray receives a random position inside its sector and a positive elevation between 1 and 16 degrees. Together the possible paths form a shallow, upward-climbing 360-degree cone.
+- Resolve all first-hit raycasts before creating projectiles. Confirmed game-object impacts are consumed in batches on subsequent frames and receive piercing damage with distance falloff.
+- Hits on unmapped or non-destructible world geometry emit a concrete-dust impact effect instead of creating a projectile.
 - Because the rays are geometric, going prone materially reduces exposed area without a special posture multiplier.
 
 ## Client effects
 
 - Wire the existing `SLIGHT_FX_GRENADE` particle placeholder to real grenade detonation and repair its stale emitter reference.
-- Add a client concussion event inside a six-metre radius: tinnitus, camera shake, and a low-pass filter shared by ordinary positional sounds and remote player voices.
-- A visible blast applies one decaying afterimage effect lasting from five seconds at the edge to sixty seconds at the epicentre. It raises brightness, lifts the contrast offset, and reduces contrast to represent lost dark adaptation without darkening the image.
+- Add a client concussion event inside an eight-metre radius: tinnitus and a low-pass filter shared by ordinary positional sounds and remote player voices. Grenade-owned camera shake is deliberately absent; wound pain and agony retain their independent presentation.
+- A visible blast darkens adaptation for at most ten seconds and applies pulsed DynamicBlur for at most twenty seconds. The intermittent blur supplies the afterimage-like loss of visual continuity without adding chromatic aberration.
 - Repeated blasts keep the stronger remaining effect rather than starting competing update loops.
 
 ## Validation
 
 - Static checks: macro/preprocessor balance, class and verb registration, RPC registration, generated enum visibility for the new damage type, and absence of map/role/loot references.
 - State tests in simulation: safe to pin pulled; explicit and inventory replacement; lever release on second interaction, handoff, drop, placement, and throw; fuse persistence through movement; dud reveal; stale-callback and double-detonation guards.
-- Physical tests: ordinary landing before fuse expiry, fuse expiry in flight, blast cover, falloff, object damage, shallow-cone fragment traces, prone exposure, and close-range wound severity.
-- Client tests: particle creation without script errors, tinnitus and low-pass decay, voice muffling, sight-gated afterimage without dark recovery, and repeated explosions.
+- Physical tests: ordinary landing before fuse expiry, fuse expiry in flight, blast cover, monotonic falloff, item/structure damage, height-dependent body zones, held-arm destruction, 12-sector fragment traces, scheduled hit batches, world-geometry dust, prone exposure, and close-range wound severity.
+- Client tests: particle creation without script errors, tinnitus and low-pass decay, voice muffling, sight-gated dark adaptation and pulsed afterimage, absence of grenade-owned camera shake/chromatic aberration, and repeated explosions.
 - Final runtime confidence must distinguish repository/static validation from behavior actually observed in an Arma/ReEditor session.

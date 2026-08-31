@@ -45,3 +45,6 @@ RBuilder/platform_path.cache
 RBuilder/bin/**
 Third-party/SPBuilder/voice_gen.txt
 Src/RVEngine/vcproj64
+
+# MacOS specific
+.DS_Store

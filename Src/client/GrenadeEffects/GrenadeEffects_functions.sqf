@@ -25,29 +25,49 @@ grenadefx_isExplosionVisible = {
 	count _hits == 0
 };
 
+grenadefx_resetDarkAdaptation = {
+	private _effect = getPPVar("grenade_dark_adaptation");
+	if !(ppEffectEnabled _effect) exitWith {};
+	_effect ppEffectAdjust [1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
+	_effect ppEffectCommit 0;
+	["grenade_dark_adaptation",false,false] call pp_setEnable;
+};
+
+grenadefx_updateDarkAdaptation = {
+	params ["_intensity"];
+	if (_intensity <= 0) exitWith {
+		call grenadefx_resetDarkAdaptation;
+	};
+
+	private _strength = grenadefx_darkAdaptationStrength * _intensity;
+	private _brightness = 1 - (0.35 * _strength);
+	private _contrast = 1 + (0.45 * _strength);
+	private _offset = -0.2 * _strength;
+	private _effect = getPPVar("grenade_dark_adaptation");
+	_effect ppEffectAdjust [_brightness,_contrast,_offset,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
+	_effect ppEffectCommit 0.1;
+};
+
 grenadefx_resetAfterimage = {
 	private _effect = getPPVar("grenade_afterimage");
 	if !(ppEffectEnabled _effect) exitWith {};
-	_effect ppEffectAdjust [1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
+	_effect ppEffectAdjust [0];
 	_effect ppEffectCommit 0;
 	["grenade_afterimage",false,false] call pp_setEnable;
 };
 
+// Dynamic blur is deliberately emitted in short pulses. This gives a broken,
+// afterimage-like loss of visual continuity without chromatic aberration.
 grenadefx_updateAfterimage = {
-	params ["_intensity"];
+	params ["_intensity","_now"];
 	if (_intensity <= 0) exitWith {
 		call grenadefx_resetAfterimage;
 	};
-
-	// Loss of dark adaptation is represented by a washed-out image. Brightness
-	// and offset never fall below neutral, while contrast decreases. The blend
-	// channel remains disabled so the effect cannot recover through a dark frame.
-	private _brightness = 1 + (0.35 * _intensity);
-	private _contrast = 1 - (0.45 * _intensity);
-	private _offset = 0.2 * _intensity;
+	private _phase = _now % grenadefx_afterimagePulsePeriod;
+	private _pulse = ifcheck(_phase < grenadefx_afterimagePulseLength,1,grenadefx_afterimageResidual);
 	private _effect = getPPVar("grenade_afterimage");
-	_effect ppEffectAdjust [_brightness,_contrast,_offset,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
-	_effect ppEffectCommit 0.1;
+	_effect ppEffectAdjust [grenadefx_afterimageMaxBlur * _intensity * _pulse];
+	_effect ppEffectCommit 0.08;
 };
 
 grenadefx_update = {
@@ -58,13 +78,20 @@ grenadefx_update = {
 		grenadefx_hearingDuration,
 		_now
 	] call grenadefx_getRemainingIntensity;
+	private _darkAdaptationIntensity = [
+		grenadefx_darkAdaptationBase,
+		grenadefx_darkAdaptationEnd,
+		grenadefx_darkAdaptationDuration,
+		_now
+	] call grenadefx_getRemainingIntensity;
 	private _afterimageIntensity = [
 		grenadefx_afterimageBase,
 		grenadefx_afterimageEnd,
 		grenadefx_afterimageDuration,
 		_now
 	] call grenadefx_getRemainingIntensity;
-	[_afterimageIntensity] call grenadefx_updateAfterimage;
+	[_darkAdaptationIntensity] call grenadefx_updateDarkAdaptation;
+	[_afterimageIntensity,_now] call grenadefx_updateAfterimage;
 };
 
 grenadefx_startHearingEffect = {
@@ -88,6 +115,29 @@ grenadefx_startHearingEffect = {
 		0.65 * grenadefx_hearingBase,
 		false
 	] call vs_audio_playSound2d;
+};
+
+grenadefx_startDarkAdaptation = {
+	params ["_intensity","_now"];
+	private _remaining = [
+		grenadefx_darkAdaptationBase,
+		grenadefx_darkAdaptationEnd,
+		grenadefx_darkAdaptationDuration,
+		_now
+	] call grenadefx_getRemainingIntensity;
+	if (_intensity < _remaining) exitWith {};
+
+	grenadefx_darkAdaptationDuration = linearConversion [
+		0.05,
+		1,
+		_intensity,
+		grenadefx_darkAdaptationMinDuration,
+		grenadefx_darkAdaptationMaxDuration,
+		true
+	];
+	grenadefx_darkAdaptationBase = _intensity;
+	grenadefx_darkAdaptationEnd = _now + grenadefx_darkAdaptationDuration;
+	["grenade_dark_adaptation",true,false] call pp_setEnable;
 };
 
 grenadefx_startAfterimage = {
@@ -119,7 +169,7 @@ grenadefx_onExplosion = {
 	private _now = tickTime;
 	[_intensity,_now] call grenadefx_startHearingEffect;
 	if ([_origin] call grenadefx_isExplosionVisible) then {
+		[_intensity,_now] call grenadefx_startDarkAdaptation;
 		[_intensity,_now] call grenadefx_startAfterimage;
 	};
-	[0.22 * _intensity,25 * _intensity,0.04,0.8 + _intensity] call cam_addCamShake;
 };

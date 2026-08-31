@@ -28,12 +28,22 @@ decl(float) grenadefx_hearingEnd = 0;
 decl(string) grenadefx_tinnitusHandle = "0";
 decl(float) grenadefx_hearingDuration = 60;
 
-// The visual channel is sight-gated and keeps the strongest remaining exposure.
+// Visual channels are sight-gated and keep the strongest remaining exposure.
+decl(float) grenadefx_darkAdaptationBase = 0;
+decl(float) grenadefx_darkAdaptationEnd = 0;
+decl(float) grenadefx_darkAdaptationDuration = 2;
+decl(float) grenadefx_darkAdaptationMinDuration = 2;
+decl(float) grenadefx_darkAdaptationMaxDuration = 10;
+decl(float) grenadefx_darkAdaptationStrength = 1.5;
 decl(float) grenadefx_afterimageBase = 0;
 decl(float) grenadefx_afterimageEnd = 0;
-decl(float) grenadefx_afterimageDuration = 5;
-decl(float) grenadefx_afterimageMinDuration = 5;
-decl(float) grenadefx_afterimageMaxDuration = 60;
+decl(float) grenadefx_afterimageDuration = 4;
+decl(float) grenadefx_afterimageMinDuration = 4;
+decl(float) grenadefx_afterimageMaxDuration = 20;
+decl(float) grenadefx_afterimageMaxBlur = 1.6;
+decl(float) grenadefx_afterimagePulsePeriod = 0.45;
+decl(float) grenadefx_afterimagePulseLength = 0.28;
+decl(float) grenadefx_afterimageResidual = 0.2;
 #ifdef DEBUG
 decl(mesh[]) grenadefx_debugObjects = [];
 #endif
