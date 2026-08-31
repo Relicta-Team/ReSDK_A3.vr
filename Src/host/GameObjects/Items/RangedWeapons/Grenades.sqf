@@ -352,11 +352,11 @@ class(Grenade) extends(Item)
 			if equals(_target,this) then {continue};
 			_isMob = callFunc(_target,isMob);
 			if (!_isMob && {!callFunc(_target,canApplyDamage)}) then {continue};
-			_targetPos = ifcheck(
-				_isMob,
-				getPosATL _targetVis vectorAdd [0,0,1],
-				callSelfParams(getVisualCenter,_targetVis)
-			);
+			if (_isMob) then {
+				_targetPos = getPosATL _targetVis vectorAdd [0,0,1];
+			} else {
+				_targetPos = callSelfParams(getVisualCenter,_targetVis);
+			};
 			_distance = _origin distance _targetPos;
 			_hasLine = callSelfParams(hasBlastLine,_origin arg _targetPos arg _sourceVis arg _targetVis);
 			#ifdef DEBUG
