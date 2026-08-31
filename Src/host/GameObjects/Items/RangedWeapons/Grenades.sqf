@@ -50,10 +50,13 @@ class(Grenade) extends(Item)
 	getterconst_func(getThrowSkillModifier,3);
 	getterconst_func(getBlastRadius,6);
 	getterconst_func(getShrapnelRadius,20);
-	getterconst_func(getConcussionRadius,35);
+	getterconst_func(getConcussionRadius,6);
+	getterconst_func(getExplosionVisualRadius,35);
 	getterconst_func(getShrapnelCount,20);
 	getterconst_func(getBlastDamageDice,5);
 	getterconst_func(getShrapnelDamageDice,2);
+
+	region(state_and_interaction)
 
 	func(constructor)
 	{
@@ -265,6 +268,10 @@ class(Grenade) extends(Item)
 		callSuper(Item,onDrop);
 	};
 
+	endregion
+
+	region(explosion)
+
 	func(hasBlastLine)
 	{
 		objParams_4(_origin,_targetPos,_sourceVis,_targetVis);
@@ -284,11 +291,17 @@ class(Grenade) extends(Item)
 			if !callFunc(_x,isMob) then {continue};
 			_owner = getVar(_x,owner);
 			if isNullReference(_owner) then {continue};
-			if (_origin distance (getPosATL _owner vectorAdd [0,0,1]) <= _radius) then {
+			if (_origin distance (callSelfParams(getExplosionMobPosition,_x)) <= _radius) then {
 				_result pushBack _x;
 			};
 		} foreach (["BasicMob",true] call getAllMobsInWorld);
 		_result
+	};
+
+	func(getExplosionMobPosition)
+	{
+		objParams_1(_mob);
+		getPosATL getVar(_mob,owner) vectorAdd [0,0,1]
 	};
 
 	func(getVisualCenter)
@@ -426,33 +439,37 @@ class(Grenade) extends(Item)
 			_projectile = instantiate("GrenadeShrapnelProjectile");
 			setVar(_projectile,shooter,_usr);
 			setVar(_projectile,shotedFrom,this);
+			// onBulletAct reads the impact point through its legacy _p exref.
 			private _p = _hitPos;
 			callFuncParams(_target,onBulletAct,_damage arg DAMAGE_TYPE_PIERCING_NO arg TARGET_ZONE_RANDOM arg _usr arg _distance arg _projectile);
 		};
 		_debugRays
 	};
 
-	func(sendExplosionEffects)
+	func(sendExplosionPresentation)
 	{
 		objParams_1(_origin);
-		private _radius = callSelf(getConcussionRadius);
+		private _concussionRadius = callSelf(getConcussionRadius);
+		private _visualRadius = callSelf(getExplosionVisualRadius);
 		private _effectId = "SLIGHT_FX_GRENADE" call lightSys_getConfigIdByName;
 		private _effectUp = vec3(0,0,1);
 		private _distance = 0;
 		private _intensity = 0;
 		{
-			_distance = _origin distance getPosATL getVar(_x,owner);
-			_intensity = linearConversion [0,_radius,_distance,1,0.05,true];
+			_distance = _origin distance (callSelfParams(getExplosionMobPosition,_x));
 			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.35]);
-			callFuncParams(_x,sendInfo,"grenade_concussion" arg [_origin arg _intensity]);
-		} foreach callSelfParams(getExplosionMobs,_origin arg _radius);
+			if (_distance <= _concussionRadius) then {
+				_intensity = linearConversion [0,_concussionRadius,_distance,1,0.05,true];
+				callFuncParams(_x,sendInfo,"grenade_concussion" arg [_origin arg _intensity]);
+			};
+		} foreach callSelfParams(getExplosionMobs,_origin arg _visualRadius);
 	};
 
 	func(sendExplosionDebug)
 	{
 		objParams_3(_origin,_radius,_rays);
 		#ifdef DEBUG
-		private _debugRadius = callSelf(getConcussionRadius);
+		private _debugRadius = callSelf(getExplosionVisualRadius);
 		{
 			callFuncParams(_x,sendInfo,"grenade_debug" arg [_origin arg _radius arg _rays]);
 		} foreach callSelfParams(getExplosionMobs,_origin arg _debugRadius);
@@ -501,13 +518,15 @@ class(Grenade) extends(Item)
 		private _sourceVis = ifcheck(callSelf(isInWorld),getSelf(loc),callSelf(getBasicLoc));
 		private _origin = callSelfParams(getExplosionOrigin,_sourceVis);
 		callSelfParams(playSound,"atmos\grenade" arg rand(0.8,1.2) arg 120);
-		callSelfParams(sendExplosionEffects,_origin);
+		callSelfParams(sendExplosionPresentation,_origin);
 		private _blastRays = callSelfParams(applyBlastWave,_origin arg _sourceVis);
 		private _shrapnelRays = callSelfParams(applyShrapnel,_origin arg _sourceVis);
 		private _blastRadius = callSelf(getBlastRadius);
 		private _debugRays = _blastRays + _shrapnelRays;
 		callSelfParams(sendExplosionDebug,_origin arg _blastRadius arg _debugRays);
 	};
+
+	endregion
 
 endclass
 
