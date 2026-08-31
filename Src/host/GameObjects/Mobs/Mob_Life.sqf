@@ -1165,13 +1165,18 @@ region(Status effects)
 		private _hunger = getSelf(hunger);
 		private _newPenalty = 0;
 		private _newStatusLevel = 0;
-		if (_hunger > HUNGER_OVEREAT_THRESHOLD) then {
-			_newPenalty = 4;
-			_newStatusLevel = 2;
+		if (_hunger > HUNGER_SEVERE_OVEREAT_THRESHOLD) then {
+			_newPenalty = 6;
+			_newStatusLevel = 3;
 		} else {
-			if (_hunger > HUNGER_SATED_THRESHOLD) then {
-				_newPenalty = 2;
-				_newStatusLevel = 1;
+			if (_hunger > HUNGER_OVEREAT_THRESHOLD) then {
+				_newPenalty = 4;
+				_newStatusLevel = 2;
+			} else {
+				if (_hunger > HUNGER_SATED_THRESHOLD) then {
+					_newPenalty = 2;
+					_newStatusLevel = 1;
+				};
 			};
 		};
 
@@ -1186,7 +1191,7 @@ region(Status effects)
 			setSelf(__hungerStatusLevel,_newStatusLevel);
 		};
 
-		if (_newStatusLevel == 2 && {tickTime >= getSelf(__hungerNextVomit)}) then {
+		if (_newStatusLevel == 3 && {tickTime >= getSelf(__hungerNextVomit)}) then {
 			callSelf(vomit);
 			setSelf(__hungerNextVomit,tickTime + randInt(HUNGER_OVEREAT_VOMIT_MIN,HUNGER_OVEREAT_VOMIT_MAX));
 		};
@@ -1233,8 +1238,13 @@ region(Status effects)
 
 		// только за реген стамины
 		callSelfParams(adjustHunger, - HUNGER_PER_TICK_LESS);
-		if (getSelf(hunger) > HUNGER_OVEREAT_THRESHOLD) then {
-			callSelfParams(adjustHunger, - HUNGER_OVEREAT_PER_TICK_LESS);
+		private _hungerAfterPassive = getSelf(hunger);
+		if (_hungerAfterPassive > HUNGER_OVEREAT_THRESHOLD) then {
+			private _overeatLoss = HUNGER_OVEREAT_PER_TICK_LESS;
+			if (_hungerAfterPassive > HUNGER_SEVERE_OVEREAT_THRESHOLD) then {
+				_overeatLoss = HUNGER_SEVERE_OVEREAT_PER_TICK_LESS;
+			};
+			callSelfParams(adjustHunger, - _overeatLoss);
 		};
 		//callSelfParams(adjustThirst, - THIRST_PER_TICK_LESS);
 
