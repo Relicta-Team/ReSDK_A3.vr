@@ -2450,12 +2450,12 @@ File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 74](../../../Src/host/
 
 Type: constant
 
-Description: ~2.31h to zero without food or stamina restoration
+Description: ~2.06h to zero without food or stamina restoration (-10% from the original rate)
 
 
 Replaced value:
 ```sqf
-0.012
+0.0135
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 79](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L79)
 ## HUNGER_MAX
@@ -2467,7 +2467,7 @@ Description:
 
 Replaced value:
 ```sqf
-140
+160
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 81](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L81)
 ## HUNGER_SATED_THRESHOLD
@@ -2494,6 +2494,18 @@ Replaced value:
 120
 ```
 File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 83](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L83)
+## HUNGER_SEVERE_OVEREAT_THRESHOLD
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+140
+```
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 84](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L84)
 ## HUNGER_OVEREAT_PER_TICK_LESS
 
 Type: constant
@@ -2505,7 +2517,19 @@ Replaced value:
 ```sqf
 0.0715
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 85](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L85)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 86](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L86)
+## HUNGER_SEVERE_OVEREAT_PER_TICK_LESS
+
+Type: constant
+
+Description: Added after the passive loss to make the total rate twice as high above 140.
+
+
+Replaced value:
+```sqf
+(HUNGER_PER_TICK_LESS + HUNGER_OVEREAT_PER_TICK_LESS * 2)
+```
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 88](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L88)
 ## HUNGER_OVEREAT_VOMIT_MIN
 
 Type: constant
@@ -2517,7 +2541,7 @@ Replaced value:
 ```sqf
 45
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 86](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L86)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 89](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L89)
 ## HUNGER_OVEREAT_VOMIT_MAX
 
 Type: constant
@@ -2529,7 +2553,7 @@ Replaced value:
 ```sqf
 75
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 87](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L87)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 90](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L90)
 ## THIRST_PER_TICK_LESS
 
 Type: constant
@@ -2541,19 +2565,19 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 90](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L90)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 93](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L93)
 ## HUNGER_STAMINA_LESS
 
 Type: constant
 
-Description: Additional hunger loss per stamina-restoration update
+Description: Calibrated for ~2.5 average meals over 2h at medium encumbrance
 
 
 Replaced value:
 ```sqf
-0.00585
+0.01527
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 94](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L94)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 97](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L97)
 ## HUNGER_UNC_TIME
 
 Type: constant
@@ -2565,7 +2589,7 @@ Replaced value:
 ```sqf
 randInt(10,60 * 3)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 96](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L96)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 99](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L99)
 ## THIRST_UNC_TIME
 
 Type: constant
@@ -2577,7 +2601,7 @@ Replaced value:
 ```sqf
 randInt(10,60 * 2)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 97](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L97)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 100](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L100)
 ## PAIN_LEVEL_MAX
 
 Type: constant
@@ -2589,7 +2613,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 101](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L101)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 104](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L104)
 ## PAIN_LEVEL_MIN
 
 Type: constant
@@ -2601,7 +2625,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 102](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L102)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 105](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L105)
 ## PAIN_LEVEL_NO
 
 Type: constant
@@ -2613,7 +2637,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 103](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L103)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 106](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L106)
 ## PAIN_LEVEL_TO_TEXT(val)
 
 Type: constant
@@ -2625,7 +2649,7 @@ Replaced value:
 ```sqf
 (["","слабая боль","боль","сильная боль","ужасная боль"] select val)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 105](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L105)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 108](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L108)
 ## PAIN_LIST_RESTORE_TIME
 
 Type: constant
@@ -2637,7 +2661,7 @@ Replaced value:
 ```sqf
 [0,120,240,360,1800]
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 109](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L109)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 112](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L112)
 ## PAIN_LEVEL_GET_RESTORE_TIME(lvl)
 
 Type: constant
@@ -2649,7 +2673,7 @@ Replaced value:
 ```sqf
 (PAIN_LIST_RESTORE_TIME select lvl)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 110](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L110)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 113](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L113)
 ## PAIN_MAX_AMOUNT
 
 Type: constant
@@ -2661,7 +2685,7 @@ Replaced value:
 ```sqf
 2520
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 113](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L113)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 116](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L116)
 ## PAIN_DEFAULT_RESTORE
 
 Type: constant
@@ -2673,7 +2697,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 116](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L116)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 119](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L119)
 ## PAIN_SLEEP_RESTORE
 
 Type: constant
@@ -2685,7 +2709,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 119](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L119)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 122](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L122)
 ## ORGAN_HEAL_TIMEOUT
 
 Type: constant
@@ -2697,7 +2721,7 @@ Replaced value:
 ```sqf
 100
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 124](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L124)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 127](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L127)
 ## ORGAN_REGEN_TIME_PRE_SECOND
 
 Type: constant
@@ -2709,7 +2733,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 126](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L126)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 129](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L129)
 ## ORGAN_MEDICAL_REGEN_TIME_PER_SECOND
 
 Type: constant
@@ -2721,7 +2745,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 128](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L128)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 131](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L131)
 ## BODY_PART_REGEN_DELAY
 
 Type: constant
@@ -2733,7 +2757,7 @@ Replaced value:
 ```sqf
 60
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 133](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L133)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 136](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L136)
 ## BODY_PART_HUNGER_REGEN_LOWLEVEL
 
 Type: constant
@@ -2745,7 +2769,7 @@ Replaced value:
 ```sqf
 40
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 136](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L136)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 139](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L139)
 ## APPEARANCE_UPDATE_DNA
 
 Type: constant
@@ -2757,7 +2781,7 @@ Replaced value:
 ```sqf
 0x1
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 140](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L140)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 143](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L143)
 ## APPEARANCE_RACE
 
 Type: constant
@@ -2769,7 +2793,7 @@ Replaced value:
 ```sqf
 (0x2|APPEARANCE_UPDATE_DNA)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 141](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L141)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 144](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L144)
 ## APPEARANCE_GENDER
 
 Type: constant
@@ -2781,7 +2805,7 @@ Replaced value:
 ```sqf
 (0x4|APPEARANCE_UPDATE_DNA)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 142](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L142)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 145](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L145)
 ## APPEARANCE_SKIN
 
 Type: constant
@@ -2793,7 +2817,7 @@ Replaced value:
 ```sqf
 0x8
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 143](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L143)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 146](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L146)
 ## APPEARANCE_HAIR
 
 Type: constant
@@ -2805,7 +2829,7 @@ Replaced value:
 ```sqf
 0x10
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 144](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L144)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 147](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L147)
 ## APPEARANCE_HAIR_COLOR
 
 Type: constant
@@ -2817,7 +2841,7 @@ Replaced value:
 ```sqf
 0x20
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 145](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L145)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 148](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L148)
 ## APPEARANCE_FACIAL_HAIR
 
 Type: constant
@@ -2829,7 +2853,7 @@ Replaced value:
 ```sqf
 0x40
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 146](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L146)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 149](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L149)
 ## APPEARANCE_FACIAL_HAIR_COLOR
 
 Type: constant
@@ -2841,7 +2865,7 @@ Replaced value:
 ```sqf
 0x80
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 147](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L147)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 150](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L150)
 ## APPEARANCE_EYE_COLOR
 
 Type: constant
@@ -2853,7 +2877,7 @@ Replaced value:
 ```sqf
 0x100
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 148](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L148)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 151](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L151)
 ## APPEARANCE_ALL_HAIR
 
 Type: constant
@@ -2865,7 +2889,7 @@ Replaced value:
 ```sqf
 (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 149](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L149)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 152](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L152)
 ## APPEARANCE_ALL
 
 Type: constant
@@ -2877,7 +2901,7 @@ Replaced value:
 ```sqf
 0xFFFF
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 149](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L149)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 152](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L152)
 ## DEFAULT_SLOW_COOLDOWN
 
 Type: constant
@@ -2889,7 +2913,7 @@ Replaced value:
 ```sqf
 16 //The default cooldown for slow actions.*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 154](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L154)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 157](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L157)
 ## DEFAULT_ATTACK_COOLDOWN
 
 Type: constant
@@ -2901,7 +2925,7 @@ Replaced value:
 ```sqf
 8 //Default timeout for aggressive actions*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 155](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L155)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 158](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L158)
 ## DEFAULT_QUICK_COOLDOWN
 
 Type: constant
@@ -2913,7 +2937,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 156](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L156)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 159](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L159)
 ## GLUT_TINY
 
 Type: constant
@@ -2925,7 +2949,7 @@ Replaced value:
 ```sqf
 1       /* Eat anything tiny and smaller*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 159](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L159)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 162](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L162)
 ## GLUT_SMALLER
 
 Type: constant
@@ -2937,7 +2961,7 @@ Replaced value:
 ```sqf
 2    /* Eat anything smaller than we are*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 160](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L160)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 163](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L163)
 ## GLUT_ANYTHING
 
 Type: constant
@@ -2949,7 +2973,7 @@ Replaced value:
 ```sqf
 4   /* Eat anything, ever*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 161](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L161)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 164](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L164)
 ## GLUT_ITEM_TINY
 
 Type: constant
@@ -2961,7 +2985,7 @@ Replaced value:
 ```sqf
 8         /* Eat items with a w_class of small or smaller*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 163](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L163)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 166](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L166)
 ## GLUT_ITEM_NORMAL
 
 Type: constant
@@ -2973,7 +2997,7 @@ Replaced value:
 ```sqf
 16      /* Eat items with a w_class of normal or smaller*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 164](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L164)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 167](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L167)
 ## GLUT_ITEM_ANYTHING
 
 Type: constant
@@ -2985,7 +3009,7 @@ Replaced value:
 ```sqf
 32    /* Eat any item*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 165](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L165)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 168](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L168)
 ## GLUT_PROJECTILE_VOMIT
 
 Type: constant
@@ -2997,7 +3021,7 @@ Replaced value:
 ```sqf
 64 /* When vomitting, does it fly out?*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 166](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L166)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 169](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L169)
 ## DEVOUR_SLOW
 
 Type: constant
@@ -3009,7 +3033,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 169](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L169)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 172](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L172)
 ## DEVOUR_FAST
 
 Type: constant
@@ -3021,7 +3045,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 170](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L170)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 173](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L173)
 ## INCAPACITATION_NONE
 
 Type: constant
@@ -3033,7 +3057,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 173](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L173)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 176](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L176)
 ## INCAPACITATION_STUNNED
 
 Type: constant
@@ -3045,7 +3069,7 @@ Replaced value:
 ```sqf
 1 /*оглушение*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 174](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L174)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 177](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L177)
 ## INCAPACITATION_KNOCKDOWN
 
 Type: constant
@@ -3057,7 +3081,7 @@ Replaced value:
 ```sqf
 2 /*нокдаун. Падение вниз. Короткое время бездействия*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 175](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L175)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 178](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L178)
 ## INCAPACITATION_LYING
 
 Type: constant
@@ -3069,7 +3093,7 @@ Replaced value:
 ```sqf
 4 /*лежит. либо персонаж лёг на кровать, либо просто лежит в анимке*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 176](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L176)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 179](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L179)
 ## INCAPACITATION_RESTRAINED
 
 Type: constant
@@ -3081,7 +3105,7 @@ Replaced value:
 ```sqf
 8 /*держится кем-то*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 177](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L177)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 180](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L180)
 ## INCAPACITATION_ALL
 
 Type: constant
@@ -3093,7 +3117,7 @@ Replaced value:
 ```sqf
 (INCAPACITATION_STUNNED + INCAPACITATION_KNOCKDOWN + INCAPACITATION_LYING + INCAPACITATION_RESTRAINED)
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 179](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L179)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 182](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L182)
 ## NUTRITION_LEVEL_FAT
 
 Type: constant
@@ -3105,7 +3129,7 @@ Replaced value:
 ```sqf
 550
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 183](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L183)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 186](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L186)
 ## NUTRITION_LEVEL_FULL
 
 Type: constant
@@ -3117,7 +3141,7 @@ Replaced value:
 ```sqf
 500
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 184](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L184)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 187](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L187)
 ## NUTRITION_LEVEL_WELL_FED
 
 Type: constant
@@ -3129,7 +3153,7 @@ Replaced value:
 ```sqf
 450
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 185](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L185)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 188](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L188)
 ## NUTRITION_LEVEL_FED
 
 Type: constant
@@ -3141,7 +3165,7 @@ Replaced value:
 ```sqf
 350
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 186](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L186)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 189](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L189)
 ## NUTRITION_LEVEL_HUNGRY
 
 Type: constant
@@ -3153,7 +3177,7 @@ Replaced value:
 ```sqf
 250
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 187](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L187)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 190](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L190)
 ## NUTRITION_LEVEL_STARVING
 
 Type: constant
@@ -3165,7 +3189,7 @@ Replaced value:
 ```sqf
 150
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 188](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L188)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 191](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L191)
 ## THIRST_LEVEL_MAX
 
 Type: constant
@@ -3177,7 +3201,7 @@ Replaced value:
 ```sqf
 800
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 191](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L191)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 194](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L194)
 ## THIRST_LEVEL_FILLED
 
 Type: constant
@@ -3189,7 +3213,7 @@ Replaced value:
 ```sqf
 600
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 192](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L192)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 195](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L195)
 ## THIRST_LEVEL_MEDIUM
 
 Type: constant
@@ -3201,7 +3225,7 @@ Replaced value:
 ```sqf
 300
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 193](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L193)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 196](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L196)
 ## THIRST_LEVEL_THIRSTY
 
 Type: constant
@@ -3213,7 +3237,7 @@ Replaced value:
 ```sqf
 200
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 194](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L194)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 197](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L197)
 ## THIRST_LEVEL_DEHYDRATED
 
 Type: constant
@@ -3225,7 +3249,7 @@ Replaced value:
 ```sqf
 50
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 195](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L195)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 198](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L198)
 ## THIRST_FACTOR
 
 Type: constant
@@ -3237,7 +3261,7 @@ Replaced value:
 ```sqf
 0.5
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 196](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L196)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 199](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L199)
 ## STARVATION_MIN
 
 Type: constant
@@ -3249,7 +3273,7 @@ Replaced value:
 ```sqf
 60 /*If you have less nutrition than this value, the hunger indicator starts flashing - THIS ISN'T USED!*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 198](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L198)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 201](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L201)
 ## STARVATION_NOTICE
 
 Type: constant
@@ -3261,7 +3285,7 @@ Replaced value:
 ```sqf
 45 /*If you have more nutrition than this value, you get an occasional message reminding you that you're going to starve soon*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 199](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L199)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 202](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L202)
 ## STARVATION_WEAKNESS
 
 Type: constant
@@ -3273,7 +3297,7 @@ Replaced value:
 ```sqf
 20 /*Otherwise, if you have more nutrition than this value, you occasionally become weak and receive minor damage*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 200](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L200)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 203](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L203)
 ## STARVATION_NEARDEATH
 
 Type: constant
@@ -3285,7 +3309,7 @@ Replaced value:
 ```sqf
 5 /*Otherwise, if you have more nutrition than this value, you have seizures and occasionally receive damage*/
 ```
-File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 201](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L201)
+File: [host\GameObjects\ConstantAndDefines\Mobs.h at line 204](../../../Src/host/GameObjects/ConstantAndDefines/Mobs.h#L204)
 # ObjectsHP.h
 
 ## OBJECT_TYPE_COMPLEX
@@ -5044,7 +5068,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1320](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1320)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1330](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1330)
 ## UNC_TO_STAMINALOSS_MAX
 
 Type: constant
@@ -5056,7 +5080,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1321](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1321)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1331](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1331)
 ## __dmgAndHp
 
 Type: constant
@@ -5068,7 +5092,7 @@ Replaced value:
 ```sqf
 _dmg arg _hp
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1361](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1361)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1371](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1371)
 ## log_performance
 
 Type: constant
@@ -5080,7 +5104,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1362](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1362)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1372](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1372)
 ## lifelog(mes,fmt)
 
 Type: constant
@@ -5093,7 +5117,7 @@ Replaced value:
 ```sqf
 (["[LOG::LIFE]",(mes),fmt,"#1011"] call stdoutPrint)
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1364](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1364)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1374](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1374)
 ## std_check_dam(low,up)
 
 Type: constant
@@ -5106,7 +5130,7 @@ Replaced value:
 ```sqf
 if (_dmg >= (low) && _dmg < (up)) exitWith
 ```
-File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1446](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1446)
+File: [host\GameObjects\Mobs\Mob_Life.sqf at line 1456](../../../Src/host/GameObjects/Mobs/Mob_Life.sqf#L1456)
 # Mob_Skills.sqf
 
 ## skill_def
