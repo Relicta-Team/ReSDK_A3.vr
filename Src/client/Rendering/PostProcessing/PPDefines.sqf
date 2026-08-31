@@ -32,7 +32,7 @@ namespace(Rendering.PostProcess.Effects,pp_)
 // Grenade concussion is driven explicitly by GrenadeEffects. These effects are
 // disabled at rest and share the normal post-processing lifecycle.
 ["grenade_blur","DynamicBlur",[0]] call pp_init;
-["grenade_flash","ColorCorrections",[1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0],[0,0,0,0,0,0,4]]] call pp_init;
+["grenade_flash","ColorCorrections",[1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]]] call pp_init;
 
 decl(int) pp_pain_lvl = 0;
 decl(float) pp_pain_nextGlobal = 0;
