@@ -79,8 +79,10 @@ class(Grenade) extends(Item)
 	getterconst_func(getConcussionRadius,8);
 	getterconst_func(getBlastShakeRadius,10);
 	getterconst_func(getBlastShakeCenterMultiplier,2.5);
-	getterconst_func(getBlastShakeEdgePositionPower,0.027);
-	getterconst_func(getBlastShakeEdgeDirectionPower,2.1);
+	// Edge values are derived from the target epicentre strength (0.18 / 14)
+	// so changing the falloff ratio cannot silently weaken the centre again.
+	getterconst_func(getBlastShakeEdgePositionPower,0.072);
+	getterconst_func(getBlastShakeEdgeDirectionPower,5.6);
 	getterconst_func(getExplosionVisualRadius,35);
 	getterconst_func(getExplosionSoundDistance,120);
 	getterconst_func(getShrapnelCount,50);

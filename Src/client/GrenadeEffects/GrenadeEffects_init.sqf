@@ -28,9 +28,12 @@ if !isNullVar(grenadefx_debugObjects) then {
 // Hearing state is public because ReVoice reads the current low-pass intensity.
 decl(float) grenadefx_hearingIntensity = 0;
 decl(float) grenadefx_hearingBase = 0;
+decl(float) grenadefx_hearingStart = 0;
 decl(float) grenadefx_hearingEnd = 0;
 decl(string) grenadefx_tinnitusHandle = "0";
-decl(float) grenadefx_hearingDuration = 60;
+decl(float) grenadefx_hearingSteadyDuration = 6;
+decl(float) grenadefx_hearingFadeDuration = 4;
+decl(float) grenadefx_hearingDuration = grenadefx_hearingSteadyDuration + grenadefx_hearingFadeDuration;
 decl(float) grenadefx_tinnitusVolume = 1;
 
 // Visual channels are sight-gated and keep the strongest remaining exposure.
@@ -42,7 +45,6 @@ decl(float) grenadefx_darkAdaptationAttackDuration = 0.3;
 decl(float) grenadefx_darkAdaptationHalfTime = 1;
 decl(float) grenadefx_darkAdaptationPeakIntensity = 0.8;
 decl(float) grenadefx_darkAdaptationMaxOpacity = 0.525;
-decl(float) grenadefx_darkAdaptationGeneration = tickTime;
 decl(widget) grenadefx_darkAdaptationOverlay = [getGUI,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
 grenadefx_darkAdaptationOverlay setBackgroundColor [0,0,0,1];
 grenadefx_darkAdaptationOverlay ctrlEnable false;
@@ -62,7 +64,7 @@ decl(mesh[]) grenadefx_debugObjects = [];
 #include "GrenadeEffects_debug.sqf"
 #endif
 
-decl(int) grenadefx_updateHandle = startUpdate(grenadefx_update,0.1);
+decl(int) grenadefx_updateHandle = startUpdate(grenadefx_update,0);
 
 rpcAdd("grenade_concussion",grenadefx_onExplosion);
 #ifdef DEBUG_GRENADES
