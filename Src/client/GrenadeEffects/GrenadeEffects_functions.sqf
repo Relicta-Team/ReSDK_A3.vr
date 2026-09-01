@@ -53,60 +53,6 @@ grenadefx_getHearingIntensity = {
 	]
 };
 
-grenadefx_resetDarkAdaptation = {
-	grenadefx_darkAdaptationBase = 0;
-	grenadefx_darkAdaptationStart = 0;
-	grenadefx_darkAdaptationEnd = 0;
-	if isNullReference(grenadefx_darkAdaptationOverlay) exitWith {};
-	widgetSetFade(grenadefx_darkAdaptationOverlay,1,0);
-};
-
-grenadefx_getDarkAdaptationIntensity = {
-	params ["_now"];
-	if (_now >= grenadefx_darkAdaptationEnd) exitWith {0};
-	private _elapsed = _now - grenadefx_darkAdaptationStart;
-	if (_elapsed <= grenadefx_darkAdaptationAttackDuration) exitWith {
-		grenadefx_darkAdaptationBase * linearConversion [
-			0,
-			grenadefx_darkAdaptationAttackDuration,
-			_elapsed,
-			0,
-			1,
-			true
-		]
-	};
-	if (_elapsed <= grenadefx_darkAdaptationHalfTime) exitWith {
-		grenadefx_darkAdaptationBase * linearConversion [
-			grenadefx_darkAdaptationAttackDuration,
-			grenadefx_darkAdaptationHalfTime,
-			_elapsed,
-			1,
-			0.5,
-			true
-		]
-	};
-	grenadefx_darkAdaptationBase * linearConversion [
-		grenadefx_darkAdaptationHalfTime,
-		grenadefx_darkAdaptationDuration,
-		_elapsed,
-		0.5,
-		0,
-		true
-	]
-};
-
-grenadefx_updateDarkAdaptation = {
-	params ["_now"];
-	if isNullReference(grenadefx_darkAdaptationOverlay) exitWith {};
-	private _intensity = [_now] call grenadefx_getDarkAdaptationIntensity;
-	private _opacity = clamp(
-		grenadefx_darkAdaptationMaxOpacity * grenadefx_darkAdaptationPeakIntensity * _intensity,
-		0,
-		grenadefx_darkAdaptationMaxOpacity * grenadefx_darkAdaptationPeakIntensity
-	);
-	widgetSetFade(grenadefx_darkAdaptationOverlay,1 - _opacity,0);
-};
-
 grenadefx_resetAfterimage = {
 	grenadefx_afterimageBase = 0;
 	grenadefx_afterimageEnd = 0;
@@ -139,13 +85,6 @@ grenadefx_update = {
 			grenadefx_hearingIntensity = [_now] call grenadefx_getHearingIntensity;
 		};
 	};
-	if (grenadefx_darkAdaptationEnd > 0) then {
-		if (_now >= grenadefx_darkAdaptationEnd) then {
-			call grenadefx_resetDarkAdaptation;
-		} else {
-			[_now] call grenadefx_updateDarkAdaptation;
-		};
-	};
 	if (grenadefx_afterimageEnd > 0 && {_now >= grenadefx_afterimageEnd}) then {
 		call grenadefx_resetAfterimage;
 	};
@@ -169,17 +108,6 @@ grenadefx_startHearingEffect = {
 		grenadefx_tinnitusVolume * grenadefx_hearingBase,
 		false
 	] call vs_audio_playSound2d;
-};
-
-grenadefx_startDarkAdaptation = {
-	params ["_intensity","_now"];
-	private _remaining = [_now] call grenadefx_getDarkAdaptationIntensity;
-	if (_intensity < _remaining) exitWith {};
-
-	grenadefx_darkAdaptationBase = _intensity;
-	grenadefx_darkAdaptationStart = _now;
-	grenadefx_darkAdaptationEnd = _now + grenadefx_darkAdaptationDuration;
-	[_now] call grenadefx_updateDarkAdaptation;
 };
 
 grenadefx_startAfterimage = {
@@ -212,7 +140,6 @@ grenadefx_onExplosion = {
 	private _now = tickTime;
 	[_intensity,_now] call grenadefx_startHearingEffect;
 	if ([_origin] call grenadefx_isExplosionVisible) then {
-		[_intensity,_now] call grenadefx_startDarkAdaptation;
 		[_intensity,_now] call grenadefx_startAfterimage;
 	};
 };

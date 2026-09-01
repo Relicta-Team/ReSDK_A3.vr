@@ -6,7 +6,6 @@
 #include <..\..\host\engine.hpp>
 #include <..\ClientRpc\clientRpc.hpp>
 #include <..\Rendering\PostProcessing\postprocessing.h>
-#include <..\WidgetSystem\widgets.hpp>
 
 namespace(GrenadeEffects,grenadefx_)
 
@@ -16,6 +15,7 @@ if !isNullVar(grenadefx_updateHandle) then {
 if (!isNullVar(grenadefx_tinnitusHandle) && {grenadefx_tinnitusHandle != "0"}) then {
 	grenadefx_tinnitusHandle call vs_audio_stopSound;
 };
+// Remove the obsolete black overlay when this module is hot-reloaded.
 if (!isNullVar(grenadefx_darkAdaptationOverlay) && {!isNullReference(grenadefx_darkAdaptationOverlay)}) then {
 	[grenadefx_darkAdaptationOverlay] call deleteWidget;
 };
@@ -36,19 +36,7 @@ decl(float) grenadefx_hearingFadeDuration = 4;
 decl(float) grenadefx_hearingDuration = grenadefx_hearingSteadyDuration + grenadefx_hearingFadeDuration;
 decl(float) grenadefx_tinnitusVolume = 1;
 
-// Visual channels are sight-gated and keep the strongest remaining exposure.
-decl(float) grenadefx_darkAdaptationBase = 0;
-decl(float) grenadefx_darkAdaptationStart = 0;
-decl(float) grenadefx_darkAdaptationEnd = 0;
-decl(float) grenadefx_darkAdaptationDuration = 5;
-decl(float) grenadefx_darkAdaptationAttackDuration = 0.3;
-decl(float) grenadefx_darkAdaptationHalfTime = 1;
-decl(float) grenadefx_darkAdaptationPeakIntensity = 0.8;
-decl(float) grenadefx_darkAdaptationMaxOpacity = 0.525;
-decl(widget) grenadefx_darkAdaptationOverlay = [getGUI,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
-grenadefx_darkAdaptationOverlay setBackgroundColor [0,0,0,1];
-grenadefx_darkAdaptationOverlay ctrlEnable false;
-widgetSetFade(grenadefx_darkAdaptationOverlay,1,0);
+// The remaining visual channel is sight-gated and keeps the strongest exposure.
 decl(float) grenadefx_afterimageBase = 0;
 decl(float) grenadefx_afterimageEnd = 0;
 decl(float) grenadefx_afterimageDuration = 4;
@@ -64,7 +52,7 @@ decl(mesh[]) grenadefx_debugObjects = [];
 #include "GrenadeEffects_debug.sqf"
 #endif
 
-decl(int) grenadefx_updateHandle = startUpdate(grenadefx_update,0);
+decl(int) grenadefx_updateHandle = startUpdate(grenadefx_update,0.1);
 
 rpcAdd("grenade_concussion",grenadefx_onExplosion);
 #ifdef DEBUG_GRENADES
