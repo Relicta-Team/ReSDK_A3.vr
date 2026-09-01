@@ -15,9 +15,15 @@ if !isNullVar(grenadefx_updateHandle) then {
 if (!isNullVar(grenadefx_tinnitusHandle) && {grenadefx_tinnitusHandle != "0"}) then {
 	grenadefx_tinnitusHandle call vs_audio_stopSound;
 };
-// Remove the obsolete black overlay when this module is hot-reloaded.
+// Remove obsolete visual effects when this module is hot-reloaded.
 if (!isNullVar(grenadefx_darkAdaptationOverlay) && {!isNullReference(grenadefx_darkAdaptationOverlay)}) then {
 	[grenadefx_darkAdaptationOverlay] call deleteWidget;
+};
+private _obsoleteAfterimage = getPPVar("grenade_afterimage");
+if !isNullVar(_obsoleteAfterimage) then {
+	_obsoleteAfterimage ppEffectAdjust [0];
+	_obsoleteAfterimage ppEffectCommit 0;
+	_obsoleteAfterimage ppEffectEnable false;
 };
 #ifdef DEBUG_GRENADES
 if !isNullVar(grenadefx_debugObjects) then {
@@ -36,13 +42,6 @@ decl(float) grenadefx_hearingFadeDuration = 4;
 decl(float) grenadefx_hearingDuration = grenadefx_hearingSteadyDuration + grenadefx_hearingFadeDuration;
 decl(float) grenadefx_tinnitusVolume = 1;
 
-// The remaining visual channel is sight-gated and keeps the strongest exposure.
-decl(float) grenadefx_afterimageBase = 0;
-decl(float) grenadefx_afterimageEnd = 0;
-decl(float) grenadefx_afterimageDuration = 4;
-decl(float) grenadefx_afterimageMinDuration = 4;
-decl(float) grenadefx_afterimageMaxDuration = 20;
-decl(float) grenadefx_afterimageMaxBlur = 1.6;
 #ifdef DEBUG_GRENADES
 decl(mesh[]) grenadefx_debugObjects = [];
 #endif

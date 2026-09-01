@@ -29,9 +29,6 @@ namespace(Rendering.PostProcess.Effects,pp_)
 
 }] call pp_init;
 
-// Grenade afterimage is driven explicitly by GrenadeEffects and disabled at rest.
-["grenade_afterimage","DynamicBlur",[0]] call pp_init;
-
 decl(int) pp_pain_lvl = 0;
 decl(float) pp_pain_nextGlobal = 0;
 decl(float) pp_pain_nextTime = 0;
