@@ -77,7 +77,7 @@ class(Grenade) extends(Item)
 	getterconst_func(getBlastRadius,5);
 	getterconst_func(getShrapnelRadius,20);
 	getterconst_func(getConcussionRadius,8);
-	getterconst_func(getBlastShakeRadius,10);
+	getterconst_func(getBlastShakeRadius,20);
 	getterconst_func(getExplosionVisualRadius,35);
 	getterconst_func(getShrapnelCount,50);
 	getterconst_func(getShrapnelSectorCount,12);
@@ -669,14 +669,14 @@ class(Grenade) extends(Item)
 		private _concussionRadius = callSelf(getConcussionRadius);
 		private _shakeRadius = callSelf(getBlastShakeRadius);
 		private _visualRadius = callSelf(getExplosionVisualRadius);
-		private _effectId = "SLIGHT_FX_GRENADE" call lightSys_getConfigIdByName;
+		private _effectId = "SLIGHT_FX_GRENADE_1" call lightSys_getConfigIdByName;
 		private _effectUp = vec3(0,0,1);
 		private _distance = 0;
 		private _intensity = 0;
 		private _shakeIntensity = 0;
 		{
 			_distance = _origin distance (callSelfParams(getExplosionMobPosition,_x));
-			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.35]);
+			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.55]);
 			if (_distance <= _shakeRadius) then {
 				_shakeIntensity = linearConversion [0,_shakeRadius,_distance,1,0.15,true];
 				callFuncParams(_x,addCamShake,0.09 * _shakeIntensity arg 7 * _shakeIntensity arg 0.04 arg 0.65);
