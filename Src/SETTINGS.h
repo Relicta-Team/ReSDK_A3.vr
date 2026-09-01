@@ -9,6 +9,7 @@
 	#include <client\client_debug.h>
 #endif
 
+
 //определение констант для работы RBuilder
 #if __has_include("..\preload\rbuilder.h")
 	#include <..\preload\rbuilder.h>
@@ -57,6 +58,9 @@
 
 // Общий флаг отладки
 #define DEBUG
+
+// Отладочная геометрия гранат: зоны взрыва и трассы осколков
+#define DEBUG_GRENADES
 
 //разрешить трейс сообщения. Автоматически выключается при активном RELEASE
 #define __TRACE__ENABLED
@@ -198,6 +202,7 @@
 //disable flags
 #ifndef EDITOR
 	#undef DEBUG
+	#undef DEBUG_GRENADES
 	#undef RELEASE
 	#undef TEST_WHITELISTED
 	#undef PRIVATELAUNCH
@@ -206,11 +211,13 @@
 //прод.запуск сп режима
 #ifdef SP_PROD
 	#undef DEBUG
+	#undef DEBUG_GRENADES
 	#define RELEASE
 #else
 	#ifdef SP_MODE
 		#undef RELEASE
 		#define DEBUG
+		#define DEBUG_GRENADES
 	#endif
 #endif
 
@@ -218,6 +225,10 @@
 //redirected preproc
 #ifdef CMD__DEBUG
 	#define DEBUG
+#endif
+
+#ifdef CMD__DEBUG_GRENADES
+	#define DEBUG_GRENADES
 #endif
 
 #ifdef CMD__RELEASE
@@ -279,5 +290,3 @@
 	#define USEEVERYDAYRUN_doValidation() 
 	#define USEEVERYDAYRUN_THREAD_UPDATE() 
 #endif
-
-

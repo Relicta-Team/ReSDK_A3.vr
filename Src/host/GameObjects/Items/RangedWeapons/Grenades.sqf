@@ -77,8 +77,12 @@ class(Grenade) extends(Item)
 	getterconst_func(getBlastRadius,5);
 	getterconst_func(getShrapnelRadius,20);
 	getterconst_func(getConcussionRadius,8);
-	getterconst_func(getBlastShakeRadius,20);
+	getterconst_func(getBlastShakeRadius,10);
+	getterconst_func(getBlastShakeCenterMultiplier,2.5);
+	getterconst_func(getBlastShakeEdgePositionPower,0.0135);
+	getterconst_func(getBlastShakeEdgeDirectionPower,1.05);
 	getterconst_func(getExplosionVisualRadius,35);
+	getterconst_func(getExplosionSoundDistance,120);
 	getterconst_func(getShrapnelCount,50);
 	getterconst_func(getShrapnelSectorCount,12);
 	getterconst_func(getShrapnelMinElevation,1);
@@ -535,7 +539,7 @@ class(Grenade) extends(Item)
 				};
 			};
 			_distance = _origin distance _targetPos;
-			#ifdef DEBUG
+			#ifdef DEBUG_GRENADES
 			_rayColor = [1,0,0,0.85];
 			if (_hasLine) then {_rayColor = [0,1,0,0.85]};
 			_debugRays pushBack [_origin,_targetPos,_rayColor];
@@ -593,6 +597,23 @@ class(Grenade) extends(Item)
 		};
 	};
 
+	func(getShrapnelImpactEffect)
+	{
+		objParams_2(_target,_fallbackEffect);
+		if isNullReference(_target) exitWith {_fallbackEffect};
+		private _material = callFunc(_target,getMaterial);
+		if isNullReference(_material) exitWith {_fallbackEffect};
+		callFunc(_material,getDamageEffect)
+	};
+
+	func(rollShrapnelDamage)
+	{
+		objParams_3(_distance,_radius,_diceMultiplier);
+		private _factor = linearConversion [0,_radius,_distance,1,0.25,true];
+		private _dice = callSelf(getShrapnelDamageDice) * _diceMultiplier;
+		round (((_dice call gurps_throwdices) * _factor) max 1)
+	};
+
 	func(applyShrapnel)
 	{
 		objParams_2(_origin,_sourceVis);
@@ -605,7 +626,6 @@ class(Grenade) extends(Item)
 		private _hitObj = objNull;
 		private _hitPos = [0,0,0];
 		private _target = nullPtr;
-		private _factor = 0;
 		private _damage = 0;
 		private _debugRays = [];
 		private _rayEnd = [0,0,0];
@@ -617,10 +637,12 @@ class(Grenade) extends(Item)
 		private _minElevation = callSelf(getShrapnelMinElevation);
 		private _maxElevation = callSelf(getShrapnelMaxElevation);
 		private _impactQueue = [];
+		private _objectImpacts = createHashMap;
 		private _dustImpacts = [];
 		private _fallbackImpactEffect = "SLIGHT_DAM_BETON" call lightSys_getConfigIdByName;
 		private _impactEffect = _fallbackImpactEffect;
-		private _material = nullPtr;
+		private _targetKey = "";
+		private _storedImpact = [];
 
 		for "_i" from 1 to callSelf(getShrapnelCount) do {
 			private _sector = (_sectorOffset + (_i - 1)) mod _sectorCount;
@@ -630,7 +652,7 @@ class(Grenade) extends(Item)
 			_endPos = _origin vectorAdd (_direction vectorMultiply _radius);
 			_hitData = [_origin,_endPos,_sourceVis] call si_getIntersectData;
 			_hitObj = _hitData select 0;
-			#ifdef DEBUG
+			#ifdef DEBUG_GRENADES
 			_rayEnd = _endPos;
 			if !isNullReference(_hitObj) then {_rayEnd = _hitData select 1};
 			_debugRays pushBack [_origin,_rayEnd,[1,0.65,0,0.85]];
@@ -639,21 +661,34 @@ class(Grenade) extends(Item)
 			_hitPos = _hitData select 1;
 			_target = [_hitObj] call si_handleObjectReturnCheckVirtual;
 			if (isNullReference(_target) || {(!callFunc(_target,isMob) && {!callFunc(_target,canApplyDamage)})}) then {
-				_impactEffect = _fallbackImpactEffect;
-				if !isNullReference(_target) then {
-					_material = callFunc(_target,getMaterial);
-					if !isNullReference(_material) then {
-						_impactEffect = callFunc(_material,getDamageEffect);
-					};
-				};
+				_impactEffect = callSelfParams(getShrapnelImpactEffect,_target arg _fallbackImpactEffect);
 				_dustImpacts pushBack [_hitPos,_hitData select 2,_impactEffect];
 				continue;
 			};
 			_distance = _origin distance _hitPos;
-			_factor = linearConversion [0,_radius,_distance,1,0.25,true];
-			_damage = round (((callSelf(getShrapnelDamageDice) call gurps_throwdices) * _factor) max 1);
-			_impactQueue pushBack [_target,_hitPos,_damage,_usr,_distance];
+			if callFunc(_target,isMob) then {
+				_damage = callSelfParams(rollShrapnelDamage,_distance arg _radius arg 1);
+				_impactQueue pushBack [_target,_hitPos,_damage,_usr,_distance];
+				continue;
+			};
+
+			_targetKey = getVar(_target,pointer);
+			_storedImpact = _objectImpacts getOrDefault [_targetKey,[]];
+			if (count _storedImpact == 0) then {
+				_objectImpacts set [_targetKey,[_target,_hitPos,_distance,1]];
+			} else {
+				_storedImpact set [3,(_storedImpact select 3) + 1];
+				_objectImpacts set [_targetKey,_storedImpact];
+				_impactEffect = callSelfParams(getShrapnelImpactEffect,_target arg _fallbackImpactEffect);
+				_dustImpacts pushBack [_hitPos,_hitData select 2,_impactEffect];
+			};
 		};
+
+		{
+			_x params ["_objectTarget","_objectHitPos","_objectDistance","_hitCount"];
+			_damage = callSelfParams(rollShrapnelDamage,_objectDistance arg _radius arg _hitCount);
+			_impactQueue pushBack [_objectTarget,_objectHitPos,_damage,_usr,_objectDistance];
+		} foreach values _objectImpacts;
 
 		callSelfParams(sendShrapnelDust,_origin arg _dustImpacts);
 		if (count _impactQueue > 0) then {
@@ -673,13 +708,20 @@ class(Grenade) extends(Item)
 		private _effectUp = vec3(0,0,1);
 		private _distance = 0;
 		private _intensity = 0;
-		private _shakeIntensity = 0;
+		private _shakeMultiplier = 0;
 		{
 			_distance = _origin distance (callSelfParams(getExplosionMobPosition,_x));
 			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.55]);
 			if (_distance <= _shakeRadius) then {
-				_shakeIntensity = linearConversion [0,_shakeRadius,_distance,1,0.15,true];
-				callFuncParams(_x,addCamShake,0.09 * _shakeIntensity arg 7 * _shakeIntensity arg 0.04 arg 0.65);
+				_shakeMultiplier = linearConversion [
+					0,
+					_shakeRadius,
+					_distance,
+					callSelf(getBlastShakeCenterMultiplier),
+					1,
+					true
+				];
+				callFuncParams(_x,addCamShake,callSelf(getBlastShakeEdgePositionPower) * _shakeMultiplier arg callSelf(getBlastShakeEdgeDirectionPower) * _shakeMultiplier arg 0.04 arg 0.65);
 			};
 			if (_distance <= _concussionRadius) then {
 				_intensity = linearConversion [0,_concussionRadius,_distance,1,0.05,true];
@@ -691,7 +733,7 @@ class(Grenade) extends(Item)
 	func(sendExplosionDebug)
 	{
 		objParams_3(_origin,_radius,_rays);
-		#ifdef DEBUG
+		#ifdef DEBUG_GRENADES
 		private _debugRadius = callSelf(getExplosionVisualRadius);
 		{
 			callFuncParams(_x,sendInfo,"grenade_debug" arg [_origin arg _radius arg _rays]);
@@ -748,7 +790,9 @@ class(Grenade) extends(Item)
 		private _heldArmTarget = callSelf(getHeldArmTarget);
 		private _sourceVis = ifcheck(callSelf(isInWorld),getSelf(loc),callSelf(getBasicLoc));
 		private _origin = callSelfParams(getExplosionOrigin,_sourceVis);
-		callSelfParams(playSound,"atmos\grenade" arg rand(0.8,1.2) arg 120);
+		// The grenade is deleted immediately after this method. A world position is
+		// stable on clients; the grenade pointer is not.
+		callSelfParams(playSound,"atmos\grenade" arg rand(0.8,1.2) arg callSelf(getExplosionSoundDistance) arg 1 arg _origin);
 		callSelfParams(sendExplosionPresentation,_origin);
 		private _blastRays = callSelfParams(applyBlastWave,_origin arg _sourceVis);
 		private _shrapnelRays = callSelfParams(applyShrapnel,_origin arg _sourceVis);

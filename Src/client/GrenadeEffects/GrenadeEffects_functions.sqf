@@ -28,32 +28,18 @@ grenadefx_isExplosionVisible = {
 grenadefx_resetDarkAdaptation = {
 	grenadefx_darkAdaptationBase = 0;
 	grenadefx_darkAdaptationEnd = 0;
-	private _effect = getPPVar("grenade_dark_adaptation");
-	if !(ppEffectEnabled _effect) exitWith {};
-	_effect ppEffectAdjust [1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
-	_effect ppEffectCommit 0;
-	["grenade_dark_adaptation",false,false] call pp_setEnable;
+	if isNullReference(grenadefx_darkAdaptationOverlay) exitWith {};
+	widgetSetFade(grenadefx_darkAdaptationOverlay,1,0);
 };
 
-grenadefx_startDarkAdaptationTransition = {
-	params ["_intensity","_duration"];
+grenadefx_applyDarkAdaptation = {
+	params ["_intensity"];
 	if (_intensity <= 0) exitWith {
 		call grenadefx_resetDarkAdaptation;
 	};
 
-	private _strength = grenadefx_darkAdaptationStrength * _intensity;
-	private _brightness = 1 - (0.35 * _strength);
-	private _contrast = 1 + (0.45 * _strength);
-	private _offset = -0.2 * _strength;
-	private _effect = getPPVar("grenade_dark_adaptation");
-	["grenade_dark_adaptation",true,false] call pp_setEnable;
-
-	// The loss of adaptation is immediate. Recovery is one uninterrupted engine
-	// transition; recommitting it from the update loop caused visible cycling.
-	_effect ppEffectAdjust [_brightness,_contrast,_offset,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
-	_effect ppEffectCommit 0;
-	_effect ppEffectAdjust [1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]];
-	_effect ppEffectCommit _duration;
+	private _opacity = clamp(grenadefx_darkAdaptationMaxOpacity * _intensity,0,grenadefx_darkAdaptationMaxOpacity);
+	widgetSetFade(grenadefx_darkAdaptationOverlay,1 - _opacity,0);
 };
 
 grenadefx_resetAfterimage = {
@@ -86,15 +72,21 @@ grenadefx_update = {
 		grenadefx_hearingDuration,
 		_now
 	] call grenadefx_getRemainingIntensity;
+	if (grenadefx_darkAdaptationEnd > 0) then {
+		private _darkAdaptationIntensity = [
+			grenadefx_darkAdaptationBase,
+			grenadefx_darkAdaptationEnd,
+			grenadefx_darkAdaptationDuration,
+			_now
+		] call grenadefx_getRemainingIntensity;
+		[_darkAdaptationIntensity] call grenadefx_applyDarkAdaptation;
+	};
 	private _afterimageIntensity = [
 		grenadefx_afterimageBase,
 		grenadefx_afterimageEnd,
 		grenadefx_afterimageDuration,
 		_now
 	] call grenadefx_getRemainingIntensity;
-	if (grenadefx_darkAdaptationEnd > 0 && {_now >= grenadefx_darkAdaptationEnd}) then {
-		call grenadefx_resetDarkAdaptation;
-	};
 	[_afterimageIntensity,_now] call grenadefx_updateAfterimage;
 };
 
@@ -116,7 +108,7 @@ grenadefx_startHearingEffect = {
 		PATH_SOUND("effects\grenade_tinnitus"),
 		1,
 		0,
-		0.65 * grenadefx_hearingBase,
+		grenadefx_tinnitusVolume * grenadefx_hearingBase,
 		false
 	] call vs_audio_playSound2d;
 };
@@ -141,7 +133,7 @@ grenadefx_startDarkAdaptation = {
 	];
 	grenadefx_darkAdaptationBase = _intensity;
 	grenadefx_darkAdaptationEnd = _now + grenadefx_darkAdaptationDuration;
-	[_intensity,grenadefx_darkAdaptationDuration] call grenadefx_startDarkAdaptationTransition;
+	[_intensity] call grenadefx_applyDarkAdaptation;
 };
 
 grenadefx_startAfterimage = {

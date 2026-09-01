@@ -29,8 +29,7 @@ namespace(Rendering.PostProcess.Effects,pp_)
 
 }] call pp_init;
 
-// Grenade concussion is driven explicitly by GrenadeEffects and disabled at rest.
-["grenade_dark_adaptation","ColorCorrections",[1,1,0,[0,0,0,0],[1,1,1,1],[0.299,0.587,0.114,0]]] call pp_init;
+// Grenade afterimage is driven explicitly by GrenadeEffects and disabled at rest.
 ["grenade_afterimage","DynamicBlur",[0]] call pp_init;
 
 decl(int) pp_pain_lvl = 0;
