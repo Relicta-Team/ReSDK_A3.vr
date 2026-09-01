@@ -27,20 +27,52 @@ grenadefx_isExplosionVisible = {
 
 grenadefx_resetDarkAdaptation = {
 	grenadefx_darkAdaptationBase = 0;
+	grenadefx_darkAdaptationStart = 0;
 	grenadefx_darkAdaptationEnd = 0;
+	grenadefx_darkAdaptationGeneration = grenadefx_darkAdaptationGeneration + 1;
 	if isNullReference(grenadefx_darkAdaptationOverlay) exitWith {};
 	widgetSetFade(grenadefx_darkAdaptationOverlay,1,0);
 };
 
-grenadefx_startDarkAdaptationFade = {
-	params ["_intensity","_duration"];
-	if (_intensity <= 0) exitWith {
-		call grenadefx_resetDarkAdaptation;
+grenadefx_getDarkAdaptationIntensity = {
+	params ["_now"];
+	if (_now >= grenadefx_darkAdaptationEnd) exitWith {0};
+	private _elapsed = _now - grenadefx_darkAdaptationStart;
+	if (_elapsed <= grenadefx_darkAdaptationAttackDuration) exitWith {
+		grenadefx_darkAdaptationBase * linearConversion [
+			0,
+			grenadefx_darkAdaptationAttackDuration,
+			_elapsed,
+			0,
+			1,
+			true
+		]
 	};
+	if (_elapsed <= grenadefx_darkAdaptationHalfTime) exitWith {
+		grenadefx_darkAdaptationBase * linearConversion [
+			grenadefx_darkAdaptationAttackDuration,
+			grenadefx_darkAdaptationHalfTime,
+			_elapsed,
+			1,
+			0.5,
+			true
+		]
+	};
+	grenadefx_darkAdaptationBase * linearConversion [
+		grenadefx_darkAdaptationHalfTime,
+		grenadefx_darkAdaptationDuration,
+		_elapsed,
+		0.5,
+		0,
+		true
+	]
+};
 
-	private _opacity = clamp(grenadefx_darkAdaptationMaxOpacity * _intensity,0,grenadefx_darkAdaptationMaxOpacity);
-	widgetSetFade(grenadefx_darkAdaptationOverlay,1 - _opacity,0);
-	widgetSetFade(grenadefx_darkAdaptationOverlay,1,_duration);
+grenadefx_commitDarkAdaptationStage = {
+	params ["_generation","_opacity","_duration"];
+	if (_generation != grenadefx_darkAdaptationGeneration) exitWith {};
+	if isNullReference(grenadefx_darkAdaptationOverlay) exitWith {};
+	widgetSetFade(grenadefx_darkAdaptationOverlay,1 - _opacity,_duration);
 };
 
 grenadefx_resetAfterimage = {
@@ -107,25 +139,28 @@ grenadefx_startHearingEffect = {
 
 grenadefx_startDarkAdaptation = {
 	params ["_intensity","_now"];
-	private _remaining = [
-		grenadefx_darkAdaptationBase,
-		grenadefx_darkAdaptationEnd,
-		grenadefx_darkAdaptationDuration,
-		_now
-	] call grenadefx_getRemainingIntensity;
+	private _remaining = [_now] call grenadefx_getDarkAdaptationIntensity;
 	if (_intensity < _remaining) exitWith {};
 
-	grenadefx_darkAdaptationDuration = linearConversion [
-		0.05,
-		1,
-		_intensity,
-		grenadefx_darkAdaptationMinDuration,
-		grenadefx_darkAdaptationMaxDuration,
-		true
-	];
+	grenadefx_darkAdaptationGeneration = grenadefx_darkAdaptationGeneration + 1;
+	private _generation = grenadefx_darkAdaptationGeneration;
+	private _peakOpacity = clamp(
+		grenadefx_darkAdaptationMaxOpacity * grenadefx_darkAdaptationPeakIntensity * _intensity,
+		0,
+		grenadefx_darkAdaptationMaxOpacity * grenadefx_darkAdaptationPeakIntensity
+	);
+	if (_remaining <= 0) then {
+		widgetSetFade(grenadefx_darkAdaptationOverlay,1,0);
+	};
 	grenadefx_darkAdaptationBase = _intensity;
+	grenadefx_darkAdaptationStart = _now;
 	grenadefx_darkAdaptationEnd = _now + grenadefx_darkAdaptationDuration;
-	[_intensity,grenadefx_darkAdaptationDuration] call grenadefx_startDarkAdaptationFade;
+	[_generation,_peakOpacity,grenadefx_darkAdaptationAttackDuration] call grenadefx_commitDarkAdaptationStage;
+
+	private _halfStageArgs = [_generation,_peakOpacity * 0.5,grenadefx_darkAdaptationHalfTime - grenadefx_darkAdaptationAttackDuration];
+	invokeAfterDelayParams(grenadefx_commitDarkAdaptationStage,grenadefx_darkAdaptationAttackDuration,_halfStageArgs);
+	private _clearStageArgs = [_generation,0,grenadefx_darkAdaptationDuration - grenadefx_darkAdaptationHalfTime];
+	invokeAfterDelayParams(grenadefx_commitDarkAdaptationStage,grenadefx_darkAdaptationHalfTime,_clearStageArgs);
 };
 
 grenadefx_startAfterimage = {

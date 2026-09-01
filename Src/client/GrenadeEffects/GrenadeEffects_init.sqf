@@ -35,11 +35,14 @@ decl(float) grenadefx_tinnitusVolume = 1;
 
 // Visual channels are sight-gated and keep the strongest remaining exposure.
 decl(float) grenadefx_darkAdaptationBase = 0;
+decl(float) grenadefx_darkAdaptationStart = 0;
 decl(float) grenadefx_darkAdaptationEnd = 0;
-decl(float) grenadefx_darkAdaptationDuration = 1;
-decl(float) grenadefx_darkAdaptationMinDuration = 1;
-decl(float) grenadefx_darkAdaptationMaxDuration = 5;
+decl(float) grenadefx_darkAdaptationDuration = 5;
+decl(float) grenadefx_darkAdaptationAttackDuration = 0.3;
+decl(float) grenadefx_darkAdaptationHalfTime = 1;
+decl(float) grenadefx_darkAdaptationPeakIntensity = 0.8;
 decl(float) grenadefx_darkAdaptationMaxOpacity = 0.525;
+decl(float) grenadefx_darkAdaptationGeneration = tickTime;
 decl(widget) grenadefx_darkAdaptationOverlay = [getGUI,BACKGROUND,WIDGET_FULLSIZE] call createWidget;
 grenadefx_darkAdaptationOverlay setBackgroundColor [0,0,0,1];
 grenadefx_darkAdaptationOverlay ctrlEnable false;
