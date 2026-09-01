@@ -1529,6 +1529,250 @@ class(MerchantConsole) extends(ElectronicDevice)
 endclass
 
 
+class(MerchantConsoleSaloon) extends(MerchantConsole)
+	var(name,"Торговая консоль");
+	var(money,randInt(16,38));
+	var(nextOrderTime,0);
+	var_array(pendingOrders);
+	autoref var(orderUpdateHandle,-1);
+
+	getterconst_func(getResponseDelay,30);
+	getterconst_func(getDeliveryDelay,330);
+	getterconst_func(getOrderCooldown,600);
+	getterconst_func(getDeliveryBagSlots,1000);
+
+	func(constructor)
+	{
+		objParams();
+
+		/* Каталог наследуется от Грязноямска, но локальная копия не содержит энергию. */
+		private _tradeCats = (getSelf(tradecats) select {(_x select 0) != MC_CAT_ENEGRY}) apply {+_x};
+		private _tradeList = getSelf(tradelist) apply {_x apply {+_x}};
+		_tradeList set [MC_CAT_ENEGRY,[]];
+		_tradeCats pushBack [MC_CAT_SPECIAL,"Особое"];
+		_tradeList set [MC_CAT_SPECIAL,[["Кассета","Holotape",{"Holotape"},230,1,0]]];
+		setSelf(tradecats,_tradeCats);
+		setSelf(tradelist,_tradeList);
+
+		callSelfParams(startUpdateMethod,"onOrderUpdate" arg "orderUpdateHandle" arg 1);
+	};
+
+	func(onInteractWith)
+	{
+		objParams_2(_with,_usr);
+		private _isBryak = isTypeOf(_with,Bryak);
+		if (isTypeOf(_with,Zvak) || _isBryak) exitWith {
+			private _amount = getVar(_with,stackCount) * ifcheck(_isBryak,10,1);
+			private _amountText = [_amount,["звяк","звяка","звяков"],true] call toNumeralString;
+			private _message = format["На торговый счёт внесено %1.",_amountText];
+			delete(_with);
+			modSelf(money, + _amount);
+			callSelfParams(playSound,"electronics\console_success" arg getRandomPitchInRange(0.9,1.1));
+			callFuncParams(_usr,localSay,_message arg "info");
+			callSelf(updateNDisplay);
+		};
+		super();
+	};
+
+	func(getNDInfo)
+	{
+		objParams();
+		if (getSelf(dispMode) == MC_MODE_GETSTATUS) exitWith {
+			[MC_MODE_GETSTATUS,getSelf(money),callSelf(getOrderStatusText)]
+		};
+		super();
+	};
+
+	func(getOrderStatusText)
+	{
+		objParams();
+		private _messages = [];
+		{
+			_x params ["","","_responseTime","_deliveryTime","_responseCreated","_deliveryCreated"];
+			if (!_responseCreated) then {
+				private _responseLeft = callSelfParams(getIntervalsText,_responseTime - tickTime);
+				_messages pushBack format["Ответ ожидается: осталось примерно %1.",_responseLeft];
+			};
+			if (!_deliveryCreated) then {
+				private _deliveryLeft = callSelfParams(getIntervalsText,_deliveryTime - tickTime);
+				_messages pushBack format["Поставка готовится: осталось примерно %1.",_deliveryLeft];
+			};
+		} foreach getSelf(pendingOrders);
+
+		if (tickTime < getSelf(nextOrderTime)) then {
+			private _nextOrderLeft = callSelfParams(getIntervalsText,getSelf(nextOrderTime) - tickTime);
+			_messages pushBack format["Новый заказ можно оформить примерно через %1.",_nextOrderLeft];
+		};
+		if (count _messages == 0) exitWith {"Нет ожидающих ответов и поставок."};
+		_messages joinString sbr
+	};
+
+	func(getIntervalsText)
+	{
+		objParams_1(_secondsLeft);
+		private _intervalsLeft = (ceil((_secondsLeft max 0) / 60)) max 1;
+		[_intervalsLeft,vec3("промежуток","промежутка","промежутков"),true] call toNumeralString
+	};
+
+	func(handleNDInput)
+	{
+		objParams_2(_usr,_inp);
+		_inp params ["_userMode","_userInput","_optData"];
+		if (_userMode != getSelf(dispMode)) exitWith {};
+		private _rejectInput = false;
+		private _rejectMessage = "";
+
+		if (_userMode == MC_MODE_MAINMENU && _userInput == MC_MAIN_CHANGEMON) exitWith {
+			callFuncParams(_usr,localSay,"Положи звяки или бряки в специальный приёмник в консоли." arg "info");
+		};
+		if (_userMode == MC_MODE_SELECTCAT && _userInput != MC_GENERIC_BACK) then {
+			private _availableCategories = getSelf(tradecats) apply {_x select 0};
+			_rejectInput = !(_userInput in _availableCategories);
+		};
+		if (_userMode == MC_MODE_CATLIST && _userInput in [MC_CATLIST_INC,MC_CATLIST_DEC]) then {
+			private _category = getSelf(curCat);
+			private _categoryList = getSelf(tradelist) select _category;
+			if (!equalTypes(_optData,0) || _optData < 0 || _optData >= count _categoryList) then {
+				_rejectInput = true;
+			} else {
+				if (_userInput == MC_CATLIST_INC) then {
+					private _itemInfo = _categoryList select _optData;
+					if ((_itemInfo select 5) >= (_itemInfo select 4)) then {
+						_rejectInput = true;
+						_rejectMessage = "Больше на складе нет.";
+					};
+				};
+			};
+		};
+		if (_rejectInput) exitWith {
+			if (_rejectMessage != "") then {
+				callFuncParams(_usr,localSay,_rejectMessage arg "error");
+			};
+		};
+		if (_userMode == MC_MODE_PRINT && _userInput == MC_PRINT_DO) exitWith {
+			callSelfParams(placeOrder,_usr);
+		};
+		super();
+	};
+
+	func(placeOrder)
+	{
+		objParams_1(_usr);
+		if (tickTime < getSelf(nextOrderTime)) exitWith {
+			private _intervalsLeft = callSelfParams(getIntervalsText,getSelf(nextOrderTime) - tickTime);
+			private _message = format["Слишком рано. Следующий заказ можно сделать примерно через %1.",_intervalsLeft];
+			callFuncParams(_usr,localSay,_message arg "error");
+		};
+
+		private _cart = getSelf(requestCart);
+		if (count _cart == 0) exitWith {
+			callFuncParams(_usr,localSay,"Сначала выбери товары." arg "error");
+		};
+
+		private _fullPrice = 0;
+		private _tradeList = getSelf(tradelist);
+		{
+			private _itemInfo = _tradeList select (_x select 0) select (_x select 1);
+			_itemInfo params ["","","","_price","","_requested"];
+			modvar(_fullPrice) + (_requested * _price);
+		} foreach _cart;
+
+		if (getSelf(money) < _fullPrice) exitWith {
+			callFuncParams(_usr,localSay,"Недостаточно звяков." arg "error");
+		};
+
+		private _orderedItems = [];
+		{
+			private _itemInfo = _tradeList select (_x select 0) select (_x select 1);
+			_itemInfo params ["","","_typeCode","","_available","_requested"];
+			_orderedItems pushBack [call _typeCode,_requested];
+			_itemInfo set [4,(_available - _requested) max 0];
+			_itemInfo set [5,0];
+		} foreach _cart;
+
+		private _deliveryPoint = pick callSelf(getDeliveryPoints);
+		private _orderTime = tickTime;
+		getSelf(pendingOrders) pushBack [
+			_orderedItems,
+			_deliveryPoint,
+			_orderTime + callSelf(getResponseDelay),
+			_orderTime + callSelf(getDeliveryDelay),
+			false,
+			false
+		];
+
+		modSelf(money, - _fullPrice);
+		setSelf(nextOrderTime,_orderTime + callSelf(getOrderCooldown));
+		setSelf(requestCart,[]);
+		callSelfParams(playSound,"electronics\console_success" arg getRandomPitchInRange(0.9,1.1));
+		callFuncParams(_usr,localSay,"Заказ принят. Жди ответа." arg "info");
+		callSelf(updateNDisplay);
+	};
+
+	func(getDeliveryPoints)
+	{
+		objParams();
+		[
+			[[3433.42,3750.44,8.00757],"после спуска, который недалеко от входа в ломню, в первой комнате справа, где куча старых шкафов и мебели"],
+			[[3396.35,3781.2,8.08064],"после спуска на самой ломне, в первой комнате слева, за красными бочками"],
+			[[3446.53,3658.43,8.2],"после спуска под баром: поверни направо два раза, мешок будет ждать в огромной разрушенной трубе"]
+		]
+	};
+
+	func(createOrderResponse)
+	{
+		objParams_1(_deliveryPoint);
+		_deliveryPoint params ["","_placeDescription"];
+		private _text = format[
+			"Здорова, получил твой заказ. Товар доставлю в условленное место: %1. Примерно через 5 промежутков мешок будет там. Если я увижу, что ты явился туда раньше меня - сделки не будет.",
+			_placeDescription
+		];
+		private _paper = ["Paper",[3428.23,3713.86,28.664],null,false] call createItemInWorld;
+		if isNullReference(_paper) exitWith {};
+		setVar(_paper,name,"Ответ поставщика");
+		setVar(_paper,content,_text);
+		setVar(_paper,canWrite,false);
+		callSelfParams(playSound,"electronics\console_success" arg getRandomPitchInRange(0.9,1.1));
+	};
+
+	func(createOrderDelivery)
+	{
+		objParams_2(_orderedItems,_deliveryPoint);
+		_deliveryPoint params ["_position",""];
+		private _bag = ["FabricBagBig1",_position,null,false] call createItemInWorld;
+		if isNullReference(_bag) exitWith {
+			error("MerchantConsoleSaloon::createOrderDelivery() - Cannot create delivery bag");
+		};
+		setVar(_bag,name,"Мешок с заказом");
+		setVar(_bag,countSlots,callSelf(getDeliveryBagSlots));
+		setVar(_bag,maxSize,ITEM_SIZE_HUGE);
+		{
+			_x params ["_type","_count"];
+			callFuncParams(_bag,createItemInContainer,_type arg _count);
+		} foreach _orderedItems;
+	};
+
+	func(onOrderUpdate)
+	{
+		updateParams();
+		private _orders = getSelf(pendingOrders);
+		{
+			_x params ["_orderedItems","_deliveryPoint","_responseTime","_deliveryTime","_responseCreated","_deliveryCreated"];
+			if (!_responseCreated && tickTime >= _responseTime) then {
+				callSelfParams(createOrderResponse,_deliveryPoint);
+				_x set [4,true];
+			};
+			if (!_deliveryCreated && tickTime >= _deliveryTime) then {
+				callSelfParams(createOrderDelivery,_orderedItems arg _deliveryPoint);
+				_x set [5,true];
+			};
+		} foreach _orders;
+		setSelf(pendingOrders,_orders select {!(_x select 4) || !(_x select 5)});
+	};
+
+endclass
+
+
 class(MerchantConsoleOkopovo) extends(MerchantConsole)
 	
 	var(money,0);
