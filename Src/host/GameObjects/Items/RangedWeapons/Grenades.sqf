@@ -78,11 +78,11 @@ class(Grenade) extends(Item)
 	getterconst_func(getShrapnelRadius,20);
 	getterconst_func(getConcussionRadius,8);
 	getterconst_func(getBlastShakeRadius,10);
-	getterconst_func(getBlastShakeCenterMultiplier,2.5);
-	// Edge values are derived from the target epicentre strength (0.18 / 14)
-	// so changing the falloff ratio cannot silently weaken the centre again.
-	getterconst_func(getBlastShakeEdgePositionPower,0.072);
-	getterconst_func(getBlastShakeEdgeDirectionPower,5.6);
+	getterconst_func(getBlastShakeCenterPositionPower,0.11);
+	getterconst_func(getBlastShakeCenterDirectionPower,5);
+	getterconst_func(getBlastShakeEdgeFactor,0.4);
+	getterconst_func(getBlastShakeFrequency,0.02);
+	getterconst_func(getBlastShakeDuration,1.4);
 	getterconst_func(getExplosionVisualRadius,35);
 	getterconst_func(getExplosionSoundDistance,120);
 	getterconst_func(getShrapnelCount,50);
@@ -710,20 +710,20 @@ class(Grenade) extends(Item)
 		private _effectUp = vec3(0,0,1);
 		private _distance = 0;
 		private _intensity = 0;
-		private _shakeMultiplier = 0;
+		private _shakeFactor = 0;
 		{
 			_distance = _origin distance (callSelfParams(getExplosionMobPosition,_x));
 			callFuncParams(_x,sendInfo,"do_fe" arg [_origin arg _effectId arg _effectUp arg 0.55]);
 			if (_distance <= _shakeRadius) then {
-				_shakeMultiplier = linearConversion [
+				_shakeFactor = linearConversion [
 					0,
 					_shakeRadius,
 					_distance,
-					callSelf(getBlastShakeCenterMultiplier),
 					1,
+					callSelf(getBlastShakeEdgeFactor),
 					true
 				];
-				callFuncParams(_x,addCamShake,callSelf(getBlastShakeEdgePositionPower) * _shakeMultiplier arg callSelf(getBlastShakeEdgeDirectionPower) * _shakeMultiplier arg 0.04 arg 0.65);
+				callFuncParams(_x,addCamShake,callSelf(getBlastShakeCenterPositionPower) * _shakeFactor arg callSelf(getBlastShakeCenterDirectionPower) * _shakeFactor arg callSelf(getBlastShakeFrequency) arg callSelf(getBlastShakeDuration));
 			};
 			if (_distance <= _concussionRadius) then {
 				_intensity = linearConversion [0,_concussionRadius,_distance,1,0.05,true];
