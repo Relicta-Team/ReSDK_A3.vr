@@ -77,10 +77,10 @@ class(Grenade) extends(Item)
 	getterconst_func(getBlastRadius,5);
 	getterconst_func(getShrapnelRadius,20);
 	getterconst_func(getConcussionRadius,8);
-	getterconst_func(getBlastShakeRadius,10);
-	getterconst_func(getBlastShakeCenterPositionPower,0.11);
-	getterconst_func(getBlastShakeCenterDirectionPower,5);
-	getterconst_func(getBlastShakeEdgeFactor,0.4);
+	getterconst_func(getBlastShakeRadius,20);
+	getterconst_func(getBlastShakeCenterPositionPower,0.22);
+	getterconst_func(getBlastShakeCenterDirectionPower,10);
+	getterconst_func(getBlastShakeEdgeFactor,0.2);
 	getterconst_func(getBlastShakeFrequency,0.02);
 	getterconst_func(getBlastShakeDuration,1.4);
 	getterconst_func(getExplosionVisualRadius,35);

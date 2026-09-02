@@ -60,7 +60,7 @@
 #define DEBUG
 
 // Отладочная геометрия гранат: зоны взрыва и трассы осколков
-#define DEBUG_GRENADES
+// #define DEBUG_GRENADES
 
 //разрешить трейс сообщения. Автоматически выключается при активном RELEASE
 #define __TRACE__ENABLED
