@@ -3,6 +3,20 @@
 // sdk.relicta.ru
 // ======================================================
 
+// Compatibility for developer hot-reloads from builds that still owned the
+// removed screen effects. Production clients start without this legacy state.
+grenadefx_cleanupLegacyVisualState = {
+	if (!isNullVar(grenadefx_darkAdaptationOverlay) && {!isNullReference(grenadefx_darkAdaptationOverlay)}) then {
+		[grenadefx_darkAdaptationOverlay] call deleteWidget;
+	};
+	private _obsoleteAfterimage = getPPVar("grenade_afterimage");
+	if !isNullVar(_obsoleteAfterimage) then {
+		_obsoleteAfterimage ppEffectAdjust [0];
+		_obsoleteAfterimage ppEffectCommit 0;
+		_obsoleteAfterimage ppEffectEnable false;
+	};
+};
+
 grenadefx_resetHearingEffect = {
 	grenadefx_hearingIntensity = 0;
 	grenadefx_hearingBase = 0;

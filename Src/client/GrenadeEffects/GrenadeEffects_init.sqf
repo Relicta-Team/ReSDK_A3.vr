@@ -15,16 +15,6 @@ if !isNullVar(grenadefx_updateHandle) then {
 if (!isNullVar(grenadefx_tinnitusHandle) && {grenadefx_tinnitusHandle != "0"}) then {
 	grenadefx_tinnitusHandle call vs_audio_stopSound;
 };
-// Remove obsolete visual effects when this module is hot-reloaded.
-if (!isNullVar(grenadefx_darkAdaptationOverlay) && {!isNullReference(grenadefx_darkAdaptationOverlay)}) then {
-	[grenadefx_darkAdaptationOverlay] call deleteWidget;
-};
-private _obsoleteAfterimage = getPPVar("grenade_afterimage");
-if !isNullVar(_obsoleteAfterimage) then {
-	_obsoleteAfterimage ppEffectAdjust [0];
-	_obsoleteAfterimage ppEffectCommit 0;
-	_obsoleteAfterimage ppEffectEnable false;
-};
 #ifdef DEBUG_GRENADES
 if !isNullVar(grenadefx_debugObjects) then {
 	{deleteVehicle _x} foreach grenadefx_debugObjects;
@@ -47,6 +37,7 @@ decl(mesh[]) grenadefx_debugObjects = [];
 #endif
 
 #include "GrenadeEffects_functions.sqf"
+call grenadefx_cleanupLegacyVisualState;
 #ifdef DEBUG_GRENADES
 #include "GrenadeEffects_debug.sqf"
 #endif

@@ -7,6 +7,7 @@
 - Keep the existing item-throw flight model for the MVP. Grenades receive a throwing-skill modifier rather than a second physics system.
 - Determine fuse duration and dud status when the grenade object is constructed. Neither value changes when the lever is released.
 - The pin is replaced only by the explicit context action. A pin-pulled grenade that leaves a hand releases its lever automatically.
+- Use either E or LMB for a grenade directly owned by the player; keep E as the world interaction.
 
 ## Grenade state machine
 
@@ -52,8 +53,8 @@ The server resolves two independent effects from a point slightly above the gren
 ## Client effects
 
 - Use the dedicated `SLIGHT_FX_GRENADE_1` scripted particle effect for grenade detonation.
-- Add a client concussion event inside an eight-metre radius: listener-local tinnitus and a low-pass filter shared by ordinary positional sounds and remote player voices. Both remain steady for six seconds, decay over four seconds, and are explicitly disabled after ten seconds. Grenade audio uses the repository-standard Ogg Vorbis encoding; Ogg Opus was accepted by tooling but failed to load in the deployed game audio path.
-- Send a single distance-scaled camera shake to everyone within ten metres. The directly tunable epicentre values are `0.11 / 5`; the edge receives `40%` of those values (`0.044 / 2`). The impulse lasts `1.4` seconds and uses the pain shake's `0.02`-second oscillation frequency. Wound pain and agony retain their independent presentation.
+- Add a client concussion event inside an eight-metre radius: listener-local tinnitus and a ReVoice low-pass filter for remote player voices. Both remain steady for six seconds, decay over four seconds, and are explicitly disabled after ten seconds. Grenade audio uses the repository-standard Ogg Vorbis encoding; Ogg Opus was accepted by tooling but failed to load in the deployed game audio path.
+- Send a single distance-scaled camera shake to everyone within twenty metres. The directly tunable epicentre values are `0.22 / 10`; the edge receives `20%` of those values (`0.044 / 2`). The impulse lasts `1.4` seconds and uses the pain shake's `0.02`-second oscillation frequency. Wound pain and agony retain their independent presentation.
 - Grenade concussion creates no screen-space visual effect. The former dark-adaptation overlay and DynamicBlur channel were removed because both produced intrusive black-screen behaviour in the deployed renderer.
 - Repeated blasts keep the stronger remaining effect rather than starting competing update loops.
 - Play the explosion from its captured world position rather than from the grenade pointer, which is deleted immediately after detonation. The 120-metre parameter is the 3D rolloff boundary, not constant-volume reach, so the source asset is normalized to carry at useful mid-range distances.
@@ -61,7 +62,7 @@ The server resolves two independent effects from a point slightly above the gren
 ## Validation
 
 - Static checks: macro/preprocessor balance in release, ordinary-debug, and `DEBUG_GRENADES` configurations; class and verb registration; RPC registration; generated enum visibility for the new damage type; and absence of map/role/loot references.
-- State tests in simulation: safe to pin pulled; explicit and inventory replacement; lever release on second interaction, handoff, drop, placement, and throw; fuse persistence through movement; dud reveal; stale-callback and double-detonation guards.
+- State tests in simulation: safe to pin pulled through inventory E/LMB and world E; explicit pin replacement; lever release on second interaction, handoff, inventory/container movement, drop, placement, and throw; fuse persistence through movement; dud reveal; stale-callback and double-detonation guards.
 - Physical tests: ordinary landing before fuse expiry, fuse expiry in flight, blast cover, monotonic falloff, item/structure damage, height-dependent body zones, held-arm destruction, 12-sector fragment traces, scheduled hit batches, world-geometry dust, prone exposure, and close-range wound severity.
-- Client tests: particle creation without script errors, explosion audibility at measured distances, tinnitus and low-pass decay, voice muffling, absence of grenade-owned screen-space effects, one-off ten-metre camera shake with 2.5-to-1 centre/edge strength, and repeated explosions.
+- Client tests: particle creation without script errors, explosion audibility at measured distances, tinnitus and low-pass decay, voice muffling, absence of grenade-owned screen-space effects, one-off twenty-metre camera shake with 5-to-1 centre/edge strength, and repeated explosions.
 - Final runtime confidence must distinguish repository/static validation from behavior actually observed in an Arma/ReEditor session.
