@@ -23,11 +23,8 @@ var(isDead,false);
 	return:float
 	defval:100
 " node_var
-	var(hunger,100); //hud_hunger
-	var(__hungerDxPenalty,0);
-	var(__hungerStatusLevel,0);
-	var(__hungerNextVomit,0);
-	var(thirst,100); //hud_thirst
+var(hunger,100); //hud_hunger
+var(thirst,100); //hud_thirst
 var(oxygen,100); //hud_oxy
 var(toxin,0); //TODO hud_tox?!?
 var(urine,0); //hud_pee
@@ -1135,11 +1132,14 @@ region(Status effects)
 			};
 		};
 
-		_curhung = ((_curhung + _amount) max 0) min HUNGER_MAX;
+		_curhung = (_curhung + _amount) max 0;
+
+		if (_curhung > 100) then {
+			//do vomit
+		};
 
 		setSelf(hunger,_curhung);
 		callSelfParams(fastSendInfo,"hud_hunger" arg _curhung);
-		callSelf(handleHungerStatus);
 	};
 
 	"
@@ -1152,49 +1152,8 @@ region(Status effects)
 	func(setHunger)
 	{
 		objParams_1(_newval);
-		_newval = (_newval max 0) min HUNGER_MAX;
 		setSelf(hunger,_newval);
 		callSelfParams(fastSendInfo,"hud_hunger" arg _newval);
-		callSelf(handleHungerStatus);
-	};
-
-	func(handleHungerStatus)
-	{
-		objParams();
-
-		private _hunger = getSelf(hunger);
-		private _newPenalty = 0;
-		private _newStatusLevel = 0;
-		if (_hunger > HUNGER_SEVERE_OVEREAT_THRESHOLD) then {
-			_newPenalty = 6;
-			_newStatusLevel = 3;
-		} else {
-			if (_hunger > HUNGER_OVEREAT_THRESHOLD) then {
-				_newPenalty = 4;
-				_newStatusLevel = 2;
-			} else {
-				if (_hunger > HUNGER_SATED_THRESHOLD) then {
-					_newPenalty = 2;
-					_newStatusLevel = 1;
-				};
-			};
-		};
-
-		private _oldPenalty = getSelf(__hungerDxPenalty);
-		if (_oldPenalty != _newPenalty) then {
-			callSelfParams(addDX,_oldPenalty - _newPenalty);
-			setSelf(__hungerDxPenalty,_newPenalty);
-		};
-
-		private _oldStatusLevel = getSelf(__hungerStatusLevel);
-		if (_oldStatusLevel != _newStatusLevel) then {
-			setSelf(__hungerStatusLevel,_newStatusLevel);
-		};
-
-		if (_newStatusLevel == 3 && {tickTime >= getSelf(__hungerNextVomit)}) then {
-			callSelf(vomit);
-			setSelf(__hungerNextVomit,tickTime + randInt(HUNGER_OVEREAT_VOMIT_MIN,HUNGER_OVEREAT_VOMIT_MAX));
-		};
 	};
 
 	//добавить _amount единиц жажды
@@ -1238,23 +1197,15 @@ region(Status effects)
 
 		// только за реген стамины
 		callSelfParams(adjustHunger, - HUNGER_PER_TICK_LESS);
-		private _hungerAfterPassive = getSelf(hunger);
-		if (_hungerAfterPassive > HUNGER_OVEREAT_THRESHOLD) then {
-			private _overeatLoss = HUNGER_OVEREAT_PER_TICK_LESS;
-			if (_hungerAfterPassive > HUNGER_SEVERE_OVEREAT_THRESHOLD) then {
-				_overeatLoss = HUNGER_SEVERE_OVEREAT_PER_TICK_LESS;
-			};
-			callSelfParams(adjustHunger, - _overeatLoss);
-		};
 		//callSelfParams(adjustThirst, - THIRST_PER_TICK_LESS);
 
 		if (!callSelf(isActive)) exitWith {};
 
 		_curhung = getSelf(hunger);
-		if (_curhung < 30) then {
+		if (_curhung < 40) then {
 			_lastMessage = getSelf(__hungernextmes);
 
-			if (_curhung >= 20 && _curhung < 30) exitWith {
+			if (_curhung >= 30 && _curhung < 40) exitWith {
 				if (tickTime > _lastMessage) then {
 					private _mes = pick["Поесть бы чего-нибудь...","Пора перекусить."];
 					callSelfParams(localSay,_mes arg "mind");
@@ -1262,7 +1213,7 @@ region(Status effects)
 					callSelfParams(playSound,"mob\hungry" + str randInt(1,4) arg getRandomPitch);
 				};
 			};
-			if (_curhung >= 10 && _curhung < 20) exitWith {
+			if (_curhung >= 15 && _curhung < 30) exitWith {
 				if (tickTime > _lastMessage) then {
 					private _mes = pick["Я хочу есть!","Надо пожевать чего-то.","Мне надо подкрепиться.","Я голодаю."];
 					callSelfParams(localSay,_mes arg "mind");
@@ -1270,7 +1221,7 @@ region(Status effects)
 					callSelfParams(playSound,"mob\hungry" + str randInt(1,4) arg getRandomPitch);
 				};
 			};
-			if (_curhung < 10) exitWith {
+			if (_curhung < 15) exitWith {
 				if (tickTime > _lastMessage) then {
 					private _mes = pick["ЖРАТЬ ХОЧУ!","ДАЙТЕ ЕДЫ!!!!","БУРЧАК УРЧИТ УЖЕ ОТ ГОЛОДА!","ЖРАТЬ!","ЕДЫ... ЛЮБОЕ СЪЕМ."];
 					callSelfParams(localSay,_mes arg "mind");
