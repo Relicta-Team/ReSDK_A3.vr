@@ -791,7 +791,7 @@ cpt5_getLookAt = {
 cpt5_explosionGrenade = {
 	params ["_pos"];
 	
-	callFuncParams(call sp_getActor,playSound,"atmos\grenade" arg rand(0.8,1.2) arg 80);
+	callFuncParams(call sp_getActor,playSound,"atmos\grenade-explosion-" + str randInt(1,3) arg rand(0.8,1.2) arg 80);
 
 	private _dist = _pos distance (getposatl player);
 	private _mv = linearConversion [5,30,_dist,0.23,0.01,true];

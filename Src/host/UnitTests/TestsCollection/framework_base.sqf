@@ -20,6 +20,19 @@ TEST(BaseTest2)
 	ASSERT_NE(_val,0);
 }
 
+TEST(MultilineIfcheckArrays)
+{
+	{
+		_x params ["_condition","_expected"];
+		private _result = ifcheck(
+			_condition,
+			[1 arg 2 arg 3],
+			[4 arg 5 arg 6 arg 7]
+		);
+		ASSERT_EQ(_result,_expected);
+	} foreach [[true,[1,2,3]],[false,[4,5,6,7]]];
+}
+
 //!check work error
 // TEST(BaseTest_FailExpect)
 // {

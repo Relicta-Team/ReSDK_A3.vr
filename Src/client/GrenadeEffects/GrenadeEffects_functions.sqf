@@ -67,11 +67,13 @@ grenadefx_startHearingEffect = {
 	if (grenadefx_tinnitusHandle != "0") then {
 		grenadefx_tinnitusHandle call vs_audio_stopSound;
 	};
+	// One playback per explosion; duration is fixed, independent of distance.
 	grenadefx_tinnitusHandle = [
 		PATH_SOUND("effects\grenade_tinnitus"),
 		1,
 		0,
-		grenadefx_tinnitusVolume * grenadefx_hearingBase,
+		clamp(grenadefx_tinnitusVolume * grenadefx_hearingBase,0,2),
+		false,
 		false
 	] call vs_audio_playSound2d;
 };

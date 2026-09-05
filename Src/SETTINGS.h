@@ -202,7 +202,6 @@
 //disable flags
 #ifndef EDITOR
 	#undef DEBUG
-	#undef DEBUG_GRENADES
 	#undef RELEASE
 	#undef TEST_WHITELISTED
 	#undef PRIVATELAUNCH
@@ -211,13 +210,11 @@
 //прод.запуск сп режима
 #ifdef SP_PROD
 	#undef DEBUG
-	#undef DEBUG_GRENADES
 	#define RELEASE
 #else
 	#ifdef SP_MODE
 		#undef RELEASE
 		#define DEBUG
-		#define DEBUG_GRENADES
 	#endif
 #endif
 
@@ -225,10 +222,6 @@
 //redirected preproc
 #ifdef CMD__DEBUG
 	#define DEBUG
-#endif
-
-#ifdef CMD__DEBUG_GRENADES
-	#define DEBUG_GRENADES
 #endif
 
 #ifdef CMD__RELEASE

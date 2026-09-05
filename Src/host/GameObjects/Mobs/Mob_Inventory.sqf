@@ -444,7 +444,7 @@ region(Inventory control)
 		private _slots_data = getSelf(slots);
 		_slots_data set [_slot,_item];
 		setVar(_item,slot,_slot);
-		if getVar(_item,processInventoryTransitions) then {
+		if callFunc(_item,processInventoryTransitions) then {
 			callFuncParams(_item,onInventorySlotChanged,this arg _oldLoc arg _idFrom arg _slot);
 		};
 

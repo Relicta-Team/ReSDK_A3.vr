@@ -67,7 +67,7 @@ class(Grenade) extends(Item)
 	var(weight,gramm(310));
 	var(size,ITEM_SIZE_SMALL);
 	var(dr,4);
-	var(processInventoryTransitions,true);
+	getterconst_func(processInventoryTransitions,true);
 
 	verbList("replacegrenadepin",Item);
 
@@ -339,17 +339,7 @@ class(Grenade) extends(Item)
 	func(getExplosionMobs)
 	{
 		objParams_2(_origin,_radius);
-		private _result = [];
-		private _owner = objNull;
-		{
-			if !callFunc(_x,isMob) then {continue};
-			_owner = getVar(_x,owner);
-			if isNullReference(_owner) then {continue};
-			if (_origin distance (callSelfParams(getExplosionMobPosition,_x)) <= _radius) then {
-				_result pushBack _x;
-			};
-		} foreach (["BasicMob",true] call getAllMobsInWorld);
-		_result
+		["BasicMob",_origin,_radius,true,true] call getMobsOnPosition
 	};
 
 	func(createExplosionContext)
@@ -566,7 +556,9 @@ class(Grenade) extends(Item)
 		private _origin = _context get GRENADE_CONTEXT_ORIGIN;
 		private _sourceVis = _context get GRENADE_CONTEXT_SOURCE_VISUAL;
 		private _radius = callSelf(getBlastRadius);
+		#ifdef DEBUG_GRENADES
 		private _debugRays = [];
+		#endif
 		private _baseDamage = callSelf(getBlastDamageDice) call gurps_throwdices;
 
 		{
@@ -584,7 +576,9 @@ class(Grenade) extends(Item)
 			private _damage = round ((_baseDamage * _factor) max 1);
 			callSelfParams(applyBlastDamage,_target arg _targetPos arg _targetZone arg _isMob arg _damage arg _distance);
 		} foreach callSelfParams(getBlastWaveTargets,_context arg _radius);
+		#ifdef DEBUG_GRENADES
 		_debugRays
+		#endif
 	};
 
 	func(sendShrapnelDust)
@@ -711,7 +705,9 @@ class(Grenade) extends(Item)
 		private _origin = _context get GRENADE_CONTEXT_ORIGIN;
 		private _sourceVis = _context get GRENADE_CONTEXT_SOURCE_VISUAL;
 		private _radius = callSelf(getShrapnelRadius);
+		#ifdef DEBUG_GRENADES
 		private _debugRays = [];
+		#endif
 		private _usr = getSelf(activator);
 		private _sectorCount = callSelf(getShrapnelSectorCount);
 		private _traceConfig = [
@@ -744,7 +740,9 @@ class(Grenade) extends(Item)
 		};
 
 		callSelfParams(finalizeShrapnelImpacts,_context arg _radius arg _usr arg _accumulator);
+		#ifdef DEBUG_GRENADES
 		_debugRays
+		#endif
 	};
 
 	func(sendExplosionPresentation)
@@ -780,17 +778,17 @@ class(Grenade) extends(Item)
 		} foreach (_context get GRENADE_CONTEXT_MOBS);
 	};
 
+	#ifdef DEBUG_GRENADES
 	func(sendExplosionDebug)
 	{
 		objParams_3(_context,_radius,_rays);
-		#ifdef DEBUG_GRENADES
 		private _origin = _context get GRENADE_CONTEXT_ORIGIN;
 		{
 			if (isNullReference(_x) || {!isExistsObject(_x)}) then {continue};
 			callFuncParams(_x,sendInfo,"grenade_debug" arg [_origin arg _radius arg _rays]);
 		} foreach (_context get GRENADE_CONTEXT_MOBS);
-		#endif
 	};
+	#endif
 
 	// A ray aimed at the model origin can be stopped by the grenade itself.
 	// Put a world grenade's detonation point just above its rotated visual bounds
@@ -838,15 +836,23 @@ class(Grenade) extends(Item)
 		private _origin = callSelfParams(getExplosionOrigin,_sourceVis);
 		// The grenade is deleted immediately after this method. A world position is
 		// stable on clients; the grenade pointer is not.
-		callSelfParams(playSound,"atmos\grenade" arg rand(0.8,1.2) arg callSelf(getExplosionSoundDistance) arg 1 arg _origin);
+		callSelfParams(playSound,"atmos\grenade-explosion-" + str randInt(1,3) arg rand(0.8,1.2) arg callSelf(getExplosionSoundDistance) arg 1 arg _origin);
 		private _context = callSelfParams(createExplosionContext,_origin arg _sourceVis);
 		callSelfParams(sendExplosionPresentation,_context);
-		private _blastRays = callSelfParams(applyBlastWave,_context);
-		private _shrapnelRays = callSelfParams(applyShrapnel,_context);
+		#ifdef DEBUG_GRENADES
+		private _blastRays =
+		#endif
+		callSelfParams(applyBlastWave,_context);
+		#ifdef DEBUG_GRENADES
+		private _shrapnelRays =
+		#endif
+		callSelfParams(applyShrapnel,_context);
 		callSelfParams(annihilateHeldArm,_heldArmTarget);
+		#ifdef DEBUG_GRENADES
 		private _blastRadius = callSelf(getBlastRadius);
 		private _debugRays = _blastRays + _shrapnelRays;
 		callSelfParams(sendExplosionDebug,_context arg _blastRadius arg _debugRays);
+		#endif
 	};
 
 	endregion

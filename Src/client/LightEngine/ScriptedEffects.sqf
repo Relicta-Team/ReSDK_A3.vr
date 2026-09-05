@@ -401,6 +401,8 @@ le_se_fireEmit = {
 	};
 	private allEmitters = [];
 	[_cfgData,SCRIPT_EMIT_HANDLER_MODE_DROP,_pos] call le_se_handleConfig;
+	// Optional debug marker. If enabled, also uncomment its cleanup registration
+	// (allEmitters pushBack _et) below.
 	// #ifdef EDITOR
 	// private _et = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
 	// _et setposatl _pos;
@@ -415,6 +417,7 @@ le_se_fireEmit = {
 	// } foreach allEmitters;
 	// _et setposatl _pos;
 	// _et setVectorUp _norm;
+	// allEmitters pushBack _et;
 	private _rp = rand(0.05,0.2);
 	if !isNullVar(_deleteAfter) then {
 		_rp = _deleteAfter;

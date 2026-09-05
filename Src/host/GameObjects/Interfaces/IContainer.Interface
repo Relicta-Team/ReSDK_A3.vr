@@ -180,7 +180,7 @@ func(addItem)
 		setVar(_item,slot,-1);
 	};
 
-	if getVar(_item,processInventoryTransitions) then {
+	if callFunc(_item,processInventoryTransitions) then {
 		callFuncParams(_item,onMovedToContainer,this arg _oldLoc);
 	};
 

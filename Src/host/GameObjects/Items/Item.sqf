@@ -413,7 +413,7 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 
 	// Narrow lifecycle hooks for items whose state depends on an explicit
 	// inventory transition. Ordinary items deliberately do nothing here.
-	var(processInventoryTransitions,false);
+	getterconst_func(processInventoryTransitions,false);
 
 	func(onInventorySlotChanged)
 	{
