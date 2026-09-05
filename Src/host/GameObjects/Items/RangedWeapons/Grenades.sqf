@@ -33,6 +33,8 @@ grenade_processShrapnelImpact = {
 	// onBulletAct reads the impact point through its legacy _p exref and owns
 	// deletion of the temporary projectile instance.
 	private _p = _hitPos;
+	// Scoped exref: also covers container contents and destruction effects.
+	private _suppressObjectDamageSounds = true;
 	callFuncParams(_target,onBulletAct,_damage arg DAMAGE_TYPE_PIERCING_NO arg TARGET_ZONE_RANDOM arg _usr arg _distance arg _projectile);
 };
 
@@ -553,6 +555,8 @@ class(Grenade) extends(Item)
 		};
 
 		private _objectDamage = round (_damage * callSelf(getBlastObjectDamageMultiplier));
+		// Scoped exref consumed by sendDamageVisualOnPos throughout nested damage.
+		private _suppressObjectDamageSounds = true;
 		callFuncParams(_target,applyDamage,_objectDamage arg DAMAGE_TYPE_BLAST arg _targetPos arg di_grenade);
 	};
 

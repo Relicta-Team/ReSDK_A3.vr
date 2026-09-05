@@ -2057,6 +2057,8 @@ class(IDestructible) extends(GameObject)
 		if isNullVar(_doEffect) then {_doEffect = true};
 		if isNullVar(_doSound) then {_doSound = false};
 		if isNullVar(_useBlockSound) then {_useBlockSound = true};
+		// Optional grenade damage exref: retain particles without stacking material sounds.
+		if (!isNullVar(_suppressObjectDamageSounds) && {_suppressObjectDamageSounds}) then {_doSound = false};
 
 		private _mat = getSelf(material);
 		if isNullVar(_mat) exitWith {};
