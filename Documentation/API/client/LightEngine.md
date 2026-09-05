@@ -818,7 +818,7 @@ Initial value:
 ```sqf
 createHashMap //key setParticleN , value [functions]
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 505](../../../Src/client/LightEngine/ScriptedEffects.sqf#L505)
+File: [client\LightEngine\ScriptedEffects.sqf at line 506](../../../Src/client/LightEngine/ScriptedEffects.sqf#L506)
 ## le_se_list_fassoc
 
 Type: Variable
@@ -830,7 +830,7 @@ Initial value:
 ```sqf
 []
 ```
-File: [client\LightEngine\ScriptedEffects.sqf at line 614](../../../Src/client/LightEngine/ScriptedEffects.sqf#L614)
+File: [client\LightEngine\ScriptedEffects.sqf at line 615](../../../Src/client/LightEngine/ScriptedEffects.sqf#L615)
 ## le_se_handleConfig
 
 Type: function
@@ -985,7 +985,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 433](../../../Src/client/LightEngine/ScriptedEffects.sqf#L433)
+File: [client\LightEngine\ScriptedEffects.sqf at line 434](../../../Src/client/LightEngine/ScriptedEffects.sqf#L434)
 ## le_se_doSorting
 
 Type: function
@@ -993,7 +993,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 457](../../../Src/client/LightEngine/ScriptedEffects.sqf#L457)
+File: [client\LightEngine\ScriptedEffects.sqf at line 458](../../../Src/client/LightEngine/ScriptedEffects.sqf#L458)
 ## le_se_getParticleOption
 
 Type: function
@@ -1003,7 +1003,7 @@ Description:
 - Param: _varname
 - Param: _storage
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 508](../../../Src/client/LightEngine/ScriptedEffects.sqf#L508)
+File: [client\LightEngine\ScriptedEffects.sqf at line 509](../../../Src/client/LightEngine/ScriptedEffects.sqf#L509)
 ## le_se_setParticleOption
 
 Type: function
@@ -1014,7 +1014,7 @@ Description:
 - Param: _storage
 - Param: _value
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 518](../../../Src/client/LightEngine/ScriptedEffects.sqf#L518)
+File: [client\LightEngine\ScriptedEffects.sqf at line 519](../../../Src/client/LightEngine/ScriptedEffects.sqf#L519)
 ## le_se_getCurrentEmitterIndex
 
 Type: function
@@ -1022,7 +1022,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 528](../../../Src/client/LightEngine/ScriptedEffects.sqf#L528)
+File: [client\LightEngine\ScriptedEffects.sqf at line 529](../../../Src/client/LightEngine/ScriptedEffects.sqf#L529)
 ## le_se_internal_generateOptionAddress
 
 Type: function
@@ -1030,7 +1030,7 @@ Type: function
 Description: 
 
 
-File: [client\LightEngine\ScriptedEffects.sqf at line 531](../../../Src/client/LightEngine/ScriptedEffects.sqf#L531)
+File: [client\LightEngine\ScriptedEffects.sqf at line 532](../../../Src/client/LightEngine/ScriptedEffects.sqf#L532)
 # SEConfigHandlers.sqf
 
 ## le_se_internal_randomizeData

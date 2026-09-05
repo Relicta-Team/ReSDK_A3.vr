@@ -3565,7 +3565,7 @@ Replaced value:
 ```sqf
 setSelf(name,getVar(_item,name))
 ```
-File: [host\GameObjects\Items\Item.sqf at line 922](../../../Src/host/GameObjects/Items/Item.sqf#L922)
+File: [host\GameObjects\Items\Item.sqf at line 943](../../../Src/host/GameObjects/Items/Item.sqf#L943)
 ## methodReference(name__,parm,refparam)
 
 Type: constant
@@ -3579,7 +3579,7 @@ Replaced value:
 ```sqf
 func(name__) {parm; callFuncParams(getSelf(object),name__,refparam)}
 ```
-File: [host\GameObjects\Items\Item.sqf at line 1359](../../../Src/host/GameObjects/Items/Item.sqf#L1359)
+File: [host\GameObjects\Items\Item.sqf at line 1380](../../../Src/host/GameObjects/Items/Item.sqf#L1380)
 ## generateItemSize
 
 Type: function
@@ -4279,6 +4279,161 @@ Replaced value:
 _y get #func
 ```
 File: [host\GameObjects\Items\Office\Books.sqf at line 449](../../../Src/host/GameObjects/Items/Office/Books.sqf#L449)
+# Grenades.sqf
+
+## GRENADE_STATE_SAFE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+0
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 11](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L11)
+## GRENADE_STATE_PIN_PULLED
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+1
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 12](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L12)
+## GRENADE_STATE_FUSE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+2
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 13](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L13)
+## GRENADE_STATE_DUD
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+3
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 14](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L14)
+## GRENADE_STATE_DETONATED
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+4
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 15](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L15)
+## GRENADE_CONTEXT_ORIGIN
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"origin"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 17](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L17)
+## GRENADE_CONTEXT_SOURCE_VISUAL
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"sourceVisual"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 18](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L18)
+## GRENADE_CONTEXT_MOBS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"mobs"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 19](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L19)
+## GRENADE_SHRAPNEL_QUEUE
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"impactQueue"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 21](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L21)
+## GRENADE_SHRAPNEL_OBJECTS
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"objectImpacts"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 22](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L22)
+## GRENADE_SHRAPNEL_DUST
+
+Type: constant
+
+Description: 
+
+
+Replaced value:
+```sqf
+"dustImpacts"
+```
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 23](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L23)
+## grenade_processShrapnelImpact
+
+Type: function
+
+Description: not, so confirmed impacts are consumed in small batches on later frames.
+- Param: _target
+- Param: _hitPos
+- Param: _damage
+- Param: _usr
+- Param: _distance
+
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 27](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L27)
+## grenade_processShrapnelQueue
+
+Type: function
+
+Description: 
+- Param: _queue
+- Param: _batchSize
+
+File: [host\GameObjects\Items\RangedWeapons\Grenades.sqf at line 41](../../../Src/host/GameObjects/Items/RangedWeapons/Grenades.sqf#L41)
 # BasicMob.sqf
 
 ## emulate_mp_in_sp
@@ -4883,7 +5038,7 @@ _o_upd_impl_internal = { \
 	setSelf(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 535](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L535)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 541](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L541)
 ## __onUpdateImplMethod(content,varName)
 
 Type: constant
@@ -4901,7 +5056,7 @@ _o_upd_impl_internal = { \
 	callSelfParams(varName,_var); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 542](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L542)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 548](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L548)
 ## __onUpdateImplMethodNoParams(content,varName)
 
 Type: constant
@@ -4919,7 +5074,7 @@ _o_upd_impl_internal = { \
 	callSelf(varName); \
 }; rpcAdd('content',_o_upd_impl_internal)
 ```
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 549](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L549)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 555](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L555)
 ## repl_doLocal
 
 Type: function
@@ -4929,7 +5084,7 @@ Description: replicator common
 - Param: _method
 - Param: _ctx
 
-File: [host\GameObjects\Mobs\Mob_Events.sqf at line 728](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L728)
+File: [host\GameObjects\Mobs\Mob_Events.sqf at line 734](../../../Src/host/GameObjects/Mobs/Mob_Events.sqf#L734)
 # Mob_Interact.sqf
 
 ## callScriptedEvent(action__)
@@ -4991,7 +5146,7 @@ Replaced value:
 ```sqf
 'v'
 ```
-File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1428](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1428)
+File: [host\GameObjects\Mobs\Mob_Interact.sqf at line 1429](../../../Src/host/GameObjects/Mobs/Mob_Interact.sqf#L1429)
 # Mob_Inventory.sqf
 
 ## __switchVars(prevname,nextname)
@@ -5589,7 +5744,7 @@ Replaced value:
 ```sqf
 !callFunc(_bodyPartObj,isBoneBroken)
 ```
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 214](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L214)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 216](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L216)
 ## woundSystem_onWoundProcess
 
 Type: function
@@ -5605,7 +5760,7 @@ Type: function
 Description: бросок на оглушение и нокдаун
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 178](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L178)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 180](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L180)
 ## woundSystem_breakDelegate
 
 Type: function
@@ -5613,7 +5768,7 @@ Type: function
 Description: перелом
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 212](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L212)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 214](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L214)
 ## woundSystem_limbDestroyDelegate
 
 Type: function
@@ -5621,7 +5776,7 @@ Type: function
 Description: потеря конечности
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 266](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L266)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 268](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L268)
 ## woundSystem_limbLossDelegate
 
 Type: function
@@ -5629,7 +5784,7 @@ Type: function
 Description: отрубание конечности
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 280](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L280)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 282](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L282)
 ## woundSystem_teethLossDelegate
 
 Type: function
@@ -5637,7 +5792,7 @@ Type: function
 Description: потеря зуба
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 294](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L294)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 296](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L296)
 ## woundSystem_eyeLossDelegate
 
 Type: function
@@ -5645,7 +5800,7 @@ Type: function
 Description: 
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 305](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L305)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 307](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L307)
 ## woundSystem_impalingDelegate
 
 Type: function
@@ -5653,7 +5808,15 @@ Type: function
 Description: 
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 317](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L317)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 319](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L319)
+## woundSystem_blastTraumaDelegate
+
+Type: function
+
+Description: Severity supplies the GURPS-style HT penalty; failure ruptures a valid organ.
+
+
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 361](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L361)
 ## woundSystem_arteryDelegate
 
 Type: function
@@ -5661,7 +5824,7 @@ Type: function
 Description: Открытие артерии
 
 
-File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 358](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L358)
+File: [host\GameObjects\Mobs\Mob_WoundSystem.sqf at line 396](../../../Src/host/GameObjects/Mobs/Mob_WoundSystem.sqf#L396)
 # MerchantConsole.hpp
 
 ## MC_CAT_CLOTH

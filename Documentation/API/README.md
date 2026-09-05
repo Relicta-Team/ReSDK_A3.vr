@@ -1,5 +1,5 @@
 # Side: client
-Count modules: 33
+Count modules: 34
  - [client](client//client.md) - 2 files
  - [BlastFx](client//BlastFx.md) - 2 files
  - [Chat](client//Chat.md) - 4 files
@@ -12,11 +12,12 @@ Count modules: 33
  - [CraftMenu](client//CraftMenu.md) - 3 files
  - [DiscordRPC](client//DiscordRPC.md) - 3 files
  - [GeometryFixer](client//GeometryFixer.md) - 3 files
+ - [GrenadeEffects](client//GrenadeEffects.md) - 3 files
  - [Hud](client//Hud.md) - 1 files
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 77 files
+ - [LightEngine](client//LightEngine.md) - 78 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 2 files
  - [NetDisplays](client//NetDisplays.md) - 18 files

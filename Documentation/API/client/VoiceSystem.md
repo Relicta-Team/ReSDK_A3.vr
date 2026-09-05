@@ -1512,7 +1512,7 @@ Description: Калькулирует понимание речи персона
 - Param: _unit
 - Param: _curVol
 
-File: [client\VoiceSystem\ReVoice\API.sqf at line 1060](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L1060)
+File: [client\VoiceSystem\ReVoice\API.sqf at line 1065](../../../Src/client/VoiceSystem/ReVoice/API.sqf#L1065)
 # AudioSystem.sqf
 
 ## VS_AUDIO_NEXT_EFFECT_UPDATE

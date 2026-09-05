@@ -528,7 +528,7 @@ File: [host\CombatSystem\CombatSystem.hpp at line 53](../../../Src/host/CombatSy
 
 Type: constant
 
-Description: дробящий (cr) причиняет Ущерб через тупой удар, как дубинкой или взрывчаткой.
+Description: дробящий (cr) причиняет ущерб через обычный тупой удар, например дубинкой.
 
 
 Replaced value:
@@ -536,6 +536,18 @@ Replaced value:
 "dt_crushing"
 ```
 File: [host\CombatSystem\CombatSystem.hpp at line 63](../../../Src/host/CombatSystem/CombatSystem.hpp#L63)
+## DAMAGE_TYPE_BLAST
+
+Type: constant
+
+Description: взрывная волна: высокоэнергетическая тупая травма с внутренними повреждениями
+
+
+Replaced value:
+```sqf
+"dt_blast"
+```
+File: [host\CombatSystem\CombatSystem.hpp at line 65](../../../Src/host/CombatSystem/CombatSystem.hpp#L65)
 ## DAMAGE_TYPE_CUTTING
 
 Type: constant
@@ -547,7 +559,7 @@ Replaced value:
 ```sqf
 "dt_cutting"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 65](../../../Src/host/CombatSystem/CombatSystem.hpp#L65)
+File: [host\CombatSystem\CombatSystem.hpp at line 67](../../../Src/host/CombatSystem/CombatSystem.hpp#L67)
 ## DAMAGE_TYPE_IMPALING
 
 Type: constant
@@ -559,7 +571,7 @@ Replaced value:
 ```sqf
 "dt_impaling" /*колющий*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 67](../../../Src/host/CombatSystem/CombatSystem.hpp#L67)
+File: [host\CombatSystem\CombatSystem.hpp at line 69](../../../Src/host/CombatSystem/CombatSystem.hpp#L69)
 ## DAMAGE_TYPE_PIERCING_SM
 
 Type: constant
@@ -571,7 +583,7 @@ Replaced value:
 ```sqf
 "dt_pi-"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 75](../../../Src/host/CombatSystem/CombatSystem.hpp#L75)
+File: [host\CombatSystem\CombatSystem.hpp at line 77](../../../Src/host/CombatSystem/CombatSystem.hpp#L77)
 ## DAMAGE_TYPE_PIERCING_NO
 
 Type: constant
@@ -583,7 +595,7 @@ Replaced value:
 ```sqf
 "dt_pi"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 76](../../../Src/host/CombatSystem/CombatSystem.hpp#L76)
+File: [host\CombatSystem\CombatSystem.hpp at line 78](../../../Src/host/CombatSystem/CombatSystem.hpp#L78)
 ## DAMAGE_TYPE_PIERCING_LA
 
 Type: constant
@@ -595,7 +607,7 @@ Replaced value:
 ```sqf
 "dt_pi+"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 77](../../../Src/host/CombatSystem/CombatSystem.hpp#L77)
+File: [host\CombatSystem\CombatSystem.hpp at line 79](../../../Src/host/CombatSystem/CombatSystem.hpp#L79)
 ## DAMAGE_TYPE_PIERCING_HU
 
 Type: constant
@@ -607,7 +619,7 @@ Replaced value:
 ```sqf
 "dt_pi++"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 78](../../../Src/host/CombatSystem/CombatSystem.hpp#L78)
+File: [host\CombatSystem\CombatSystem.hpp at line 80](../../../Src/host/CombatSystem/CombatSystem.hpp#L80)
 ## DAMAGE_TYPE_BURN
 
 Type: constant
@@ -619,7 +631,7 @@ Replaced value:
 ```sqf
 "dt_burn"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 81](../../../Src/host/CombatSystem/CombatSystem.hpp#L81)
+File: [host\CombatSystem\CombatSystem.hpp at line 83](../../../Src/host/CombatSystem/CombatSystem.hpp#L83)
 ## DAMAGE_TYPE_CORROSION
 
 Type: constant
@@ -631,7 +643,7 @@ Replaced value:
 ```sqf
 "dt_cor"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 83](../../../Src/host/CombatSystem/CombatSystem.hpp#L83)
+File: [host\CombatSystem\CombatSystem.hpp at line 85](../../../Src/host/CombatSystem/CombatSystem.hpp#L85)
 ## DAMAGE_TYPE_TOXIC
 
 Type: constant
@@ -643,7 +655,7 @@ Replaced value:
 ```sqf
 "dt_tox"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 88](../../../Src/host/CombatSystem/CombatSystem.hpp#L88)
+File: [host\CombatSystem\CombatSystem.hpp at line 90](../../../Src/host/CombatSystem/CombatSystem.hpp#L90)
 ## DAMAGE_TYPE_FATIGUE
 
 Type: constant
@@ -655,7 +667,7 @@ Replaced value:
 ```sqf
 "dt_fat"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 91](../../../Src/host/CombatSystem/CombatSystem.hpp#L91)
+File: [host\CombatSystem\CombatSystem.hpp at line 93](../../../Src/host/CombatSystem/CombatSystem.hpp#L93)
 ## DAMAGE_TYPE_AFFLICTION
 
 Type: constant
@@ -667,7 +679,7 @@ Replaced value:
 ```sqf
 "dt_aff"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 93](../../../Src/host/CombatSystem/CombatSystem.hpp#L93)
+File: [host\CombatSystem\CombatSystem.hpp at line 95](../../../Src/host/CombatSystem/CombatSystem.hpp#L95)
 ## DAMAGE_TYPE_SPEC
 
 Type: constant
@@ -679,7 +691,7 @@ Replaced value:
 ```sqf
 "dt_spec"
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 95](../../../Src/host/CombatSystem/CombatSystem.hpp#L95)
+File: [host\CombatSystem\CombatSystem.hpp at line 97](../../../Src/host/CombatSystem/CombatSystem.hpp#L97)
 ## DAMAGE_TYPE_LIST_NODE_BINDING
 
 Type: constant
@@ -689,7 +701,8 @@ Description:
 
 Replaced value:
 ```sqf
-[ "Дробящий:"+DAMAGE_TYPE_CRUSHING+":Ущерб через тупой удар, как дубинкой или взрывчаткой." \
+[ "Дробящий:"+DAMAGE_TYPE_CRUSHING+":Ущерб через обычный тупой удар, например дубинкой." \
+	,"Взрывной:"+DAMAGE_TYPE_BLAST+":Ударная волна, ломающая кости и повреждающая внутренние органы." \
 	,"Режущий:"+DAMAGE_TYPE_CUTTING + ":Ущерб через острые предметы." \
 	,"Проникающий:"+DAMAGE_TYPE_IMPALING + ":Колотые раны, полученные например копьем или стрелой." \
 	,"Малый пробивной:"+DAMAGE_TYPE_PIERCING_SM +":Низкоэнергетический снаряд или атака, оставляющая небольшой раневой канал, например бронебойная пуля." \
@@ -704,7 +717,7 @@ Replaced value:
 	,"Специализированный:"+DAMAGE_TYPE_SPEC \
 ]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 97](../../../Src/host/CombatSystem/CombatSystem.hpp#L97)
+File: [host\CombatSystem\CombatSystem.hpp at line 99](../../../Src/host/CombatSystem/CombatSystem.hpp#L99)
 ## WOUND_TYPE_BRUISE
 
 Type: constant
@@ -716,7 +729,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 119](../../../Src/host/CombatSystem/CombatSystem.hpp#L119)
+File: [host\CombatSystem\CombatSystem.hpp at line 122](../../../Src/host/CombatSystem/CombatSystem.hpp#L122)
 ## WOUND_TYPE_BLEEDING
 
 Type: constant
@@ -728,7 +741,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 121](../../../Src/host/CombatSystem/CombatSystem.hpp#L121)
+File: [host\CombatSystem\CombatSystem.hpp at line 124](../../../Src/host/CombatSystem/CombatSystem.hpp#L124)
 ## WOUND_TYPE_BURN
 
 Type: constant
@@ -740,7 +753,7 @@ Replaced value:
 ```sqf
 WOUND_TYPE_BRUISE
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 123](../../../Src/host/CombatSystem/CombatSystem.hpp#L123)
+File: [host\CombatSystem\CombatSystem.hpp at line 126](../../../Src/host/CombatSystem/CombatSystem.hpp#L126)
 ## WOUND_SIZE_SCRATCH
 
 Type: constant
@@ -752,7 +765,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 133](../../../Src/host/CombatSystem/CombatSystem.hpp#L133)
+File: [host\CombatSystem\CombatSystem.hpp at line 136](../../../Src/host/CombatSystem/CombatSystem.hpp#L136)
 ## WOUND_SIZE_MINOR
 
 Type: constant
@@ -764,7 +777,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 134](../../../Src/host/CombatSystem/CombatSystem.hpp#L134)
+File: [host\CombatSystem\CombatSystem.hpp at line 137](../../../Src/host/CombatSystem/CombatSystem.hpp#L137)
 ## WOUND_SIZE_MODERATE
 
 Type: constant
@@ -776,7 +789,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 135](../../../Src/host/CombatSystem/CombatSystem.hpp#L135)
+File: [host\CombatSystem\CombatSystem.hpp at line 138](../../../Src/host/CombatSystem/CombatSystem.hpp#L138)
 ## WOUND_SIZE_MAJOR
 
 Type: constant
@@ -788,7 +801,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 136](../../../Src/host/CombatSystem/CombatSystem.hpp#L136)
+File: [host\CombatSystem\CombatSystem.hpp at line 139](../../../Src/host/CombatSystem/CombatSystem.hpp#L139)
 ## WOUND_SIZE_CRITICAL
 
 Type: constant
@@ -800,7 +813,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 137](../../../Src/host/CombatSystem/CombatSystem.hpp#L137)
+File: [host\CombatSystem\CombatSystem.hpp at line 140](../../../Src/host/CombatSystem/CombatSystem.hpp#L140)
 ## WOUND_SIZE_MASSIVE
 
 Type: constant
@@ -812,7 +825,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 138](../../../Src/host/CombatSystem/CombatSystem.hpp#L138)
+File: [host\CombatSystem\CombatSystem.hpp at line 141](../../../Src/host/CombatSystem/CombatSystem.hpp#L141)
 ## WOUND_SIZE_GAWDAWFUL
 
 Type: constant
@@ -824,7 +837,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 139](../../../Src/host/CombatSystem/CombatSystem.hpp#L139)
+File: [host\CombatSystem\CombatSystem.hpp at line 142](../../../Src/host/CombatSystem/CombatSystem.hpp#L142)
 ## WOUND_SIZE_DESTRUCTION
 
 Type: constant
@@ -836,7 +849,7 @@ Replaced value:
 ```sqf
 7
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 140](../../../Src/host/CombatSystem/CombatSystem.hpp#L140)
+File: [host\CombatSystem\CombatSystem.hpp at line 143](../../../Src/host/CombatSystem/CombatSystem.hpp#L143)
 ## BP_INDEX_HEAD
 
 Type: constant
@@ -848,7 +861,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 149](../../../Src/host/CombatSystem/CombatSystem.hpp#L149)
+File: [host\CombatSystem\CombatSystem.hpp at line 152](../../../Src/host/CombatSystem/CombatSystem.hpp#L152)
 ## BP_INDEX_TORSO
 
 Type: constant
@@ -860,7 +873,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 150](../../../Src/host/CombatSystem/CombatSystem.hpp#L150)
+File: [host\CombatSystem\CombatSystem.hpp at line 153](../../../Src/host/CombatSystem/CombatSystem.hpp#L153)
 ## BP_INDEX_ARM_R
 
 Type: constant
@@ -872,7 +885,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 151](../../../Src/host/CombatSystem/CombatSystem.hpp#L151)
+File: [host\CombatSystem\CombatSystem.hpp at line 154](../../../Src/host/CombatSystem/CombatSystem.hpp#L154)
 ## BP_INDEX_ARM_L
 
 Type: constant
@@ -884,7 +897,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 152](../../../Src/host/CombatSystem/CombatSystem.hpp#L152)
+File: [host\CombatSystem\CombatSystem.hpp at line 155](../../../Src/host/CombatSystem/CombatSystem.hpp#L155)
 ## BP_INDEX_LEG_R
 
 Type: constant
@@ -896,7 +909,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 155](../../../Src/host/CombatSystem/CombatSystem.hpp#L155)
+File: [host\CombatSystem\CombatSystem.hpp at line 158](../../../Src/host/CombatSystem/CombatSystem.hpp#L158)
 ## BP_INDEX_LEG_L
 
 Type: constant
@@ -908,7 +921,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 156](../../../Src/host/CombatSystem/CombatSystem.hpp#L156)
+File: [host\CombatSystem\CombatSystem.hpp at line 159](../../../Src/host/CombatSystem/CombatSystem.hpp#L159)
 ## BP_INDEX_ALL
 
 Type: constant
@@ -920,7 +933,7 @@ Replaced value:
 ```sqf
 [BP_INDEX_HEAD,BP_INDEX_TORSO,BP_INDEX_ARM_R,BP_INDEX_ARM_L,BP_INDEX_LEG_R,BP_INDEX_LEG_L]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 159](../../../Src/host/CombatSystem/CombatSystem.hpp#L159)
+File: [host\CombatSystem\CombatSystem.hpp at line 162](../../../Src/host/CombatSystem/CombatSystem.hpp#L162)
 ## BODY_PART_LIST_NODE_BINDING
 
 Type: constant
@@ -938,7 +951,7 @@ Replaced value:
 	,'Левая нога:BP_INDEX_LEG_L' \
 ]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 161](../../../Src/host/CombatSystem/CombatSystem.hpp#L161)
+File: [host\CombatSystem\CombatSystem.hpp at line 164](../../../Src/host/CombatSystem/CombatSystem.hpp#L164)
 ## BO_INDEX_HEART
 
 Type: constant
@@ -950,7 +963,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 170](../../../Src/host/CombatSystem/CombatSystem.hpp#L170)
+File: [host\CombatSystem\CombatSystem.hpp at line 173](../../../Src/host/CombatSystem/CombatSystem.hpp#L173)
 ## BO_INDEX_LIVER
 
 Type: constant
@@ -962,7 +975,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 171](../../../Src/host/CombatSystem/CombatSystem.hpp#L171)
+File: [host\CombatSystem\CombatSystem.hpp at line 174](../../../Src/host/CombatSystem/CombatSystem.hpp#L174)
 ## BO_INDEX_KIDNEY_R
 
 Type: constant
@@ -974,7 +987,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 172](../../../Src/host/CombatSystem/CombatSystem.hpp#L172)
+File: [host\CombatSystem\CombatSystem.hpp at line 175](../../../Src/host/CombatSystem/CombatSystem.hpp#L175)
 ## BO_INDEX_KIDNEY_L
 
 Type: constant
@@ -986,7 +999,7 @@ Replaced value:
 ```sqf
 3
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 173](../../../Src/host/CombatSystem/CombatSystem.hpp#L173)
+File: [host\CombatSystem\CombatSystem.hpp at line 176](../../../Src/host/CombatSystem/CombatSystem.hpp#L176)
 ## BO_INDEX_GUTS
 
 Type: constant
@@ -998,7 +1011,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 174](../../../Src/host/CombatSystem/CombatSystem.hpp#L174)
+File: [host\CombatSystem\CombatSystem.hpp at line 177](../../../Src/host/CombatSystem/CombatSystem.hpp#L177)
 ## BO_INDEX_STOMACH
 
 Type: constant
@@ -1010,7 +1023,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 175](../../../Src/host/CombatSystem/CombatSystem.hpp#L175)
+File: [host\CombatSystem\CombatSystem.hpp at line 178](../../../Src/host/CombatSystem/CombatSystem.hpp#L178)
 ## BO_INDEX_LUNGS
 
 Type: constant
@@ -1022,7 +1035,7 @@ Replaced value:
 ```sqf
 6
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 176](../../../Src/host/CombatSystem/CombatSystem.hpp#L176)
+File: [host\CombatSystem\CombatSystem.hpp at line 179](../../../Src/host/CombatSystem/CombatSystem.hpp#L179)
 ## BO_INDEX_TO_NAME(idx)
 
 Type: constant
@@ -1034,7 +1047,7 @@ Replaced value:
 ```sqf
 (["Сердце","Печень","Правая почка","Левая почка","Кишки","Желудок","Легкие"] select idx)
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 178](../../../Src/host/CombatSystem/CombatSystem.hpp#L178)
+File: [host\CombatSystem\CombatSystem.hpp at line 181](../../../Src/host/CombatSystem/CombatSystem.hpp#L181)
 ## BO_INDEX_ALL
 
 Type: constant
@@ -1046,7 +1059,7 @@ Replaced value:
 ```sqf
 [BO_INDEX_HEART,BO_INDEX_LIVER,BO_INDEX_KIDNEY_R,BO_INDEX_KIDNEY_L,BO_INDEX_GUTS,BO_INDEX_STOMACH,BO_INDEX_LUNGS]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 180](../../../Src/host/CombatSystem/CombatSystem.hpp#L180)
+File: [host\CombatSystem\CombatSystem.hpp at line 183](../../../Src/host/CombatSystem/CombatSystem.hpp#L183)
 ## TARGET_ZONE_TORSO
 
 Type: constant
@@ -1058,7 +1071,7 @@ Replaced value:
 ```sqf
 0 /*торс*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 182](../../../Src/host/CombatSystem/CombatSystem.hpp#L182)
+File: [host\CombatSystem\CombatSystem.hpp at line 185](../../../Src/host/CombatSystem/CombatSystem.hpp#L185)
 ## TARGET_ZONE_ABDOMEN
 
 Type: constant
@@ -1070,7 +1083,7 @@ Replaced value:
 ```sqf
 1 /*живот*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 183](../../../Src/host/CombatSystem/CombatSystem.hpp#L183)
+File: [host\CombatSystem\CombatSystem.hpp at line 186](../../../Src/host/CombatSystem/CombatSystem.hpp#L186)
 ## TARGET_ZONE_HEAD
 
 Type: constant
@@ -1082,7 +1095,7 @@ Replaced value:
 ```sqf
 3 /*голова*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 184](../../../Src/host/CombatSystem/CombatSystem.hpp#L184)
+File: [host\CombatSystem\CombatSystem.hpp at line 187](../../../Src/host/CombatSystem/CombatSystem.hpp#L187)
 ## TARGET_ZONE_EYE_L
 
 Type: constant
@@ -1094,7 +1107,7 @@ Replaced value:
 ```sqf
 4
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 185](../../../Src/host/CombatSystem/CombatSystem.hpp#L185)
+File: [host\CombatSystem\CombatSystem.hpp at line 188](../../../Src/host/CombatSystem/CombatSystem.hpp#L188)
 ## TARGET_ZONE_EYE_R
 
 Type: constant
@@ -1106,7 +1119,7 @@ Replaced value:
 ```sqf
 5
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 186](../../../Src/host/CombatSystem/CombatSystem.hpp#L186)
+File: [host\CombatSystem\CombatSystem.hpp at line 189](../../../Src/host/CombatSystem/CombatSystem.hpp#L189)
 ## TARGET_ZONE_FACE
 
 Type: constant
@@ -1118,7 +1131,7 @@ Replaced value:
 ```sqf
 6 /*лицо*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 187](../../../Src/host/CombatSystem/CombatSystem.hpp#L187)
+File: [host\CombatSystem\CombatSystem.hpp at line 190](../../../Src/host/CombatSystem/CombatSystem.hpp#L190)
 ## TARGET_ZONE_NECK
 
 Type: constant
@@ -1130,7 +1143,7 @@ Replaced value:
 ```sqf
 7 /*шея*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 188](../../../Src/host/CombatSystem/CombatSystem.hpp#L188)
+File: [host\CombatSystem\CombatSystem.hpp at line 191](../../../Src/host/CombatSystem/CombatSystem.hpp#L191)
 ## TARGET_ZONE_GROIN
 
 Type: constant
@@ -1142,7 +1155,7 @@ Replaced value:
 ```sqf
 8 /*пах*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 189](../../../Src/host/CombatSystem/CombatSystem.hpp#L189)
+File: [host\CombatSystem\CombatSystem.hpp at line 192](../../../Src/host/CombatSystem/CombatSystem.hpp#L192)
 ## TARGET_ZONE_ARM_L
 
 Type: constant
@@ -1154,7 +1167,7 @@ Replaced value:
 ```sqf
 9
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 190](../../../Src/host/CombatSystem/CombatSystem.hpp#L190)
+File: [host\CombatSystem\CombatSystem.hpp at line 193](../../../Src/host/CombatSystem/CombatSystem.hpp#L193)
 ## TARGET_ZONE_ARM_R
 
 Type: constant
@@ -1166,7 +1179,7 @@ Replaced value:
 ```sqf
 10
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 191](../../../Src/host/CombatSystem/CombatSystem.hpp#L191)
+File: [host\CombatSystem\CombatSystem.hpp at line 194](../../../Src/host/CombatSystem/CombatSystem.hpp#L194)
 ## TARGET_ZONE_LEG_L
 
 Type: constant
@@ -1178,7 +1191,7 @@ Replaced value:
 ```sqf
 11
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 192](../../../Src/host/CombatSystem/CombatSystem.hpp#L192)
+File: [host\CombatSystem\CombatSystem.hpp at line 195](../../../Src/host/CombatSystem/CombatSystem.hpp#L195)
 ## TARGET_ZONE_LEG_R
 
 Type: constant
@@ -1190,7 +1203,7 @@ Replaced value:
 ```sqf
 12
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 193](../../../Src/host/CombatSystem/CombatSystem.hpp#L193)
+File: [host\CombatSystem\CombatSystem.hpp at line 196](../../../Src/host/CombatSystem/CombatSystem.hpp#L196)
 ## TARGET_ZONE_FOOT_R
 
 Type: constant
@@ -1202,7 +1215,7 @@ Replaced value:
 ```sqf
 16*/
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 197](../../../Src/host/CombatSystem/CombatSystem.hpp#L197)
+File: [host\CombatSystem\CombatSystem.hpp at line 200](../../../Src/host/CombatSystem/CombatSystem.hpp#L200)
 ## TARGET_ZONE_MOUTH
 
 Type: constant
@@ -1214,7 +1227,7 @@ Replaced value:
 ```sqf
 20
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 198](../../../Src/host/CombatSystem/CombatSystem.hpp#L198)
+File: [host\CombatSystem\CombatSystem.hpp at line 201](../../../Src/host/CombatSystem/CombatSystem.hpp#L201)
 ## TARGET_ZONE_RANDOM
 
 Type: constant
@@ -1226,7 +1239,7 @@ Replaced value:
 ```sqf
 19
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 201](../../../Src/host/CombatSystem/CombatSystem.hpp#L201)
+File: [host\CombatSystem\CombatSystem.hpp at line 204](../../../Src/host/CombatSystem/CombatSystem.hpp#L204)
 ## TARGET_ZONE_LIST_NODE_BINDING
 
 Type: constant
@@ -1252,7 +1265,7 @@ Replaced value:
 	,'Случайно:TARGET_ZONE_RANDOM' \
 ]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 203](../../../Src/host/CombatSystem/CombatSystem.hpp#L203)
+File: [host\CombatSystem\CombatSystem.hpp at line 206](../../../Src/host/CombatSystem/CombatSystem.hpp#L206)
 ## TARGET_ZONE_LIST_HEAD
 
 Type: constant
@@ -1264,7 +1277,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_HEAD,TARGET_ZONE_FACE,TARGET_ZONE_NECK,TARGET_ZONE_MOUTH,TARGET_ZONE_EYE_R,TARGET_ZONE_EYE_L]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 220](../../../Src/host/CombatSystem/CombatSystem.hpp#L220)
+File: [host\CombatSystem\CombatSystem.hpp at line 223](../../../Src/host/CombatSystem/CombatSystem.hpp#L223)
 ## TARGET_ZONE_LIST_LIMBS
 
 Type: constant
@@ -1276,7 +1289,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_ARM_R,TARGET_ZONE_ARM_L,TARGET_ZONE_LEG_R,TARGET_ZONE_LEG_L]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 221](../../../Src/host/CombatSystem/CombatSystem.hpp#L221)
+File: [host\CombatSystem\CombatSystem.hpp at line 224](../../../Src/host/CombatSystem/CombatSystem.hpp#L224)
 ## TARGET_ZONE_LIST_TORSO
 
 Type: constant
@@ -1288,7 +1301,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_ABDOMEN,TARGET_ZONE_TORSO,TARGET_ZONE_GROIN]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 222](../../../Src/host/CombatSystem/CombatSystem.hpp#L222)
+File: [host\CombatSystem\CombatSystem.hpp at line 225](../../../Src/host/CombatSystem/CombatSystem.hpp#L225)
 ## TARGET_ZONE_LIST_ALL
 
 Type: constant
@@ -1300,7 +1313,7 @@ Replaced value:
 ```sqf
 [TARGET_ZONE_ABDOMEN,TARGET_ZONE_TORSO,TARGET_ZONE_GROIN,TARGET_ZONE_ARM_R,TARGET_ZONE_ARM_L,TARGET_ZONE_LEG_R,TARGET_ZONE_LEG_L,TARGET_ZONE_HEAD,TARGET_ZONE_FACE,TARGET_ZONE_NECK,TARGET_ZONE_MOUTH,TARGET_ZONE_EYE_R,TARGET_ZONE_EYE_L]
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 223](../../../Src/host/CombatSystem/CombatSystem.hpp#L223)
+File: [host\CombatSystem\CombatSystem.hpp at line 226](../../../Src/host/CombatSystem/CombatSystem.hpp#L226)
 ## TARGET_ZONE_NAME_MAIN
 
 Type: constant
@@ -1312,7 +1325,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 227](../../../Src/host/CombatSystem/CombatSystem.hpp#L227)
+File: [host\CombatSystem\CombatSystem.hpp at line 230](../../../Src/host/CombatSystem/CombatSystem.hpp#L230)
 ## TARGET_ZONE_NAME_TO
 
 Type: constant
@@ -1324,7 +1337,7 @@ Replaced value:
 ```sqf
 1
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 229](../../../Src/host/CombatSystem/CombatSystem.hpp#L229)
+File: [host\CombatSystem\CombatSystem.hpp at line 232](../../../Src/host/CombatSystem/CombatSystem.hpp#L232)
 ## TARGET_ZONE_NAME_WHAT
 
 Type: constant
@@ -1336,7 +1349,7 @@ Replaced value:
 ```sqf
 2
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 231](../../../Src/host/CombatSystem/CombatSystem.hpp#L231)
+File: [host\CombatSystem\CombatSystem.hpp at line 234](../../../Src/host/CombatSystem/CombatSystem.hpp#L234)
 ## WEAPON_CATEGORY_MELEE
 
 Type: constant
@@ -1348,7 +1361,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 234](../../../Src/host/CombatSystem/CombatSystem.hpp#L234)
+File: [host\CombatSystem\CombatSystem.hpp at line 237](../../../Src/host/CombatSystem/CombatSystem.hpp#L237)
 ## WEAPON_CATEGORY_FIREARMS
 
 Type: constant
@@ -1360,7 +1373,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 235](../../../Src/host/CombatSystem/CombatSystem.hpp#L235)
+File: [host\CombatSystem\CombatSystem.hpp at line 238](../../../Src/host/CombatSystem/CombatSystem.hpp#L238)
 ## WEAPON_CATEGORY_THROWABLE
 
 Type: constant
@@ -1372,7 +1385,7 @@ Replaced value:
 ```sqf
 0
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 236](../../../Src/host/CombatSystem/CombatSystem.hpp#L236)
+File: [host\CombatSystem\CombatSystem.hpp at line 239](../../../Src/host/CombatSystem/CombatSystem.hpp#L239)
 ## runtimeGenerateWeapon(typename,baseclass)
 
 Type: constant
@@ -1385,7 +1398,7 @@ Replaced value:
 ```sqf
 ([typename,baseclass,__FILE__,__LINE__]call cs_runtime_internal_generate)pushBack
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 240](../../../Src/host/CombatSystem/CombatSystem.hpp#L240)
+File: [host\CombatSystem\CombatSystem.hpp at line 243](../../../Src/host/CombatSystem/CombatSystem.hpp#L243)
 ## weaponModule(t)
 
 Type: constant
@@ -1397,7 +1410,7 @@ Replaced value:
 ```sqf
 wm_##t
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 242](../../../Src/host/CombatSystem/CombatSystem.hpp#L242)
+File: [host\CombatSystem\CombatSystem.hpp at line 245](../../../Src/host/CombatSystem/CombatSystem.hpp#L245)
 ## REACH_DEFAULT
 
 Type: constant
@@ -1409,7 +1422,7 @@ Replaced value:
 ```sqf
 0.9
 ```
-File: [host\CombatSystem\CombatSystem.hpp at line 245](../../../Src/host/CombatSystem/CombatSystem.hpp#L245)
+File: [host\CombatSystem\CombatSystem.hpp at line 248](../../../Src/host/CombatSystem/CombatSystem.hpp#L248)
 # Functions.sqf
 
 ## tzndef(name,a,b,c)

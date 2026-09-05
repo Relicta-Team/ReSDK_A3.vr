@@ -99,7 +99,7 @@ Replaced value:
 ```sqf
 errorformat("[SH_DEBUG_SHOTGUN]: %1 %2",txt arg [vars]);
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 491](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L491)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 492](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L492)
 ## logshotgun(txt,vars)
 
 Type: constant
@@ -114,7 +114,7 @@ Replaced value:
 ```sqf
 
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 493](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L493)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 494](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L494)
 ## si_internal_rayObject
 
 Type: Variable
@@ -164,7 +164,7 @@ Initial value:
 ```sqf
 [...
 ```
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 634](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L634)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 635](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L635)
 ## si_throwingProcess
 
 Type: function
@@ -258,7 +258,7 @@ Type: function
 Description: например взрыв летящей гранаты
 - Param: _tempObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 410](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L410)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 411](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L411)
 ## si_onThrowingEnd
 
 Type: function
@@ -267,7 +267,7 @@ Description:
 - Param: _tempObj
 - Param: _barrierObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 426](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L426)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 427](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L427)
 ## si_onBulletAct
 
 Type: function
@@ -276,7 +276,7 @@ Description:
 - Param: _tempObj
 - Param: _barrierObj
 
-File: [host\ServerInteraction\ServerInteractionInit.sqf at line 455](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L455)
+File: [host\ServerInteraction\ServerInteractionInit.sqf at line 456](../../../Src/host/ServerInteraction/ServerInteractionInit.sqf#L456)
 # ServerInteractionShared.sqf
 
 ## addInteractSecondPassObj(path)
