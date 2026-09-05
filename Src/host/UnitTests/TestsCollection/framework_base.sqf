@@ -29,6 +29,7 @@ TEST(MultilineIfcheckArrays)
 			[1 arg 2 arg 3],
 			[4 arg 5 arg 6 arg 7]
 		);
+		ASSERT(!isNullVar(_result));
 		ASSERT_EQ(_result,_expected);
 	} foreach [[true,[1,2,3]],[false,[4,5,6,7]]];
 }
