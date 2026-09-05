@@ -180,6 +180,10 @@ func(addItem)
 		setVar(_item,slot,-1);
 	};
 
+	if callFunc(_item,processInventoryTransitions) then {
+		callFuncParams(_item,onMovedToContainer,this arg _oldLoc);
+	};
+
 	callSelf(onContainerContentUpdate);
 
 	callSelf(onWeightChanged);
@@ -566,4 +570,4 @@ func(applyDamage)
 		callFuncParams(_x,applyDamage,_dmgToContent arg _type arg _worldPos arg DAMAGE_TYPE_CRUSHING);
 	true;
 	} count _content;
-};	
+};

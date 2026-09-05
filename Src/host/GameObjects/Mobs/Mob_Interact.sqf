@@ -733,6 +733,7 @@ region(Throwing)
 			true;
 		} count ["dx","throw"];
 		private _modThrow = 0;
+		modvar(_modThrow) + callFunc(_item,getThrowSkillModifier);
 		if callSelf(hasPainWithSuppress) then {
 			modvar(_modThrow) - 1;
 		};

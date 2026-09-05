@@ -9,6 +9,7 @@
 	#include <client\client_debug.h>
 #endif
 
+
 //определение констант для работы RBuilder
 #if __has_include("..\preload\rbuilder.h")
 	#include <..\preload\rbuilder.h>
@@ -57,6 +58,9 @@
 
 // Общий флаг отладки
 #define DEBUG
+
+// Отладочная геометрия гранат: зоны взрыва и трассы осколков
+// #define DEBUG_GRENADES
 
 //разрешить трейс сообщения. Автоматически выключается при активном RELEASE
 #define __TRACE__ENABLED
@@ -279,5 +283,3 @@
 	#define USEEVERYDAYRUN_doValidation() 
 	#define USEEVERYDAYRUN_THREAD_UPDATE() 
 #endif
-
-

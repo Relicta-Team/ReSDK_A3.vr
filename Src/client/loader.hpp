@@ -50,6 +50,7 @@ importClient("src\client\PersonClient\PersonClient_init.sqf"); cmplog("Person") 
 
 importClient("src\client\NOEngineClient\NOEngineClientInit.sqf");cmplog("NOEngine")
 importClient("src\client\VoiceSystem\VoiceSystem_init.sqf"); cmplog("Voice")//tfar interface
+importClient("src\client\GrenadeEffects\GrenadeEffects_init.sqf"); cmplog("GrenadeFX")
 importClient("src\client\DiscordRPC\DiscordRPC_init.sqf");cmplog("Discord")
 importClient("src\client\Traps\TrapsInit.sqf"); cmplog("traps") //система ловушек
 importClient("src\client\OneSync\OneSync_init.sqf"); cmplog("OSync")//оптимизированная синхронизация

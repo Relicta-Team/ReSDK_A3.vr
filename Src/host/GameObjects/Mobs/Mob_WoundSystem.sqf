@@ -65,6 +65,7 @@ woundSystem_onWoundProcess = {
 	private _isBurn = isWoundType(WOUND_TYPE_BURN); //ожоговый
 
 	private _isDTImp = isDamageType(DAMAGE_TYPE_IMPALING); //Колющий
+	private _isBlast = isDamageType(DAMAGE_TYPE_BLAST);
 	private _isShoot = isDamageType(DAMAGE_TYPE_PIERCING_SM)
 		|| isDamageType(DAMAGE_TYPE_PIERCING_NO)
 		|| isDamageType(DAMAGE_TYPE_PIERCING_HU)
@@ -97,6 +98,7 @@ woundSystem_onWoundProcess = {
 				) then {
 					addWoundEvent(arteryDelegate);
 				};
+			if (_isBlast && _isTorsoWound) then {addWoundEvent(blastTraumaDelegate);};
 
 		canPassWound(WOUND_SIZE_MAJOR); //3
 			_shockLevel = 4;
@@ -221,13 +223,13 @@ woundSystem_breakDelegate = {
 
 		//если кость ещё не сломана ломаем её
 		if (_isLimbWound) exitWith {
-			if (canBreakBone() && {checkWound(WOUND_SIZE_MAJOR,>= 2)}) exitWith {
+			if (canBreakBone() && {(_isBlast && _woundSize >= WOUND_SIZE_MAJOR) || checkWound(WOUND_SIZE_MAJOR,>= 2)}) exitWith {
 				_hasBreakProcess = true;
 				_zoneBreakMes = "ломается кость";
 			};
 		};
 		if (_hitZone in [TARGET_ZONE_TORSO,TARGET_ZONE_ABDOMEN]) exitWith {
-			if (canBreakBone() && {checkWound(WOUND_SIZE_MAJOR,>= 3)}) then {
+			if (canBreakBone() && {(_isBlast && _woundSize >= WOUND_SIZE_MAJOR) || checkWound(WOUND_SIZE_MAJOR,>= 3)}) then {
 				_hasBreakProcess = true;
 				_zoneBreakMes = "ломаются рёбра";
 			};
@@ -235,7 +237,7 @@ woundSystem_breakDelegate = {
 		if (_hitZone in TARGET_ZONE_LIST_HEAD) exitWith {
 
 			if (_hitZone == TARGET_ZONE_HEAD) exitWith {
-				if (canBreakBone() && {checkWound(WOUND_SIZE_MAJOR,>= 2)}) then {
+				if (canBreakBone() && {(_isBlast && _woundSize >= WOUND_SIZE_MAJOR) || checkWound(WOUND_SIZE_MAJOR,>= 2)}) then {
 					_hasBreakProcess = true;
 					_zoneBreakMes = "ломается череп";
 				}
@@ -350,6 +352,42 @@ woundSystem_impalingDelegate = {
 				MOD(postMessageEffect,+ " Повреждён один из внутренних органов.");
 			};
 			callFunc(_org,addDamage);
+		};
+	};
+};
+
+// Blast pressure can damage organs without a penetrating wound channel.
+// Severity supplies the GURPS-style HT penalty; failure ruptures a valid organ.
+woundSystem_blastTraumaDelegate = {
+	if !_isTorsoWound exitWith {};
+	private _penalty = switch (_woundSize) do {
+		case WOUND_SIZE_MODERATE: {0};
+		case WOUND_SIZE_MAJOR: {2};
+		case WOUND_SIZE_CRITICAL: {4};
+		default {6};
+	};
+	private _roll = (_ht - _penalty) call gurps_rollstd;
+	if DICE_ISFAIL(getRollType(_roll)) then {
+		private _organIndexes = ifcheck(
+			_hitZone == TARGET_ZONE_TORSO,
+			[BO_INDEX_HEART arg BO_INDEX_LUNGS arg BO_INDEX_LIVER],
+			[BO_INDEX_STOMACH arg BO_INDEX_GUTS arg BO_INDEX_KIDNEY_L arg BO_INDEX_KIDNEY_R]
+		);
+		private _organs = [];
+		{
+			if callSelfParams(hasBodyOrgan,_x) then {
+				_organs pushBack callSelfParams(getBodyOrgan,_x);
+			};
+		} foreach _organIndexes;
+		if (count _organs > 0) then {
+			private _organ = pick _organs;
+			if callFunc(_organ,isStatusOk) then {
+				MOD(postMessageEffect,+ " Ударная волна повреждает внутренний орган.");
+			};
+			callFunc(_organ,addDamage);
+			if (_woundSize >= WOUND_SIZE_MASSIVE) then {
+				callFunc(_organ,addDamage);
+			};
 		};
 	};
 };

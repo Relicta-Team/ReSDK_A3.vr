@@ -215,6 +215,12 @@ _onClickTarget = {
 		sp_checkInput("click_target",[_obj]);
 	#endif
 
+	// Some items deliberately assign LMB a direct inventory action. World LMB
+	// keeps the normal click/pickup path; only an item owned by this mob opts in.
+	if (equals(getVar(_obj,loc),this) && {isImplementFunc(_obj,onInventoryClick)}) exitWith {
+		callFuncParams(_obj,onInventoryClick,this);
+	};
+
 	callSelfParams(clickTarget,_obj);
 
 }; rpcAdd("onClickTarget",_onClickTarget);
@@ -386,7 +392,7 @@ _onMainAction = {
 
 	private _item = if (_targHash isEqualType "") then {
 		private _itemRef = pointer_get(_targHash);
-		if !pointer_isValidResult(_item) exitWith {
+		if !pointer_isValidResult(_itemRef) exitWith {
 			errorformat("onMainAction() - Target reference has no exists in pointers table - %1",_targHash);
 			RETURN(0);
 		};

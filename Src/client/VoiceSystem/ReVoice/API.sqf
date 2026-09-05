@@ -975,6 +975,11 @@ vs_calcLowpassEffect = {
             _cutoff = _cutoff min 600;
 	        _q = _q min 1;
         };
+
+		if (grenadefx_hearingIntensity > 0) then {
+			_cutoff = _cutoff min linearConversion [0,1,grenadefx_hearingIntensity,22000,700,true];
+			_q = _q min 1;
+		};
     };
     private _defRet = {
         private _cutoff = 22000;

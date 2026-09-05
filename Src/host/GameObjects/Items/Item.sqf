@@ -411,6 +411,27 @@ class(Item) extends(IDestructible) attribute(GenerateWeaponModule)
 		//setSelf(__debug_lastslot,getSelf(slot));
 	};
 
+	// Narrow lifecycle hooks for items whose state depends on an explicit
+	// inventory transition. Ordinary items deliberately do nothing here.
+	getterconst_func(processInventoryTransitions,false);
+
+	func(onInventorySlotChanged)
+	{
+		objParams_4(_usr,_oldLoc,_oldSlot,_newSlot);
+	};
+
+	func(onMovedToContainer)
+	{
+		objParams_2(_container,_oldLoc);
+	};
+
+	func(onBeforeThrow)
+	{
+		objParams_1(_usr);
+	};
+
+	getterconst_func(getThrowSkillModifier,0);
+
 	//TODO найти все прямые установки и заменить на установку через метод
 	//подстроки для поиска:
 	// ,loc,
