@@ -412,6 +412,9 @@ vs_stopHandleProcessPlayerPos = {
 vs_onProcessPlayerPosition = {
     if (!vs_canProcess) exitWith {};
 
+    // Game audio still plays when Mumble disconnects; keep its listener moving.
+    call vs_syncLocalPlayer;
+
     if (call vs_checkConnection) then {
         //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=_this max vs_debug_maxvalue;vs_debug_maxvalue})
         /*
@@ -419,7 +422,6 @@ vs_onProcessPlayerPosition = {
             ~max 17 ms for 100 players (only remotes,noeffects)
             mid 3-4 ms for 100 players (only remotes,noeffects)
         */
-        call vs_syncLocalPlayer;
         //revoice_debug_only(["sync local %1ms" arg (((tickTime - _t)*1000)call _mv)tofixed 6]call printTrace;_t=tickTime;)
         //revoice_debug_only(_t = tickTime; _mv = {vs_debug_maxvalue=round _this max vs_debug_maxvalue;vs_debug_maxvalue})
         call vs_syncRemotePlayers;
