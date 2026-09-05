@@ -78,6 +78,10 @@ class(Grenade) extends(Item)
 	var(resolveOnStopFlying,false);
 	var(activator,nullPtr);
 
+	// Container damage must not delete the grenade during its own explosion.
+	// resolveFuse owns deletion after all explosion processing has finished.
+	getter_func(canApplyDamage,getSelf(grenadeState) != GRENADE_STATE_DETONATED);
+
 	getterconst_func(activateSound,"guns\pin_pull");
 	getterconst_func(leverSound,"electronics\click");
 	getterconst_func(replacePinSound,"updown\keyring_up");
@@ -511,6 +515,8 @@ class(Grenade) extends(Item)
 	{
 		objParams_3(_origin,_sourceVis,_targetRecord);
 		_targetRecord params ["_target","_targetVis","_preferredPos"];
+		// Earlier blast hits can destroy other entries in the captured target set.
+		if isNullReference(_target) exitWith {[]};
 		if equals(_target,this) exitWith {[]};
 
 		private _isMob = callFunc(_target,isMob);
