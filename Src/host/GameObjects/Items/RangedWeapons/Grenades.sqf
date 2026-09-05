@@ -842,7 +842,7 @@ class(Grenade) extends(Item)
 		private _origin = callSelfParams(getExplosionOrigin,_sourceVis);
 		// The grenade is deleted immediately after this method. A world position is
 		// stable on clients; the grenade pointer is not.
-		callSelfParams(playSound,"atmos\grenade-explosion-" + str randInt(1,3) arg rand(0.8,1.2) arg callSelf(getExplosionSoundDistance) arg 2 arg _origin);
+		callSelfParams(playSound,"atmos\grenade-explosion-" + str randInt(1,3) arg rand(0.8,1.2) arg callSelf(getExplosionSoundDistance) arg 1 arg _origin);
 		private _context = callSelfParams(createExplosionContext,_origin arg _sourceVis);
 		callSelfParams(sendExplosionPresentation,_context);
 		#ifdef DEBUG_GRENADES
