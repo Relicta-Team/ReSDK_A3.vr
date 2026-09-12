@@ -229,19 +229,6 @@
     class: SmallSteelTable1
     <<: *def_mods
 
-- <<: *furniture
-  name: Стальной верстак
-  required:
-    components:
-      - class: MetalDebris(1-2)
-        count: 4
-        check_type_of: false
-      - class: [ToolPipe,ToolStraigthPipe]
-        count: 4
-  result:
-    class: Workbench
-    <<: *def_mods
-
 # =======================================================
 # кровати
 # =======================================================

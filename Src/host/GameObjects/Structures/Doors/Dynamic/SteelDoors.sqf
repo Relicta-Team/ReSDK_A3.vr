@@ -107,6 +107,8 @@ class(TinGate) extends(DoorDynamic)
 endclass
 
 class(GreenAmbarWithDoors) extends(DoorDynamic)
+	// Whole-building scenery with permanently opened leaves, not an operable door.
+	getter_func(hasMechanicalLock,false);
 	getter_func(canUseMainAction,false); //В амбаре нельзя юзать такие дейсвтия
 	getter_func(canApplyDamage,false);
 	var(model,"Land_Barn_W_02");

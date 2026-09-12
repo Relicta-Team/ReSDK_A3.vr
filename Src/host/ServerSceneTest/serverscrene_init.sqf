@@ -277,7 +277,7 @@ if (!isMultiplayer) then {
 
 		_dr = ["SteelGridDoor",[1934.33,2213.66,5.36672],0,false] call createStructure;
 		setVar(_k,keyOwner,["test"]);
-		setVar(_dr,keyTypes,["test"]);
+		callFuncParams(_dr,setDoorKeyTypes,["test"]);
 
 		//cont
 		_cont = ["FabricBagBig1",[1933.78,2216.31,5.36284],null,false] call createItemInWorld;

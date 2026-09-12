@@ -273,7 +273,7 @@ class(DeliveryPipe) extends(IDeliveryPipeInternal)
 			{
 				_x params ["_type","_count"];
 				[_type arg _count] call _modifWarehouse;
-				callSelfParams(createItemInContainer,_type arg _count);
+				[this,_type,_count] call doorLock_deliverItem;
 			} foreach (getSelf(generatedOrders) get _orderId);
 
 			#ifdef LOG_TRADE
@@ -414,7 +414,7 @@ class(DeliveryPipe) extends(IDeliveryPipeInternal)
 				if (_type == "CALLCODE") then {
 					0 call _count;
 				} else {
-					callSelfParams(createItemInContainer,_type arg _count);
+					[this,_type,_count] call doorLock_deliverItem;
 				};
 
 			} foreach _metadata;
@@ -1134,6 +1134,8 @@ class(MerchantConsole) extends(ElectronicDevice)
 	_ctbuf pushBack [name,typename,{typename},randInt(minpr,maxpr),randInt(minc,maxc),0];
 
 	regConsole;
+	regItemCustomName(MC_CAT_OTHER,"Простой замок с ключом","DoorLock",12,18,3,6)
+	regItemCustomName(MC_CAT_OTHER,"Прочный замок с ключом","StrongDoorLock",40,60,1,3)
 
 	regCat(MC_CAT_CLOTH,"Экипировка")
 	regCat(MC_CAT_WEAPONS,"Оружие")
@@ -1759,7 +1761,7 @@ class(MerchantConsoleSaloon) extends(MerchantConsole)
 		setVar(_bag,maxSize,ITEM_SIZE_HUGE);
 		{
 			_x params ["_type","_count"];
-			callFuncParams(_bag,createItemInContainer,_type arg _count);
+			[_bag,_type,_count] call doorLock_deliverItem;
 		} foreach _orderedItems;
 		// Вместимость соответствует фактически занятому объёму: свободных ячеек нет.
 		setVar(_bag,countSlots,getVar(_bag,currentSize));

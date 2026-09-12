@@ -173,7 +173,7 @@ class(OpenedDoorsAspect) extends(BaseGameAspect)
 				if getVar(_x,isLocked) then {
 					private _list = getVar(_x,keyTypes);
 					_list resize 0;
-					setVar(_x,keyTypes,_list);
+					callFuncParams(_x,setDoorKeyTypes,_list);
 
 					callFuncParams(_x,setDoorLock,false arg true);
 				};

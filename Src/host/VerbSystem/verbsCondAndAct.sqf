@@ -185,6 +185,7 @@ VERB(craft_here)
 	act
 		[src,usr,!isNull(getSelf(craftComponent))] call csys_requestOpenMenu;
 	name
+		if (callSelf(getCraftStation) != "") exitWith {setName("Создать на верстаке")};
 		if !isNull(getSelf(craftComponent)) exitWith {setName("Вспомнить рецепты")};
 ENDVERB
 

@@ -225,6 +225,7 @@ class(GameObject) extends(ManagedObject)
 	getterconst_func(isSeat,false); //это сиденье (стул, лавка)
 
 	//TODO remove
+	getter_func(getCraftStation,"");
 	getter_func(canUseAsCraftSpace,false);//для пукнта в verb-меню (позволяет открывать крафт от этого объекта)
 	getter_func(getAllowedCraftCategories,[]); //доступные категории для крафт меню
 
@@ -1779,6 +1780,9 @@ class(IDestructible) extends(GameObject)
 	//Здесь хранятся ссылка на чанки, которые владеют этим объектом. key:chId, value:AtmosChunk
 	var(__atm_ownerChunks,createHashMap);
 
+	// Applied after damage-type rounding, so durability does not add immunity thresholds.
+	getter_func(getDamageHPScale,1);
+
 	func(applyDamage)
 	{
 		// количество урона, тип повреждений, мировая позиция по которой пришлись повреждения, (опциональная) причина урона
@@ -1836,6 +1840,7 @@ class(IDestructible) extends(GameObject)
 			};
 		};
 		
+		_amount = _amount * callSelf(getDamageHPScale);
 		callSelfParams(onAffectDamageToPos,_amount arg _type arg _worldPos arg _cause);
 
 		_canUseEffect = _amount > 0;

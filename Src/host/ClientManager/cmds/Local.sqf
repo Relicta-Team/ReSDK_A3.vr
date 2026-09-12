@@ -28,3 +28,8 @@ addCommandWithDescription("lightdebug",PUBLIC_COMMAND,"Показывает от
 #endif
 
 addCommand("disablecolorcorrection",ACCESS_ADMIN) {IS_LOCAL_COMMAND()};
+#ifdef DEBUG
+addCommandWithDescription("modelpos",PUBLIC_COMMAND,"Координаты под центром экрана: modelpos [селект]; modelpos off — выключить") {IS_LOCAL_COMMAND()};
+#endif
+
+addCommandWithDescription("geombounds",PUBLIC_COMMAND,"Границы LOD объекта под прицелом: geombounds geometry|view|fire|visual|off; это bounding box, не wireframe") {IS_LOCAL_COMMAND()};

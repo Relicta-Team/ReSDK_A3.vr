@@ -24,6 +24,10 @@ csys_requestOpenMenu = {
 		};
 	} foreach _allowedCateg;
 
+	if (count _allowedCategReal == 0 && {callFunc(_objSrc,getCraftStation) != ""}) exitWith {
+		callFuncParams(_usr,localSay,"Не хватает навыка инженерии для работы на этом верстаке." arg "error");
+	};
+
 	private _firstCat = ifcheck(count _allowedCategReal > 0,_allowedCategReal select 0,_allowedCateg select 0);
 	
 	#ifdef SP_MODE
@@ -85,6 +89,11 @@ csys_tryCraft = {
 		false
 	};
 	
+	private _recipe = csys_map_allCraftRefs get _recipeID;
+	if ((_recipe getv(station)) != "" || {callFunc(_obj,getCraftStation) != ""}) exitWith {
+		if !(_recipe callp(canSeeRecipe,this arg _obj)) exitWith {false};
+		callFuncParams(_obj,startStationCraft,this arg _recipe);
+	};
 	[this,null,_recipeID] call csys_processCraftMain;
 	
 }; rpcAdd("tryCraft",csys_tryCraft);
@@ -246,6 +255,7 @@ csys_processCraftMain = {
 		callFunc(_usr,generateLastInteractOnServer);
 
 		_recipe = csys_map_allCraftRefs get _recipeIdOrSystem;
+		if ((_recipe getv(station)) != "") exitWith {RETURN(false)};
 
 		_position = callFunc(_usr,getLastInteractEndPos);
 		private _objList = ["IDestructible",_position,_recipe getv(opt_collect_distance),true,true] call getGameObjectOnPosition;

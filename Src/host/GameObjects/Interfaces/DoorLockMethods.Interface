@@ -1,0 +1,232 @@
+// Mechanical lock state and its two visual faces are owned by this door slot.
+getter_func(hasMechanicalLock,true);
+editor_attribute("alias" arg "Тип замка")
+editor_attribute("EditorVisible" arg "custom_provider:door_lock")
+var(lockType,-1); // automatic: no access ids -> none, access ids -> simple
+var(doorLock,nullPtr);
+var(lockInitialized,false);
+var(lockPosition,[]); // empty: closed-leaf center; explicit values are relative to the selected anchor
+var(lockSelection,"");
+var(lockDepth,0.025);
+var(lockDirection,180);
+
+func(constructor)
+{
+	objParams();
+	callSelfAfter(initializeDoorLock,0.1);
+};
+
+func(initializeDoorLock)
+{
+	objParams();
+	if isNullReference(this) exitWith {};
+	if (getSelf(lockInitialized) || {!callSelf(hasMechanicalLock)}) exitWith {};
+	if (!callSelf(isInWorld) || {isNullReference(getSelf(loc))}) exitWith {};
+	setSelf(lockInitialized,true);
+	private _type = callSelf(resolveDoorLockType);
+	if (_type == 0) exitWith {setSelf(isLocked,false)};
+	private _class = ["","DoorLock","StrongDoorLock","StoryDoorLock"] param [_type,"DoorLock"];
+	private _lock = instantiate(_class);
+	callFuncParams(_lock,setLoc,this);
+	setVar(_lock,door,this);
+	setVar(_lock,isFastened,true);
+	setVar(_lock,keyTypes,getSelf(keyTypes));
+	setSelf(doorLock,_lock);
+	if getSelf(isLockBreaked) then {
+		callSelf(releaseDoorLock);
+		delete(_lock);
+	} else {
+		callSelf(syncDoorLockVisual);
+	};
+};
+
+func(resolveDoorLockType)
+{
+	objParams();
+	private _type = getSelf(lockType);
+	ifcheck(_type == -1,ifcheck(count getSelf(keyTypes) > 0,1,0),_type)
+};
+
+func(setDoorKeyTypes)
+{
+	objParams_1(_types);
+	setSelf(keyTypes,_types);
+	private _lock = getSelf(doorLock);
+	if !isNullReference(_lock) then {
+		setVar(_lock,keyTypes,_types);
+	} else {
+		if (getSelf(lockType) == -1 && {getSelf(lockInitialized)} && {count _types > 0}) then {
+			setSelf(lockInitialized,false);
+			callSelf(initializeDoorLock);
+		};
+	};
+};
+
+getter_func(getLockSelection,getSelf(lockSelection));
+
+// Closed-leaf convention: static doors move their whole model, while dynamic
+// doors use the average point of the animated selection relative to its memory anchor.
+func(getLockPlacementData)
+{
+	objParams();
+	private _mesh = getSelf(loc);
+	private _selection = callSelf(getLockSelection);
+	private _position = getSelf(lockPosition);
+	private _leafCenter = [0,0,0];
+	if (_selection == "") then {
+		private _bounds = boundingBoxReal _mesh;
+		_leafCenter = ((_bounds select 0) vectorAdd (_bounds select 1)) vectorMultiply 0.5;
+		if (count _position == 0) then {_position = _leafCenter};
+	} else {
+		_leafCenter = _mesh selectionPosition [_selection,"ViewGeometry","AveragePoint"];
+		if (_leafCenter isEqualTo [0,0,0]) then {_leafCenter = _mesh selectionPosition [_selection,"Geometry","AveragePoint"]};
+		private _anchor = _leafCenter;
+		if ((tolower _selection) in ((_mesh selectionNames "Memory") apply {tolower _x})) then {
+			_anchor = _mesh selectionPosition [_selection,"Memory","AveragePoint"];
+		};
+		// Normalize the descriptor to a closed-leaf model coordinate. Explicit
+		// author values remain offsets from the configured selection anchor.
+		if (count _position == 0) then {
+			_position = _leafCenter;
+		} else {
+			_position = _anchor vectorAdd _position;
+		};
+	};
+	private _leafBasis = [[0,1,0],[0,0,1]];
+	if (_selection != "") then {
+		_leafBasis = ([_mesh,_selection] call doorLock_getSelectionTransform) select 1;
+	};
+	[_position,_selection,_leafCenter,_leafBasis]
+};
+
+func(syncDoorLockVisual)
+{
+	objParams();
+	if !callSelf(isInWorld) exitWith {};
+	private _mesh = getSelf(loc);
+	private _data = [];
+	private _lock = getSelf(doorLock);
+	if !isNullReference(_lock) then {
+		callSelf(getLockPlacementData) params ["_position","_selection","_leafCenter","_leafBasis"];
+		_data = [getVar(_lock,pointer),getVar(_lock,model),_position,_selection,getSelf(lockDepth),getSelf(lockDirection),_leafCenter,_leafBasis,"v2"];
+	};
+	_mesh setVariable ["doorLockData",_data];
+	private _visuals = [_mesh,_data] call doorLock_updateVisuals;
+	{
+		_x setVariable ["link",_lock];
+		[_x,getVar(_lock,model)] call noe_server_ngo_check;
+	} foreach _visuals;
+	callSelf(replicateObject);
+};
+
+func(installDoorLock)
+{
+	objParams_2(_lock,_usr);
+	callSelf(initializeDoorLock);
+	if (!callSelf(hasMechanicalLock) || {!isNullReference(getSelf(doorLock))}) exitWith {callFuncParams(_usr,localSay,"На двери уже есть замок." arg "error")};
+	if (!equals(callFunc(_usr,getItemInActiveHandRedirect),_lock) || {callFuncParams(_usr,getDistanceTo,this) > 2}) exitWith {callFuncParams(_usr,localSay,"Не удаётся приложить замок к двери." arg "error")};
+	if !isNullReference(getVar(_lock,door)) exitWith {callFuncParams(_usr,localSay,"Этот замок уже установлен." arg "error")};
+	callFuncParams(_usr,removeItem,_lock);
+	callFuncParams(_lock,setLoc,this);
+	setVar(_lock,slot,-1);
+	setVar(_lock,door,this);
+	setVar(_lock,isFastened,false);
+	setSelf(doorLock,_lock);
+	setSelf(isLocked,false);
+	setSelf(isLockBreaked,false);
+	setSelf(keyTypes,getVar(_lock,keyTypes));
+	callSelf(syncDoorLockVisual);
+	callFuncParams(_usr,mindSay,"Я установил замок. Осталось прикрутить его отвёрткой.");
+};
+
+func(releaseDoorLock)
+{
+	objParams();
+	private _lock = getSelf(doorLock);
+	if isNullReference(_lock) exitWith {};
+	private _pos = callFunc(_lock,getPos);
+	callFunc(_lock,clearToolWork);
+	setSelf(doorLock,nullPtr);
+	setSelf(isLocked,false);
+	setSelf(keyTypes,[]);
+	setSelf(isLockBreaked,true);
+	setVar(_lock,door,nullPtr);
+	setVar(_lock,isFastened,false);
+	callFuncParams(_lock,setLoc,nullPtr);
+	callSelf(syncDoorLockVisual);
+	callFuncParams(_lock,loadModel,_pos);
+};
+
+func(loadModel)
+{
+	objParams_4(_pos,_dir,_vecOrDist,_simDrop);
+	private _result = super();
+	if (_result) then {callSelf(syncDoorLockVisual)};
+	_result
+};
+
+func(destructor)
+{
+	objParams();
+	private _lock = getSelf(doorLock);
+	if !isNullReference(_lock) then {
+		setVar(_lock,door,nullPtr);
+		callFuncParams(_lock,setLoc,nullPtr);
+		delete(_lock);
+	};
+};
+
+func(onDestroyed)
+{
+	objParams();
+	callSelf(releaseDoorLock);
+	super();
+};
+
+func(unloadModel)
+{
+	objParams();
+	if callSelf(isInWorld) then {[getSelf(loc)] call doorLock_clearVisuals};
+	super();
+};
+
+// Story protection is material-independent; strong-lock reinforcement is metal-only.
+func(getDoorProtectionGrade)
+{
+	objParams();
+	private _lock = getSelf(doorLock);
+	if (isNullReference(_lock) || {!getVar(_lock,isFastened)}) exitWith {0};
+	if (callFunc(_lock,lockGrade) == 3) exitWith {3};
+	if !isTypeOf(callSelf(getMaterial),MatMetal) exitWith {0};
+	callFunc(_lock,lockGrade)
+};
+
+func(getDamageHPScale)
+{
+	objParams();
+	// GateCity HP from its M2C bounds and MatMetal construction weight.
+	if (callSelf(getDoorProtectionGrade) == 2) exitWith {(getSelf(hpMax) / 152) min 1};
+	super()
+};
+
+// Protection changes the incoming damage, never resets the door's existing HP.
+func(applyDamage)
+{
+	objParams_4(_amount,_type,_worldPos,_cause);
+	callSelf(initializeDoorLock);
+	private _lock = getSelf(doorLock);
+	private _blastAmount = _amount;
+	private _grade = callSelf(getDoorProtectionGrade);
+	if (_grade == 3) exitWith {};
+	if (_grade == 2) then {
+		// GateCity DR; HP scaling happens after the base damage-type rounding.
+		_amount = ((_amount - (getSelf(dr) max 5)) max 0) + getSelf(dr);
+	};
+	// Apply the door's old protection before the same blast can destroy the lock.
+	private _this = array_copy(_this);
+	_this set [1,_amount];
+	super();
+	if (_type == DAMAGE_TYPE_BLAST && {!isNullReference(_lock)}) then {
+		callFuncParams(_lock,applyDamage,_blastAmount arg _type arg _worldPos arg _cause);
+	};
+};

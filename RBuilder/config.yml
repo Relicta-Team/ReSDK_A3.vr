@@ -39,6 +39,8 @@ defines:
     enable_on: TEST_ALL
   TEST_IO:
     enable_on: TEST_ALL
+  TEST_DOOR_LOCKS:
+    enable_on: TEST_ALL
 
   TEST_OOP_ALL:
     enable_on: TEST_ALL

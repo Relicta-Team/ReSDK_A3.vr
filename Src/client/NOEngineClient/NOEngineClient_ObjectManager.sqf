@@ -7,10 +7,25 @@
 
 namespace(NOEngine.Client.ObjectManager,noe_client_)
 
+// Register the single item pointer used by progress UI and both visual faces.
+noe_client_updateDoorLock = {
+	params ["_door","_data"];
+	private _old = _door getVariable ["doorLockMeshes",[]];
+	if (count _old > 0) then {
+		private _ptr = (_old select 0) getVariable "ref";
+		if ((noe_client_allPointers getOrDefault [_ptr,objNull]) in _old) then {noe_client_allPointers deleteAt _ptr};
+	};
+	private _meshes = [_door,_data] call doorLock_updateVisuals;
+	if (count _meshes > 0) then {
+		{[_x,tolower (_data select 1)] call noe_client_ngo_check} foreach _meshes;
+		noe_client_allPointers set [_data select 0,_meshes select 0];
+	};
+};
+
 decl(mesh(...any[]))
 noe_client_spawnObject = {
 	//_chunkObject and _chunkObjData is out reference
-	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null]];
+	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null],["_doorLock",[]]];
 	
 	if equalTypes(_model,0) exitWith {
 		error("NOEngineClient::SpawnObject() - Not implemented exception: only string for create model (NOT NUMBER)");
@@ -68,6 +83,7 @@ noe_client_spawnObject = {
 
 	};
 	
+	[_obj,_doorLock] call noe_client_updateDoorLock;
 	//radio
 	if !isNullVar(_radio) then {
 		[_obj,_radio,_obj getVariable "ref"] call vs_loadWorldRadio;
@@ -82,7 +98,7 @@ noe_client_spawnObject = {
 decl(void(...any[]))
 noe_client_updateObject = {
 	//_chunkObject is out reference
-	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null]];
+	(_this select chunk_objectData_transform) params ["_ref","_isSimple","_model","_pos","_dir","_vec",["_light",0],["_anim",null],["_radio",null],["_doorLock",[]]];
 	private _obj = _this select chunk_objectData_ptr;
 	
 	// 0.4.50 deprecated sample
@@ -162,6 +178,7 @@ noe_client_updateObject = {
 
 	};
 	
+	[_obj,_doorLock] call noe_client_updateDoorLock;
 	//radio
 	if !isNullVar(_radio) then {
 		[_obj,_radio,_obj getVariable "ref"] call vs_loadWorldRadio;
@@ -291,7 +308,7 @@ decl(void(mesh[]))
 noe_client_remObjsAlg = {
 	params ["_odel"];
 	private __delMet__ = {
-		{deleteVehicle _x} foreach _this
+		{[_x,[]] call noe_client_updateDoorLock; deleteVehicle _x} foreach _this
 	};
 	private __t__ = 0;
 	for "_i" from 0 to (count _odel) - 1 step NOE_CLIENT_DELETEOBJS_COUNT do {
@@ -365,4 +382,3 @@ noe_client_getObjPtr = {
 	};
 	_obj getvariable ["ref",""];
 };
-

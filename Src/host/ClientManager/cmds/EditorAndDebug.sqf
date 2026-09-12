@@ -6,6 +6,60 @@
 #include <..\..\Gender\Gender.hpp>
 
 #ifdef DEBUG
+	addCommandWithDescription("lockpos",PUBLIC_COMMAND,"Параметры замка/станции под курсором; аргумент — селект двери")
+	{
+		checkIfMobExists();
+		callSelf(generateLastInteractOnServer);
+		private _target = callSelf(getLastInteractTarget);
+		if isNullReference(_target) exitWith {};
+		if isTypeOf(_target,DoorLock) then {_target = getVar(_target,door)};
+		if (isNullReference(_target)) exitWith {};
+		if isTypeOf(_target,CraftStation) exitWith {
+			callSelfParams(localSay,format["%1: collectionBounds=%2 (логический model-space объём, не collision mesh)." arg callFunc(_target,getClassName) arg getVar(_target,tableBounds)] arg "system");
+		};
+		if !callFunc(_target,isDoor) exitWith {};
+		private _mesh = callFunc(_target,getBasicLoc);
+		private _point = _mesh worldToModel callSelf(getLastInteractEndPos);
+		private _selection = ifcheck(args == "",callFunc(_target,getLockSelection),args);
+		private _offset = _point vectorDiff (_mesh selectionPosition _selection);
+		callFunc(_target,getLockPlacementData) params ["_installedPosition","_installedSelection","_leafCenter"];
+		callSelfParams(localSay,format["%1: installedPosition=%2; installedSelection='%3'; closedLeafCenter=%4; candidatePosition=%5; candidateSelection='%6'; modelPosition=%7; lockNGO=block_dirt(scale 0.025). Bounds/NGO proxy, не collision-mesh wireframe. Настраивать на закрытой двери." arg callFunc(_target,getClassName) arg _installedPosition arg _installedSelection arg _leafCenter arg _offset arg _selection arg _point] arg "system");
+
+		private _configuredSelection = getVar(_target,lockSelection);
+		private _animationSelections = [];
+		if isTypeOf(_target,DoorDynamic) then {
+			_animationSelections = (callFunc(_target,animateData)) apply {_x param [0,""]};
+		};
+		private _selectionSources = [["configured",_configuredSelection],["effective",callFunc(_target,getLockSelection)]];
+		{_selectionSources pushBack ["animation",_x]} foreach _animationSelections;
+		if (args != "") then {_selectionSources pushBack ["argument",args]};
+		private _animationNames = animationNames _mesh;
+		callSelfParams(localSay,format["motionSnapshot: isOpen=%1; doorWorldPos=%2; doorDir=%3; doorUp=%4; selectionSources=%5" arg getVar(_target,isOpen) arg getPosWorldVisual _mesh arg vectorDirVisual _mesh arg vectorUpVisual _mesh arg _selectionSources] arg "system");
+		private _seenSelections = [];
+		{
+			_x params ["_source","_candidate"];
+			if (_candidate == "" || {_candidate in _seenSelections}) then {continue};
+			_seenSelections pushBack _candidate;
+			private _lodData = [];
+			{
+				private _lod = _x;
+				private _exists = (tolower _candidate) in ((_mesh selectionNames _lod) apply {tolower _x});
+				if (_exists) then {
+					_lodData pushBack [_lod,_mesh selectionPosition [_candidate,_lod,"AveragePoint"],_mesh selectionVectorDirAndUp [_candidate,_lod]];
+				} else {
+					_lodData pushBack [_lod,"missing"];
+				};
+			} foreach ["Memory","Geometry","FireGeometry","ViewGeometry","LandContact","HitPoints"];
+			private _animIndex = (_animationNames apply {tolower _x}) find (tolower _candidate);
+			private _animPhase = ifcheck(_animIndex == -1,"not listed",_mesh animationPhase (_animationNames select _animIndex));
+			callSelfParams(localSay,format["selection '%1' (%2): animationPhase=%3; animationSourcePhase(query)=%4; LOD rows=[LOD, current AveragePoint, current dir/up]=%5" arg _candidate arg _source arg _animPhase arg _mesh animationSourcePhase _candidate arg _lodData] arg "system");
+		} foreach _selectionSources;
+		private _faceData = (_mesh getVariable ["doorLockMeshes",[]]) apply {
+			[getPosWorldVisual _x,vectorDirVisual _x,vectorUpVisual _x,_x getVariable ["ref",""]]
+		};
+		callSelfParams(localSay,format["mountedFaces=[worldPos, worldDir, worldUp, ref]=%1. Repeat lockpos while closed, moving, and open; this is a snapshot, not a persistent tracker." arg _faceData] arg "system");
+	};
+
 	
 	addCommand("container_errinfo",PUBLIC_COMMAND)
 	{

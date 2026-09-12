@@ -25,6 +25,7 @@ This skill is for placing new gameplay content into the right class family, file
 - Declare fields explicitly in the class body. Do not create dynamic fields inside constructors.
 - If the object is meant to be visible in editor content flows, account for editor class-library rebuilds.
 - If the object introduces new model mappings or editor model lookup needs, consider whether model-map regeneration is required.
+- Actor-driven interactions must state the started action, report success, and explain known rejection or failure causes without inventing hidden information. Sustained work must use the existing progress/cancellation contract and revalidate its tool, target, reach, and relevant state before applying completion effects; instant actions need not manufacture progress.
 
 ## Working Style
 

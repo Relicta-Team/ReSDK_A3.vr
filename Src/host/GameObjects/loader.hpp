@@ -40,6 +40,7 @@ loadFile("src\host\GameObjects\Items\Containers\Container.sqf");
 loadFile("src\host\GameObjects\Items\Lighting\Natural.sqf");
 	loadFile("src\host\GameObjects\Items\Lighting\Electronic.sqf");
 loadFile("src\host\GameObjects\Items\Instruments\Keys.sqf");
+loadFile("src\host\GameObjects\Items\Instruments\DoorLocks.sqf");
 	loadFile("src\host\GameObjects\Items\Instruments\Chemical.sqf");
 	loadFile("src\host\GameObjects\Items\Instruments\Radios.sqf");
 	loadFile("src\host\GameObjects\Items\Instruments\Engineering.sqf");

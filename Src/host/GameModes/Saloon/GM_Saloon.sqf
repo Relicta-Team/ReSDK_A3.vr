@@ -102,19 +102,19 @@ class(GMSaloon) extends(GMBase)
 		
 		//door enter
 		{
-			setVar(_x,keyTypes,["bar" arg "barsuper"]);
+			callFuncParams(_x,setDoorKeyTypes,["bar" arg "barsuper"]);
 		} foreach (["WoodenDoor",[3449.73,3604.19,18.0939],5,true,false] call getGameObjectOnPosition);
 		//bar back
 		private _back = (["WoodenDoor",[3470.95,3601.81,18.0835],5,!true,false] call getGameObjectOnPosition );
-		setVar(_back,keyTypes,["barback" arg "barsuper"]);
+		callFuncParams(_back,setDoorKeyTypes,["barback" arg "barsuper"]);
 		private _barowner = (["SteelBrownDoor",[3475.68,3604.31,22.7188],2,!true,false] call getGameObjectOnPosition );
-		setVar(_barowner,keyTypes,["barowner" arg "barsuper"]);
+		callFuncParams(_barowner,setDoorKeyTypes,["barowner" arg "barsuper"]);
 		private _grom = (["SteelBrownDoor",[3477.43,3602.94,22.7188],2,!true,false] call getGameObjectOnPosition );
-		setVar(_grom,keyTypes,["bargrom" arg "barsuper"]);
+		callFuncParams(_grom,setDoorKeyTypes,["bargrom" arg "barsuper"]);
 		
 		{
 			modSelf(countDoors, + 1);
-			setVar(_x,keyTypes,["barsuper" arg "bardoor" + str getSelf(countDoors)]);
+			callFuncParams(_x,setDoorKeyTypes,["barsuper" arg "bardoor" + str getSelf(countDoors)]);
 			setVar(_x,name,format["Комната %1" arg getSelf(countDoors)]);
 			callFuncParams(_x,setDoorLock,true);
 		} foreach (["SteelDoorThinSmall",[3468.55,3601.12,22.7446],20,true,false] call getGameObjectOnPosition );

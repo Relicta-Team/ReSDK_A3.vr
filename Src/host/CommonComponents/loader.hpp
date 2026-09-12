@@ -19,6 +19,7 @@ importCommon("CombatMode.sqf");
 importCommon("SMD_shared.sqf");
 importCommon("SoundEngine.sqf");
 importCommon("Craft.sqf");
+importCommon("DoorLocks.sqf");
 importCommon("DateTime.sqf");
 importCommon("Replicator.sqf");
 importCommon("AttackTypesAssoc.sqf");

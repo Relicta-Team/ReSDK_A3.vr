@@ -10,6 +10,16 @@
 #include <..\..\..\..\NOEngine\NOEngine.hpp>
 
 class(ElectronicDeviceDoor) extends(DoorStatic)
+	getter_func(hasMechanicalLock,false);
+	editor_attribute("alias" arg "Сюжетная дверь")
+	editor_attribute("EditorVisible" arg "type:bool")
+	var(isStory,false);
+	func(applyDamage)
+	{
+		objParams_4(_amount,_type,_worldPos,_cause);
+		if getSelf(isStory) exitWith {};
+		super();
+	};
 	#include "..\..\..\Interfaces\ElectronicDevice.Interface"
 	var(edIsEnabled,true);
 	getterconst_func(canBreak,false);

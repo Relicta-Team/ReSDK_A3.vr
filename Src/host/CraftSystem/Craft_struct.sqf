@@ -294,6 +294,8 @@ struct(ICraftRecipeBase)
 
 	};
 
+	def(station) ""
+	def(skillBonus) 0
 	def(opt_collect_distance) 0.8
 	def(opt_craft_duration) {getVar(_this,rta)} //_this == usr.rta
 
@@ -302,6 +304,13 @@ struct(ICraftRecipeBase)
 		params ["_req","_refResult"];
 		if isNullVar(_req) exitWith {};
 		CRAFT_PARSER_HEAD;
+
+		GETVAL_STR(_req, vec2("station",""));
+		FAIL_CHECK_REFSET(_refResult);
+		self setv(station,value);
+		GETVAL_FLOAT(_req, vec2("skill_bonus",0));
+		FAIL_CHECK_REFSET(_refResult);
+		self setv(skillBonus,value);
 
 		GETVAL_FLOAT(_req, vec2("collect_distance",self getv(opt_collect_distance)));
 		FAIL_CHECK_REFSET(_refResult);
@@ -451,7 +460,7 @@ struct(ICraftRecipeBase)
 				private _requiredSkillName = _x;
 				private _requiredSkillValue = _y;
 
-				private _rollValidate = callFuncParams(_usr,checkSkill,_x arg 0);
+				private _rollValidate = callFuncParams(_usr,checkSkill,_x arg self getv(skillBonus));
 				if DICE_ISSUCCESS(getRollType(_rollValidate)) then {
 					private _successAmount = getRollAmount(_rollValidate);
 					traceformat("Skill check success: %1 -> %2",_x arg _rollValidate)
@@ -473,7 +482,9 @@ struct(ICraftRecipeBase)
 
 	def(canSeeRecipe)
 	{
-		params ["_usr"];
+		params ["_usr",["_src",nullPtr]];
+		private _station = ifcheck(isNullReference(_src),"",callFunc(_src,getCraftStation));
+		if ((_station != (self getv(station)))) exitWith {false};
 		private _canSee = false; //by default cannot see recipe (low skills)
 		call {
 			if (self getv(forceVisible)) exitWith {_canSee = true};

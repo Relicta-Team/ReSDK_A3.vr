@@ -337,6 +337,121 @@ localCommand("escnative")
 	input_internal_handleNativeEsc = (parseNumber arguments) > 0;
 };
 
+#ifdef DEBUG
+decl(widget) cd_modelPosWidget = widgetNull;
+decl(int) cd_modelPosUpdate = -1;
+decl(string) cd_modelPosSelection = "";
+
+decl(void())
+cd_modelPosStop = {
+	if (cd_modelPosUpdate != -1) then {stopUpdate(cd_modelPosUpdate)};
+	cd_modelPosUpdate = -1;
+	if !isNullReference(cd_modelPosWidget) then {[cd_modelPosWidget] call deleteWidget};
+	cd_modelPosWidget = widgetNull;
+};
+
+decl(void())
+cd_modelPosOnUpdate = {
+	if (isNullReference(cd_modelPosWidget) || {isNullReference(player)}) exitWith {call cd_modelPosStop};
+	private _hit = [] call interact_getIntersectData;
+	_hit params ["_object","_point"];
+	private _text = "Наведи центр экрана на поверхность объекта";
+	if !isNullReference(_object) then {
+		private _face = _object getVariable ["ngo_src",_object];
+		private _owner = _face getVariable ["doorLockOwner",objNull];
+		if !isNullReference(_owner) then {
+			private _formatVector = {"[" + ((_this apply {_x toFixed 4}) joinString ", ") + "]"};
+			private _facePos = (getPosWorldVisual _face) call _formatVector;
+			private _faceDir = (vectorDirVisual _face) call _formatVector;
+			private _faceUp = (vectorUpVisual _face) call _formatVector;
+			private _ownerPos = (getPosWorldVisual _owner) call _formatVector;
+			private _ownerDir = (vectorDirVisual _owner) call _formatVector;
+			private _ownerUp = (vectorUpVisual _owner) call _formatVector;
+			_text = format["lock face snapshot<br/>faceWorldPos = %1<br/>faceWorldDir = %2<br/>faceWorldUp = %3<br/>ownerWorldPos = %4<br/>ownerWorldDir = %5<br/>ownerWorldUp = %6<br/>Repeat during closed/moving/open states" arg _facePos arg _faceDir arg _faceUp arg _ownerPos arg _ownerDir arg _ownerUp];
+		} else {
+			private _selection = cd_modelPosSelection;
+			private _modelPoint = _object worldToModel _point;
+			private _formatVector = {"[" + ((_this apply {_x toFixed 4}) joinString ", ") + "]"};
+			_text = format["%1<br/>modelPosition = %2",(getModelInfo _object) select 0,_modelPoint call _formatVector];
+			private _installed = _object getVariable ["doorLockVisualData",[]];
+			if (count _installed > 0) then {
+				_text = _text + format["<br/>installedPosition = %1<br/>installedSelection = '%2'",(_installed select 2) call _formatVector,_installed select 3];
+			};
+			if (_selection == "" || {_selection in selectionNames _object}) then {
+				private _offset = _modelPoint;
+				if (_selection != "") then {_offset = _offset vectorDiff (_object selectionPosition _selection)};
+				_text = _text + format["<br/>candidateSelection = '%1'<br/>candidatePosition = %2",_selection,_offset call _formatVector];
+			} else {
+				_text = _text + "<br/>У этой модели нет указанного селекта";
+			};
+		};
+	};
+	[cd_modelPosWidget,"<t align='center'>" + _text + "<br/>modelpos off — выключить</t>"] call widgetSetText;
+};
+
+localCommand("modelpos")
+{
+	call cd_modelPosStop;
+	if (arguments == "off") exitWith {};
+	cd_modelPosSelection = arguments;
+	cd_modelPosWidget = [getGUI,TEXT,[25,54,50,18]] call createWidget;
+	cd_modelPosWidget setBackgroundColor (["back"] call ct_getValue);
+	call cd_modelPosOnUpdate;
+	if !isNullReference(cd_modelPosWidget) then {
+		cd_modelPosUpdate = startUpdate(cd_modelPosOnUpdate,0.05);
+	};
+};
+
+#endif
+
+decl(mesh) cd_geomBoundsObject = objNull;
+decl(string) cd_geomBoundsLod = "Geometry";
+decl(vector4) cd_geomBoundsColor = [0,1,0,1];
+decl(int) cd_geomBoundsUpdate = -1;
+
+decl(void())
+cd_geomBoundsStop = {
+	if (cd_geomBoundsUpdate != -1) then {stopUpdate(cd_geomBoundsUpdate)};
+	cd_geomBoundsUpdate = -1;
+	cd_geomBoundsObject = objNull;
+};
+
+decl(void())
+cd_geomBoundsOnUpdate = {
+	updateParams();
+	if isNullReference(cd_geomBoundsObject) exitWith {call cd_geomBoundsStop};
+	private _bounds = ifcheck(cd_geomBoundsLod == "",boundingBoxReal cd_geomBoundsObject,boundingBoxReal [cd_geomBoundsObject,cd_geomBoundsLod]);
+	[cd_geomBoundsObject,cd_geomBoundsColor,3,_bounds] call debug_drawBoundingBox;
+};
+
+localCommand("geombounds")
+{
+	private _modeName = tolower arguments;
+	if (_modeName == "") then {_modeName = "geometry"};
+	call cd_geomBoundsStop;
+	if (_modeName == "off") exitWith {["geombounds: отображение выключено.","system"] call chatPrint};
+	private _modes = createHashMapFromArray [
+		["geometry",["Geometry",[0,1,0,1],"Geometry"]],
+		["view",["ViewGeometry",[0,0.6,1,1],"ViewGeometry"]],
+		["fire",["FireGeometry",[1,0.2,0.2,1],"FireGeometry"]],
+		["visual",["",[1,0.8,0,1],"visual model"]]
+	];
+	private _config = _modes getOrDefault [_modeName,[]];
+	if (count _config == 0) exitWith {["geombounds geometry|view|fire|visual|off. Рисуется только model-space bounding box выбранного LOD, не полигоны и не wireframe.","system"] call chatPrint};
+	private _hit = [] call interact_getIntersectData;
+	private _object = _hit param [0,objNull];
+	if isNullReference(_object) exitWith {["geombounds: наведите центр экрана на объект.","system"] call chatPrint};
+	_object = _object getVariable ["ngo_src",_object];
+	_config params ["_lod","_color","_label"];
+	cd_geomBoundsObject = _object;
+	cd_geomBoundsLod = _lod;
+	cd_geomBoundsColor = _color;
+	cd_geomBoundsUpdate = startUpdate(cd_geomBoundsOnUpdate,0);
+	private _modelName = (getModelInfo _object) select 0;
+	private _bounds = ifcheck(_lod == "",boundingBoxReal _object,boundingBoxReal [_object,_lod]);
+	[format["geombounds: %1, объект %2, bounds=%3. Это model-space bounding box LOD, не collision-полигоны и не wireframe; geombounds off — выключить." arg _label arg _modelName arg _bounds],"system"] call chatPrint;
+};
+
 localCommand("debugvars")
 {
 	[(parseNumber arguments) > 0] call clistat_setLogVars;

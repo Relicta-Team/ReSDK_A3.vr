@@ -28,8 +28,6 @@ noe_client_interp_processObjInterp = {
 		params ["_src","_fp","_ft","_tp","_tt","_tStart","_dur","_scl","_stdMode","_emuMode"];
 		if isNullReference(_src) exitWith {true};
 		
-		{(_x select 0)call(_x select 1)} foreach (_src getvariable "_eventOnFrame");
-
 		//auto_gen: transform data params; [_mSrc,_offset,_selName,[_obj] call model_getPitchBankYaw]
 		if equals(_fp,"AUTO_GEN") then {
 			_ft params ["_m","_of","_sl","_pby"];
@@ -122,6 +120,10 @@ noe_client_interp_processObjInterp = {
 			_src setObjectScale _sFact;
 		};
 
+		// Replacement children must consume the temporary owner's completed
+		// transform, not the previous frame's transform.
+		{(_x select 0)call(_x select 1)} foreach (_src getvariable "_eventOnFrame");
+
 		false
 	},
 	_onEnd,
@@ -193,6 +195,13 @@ noe_client_interp_start = {
 		_iObj setvariable ["_eventOnDelete",_tEventOnDelete];
 		_iObj setvariable ["_eventOnFrame",_tEventOnFrame];
 		_objects = [_sObj,_dObj];
+		private _doorLockData = _objTargetInfo getVariable ["doorLockVisualData",[]];
+		if (count _doorLockData > 0) then {
+			private _lockMeshes = [_iObj,_doorLockData,false] call doorLock_updateVisuals;
+			{[_x,tolower (_doorLockData select 1)] call noe_client_ngo_check} foreach _lockMeshes;
+			_tEventOnFrame pushBack [[_iObj],doorLock_syncVisuals];
+			_tEventOnDelete pushBack [[_iObj],doorLock_clearVisuals];
+		};
 
 		//setup interpolation speed
 		_ispdIdx = _options find "ispd";
@@ -247,11 +256,13 @@ noe_client_interp_start = {
 				// _ppos = getposatl _x;
 				// _x setposatl [0,0,0]; //! raise position error
 				_x hideObject true;
+				[_x,true] call doorLock_setVisualsHidden;
 				_tEventOnDelete pushBack [
 					[_x,_ppos],{
 						params ["_o","_ppos"];
 						//_o setposatl _ppos;
 						_o hideObject false;
+						[_o,false] call doorLock_setVisualsHidden;
 					}
 				];
 				continue;

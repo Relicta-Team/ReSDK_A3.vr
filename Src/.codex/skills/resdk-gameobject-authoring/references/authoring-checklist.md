@@ -12,6 +12,7 @@
 - keep fields explicit in the class body
 - prefer public methods over reaching into private internals from other systems
 - use `autoref` only where its lifecycle behavior is appropriate
+- apply the interaction feedback and sustained-work rule from the skill, including completion-time revalidation
 
 ## After Coding
 

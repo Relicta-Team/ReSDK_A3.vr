@@ -4,7 +4,7 @@
 // ======================================================
 
 
-#define __COUNT_ELEMENTS_DATA_TRANSPORT__ 6
+#define __COUNT_ELEMENTS_DATA_TRANSPORT__ 7
 
 #define simpleObj_true 0.1
 #define simpleObj_false 0
@@ -23,3 +23,4 @@
 #define radioObj_false 0
 
 #define transportFlagsToArray(fl) (fl toFixed __COUNT_ELEMENTS_DATA_TRANSPORT__ splitString "")
+#define doorLockObj_true 0.0000001

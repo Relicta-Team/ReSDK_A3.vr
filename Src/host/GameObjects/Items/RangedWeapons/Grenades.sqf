@@ -427,6 +427,8 @@ class(Grenade) extends(Item)
 	func(addBlastWaveTarget)
 	{
 		objParams_3(_targets,_visual,_preferredPos);
+		// Attached lock faces receive this wave through the door, once.
+		_visual = _visual getVariable ["doorLockOwner",_visual];
 		private _target = [_visual] call si_handleObjectReturnCheckVirtual;
 		if isNullReference(_target) exitWith {};
 		if equals(_target,this) exitWith {};

@@ -373,7 +373,7 @@ noe_client_byteArrToObjStruct = {
 		};
 
 		transportFlagsToArray(_bufvar) params ["","",
-			["_isSimple",_strOne],["_useWorldPos",_strZero],["_isVectorDir",_strZero],["_hasLight",_strZero],["_hasAnim",_strZero],["_hasRadio",_strZero]
+			["_isSimple",_strOne],["_useWorldPos",_strZero],["_isVectorDir",_strZero],["_hasLight",_strZero],["_hasAnim",_strZero],["_hasRadio",_strZero],["_hasDoorLock",_strZero]
 		];
 		
 		//_nobject pushBack [_isSimple == _strOne,_useWorldPos == _strOne,_isVectorDir == _strOne,_hasLight == _strOne];
@@ -524,6 +524,11 @@ noe_client_byteArrToObjStruct = {
 			};
 		};
 
+
+		if isTrue(_hasDoorLock) then {
+			moveNext();
+			_nobject set [9,getCurToken()];
+		};
 
 		//final add object
 		//traceformat("Prepare object struct: %1",_nobject)

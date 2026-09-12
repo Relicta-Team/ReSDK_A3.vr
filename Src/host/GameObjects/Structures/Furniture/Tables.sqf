@@ -19,6 +19,9 @@ class(TableBase) extends(Furniture)
 	getterconst_func(getCoefAutoWeight,30);
 endclass
 
+// CraftStation must exist before the legacy Workbench class is declared.
+loadFile("src\host\GameObjects\Structures\Tools\LockWorkbench.sqf");
+
 editor_attribute("EditorGenerated")
 class(SteelTableHandmade) extends(TableBase)
 	var(model,"ml\ml_object_new\ml_object_2\l00_intro_props\l01_tir_stol.p3d");
@@ -26,7 +29,7 @@ class(SteelTableHandmade) extends(TableBase)
 endclass
 
 editor_attribute("EditorGenerated")
-class(Workbench) extends(TableBase)
+class(Workbench) extends(ArtificerWorkbench)
 	var(model,"a3\structures_f_heli\furniture\workbench_01_f.p3d");
 	var(material,"MatMetal");
 endclass

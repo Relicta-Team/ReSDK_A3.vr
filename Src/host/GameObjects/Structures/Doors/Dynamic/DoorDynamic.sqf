@@ -22,6 +22,16 @@ class(DoorDynamic) extends(DynamicStruct)
 
 	#include "..\..\..\Interfaces\DoorBaseMethods.Interface"
 
+	func(getLockSelection)
+	{
+		objParams();
+		if (getSelf(lockSelection) != "") exitWith {getSelf(lockSelection)};
+		// Animation names often match selections, but never attach to a missing name.
+		private _candidate = (callSelf(animateData) param [0,[]]) param [0,""];
+		if (_candidate in (selectionNames getSelf(loc))) exitWith {_candidate};
+		""
+	};
+
 	func(animateSource)
 	{
 		objParams();

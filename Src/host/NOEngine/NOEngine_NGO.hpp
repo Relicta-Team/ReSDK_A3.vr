@@ -55,3 +55,5 @@ addNGODecal("ml\ml_object_new\model_05\matras_2.p3d",vec3(0,0,-0.05),0.4,"geopol
 addNGO("ml_shabut\furniture\teabaggin.p3d",vec3(0,0,0),0.018);
 //Банка молока
 addNGO("sterben_top\am_items_2\misc\food\milkbottle.p3d",vec3(0,0,-0.04),0.01);
+// Door-lock model has no usable geometry; the proxy also follows mounted lock faces.
+addNGO("sterben_top\am_items\misc\junk\counductor\counductor.p3d",vec3(0,0,0),0.025);
