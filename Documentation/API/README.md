@@ -17,7 +17,7 @@ Count modules: 34
  - [InputSystem](client//InputSystem.md) - 6 files
  - [Interactions](client//Interactions.md) - 22 files
  - [Inventory](client//Inventory.md) - 7 files
- - [LightEngine](client//LightEngine.md) - 81 files
+ - [LightEngine](client//LightEngine.md) - 82 files
  - [Lobby](client//Lobby.md) - 8 files
  - [LocalEffects](client//LocalEffects.md) - 2 files
  - [NetDisplays](client//NetDisplays.md) - 18 files
