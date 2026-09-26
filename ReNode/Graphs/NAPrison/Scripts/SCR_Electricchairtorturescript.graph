@@ -1,0 +1,45 @@
+{
+  "graph":{
+    "layout_direction":0,
+    "acyclic":true,
+    "pipe_collision":false,
+    "pipe_slicing":true,
+    "pipe_style":1,
+    "variables":{
+      "localvar":{
+        "0x1a122d1d920_202598151911510805":{
+          "name":"Активация пыточного стула",
+          "type":"bool",
+          "value":false,
+          "category":"localvar",
+          "group":"",
+          "systemname":"Aktivatsiya_pytochnogo_stula",
+          "reprType":"bool (Булево)",
+          "reprDataType":"value (Значение)"
+        }
+      }
+    },
+    "info":{
+      "type":"gobject",
+      "name":"ElectricChairTortureScript",
+      "classname":"SCR_Electricchairtorturescript",
+      "parent":"ScriptedGameObject",
+      "desc":"Скрипт электрического стула для пыток.",
+      "path":".Пользовательские.ElectricChairTortureScript",
+      "props":{
+        "fields":{},
+        "methods":{}
+      },
+      "compileStatus":"Compiled",
+      "graphVersion":2
+    },
+    "mpos":[
+      -3141.7358391608504,
+      -1914.7143021030133,
+      5358.179829430459,
+      5042.992780640427
+    ],
+    "mzoom":-0.87
+  },
+  "nodes":{}
+}
