@@ -30,6 +30,7 @@ class(IGlassReagentCont) extends(IReagentNDItem)
 	getterconst_func(transferAmount,[5 arg 10 arg 15 arg 25 arg 30 arg 60]);
 endclass
 
+//Пустые бутылки
 class(GlassBottle) extends(IGlassReagentItem)
 	var(name,"Стеклянная бутылка");
 	//var(model,"ml\ml_object_new\model_14_10\bottledef.p3d"); //nogeom
@@ -65,31 +66,201 @@ class(GlassBottle) extends(IGlassReagentItem)
 		};
 		_txt
 	};
-	
-
-	
 endclass
 
+class(GlassBottle1) extends(GlassBottle)
+	var(model,"relicta_models\models\interier\props\kitchen\buhlo2.p3d");
+	var(weight,gramm(350));
+	var(reagents,vec2(this,50) call ms_create);
+endclass
+
+class(GlassBottle2) extends(GlassBottle)
+	var(model,"relicta_models\models\interier\props\kitchen\buhlo3.p3d");
+	var(weight,gramm(450));
+	var(reagents,vec2(this,75) call ms_create);
+endclass
+
+class(GlassBottle3) extends(GlassBottle)
+	var(model,"relicta_models\models\interier\props\kitchen\buhlo4.p3d");
+	var(weight,gramm(850));
+	var(size,ITEM_SIZE_MEDIUM);
+	var(reagents,vec2(this,150) call ms_create);
+endclass
+
+class(GlassBottle4) extends(GlassBottle)
+	var(model,"sterben_top\am_items_2\misc\food\beerbottle\beerbottle.p3d");
+	var(weight,gramm(350));
+	var(reagents,vec2(this,60) call ms_create);
+endclass
+
+class(GlassBottle5) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\scotch\tequila.p3d");
+	var(weight,gramm(450));
+	var(reagents,vec2(this,70) call ms_create);
+endclass
+
+//Пустые бутылки (требуется ретекстур, настройка геометрии и позиции в руках, скрыты в редакторе)
+class(GlassBottle6) extends(GlassBottle)
+	var(model,"ml\ml_object_new\model_14_10\bottlehz.p3d");
+	var(weight,gramm(450));
+	var(reagents,vec2(this,75) call ms_create);
+endclass
+
+class(GlassBottle7) extends(GlassBottle)
+	var(model,"ml\ml_object_new\model_14_10\bottlevine.p3d");
+	var(weight,gramm(450));
+	var(reagents,vec2(this,75) call ms_create);
+endclass
+
+class(GlassBottle8) extends(GlassBottle)
+	var(model,"ml\ml_object_new\model_14_10\bottlepoison.p3d");
+	var(weight,gramm(500));
+	var(reagents,vec2(this,70) call ms_create);
+endclass
+
+class(GlassBottle9) extends(GlassBottle)
+	var(model,"ml\ml_object_new\model_14_10\ratpoison.p3d");
+	var(weight,gramm(350));
+	var(reagents,vec2(this,50) call ms_create);
+endclass
+
+class(GlassBottle10) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\scotch\scotch.p3d");
+	var(weight,gramm(500));
+	var(reagents,vec2(this,75) call ms_create);
+endclass
+
+class(GlassBottle11) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\whiskeybottle01\whiskeybottle01.p3d");
+	var(weight,gramm(350));
+	var(reagents,vec2(this,50) call ms_create);
+endclass
+
+class(GlassBottle12) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\scotch_new\am_scotch_new.p3d");
+	var(weight,gramm(400));
+	var(reagents,vec2(this,60) call ms_create);
+endclass
+
+class(GlassBottle13) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\scotch_old\am_scotch_old.p3d");
+	var(weight,gramm(400));
+	var(reagents,vec2(this,60) call ms_create);	
+endclass
+
+class(GlassBottle14) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\wine\am_wine.p3d");
+	var(weight,gramm(450));
+	var(reagents,vec2(this,75) call ms_create);	
+endclass
+
+class(GlassBottle15) extends(GlassBottle)
+	var(model,"sterben_top\am_items\misc\food\moonshinejug\moonshinejug.p3d");
+	var(weight,gramm(2500));
+	var(reagents,vec2(this,350) call ms_create);
+endclass
+
+//Молоко
 class(MilkBottle) extends(GlassBottle)
 	var(bottleName,"Молоко");
 	getterconst_func(contentReagents,[vec2("Milk",60)]);
-	
 endclass
 
+class(MilkBottle2) extends(MilkBottle)
+	var(model,"sterben_top\am_items_2\misc\food\milkbottle.p3d");
+	var(icon,"gen\relicta_models+models+interier+props+kitchen+buhlo1+p3d");
+endclass
+
+//Бутылки с алкоголем
 class(SpirtBottle) extends(GlassBottle)
 	var(bottleName,"Грибная брага");
 	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
 endclass
 
+class(SpirtBottle1) extends(GlassBottle1)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",35) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle2) extends(GlassBottle2)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",60) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle3) extends(GlassBottle3)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",135) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle4) extends(GlassBottle4)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle5) extends(GlassBottle5)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",55) arg vec2("Nutriment",15)]);
+endclass
+
+//Бутылки с алкоголем (требуется ретекстур, настройка геометрии и позиции в руках, скрыты в редакторе)
+class(SpirtBottle6) extends(GlassBottle6)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",60) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle7) extends(GlassBottle7)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",60) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle8) extends(GlassBottle8)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",55) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle9) extends(GlassBottle9)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",35) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle10) extends(GlassBottle10)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",60) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle11) extends(GlassBottle11)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",35) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle12) extends(GlassBottle12)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle13) extends(GlassBottle13)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle14) extends(GlassBottle14)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",60) arg vec2("Nutriment",15)]);
+endclass
+
+class(SpirtBottle15) extends(GlassBottle15)
+	var(bottleName,"Грибная брага");
+	getterconst_func(contentReagents,[vec2("Spirt",335) arg vec2("Nutriment",15)]);
+endclass
+
+//Флакон с духами
 class(PerfumeBottle) extends(GlassBottle)
 	var(model,"relicta_models\models\interier\props\treasure\perfume\perfume.p3d");
 	var(bottleName,"Духи");
 	getterconst_func(contentReagents,[vec2("Spirt",45) arg vec2("Nutriment",15)]);
 endclass
 
-
-
-// cups
+//Кружки и бокалы
 class(GlassGoblet) extends(IGlassReagentItem)
 	var(name,"Стеклянный бокал");
 	var(model,"relicta_models\models\interier\props\kitchen\vinecup.p3d");

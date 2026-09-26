@@ -121,7 +121,7 @@ class(Crowbar) extends(EngineeringToolItem)
 	var(size,ITEM_SIZE_MEDIUM);
 	getter_func(getTwoHandAnim,ITEM_2HANIM_SWORD);
 	getter_func(getTwoHandCombAnim,ITEM_2HANIM_COMBAT_SWORD);
-
+	var(allowedSlots,[INV_BELT]);
 	var(leftBreaked,randInt(2,4));
 
 endclass

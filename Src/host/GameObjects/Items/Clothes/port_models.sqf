@@ -427,11 +427,6 @@ class(lunchbox) extends(REPLACE_REQUIRED)
 	var(model,"sterben_top\am_items\misc\food\lunchbox\lunchbox.p3d");
 endclass
 
-class(moonshinejug) extends(REPLACE_REQUIRED)
-	var(name,"moonshinejug");
-	var(model,"sterben_top\am_items\misc\food\moonshinejug\moonshinejug.p3d");
-endclass
-
 class(mutfruit) extends(REPLACE_REQUIRED)
 	var(name,"mutfruit");
 	var(model,"sterben_top\am_items\misc\food\mutfruit01\mutfruit.p3d");
@@ -472,26 +467,6 @@ class(emptybottle) extends(REPLACE_REQUIRED)
 	var(model,"sterben_top\am_items\misc\food\scotch\emptybottle.p3d");
 endclass
 
-class(scotch) extends(REPLACE_REQUIRED)
-	var(name,"scotch");
-	var(model,"sterben_top\am_items\misc\food\scotch\scotch.p3d");
-endclass
-
-class(tequila) extends(REPLACE_REQUIRED)
-	var(name,"tequila");
-	var(model,"sterben_top\am_items\misc\food\scotch\tequila.p3d");
-endclass
-
-class(am_scotch_new) extends(REPLACE_REQUIRED)
-	var(name,"am_scotch_new");
-	var(model,"sterben_top\am_items\misc\food\scotch_new\am_scotch_new.p3d");
-endclass
-
-class(am_scotch_old) extends(REPLACE_REQUIRED)
-	var(name,"am_scotch_old");
-	var(model,"sterben_top\am_items\misc\food\scotch_old\am_scotch_old.p3d");
-endclass
-
 class(squirrelonastick) extends(REPLACE_REQUIRED)
 	var(name,"squirrelonastick");
 	var(model,"sterben_top\am_items\misc\food\squirrelonastick\squirrelonastick.p3d");
@@ -510,16 +485,6 @@ endclass
 class(am_waterdirty) extends(REPLACE_REQUIRED)
 	var(name,"am_waterdirty");
 	var(model,"sterben_top\am_items\misc\food\waterdirty\am_waterdirty.p3d");
-endclass
-
-class(whiskeybottle01) extends(REPLACE_REQUIRED)
-	var(name,"whiskeybottle01");
-	var(model,"sterben_top\am_items\misc\food\whiskeybottle01\whiskeybottle01.p3d");
-endclass
-
-class(am_wine) extends(REPLACE_REQUIRED)
-	var(name,"am_wine");
-	var(model,"sterben_top\am_items\misc\food\wine\am_wine.p3d");
 endclass
 
 class(9vbattery) extends(REPLACE_REQUIRED)
@@ -1802,16 +1767,6 @@ endclass
 class(wastelandkiss) extends(REPLACE_REQUIRED)
 	var(name,"wastelandkiss");
 	var(model,"sterben_top\am_items_2\misc\drugs\wastelandkiss\wastelandkiss.p3d");
-endclass
-
-class(beerbottle) extends(REPLACE_REQUIRED)
-	var(name,"beerbottle");
-	var(model,"sterben_top\am_items_2\misc\food\beerbottle\beerbottle.p3d");
-endclass
-
-class(MilkBottle2) extends(MilkBottle)
-	var(model,"sterben_top\am_items_2\misc\food\milkbottle.p3d");
-	var(icon,"gen\relicta_models+models+interier+props+kitchen+buhlo1+p3d");
 endclass
 
 class(am_mre) extends(REPLACE_REQUIRED)

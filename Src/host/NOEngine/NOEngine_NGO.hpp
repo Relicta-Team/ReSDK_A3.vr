@@ -61,3 +61,16 @@ addNGO("ml_shabut\exoduss\gribabas1.p3d",vec3(0,0,0),0.01);
 addNGO("ml_shabut\exoduss\gribabas2.p3d",vec3(0,0,0),0.01);
 //Серый кирпич
 addNGO("sterben_top\am_items\props\wastes\camplog\brick.p3d",vec3(0,0,0),0.015);
+//Бутылки
+addNGO("ml\ml_object_new\model_14_10\bottlehz.p3d",vec3(0,0,-0.05),0.008);
+addNGO("ml\ml_object_new\model_14_10\bottlevine.p3d",vec3(0,0,-0.05),0.008);
+addNGO("ml\ml_object_new\model_14_10\bottlepoison.p3d",vec3(0,0,-0.03),0.008);
+addNGO("ml\ml_object_new\model_14_10\ratpoison.p3d",vec3(0,0,-0.03),0.008);
+addNGO("sterben_top\am_items\misc\food\scotch\tequila.p3d",vec3(0,0,-0.04),0.009);
+addNGO("sterben_top\am_items\misc\food\scotch\scotch.p3d",vec3(0,0,-0.04),0.009);
+addNGO("sterben_top\am_items\misc\food\whiskeybottle01\whiskeybottle01.p3d",vec3(0,0,-0.01),0.009);
+addNGO("sterben_top\am_items_2\misc\food\beerbottle\beerbottle.p3d",vec3(0,0,-0.03),0.009);
+addNGO("sterben_top\am_items\misc\food\scotch_new\am_scotch_new.p3d",vec3(0,0,-0.03),0.009);
+addNGO("sterben_top\am_items\misc\food\scotch_old\am_scotch_old.p3d",vec3(0,0,-0.03),0.009);
+addNGO("sterben_top\am_items\misc\food\wine\am_wine.p3d",vec3(0,0,-0.03),0.009);
+addNGO("sterben_top\am_items\misc\food\moonshinejug\moonshinejug.p3d",vec3(0,0,-0.05),0.018);
