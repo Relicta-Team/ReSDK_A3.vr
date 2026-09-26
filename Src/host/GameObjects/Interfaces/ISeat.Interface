@@ -307,6 +307,9 @@ func(seatConnect)
 	
 	//Создаём репликатор
 	private _rplObj = "C_Quadbike_01_F" createVehicle [0,0,0];
+	// This is a fixed attachment anchor, not a simulated vehicle. Hiding it does not
+	// disable physics; correcting only its position each frame leaves its rotation free.
+	_rplObj enableSimulationGlobal false;
 	
 	if isTypeOf(this,BedBase) then {
 		_rplObj setvariable ["sitmode","bed",true];
@@ -321,13 +324,8 @@ func(seatConnect)
 	#endif
 	getSelf(_seatListDummy) set [_index,_rplObj];
 	private _pos = _origObj modelToWorld (_offsetPos vectorAdd [0,0,-1.62629]);
-	_rplObj setPosAtl _pos;
 	_rplObj setDir (getDir _origObj + _offsetDir);
-	private _pfh_onReplicate = {
-		(_this select 0) params ["_o"];
-		if isNullReference(_o) exitWith {stopThisUpdate()};
-		_o setPosAtl (_o getvariable "__posSeat");
-	}; startUpdateParams(_pfh_onReplicate,0,[_rplObj]);
+	_rplObj setPosAtl _pos;
 
 	_rplObj setVariable ["__posSeat",_pos]; //current mode
 	_rplObj setVariable ["__posSeatActive",_pos];
@@ -403,6 +401,8 @@ func(seatApplySeatAnim)
 		if isNullReference(_rplObj) exitWith {};
 
 		_rplObj setVariable ["__posSeat",_rplObj getvariable _vName];
+		// Move the non-simulated anchor on state changes instead of every frame.
+		_rplObj setPosAtl (_rplObj getVariable "__posSeat");
 
 		private _rinf = (_rplObj getVariable "__replicatedInfo");
 		[_rinf select 0,"seatConnectUpdate",_rinf] call repl_doLocal;
